@@ -102,7 +102,11 @@ Public Class FR_PRODUK
 
     Private Sub TXTHARGA1_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTHARGA1.KeyPress
         If e.KeyChar = Chr(13) Then
-            TXTEND2.Select()
+            If TXTEND2.ReadOnly = True Then
+                BTNSIMPAN.Select()
+            Else
+                TXTEND2.Select()
+            End If
         End If
 
         If Not ((e.KeyChar >= "0" And e.KeyChar <= "9") Or e.KeyChar = vbBack) Then
@@ -112,7 +116,11 @@ Public Class FR_PRODUK
 
     Private Sub TXTHARGA2_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTHARGA2.KeyPress
         If e.KeyChar = Chr(13) Then
-            TXTHARGA3.Select()
+            If TXTEND3.ReadOnly = True Then
+                BTNSIMPAN.Select()
+            Else
+                TXTEND3.Select()
+            End If
         End If
 
         If Not ((e.KeyChar >= "0" And e.KeyChar <= "9") Or e.KeyChar = vbBack) Then
@@ -122,7 +130,11 @@ Public Class FR_PRODUK
 
     Private Sub TXTHARGA3_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTHARGA3.KeyPress
         If e.KeyChar = Chr(13) Then
-            BTNSIMPAN.Select()
+            If TXTEND4.ReadOnly = True Then
+                BTNSIMPAN.Select()
+            Else
+                TXTEND4.Select()
+            End If
         End If
 
         If Not ((e.KeyChar >= "0" And e.KeyChar <= "9") Or e.KeyChar = vbBack) Then
@@ -138,6 +150,9 @@ Public Class FR_PRODUK
         RD = CMD.ExecuteReader
         If RD.HasRows Then
             RD.Read()
+            TXTNAMA.ReadOnly = False
+            TXTEND1.ReadOnly = False
+            TXTHARGA1.ReadOnly = False
             Dim END1 As String = ""
             If Not RD.Item("End1") = 0 Then
                 END1 = RD.Item("End1")
@@ -149,6 +164,8 @@ Public Class FR_PRODUK
             Dim END2 As String = ""
             If Not RD.Item("End2") = 0 Then
                 END2 = RD.Item("End2")
+            Else
+                TXTEND2.ReadOnly = True
             End If
             Dim START3 As String = ""
             If Not RD.Item("Start3") = 0 Then
@@ -157,6 +174,22 @@ Public Class FR_PRODUK
             Dim END3 As String = ""
             If Not RD.Item("End3") = 0 Then
                 END3 = RD.Item("End3")
+            Else
+                TXTEND3.ReadOnly = True
+            End If
+            Dim START4 As String = ""
+            If Not RD.Item("Start4") = 0 Then
+                START4 = RD.Item("Start4")
+            End If
+            Dim END4 As String = ""
+            If Not RD.Item("End4") = 0 Then
+                END4 = RD.Item("End4")
+            Else
+                TXTEND4.ReadOnly = True
+            End If
+            Dim START5 As String = ""
+            If Not RD.Item("Start5") = 0 Then
+                START5 = RD.Item("Start5")
             End If
 
             TXTNAMA.Text = RD.Item("Barang").ToString.Trim
@@ -169,6 +202,11 @@ Public Class FR_PRODUK
             TXTSTART3.Text = START3
             TXTHARGA3.Text = CInt(RD.Item("Harga3"))
             TXTEND3.Text = END3
+            TXTSTART4.Text = START4
+            TXTHARGA4.Text = CInt(RD.Item("Harga4"))
+            TXTEND4.Text = END4
+            TXTSTART5.Text = START5
+            TXTHARGA5.Text = CInt(RD.Item("Harga5"))
             RD.Close()
         Else
             RD.Close()
@@ -181,42 +219,66 @@ Public Class FR_PRODUK
             TXTSTART3.Clear()
             TXTHARGA3.Clear()
             TXTEND3.Clear()
+            TXTSTART4.Clear()
+            TXTHARGA4.Clear()
+            TXTEND4.Clear()
+            TXTSTART5.Clear()
+            TXTHARGA5.Clear()
         End If
         RD.Close()
     End Sub
 
     Private Sub BTNSIMPAN_Click(sender As Object, e As EventArgs) Handles BTNSIMPAN.Click
-        If TXTKODE.Text = "" Or TXTNAMA.Text = "" Or TXTHARGA1.Text = "" Or TXTHARGA2.Text = "" Or TXTHARGA3.Text = "" Then
+        If TXTKODE.Text = "" Or TXTNAMA.Text = "" Or CBSATUAN.Text = "" Then
             MsgBox("Isikan data secara lengkap!")
+            TXTKODE.Select()
         Else
-            Dim START1 As Integer = 1
-            Dim END1 As Integer = 0
-            Dim START2 As Integer = 0
-            Dim END2 As Integer = 0
-            Dim START3 As Integer = 0
-            Dim END3 As Integer = 0
+            If (TXTHARGA1.ReadOnly = False And TXTHARGA1.Text = "") Or (TXTHARGA2.ReadOnly = False And TXTHARGA2.Text = "") Or (TXTHARGA3.ReadOnly = False And TXTHARGA3.Text = "") Or (TXTHARGA4.ReadOnly = False And TXTHARGA4.Text = "") Or (TXTHARGA5.ReadOnly = False And TXTHARGA5.Text = "") Then
+                MsgBox("Isikan data secara lengkap!")
+            Else
+                Dim START1 As Integer = 1
+                Dim END1 As Integer = 0
+                Dim START2 As Integer = 0
+                Dim END2 As Integer = 0
+                Dim START3 As Integer = 0
+                Dim END3 As Integer = 0
+                Dim START4 As Integer = 0
+                Dim END4 As Integer = 0
+                Dim START5 As Integer = 0
 
-            If Not TXTEND1.Text = "" Then
-                END1 = TXTEND1.Text
-            End If
-            If Not TXTSTART2.Text = "" Then
-                START2 = TXTSTART2.Text
-            End If
-            If Not TXTEND2.Text = "" Then
-                END2 = TXTEND2.Text
-            End If
-            If Not TXTSTART3.Text = "" Then
-                START3 = TXTSTART3.Text
-            End If
+                If Not TXTEND1.Text = "" Then
+                    END1 = TXTEND1.Text
+                End If
+                If Not TXTSTART2.Text = "" Then
+                    START2 = TXTSTART2.Text
+                End If
+                If Not TXTEND2.Text = "" Then
+                    END2 = TXTEND2.Text
+                End If
+                If Not TXTSTART3.Text = "" Then
+                    START3 = TXTSTART3.Text
+                End If
+                If Not TXTEND3.Text = "" Then
+                    END3 = TXTEND3.Text
+                End If
+                If Not TXTSTART4.Text = "" Then
+                    START4 = TXTSTART4.Text
+                End If
+                If Not TXTEND4.Text = "" Then
+                    END4 = TXTEND4.Text
+                End If
+                If Not TXTSTART5.Text = "" Then
+                    START5 = TXTSTART5.Text
+                End If
 
-            Dim STR As String = "SELECT * FROM tbl_barang WHERE Kode='" & TXTKODE.Text & "'"
-            Dim CMD As SqlCommand
-            CMD = New SqlCommand(STR, CONN)
-            Dim RD As SqlDataReader
-            RD = CMD.ExecuteReader
-            If RD.HasRows Then
-                RD.Close()
-                STR = "UPDATE tbl_barang SET Barang='" & TXTNAMA.Text &
+                Dim STR As String = "SELECT * FROM tbl_barang WHERE Kode='" & TXTKODE.Text & "'"
+                Dim CMD As SqlCommand
+                CMD = New SqlCommand(STR, CONN)
+                Dim RD As SqlDataReader
+                RD = CMD.ExecuteReader
+                If RD.HasRows Then
+                    RD.Close()
+                    STR = "UPDATE tbl_barang SET Barang='" & TXTNAMA.Text &
                     "',Satuan='" & CBSATUAN.Text &
                     "',Start1='" & START1 &
                     "',Harga1='" & TXTHARGA1.Text &
@@ -227,10 +289,15 @@ Public Class FR_PRODUK
                     "',Start3='" & START3 &
                     "',Harga3='" & TXTHARGA3.Text &
                     "',End3='" & END3 &
+                    "',Start4='" & START4 &
+                    "',Harga4='" & TXTHARGA4.Text &
+                    "',End4='" & END4 &
+                    "',Start5='" & START5 &
+                    "',Harga5='" & TXTHARGA5.Text &
                     "' WHERE Kode='" & TXTKODE.Text & "'"
-            Else
-                RD.Close()
-                STR = "INSERT INTO tbl_barang VALUES ('" &
+                Else
+                    RD.Close()
+                    STR = "INSERT INTO tbl_barang VALUES ('" &
                     TXTKODE.Text & "', '" &
                     TXTNAMA.Text & "', '" &
                     CBSATUAN.Text & "', '" &
@@ -242,14 +309,20 @@ Public Class FR_PRODUK
                     END2 & "', '" &
                     START3 & "', '" &
                     TXTHARGA3.Text & "', '" &
-                    END3 & "')"
+                    END3 & "', '" &
+                    START4 & "', '" &
+                    TXTHARGA4.Text & "', '" &
+                    END4 & "', '" &
+                    START5 & "', '" &
+                    TXTHARGA5.Text & "')"
+                End If
+                CMD = New SqlCommand(STR, CONN)
+                CMD.ExecuteNonQuery()
+                MsgBox("Data produk berhasil disimpan.")
+                TXTKODE.Clear()
+                TXTKODE.Select()
+                TAMPIL()
             End If
-            CMD = New SqlCommand(STR, CONN)
-            CMD.ExecuteNonQuery()
-            MsgBox("Data produk berhasil disimpan.")
-            TXTKODE.Clear()
-            TXTKODE.Select()
-            TAMPIL()
         End If
     End Sub
 
@@ -281,6 +354,11 @@ Public Class FR_PRODUK
         TXTSTART3.ReadOnly = True
         TXTHARGA3.ReadOnly = True
         TXTEND3.ReadOnly = True
+        TXTSTART4.ReadOnly = True
+        TXTHARGA4.ReadOnly = True
+        TXTEND4.ReadOnly = True
+        TXTSTART5.ReadOnly = True
+        TXTHARGA5.ReadOnly = True
         BTNSIMPAN.Visible = False
         BTNCANCEL.Visible = True
         BTNUBAH.Visible = True
@@ -341,10 +419,12 @@ Public Class FR_PRODUK
     Private Sub TXTEND2_TextChanged(sender As Object, e As EventArgs) Handles TXTEND2.TextChanged
         If TXTEND2.Text = "" Or TXTEND2.Text = "0" Then
             TXTSTART3.Text = ""
-            TXTHARGA3.Text = ""
+            TXTEND3.ReadOnly = True
+            TXTEND3.Text = ""
             TXTHARGA3.ReadOnly = True
         Else
-            If TXTEND1.Text > "0" Then
+            If TXTEND2.Text > "0" Then
+                TXTEND3.ReadOnly = False
                 TXTHARGA3.ReadOnly = False
                 TXTSTART3.Text = CInt(TXTEND2.Text + 1)
             End If
@@ -352,26 +432,10 @@ Public Class FR_PRODUK
         TXTHARGA3.Text = ""
     End Sub
 
-    Private Sub TXTHARGA1_TextChanged(sender As Object, e As EventArgs) Handles TXTHARGA1.TextChanged
-        If TXTSTART2.Text = "" Then
-            TXTHARGA2.Text = TXTHARGA1.Text
-        End If
-    End Sub
-
-    Private Sub TXTHARGA2_TextChanged(sender As Object, e As EventArgs) Handles TXTHARGA2.TextChanged
-        If TXTSTART3.Text = "" Then
-            TXTHARGA3.Text = TXTHARGA2.Text
-        End If
-    End Sub
-
     Private Sub BTNUBAH_Click(sender As Object, e As EventArgs) Handles BTNUBAH.Click
-        TXTKODE.ReadOnly = False
-        TXTNAMA.ReadOnly = False
-        TXTEND1.ReadOnly = False
-        TXTHARGA1.ReadOnly = False
-        TXTEND2.ReadOnly = False
-        TXTHARGA2.ReadOnly = False
-        TXTHARGA3.ReadOnly = False
+        Dim KODE As String = TXTKODE.Text
+        TXTKODE.Text = ""
+        TXTKODE.Text = KODE
         BTNSIMPAN.Visible = True
         BTNUBAH.Visible = False
     End Sub
@@ -386,5 +450,94 @@ Public Class FR_PRODUK
         BTNUBAH.Visible = False
         BTNCANCEL.Visible = False
         TXTKODE.Select()
+    End Sub
+
+    Private Sub TXTEND3_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTEND3.KeyPress
+        If Not ((e.KeyChar >= "0" And e.KeyChar <= "9") Or e.KeyChar = vbBack) Then
+            e.Handled = True
+        End If
+        If e.KeyChar = Chr(13) Then
+            If Not TXTEND3.Text = "" Then
+                If CInt(TXTEND3.Text) <= CInt(TXTSTART3.Text) Then
+                    TXTEND3.Clear()
+                    MsgBox("Item harus lebih besar dari sebelumnya!")
+                Else
+                    TXTHARGA3.Select()
+                End If
+            Else
+                TXTHARGA3.Select()
+            End If
+        End If
+    End Sub
+
+    Private Sub TXTEND4_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTEND4.KeyPress
+        If Not ((e.KeyChar >= "0" And e.KeyChar <= "9") Or e.KeyChar = vbBack) Then
+            e.Handled = True
+        End If
+        If e.KeyChar = Chr(13) Then
+            If Not TXTEND4.Text = "" Then
+                If CInt(TXTEND4.Text) <= CInt(TXTSTART4.Text) Then
+                    TXTEND4.Clear()
+                    MsgBox("Item harus lebih besar dari sebelumnya!")
+                Else
+                    TXTHARGA4.Select()
+                End If
+            Else
+                TXTHARGA4.Select()
+            End If
+        End If
+    End Sub
+
+    Private Sub TXTEND3_TextChanged(sender As Object, e As EventArgs) Handles TXTEND3.TextChanged
+        If TXTEND3.Text = "" Or TXTEND3.Text = "0" Then
+            TXTSTART4.Text = ""
+            TXTEND4.ReadOnly = True
+            TXTEND4.Text = ""
+            TXTHARGA4.ReadOnly = True
+        Else
+            If TXTEND3.Text > "0" Then
+                TXTHARGA4.ReadOnly = False
+                TXTEND4.ReadOnly = False
+                TXTSTART4.Text = CInt(TXTEND3.Text + 1)
+            End If
+        End If
+        TXTHARGA4.Text = ""
+    End Sub
+
+    Private Sub TXTEND4_TextChanged(sender As Object, e As EventArgs) Handles TXTEND4.TextChanged
+        If TXTEND4.Text = "" Or TXTEND4.Text = "0" Then
+            TXTSTART5.Text = ""
+            TXTHARGA5.ReadOnly = True
+        Else
+            If TXTEND4.Text > "0" Then
+                TXTHARGA5.ReadOnly = False
+                TXTSTART5.Text = CInt(TXTEND4.Text + 1)
+            End If
+        End If
+        TXTHARGA5.Text = ""
+    End Sub
+
+    Private Sub TXTHARGA4_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTHARGA4.KeyPress
+        If e.KeyChar = Chr(13) Then
+            If TXTEND4.Text = "" Then
+                BTNSIMPAN.Select()
+            Else
+                TXTHARGA5.Select()
+            End If
+        End If
+
+        If Not ((e.KeyChar >= "0" And e.KeyChar <= "9") Or e.KeyChar = vbBack) Then
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub TXTHARGA5_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTHARGA5.KeyPress
+        If e.KeyChar = Chr(13) Then
+            BTNSIMPAN.Select()
+        End If
+
+        If Not ((e.KeyChar >= "0" And e.KeyChar <= "9") Or e.KeyChar = vbBack) Then
+            e.Handled = True
+        End If
     End Sub
 End Class

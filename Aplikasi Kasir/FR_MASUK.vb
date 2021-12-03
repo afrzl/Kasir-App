@@ -157,6 +157,40 @@ Public Class FR_MASUK
         End If
     End Sub
 
+    Private Function CEK_HARGA() As Boolean
+        Dim STR As String = "SELECT * FROM tbl_barang WHERE Kode='" & TXTKODE.Text & "'"
+        Dim CMD As New SqlCommand(STR, CONN)
+        Dim RD As SqlDataReader
+        RD = CMD.ExecuteReader
+        RD.Read()
+        Dim HARGA_TERENDAH As Integer = 0
+        If Not RD.Item("Start5") = 0 Then
+            HARGA_TERENDAH = RD.Item("Harga5")
+        Else
+            If Not RD.Item("Start4") = 0 Then
+                HARGA_TERENDAH = RD.Item("Harga4")
+            Else
+                If Not RD.Item("Start3") = 0 Then
+                    HARGA_TERENDAH = RD.Item("Harga3")
+                Else
+                    If Not RD.Item("Start2") = 0 Then
+                        HARGA_TERENDAH = RD.Item("Harga2")
+                    Else
+                        HARGA_TERENDAH = RD.Item("Harga1")
+                    End If
+                End If
+            End If
+        End If
+
+        RD.Close()
+
+        If CInt(TXTHARGAPARTAI.Text) < HARGA_TERENDAH Then
+            CEK_HARGA = True
+        Else
+            CEK_HARGA = False
+        End If
+    End Function
+
     Private Function AUTOID() As String
         Dim ID_AWAL As String = Format(Date.Now, "yyMMdd")
         Dim STR As String = "SELECT TOP 1 (Id_trans) AS Id_trans FROM tbl_transaksi_parent WHERE LEFT(Id_trans,1)='M' ORDER BY Id DESC"
@@ -240,15 +274,6 @@ Public Class FR_MASUK
         CARI_BARANG()
     End Sub
 
-    Private Sub DGCARI_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs)
-        On Error Resume Next
-        TXTKODE.Text = DGCARI.Item(0, e.RowIndex).Value
-        BTNCARI.Text = "Cari (F1)"
-        TXTJUMLAH.Select()
-        PNCARI.Visible = False
-        DGCARI.DataSource = Nothing
-    End Sub
-
     Private Sub BTNTAMBAH_Click(sender As Object, e As EventArgs) Handles BTNTAMBAH.Click
         BUKA_FORM(FR_PRODUK)
     End Sub
@@ -256,27 +281,34 @@ Public Class FR_MASUK
     Private Sub BTNSTOK_Click(sender As Object, e As EventArgs) Handles BTNSTOK.Click
         If TXTKODE.Text = "" Or LBBARANG.Text = "" Or TXTJUMLAH.Text = "" Or TXTHARGAPARTAI.Text = "" Then
             MsgBox("Data tidak lengkap!")
+            TXTKODE.Select()
         ElseIf CInt(TXTJUMLAH.Text) <= 0 Then
             MsgBox("Jumlah barang harus lebih dari 0!")
         Else
-            Dim ID_TRANS As String = AUTOID()
-            Dim STR As String = "INSERT INTO tbl_transaksi_child (Id_trans, Kode, Jumlah, Harga)" &
+            If CEK_HARGA() = True Then
+                Dim ID_TRANS As String = AUTOID()
+                Dim STR As String = "INSERT INTO tbl_transaksi_child (Id_trans, Kode, Jumlah, Harga)" &
                 " VALUES('" & ID_TRANS & "','" & TXTKODE.Text & "','" & CInt(TXTJUMLAH.Text) & "','" &
                 CInt(TXTHARGAPARTAI.Text) & "')"
-            Dim CMD As New SqlCommand(STR, CONN)
-            CMD.ExecuteNonQuery()
+                Dim CMD As New SqlCommand(STR, CONN)
+                CMD.ExecuteNonQuery()
 
-            STR = "INSERT INTO tbl_transaksi_parent (Id_trans, Id_kasir, Tgl, Jenis, Person) VALUES" &
+                STR = "INSERT INTO tbl_transaksi_parent (Id_trans, Id_kasir, Tgl, Jenis, Person) VALUES" &
                 "('" & ID_TRANS & "','" & My.Settings.ID_ACCOUNT & "','" & Format(Date.Now, "MM/dd/yyyy h:m:s") & "','M','" & TXTSUPPLIER.Text & "')"
-            CMD = New SqlCommand(STR, CONN)
-            CMD.ExecuteNonQuery()
-            MsgBox("Data tersimpan")
-            TXTKODE.Clear()
-            TXTJUMLAH.Clear()
-            TXTHARGAPARTAI.Clear()
-            TXTSUPPLIER.Clear()
-            TXTKODE.Select()
-            TAMPIL()
+                CMD = New SqlCommand(STR, CONN)
+                CMD.ExecuteNonQuery()
+                MsgBox("Data tersimpan")
+                TXTKODE.Clear()
+                TXTJUMLAH.Clear()
+                TXTHARGAPARTAI.Clear()
+                TXTSUPPLIER.Clear()
+                TXTKODE.Select()
+                TAMPIL()
+            Else
+                MsgBox("Harga partai harus lebih rendah dari harga jual produk, silahkan ubah harga jual!")
+                TXTHARGAPARTAI.Clear()
+                TXTHARGAPARTAI.Select()
+            End If
         End If
     End Sub
 
@@ -321,5 +353,14 @@ Public Class FR_MASUK
     Private Sub TXTCARI_TextChanged(sender As Object, e As EventArgs) Handles TXTCARI.TextChanged
         START_RECORD = 0
         TAMPIL()
+    End Sub
+
+    Private Sub DGCARI_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGCARI.CellDoubleClick
+        On Error Resume Next
+        TXTKODE.Text = DGCARI.Item(0, e.RowIndex).Value
+        BTNCARI.Text = "Cari (F1)"
+        TXTJUMLAH.Select()
+        PNCARI.Visible = False
+        DGCARI.DataSource = Nothing
     End Sub
 End Class
