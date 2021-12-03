@@ -49,18 +49,25 @@ Partial Class FR_PRODUK
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.BTNKASIR = New System.Windows.Forms.Button()
         Me.PNCONTENT = New System.Windows.Forms.Panel()
+        Me.BTNUBAH = New System.Windows.Forms.Button()
+        Me.TXTEND3 = New System.Windows.Forms.TextBox()
+        Me.TXTSTART3 = New System.Windows.Forms.TextBox()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.TXTEND2 = New System.Windows.Forms.TextBox()
+        Me.TXTSTART2 = New System.Windows.Forms.TextBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.TXTEND1 = New System.Windows.Forms.TextBox()
+        Me.TXTSTART1 = New System.Windows.Forms.TextBox()
         Me.DGTAMPIL = New System.Windows.Forms.DataGridView()
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.HapusToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.BTNSIMPAN = New System.Windows.Forms.Button()
-        Me.Label11 = New System.Windows.Forms.Label()
-        Me.TXTLUSIN = New System.Windows.Forms.TextBox()
-        Me.Label10 = New System.Windows.Forms.Label()
-        Me.TXTSETLUSIN = New System.Windows.Forms.TextBox()
+        Me.TXTHARGA3 = New System.Windows.Forms.TextBox()
+        Me.TXTHARGA2 = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.TXTCARI = New System.Windows.Forms.TextBox()
         Me.CBSATUAN = New System.Windows.Forms.ComboBox()
-        Me.TXTSATUAN = New System.Windows.Forms.TextBox()
+        Me.TXTHARGA1 = New System.Windows.Forms.TextBox()
         Me.TXTNAMA = New System.Windows.Forms.TextBox()
         Me.TXTKODE = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -68,6 +75,7 @@ Partial Class FR_PRODUK
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.PNLEFT = New System.Windows.Forms.Panel()
+        Me.BTNCANCEL = New System.Windows.Forms.Button()
         Me.PNCONTROL.SuspendLayout()
         Me.PNTOP.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -365,16 +373,24 @@ Partial Class FR_PRODUK
         '
         'PNCONTENT
         '
+        Me.PNCONTENT.Controls.Add(Me.BTNCANCEL)
+        Me.PNCONTENT.Controls.Add(Me.BTNUBAH)
+        Me.PNCONTENT.Controls.Add(Me.TXTEND3)
+        Me.PNCONTENT.Controls.Add(Me.TXTSTART3)
+        Me.PNCONTENT.Controls.Add(Me.Label11)
+        Me.PNCONTENT.Controls.Add(Me.TXTEND2)
+        Me.PNCONTENT.Controls.Add(Me.TXTSTART2)
+        Me.PNCONTENT.Controls.Add(Me.Label10)
+        Me.PNCONTENT.Controls.Add(Me.TXTEND1)
+        Me.PNCONTENT.Controls.Add(Me.TXTSTART1)
         Me.PNCONTENT.Controls.Add(Me.DGTAMPIL)
         Me.PNCONTENT.Controls.Add(Me.BTNSIMPAN)
-        Me.PNCONTENT.Controls.Add(Me.Label11)
-        Me.PNCONTENT.Controls.Add(Me.TXTLUSIN)
-        Me.PNCONTENT.Controls.Add(Me.Label10)
-        Me.PNCONTENT.Controls.Add(Me.TXTSETLUSIN)
+        Me.PNCONTENT.Controls.Add(Me.TXTHARGA3)
+        Me.PNCONTENT.Controls.Add(Me.TXTHARGA2)
         Me.PNCONTENT.Controls.Add(Me.Label6)
         Me.PNCONTENT.Controls.Add(Me.TXTCARI)
         Me.PNCONTENT.Controls.Add(Me.CBSATUAN)
-        Me.PNCONTENT.Controls.Add(Me.TXTSATUAN)
+        Me.PNCONTENT.Controls.Add(Me.TXTHARGA1)
         Me.PNCONTENT.Controls.Add(Me.TXTNAMA)
         Me.PNCONTENT.Controls.Add(Me.TXTKODE)
         Me.PNCONTENT.Controls.Add(Me.Label5)
@@ -386,6 +402,101 @@ Partial Class FR_PRODUK
         Me.PNCONTENT.Name = "PNCONTENT"
         Me.PNCONTENT.Size = New System.Drawing.Size(1096, 768)
         Me.PNCONTENT.TabIndex = 18
+        '
+        'BTNUBAH
+        '
+        Me.BTNUBAH.BackColor = System.Drawing.Color.Navy
+        Me.BTNUBAH.FlatAppearance.BorderSize = 0
+        Me.BTNUBAH.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNUBAH.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNUBAH.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BTNUBAH.Location = New System.Drawing.Point(189, 405)
+        Me.BTNUBAH.Name = "BTNUBAH"
+        Me.BTNUBAH.Size = New System.Drawing.Size(145, 40)
+        Me.BTNUBAH.TabIndex = 52
+        Me.BTNUBAH.Text = "UBAH DATA"
+        Me.BTNUBAH.UseVisualStyleBackColor = False
+        Me.BTNUBAH.Visible = False
+        '
+        'TXTEND3
+        '
+        Me.TXTEND3.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TXTEND3.Location = New System.Drawing.Point(97, 356)
+        Me.TXTEND3.Name = "TXTEND3"
+        Me.TXTEND3.ReadOnly = True
+        Me.TXTEND3.Size = New System.Drawing.Size(40, 30)
+        Me.TXTEND3.TabIndex = 51
+        Me.TXTEND3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'TXTSTART3
+        '
+        Me.TXTSTART3.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TXTSTART3.Location = New System.Drawing.Point(22, 356)
+        Me.TXTSTART3.Name = "TXTSTART3"
+        Me.TXTSTART3.ReadOnly = True
+        Me.TXTSTART3.Size = New System.Drawing.Size(40, 30)
+        Me.TXTSTART3.TabIndex = 50
+        Me.TXTSTART3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label11.Location = New System.Drawing.Point(71, 360)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(17, 23)
+        Me.Label11.TabIndex = 49
+        Me.Label11.Text = "-"
+        '
+        'TXTEND2
+        '
+        Me.TXTEND2.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TXTEND2.Location = New System.Drawing.Point(97, 303)
+        Me.TXTEND2.Name = "TXTEND2"
+        Me.TXTEND2.ReadOnly = True
+        Me.TXTEND2.Size = New System.Drawing.Size(40, 30)
+        Me.TXTEND2.TabIndex = 48
+        Me.TXTEND2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'TXTSTART2
+        '
+        Me.TXTSTART2.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TXTSTART2.Location = New System.Drawing.Point(22, 303)
+        Me.TXTSTART2.Name = "TXTSTART2"
+        Me.TXTSTART2.ReadOnly = True
+        Me.TXTSTART2.Size = New System.Drawing.Size(40, 30)
+        Me.TXTSTART2.TabIndex = 47
+        Me.TXTSTART2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label10.Location = New System.Drawing.Point(71, 307)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(17, 23)
+        Me.Label10.TabIndex = 46
+        Me.Label10.Text = "-"
+        '
+        'TXTEND1
+        '
+        Me.TXTEND1.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TXTEND1.Location = New System.Drawing.Point(97, 257)
+        Me.TXTEND1.Name = "TXTEND1"
+        Me.TXTEND1.Size = New System.Drawing.Size(40, 30)
+        Me.TXTEND1.TabIndex = 45
+        Me.TXTEND1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'TXTSTART1
+        '
+        Me.TXTSTART1.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TXTSTART1.Location = New System.Drawing.Point(22, 257)
+        Me.TXTSTART1.Name = "TXTSTART1"
+        Me.TXTSTART1.ReadOnly = True
+        Me.TXTSTART1.Size = New System.Drawing.Size(40, 30)
+        Me.TXTSTART1.TabIndex = 44
+        Me.TXTSTART1.Text = "1"
+        Me.TXTSTART1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'DGTAMPIL
         '
@@ -453,51 +564,33 @@ Partial Class FR_PRODUK
         Me.BTNSIMPAN.Text = "SIMPAN"
         Me.BTNSIMPAN.UseVisualStyleBackColor = False
         '
-        'Label11
+        'TXTHARGA3
         '
-        Me.Label11.AutoSize = True
-        Me.Label11.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label11.Location = New System.Drawing.Point(18, 359)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(96, 23)
-        Me.Label11.TabIndex = 43
-        Me.Label11.Text = ">= 12 item"
+        Me.TXTHARGA3.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TXTHARGA3.Location = New System.Drawing.Point(189, 356)
+        Me.TXTHARGA3.Name = "TXTHARGA3"
+        Me.TXTHARGA3.ReadOnly = True
+        Me.TXTHARGA3.Size = New System.Drawing.Size(226, 30)
+        Me.TXTHARGA3.TabIndex = 6
         '
-        'TXTLUSIN
+        'TXTHARGA2
         '
-        Me.TXTLUSIN.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TXTLUSIN.Location = New System.Drawing.Point(189, 356)
-        Me.TXTLUSIN.Name = "TXTLUSIN"
-        Me.TXTLUSIN.Size = New System.Drawing.Size(226, 30)
-        Me.TXTLUSIN.TabIndex = 6
-        '
-        'Label10
-        '
-        Me.Label10.AutoSize = True
-        Me.Label10.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(18, 306)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(93, 23)
-        Me.Label10.TabIndex = 41
-        Me.Label10.Text = "6 - 11 item"
-        '
-        'TXTSETLUSIN
-        '
-        Me.TXTSETLUSIN.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TXTSETLUSIN.Location = New System.Drawing.Point(189, 303)
-        Me.TXTSETLUSIN.Name = "TXTSETLUSIN"
-        Me.TXTSETLUSIN.Size = New System.Drawing.Size(226, 30)
-        Me.TXTSETLUSIN.TabIndex = 5
+        Me.TXTHARGA2.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TXTHARGA2.Location = New System.Drawing.Point(189, 303)
+        Me.TXTHARGA2.Name = "TXTHARGA2"
+        Me.TXTHARGA2.ReadOnly = True
+        Me.TXTHARGA2.Size = New System.Drawing.Size(226, 30)
+        Me.TXTHARGA2.TabIndex = 5
         '
         'Label6
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(18, 260)
+        Me.Label6.Location = New System.Drawing.Point(71, 261)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(87, 23)
+        Me.Label6.Size = New System.Drawing.Size(17, 23)
         Me.Label6.TabIndex = 39
-        Me.Label6.Text = "<= 5 item"
+        Me.Label6.Text = "-"
         '
         'TXTCARI
         '
@@ -519,13 +612,13 @@ Partial Class FR_PRODUK
         Me.CBSATUAN.Size = New System.Drawing.Size(226, 31)
         Me.CBSATUAN.TabIndex = 3
         '
-        'TXTSATUAN
+        'TXTHARGA1
         '
-        Me.TXTSATUAN.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TXTSATUAN.Location = New System.Drawing.Point(189, 257)
-        Me.TXTSATUAN.Name = "TXTSATUAN"
-        Me.TXTSATUAN.Size = New System.Drawing.Size(226, 30)
-        Me.TXTSATUAN.TabIndex = 4
+        Me.TXTHARGA1.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TXTHARGA1.Location = New System.Drawing.Point(189, 257)
+        Me.TXTHARGA1.Name = "TXTHARGA1"
+        Me.TXTHARGA1.Size = New System.Drawing.Size(226, 30)
+        Me.TXTHARGA1.TabIndex = 4
         '
         'TXTNAMA
         '
@@ -607,6 +700,21 @@ Partial Class FR_PRODUK
         Me.PNLEFT.Size = New System.Drawing.Size(270, 768)
         Me.PNLEFT.TabIndex = 17
         '
+        'BTNCANCEL
+        '
+        Me.BTNCANCEL.BackColor = System.Drawing.Color.DarkGreen
+        Me.BTNCANCEL.FlatAppearance.BorderSize = 0
+        Me.BTNCANCEL.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNCANCEL.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNCANCEL.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BTNCANCEL.Location = New System.Drawing.Point(340, 405)
+        Me.BTNCANCEL.Name = "BTNCANCEL"
+        Me.BTNCANCEL.Size = New System.Drawing.Size(130, 40)
+        Me.BTNCANCEL.TabIndex = 53
+        Me.BTNCANCEL.Text = "CANCEL"
+        Me.BTNCANCEL.UseVisualStyleBackColor = False
+        Me.BTNCANCEL.Visible = False
+        '
         'FR_PRODUK
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -660,20 +768,28 @@ Partial Class FR_PRODUK
     Friend WithEvents PNLEFT As Panel
     Friend WithEvents TXTCARI As TextBox
     Friend WithEvents CBSATUAN As ComboBox
-    Friend WithEvents TXTSATUAN As TextBox
+    Friend WithEvents TXTHARGA1 As TextBox
     Friend WithEvents TXTNAMA As TextBox
     Friend WithEvents TXTKODE As TextBox
     Friend WithEvents Label5 As Label
     Friend WithEvents Label7 As Label
     Friend WithEvents Label8 As Label
     Friend WithEvents Label9 As Label
-    Friend WithEvents Label6 As Label
-    Friend WithEvents Label11 As Label
-    Friend WithEvents TXTLUSIN As TextBox
-    Friend WithEvents Label10 As Label
-    Friend WithEvents TXTSETLUSIN As TextBox
+    Friend WithEvents TXTHARGA3 As TextBox
+    Friend WithEvents TXTHARGA2 As TextBox
     Friend WithEvents BTNSIMPAN As Button
     Friend WithEvents DGTAMPIL As DataGridView
     Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
     Friend WithEvents HapusToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents TXTSTART1 As TextBox
+    Friend WithEvents Label6 As Label
+    Friend WithEvents TXTEND3 As TextBox
+    Friend WithEvents TXTSTART3 As TextBox
+    Friend WithEvents Label11 As Label
+    Friend WithEvents TXTEND2 As TextBox
+    Friend WithEvents TXTSTART2 As TextBox
+    Friend WithEvents Label10 As Label
+    Friend WithEvents TXTEND1 As TextBox
+    Friend WithEvents BTNUBAH As Button
+    Friend WithEvents BTNCANCEL As Button
 End Class
