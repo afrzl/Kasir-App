@@ -1,6 +1,5 @@
 ﻿Imports System.Data.SqlClient
-
-Public Class FR_MASUK
+Public Class FR_DISKON
     Private Sub PEWAKTU_Tick(sender As Object, e As EventArgs) Handles PEWAKTU.Tick
         LBTGL.Text = Format(Date.Now, "dd MMMM yyyy HH:mm:ss")
     End Sub
@@ -36,38 +35,59 @@ Public Class FR_MASUK
         LBTGL.Text = Format(Date.Now, "dd MMMM yyyy HH:mm:ss")
         PEWAKTU.Enabled = True
         LBLUSER.Text = NAMA_LOGIN
+        CBTAMPIL.Text = "Semua"
 
         TXTKODE.Select()
         TAMPIL()
     End Sub
 
     Dim START_RECORD As Integer = 0
-    Dim TAMPIL_RECORD As Integer = 2
+    Dim TAMPIL_RECORD As Integer = 10
 
     Sub TAMPIL()
-        'Dim STR As String = "SELECT Id, RTRIM(Kode) AS Kode," &
-        '" (SELECT RTRIM(Barang) FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) AS Barang,Jumlah,RTRIM(Supplier) AS Supplier," &
-        '" Harga, Tgl, (SELECT RTRIM(Nama) FROM tbl_karyawan WHERE RTRIM(Id)=RTRIM(tbl_transaksi.Id_kasir)) As Kasir" &
-        '" FROM tbl_transaksi WHERE Jenis='M' AND (SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi.Kode))" &
-        '" LIKE '%" & TXTCARI.Text & "%'"
-
-        Dim STR As String = "SELECT RTRIM(Id_trans) AS 'ID Transaksi', RTRIM(Kode) AS 'Kode Barang'," &
-            " (SELECT RTRIM(Barang) FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) AS 'Nama Barang'," &
-            " Jumlah as 'Stok Masuk', Harga AS 'Harga Partai' FROM tbl_transaksi_child WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M' AND" &
-            " (SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) Like '%" & TXTCARI.Text & "%' ORDER BY Id ASC"
+        Dim TGL_SKRG As String = Format(Date.Now, "yyyy-MM-dd")
+        Dim STR As String = ""
+        If CBTAMPIL.Text = "Semua" Then
+            STR = "SELECT Id, RTRIM(Kode) AS 'Kode Barang'," &
+            " (SELECT RTRIM(Barang) FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_diskon.Kode)) AS 'Nama Barang'," &
+            " Tgl_awal as 'Tanggal Awal', Tgl_akhir AS 'Tanggal Akhir', Diskon AS 'Diskon' FROM tbl_diskon" &
+            " WHERE (SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_diskon.Kode)) Like '%" & TXTCARI.Text & "%' ORDER BY Tgl_awal ASC"
+        ElseIf CBTAMPIL.Text = "Berlalu" Then
+            STR = "SELECT Id, RTRIM(Kode) AS 'Kode Barang'," &
+            " (SELECT RTRIM(Barang) FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_diskon.Kode)) AS 'Nama Barang'," &
+            " Tgl_awal as 'Tanggal Awal', Tgl_akhir AS 'Tanggal Akhir', Diskon AS 'Diskon' FROM tbl_diskon" &
+            " WHERE (SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_diskon.Kode))" &
+            " Like '%" & TXTCARI.Text & "%' AND Tgl_akhir < '" & TGL_SKRG & "' ORDER BY Tgl_awal ASC"
+        ElseIf CBTAMPIL.Text = "Sekarang" Then
+            STR = "SELECT Id, RTRIM(Kode) AS 'Kode Barang'," &
+            " (SELECT RTRIM(Barang) FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_diskon.Kode)) AS 'Nama Barang'," &
+            " Tgl_awal as 'Tanggal Awal', Tgl_akhir AS 'Tanggal Akhir', Diskon AS 'Diskon' FROM tbl_diskon" &
+            " WHERE (SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_diskon.Kode))" &
+            " Like '%" & TXTCARI.Text & "%' AND Tgl_awal <= '" & TGL_SKRG & "' AND Tgl_akhir >= '" & TGL_SKRG & "' ORDER BY Tgl_awal ASC"
+        ElseIf CBTAMPIL.Text = "Akan Datang" Then
+            STR = "SELECT Id, RTRIM(Kode) AS 'Kode Barang'," &
+            " (SELECT RTRIM(Barang) FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_diskon.Kode)) AS 'Nama Barang'," &
+            " Tgl_awal as 'Tanggal Awal', Tgl_akhir AS 'Tanggal Akhir', Diskon AS 'Diskon' FROM tbl_diskon" &
+            " WHERE (SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_diskon.Kode))" &
+            " Like '%" & TXTCARI.Text & "%' AND Tgl_awal > '" & TGL_SKRG & "' ORDER BY Tgl_awal ASC"
+        Else
+            STR = "SELECT Id, RTRIM(Kode) AS 'Kode Barang'," &
+            " (SELECT RTRIM(Barang) FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_diskon.Kode)) AS 'Nama Barang'," &
+            " Tgl_awal as 'Tanggal Awal', Tgl_akhir AS 'Tanggal Akhir', Diskon AS 'Diskon' FROM tbl_diskon" &
+            " WHERE (SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_diskon.Kode)) Like '%" & TXTCARI.Text & "%' ORDER BY Tgl_awal ASC"
+        End If
         Dim DA As SqlDataAdapter
         Dim TBL As New DataSet
         DA = New SqlDataAdapter(STR, CONN)
         DA.Fill(TBL, START_RECORD, TAMPIL_RECORD, 0)
         DGTAMPIL.DataSource = TBL.Tables(0)
 
-        DGTAMPIL.Columns(4).DefaultCellStyle.Format = "Rp ###,##"
-
-        DGTAMPIL.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-        DGTAMPIL.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+        DGTAMPIL.Columns(0).Visible = False
+        DGTAMPIL.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
         DGTAMPIL.Columns(2).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
         DGTAMPIL.Columns(3).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
         DGTAMPIL.Columns(4).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+        DGTAMPIL.Columns(5).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
 
         BTNPREV.Enabled = True
         BTNNEXT.Enabled = True
@@ -133,64 +153,6 @@ Public Class FR_MASUK
         End If
     End Sub
 
-    Private Function CEK_HARGA() As Boolean
-        Dim STR As String = "SELECT * FROM tbl_barang WHERE Kode='" & TXTKODE.Text & "'"
-        Dim CMD As New SqlCommand(STR, CONN)
-        Dim RD As SqlDataReader
-        RD = CMD.ExecuteReader
-        RD.Read()
-        Dim HARGA_TERENDAH As Integer = 0
-        If Not RD.Item("Start5") = 0 Then
-            HARGA_TERENDAH = RD.Item("Harga5")
-        Else
-            If Not RD.Item("Start4") = 0 Then
-                HARGA_TERENDAH = RD.Item("Harga4")
-            Else
-                If Not RD.Item("Start3") = 0 Then
-                    HARGA_TERENDAH = RD.Item("Harga3")
-                Else
-                    If Not RD.Item("Start2") = 0 Then
-                        HARGA_TERENDAH = RD.Item("Harga2")
-                    Else
-                        HARGA_TERENDAH = RD.Item("Harga1")
-                    End If
-                End If
-            End If
-        End If
-
-        RD.Close()
-
-        If CInt(TXTHARGAPARTAI.Text) < HARGA_TERENDAH Then
-            CEK_HARGA = True
-        Else
-            CEK_HARGA = False
-        End If
-    End Function
-
-    Private Function AUTOID() As String
-        Dim ID_AWAL As String = Format(Date.Now, "yyMMdd")
-        Dim STR As String = "SELECT TOP 1 (Id_trans) AS Id_trans FROM tbl_transaksi_parent WHERE LEFT(Id_trans,1)='M' ORDER BY Id DESC"
-        Dim CMD As SqlCommand
-        CMD = New SqlCommand(STR, CONN)
-        Dim RD As SqlDataReader
-        RD = CMD.ExecuteReader
-        RD.Read()
-        If RD.HasRows Then
-            If Mid(RD.Item("Id_trans"), 2, 6) = ID_AWAL Then
-                Dim ID As Integer = Mid(RD.Item("Id_trans"), 8, 3) + 1
-                RD.Close()
-                AUTOID = "M" + ID_AWAL + Format(ID, "000")
-            Else
-                RD.Close()
-                AUTOID = "M" + ID_AWAL + Format(1, "000")
-            End If
-        Else
-            RD.Close()
-            AUTOID = "M" + ID_AWAL + Format(1, "000")
-        End If
-        RD.Close()
-    End Function
-
     Private Sub TXTKODE_TextChanged(sender As Object, e As EventArgs) Handles TXTKODE.TextChanged
         Dim STR As String = "SELECT * FROM tbl_barang WHERE RTRIM(Kode)='" & TXTKODE.Text & "'"
         Dim CMD As SqlCommand
@@ -212,33 +174,7 @@ Public Class FR_MASUK
 
     Private Sub TXTKODE_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTKODE.KeyPress
         If e.KeyChar = Chr(13) Then
-            TXTJUMLAH.Select()
-        End If
-    End Sub
-
-    Private Sub TXTJUMLAH_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTJUMLAH.KeyPress
-        If Not ((e.KeyChar >= "0" And e.KeyChar <= "9") Or e.KeyChar = vbBack) Then
-            e.Handled = True
-        End If
-
-        If e.KeyChar = Chr(13) Then
-            TXTSUPPLIER.Select()
-        End If
-    End Sub
-
-    Private Sub TXTSUPPLIER_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTSUPPLIER.KeyPress
-        If e.KeyChar = Chr(13) Then
-            TXTHARGAPARTAI.Select()
-        End If
-    End Sub
-
-    Private Sub TXTHARGAPARTAI_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTHARGAPARTAI.KeyPress
-        If e.KeyChar = Chr(13) Then
-            BTNSTOK.Select()
-        End If
-
-        If Not ((e.KeyChar >= "0" And e.KeyChar <= "9") Or e.KeyChar = vbBack) Then
-            e.Handled = True
+            TXTTGLAWAL.Select()
         End If
     End Sub
 
@@ -250,54 +186,33 @@ Public Class FR_MASUK
         CARI_BARANG()
     End Sub
 
-    Private Sub BTNTAMBAH_Click(sender As Object, e As EventArgs) Handles BTNTAMBAH.Click
-        BUKA_FORM(FR_PRODUK)
-    End Sub
-
     Private Sub BTNSTOK_Click(sender As Object, e As EventArgs) Handles BTNSTOK.Click
-        If TXTKODE.Text = "" Or LBBARANG.Text = "" Or TXTJUMLAH.Text = "" Or TXTHARGAPARTAI.Text = "" Then
+        If TXTKODE.Text = "" Or LBBARANG.Text = "" Or TXTTGLAWAL.Text = "" Or TXTTGLAKHIR.Text = "" Or TXTDISKON.Text = "" Then
             MsgBox("Data tidak lengkap!")
             TXTKODE.Select()
-        ElseIf CInt(TXTJUMLAH.Text) <= 0 Then
-            MsgBox("Jumlah barang harus lebih dari 0!")
         Else
-            If CEK_HARGA() = True Then
-                Dim ID_TRANS As String = AUTOID()
-                Dim STR As String = "INSERT INTO tbl_transaksi_child (Id_trans, Kode, Jumlah, Harga, Stok) VALUES('" &
-                    ID_TRANS & "','" &
-                    TXTKODE.Text & "','" &
-                    CInt(TXTJUMLAH.Text) & "','" &
-                    CInt(TXTHARGAPARTAI.Text) & "','" &
-                    CInt(TXTJUMLAH.Text) & "')"
-                Dim CMD As New SqlCommand(STR, CONN)
-                CMD.ExecuteNonQuery()
-
-                STR = "INSERT INTO tbl_transaksi_parent (Id_trans, Id_kasir, Tgl, Jenis, Person) VALUES" &
-                "('" & ID_TRANS & "','" & My.Settings.ID_ACCOUNT & "','" & Format(Date.Now, "MM/dd/yyyy h:m:s") & "','M','" & TXTSUPPLIER.Text & "')"
-                CMD = New SqlCommand(STR, CONN)
-                CMD.ExecuteNonQuery()
-                MsgBox("Data tersimpan")
-                TXTKODE.Clear()
-                TXTJUMLAH.Clear()
-                TXTHARGAPARTAI.Clear()
-                TXTSUPPLIER.Clear()
-                TXTKODE.Select()
-                TAMPIL()
-            Else
-                MsgBox("Harga partai harus lebih rendah dari harga jual produk, silahkan ubah harga jual!")
-                TXTHARGAPARTAI.Clear()
-                TXTHARGAPARTAI.Select()
-            End If
+            Dim STR As String = "INSERT INTO tbl_diskon (Kode, Diskon, Tgl_awal, Tgl_akhir)" &
+                " VALUES(" &
+                " '" & TXTKODE.Text & "'," &
+                " '" & CInt(TXTDISKON.Text) & "'," &
+                " '" & Format(TXTTGLAWAL.Value, "MM/dd/yyyy") & "'," &
+                " '" & Format(TXTTGLAKHIR.Value, "MM/dd/yyyy") & "'" &
+                " )"
+            Dim CMD As New SqlCommand(STR, CONN)
+            CMD.ExecuteNonQuery()
+            MsgBox("Data tersimpan")
+            TXTKODE.Clear()
+            TXTDISKON.Clear()
+            TXTKODE.Select()
+            TAMPIL()
         End If
     End Sub
 
     Private Sub HapusToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HapusToolStripMenuItem.Click
-        If MsgBox("Apakah anda yakin akan menghapus data transaksi?", vbYesNo) = vbYes Then
-            Dim IDX As String = DGTAMPIL.Item(0, DGTAMPIL.CurrentRow.Index).Value
-            Dim CMD As New SqlCommand("DELETE FROM tbl_transaksi_child WHERE Id_trans='" & IDX & "'", CONN)
-            CMD.ExecuteNonQuery()
-
-            CMD = New SqlCommand("DELETE FROM tbl_transaksi_parent WHERE Id_trans='" & IDX & "'", CONN)
+        If MsgBox("Apakah anda yakin akan menghapus data diskon?", vbYesNo) = vbYes Then
+            DGTAMPIL.Columns(0).Visible = True
+            Dim IDX As String = DGTAMPIL.CurrentRow.Cells("Id").Value
+            Dim CMD As New SqlCommand("DELETE FROM tbl_diskon WHERE Id='" & IDX & "'", CONN)
             CMD.ExecuteNonQuery()
             TAMPIL()
             MsgBox("Data transaksi berhasil dihapus")
@@ -323,7 +238,6 @@ Public Class FR_MASUK
             On Error Resume Next
             TXTKODE.Text = DGCARI.Item(0, DGTAMPIL.CurrentRow.Index).Value
             BTNCARI.Text = "Cari (F1)"
-            TXTJUMLAH.Select()
             PNCARI.Visible = False
             DGCARI.DataSource = Nothing
         End If
@@ -338,9 +252,23 @@ Public Class FR_MASUK
         On Error Resume Next
         TXTKODE.Text = DGCARI.Item(0, e.RowIndex).Value
         BTNCARI.Text = "Cari (F1)"
-        TXTJUMLAH.Select()
         PNCARI.Visible = False
         DGCARI.DataSource = Nothing
+    End Sub
+
+    Private Sub TXTTGLAKHIR_ValueChanged(sender As Object, e As EventArgs) Handles TXTTGLAKHIR.ValueChanged
+        If TXTTGLAKHIR.Value < TXTTGLAWAL.Value Then
+            MsgBox("Tanggal akhir diskon harus lebih besar atau sama dengan tanggal awal!")
+            TXTTGLAKHIR.Value = TXTTGLAWAL.Value
+        End If
+    End Sub
+
+    Private Sub TXTTGLAWAL_ValueChanged(sender As Object, e As EventArgs) Handles TXTTGLAWAL.ValueChanged
+        TXTTGLAKHIR.Value = TXTTGLAWAL.Value
+    End Sub
+
+    Private Sub CBTAMPIL_TextChanged(sender As Object, e As EventArgs) Handles CBTAMPIL.TextChanged
+        TAMPIL()
     End Sub
 
     Private Sub BTNDASHBOARD_Click(sender As Object, e As EventArgs) Handles BTNDASHBOARD.Click
@@ -355,8 +283,8 @@ Public Class FR_MASUK
         BUKA_FORM(FR_PRODUK)
     End Sub
 
-    Private Sub BTNDISKON_Click(sender As Object, e As EventArgs) Handles BTNDISKON.Click
-        BUKA_FORM(FR_DISKON)
+    Private Sub BTNMASUK_Click(sender As Object, e As EventArgs) Handles BTNMASUK.Click
+        BUKA_FORM(FR_MASUK)
     End Sub
 
     Private Sub BTNKELUAR_Click(sender As Object, e As EventArgs) Handles BTNKELUAR.Click

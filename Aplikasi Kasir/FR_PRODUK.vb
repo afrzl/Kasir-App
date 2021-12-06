@@ -1,7 +1,7 @@
 ﻿Imports System.Data.SqlClient
 Public Class FR_PRODUK
     Private Sub PEWAKTU_Tick(sender As Object, e As EventArgs) Handles PEWAKTU.Tick
-        LBTGL.Text = Format(Date.Now, "dd MMMM yyyy H:m:s")
+        LBTGL.Text = Format(Date.Now, "dd MMMM yyyy HH:mm:ss")
     End Sub
 
     Sub BUKA_FORM(ByVal FR As Form)
@@ -16,35 +16,11 @@ Public Class FR_PRODUK
         Me.Hide()
     End Sub
 
-    Private Sub BTNMASUK_Click(sender As Object, e As EventArgs) Handles BTNMASUK.Click
-        BUKA_FORM(FR_MASUK)
-    End Sub
-
-    Private Sub BTNKELUAR_Click(sender As Object, e As EventArgs) Handles BTNKELUAR.Click
-        BUKA_FORM(FR_KELUAR)
-    End Sub
-
-    Private Sub BTNLAPORAN_Click(sender As Object, e As EventArgs) Handles BTNLAPORAN.Click
-        BUKA_FORM(FR_REPORT)
-    End Sub
-
-    Private Sub BTNTENTANG_Click(sender As Object, e As EventArgs) Handles BTNTENTANG.Click
-        BUKA_FORM(FR_TENTANG)
-    End Sub
-
     Private Sub BTNLOGOUT_Click(sender As Object, e As EventArgs) Handles BTNLOGOUT.Click
         Dim FR As New FR_LOGIN
         My.Settings.ID_ACCOUNT = 0
         FR.Show()
         Me.Hide()
-    End Sub
-
-    Private Sub BTNDASHBOARD_Click(sender As Object, e As EventArgs) Handles BTNDASHBOARD.Click
-        BUKA_FORM(FR_MENU)
-    End Sub
-
-    Private Sub BTNKASIR_Click(sender As Object, e As EventArgs) Handles BTNKASIR.Click
-        BUKA_FORM(FR_KASIR)
     End Sub
 
     Private Sub BTNCLOSE_Click(sender As Object, e As EventArgs) Handles BTNCLOSE.Click
@@ -56,7 +32,7 @@ Public Class FR_PRODUK
     End Sub
 
     Private Sub FR_PRODUK_Load(sender As Object, e As EventArgs) Handles Me.Load
-        LBTGL.Text = Format(Date.Now, "dd MMMM yyyy HH:MM:SS")
+        LBTGL.Text = Format(Date.Now, "dd MMMM yyyy HH:mm:ss")
         PEWAKTU.Enabled = True
         LBLUSER.Text = NAMA_LOGIN
 
@@ -539,5 +515,33 @@ Public Class FR_PRODUK
         If Not ((e.KeyChar >= "0" And e.KeyChar <= "9") Or e.KeyChar = vbBack) Then
             e.Handled = True
         End If
+    End Sub
+
+    Private Sub BTNDASHBOARD_Click(sender As Object, e As EventArgs) Handles BTNDASHBOARD.Click
+        BUKA_FORM(FR_MENU)
+    End Sub
+
+    Private Sub BTNKASIR_Click(sender As Object, e As EventArgs) Handles BTNKASIR.Click
+        BUKA_FORM(FR_KASIR)
+    End Sub
+
+    Private Sub BTNDISKON_Click(sender As Object, e As EventArgs) Handles BTNDISKON.Click
+        BUKA_FORM(FR_DISKON)
+    End Sub
+
+    Private Sub BTNMASUK_Click(sender As Object, e As EventArgs) Handles BTNMASUK.Click
+        BUKA_FORM(FR_MASUK)
+    End Sub
+
+    Private Sub BTNKELUAR_Click(sender As Object, e As EventArgs) Handles BTNKELUAR.Click
+        BUKA_FORM(FR_KELUAR)
+    End Sub
+
+    Private Sub BTNLAPORAN_Click(sender As Object, e As EventArgs) Handles BTNLAPORAN.Click
+        BUKA_FORM(FR_REPORT)
+    End Sub
+
+    Private Sub BTNTENTANG_Click(sender As Object, e As EventArgs) Handles BTNTENTANG.Click
+        BUKA_FORM(FR_TENTANG)
     End Sub
 End Class

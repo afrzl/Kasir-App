@@ -120,6 +120,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FR_DISKON.Designer.vb">
+      <DependentUpon>FR_DISKON.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FR_DISKON.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FR_KASIR.Designer.vb">
       <DependentUpon>FR_KASIR.vb</DependentUpon>
     </Compile>
@@ -205,6 +211,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="FR_DISKON.resx">
+      <DependentUpon>FR_DISKON.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FR_KASIR.resx">
       <DependentUpon>FR_KASIR.vb</DependentUpon>
     </EmbeddedResource>

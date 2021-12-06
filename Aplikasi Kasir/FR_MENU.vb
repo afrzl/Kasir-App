@@ -43,14 +43,14 @@
     End Sub
 
     Private Sub FR_MENU_Load(sender As Object, e As EventArgs) Handles Me.Load
-        LBTGL.Text = Format(Date.Now, "dd MMMM yyyy HH:MM:SS")
+        LBTGL.Text = Format(Date.Now, "dd MMMM yyyy HH:mm:ss")
         PEWAKTU.Enabled = True
 
         LBLUSER.Text = NAMA_LOGIN
     End Sub
 
     Private Sub PEWAKTU_Tick(sender As Object, e As EventArgs) Handles PEWAKTU.Tick
-        LBTGL.Text = Format(Date.Now, "dd MMMM yyyy H:m:s")
+        LBTGL.Text = Format(Date.Now, "dd MMMM yyyy HH:mm:ss")
     End Sub
 
     Private Sub FR_MENU_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
@@ -70,6 +70,10 @@
 
     Private Sub BTNMINIMIZE_Click(sender As Object, e As EventArgs) Handles BTNMINIMIZE.Click
         Me.WindowState = FormWindowState.Minimized
+    End Sub
+
+    Private Sub BTNDISKON_Click(sender As Object, e As EventArgs) Handles BTNDISKON.Click
+        BUKA_FORM(FR_DISKON)
     End Sub
 
     Private Sub BTNKASIR_Click(sender As Object, e As EventArgs) Handles BTNKASIR.Click

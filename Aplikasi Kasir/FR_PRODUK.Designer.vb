@@ -29,14 +29,15 @@ Partial Class FR_PRODUK
         Me.PEWAKTU = New System.Windows.Forms.Timer(Me.components)
         Me.LBTGL = New System.Windows.Forms.Label()
         Me.PNCONTROL = New System.Windows.Forms.Panel()
+        Me.BTNMINIMIZE = New System.Windows.Forms.Button()
+        Me.BTNCLOSE = New System.Windows.Forms.Button()
         Me.PNTOP = New System.Windows.Forms.Panel()
-        Me.LBLKASIR = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.LBLUSER = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.BTNLOGOUT = New System.Windows.Forms.Button()
         Me.PNCONTENT = New System.Windows.Forms.Panel()
         Me.TXTSTART5 = New System.Windows.Forms.TextBox()
         Me.Label13 = New System.Windows.Forms.Label()
@@ -72,10 +73,9 @@ Partial Class FR_PRODUK
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.PNLEFT = New System.Windows.Forms.Panel()
-        Me.BTNMINIMIZE = New System.Windows.Forms.Button()
-        Me.BTNCLOSE = New System.Windows.Forms.Button()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.BTNLOGOUT = New System.Windows.Forms.Button()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.BTNDISKON = New System.Windows.Forms.Button()
+        Me.Label14 = New System.Windows.Forms.Label()
         Me.BTNTENTANG = New System.Windows.Forms.Button()
         Me.BTNLAPORAN = New System.Windows.Forms.Button()
         Me.BTNKELUAR = New System.Windows.Forms.Button()
@@ -83,6 +83,7 @@ Partial Class FR_PRODUK
         Me.BTNBARANG = New System.Windows.Forms.Button()
         Me.BTNKASIR = New System.Windows.Forms.Button()
         Me.BTNDASHBOARD = New System.Windows.Forms.Button()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.PNCONTROL.SuspendLayout()
         Me.PNTOP.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -118,6 +119,28 @@ Partial Class FR_PRODUK
         Me.PNCONTROL.Size = New System.Drawing.Size(76, 40)
         Me.PNCONTROL.TabIndex = 0
         '
+        'BTNMINIMIZE
+        '
+        Me.BTNMINIMIZE.FlatAppearance.BorderSize = 0
+        Me.BTNMINIMIZE.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNMINIMIZE.Image = Global.Aplikasi_Kasir.My.Resources.Resources.minimize15px
+        Me.BTNMINIMIZE.Location = New System.Drawing.Point(11, 10)
+        Me.BTNMINIMIZE.Name = "BTNMINIMIZE"
+        Me.BTNMINIMIZE.Size = New System.Drawing.Size(18, 18)
+        Me.BTNMINIMIZE.TabIndex = 2
+        Me.BTNMINIMIZE.UseVisualStyleBackColor = True
+        '
+        'BTNCLOSE
+        '
+        Me.BTNCLOSE.FlatAppearance.BorderSize = 0
+        Me.BTNCLOSE.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNCLOSE.Image = Global.Aplikasi_Kasir.My.Resources.Resources.close15px
+        Me.BTNCLOSE.Location = New System.Drawing.Point(46, 10)
+        Me.BTNCLOSE.Name = "BTNCLOSE"
+        Me.BTNCLOSE.Size = New System.Drawing.Size(18, 18)
+        Me.BTNCLOSE.TabIndex = 0
+        Me.BTNCLOSE.UseVisualStyleBackColor = True
+        '
         'PNTOP
         '
         Me.PNTOP.BackColor = System.Drawing.Color.Silver
@@ -128,14 +151,6 @@ Partial Class FR_PRODUK
         Me.PNTOP.Name = "PNTOP"
         Me.PNTOP.Size = New System.Drawing.Size(1096, 40)
         Me.PNTOP.TabIndex = 19
-        '
-        'LBLKASIR
-        '
-        Me.LBLKASIR.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.LBLKASIR.Location = New System.Drawing.Point(0, 319)
-        Me.LBLKASIR.Name = "LBLKASIR"
-        Me.LBLKASIR.Size = New System.Drawing.Size(5, 25)
-        Me.LBLKASIR.TabIndex = 3
         '
         'Label4
         '
@@ -180,17 +195,6 @@ Partial Class FR_PRODUK
         Me.Label2.TabIndex = 14
         Me.Label2.Text = "Selamat datang,"
         '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.Label1.Location = New System.Drawing.Point(7, 151)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(125, 28)
-        Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Menu Utama"
-        '
         'Panel1
         '
         Me.Panel1.Controls.Add(Me.BTNLOGOUT)
@@ -199,6 +203,24 @@ Partial Class FR_PRODUK
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(270, 64)
         Me.Panel1.TabIndex = 0
+        '
+        'BTNLOGOUT
+        '
+        Me.BTNLOGOUT.FlatAppearance.BorderSize = 0
+        Me.BTNLOGOUT.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNLOGOUT.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNLOGOUT.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BTNLOGOUT.Image = Global.Aplikasi_Kasir.My.Resources.Resources.logout
+        Me.BTNLOGOUT.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.BTNLOGOUT.Location = New System.Drawing.Point(3, 17)
+        Me.BTNLOGOUT.Name = "BTNLOGOUT"
+        Me.BTNLOGOUT.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
+        Me.BTNLOGOUT.Size = New System.Drawing.Size(270, 35)
+        Me.BTNLOGOUT.TabIndex = 14
+        Me.BTNLOGOUT.Text = "     Logout"
+        Me.BTNLOGOUT.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.BTNLOGOUT.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.BTNLOGOUT.UseVisualStyleBackColor = True
         '
         'PNCONTENT
         '
@@ -598,14 +620,9 @@ Partial Class FR_PRODUK
         'PNLEFT
         '
         Me.PNLEFT.BackColor = System.Drawing.Color.FromArgb(CType(CType(63, Byte), Integer), CType(CType(48, Byte), Integer), CType(CType(120, Byte), Integer))
-        Me.PNLEFT.Controls.Add(Me.LBLKASIR)
-        Me.PNLEFT.Controls.Add(Me.Label4)
-        Me.PNLEFT.Controls.Add(Me.Label3)
-        Me.PNLEFT.Controls.Add(Me.LBLUSER)
-        Me.PNLEFT.Controls.Add(Me.Label2)
         Me.PNLEFT.Controls.Add(Me.Label1)
-        Me.PNLEFT.Controls.Add(Me.Button1)
-        Me.PNLEFT.Controls.Add(Me.Panel1)
+        Me.PNLEFT.Controls.Add(Me.BTNDISKON)
+        Me.PNLEFT.Controls.Add(Me.Label14)
         Me.PNLEFT.Controls.Add(Me.BTNTENTANG)
         Me.PNLEFT.Controls.Add(Me.BTNLAPORAN)
         Me.PNLEFT.Controls.Add(Me.BTNKELUAR)
@@ -613,63 +630,54 @@ Partial Class FR_PRODUK
         Me.PNLEFT.Controls.Add(Me.BTNBARANG)
         Me.PNLEFT.Controls.Add(Me.BTNKASIR)
         Me.PNLEFT.Controls.Add(Me.BTNDASHBOARD)
+        Me.PNLEFT.Controls.Add(Me.Label4)
+        Me.PNLEFT.Controls.Add(Me.Label3)
+        Me.PNLEFT.Controls.Add(Me.LBLUSER)
+        Me.PNLEFT.Controls.Add(Me.Label2)
+        Me.PNLEFT.Controls.Add(Me.Button1)
+        Me.PNLEFT.Controls.Add(Me.Panel1)
         Me.PNLEFT.Dock = System.Windows.Forms.DockStyle.Left
         Me.PNLEFT.Location = New System.Drawing.Point(0, 0)
         Me.PNLEFT.Name = "PNLEFT"
         Me.PNLEFT.Size = New System.Drawing.Size(270, 768)
         Me.PNLEFT.TabIndex = 17
         '
-        'BTNMINIMIZE
+        'Label1
         '
-        Me.BTNMINIMIZE.FlatAppearance.BorderSize = 0
-        Me.BTNMINIMIZE.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BTNMINIMIZE.Image = Global.Aplikasi_Kasir.My.Resources.Resources.minimize15px
-        Me.BTNMINIMIZE.Location = New System.Drawing.Point(11, 10)
-        Me.BTNMINIMIZE.Name = "BTNMINIMIZE"
-        Me.BTNMINIMIZE.Size = New System.Drawing.Size(18, 18)
-        Me.BTNMINIMIZE.TabIndex = 2
-        Me.BTNMINIMIZE.UseVisualStyleBackColor = True
+        Me.Label1.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.Label1.Location = New System.Drawing.Point(0, 308)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(5, 25)
+        Me.Label1.TabIndex = 28
         '
-        'BTNCLOSE
+        'BTNDISKON
         '
-        Me.BTNCLOSE.FlatAppearance.BorderSize = 0
-        Me.BTNCLOSE.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BTNCLOSE.Image = Global.Aplikasi_Kasir.My.Resources.Resources.close15px
-        Me.BTNCLOSE.Location = New System.Drawing.Point(46, 10)
-        Me.BTNCLOSE.Name = "BTNCLOSE"
-        Me.BTNCLOSE.Size = New System.Drawing.Size(18, 18)
-        Me.BTNCLOSE.TabIndex = 0
-        Me.BTNCLOSE.UseVisualStyleBackColor = True
+        Me.BTNDISKON.FlatAppearance.BorderSize = 0
+        Me.BTNDISKON.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNDISKON.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNDISKON.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BTNDISKON.Image = Global.Aplikasi_Kasir.My.Resources.Resources.transaksi
+        Me.BTNDISKON.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.BTNDISKON.Location = New System.Drawing.Point(0, 360)
+        Me.BTNDISKON.Name = "BTNDISKON"
+        Me.BTNDISKON.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
+        Me.BTNDISKON.Size = New System.Drawing.Size(270, 35)
+        Me.BTNDISKON.TabIndex = 29
+        Me.BTNDISKON.Text = "     Diskon"
+        Me.BTNDISKON.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.BTNDISKON.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.BTNDISKON.UseVisualStyleBackColor = True
         '
-        'Button1
+        'Label14
         '
-        Me.Button1.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.Button1.FlatAppearance.BorderSize = 0
-        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button1.Image = Global.Aplikasi_Kasir.My.Resources.Resources.avatar50px
-        Me.Button1.Location = New System.Drawing.Point(12, 29)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(80, 80)
-        Me.Button1.TabIndex = 0
-        Me.Button1.UseVisualStyleBackColor = False
-        '
-        'BTNLOGOUT
-        '
-        Me.BTNLOGOUT.FlatAppearance.BorderSize = 0
-        Me.BTNLOGOUT.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BTNLOGOUT.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BTNLOGOUT.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.BTNLOGOUT.Image = Global.Aplikasi_Kasir.My.Resources.Resources.logout
-        Me.BTNLOGOUT.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNLOGOUT.Location = New System.Drawing.Point(3, 17)
-        Me.BTNLOGOUT.Name = "BTNLOGOUT"
-        Me.BTNLOGOUT.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
-        Me.BTNLOGOUT.Size = New System.Drawing.Size(270, 35)
-        Me.BTNLOGOUT.TabIndex = 14
-        Me.BTNLOGOUT.Text = "     Logout"
-        Me.BTNLOGOUT.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNLOGOUT.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.BTNLOGOUT.UseVisualStyleBackColor = True
+        Me.Label14.AutoSize = True
+        Me.Label14.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label14.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.Label14.Location = New System.Drawing.Point(7, 146)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(125, 28)
+        Me.Label14.TabIndex = 20
+        Me.Label14.Text = "Menu Utama"
         '
         'BTNTENTANG
         '
@@ -679,11 +687,11 @@ Partial Class FR_PRODUK
         Me.BTNTENTANG.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.BTNTENTANG.Image = Global.Aplikasi_Kasir.My.Resources.Resources.tentang
         Me.BTNTENTANG.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNTENTANG.Location = New System.Drawing.Point(0, 554)
+        Me.BTNTENTANG.Location = New System.Drawing.Point(0, 588)
         Me.BTNTENTANG.Name = "BTNTENTANG"
         Me.BTNTENTANG.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
         Me.BTNTENTANG.Size = New System.Drawing.Size(270, 35)
-        Me.BTNTENTANG.TabIndex = 12
+        Me.BTNTENTANG.TabIndex = 27
         Me.BTNTENTANG.Text = "     Tentang"
         Me.BTNTENTANG.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.BTNTENTANG.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
@@ -697,11 +705,11 @@ Partial Class FR_PRODUK
         Me.BTNLAPORAN.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.BTNLAPORAN.Image = Global.Aplikasi_Kasir.My.Resources.Resources.laporan
         Me.BTNLAPORAN.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNLAPORAN.Location = New System.Drawing.Point(0, 494)
+        Me.BTNLAPORAN.Location = New System.Drawing.Point(0, 531)
         Me.BTNLAPORAN.Name = "BTNLAPORAN"
         Me.BTNLAPORAN.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
         Me.BTNLAPORAN.Size = New System.Drawing.Size(270, 35)
-        Me.BTNLAPORAN.TabIndex = 10
+        Me.BTNLAPORAN.TabIndex = 26
         Me.BTNLAPORAN.Text = "     Laporan"
         Me.BTNLAPORAN.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.BTNLAPORAN.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
@@ -715,11 +723,11 @@ Partial Class FR_PRODUK
         Me.BTNKELUAR.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.BTNKELUAR.Image = Global.Aplikasi_Kasir.My.Resources.Resources.transaksi
         Me.BTNKELUAR.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNKELUAR.Location = New System.Drawing.Point(0, 434)
+        Me.BTNKELUAR.Location = New System.Drawing.Point(0, 474)
         Me.BTNKELUAR.Name = "BTNKELUAR"
         Me.BTNKELUAR.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
         Me.BTNKELUAR.Size = New System.Drawing.Size(270, 35)
-        Me.BTNKELUAR.TabIndex = 8
+        Me.BTNKELUAR.TabIndex = 25
         Me.BTNKELUAR.Text = "     Barang Keluar"
         Me.BTNKELUAR.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.BTNKELUAR.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
@@ -733,11 +741,11 @@ Partial Class FR_PRODUK
         Me.BTNMASUK.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.BTNMASUK.Image = Global.Aplikasi_Kasir.My.Resources.Resources.transaksi
         Me.BTNMASUK.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNMASUK.Location = New System.Drawing.Point(0, 374)
+        Me.BTNMASUK.Location = New System.Drawing.Point(0, 417)
         Me.BTNMASUK.Name = "BTNMASUK"
         Me.BTNMASUK.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
         Me.BTNMASUK.Size = New System.Drawing.Size(270, 35)
-        Me.BTNMASUK.TabIndex = 6
+        Me.BTNMASUK.TabIndex = 24
         Me.BTNMASUK.Text = "     Barang Masuk"
         Me.BTNMASUK.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.BTNMASUK.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
@@ -751,11 +759,11 @@ Partial Class FR_PRODUK
         Me.BTNBARANG.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.BTNBARANG.Image = Global.Aplikasi_Kasir.My.Resources.Resources.data_master
         Me.BTNBARANG.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNBARANG.Location = New System.Drawing.Point(0, 314)
+        Me.BTNBARANG.Location = New System.Drawing.Point(0, 303)
         Me.BTNBARANG.Name = "BTNBARANG"
         Me.BTNBARANG.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
         Me.BTNBARANG.Size = New System.Drawing.Size(270, 35)
-        Me.BTNBARANG.TabIndex = 4
+        Me.BTNBARANG.TabIndex = 23
         Me.BTNBARANG.Text = "     Data Barang"
         Me.BTNBARANG.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.BTNBARANG.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
@@ -769,11 +777,11 @@ Partial Class FR_PRODUK
         Me.BTNKASIR.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.BTNKASIR.Image = Global.Aplikasi_Kasir.My.Resources.Resources.data_master
         Me.BTNKASIR.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNKASIR.Location = New System.Drawing.Point(0, 254)
+        Me.BTNKASIR.Location = New System.Drawing.Point(0, 246)
         Me.BTNKASIR.Name = "BTNKASIR"
         Me.BTNKASIR.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
         Me.BTNKASIR.Size = New System.Drawing.Size(270, 35)
-        Me.BTNKASIR.TabIndex = 2
+        Me.BTNKASIR.TabIndex = 22
         Me.BTNKASIR.Text = "     Data Kasir"
         Me.BTNKASIR.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.BTNKASIR.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
@@ -787,20 +795,32 @@ Partial Class FR_PRODUK
         Me.BTNDASHBOARD.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.BTNDASHBOARD.Image = Global.Aplikasi_Kasir.My.Resources.Resources.data_master
         Me.BTNDASHBOARD.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNDASHBOARD.Location = New System.Drawing.Point(0, 194)
+        Me.BTNDASHBOARD.Location = New System.Drawing.Point(0, 189)
         Me.BTNDASHBOARD.Name = "BTNDASHBOARD"
         Me.BTNDASHBOARD.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
         Me.BTNDASHBOARD.Size = New System.Drawing.Size(270, 35)
-        Me.BTNDASHBOARD.TabIndex = 0
+        Me.BTNDASHBOARD.TabIndex = 21
         Me.BTNDASHBOARD.Text = "     Dashboard"
         Me.BTNDASHBOARD.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.BTNDASHBOARD.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.BTNDASHBOARD.UseVisualStyleBackColor = True
         '
+        'Button1
+        '
+        Me.Button1.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.Button1.FlatAppearance.BorderSize = 0
+        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button1.Image = Global.Aplikasi_Kasir.My.Resources.Resources.avatar50px
+        Me.Button1.Location = New System.Drawing.Point(12, 29)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(80, 80)
+        Me.Button1.TabIndex = 0
+        Me.Button1.UseVisualStyleBackColor = False
+        '
         'FR_PRODUK
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(120.0!, 120.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.ClientSize = New System.Drawing.Size(1366, 768)
         Me.Controls.Add(Me.PNTOP)
         Me.Controls.Add(Me.PNCONTENT)
@@ -831,21 +851,12 @@ Partial Class FR_PRODUK
     Friend WithEvents BTNCLOSE As Button
     Friend WithEvents Button1 As Button
     Friend WithEvents PNTOP As Panel
-    Friend WithEvents BTNTENTANG As Button
-    Friend WithEvents BTNLAPORAN As Button
-    Friend WithEvents BTNKELUAR As Button
-    Friend WithEvents BTNMASUK As Button
-    Friend WithEvents BTNBARANG As Button
     Friend WithEvents BTNLOGOUT As Button
-    Friend WithEvents BTNDASHBOARD As Button
-    Friend WithEvents LBLKASIR As Label
     Friend WithEvents Label4 As Label
     Friend WithEvents Label3 As Label
     Friend WithEvents LBLUSER As Label
     Friend WithEvents Label2 As Label
-    Friend WithEvents Label1 As Label
     Friend WithEvents Panel1 As Panel
-    Friend WithEvents BTNKASIR As Button
     Friend WithEvents PNCONTENT As Panel
     Friend WithEvents PNLEFT As Panel
     Friend WithEvents TXTCARI As TextBox
@@ -881,4 +892,14 @@ Partial Class FR_PRODUK
     Friend WithEvents TXTSTART4 As TextBox
     Friend WithEvents Label12 As Label
     Friend WithEvents TXTHARGA4 As TextBox
+    Friend WithEvents Label1 As Label
+    Friend WithEvents BTNDISKON As Button
+    Friend WithEvents Label14 As Label
+    Friend WithEvents BTNTENTANG As Button
+    Friend WithEvents BTNLAPORAN As Button
+    Friend WithEvents BTNKELUAR As Button
+    Friend WithEvents BTNMASUK As Button
+    Friend WithEvents BTNBARANG As Button
+    Friend WithEvents BTNKASIR As Button
+    Friend WithEvents BTNDASHBOARD As Button
 End Class
