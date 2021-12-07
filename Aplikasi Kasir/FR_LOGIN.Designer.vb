@@ -24,14 +24,19 @@ Partial Class FR_LOGIN
     Private Sub InitializeComponent()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TXTPASSWORD = New Syncfusion.Windows.Forms.Tools.TextBoxExt()
-        Me.BTNEXIT = New Syncfusion.WinForms.Controls.SfButton()
         Me.TXTID = New Syncfusion.Windows.Forms.Tools.TextBoxExt()
         Me.AutoLabel1 = New Syncfusion.Windows.Forms.Tools.AutoLabel()
         Me.AutoLabel2 = New Syncfusion.Windows.Forms.Tools.AutoLabel()
         Me.BTNLOGIN = New Syncfusion.WinForms.Controls.SfButton()
+        Me.PNTOP = New System.Windows.Forms.Panel()
+        Me.PNCONTROL = New System.Windows.Forms.Panel()
+        Me.BTNMINIMIZE = New System.Windows.Forms.Button()
+        Me.BTNCLOSE = New System.Windows.Forms.Button()
         Me.IconPictureBox1 = New FontAwesome.Sharp.IconPictureBox()
         CType(Me.TXTPASSWORD, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TXTID, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PNTOP.SuspendLayout()
+        Me.PNCONTROL.SuspendLayout()
         CType(Me.IconPictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -39,7 +44,8 @@ Partial Class FR_LOGIN
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Segoe UI", 25.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(227, 387)
+        Me.Label1.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.Label1.Location = New System.Drawing.Point(138, 240)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(254, 59)
         Me.Label1.TabIndex = 0
@@ -48,45 +54,29 @@ Partial Class FR_LOGIN
         'TXTPASSWORD
         '
         Me.TXTPASSWORD.BackColor = System.Drawing.Color.Transparent
-        Me.TXTPASSWORD.BeforeTouchSize = New System.Drawing.Size(440, 43)
+        Me.TXTPASSWORD.BeforeTouchSize = New System.Drawing.Size(364, 43)
         Me.TXTPASSWORD.Font = New System.Drawing.Font("Segoe UI", 16.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TXTPASSWORD.Location = New System.Drawing.Point(138, 630)
+        Me.TXTPASSWORD.Location = New System.Drawing.Point(83, 481)
         Me.TXTPASSWORD.Name = "TXTPASSWORD"
         Me.TXTPASSWORD.PasswordChar = Global.Microsoft.VisualBasic.ChrW(9679)
-        Me.TXTPASSWORD.Size = New System.Drawing.Size(440, 43)
+        Me.TXTPASSWORD.Size = New System.Drawing.Size(364, 43)
         Me.TXTPASSWORD.TabIndex = 2
         Me.TXTPASSWORD.UseSystemPasswordChar = True
         '
-        'BTNEXIT
-        '
-        Me.BTNEXIT.AccessibleName = "Button"
-        Me.BTNEXIT.BackColor = System.Drawing.Color.Crimson
-        Me.BTNEXIT.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BTNEXIT.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BTNEXIT.ForeColor = System.Drawing.Color.White
-        Me.BTNEXIT.Location = New System.Drawing.Point(619, 12)
-        Me.BTNEXIT.Name = "BTNEXIT"
-        Me.BTNEXIT.Size = New System.Drawing.Size(70, 70)
-        Me.BTNEXIT.Style.BackColor = System.Drawing.Color.Crimson
-        Me.BTNEXIT.Style.FocusedBackColor = System.Drawing.Color.Crimson
-        Me.BTNEXIT.Style.ForeColor = System.Drawing.Color.White
-        Me.BTNEXIT.TabIndex = 4
-        Me.BTNEXIT.Text = "X"
-        Me.BTNEXIT.UseVisualStyleBackColor = False
-        '
         'TXTID
         '
-        Me.TXTID.BeforeTouchSize = New System.Drawing.Size(440, 43)
+        Me.TXTID.BeforeTouchSize = New System.Drawing.Size(364, 43)
         Me.TXTID.Font = New System.Drawing.Font("Segoe UI", 16.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TXTID.Location = New System.Drawing.Point(138, 523)
+        Me.TXTID.Location = New System.Drawing.Point(83, 374)
         Me.TXTID.Name = "TXTID"
-        Me.TXTID.Size = New System.Drawing.Size(440, 43)
+        Me.TXTID.Size = New System.Drawing.Size(364, 43)
         Me.TXTID.TabIndex = 1
         '
         'AutoLabel1
         '
         Me.AutoLabel1.Font = New System.Drawing.Font("Segoe UI", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.AutoLabel1.Location = New System.Drawing.Point(148, 491)
+        Me.AutoLabel1.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.AutoLabel1.Location = New System.Drawing.Point(110, 339)
         Me.AutoLabel1.Name = "AutoLabel1"
         Me.AutoLabel1.Size = New System.Drawing.Size(76, 25)
         Me.AutoLabel1.TabIndex = 13
@@ -95,7 +85,8 @@ Partial Class FR_LOGIN
         'AutoLabel2
         '
         Me.AutoLabel2.Font = New System.Drawing.Font("Segoe UI", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.AutoLabel2.Location = New System.Drawing.Point(148, 598)
+        Me.AutoLabel2.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.AutoLabel2.Location = New System.Drawing.Point(110, 446)
         Me.AutoLabel2.Name = "AutoLabel2"
         Me.AutoLabel2.Size = New System.Drawing.Size(91, 25)
         Me.AutoLabel2.TabIndex = 14
@@ -104,29 +95,77 @@ Partial Class FR_LOGIN
         'BTNLOGIN
         '
         Me.BTNLOGIN.AccessibleName = "Button"
-        Me.BTNLOGIN.BackColor = System.Drawing.Color.Green
+        Me.BTNLOGIN.BackColor = System.Drawing.Color.DarkGreen
+        Me.BTNLOGIN.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.BTNLOGIN.Font = New System.Drawing.Font("Segoe UI", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BTNLOGIN.ForeColor = System.Drawing.Color.Black
-        Me.BTNLOGIN.Location = New System.Drawing.Point(138, 732)
+        Me.BTNLOGIN.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BTNLOGIN.Location = New System.Drawing.Point(83, 563)
         Me.BTNLOGIN.Name = "BTNLOGIN"
-        Me.BTNLOGIN.Size = New System.Drawing.Size(440, 46)
-        Me.BTNLOGIN.Style.BackColor = System.Drawing.Color.Green
-        Me.BTNLOGIN.Style.FocusedBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.BTNLOGIN.Style.ForeColor = System.Drawing.Color.Black
+        Me.BTNLOGIN.Size = New System.Drawing.Size(364, 46)
+        Me.BTNLOGIN.Style.BackColor = System.Drawing.Color.DarkGreen
+        Me.BTNLOGIN.Style.FocusedBackColor = System.Drawing.Color.DarkGreen
+        Me.BTNLOGIN.Style.FocusedForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BTNLOGIN.Style.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BTNLOGIN.Style.HoverBackColor = System.Drawing.Color.DarkGreen
+        Me.BTNLOGIN.Style.HoverForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BTNLOGIN.Style.PressedBackColor = System.Drawing.Color.DarkGreen
+        Me.BTNLOGIN.Style.PressedForeColor = System.Drawing.Color.WhiteSmoke
         Me.BTNLOGIN.TabIndex = 3
         Me.BTNLOGIN.Text = "LOGIN"
         Me.BTNLOGIN.UseVisualStyleBackColor = False
         '
+        'PNTOP
+        '
+        Me.PNTOP.BackColor = System.Drawing.Color.FromArgb(CType(CType(63, Byte), Integer), CType(CType(48, Byte), Integer), CType(CType(120, Byte), Integer))
+        Me.PNTOP.Controls.Add(Me.PNCONTROL)
+        Me.PNTOP.Dock = System.Windows.Forms.DockStyle.Top
+        Me.PNTOP.Location = New System.Drawing.Point(0, 0)
+        Me.PNTOP.Name = "PNTOP"
+        Me.PNTOP.Size = New System.Drawing.Size(531, 40)
+        Me.PNTOP.TabIndex = 17
+        '
+        'PNCONTROL
+        '
+        Me.PNCONTROL.Controls.Add(Me.BTNMINIMIZE)
+        Me.PNCONTROL.Controls.Add(Me.BTNCLOSE)
+        Me.PNCONTROL.Dock = System.Windows.Forms.DockStyle.Right
+        Me.PNCONTROL.Location = New System.Drawing.Point(455, 0)
+        Me.PNCONTROL.Name = "PNCONTROL"
+        Me.PNCONTROL.Size = New System.Drawing.Size(76, 40)
+        Me.PNCONTROL.TabIndex = 0
+        '
+        'BTNMINIMIZE
+        '
+        Me.BTNMINIMIZE.FlatAppearance.BorderSize = 0
+        Me.BTNMINIMIZE.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNMINIMIZE.Image = Global.Aplikasi_Kasir.My.Resources.Resources.minimize15px
+        Me.BTNMINIMIZE.Location = New System.Drawing.Point(11, 10)
+        Me.BTNMINIMIZE.Name = "BTNMINIMIZE"
+        Me.BTNMINIMIZE.Size = New System.Drawing.Size(18, 18)
+        Me.BTNMINIMIZE.TabIndex = 2
+        Me.BTNMINIMIZE.UseVisualStyleBackColor = True
+        '
+        'BTNCLOSE
+        '
+        Me.BTNCLOSE.FlatAppearance.BorderSize = 0
+        Me.BTNCLOSE.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNCLOSE.Image = Global.Aplikasi_Kasir.My.Resources.Resources.close15px
+        Me.BTNCLOSE.Location = New System.Drawing.Point(46, 10)
+        Me.BTNCLOSE.Name = "BTNCLOSE"
+        Me.BTNCLOSE.Size = New System.Drawing.Size(18, 18)
+        Me.BTNCLOSE.TabIndex = 0
+        Me.BTNCLOSE.UseVisualStyleBackColor = True
+        '
         'IconPictureBox1
         '
-        Me.IconPictureBox1.BackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.IconPictureBox1.BackColor = System.Drawing.Color.FromArgb(CType(CType(63, Byte), Integer), CType(CType(48, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.IconPictureBox1.IconChar = FontAwesome.Sharp.IconChar.User
         Me.IconPictureBox1.IconColor = System.Drawing.Color.White
         Me.IconPictureBox1.IconFont = FontAwesome.Sharp.IconFont.Solid
-        Me.IconPictureBox1.IconSize = 293
-        Me.IconPictureBox1.Location = New System.Drawing.Point(212, 121)
+        Me.IconPictureBox1.IconSize = 166
+        Me.IconPictureBox1.Location = New System.Drawing.Point(182, 71)
         Me.IconPictureBox1.Name = "IconPictureBox1"
-        Me.IconPictureBox1.Size = New System.Drawing.Size(293, 340)
+        Me.IconPictureBox1.Size = New System.Drawing.Size(166, 170)
         Me.IconPictureBox1.TabIndex = 16
         Me.IconPictureBox1.TabStop = False
         '
@@ -134,15 +173,15 @@ Partial Class FR_LOGIN
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(120.0!, 120.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(701, 836)
+        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(63, Byte), Integer), CType(CType(48, Byte), Integer), CType(CType(120, Byte), Integer))
+        Me.ClientSize = New System.Drawing.Size(531, 663)
+        Me.Controls.Add(Me.PNTOP)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.IconPictureBox1)
         Me.Controls.Add(Me.BTNLOGIN)
         Me.Controls.Add(Me.AutoLabel2)
         Me.Controls.Add(Me.AutoLabel1)
         Me.Controls.Add(Me.TXTID)
-        Me.Controls.Add(Me.BTNEXIT)
         Me.Controls.Add(Me.TXTPASSWORD)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "FR_LOGIN"
@@ -150,6 +189,8 @@ Partial Class FR_LOGIN
         Me.Text = "FR_LOGIN"
         CType(Me.TXTPASSWORD, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TXTID, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PNTOP.ResumeLayout(False)
+        Me.PNCONTROL.ResumeLayout(False)
         CType(Me.IconPictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -158,10 +199,13 @@ Partial Class FR_LOGIN
 
     Friend WithEvents Label1 As Label
     Friend WithEvents TXTPASSWORD As Syncfusion.Windows.Forms.Tools.TextBoxExt
-    Friend WithEvents BTNEXIT As Syncfusion.WinForms.Controls.SfButton
     Friend WithEvents TXTID As Syncfusion.Windows.Forms.Tools.TextBoxExt
     Friend WithEvents AutoLabel1 As Syncfusion.Windows.Forms.Tools.AutoLabel
     Friend WithEvents AutoLabel2 As Syncfusion.Windows.Forms.Tools.AutoLabel
     Friend WithEvents BTNLOGIN As Syncfusion.WinForms.Controls.SfButton
+    Friend WithEvents PNTOP As Panel
+    Friend WithEvents PNCONTROL As Panel
+    Friend WithEvents BTNMINIMIZE As Button
+    Friend WithEvents BTNCLOSE As Button
     Friend WithEvents IconPictureBox1 As FontAwesome.Sharp.IconPictureBox
 End Class

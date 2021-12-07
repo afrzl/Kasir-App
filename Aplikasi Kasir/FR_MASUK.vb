@@ -370,4 +370,26 @@ Public Class FR_MASUK
     Private Sub BTNTENTANG_Click(sender As Object, e As EventArgs) Handles BTNTENTANG.Click
         BUKA_FORM(FR_TENTANG)
     End Sub
+
+    Private Sub DGCARI_KeyPress(sender As Object, e As KeyPressEventArgs) Handles DGCARI.KeyPress
+        On Error Resume Next
+        If e.KeyChar = ChrW(Keys.Enter) Then
+            If DGCARI.Rows.Count - 1 = DGCARI.CurrentRow.Index Then
+                DGCARI.CurrentCell = DGCARI.Rows(DGCARI.CurrentRow.Index).Cells(0)
+            Else
+                DGCARI.CurrentCell = DGCARI.Rows(DGCARI.CurrentRow.Index - 1).Cells(0)
+            End If
+            TXTKODE.Text = DGCARI.SelectedCells(0).Value
+            BTNCARI.Text = "Cari (F1)"
+            TXTJUMLAH.Select()
+            PNCARI.Visible = False
+            DGCARI.DataSource = Nothing
+        End If
+    End Sub
+
+    Private Sub TXTCARI_BARANG_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTCARI_BARANG.KeyPress
+        If e.KeyChar = Chr(13) Then
+            DGCARI.Select()
+        End If
+    End Sub
 End Class

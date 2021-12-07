@@ -72,13 +72,17 @@ Public Class FR_LOGIN
         End If
     End Sub
 
-    Private Sub BTNEXIT_Click(sender As Object, e As EventArgs) Handles BTNEXIT.Click
-        End
-    End Sub
-
     Private Sub TXTPASSWORD_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTPASSWORD.KeyPress
         If e.KeyChar = Chr(13) Then
             BTNLOGIN.Select()
         End If
+    End Sub
+
+    Private Sub BTNMINIMIZE_Click(sender As Object, e As EventArgs) Handles BTNMINIMIZE.Click
+        Me.WindowState = FormWindowState.Minimized
+    End Sub
+
+    Private Sub BTNCLOSE_Click(sender As Object, e As EventArgs) Handles BTNCLOSE.Click
+        End
     End Sub
 End Class

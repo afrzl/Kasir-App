@@ -26,6 +26,20 @@ Public Class FR_KASIR
         DGTAMPIL.Columns(4).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
         DGTAMPIL.Columns(5).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
         DGTAMPIL.Columns(6).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+
+        For N = 0 To DGTAMPIL.Rows.Count - 1
+            If DGTAMPIL.Rows(N).Cells(4).Value = "L" Then
+                DGTAMPIL.Rows(N).Cells(4).Value = "Laki-laki"
+            Else
+                DGTAMPIL.Rows(N).Cells(4).Value = "Perempuan"
+            End If
+
+            If DGTAMPIL.Rows(N).Cells(6).Value = 1 Then
+                DGTAMPIL.Rows(N).Cells(6).Value = "Administrator"
+            Else
+                DGTAMPIL.Rows(N).Cells(6).Value = "Kasir"
+            End If
+        Next
     End Sub
 
     Private Function AUTOID() As String
@@ -75,13 +89,14 @@ Public Class FR_KASIR
             ElseIf RD.Item("JK") = "P" Then
                 TXTJK.Text = "Perempuan"
             End If
-            If RD.Item("Role") = "1" Then
+            If RD.Item("Role") = 1 Then
                 CBROLE.Text = "Admin"
-            ElseIf RD.Item("Role") = "2" Then
+            ElseIf RD.Item("Role") = 2 Then
                 CBROLE.Text = "Kasir"
             End If
             TXTNOHP.Text = RD.Item("No_hp").ToString.Trim
             RD.Close()
+            BTNDELETE.Visible = True
         Else
             RD.Close()
             TXTNAMA.Clear()
@@ -89,6 +104,7 @@ Public Class FR_KASIR
             TXTALAMAT.Clear()
             TXTNOHP.Clear()
             TXTNAMA.Select()
+            BTNDELETE.Visible = False
         End If
         RD.Close()
     End Sub
@@ -165,6 +181,9 @@ Public Class FR_KASIR
         TXTPASSWORD.Text = ""
         TXTALAMAT.Text = ""
         TXTNOHP.Text = ""
+        TXTTGL.Value = DateTime.Now
+        CBROLE.SelectedIndex = -1
+        TXTJK.SelectedIndex = -1
     End Sub
 
     Private Sub TXTNAMA_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTNAMA.KeyPress
@@ -200,6 +219,9 @@ Public Class FR_KASIR
     Private Sub TXTNOHP_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTNOHP.KeyPress
         If e.KeyChar = Chr(13) Then
             CBROLE.Select()
+        End If
+        If Not ((e.KeyChar >= "0" And e.KeyChar <= "9") Or e.KeyChar = vbBack) Then
+            e.Handled = True
         End If
     End Sub
 

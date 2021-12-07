@@ -233,16 +233,6 @@ Public Class FR_DISKON
         End Select
     End Sub
 
-    Private Sub DGCARI_PreviewKeyDown(sender As Object, e As PreviewKeyDownEventArgs)
-        If (e.KeyCode = Keys.Enter) Then
-            On Error Resume Next
-            TXTKODE.Text = DGCARI.Item(0, DGTAMPIL.CurrentRow.Index).Value
-            BTNCARI.Text = "Cari (F1)"
-            PNCARI.Visible = False
-            DGCARI.DataSource = Nothing
-        End If
-    End Sub
-
     Private Sub TXTCARI_TextChanged(sender As Object, e As EventArgs) Handles TXTCARI.TextChanged
         START_RECORD = 0
         TAMPIL()
@@ -297,5 +287,57 @@ Public Class FR_DISKON
 
     Private Sub BTNTENTANG_Click(sender As Object, e As EventArgs) Handles BTNTENTANG.Click
         BUKA_FORM(FR_TENTANG)
+    End Sub
+
+    Private Sub TXTDISKON_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTDISKON.KeyPress
+        If Not ((e.KeyChar >= "0" And e.KeyChar <= "9") Or e.KeyChar = vbBack) Then
+            e.Handled = True
+        End If
+        If e.KeyChar = Chr(13) Then
+            BTNSTOK.Select()
+        End If
+    End Sub
+
+    Private Sub TXTDISKON_TextChanged(sender As Object, e As EventArgs) Handles TXTDISKON.TextChanged
+        Dim DISKON As Integer = 0
+        If TXTDISKON.Text <> "" Then
+            DISKON = CInt(TXTDISKON.Text)
+        End If
+
+        If DISKON > 100 Then
+            MsgBox("Diskon maksimal 100%!")
+            TXTDISKON.Text = ""
+            TXTDISKON.Select()
+        End If
+    End Sub
+
+    Private Sub TXTTGLAWAL_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTTGLAWAL.KeyPress
+        If e.KeyChar = Chr(13) Then
+            TXTTGLAKHIR.Select()
+        End If
+    End Sub
+
+    Private Sub TXTTGLAKHIR_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTTGLAKHIR.KeyPress
+        If e.KeyChar = Chr(13) Then
+            TXTDISKON.Select()
+        End If
+    End Sub
+
+    Private Sub DGCARI_KeyPress(sender As Object, e As KeyPressEventArgs) Handles DGCARI.KeyPress
+        On Error Resume Next
+        If e.KeyChar = ChrW(Keys.Enter) Then
+            DGCARI.CurrentCell = DGCARI.Rows(DGCARI.CurrentRow.Index - 1).Cells(0)
+            TXTKODE.Text = DGCARI.SelectedCells(0).Value
+            BTNCARI.Text = "Cari (F1)"
+            PNCARI.Visible = False
+            DGCARI.DataSource = Nothing
+            TXTTGLAWAL.Select()
+        End If
+    End Sub
+
+    Private Sub TXTCARI_BARANG_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTCARI_BARANG.KeyPress
+        If e.KeyChar = Chr(13) Then
+            DGCARI.Select()
+        End If
     End Sub
 End Class

@@ -56,6 +56,9 @@ Public Class FR_PRODUK
         DGTAMPIL.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
         DGTAMPIL.Columns(2).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
         DGTAMPIL.Columns(3).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+
+        DGTAMPIL.Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DGTAMPIL.Columns(3).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
     End Sub
 
     Private Sub TXTKODE_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTKODE.KeyPress
@@ -425,6 +428,7 @@ Public Class FR_PRODUK
         BTNSIMPAN.Visible = True
         BTNUBAH.Visible = False
         BTNCANCEL.Visible = False
+        CBSATUAN.SelectedIndex = -1
         TXTKODE.Select()
     End Sub
 
