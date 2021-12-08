@@ -235,6 +235,9 @@
     <EmbeddedResource Include="FR_PRODUK.resx">
       <DependentUpon>FR_PRODUK.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FR_REPORT.resx">
+      <DependentUpon>FR_REPORT.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\licenses.licx" />
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>

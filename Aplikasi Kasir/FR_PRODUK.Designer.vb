@@ -23,18 +23,21 @@ Partial Class FR_PRODUK
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.PEWAKTU = New System.Windows.Forms.Timer(Me.components)
         Me.LBTGL = New System.Windows.Forms.Label()
         Me.PNCONTROL = New System.Windows.Forms.Panel()
+        Me.BTNMINIMIZE = New System.Windows.Forms.Button()
+        Me.BTNCLOSE = New System.Windows.Forms.Button()
         Me.PNTOP = New System.Windows.Forms.Panel()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.LBLUSER = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.BTNLOGOUT = New System.Windows.Forms.Button()
         Me.PNCONTENT = New System.Windows.Forms.Panel()
         Me.TXTSTART5 = New System.Windows.Forms.TextBox()
         Me.Label13 = New System.Windows.Forms.Label()
@@ -71,10 +74,8 @@ Partial Class FR_PRODUK
         Me.Label9 = New System.Windows.Forms.Label()
         Me.PNLEFT = New System.Windows.Forms.Panel()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.Label14 = New System.Windows.Forms.Label()
-        Me.BTNMINIMIZE = New System.Windows.Forms.Button()
-        Me.BTNCLOSE = New System.Windows.Forms.Button()
         Me.BTNDISKON = New System.Windows.Forms.Button()
+        Me.Label14 = New System.Windows.Forms.Label()
         Me.BTNTENTANG = New System.Windows.Forms.Button()
         Me.BTNLAPORAN = New System.Windows.Forms.Button()
         Me.BTNKELUAR = New System.Windows.Forms.Button()
@@ -83,7 +84,6 @@ Partial Class FR_PRODUK
         Me.BTNKASIR = New System.Windows.Forms.Button()
         Me.BTNDASHBOARD = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.BTNLOGOUT = New System.Windows.Forms.Button()
         Me.PNCONTROL.SuspendLayout()
         Me.PNTOP.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -118,6 +118,28 @@ Partial Class FR_PRODUK
         Me.PNCONTROL.Name = "PNCONTROL"
         Me.PNCONTROL.Size = New System.Drawing.Size(76, 40)
         Me.PNCONTROL.TabIndex = 0
+        '
+        'BTNMINIMIZE
+        '
+        Me.BTNMINIMIZE.FlatAppearance.BorderSize = 0
+        Me.BTNMINIMIZE.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNMINIMIZE.Image = Global.Aplikasi_Kasir.My.Resources.Resources.minimize15px
+        Me.BTNMINIMIZE.Location = New System.Drawing.Point(11, 10)
+        Me.BTNMINIMIZE.Name = "BTNMINIMIZE"
+        Me.BTNMINIMIZE.Size = New System.Drawing.Size(18, 18)
+        Me.BTNMINIMIZE.TabIndex = 2
+        Me.BTNMINIMIZE.UseVisualStyleBackColor = True
+        '
+        'BTNCLOSE
+        '
+        Me.BTNCLOSE.FlatAppearance.BorderSize = 0
+        Me.BTNCLOSE.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNCLOSE.Image = Global.Aplikasi_Kasir.My.Resources.Resources.close15px
+        Me.BTNCLOSE.Location = New System.Drawing.Point(46, 10)
+        Me.BTNCLOSE.Name = "BTNCLOSE"
+        Me.BTNCLOSE.Size = New System.Drawing.Size(18, 18)
+        Me.BTNCLOSE.TabIndex = 0
+        Me.BTNCLOSE.UseVisualStyleBackColor = True
         '
         'PNTOP
         '
@@ -181,6 +203,24 @@ Partial Class FR_PRODUK
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(270, 64)
         Me.Panel1.TabIndex = 0
+        '
+        'BTNLOGOUT
+        '
+        Me.BTNLOGOUT.FlatAppearance.BorderSize = 0
+        Me.BTNLOGOUT.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNLOGOUT.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNLOGOUT.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BTNLOGOUT.Image = Global.Aplikasi_Kasir.My.Resources.Resources.logout
+        Me.BTNLOGOUT.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.BTNLOGOUT.Location = New System.Drawing.Point(3, 17)
+        Me.BTNLOGOUT.Name = "BTNLOGOUT"
+        Me.BTNLOGOUT.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
+        Me.BTNLOGOUT.Size = New System.Drawing.Size(270, 35)
+        Me.BTNLOGOUT.TabIndex = 14
+        Me.BTNLOGOUT.Text = "     Logout"
+        Me.BTNLOGOUT.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.BTNLOGOUT.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.BTNLOGOUT.UseVisualStyleBackColor = True
         '
         'PNCONTENT
         '
@@ -409,31 +449,31 @@ Partial Class FR_PRODUK
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DGTAMPIL.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle1.NullValue = "-"
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DGTAMPIL.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle4.NullValue = "-"
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DGTAMPIL.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle4
         Me.DGTAMPIL.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGTAMPIL.ContextMenuStrip = Me.ContextMenuStrip1
         Me.DGTAMPIL.Location = New System.Drawing.Point(24, 619)
         Me.DGTAMPIL.Name = "DGTAMPIL"
         Me.DGTAMPIL.ReadOnly = True
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DGTAMPIL.RowHeadersDefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DGTAMPIL.RowHeadersDefaultCellStyle = DataGridViewCellStyle5
         Me.DGTAMPIL.RowHeadersVisible = False
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DGTAMPIL.RowsDefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.DGTAMPIL.RowsDefaultCellStyle = DataGridViewCellStyle6
         Me.DGTAMPIL.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.DGTAMPIL.RowTemplate.Height = 30
         Me.DGTAMPIL.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
@@ -613,39 +653,6 @@ Partial Class FR_PRODUK
         Me.Label1.Size = New System.Drawing.Size(5, 25)
         Me.Label1.TabIndex = 28
         '
-        'Label14
-        '
-        Me.Label14.AutoSize = True
-        Me.Label14.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label14.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.Label14.Location = New System.Drawing.Point(7, 146)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(125, 28)
-        Me.Label14.TabIndex = 20
-        Me.Label14.Text = "Menu Utama"
-        '
-        'BTNMINIMIZE
-        '
-        Me.BTNMINIMIZE.FlatAppearance.BorderSize = 0
-        Me.BTNMINIMIZE.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BTNMINIMIZE.Image = Global.Aplikasi_Kasir.My.Resources.Resources.minimize15px
-        Me.BTNMINIMIZE.Location = New System.Drawing.Point(11, 10)
-        Me.BTNMINIMIZE.Name = "BTNMINIMIZE"
-        Me.BTNMINIMIZE.Size = New System.Drawing.Size(18, 18)
-        Me.BTNMINIMIZE.TabIndex = 2
-        Me.BTNMINIMIZE.UseVisualStyleBackColor = True
-        '
-        'BTNCLOSE
-        '
-        Me.BTNCLOSE.FlatAppearance.BorderSize = 0
-        Me.BTNCLOSE.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BTNCLOSE.Image = Global.Aplikasi_Kasir.My.Resources.Resources.close15px
-        Me.BTNCLOSE.Location = New System.Drawing.Point(46, 10)
-        Me.BTNCLOSE.Name = "BTNCLOSE"
-        Me.BTNCLOSE.Size = New System.Drawing.Size(18, 18)
-        Me.BTNCLOSE.TabIndex = 0
-        Me.BTNCLOSE.UseVisualStyleBackColor = True
-        '
         'BTNDISKON
         '
         Me.BTNDISKON.FlatAppearance.BorderSize = 0
@@ -663,6 +670,17 @@ Partial Class FR_PRODUK
         Me.BTNDISKON.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.BTNDISKON.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.BTNDISKON.UseVisualStyleBackColor = True
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label14.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.Label14.Location = New System.Drawing.Point(7, 146)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(125, 28)
+        Me.Label14.TabIndex = 20
+        Me.Label14.Text = "Menu Utama"
         '
         'BTNTENTANG
         '
@@ -801,24 +819,6 @@ Partial Class FR_PRODUK
         Me.Button1.Size = New System.Drawing.Size(80, 80)
         Me.Button1.TabIndex = 0
         Me.Button1.UseVisualStyleBackColor = False
-        '
-        'BTNLOGOUT
-        '
-        Me.BTNLOGOUT.FlatAppearance.BorderSize = 0
-        Me.BTNLOGOUT.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BTNLOGOUT.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BTNLOGOUT.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.BTNLOGOUT.Image = Global.Aplikasi_Kasir.My.Resources.Resources.logout
-        Me.BTNLOGOUT.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNLOGOUT.Location = New System.Drawing.Point(3, 17)
-        Me.BTNLOGOUT.Name = "BTNLOGOUT"
-        Me.BTNLOGOUT.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
-        Me.BTNLOGOUT.Size = New System.Drawing.Size(270, 35)
-        Me.BTNLOGOUT.TabIndex = 14
-        Me.BTNLOGOUT.Text = "     Logout"
-        Me.BTNLOGOUT.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNLOGOUT.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.BTNLOGOUT.UseVisualStyleBackColor = True
         '
         'FR_PRODUK
         '

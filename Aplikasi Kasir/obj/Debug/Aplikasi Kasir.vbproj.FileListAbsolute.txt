@@ -59,3 +59,4 @@ C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi 
 C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\obj\Debug\Aplikasi_Kasir.nitip.resources
 C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\obj\Debug\Aplikasi_Kasir.template.resources
 C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\obj\Debug\Aplikasi_Kasir.FR_DISKON.resources
+C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\obj\Debug\Aplikasi_Kasir.FR_REPORT.resources

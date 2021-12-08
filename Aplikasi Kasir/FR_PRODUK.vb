@@ -1,4 +1,5 @@
-﻿Imports System.Data.SqlClient
+﻿Imports System.ComponentModel
+Imports System.Data.SqlClient
 Public Class FR_PRODUK
     Private Sub PEWAKTU_Tick(sender As Object, e As EventArgs) Handles PEWAKTU.Tick
         LBTGL.Text = Format(Date.Now, "dd MMMM yyyy HH:mm:ss")

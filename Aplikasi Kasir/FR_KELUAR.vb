@@ -256,7 +256,7 @@ Public Class FR_KELUAR
             " (Id_trans, Id_kasir, Tgl, Jenis, Person, Harga, Diskon, Jumlah_item, Harga_total, Harga_tunai, Harga_kembali)" &
             " VALUES('" & ID_TRANS & "'," &
             " '" & My.Settings.ID_ACCOUNT & "'," &
-            " '" & Format(Date.Now, "MM/dd/yyyy h:m:s") & "'," &
+            " '" & Format(Date.Now, "MM/dd/yyyy HH:mm:ss") & "'," &
             " 'K'," &
             " '" & TXTPEMBELI.Text & "'," &
             " '" & SUBTOTAL & "'," &
@@ -273,7 +273,7 @@ Public Class FR_KELUAR
             Dim JUMLAH_PRODUK As Integer = EROW.Cells("QTY").Value
             Dim HARGA_PRODUK As Integer = EROW.Cells("Harga").Value
             Dim DISKON_PRODUK As Integer = EROW.Cells("Diskon").Value / JUMLAH_PRODUK
-            Dim HARGA_AKHIR_PRODUK As Integer = HARGA_PRODUK * (100 - 0) / 100
+            Dim HARGA_AKHIR_PRODUK As Integer = HARGA_PRODUK - DISKON_PRODUK
 
             If Not JUMLAH_PRODUK = 1 Then
                 For N As Integer = 1 To JUMLAH_PRODUK
