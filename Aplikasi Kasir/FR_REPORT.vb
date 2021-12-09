@@ -73,6 +73,8 @@ Public Class FR_REPORT
         Select Case CBJENIS.SelectedIndex
             Case 0
                 STR = "SELECT RTRIM(Id_trans) AS 'ID Transaksi'," &
+                    " RTRIM((SELECT Person FROM tbl_transaksi_parent WHERE RTRIM(Id_trans) = RTRIM(tbl_transaksi_child.Id_trans))) AS 'Supplier'," &
+                    " RTRIM((SELECT Nama FROM tbl_karyawan WHERE Id = (SELECT Id_kasir FROM tbl_transaksi_parent WHERE RTRIM(Id_trans) = RTRIM(tbl_transaksi_child.Id_trans)))) AS 'Kasir'," &
                     " RTRIM(Kode) AS 'Kode Barang'," &
                     " RTRIM((SELECT Barang FROM tbl_barang WHERE kode = tbl_transaksi_child.kode)) as 'Nama Barang'," &
                     " RTRIM(Jumlah) AS 'Stok Masuk'," &
@@ -84,22 +86,24 @@ Public Class FR_REPORT
                     " ORDER BY Id ASC"
             Case 1
                 STR = "SELECT RTRIM(tbl_transaksi_child.Id_trans) AS 'ID Transaksi'," &
+                    " tbl_transaksi_parent.Tgl AS 'Tanggal'," &
                     " RTRIM((SELECT Nama FROM tbl_karyawan WHERE Id = tbl_transaksi_parent.Id_kasir)) AS 'Kasir'," &
                     " RTRIM(tbl_transaksi_parent.Person) AS 'Pembeli'," &
+                    " RTRIM(tbl_transaksi_parent.Jumlah_item) AS 'Jumlah Item'," &
                     " RTRIM(tbl_transaksi_child.Kode) As 'Kode Barang'," &
                     " RTRIM((SELECT Barang FROM tbl_barang WHERE Kode = tbl_transaksi_child.Kode)) AS 'Nama Barang'," &
                     " tbl_transaksi_child.Harga AS 'Harga Jual'," &
                     " tbl_transaksi_child.Diskon AS 'Diskon'," &
-                    " tbl_transaksi_child.Harga_akhir-tbl_transaksi_child.Harga_beli AS 'Laba'," &
-                    " RTRIM(tbl_transaksi_parent.Jumlah_item) AS 'Jumlah Item'," &
-                    " tbl_transaksi_parent.Harga AS 'Total Harga'," &
-                    " tbl_transaksi_parent.Diskon AS 'Diskon'," &
+                    " tbl_transaksi_child.Harga_akhir AS 'Harga'," &
+                    " tbl_transaksi_parent.Harga AS 'Total'," &
+                    " tbl_transaksi_parent.Diskon AS 'Diskon Transaksi'," &
                     " tbl_transaksi_parent.Harga_total AS 'Total Akhir'," &
                     " tbl_transaksi_parent.Harga_tunai AS 'Bayar'," &
-                    " tbl_transaksi_parent.Harga_kembali AS 'Kembalian'" &
+                    " tbl_transaksi_parent.Harga_kembali AS 'Kembalian'," &
+                    " (SELECT COALESCE(SUM(tbl_transaksi_child.Harga_akhir), 0) - COALESCE(SUM(tbl_transaksi_child.Harga_beli), 0) FROM tbl_transaksi_child WHERE tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans) - tbl_transaksi_parent.Diskon AS 'Laba'" &
                     " From tbl_transaksi_child inner Join tbl_transaksi_parent On tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans" &
                     " Where Left(tbl_transaksi_child.Id_trans, 1) = 'K'" &
-                    " And tbl_transaksi_parent.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & "'" &
+                    " And tbl_transaksi_parent.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd 00:00:00") & "'" &
                     " And tbl_transaksi_parent.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd 23:59:59") & "'" &
                     " ORDER BY tbl_transaksi_child.Id ASC"
         End Select
@@ -117,66 +121,42 @@ Public Class FR_REPORT
         Select Case CBJENIS.SelectedIndex
             Case 0
                 DGTAMPIL.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-                DGTAMPIL.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-                DGTAMPIL.Columns(2).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-                DGTAMPIL.Columns(3).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-                DGTAMPIL.Columns(4).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-                DGTAMPIL.Columns(5).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-
-                DGTAMPIL.Columns(4).DefaultCellStyle.Format = "###,###,###"
-            Case 1
-                DGTAMPIL.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
                 DGTAMPIL.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
                 DGTAMPIL.Columns(2).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
                 DGTAMPIL.Columns(3).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
                 DGTAMPIL.Columns(4).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
                 DGTAMPIL.Columns(5).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-                DGTAMPIL.Columns(6).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+                DGTAMPIL.Columns(6).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+                DGTAMPIL.Columns(7).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+
+                DGTAMPIL.Columns(6).DefaultCellStyle.Format = "###,###,###"
+            Case 1
+                DGTAMPIL.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+                DGTAMPIL.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+                DGTAMPIL.Columns(2).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+                DGTAMPIL.Columns(3).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+                DGTAMPIL.Columns(4).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+                DGTAMPIL.Columns(5).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+                DGTAMPIL.Columns(6).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
                 DGTAMPIL.Columns(7).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
                 DGTAMPIL.Columns(8).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
                 DGTAMPIL.Columns(9).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-                DGTAMPIL.Columns(10).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-                DGTAMPIL.Columns(11).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-                DGTAMPIL.Columns(12).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-                DGTAMPIL.Columns(13).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-
-                Dim ID_TRANS As String = ""
+                DGTAMPIL.Columns(10).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+                DGTAMPIL.Columns(11).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+                DGTAMPIL.Columns(12).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+                DGTAMPIL.Columns(13).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+                DGTAMPIL.Columns(14).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+                DGTAMPIL.Columns(15).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
                 For N = 1 To DGTAMPIL.Rows.Count - 1
-                    If DGTAMPIL.Rows(N).Cells(0).Value = DGTAMPIL.Rows(N - 1).Cells(0).Value Then
-                        ID_TRANS = DGTAMPIL.Rows(N - 1).Cells(0).Value
-                        DGTAMPIL.Rows(N).Cells(0).Value = ""
-                        DGTAMPIL.Rows(N).Cells(1).Value = ""
-                        DGTAMPIL.Rows(N).Cells(2).Value = ""
-                        DGTAMPIL.Rows(N).Cells(8).Value = vbNullString
-                        DGTAMPIL.Rows(N).Cells(9).Value = DBNull.Value
-                        DGTAMPIL.Rows(N).Cells(10).Value = DBNull.Value
-                        DGTAMPIL.Rows(N).Cells(11).Value = DBNull.Value
-                        DGTAMPIL.Rows(N).Cells(12).Value = DBNull.Value
-                        DGTAMPIL.Rows(N).Cells(13).Value = DBNull.Value
-
-                        DGTAMPIL.Columns(5).DefaultCellStyle.Format = "###,###,###"
-                        DGTAMPIL.Columns(6).DefaultCellStyle.Format = "###,###,###"
-                        DGTAMPIL.Columns(7).DefaultCellStyle.Format = "###,###,###"
-                        DGTAMPIL.Columns(9).DefaultCellStyle.Format = "###,###,###"
-                        DGTAMPIL.Columns(10).DefaultCellStyle.Format = "###,###,###"
-                        DGTAMPIL.Columns(11).DefaultCellStyle.Format = "###,###,###"
-                        DGTAMPIL.Columns(12).DefaultCellStyle.Format = "###,###,###"
-                        DGTAMPIL.Columns(13).DefaultCellStyle.Format = "###,###,###"
-
-                        For J = N To DGTAMPIL.Rows.Count - 1
-                            If DGTAMPIL.Rows(J).Cells(0).Value = ID_TRANS Then
-                                DGTAMPIL.Rows(J).Cells(0).Value = ""
-                                DGTAMPIL.Rows(J).Cells(1).Value = ""
-                                DGTAMPIL.Rows(J).Cells(2).Value = ""
-                                DGTAMPIL.Rows(J).Cells(8).Value = vbNullString
-                                DGTAMPIL.Rows(J).Cells(9).Value = DBNull.Value
-                                DGTAMPIL.Rows(J).Cells(10).Value = DBNull.Value
-                                DGTAMPIL.Rows(J).Cells(11).Value = DBNull.Value
-                                DGTAMPIL.Rows(J).Cells(12).Value = DBNull.Value
-                                DGTAMPIL.Rows(J).Cells(13).Value = DBNull.Value
-                            End If
-                        Next
-                    End If
+                    DGTAMPIL.Columns(7).DefaultCellStyle.Format = "###,###,###"
+                    DGTAMPIL.Columns(8).DefaultCellStyle.Format = "###,###,###"
+                    DGTAMPIL.Columns(9).DefaultCellStyle.Format = "###,###,###"
+                    DGTAMPIL.Columns(10).DefaultCellStyle.Format = "###,###,###"
+                    DGTAMPIL.Columns(11).DefaultCellStyle.Format = "###,###,###"
+                    DGTAMPIL.Columns(12).DefaultCellStyle.Format = "###,###,###"
+                    DGTAMPIL.Columns(13).DefaultCellStyle.Format = "###,###,###"
+                    DGTAMPIL.Columns(14).DefaultCellStyle.Format = "###,###,###"
+                    DGTAMPIL.Columns(15).DefaultCellStyle.Format = "###,###,###"
                 Next
         End Select
     End Sub
@@ -197,6 +177,39 @@ Public Class FR_REPORT
         If TXTTGLAKHIR.Value < TXTTGLAWAL.Value Then
             MsgBox("Tanggal akhir harus lebih dari atau sama dengan tanggal awal!")
             TXTTGLAKHIR.Value = TXTTGLAWAL.Value
+        End If
+    End Sub
+
+    Private Sub BTNCETAK_Click(sender As Object, e As EventArgs) Handles BTNCETAK.Click
+        If DGTAMPIL.Rows.Count > 0 Then
+            Select Case CBJENIS.SelectedIndex
+                Case 0
+                    Dim RPT As New RPT_MASUK
+                    With RPT
+                        .SetDataSource(TBL)
+                        .SetParameterValue("tgl_mulai", TXTTGLAWAL.Value)
+                        .SetParameterValue("tgl_akhir", TXTTGLAKHIR.Value)
+                    End With
+
+                    Dim FR As New FR_PREVIEW
+                    With FR
+                        .CRV.ReportSource = RPT
+                        .ShowDialog()
+                    End With
+                Case 1
+                    Dim RPT As New RPT_KELUAR
+                    With RPT
+                        .SetDataSource(TBL)
+                        .SetParameterValue("tgl_mulai", TXTTGLAWAL.Value)
+                        .SetParameterValue("tgl_akhir", TXTTGLAKHIR.Value)
+                    End With
+
+                    Dim FR As New FR_PREVIEW
+                    With FR
+                        .CRV.ReportSource = RPT
+                        .ShowDialog()
+                    End With
+            End Select
         End If
     End Sub
 End Class

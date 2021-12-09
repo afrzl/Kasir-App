@@ -50,6 +50,7 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AxShockwaveFlashObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
     <Reference Include="Bunifu.Licensing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f89b4760ba7dcb6b" />
     <Reference Include="Bunifu.UI.WinForms.BunifuButton, Version=4.1.1.0, Culture=neutral, PublicKeyToken=e8e24ccd28363fe9, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -62,6 +63,10 @@
     <Reference Include="Bunifu_UI_v1.5.3">
       <HintPath>..\..\..\Bunifu Plugin\Bunifu_UI_v1.5.3.dll</HintPath>
     </Reference>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
@@ -95,6 +100,8 @@
     <Reference Include="System.Drawing.Design" />
     <Reference Include="System.Management" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
@@ -120,6 +127,14 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DATA_LAPORAN.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DATA_LAPORAN.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DATA_LAPORAN.vb">
+      <DependentUpon>DATA_LAPORAN.xsd</DependentUpon>
+    </Compile>
     <Compile Include="FR_DISKON.Designer.vb">
       <DependentUpon>FR_DISKON.vb</DependentUpon>
     </Compile>
@@ -163,6 +178,12 @@
     <Compile Include="FR_LOGIN.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FR_PREVIEW.Designer.vb">
+      <DependentUpon>FR_PREVIEW.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FR_PREVIEW.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FR_PRODUK.Designer.vb">
       <DependentUpon>FR_PRODUK.vb</DependentUpon>
     </Compile>
@@ -203,6 +224,18 @@
     <Compile Include="nitip.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="RPT_KELUAR.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RPT_KELUAR.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="RPT_MASUK.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RPT_MASUK.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="template.Designer.vb">
       <DependentUpon>template.vb</DependentUpon>
     </Compile>
@@ -232,6 +265,9 @@
     <EmbeddedResource Include="FR_LOGIN.resx">
       <DependentUpon>FR_LOGIN.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FR_PREVIEW.resx">
+      <DependentUpon>FR_PREVIEW.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FR_PRODUK.resx">
       <DependentUpon>FR_PRODUK.vb</DependentUpon>
     </EmbeddedResource>
@@ -247,6 +283,14 @@
     </EmbeddedResource>
     <EmbeddedResource Include="nitip.resx">
       <DependentUpon>nitip.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RPT_KELUAR.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RPT_KELUAR.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RPT_MASUK.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RPT_MASUK.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="template.resx">
       <DependentUpon>template.vb</DependentUpon>
@@ -272,6 +316,17 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\FontAwesome.otf" />
+    <None Include="DATA_LAPORAN.xsc">
+      <DependentUpon>DATA_LAPORAN.xsd</DependentUpon>
+    </None>
+    <None Include="DATA_LAPORAN.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DATA_LAPORAN.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="DATA_LAPORAN.xss">
+      <DependentUpon>DATA_LAPORAN.xsd</DependentUpon>
+    </None>
     <None Include="Resources\WorkAsProfesional.png" />
     <None Include="Resources\36-364597_png-file-svg-dashboard-icon-black-and-white.png" />
     <None Include="Resources\close15px.png" />
@@ -330,6 +385,9 @@
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="fonts\fontawesome-webfont.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

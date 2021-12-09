@@ -42,7 +42,7 @@ Public Class FR_MASUK
     End Sub
 
     Dim START_RECORD As Integer = 0
-    Dim TAMPIL_RECORD As Integer = 2
+    Dim TAMPIL_RECORD As Integer = 30
 
     Sub TAMPIL()
         'Dim STR As String = "SELECT Id, RTRIM(Kode) AS Kode," &

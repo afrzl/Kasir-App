@@ -87,5 +87,40 @@ Aplikasi Kasir
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
 </member>
+<member name="T:Aplikasi_Kasir.DATA_LAPORAN">
+<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member>
+<member name="T:Aplikasi_Kasir.DATA_LAPORAN.TBL_MASUKDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Aplikasi_Kasir.DATA_LAPORAN.TBL_KELUARDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Aplikasi_Kasir.DATA_LAPORAN.TBL_MASUKRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Aplikasi_Kasir.DATA_LAPORAN.TBL_KELUARRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Aplikasi_Kasir.DATA_LAPORAN.TBL_MASUKRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Aplikasi_Kasir.DATA_LAPORAN.TBL_KELUARRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
 </members>
 </doc>
