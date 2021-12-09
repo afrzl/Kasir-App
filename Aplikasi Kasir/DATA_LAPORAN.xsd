@@ -12,7 +12,7 @@
   <xs:element name="DATA_LAPORAN" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DATA_LAPORAN" msprop:Generator_UserDSName="DATA_LAPORAN">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="TBL_MASUK" msprop:Generator_TableClassName="TBL_MASUKDataTable" msprop:Generator_TableVarName="tableTBL_MASUK" msprop:Generator_RowChangedName="TBL_MASUKRowChanged" msprop:Generator_TablePropName="TBL_MASUK" msprop:Generator_RowDeletingName="TBL_MASUKRowDeleting" msprop:Generator_RowChangingName="TBL_MASUKRowChanging" msprop:Generator_RowEvHandlerName="TBL_MASUKRowChangeEventHandler" msprop:Generator_RowDeletedName="TBL_MASUKRowDeleted" msprop:Generator_RowClassName="TBL_MASUKRow" msprop:Generator_UserTableName="TBL_MASUK" msprop:Generator_RowEvArgName="TBL_MASUKRowChangeEvent">
+        <xs:element name="TBL_MASUK" msprop:Generator_TableClassName="TBL_MASUKDataTable" msprop:Generator_TableVarName="tableTBL_MASUK" msprop:Generator_TablePropName="TBL_MASUK" msprop:Generator_RowDeletingName="TBL_MASUKRowDeleting" msprop:Generator_RowChangingName="TBL_MASUKRowChanging" msprop:Generator_RowEvHandlerName="TBL_MASUKRowChangeEventHandler" msprop:Generator_RowDeletedName="TBL_MASUKRowDeleted" msprop:Generator_UserTableName="TBL_MASUK" msprop:Generator_RowChangedName="TBL_MASUKRowChanged" msprop:Generator_RowEvArgName="TBL_MASUKRowChangeEvent" msprop:Generator_RowClassName="TBL_MASUKRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID_x0020_Transaksi" msprop:Generator_ColumnVarNameInTable="columnID_Transaksi" msprop:Generator_ColumnPropNameInRow="ID_Transaksi" msprop:Generator_ColumnPropNameInTable="ID_TransaksiColumn" msprop:Generator_UserColumnName="ID Transaksi" type="xs:string" minOccurs="0" />
@@ -26,7 +26,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="TBL_KELUAR" msprop:Generator_TableClassName="TBL_KELUARDataTable" msprop:Generator_TableVarName="tableTBL_KELUAR" msprop:Generator_RowChangedName="TBL_KELUARRowChanged" msprop:Generator_TablePropName="TBL_KELUAR" msprop:Generator_RowDeletingName="TBL_KELUARRowDeleting" msprop:Generator_RowChangingName="TBL_KELUARRowChanging" msprop:Generator_RowEvHandlerName="TBL_KELUARRowChangeEventHandler" msprop:Generator_RowDeletedName="TBL_KELUARRowDeleted" msprop:Generator_RowClassName="TBL_KELUARRow" msprop:Generator_UserTableName="TBL_KELUAR" msprop:Generator_RowEvArgName="TBL_KELUARRowChangeEvent">
+        <xs:element name="TBL_KELUAR" msprop:Generator_TableClassName="TBL_KELUARDataTable" msprop:Generator_TableVarName="tableTBL_KELUAR" msprop:Generator_TablePropName="TBL_KELUAR" msprop:Generator_RowDeletingName="TBL_KELUARRowDeleting" msprop:Generator_RowChangingName="TBL_KELUARRowChanging" msprop:Generator_RowEvHandlerName="TBL_KELUARRowChangeEventHandler" msprop:Generator_RowDeletedName="TBL_KELUARRowDeleted" msprop:Generator_UserTableName="TBL_KELUAR" msprop:Generator_RowChangedName="TBL_KELUARRowChanged" msprop:Generator_RowEvArgName="TBL_KELUARRowChangeEvent" msprop:Generator_RowClassName="TBL_KELUARRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID_x0020_Transaksi" msprop:Generator_ColumnVarNameInTable="columnID_Transaksi" msprop:Generator_ColumnPropNameInRow="ID_Transaksi" msprop:Generator_ColumnPropNameInTable="ID_TransaksiColumn" msprop:Generator_UserColumnName="ID Transaksi" type="xs:string" minOccurs="0" />
@@ -45,6 +45,7 @@
               <xs:element name="Bayar" msprop:Generator_ColumnVarNameInTable="columnBayar" msprop:Generator_ColumnPropNameInRow="Bayar" msprop:Generator_ColumnPropNameInTable="BayarColumn" msprop:Generator_UserColumnName="Bayar" type="xs:int" minOccurs="0" />
               <xs:element name="Kembalian" msprop:Generator_ColumnVarNameInTable="columnKembalian" msprop:Generator_ColumnPropNameInRow="Kembalian" msprop:Generator_ColumnPropNameInTable="KembalianColumn" msprop:Generator_UserColumnName="Kembalian" type="xs:int" minOccurs="0" />
               <xs:element name="Laba" msprop:Generator_ColumnVarNameInTable="columnLaba" msprop:Generator_ColumnPropNameInRow="Laba" msprop:Generator_ColumnPropNameInTable="LabaColumn" msprop:Generator_UserColumnName="Laba" type="xs:int" minOccurs="0" />
+              <xs:element name="QTY" msprop:Generator_ColumnVarNameInTable="columnQTY" msprop:Generator_ColumnPropNameInRow="QTY" msprop:Generator_ColumnPropNameInTable="QTYColumn" msprop:Generator_UserColumnName="QTY" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

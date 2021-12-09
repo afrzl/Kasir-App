@@ -45,16 +45,15 @@ Public Class FR_MASUK
     Dim TAMPIL_RECORD As Integer = 30
 
     Sub TAMPIL()
-        'Dim STR As String = "SELECT Id, RTRIM(Kode) AS Kode," &
-        '" (SELECT RTRIM(Barang) FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) AS Barang,Jumlah,RTRIM(Supplier) AS Supplier," &
-        '" Harga, Tgl, (SELECT RTRIM(Nama) FROM tbl_karyawan WHERE RTRIM(Id)=RTRIM(tbl_transaksi.Id_kasir)) As Kasir" &
-        '" FROM tbl_transaksi WHERE Jenis='M' AND (SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi.Kode))" &
-        '" LIKE '%" & TXTCARI.Text & "%'"
-
-        Dim STR As String = "SELECT RTRIM(Id_trans) AS 'ID Transaksi', RTRIM(Kode) AS 'Kode Barang'," &
+        Dim STR As String = "SELECT RTRIM(Id_trans) AS 'ID Transaksi'," &
+            " RTRIM(Kode) AS 'Kode Barang'," &
             " (SELECT RTRIM(Barang) FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) AS 'Nama Barang'," &
-            " Jumlah as 'Stok Masuk', Harga AS 'Harga Partai' FROM tbl_transaksi_child WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M' AND" &
-            " (SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) Like '%" & TXTCARI.Text & "%' ORDER BY Id ASC"
+            " Jumlah as 'Stok Masuk'," &
+            " Harga AS 'Harga Partai,'" &
+            " Stok AS 'Stok Sisa'" &
+            " FROM tbl_transaksi_child WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M' AND" &
+            " (SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) Like '%" & TXTCARI.Text & "%'" &
+            " ORDER BY Id ASC"
         Dim DA As SqlDataAdapter
         Dim TBL As New DataSet
         DA = New SqlDataAdapter(STR, CONN)
@@ -68,6 +67,7 @@ Public Class FR_MASUK
         DGTAMPIL.Columns(2).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
         DGTAMPIL.Columns(3).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
         DGTAMPIL.Columns(4).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+        DGTAMPIL.Columns(5).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
 
         BTNPREV.Enabled = True
         BTNNEXT.Enabled = True
@@ -106,7 +106,7 @@ Public Class FR_MASUK
 
     Sub CARI_BARANG()
         Dim STR As String = "SELECT RTRIM(Kode) AS Kode,RTRIM(Barang) AS Barang" &
-            " FROM tbl_barang WHERE Barang LIKE '%" & TXTCARI_BARANG.Text & "%'"
+            " FROM tbl_barang WHERE Barang Like '%" & TXTCARI_BARANG.Text & "%'"
         Dim DA As SqlDataAdapter
         DA = New SqlDataAdapter(STR, CONN)
         Dim TBL As New DataTable

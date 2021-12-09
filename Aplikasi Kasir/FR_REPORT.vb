@@ -92,7 +92,8 @@ Public Class FR_REPORT
                     " RTRIM(tbl_transaksi_parent.Jumlah_item) AS 'Jumlah Item'," &
                     " RTRIM(tbl_transaksi_child.Kode) As 'Kode Barang'," &
                     " RTRIM((SELECT Barang FROM tbl_barang WHERE Kode = tbl_transaksi_child.Kode)) AS 'Nama Barang'," &
-                    " tbl_transaksi_child.Harga AS 'Harga Jual'," &
+                    " tbl_transaksi_child.Jumlah AS 'QTY'," &
+                    " tbl_transaksi_child.Harga  AS 'Harga Jual'," &
                     " tbl_transaksi_child.Diskon AS 'Diskon'," &
                     " tbl_transaksi_child.Harga_akhir AS 'Harga'," &
                     " tbl_transaksi_parent.Harga AS 'Total'," &

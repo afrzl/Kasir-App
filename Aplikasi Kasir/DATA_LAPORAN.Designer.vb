@@ -693,6 +693,8 @@ Partial Public Class DATA_LAPORAN
         
         Private columnLaba As Global.System.Data.DataColumn
         
+        Private columnQTY As Global.System.Data.DataColumn
+        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub New()
@@ -857,6 +859,14 @@ Partial Public Class DATA_LAPORAN
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property QTYColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnQTY
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -909,9 +919,10 @@ Partial Public Class DATA_LAPORAN
                     ByVal Total_Akhir As Integer,  _
                     ByVal Bayar As Integer,  _
                     ByVal Kembalian As Integer,  _
-                    ByVal Laba As Integer) As TBL_KELUARRow
+                    ByVal Laba As Integer,  _
+                    ByVal QTY As String) As TBL_KELUARRow
             Dim rowTBL_KELUARRow As TBL_KELUARRow = CType(Me.NewRow,TBL_KELUARRow)
-            Dim columnValuesArray() As Object = New Object() {ID_Transaksi, Tanggal, Kasir, Pembeli, Jumlah_Item, Kode_Barang, Nama_Barang, Harga_Jual, Diskon, Harga, Total, Diskon_Transaksi, Total_Akhir, Bayar, Kembalian, Laba}
+            Dim columnValuesArray() As Object = New Object() {ID_Transaksi, Tanggal, Kasir, Pembeli, Jumlah_Item, Kode_Barang, Nama_Barang, Harga_Jual, Diskon, Harga, Total, Diskon_Transaksi, Total_Akhir, Bayar, Kembalian, Laba, QTY}
             rowTBL_KELUARRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowTBL_KELUARRow)
             Return rowTBL_KELUARRow
@@ -950,6 +961,7 @@ Partial Public Class DATA_LAPORAN
             Me.columnBayar = MyBase.Columns("Bayar")
             Me.columnKembalian = MyBase.Columns("Kembalian")
             Me.columnLaba = MyBase.Columns("Laba")
+            Me.columnQTY = MyBase.Columns("QTY")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -987,6 +999,8 @@ Partial Public Class DATA_LAPORAN
             MyBase.Columns.Add(Me.columnKembalian)
             Me.columnLaba = New Global.System.Data.DataColumn("Laba", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnLaba)
+            Me.columnQTY = New Global.System.Data.DataColumn("QTY", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnQTY)
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -1605,6 +1619,21 @@ Partial Public Class DATA_LAPORAN
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property QTY() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableTBL_KELUAR.QTYColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'QTY' in table 'TBL_KELUAR' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableTBL_KELUAR.QTYColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Function IsID_TransaksiNull() As Boolean
             Return Me.IsNull(Me.tableTBL_KELUAR.ID_TransaksiColumn)
         End Function
@@ -1793,6 +1822,18 @@ Partial Public Class DATA_LAPORAN
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub SetLabaNull()
             Me(Me.tableTBL_KELUAR.LabaColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsQTYNull() As Boolean
+            Return Me.IsNull(Me.tableTBL_KELUAR.QTYColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetQTYNull()
+            Me(Me.tableTBL_KELUAR.QTYColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     

@@ -271,27 +271,20 @@ Public Class FR_KELUAR
         For Each EROW As DataGridViewRow In DGTAMPIL.Rows
             Dim KODE_PRODUK As String = EROW.Cells("Kode").Value
             Dim JUMLAH_PRODUK As Integer = EROW.Cells("QTY").Value
-            Dim HARGA_PRODUK As Integer = EROW.Cells("Harga").Value
-            Dim DISKON_PRODUK As Integer = EROW.Cells("Diskon").Value / JUMLAH_PRODUK
+            Dim HARGA_PRODUK As Integer = EROW.Cells("Harga").Value * JUMLAH_PRODUK
+            Dim DISKON_PRODUK As Integer = EROW.Cells("Diskon").Value
             Dim HARGA_AKHIR_PRODUK As Integer = HARGA_PRODUK - DISKON_PRODUK
+            Dim HARGA_BELI_PRODUK As Integer = 0
 
             If Not JUMLAH_PRODUK = 1 Then
                 For N As Integer = 1 To JUMLAH_PRODUK
-                    Dim HARGA_BELI_PRODUK As Integer = CARI_HARGA_BELI(KODE_PRODUK)
-                    STR = "INSERT INTO tbl_transaksi_child (Id_trans, Kode, Jumlah, Harga_beli, Harga, Diskon, Harga_akhir) VALUES" &
-                        " ('" & ID_TRANS & "'," &
-                        " '" & KODE_PRODUK & "'," &
-                        " 1," &
-                        " '" & HARGA_BELI_PRODUK & "'," &
-                        " '" & HARGA_PRODUK & "'," &
-                        " '" & DISKON_PRODUK & "'," &
-                        " '" & HARGA_AKHIR_PRODUK & "')"
-                    CMD = New SqlCommand(STR, CONN)
-                    CMD.ExecuteNonQuery()
+                    HARGA_BELI_PRODUK += CARI_HARGA_BELI(KODE_PRODUK)
                 Next N
             Else
-                Dim HARGA_BELI_PRODUK As Integer = CARI_HARGA_BELI(KODE_PRODUK)
-                STR = "INSERT INTO tbl_transaksi_child (Id_trans, Kode, Jumlah, Harga_beli, Harga, Diskon, Harga_akhir) VALUES" &
+                HARGA_BELI_PRODUK = CARI_HARGA_BELI(KODE_PRODUK)
+            End If
+
+            STR = "INSERT INTO tbl_transaksi_child (Id_trans, Kode, Jumlah, Harga_beli, Harga, Diskon, Harga_akhir) VALUES" &
                     " ('" & ID_TRANS & "'," &
                     " '" & KODE_PRODUK & "'," &
                     " '" & JUMLAH_PRODUK & "'," &
@@ -299,9 +292,8 @@ Public Class FR_KELUAR
                     " '" & HARGA_PRODUK & "'," &
                     " '" & DISKON_PRODUK & "'," &
                     " '" & HARGA_AKHIR_PRODUK & "')"
-                CMD = New SqlCommand(STR, CONN)
-                CMD.ExecuteNonQuery()
-            End If
+            CMD = New SqlCommand(STR, CONN)
+            CMD.ExecuteNonQuery()
         Next
 
         MsgBox("Transaksi Berhasil Dilakukan")
