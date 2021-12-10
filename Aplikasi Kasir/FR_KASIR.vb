@@ -12,7 +12,7 @@ Public Class FR_KASIR
     Sub TAMPIL()
         Dim STR As String = "SELECT Id as ID,RTRIM(Nama) AS 'Nama Lengkap',RTRIM(Alamat) AS Alamat," &
             " Tgl_lahir as 'Tanggal Lahir',JK as 'Jenis Kelamin',RTRIM(No_hp) AS 'Nomor HP', Role AS 'Hak Akses'" &
-            " FROM tbl_karyawan WHERE Nama Like '%" & TXTCARI.Text & "%'"
+            " FROM tbl_karyawan WHERE Nama Like '%" & TXTCARI.Text & "%' AND ID != '" & My.Settings.ID_ACCOUNT & "'"
         Dim DA As SqlDataAdapter
         DA = New SqlDataAdapter(STR, CONN)
         Dim TBL As New DataTable
@@ -43,21 +43,20 @@ Public Class FR_KASIR
     End Sub
 
     Private Function AUTOID() As String
-        Dim ID_AWAL As String = Format(Date.Now, "yyyyMM")
-        Dim ID_AKHIR As String = ""
-        Dim STR As String = "SELECT MAX(Id) AS Id FROM tbl_karyawan"
+        Dim ID_AWAL As String = Format(TXTTGL.Value, "yyyyMMdd")
+        Dim STR As String = "SELECT TOP 1 Id FROM tbl_karyawan WHERE LEFT(Id, 8) = '" & ID_AWAL & "' ORDER BY Id DESC"
         Dim CMD As SqlCommand
         CMD = New SqlCommand(STR, CONN)
         Dim RD As SqlDataReader
         RD = CMD.ExecuteReader
-        RD.Read()
-        If Not IsDBNull(RD.Item("Id")) Then
-            Dim ID As Integer = Mid(RD.Item("Id"), 7, 6) + 1
+        If RD.HasRows() Then
+            RD.Read()
+            Dim ID As Integer = Mid(RD.Item("Id"), 9, 3) + 1
             RD.Close()
-            AUTOID = ID_AWAL + Format(ID, "000000")
+            AUTOID = ID_AWAL + Format(ID, "000")
         Else
             RD.Close()
-            AUTOID = ID_AWAL + Format(1, "000000")
+            AUTOID = ID_AWAL + Format(1, "000")
         End If
         RD.Close()
     End Function
@@ -110,8 +109,8 @@ Public Class FR_KASIR
     End Sub
 
     Private Sub BTNSIMPAN_Click(sender As Object, e As EventArgs) Handles BTNSIMPAN.Click
-        If TXTID.Text = "" Or TXTNAMA.Text = "" Or CBROLE.Text = "" Or TXTPASSWORD.Text = "" Then
-            MsgBox("ID, nama, password, dan hak akses wajib diisi!")
+        If TXTNAMA.Text = "" Or CBROLE.Text = "" Or TXTPASSWORD.Text = "" Then
+            MsgBox("Data tidak lengkap!")
         Else
             Dim jk As String = ""
             If TXTJK.Text = "Laki-laki" Then
@@ -126,38 +125,55 @@ Public Class FR_KASIR
             ElseIf CBROLE.Text = "Kasir" Then
                 role = 2
             End If
-            Dim STR As String = "SELECT * FROM tbl_karyawan WHERE Id='" & TXTID.Text & "'"
+
+            Dim ID As String = AUTOID()
+
+            Dim STR As String
             Dim CMD As SqlCommand
-            CMD = New SqlCommand(STR, CONN)
-            Dim RD As SqlDataReader
-            RD = CMD.ExecuteReader
-            If RD.HasRows Then
-                RD.Close()
-                STR = "UPDATE tbl_karyawan SET Nama='" & TXTNAMA.Text &
-                    "',Password='" & TXTPASSWORD.Text &
-                    "',Role='" & role &
-                    "',Alamat='" & TXTALAMAT.Text &
-                    "',Tgl_lahir='" & Format(TXTTGL.Value, "MM/dd/yyyy") &
-                    "',JK='" & jk &
-                    "',No_hp='" & TXTNOHP.Text &
-                    "' WHERE Id='" & TXTID.Text & "'"
-            Else
-                RD.Close()
-                STR = "INSERT INTO tbl_karyawan VALUES ('" & TXTID.Text & "','" &
+            If TXTID.Text = "" Then
+                STR = "INSERT INTO tbl_karyawan VALUES ('" & ID & "','" &
                     TXTNAMA.Text & "', '" & TXTPASSWORD.Text & "', '" & role & "', '" & TXTALAMAT.Text & "', '" &
                     Format(TXTTGL.Value, "MM/dd/yyyy") & "', '" & jk & "', '" &
                     TXTNOHP.Text & "')"
+            Else
+                STR = "SELECT * FROM tbl_karyawan WHERE Id='" & TXTID.Text & "'"
+                CMD = New SqlCommand(STR, CONN)
+                Dim RD As SqlDataReader
+                RD = CMD.ExecuteReader
+                If RD.HasRows Then
+                    RD.Close()
+                    ID = TXTID.Text
+                    STR = "UPDATE tbl_karyawan SET Nama='" & TXTNAMA.Text &
+                        "',Password='" & TXTPASSWORD.Text &
+                        "',Role='" & role &
+                        "',Alamat='" & TXTALAMAT.Text &
+                        "',Tgl_lahir='" & Format(TXTTGL.Value, "MM/dd/yyyy") &
+                        "',JK='" & jk &
+                        "',No_hp='" & TXTNOHP.Text &
+                        "' WHERE Id='" & TXTID.Text & "'"
+                Else
+                    RD.Close()
+                    STR = "INSERT INTO tbl_karyawan VALUES ('" & ID & "','" &
+                        TXTNAMA.Text & "', '" & TXTPASSWORD.Text & "', '" & role & "', '" & TXTALAMAT.Text & "', '" &
+                        Format(TXTTGL.Value, "MM/dd/yyyy") & "', '" & jk & "', '" &
+                        TXTNOHP.Text & "')"
+                End If
             End If
             CMD = New SqlCommand(STR, CONN)
             CMD.ExecuteNonQuery()
-            MsgBox("Data berhasil disimpan.")
-            TXTID.Text = AUTOID()
+            MsgBox("Data berhasil disimpan dengan ID : " & ID)
+            TXTID.Visible = False
+            LBID.Visible = False
+            TXTID.Text = ""
+            TXTNAMA.Select()
             TAMPIL()
         End If
     End Sub
 
     Private Sub DGTAMPIL_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGTAMPIL.CellClick
         On Error Resume Next
+        TXTID.Visible = True
+        LBID.Visible = True
         TXTID.Text = DGTAMPIL.Item("Id", e.RowIndex).Value
     End Sub
 
@@ -169,14 +185,21 @@ Public Class FR_KASIR
                 Dim STR As String = "DELETE FROM tbl_karyawan WHERE Id='" & TXTID.Text & "'"
                 Dim CMD As New SqlCommand(STR, CONN)
                 CMD.ExecuteNonQuery()
+                MsgBox("Data berhasil dihapus!")
                 TAMPIL()
-                TXTID.Text = AUTOID()
+                TXTID.Text = ""
+                TXTID.Visible = False
+                LBID.Visible = False
+                TXTNAMA.Select()
             End If
         End If
     End Sub
 
     Private Sub BTNREFRESH_Click(sender As Object, e As EventArgs) Handles BTNREFRESH.Click
-        TXTID.Text = AUTOID()
+        TXTID.Visible = False
+        LBID.Visible = False
+        TXTID.Text = ""
+        TXTNAMA.Select()
         TXTNAMA.Text = ""
         TXTPASSWORD.Text = ""
         TXTALAMAT.Text = ""
@@ -233,8 +256,6 @@ Public Class FR_KASIR
 
     Private Sub FR_KASIR_Load(sender As Object, e As EventArgs) Handles Me.Load
         TAMPIL()
-        TXTID.Text = AUTOID()
-
         TXTNAMA.Select()
 
         LBTGL.Text = Format(Date.Now, "dd MMMM yyyy HH:mm:ss")
