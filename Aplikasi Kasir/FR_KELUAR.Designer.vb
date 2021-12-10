@@ -23,8 +23,8 @@ Partial Class FR_KELUAR
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.PNATAS = New System.Windows.Forms.Panel()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
@@ -40,6 +40,9 @@ Partial Class FR_KELUAR
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.LBTOTAL = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.TXTDISKON = New System.Windows.Forms.TextBox()
+        Me.Label5 = New System.Windows.Forms.Label()
         Me.TXTTOTAL = New System.Windows.Forms.TextBox()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.TXTQTY = New System.Windows.Forms.TextBox()
@@ -69,13 +72,6 @@ Partial Class FR_KELUAR
         Me.Label13 = New System.Windows.Forms.Label()
         Me.TXTBAYAR = New System.Windows.Forms.TextBox()
         Me.DGTAMPIL = New System.Windows.Forms.DataGridView()
-        Me.CLICK_KANAN = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.HapusBarangToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PEWAKTU = New System.Windows.Forms.Timer(Me.components)
-        Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
-        Me.TXTDISKON = New System.Windows.Forms.TextBox()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.Label6 = New System.Windows.Forms.Label()
         Me.KODE = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.BARANG = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.SATUAN = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -83,6 +79,10 @@ Partial Class FR_KELUAR
         Me.QTY = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Diskon = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TOTAL = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CLICK_KANAN = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.HapusBarangToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PEWAKTU = New System.Windows.Forms.Timer(Me.components)
+        Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.PNATAS.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
@@ -277,6 +277,32 @@ Partial Class FR_KELUAR
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Data Barang"
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(1105, 58)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(24, 23)
+        Me.Label6.TabIndex = 14
+        Me.Label6.Text = "%"
+        '
+        'TXTDISKON
+        '
+        Me.TXTDISKON.Location = New System.Drawing.Point(1010, 55)
+        Me.TXTDISKON.Name = "TXTDISKON"
+        Me.TXTDISKON.ReadOnly = True
+        Me.TXTDISKON.Size = New System.Drawing.Size(89, 30)
+        Me.TXTDISKON.TabIndex = 13
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(1010, 28)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(61, 23)
+        Me.Label5.TabIndex = 12
+        Me.Label5.Text = "Diskon"
         '
         'TXTTOTAL
         '
@@ -561,67 +587,25 @@ Partial Class FR_KELUAR
         Me.DGTAMPIL.AllowUserToResizeColumns = False
         Me.DGTAMPIL.AllowUserToResizeRows = False
         Me.DGTAMPIL.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DGTAMPIL.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DGTAMPIL.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.DGTAMPIL.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGTAMPIL.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.KODE, Me.BARANG, Me.SATUAN, Me.HARGA, Me.QTY, Me.Diskon, Me.TOTAL})
         Me.DGTAMPIL.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DGTAMPIL.Location = New System.Drawing.Point(0, 322)
         Me.DGTAMPIL.Name = "DGTAMPIL"
         Me.DGTAMPIL.RowHeadersVisible = False
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DGTAMPIL.RowsDefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DGTAMPIL.RowsDefaultCellStyle = DataGridViewCellStyle2
         Me.DGTAMPIL.RowTemplate.Height = 30
         Me.DGTAMPIL.Size = New System.Drawing.Size(1366, 252)
         Me.DGTAMPIL.TabIndex = 2
-        '
-        'CLICK_KANAN
-        '
-        Me.CLICK_KANAN.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.CLICK_KANAN.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.HapusBarangToolStripMenuItem})
-        Me.CLICK_KANAN.Name = "CLICK_KANAN"
-        Me.CLICK_KANAN.Size = New System.Drawing.Size(172, 28)
-        '
-        'HapusBarangToolStripMenuItem
-        '
-        Me.HapusBarangToolStripMenuItem.Name = "HapusBarangToolStripMenuItem"
-        Me.HapusBarangToolStripMenuItem.Size = New System.Drawing.Size(171, 24)
-        Me.HapusBarangToolStripMenuItem.Text = "Hapus Barang"
-        '
-        'PEWAKTU
-        '
-        '
-        'TXTDISKON
-        '
-        Me.TXTDISKON.Location = New System.Drawing.Point(1010, 55)
-        Me.TXTDISKON.Name = "TXTDISKON"
-        Me.TXTDISKON.ReadOnly = True
-        Me.TXTDISKON.Size = New System.Drawing.Size(89, 30)
-        Me.TXTDISKON.TabIndex = 13
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(1010, 28)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(61, 23)
-        Me.Label5.TabIndex = 12
-        Me.Label5.Text = "Diskon"
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(1105, 58)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(24, 23)
-        Me.Label6.TabIndex = 14
-        Me.Label6.Text = "%"
         '
         'KODE
         '
@@ -670,6 +654,22 @@ Partial Class FR_KELUAR
         Me.TOTAL.HeaderText = "TOTAL"
         Me.TOTAL.Name = "TOTAL"
         Me.TOTAL.ReadOnly = True
+        '
+        'CLICK_KANAN
+        '
+        Me.CLICK_KANAN.ImageScalingSize = New System.Drawing.Size(20, 20)
+        Me.CLICK_KANAN.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.HapusBarangToolStripMenuItem})
+        Me.CLICK_KANAN.Name = "CLICK_KANAN"
+        Me.CLICK_KANAN.Size = New System.Drawing.Size(172, 28)
+        '
+        'HapusBarangToolStripMenuItem
+        '
+        Me.HapusBarangToolStripMenuItem.Name = "HapusBarangToolStripMenuItem"
+        Me.HapusBarangToolStripMenuItem.Size = New System.Drawing.Size(171, 24)
+        Me.HapusBarangToolStripMenuItem.Text = "Hapus Barang"
+        '
+        'PEWAKTU
+        '
         '
         'FR_KELUAR
         '

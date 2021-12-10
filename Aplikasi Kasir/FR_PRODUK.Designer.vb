@@ -84,6 +84,8 @@ Partial Class FR_PRODUK
         Me.BTNKASIR = New System.Windows.Forms.Button()
         Me.BTNDASHBOARD = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
+        Me.BTNNEXT = New System.Windows.Forms.Button()
+        Me.BTNPREV = New System.Windows.Forms.Button()
         Me.PNCONTROL.SuspendLayout()
         Me.PNTOP.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -224,6 +226,8 @@ Partial Class FR_PRODUK
         '
         'PNCONTENT
         '
+        Me.PNCONTENT.Controls.Add(Me.BTNNEXT)
+        Me.PNCONTENT.Controls.Add(Me.BTNPREV)
         Me.PNCONTENT.Controls.Add(Me.TXTSTART5)
         Me.PNCONTENT.Controls.Add(Me.Label13)
         Me.PNCONTENT.Controls.Add(Me.TXTHARGA5)
@@ -543,7 +547,7 @@ Partial Class FR_PRODUK
         Me.TXTCARI.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TXTCARI.Location = New System.Drawing.Point(22, 583)
         Me.TXTCARI.Name = "TXTCARI"
-        Me.TXTCARI.Size = New System.Drawing.Size(1025, 30)
+        Me.TXTCARI.Size = New System.Drawing.Size(915, 30)
         Me.TXTCARI.TabIndex = 8
         '
         'CBSATUAN
@@ -820,6 +824,36 @@ Partial Class FR_PRODUK
         Me.Button1.TabIndex = 0
         Me.Button1.UseVisualStyleBackColor = False
         '
+        'BTNNEXT
+        '
+        Me.BTNNEXT.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BTNNEXT.BackColor = System.Drawing.Color.DarkBlue
+        Me.BTNNEXT.FlatAppearance.BorderSize = 0
+        Me.BTNNEXT.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNNEXT.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNNEXT.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BTNNEXT.Location = New System.Drawing.Point(999, 583)
+        Me.BTNNEXT.Name = "BTNNEXT"
+        Me.BTNNEXT.Size = New System.Drawing.Size(50, 29)
+        Me.BTNNEXT.TabIndex = 63
+        Me.BTNNEXT.Text = ">"
+        Me.BTNNEXT.UseVisualStyleBackColor = False
+        '
+        'BTNPREV
+        '
+        Me.BTNPREV.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BTNPREV.BackColor = System.Drawing.Color.DarkBlue
+        Me.BTNPREV.FlatAppearance.BorderSize = 0
+        Me.BTNPREV.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNPREV.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNPREV.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BTNPREV.Location = New System.Drawing.Point(943, 583)
+        Me.BTNPREV.Name = "BTNPREV"
+        Me.BTNPREV.Size = New System.Drawing.Size(50, 29)
+        Me.BTNPREV.TabIndex = 62
+        Me.BTNPREV.Text = "<"
+        Me.BTNPREV.UseVisualStyleBackColor = False
+        '
         'FR_PRODUK
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(120.0!, 120.0!)
@@ -905,4 +939,6 @@ Partial Class FR_PRODUK
     Friend WithEvents BTNBARANG As Button
     Friend WithEvents BTNKASIR As Button
     Friend WithEvents BTNDASHBOARD As Button
+    Friend WithEvents BTNNEXT As Button
+    Friend WithEvents BTNPREV As Button
 End Class

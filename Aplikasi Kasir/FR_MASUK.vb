@@ -36,6 +36,7 @@ Public Class FR_MASUK
         LBTGL.Text = Format(Date.Now, "dd MMMM yyyy HH:mm:ss")
         PEWAKTU.Enabled = True
         LBLUSER.Text = NAMA_LOGIN
+        CBTAMPIL.SelectedIndex = 0
 
         TXTKODE.Select()
         TAMPIL()
@@ -45,18 +46,53 @@ Public Class FR_MASUK
     Dim TAMPIL_RECORD As Integer = 30
 
     Sub TAMPIL()
-        Dim STR As String = "SELECT RTRIM(Id_trans) AS 'ID Transaksi'," &
+        Dim STR As String
+        If CBTAMPIL.SelectedIndex = 0 Then
+            STR = "SELECT RTRIM(Id_trans) AS 'ID Transaksi'," &
             " RTRIM(Kode) AS 'Kode Barang'," &
             " (SELECT RTRIM(Barang) FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) AS 'Nama Barang'," &
             " Jumlah as 'Stok Masuk'," &
-            " Harga AS 'Harga Partai,'" &
+            " Harga AS 'Harga Partai'," &
             " Stok AS 'Stok Sisa'" &
             " FROM tbl_transaksi_child WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M' AND" &
             " (SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) Like '%" & TXTCARI.Text & "%'" &
             " ORDER BY Id ASC"
+        ElseIf CBTAMPIL.SelectedIndex = 1 Then
+            STR = "SELECT RTRIM(Id_trans) AS 'ID Transaksi'," &
+            " RTRIM(Kode) AS 'Kode Barang'," &
+            " (SELECT RTRIM(Barang) FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) AS 'Nama Barang'," &
+            " Jumlah as 'Stok Masuk'," &
+            " Harga AS 'Harga Partai'," &
+            " Stok AS 'Stok Sisa'" &
+            " FROM tbl_transaksi_child WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M' AND" &
+            " (SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) Like '%" & TXTCARI.Text & "%'" &
+            " AND Stok != 0" &
+            " ORDER BY Id ASC"
+        ElseIf CBTAMPIL.SelectedIndex = 2 Then
+            STR = "SELECT RTRIM(Id_trans) AS 'ID Transaksi'," &
+            " RTRIM(Kode) AS 'Kode Barang'," &
+            " (SELECT RTRIM(Barang) FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) AS 'Nama Barang'," &
+            " Jumlah as 'Stok Masuk'," &
+            " Harga AS 'Harga Partai'," &
+            " Stok AS 'Stok Sisa'" &
+            " FROM tbl_transaksi_child WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M' AND" &
+            " (SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) Like '%" & TXTCARI.Text & "%'" &
+            " AND Stok = 0" &
+            " ORDER BY Id ASC"
+        Else
+            STR = "SELECT RTRIM(Id_trans) AS 'ID Transaksi'," &
+            " RTRIM(Kode) AS 'Kode Barang'," &
+            " (SELECT RTRIM(Barang) FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) AS 'Nama Barang'," &
+            " Jumlah as 'Stok Masuk'," &
+            " Harga AS 'Harga Partai'," &
+            " Stok AS 'Stok Sisa'" &
+            " FROM tbl_transaksi_child WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M' AND" &
+            " (SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) Like '%" & TXTCARI.Text & "%'" &
+            " ORDER BY Id ASC"
+        End If
         Dim DA As SqlDataAdapter
         Dim TBL As New DataSet
-        DA = New SqlDataAdapter(STR, CONN)
+        DA = New SqlDataAdapter(Str, CONN)
         DA.Fill(TBL, START_RECORD, TAMPIL_RECORD, 0)
         DGTAMPIL.DataSource = TBL.Tables(0)
 
@@ -69,12 +105,16 @@ Public Class FR_MASUK
         DGTAMPIL.Columns(4).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
         DGTAMPIL.Columns(5).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
 
+        DGTAMPIL.Columns(3).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DGTAMPIL.Columns(4).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DGTAMPIL.Columns(5).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+
         BTNPREV.Enabled = True
         BTNNEXT.Enabled = True
 
         Dim TOTAL_RECORD As Integer = 0
         Dim TBL_DATA As New DataTable
-        DA = New SqlDataAdapter(STR, CONN)
+        DA = New SqlDataAdapter(Str, CONN)
         DA.Fill(TBL_DATA)
 
         TOTAL_RECORD = TBL_DATA.Rows.Count
@@ -391,5 +431,9 @@ Public Class FR_MASUK
         If e.KeyChar = Chr(13) Then
             DGCARI.Select()
         End If
+    End Sub
+
+    Private Sub CBTAMPIL_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CBTAMPIL.SelectedIndexChanged
+        TAMPIL()
     End Sub
 End Class

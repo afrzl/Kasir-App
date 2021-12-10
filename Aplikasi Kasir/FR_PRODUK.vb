@@ -41,15 +41,20 @@ Public Class FR_PRODUK
         TXTKODE.Select()
     End Sub
 
+    Dim START_RECORD As Integer = 0
+    Dim TAMPIL_RECORD As Integer = 10
     Sub TAMPIL()
-        Dim STR As String = "SELECT RTRIM(Kode) AS 'Kode Barang',RTRIM(Barang) AS 'Nama Barang'," &
-            "Satuan,Harga1 AS 'Harga Satuan' FROM tbl_barang" &
+        Dim STR As String = "SELECT RTRIM(Kode) AS 'Kode Barang'," &
+            " RTRIM(Barang) AS 'Nama Barang'," &
+            " RTRIM(Satuan) AS 'Satuan'," &
+            " Harga1 AS 'Harga Satuan' FROM tbl_barang" &
             " WHERE Barang LIKE '%" & TXTCARI.Text & "%'"
+
         Dim DA As SqlDataAdapter
+        Dim TBL As New DataSet
         DA = New SqlDataAdapter(STR, CONN)
-        Dim TBL As New DataTable
-        DA.Fill(TBL)
-        DGTAMPIL.DataSource = TBL
+        DA.Fill(TBL, START_RECORD, TAMPIL_RECORD, 0)
+        DGTAMPIL.DataSource = TBL.Tables(0)
 
         DGTAMPIL.Columns(3).DefaultCellStyle.Format = "Rp ###,##"
 
@@ -60,6 +65,30 @@ Public Class FR_PRODUK
 
         DGTAMPIL.Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         DGTAMPIL.Columns(3).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+        BTNPREV.Enabled = True
+        BTNNEXT.Enabled = True
+
+        Dim TOTAL_RECORD As Integer = 0
+        Dim TBL_DATA As New DataTable
+        DA = New SqlDataAdapter(STR, CONN)
+        DA.Fill(TBL_DATA)
+
+        TOTAL_RECORD = TBL_DATA.Rows.Count
+
+        If TOTAL_RECORD = 0 Then
+            BTNPREV.Enabled = False
+            BTNNEXT.Enabled = False
+        ElseIf START_RECORD = 0 Then
+            BTNPREV.Enabled = False
+        ElseIf TOTAL_RECORD <= TAMPIL_RECORD Then
+            BTNNEXT.Enabled = False
+        ElseIf TOTAL_RECORD - START_RECORD <= TAMPIL_RECORD Then
+            BTNNEXT.Enabled = False
+        Else
+            BTNPREV.Enabled = True
+            BTNNEXT.Enabled = True
+        End If
     End Sub
 
     Private Sub TXTKODE_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTKODE.KeyPress
@@ -548,5 +577,15 @@ Public Class FR_PRODUK
 
     Private Sub BTNTENTANG_Click(sender As Object, e As EventArgs) Handles BTNTENTANG.Click
         BUKA_FORM(FR_TENTANG)
+    End Sub
+
+    Private Sub BTNNEXT_Click(sender As Object, e As EventArgs) Handles BTNNEXT.Click
+        START_RECORD = START_RECORD + TAMPIL_RECORD
+        TAMPIL()
+    End Sub
+
+    Private Sub BTNPREV_Click(sender As Object, e As EventArgs) Handles BTNPREV.Click
+        START_RECORD = START_RECORD - TAMPIL_RECORD
+        TAMPIL()
     End Sub
 End Class

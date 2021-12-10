@@ -192,6 +192,8 @@ Public Class FR_KELUAR
 
     Private Sub FR_KELUAR_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
         Select Case e.KeyCode
+            Case Keys.F1
+                TXTKODE.Select()
             Case Keys.F2
                 TXTBAYAR.Select()
         End Select
@@ -212,6 +214,7 @@ Public Class FR_KELUAR
     End Sub
 
     Private Sub DGTAMPIL_CellMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles DGTAMPIL.CellMouseClick
+        On Error Resume Next
         TXTKODE.ReadOnly = True
         TXTQTY.ReadOnly = False
 
@@ -295,11 +298,6 @@ Public Class FR_KELUAR
             CMD = New SqlCommand(STR, CONN)
             CMD.ExecuteNonQuery()
         Next
-
-        MsgBox("Transaksi Berhasil Dilakukan")
-        DGTAMPIL.Rows.Clear()
-        TOTAL_HARGA()
-        TXTKODE.Select()
     End Sub
 
     Private Function CARI_HARGA_BELI(ByVal KODE As String) As Integer
@@ -386,8 +384,10 @@ Public Class FR_KELUAR
         If e.KeyChar = Chr(13) Then
             If TXTKEMBALIAN.Text >= "0" Then
                 INPUT_DB()
-                TXTBAYAR.Text = ""
-                TXTDISKON_PERSEN.Text = 0
+                FR_KELUAR_KEMBALIAN.LBKEMBALI.Text = Format(CInt(TXTKEMBALIAN.Text), "##,##0")
+                FR_KELUAR_KEMBALIAN.Show()
+                FR_KELUAR_KEMBALIAN.BTNTUTUP.Select()
+                Me.Enabled = False
             Else
                 MsgBox("Pembayaran Kurang!")
             End If
@@ -536,5 +536,18 @@ Public Class FR_KELUAR
             HARGA = CInt(TXTHARGA.Text)
         End If
         TXTTOTAL.Text = HARGA * JUMLAH_QTY * (100 - DISKON) / 100
+    End Sub
+
+    Private Sub TXTKODE_KeyDown(sender As Object, e As KeyEventArgs) Handles TXTKODE.KeyDown
+        Select Case e.KeyCode
+            Case Keys.F1
+                FR_KELUAR_TAMPIL.Show()
+                Me.Enabled = False
+        End Select
+    End Sub
+
+    Private Sub BTNCARI_Click(sender As Object, e As EventArgs) Handles BTNCARI.Click
+        FR_KELUAR_TAMPIL.Show()
+        Me.Enabled = False
     End Sub
 End Class

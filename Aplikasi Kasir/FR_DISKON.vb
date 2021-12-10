@@ -42,39 +42,59 @@ Public Class FR_DISKON
     End Sub
 
     Dim START_RECORD As Integer = 0
-    Dim TAMPIL_RECORD As Integer = 10
+    Dim TAMPIL_RECORD As Integer = 30
 
     Sub TAMPIL()
         Dim TGL_SKRG As String = Format(Date.Now, "yyyy-MM-dd")
         Dim STR As String = ""
         If CBTAMPIL.Text = "Semua" Then
-            STR = "SELECT Id, RTRIM(Kode) AS 'Kode Barang'," &
-            " (SELECT RTRIM(Barang) FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_diskon.Kode)) AS 'Nama Barang'," &
-            " Tgl_awal as 'Tanggal Awal', Tgl_akhir AS 'Tanggal Akhir', Diskon AS 'Diskon' FROM tbl_diskon" &
-            " WHERE (SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_diskon.Kode)) Like '%" & TXTCARI.Text & "%' ORDER BY Tgl_awal ASC"
+            STR = "SELECT Id," &
+                " RTRIM(Kode) AS 'Kode Barang'," &
+                " (SELECT RTRIM(Barang) FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_diskon.Kode)) AS 'Nama Barang'," &
+                " Tgl_awal as 'Tanggal Awal'," &
+                " Tgl_akhir AS 'Tanggal Akhir'," &
+                " RTRIM(Diskon) AS 'Diskon (%)'" &
+                " FROM tbl_diskon" &
+                " WHERE (SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_diskon.Kode)) Like '%" & TXTCARI.Text & "%' ORDER BY Tgl_awal ASC"
         ElseIf CBTAMPIL.Text = "Berlalu" Then
-            STR = "SELECT Id, RTRIM(Kode) AS 'Kode Barang'," &
-            " (SELECT RTRIM(Barang) FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_diskon.Kode)) AS 'Nama Barang'," &
-            " Tgl_awal as 'Tanggal Awal', Tgl_akhir AS 'Tanggal Akhir', Diskon AS 'Diskon' FROM tbl_diskon" &
-            " WHERE (SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_diskon.Kode))" &
-            " Like '%" & TXTCARI.Text & "%' AND Tgl_akhir < '" & TGL_SKRG & "' ORDER BY Tgl_awal ASC"
+            STR = "SELECT Id," &
+                " RTRIM(Kode) AS 'Kode Barang'," &
+                " (SELECT RTRIM(Barang) FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_diskon.Kode)) AS 'Nama Barang'," &
+                " Tgl_awal AS 'Tanggal Awal'," &
+                " Tgl_akhir AS 'Tanggal Akhir'," &
+                " RTRIM(Diskon) AS 'Diskon (%)'" &
+                " FROM tbl_diskon" &
+                " WHERE (SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_diskon.Kode))" &
+                " Like '%" & TXTCARI.Text & "%' AND Tgl_akhir < '" & TGL_SKRG & "' ORDER BY Tgl_awal ASC"
         ElseIf CBTAMPIL.Text = "Sekarang" Then
-            STR = "SELECT Id, RTRIM(Kode) AS 'Kode Barang'," &
-            " (SELECT RTRIM(Barang) FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_diskon.Kode)) AS 'Nama Barang'," &
-            " Tgl_awal as 'Tanggal Awal', Tgl_akhir AS 'Tanggal Akhir', Diskon AS 'Diskon' FROM tbl_diskon" &
-            " WHERE (SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_diskon.Kode))" &
-            " Like '%" & TXTCARI.Text & "%' AND Tgl_awal <= '" & TGL_SKRG & "' AND Tgl_akhir >= '" & TGL_SKRG & "' ORDER BY Tgl_awal ASC"
+            STR = "SELECT Id," &
+                " RTRIM(Kode) AS 'Kode Barang'," &
+                " (SELECT RTRIM(Barang) FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_diskon.Kode)) AS 'Nama Barang'," &
+                " Tgl_awal as 'Tanggal Awal'," &
+                " Tgl_akhir AS 'Tanggal Akhir'," &
+                " RTRIM(Diskon) AS 'Diskon (%)'" &
+                " FROM tbl_diskon" &
+                " WHERE (SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_diskon.Kode))" &
+                " Like '%" & TXTCARI.Text & "%' AND Tgl_awal <= '" & TGL_SKRG & "' AND Tgl_akhir >= '" & TGL_SKRG & "' ORDER BY Tgl_awal ASC"
         ElseIf CBTAMPIL.Text = "Akan Datang" Then
-            STR = "SELECT Id, RTRIM(Kode) AS 'Kode Barang'," &
-            " (SELECT RTRIM(Barang) FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_diskon.Kode)) AS 'Nama Barang'," &
-            " Tgl_awal as 'Tanggal Awal', Tgl_akhir AS 'Tanggal Akhir', Diskon AS 'Diskon' FROM tbl_diskon" &
-            " WHERE (SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_diskon.Kode))" &
-            " Like '%" & TXTCARI.Text & "%' AND Tgl_awal > '" & TGL_SKRG & "' ORDER BY Tgl_awal ASC"
+            STR = "SELECT Id," &
+                " RTRIM(Kode) AS 'Kode Barang'," &
+                " (SELECT RTRIM(Barang) FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_diskon.Kode)) AS 'Nama Barang'," &
+                " Tgl_awal as 'Tanggal Awal'," &
+                " Tgl_akhir AS 'Tanggal Akhir'," &
+                " RTRIM(Diskon) AS 'Diskon (%)'" &
+                " FROM tbl_diskon" &
+                " WHERE (SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_diskon.Kode))" &
+                " Like '%" & TXTCARI.Text & "%' AND Tgl_awal > '" & TGL_SKRG & "' ORDER BY Tgl_awal ASC"
         Else
-            STR = "SELECT Id, RTRIM(Kode) AS 'Kode Barang'," &
-            " (SELECT RTRIM(Barang) FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_diskon.Kode)) AS 'Nama Barang'," &
-            " Tgl_awal as 'Tanggal Awal', Tgl_akhir AS 'Tanggal Akhir', Diskon AS 'Diskon' FROM tbl_diskon" &
-            " WHERE (SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_diskon.Kode)) Like '%" & TXTCARI.Text & "%' ORDER BY Tgl_awal ASC"
+            STR = "SELECT Id," &
+                " RTRIM(Kode) AS 'Kode Barang'," &
+                " (SELECT RTRIM(Barang) FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_diskon.Kode)) AS 'Nama Barang'," &
+                " Tgl_awal as 'Tanggal Awal'," &
+                " Tgl_akhir AS 'Tanggal Akhir'," &
+                " RTRIM(Diskon) AS 'Diskon (%)'" &
+                " FROM tbl_diskon" &
+                " WHERE (SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_diskon.Kode)) Like '%" & TXTCARI.Text & "%' ORDER BY Tgl_awal ASC"
         End If
         Dim DA As SqlDataAdapter
         Dim TBL As New DataSet
@@ -82,12 +102,19 @@ Public Class FR_DISKON
         DA.Fill(TBL, START_RECORD, TAMPIL_RECORD, 0)
         DGTAMPIL.DataSource = TBL.Tables(0)
 
+
         DGTAMPIL.Columns(0).Visible = False
         DGTAMPIL.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
         DGTAMPIL.Columns(2).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
         DGTAMPIL.Columns(3).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
         DGTAMPIL.Columns(4).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
         DGTAMPIL.Columns(5).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+
+        DGTAMPIL.Columns(3).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DGTAMPIL.Columns(4).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DGTAMPIL.Columns(5).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DGTAMPIL.Columns(5).DefaultCellStyle.Format = "##%"
+
 
         BTNPREV.Enabled = True
         BTNNEXT.Enabled = True

@@ -153,6 +153,18 @@
     <Compile Include="FR_KELUAR.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FR_KELUAR_KEMBALIAN.Designer.vb">
+      <DependentUpon>FR_KELUAR_KEMBALIAN.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FR_KELUAR_KEMBALIAN.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FR_KELUAR_TAMPIL.Designer.vb">
+      <DependentUpon>FR_KELUAR_TAMPIL.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FR_KELUAR_TAMPIL.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FR_KONEKSI.Designer.vb">
       <DependentUpon>FR_KONEKSI.vb</DependentUpon>
     </Compile>
@@ -252,6 +264,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FR_KELUAR.resx">
       <DependentUpon>FR_KELUAR.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FR_KELUAR_KEMBALIAN.resx">
+      <DependentUpon>FR_KELUAR_KEMBALIAN.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FR_KELUAR_TAMPIL.resx">
+      <DependentUpon>FR_KELUAR_TAMPIL.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FR_KONEKSI.resx">
       <DependentUpon>FR_KONEKSI.vb</DependentUpon>
