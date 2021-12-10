@@ -7,7 +7,7 @@ Public Class FR_PRODUK
 
     Sub BUKA_FORM(ByVal FR As Form)
         FR.Show()
-        Me.Hide()
+        Me.Close()
     End Sub
 
     Private Sub BTNEXIT_Click(sender As Object, e As EventArgs)
@@ -587,5 +587,13 @@ Public Class FR_PRODUK
     Private Sub BTNPREV_Click(sender As Object, e As EventArgs) Handles BTNPREV.Click
         START_RECORD = START_RECORD - TAMPIL_RECORD
         TAMPIL()
+    End Sub
+
+    Private Sub BTNRETURN_Click(sender As Object, e As EventArgs) Handles BTNRETURN.Click
+        BUKA_FORM(FR_RETURN)
+    End Sub
+
+    Private Sub BTNRUSAK_Click(sender As Object, e As EventArgs) Handles BTNRUSAK.Click
+        BUKA_FORM(FR_RUSAK)
     End Sub
 End Class

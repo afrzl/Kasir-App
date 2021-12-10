@@ -28,6 +28,8 @@ Partial Class FR_REPORT
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.PNLEFT = New System.Windows.Forms.Panel()
+        Me.BTNRUSAK = New System.Windows.Forms.Button()
+        Me.BTNRETURN = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.BTNDISKON = New System.Windows.Forms.Button()
         Me.Label14 = New System.Windows.Forms.Label()
@@ -62,8 +64,6 @@ Partial Class FR_REPORT
         Me.BTNMINIMIZE = New System.Windows.Forms.Button()
         Me.BTNCLOSE = New System.Windows.Forms.Button()
         Me.PEWAKTU = New System.Windows.Forms.Timer(Me.components)
-        Me.BTNRUSAK = New System.Windows.Forms.Button()
-        Me.BTNRETURN = New System.Windows.Forms.Button()
         Me.PNLEFT.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.PNCONTENT.SuspendLayout()
@@ -99,6 +99,42 @@ Partial Class FR_REPORT
         Me.PNLEFT.Name = "PNLEFT"
         Me.PNLEFT.Size = New System.Drawing.Size(270, 768)
         Me.PNLEFT.TabIndex = 18
+        '
+        'BTNRUSAK
+        '
+        Me.BTNRUSAK.FlatAppearance.BorderSize = 0
+        Me.BTNRUSAK.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNRUSAK.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNRUSAK.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BTNRUSAK.Image = Global.Aplikasi_Kasir.My.Resources.Resources.transaksi
+        Me.BTNRUSAK.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.BTNRUSAK.Location = New System.Drawing.Point(0, 605)
+        Me.BTNRUSAK.Name = "BTNRUSAK"
+        Me.BTNRUSAK.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
+        Me.BTNRUSAK.Size = New System.Drawing.Size(270, 35)
+        Me.BTNRUSAK.TabIndex = 53
+        Me.BTNRUSAK.Text = "     Barang Rusak"
+        Me.BTNRUSAK.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.BTNRUSAK.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.BTNRUSAK.UseVisualStyleBackColor = True
+        '
+        'BTNRETURN
+        '
+        Me.BTNRETURN.FlatAppearance.BorderSize = 0
+        Me.BTNRETURN.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNRETURN.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNRETURN.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BTNRETURN.Image = Global.Aplikasi_Kasir.My.Resources.Resources.transaksi
+        Me.BTNRETURN.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.BTNRETURN.Location = New System.Drawing.Point(0, 553)
+        Me.BTNRETURN.Name = "BTNRETURN"
+        Me.BTNRETURN.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
+        Me.BTNRETURN.Size = New System.Drawing.Size(270, 35)
+        Me.BTNRETURN.TabIndex = 52
+        Me.BTNRETURN.Text = "     Barang Return"
+        Me.BTNRETURN.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.BTNRETURN.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.BTNRETURN.UseVisualStyleBackColor = True
         '
         'Label1
         '
@@ -150,7 +186,7 @@ Partial Class FR_REPORT
         Me.BTNTENTANG.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
         Me.BTNTENTANG.Size = New System.Drawing.Size(270, 35)
         Me.BTNTENTANG.TabIndex = 27
-        Me.BTNTENTANG.Text = "     Tentang"
+        Me.BTNTENTANG.Text = "     Setting"
         Me.BTNTENTANG.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.BTNTENTANG.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.BTNTENTANG.UseVisualStyleBackColor = True
@@ -565,42 +601,6 @@ Partial Class FR_REPORT
         '
         'PEWAKTU
         '
-        '
-        'BTNRUSAK
-        '
-        Me.BTNRUSAK.FlatAppearance.BorderSize = 0
-        Me.BTNRUSAK.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BTNRUSAK.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BTNRUSAK.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.BTNRUSAK.Image = Global.Aplikasi_Kasir.My.Resources.Resources.transaksi
-        Me.BTNRUSAK.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNRUSAK.Location = New System.Drawing.Point(0, 605)
-        Me.BTNRUSAK.Name = "BTNRUSAK"
-        Me.BTNRUSAK.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
-        Me.BTNRUSAK.Size = New System.Drawing.Size(270, 35)
-        Me.BTNRUSAK.TabIndex = 53
-        Me.BTNRUSAK.Text = "     Barang Rusak"
-        Me.BTNRUSAK.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNRUSAK.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.BTNRUSAK.UseVisualStyleBackColor = True
-        '
-        'BTNRETURN
-        '
-        Me.BTNRETURN.FlatAppearance.BorderSize = 0
-        Me.BTNRETURN.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BTNRETURN.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BTNRETURN.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.BTNRETURN.Image = Global.Aplikasi_Kasir.My.Resources.Resources.transaksi
-        Me.BTNRETURN.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNRETURN.Location = New System.Drawing.Point(0, 553)
-        Me.BTNRETURN.Name = "BTNRETURN"
-        Me.BTNRETURN.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
-        Me.BTNRETURN.Size = New System.Drawing.Size(270, 35)
-        Me.BTNRETURN.TabIndex = 52
-        Me.BTNRETURN.Text = "     Barang Return"
-        Me.BTNRETURN.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNRETURN.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.BTNRETURN.UseVisualStyleBackColor = True
         '
         'FR_REPORT
         '

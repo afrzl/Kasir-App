@@ -7,7 +7,7 @@ Public Class FR_MASUK
 
     Sub BUKA_FORM(ByVal FR As Form)
         FR.Show()
-        Me.Hide()
+        Me.Close()
     End Sub
 
     Private Sub BTNEXIT_Click(sender As Object, e As EventArgs)
@@ -435,5 +435,13 @@ Public Class FR_MASUK
 
     Private Sub CBTAMPIL_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CBTAMPIL.SelectedIndexChanged
         TAMPIL()
+    End Sub
+
+    Private Sub BTNRETURN_Click(sender As Object, e As EventArgs) Handles BTNRETURN.Click
+        BUKA_FORM(FR_RETURN)
+    End Sub
+
+    Private Sub BTNRUSAK_Click(sender As Object, e As EventArgs) Handles BTNRUSAK.Click
+        BUKA_FORM(FR_RUSAK)
     End Sub
 End Class

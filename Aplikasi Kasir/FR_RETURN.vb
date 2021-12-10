@@ -280,4 +280,8 @@ Public Class FR_RETURN
             MsgBox("Data return barang berhasil dihapus")
         End If
     End Sub
+
+    Private Sub BTNRUSAK_Click(sender As Object, e As EventArgs) Handles BTNRUSAK.Click
+        BUKA_FORM(FR_RUSAK)
+    End Sub
 End Class

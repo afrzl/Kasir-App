@@ -271,6 +271,9 @@
     <EmbeddedResource Include="FR_DISKON.resx">
       <DependentUpon>FR_DISKON.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FR_DISKON.resx">
+      <DependentUpon>FR_DISKON.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FR_KASIR.resx">
       <DependentUpon>FR_KASIR.vb</DependentUpon>
     </EmbeddedResource>
@@ -304,11 +307,17 @@
     <EmbeddedResource Include="FR_REPORT.resx">
       <DependentUpon>FR_REPORT.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FR_REPORT.resx">
+      <DependentUpon>FR_REPORT.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FR_RETURN.resx">
       <DependentUpon>FR_RETURN.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FR_RUSAK.resx">
       <DependentUpon>FR_RUSAK.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FR_TENTANG.resx">
+      <DependentUpon>FR_TENTANG.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\licenses.licx" />
     <EmbeddedResource Include="My Project\Resources.resx">

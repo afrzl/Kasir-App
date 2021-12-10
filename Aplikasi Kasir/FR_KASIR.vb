@@ -6,7 +6,7 @@ Public Class FR_KASIR
 
     Sub BUKA_FORM(ByVal FR As Form)
         FR.Show()
-        Me.Hide()
+        Me.Close()
     End Sub
 
     Sub TAMPIL()
@@ -305,5 +305,13 @@ Public Class FR_KASIR
 
     Private Sub BTNTENTANG_Click(sender As Object, e As EventArgs) Handles BTNTENTANG.Click
         BUKA_FORM(FR_TENTANG)
+    End Sub
+
+    Private Sub BTNRETURN_Click(sender As Object, e As EventArgs) Handles BTNRETURN.Click
+        BUKA_FORM(FR_RETURN)
+    End Sub
+
+    Private Sub BTNRUSAK_Click(sender As Object, e As EventArgs) Handles BTNRUSAK.Click
+        BUKA_FORM(FR_RUSAK)
     End Sub
 End Class
