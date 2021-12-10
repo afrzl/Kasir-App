@@ -146,7 +146,7 @@ Public Class FR_KELUAR
         Dim STR As String
 
         STR = "SELECT Kode, RTRIM(Barang) as Barang, RTRIM(Satuan) as Satuan," &
-                "(SELECT COALESCE(SUM(Stok),0) FROM tbl_transaksi_child WHERE Kode=tbl_barang.Kode And LEFT(Id_trans,1)='M') as Stok" &
+                "(SELECT COALESCE(SUM(Stok),0) FROM tbl_transaksi_child WHERE Kode=tbl_barang.Kode And (LEFT(Id_trans,1)='M' or LEFT(Id_trans,1)='R' )) as Stok" &
                 " From tbl_barang WHERE kode='" & Kode & "'"
         Dim CMD As SqlCommand
         CMD = New SqlCommand(STR, CONN)
