@@ -81,8 +81,8 @@ Public Class FR_REPORT
                     " Harga AS 'Harga Partai'," &
                     " RTRIM(Stok) AS 'Stok Sisa'" &
                     " FROM tbl_transaksi_child WHERE LEFT(Id_trans, 1) = 'M'" &
-                    " AND (SELECT Tgl FROM tbl_transaksi_parent WHERE RTRIM(Id_trans) = rtrim(tbl_transaksi_child.Id_trans)) >= '" & Format(TXTTGLAWAL.Value, "yyyy-MM-dd") & "'" &
-                    " AND (SELECT Tgl FROM tbl_transaksi_parent WHERE RTRIM(Id_trans) = rtrim(tbl_transaksi_child.Id_trans)) <= '" & Format(TXTTGLAKHIR.Value, "yyyy-MM-dd") & "'" &
+                    " AND (SELECT Tgl FROM tbl_transaksi_parent WHERE RTRIM(Id_trans) = rtrim(tbl_transaksi_child.Id_trans)) >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd 00:00:00") & "'" &
+                    " AND (SELECT Tgl FROM tbl_transaksi_parent WHERE RTRIM(Id_trans) = rtrim(tbl_transaksi_child.Id_trans)) <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd 23:59:59") & "'" &
                     " ORDER BY Id ASC"
             Case 1
                 STR = "SELECT RTRIM(tbl_transaksi_child.Id_trans) AS 'ID Transaksi'," &

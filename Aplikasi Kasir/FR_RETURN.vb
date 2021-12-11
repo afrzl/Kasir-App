@@ -86,6 +86,7 @@ Public Class FR_RETURN
         CBKODE.DataSource = TBL
         CBKODE.DisplayMember = "Barang"
         CBKODE.ValueMember = "Kode"
+        CBKODE.SelectedIndex = -1
     End Sub
 
     Private Sub TXTID_TextChanged(sender As Object, e As EventArgs) Handles TXTID.TextChanged
@@ -140,9 +141,10 @@ Public Class FR_RETURN
         DGCARI.DataSource = Nothing
     End Sub
 
+    Dim JUMLAH As Integer = 0
     Private Sub CBKODE_TextChanged(sender As Object, e As EventArgs) Handles CBKODE.TextChanged
         On Error Resume Next
-        Dim STR As String = "SELECT Harga_akhir, Jumlah" &
+        Dim STR As String = "SELECT Harga_akhir, RTRIM(Jumlah) AS Jumlah" &
             " FROM tbl_transaksi_child WHERE Id_trans='" & TXTID.Text & "'" &
             " AND Kode = '" & CBKODE.SelectedValue & "'"
         Dim CMD As New SqlCommand(STR, CONN)
@@ -151,6 +153,7 @@ Public Class FR_RETURN
         If RD.HasRows Then
             RD.Read()
             TXTHARGA.Text = CInt(RD.Item("Harga_akhir") / RD.Item("Jumlah"))
+            JUMLAH = CInt(RD.Item("Jumlah"))
             RD.Close()
         Else
             RD.Close()
@@ -181,8 +184,17 @@ Public Class FR_RETURN
     End Sub
 
     Private Sub BTNSIMPAN_Click(sender As Object, e As EventArgs) Handles BTNSIMPAN.Click
-        If TXTID.Text = "" Or CBKODE.Text = "" Or TXTQTY.Text = "" Then
+        Dim QTY As Integer = 0
+        If TXTQTY.Text <> "" Then
+            QTY = CInt(TXTQTY.Text)
+        End If
+        If TXTID.Text = "" Or CBKODE.Text = "" Or QTY = 0 Then
             MsgBox("Data tidak lengkap!")
+            TXTID.Select()
+        ElseIf QTY > JUMLAH Then
+            MsgBox("QTY return melebihi dari QTY pada saat transaksi!")
+            TXTQTY.Clear()
+            TXTQTY.Select()
         Else
             Dim ID_TRANS As String = "R" + Mid(TXTID.Text, 2)
             Dim PEMBELI As String = ""

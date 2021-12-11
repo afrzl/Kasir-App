@@ -392,6 +392,10 @@ Public Class FR_KELUAR
                 MsgBox("Pembayaran Kurang!")
             End If
         End If
+
+        If Not ((e.KeyChar >= "0" And e.KeyChar <= "9") Or e.KeyChar = vbBack) Then
+            e.Handled = True
+        End If
     End Sub
 
     Private Sub TXTSUBTOTAL_TextChanged(sender As Object, e As EventArgs) Handles TXTSUBTOTAL.TextChanged
@@ -399,6 +403,10 @@ Public Class FR_KELUAR
     End Sub
 
     Private Sub TXTQTY_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTQTY.KeyPress
+        If Not ((e.KeyChar >= "0" And e.KeyChar <= "9") Or e.KeyChar = vbBack) Then
+            e.Handled = True
+        End If
+
         If e.KeyChar = Chr(13) Then
             Dim HARGA As Integer = 0
             If Not TXTHARGA.Text = "" Then
@@ -549,5 +557,11 @@ Public Class FR_KELUAR
     Private Sub BTNCARI_Click(sender As Object, e As EventArgs) Handles BTNCARI.Click
         FR_KELUAR_TAMPIL.Show()
         Me.Enabled = False
+    End Sub
+
+    Private Sub TXTDISKON_PERSEN_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTDISKON_PERSEN.KeyPress
+        If Not ((e.KeyChar >= "0" And e.KeyChar <= "9") Or e.KeyChar = vbBack) Then
+            e.Handled = True
+        End If
     End Sub
 End Class

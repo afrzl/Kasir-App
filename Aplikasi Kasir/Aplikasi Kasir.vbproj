@@ -271,9 +271,6 @@
     <EmbeddedResource Include="FR_DISKON.resx">
       <DependentUpon>FR_DISKON.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FR_DISKON.resx">
-      <DependentUpon>FR_DISKON.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="FR_KASIR.resx">
       <DependentUpon>FR_KASIR.vb</DependentUpon>
     </EmbeddedResource>
@@ -303,9 +300,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FR_PRODUK.resx">
       <DependentUpon>FR_PRODUK.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FR_REPORT.resx">
-      <DependentUpon>FR_REPORT.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FR_REPORT.resx">
       <DependentUpon>FR_REPORT.vb</DependentUpon>

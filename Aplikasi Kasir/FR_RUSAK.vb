@@ -77,6 +77,7 @@ Public Class FR_RUSAK
 
         DGTAMPIL.Columns(4).DefaultCellStyle.Format = "Rp ###,##"
         DGTAMPIL.Columns(4).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DGTAMPIL.Columns(5).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
     End Sub
 
     Sub TAMPIL_PNCARI()

@@ -233,6 +233,7 @@ Public Class FR_PRODUK
             TXTEND4.Clear()
             TXTSTART5.Clear()
             TXTHARGA5.Clear()
+            CBSATUAN.SelectedIndex = -1
         End If
         RD.Close()
     End Sub
@@ -329,6 +330,7 @@ Public Class FR_PRODUK
                 CMD.ExecuteNonQuery()
                 MsgBox("Data produk berhasil disimpan.")
                 TXTKODE.Clear()
+                TXTKODE.ReadOnly = False
                 TXTKODE.Select()
                 TAMPIL()
             End If
