@@ -184,9 +184,9 @@ Public Class FR_KELUAR
         TXTSUBTOTAL.Text = TOT_HARGA
 
         If Not LBTOTAL.Text = 0 Then
-            TXTBAYAR.ReadOnly = False
+            TXTBAYAR.Enabled = True
         Else
-            TXTBAYAR.ReadOnly = True
+            TXTBAYAR.Enabled = False
         End If
     End Sub
 
@@ -215,8 +215,8 @@ Public Class FR_KELUAR
 
     Private Sub DGTAMPIL_CellMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles DGTAMPIL.CellMouseClick
         On Error Resume Next
-        TXTKODE.ReadOnly = True
-        TXTQTY.ReadOnly = False
+        TXTKODE.Enabled = False
+        TXTQTY.Enabled = True
 
         TXTKODE.Text = DGTAMPIL.Rows(e.RowIndex).Cells("Kode").Value
         TXTHARGA.Text = DGTAMPIL.Rows(e.RowIndex).Cells("Harga").Value
@@ -428,8 +428,8 @@ Public Class FR_KELUAR
                 Next
                 DGTAMPIL.Rows.RemoveAt(BARIS_DATA)
                 TOTAL_HARGA()
-                TXTQTY.ReadOnly = True
-                TXTKODE.ReadOnly = False
+                TXTQTY.Enabled = False
+                TXTKODE.Enabled = True
                 TXTKODE.Clear()
                 TXTKODE.Select()
             Else
@@ -450,10 +450,10 @@ Public Class FR_KELUAR
                     TXTQTY.Select()
                 Else
                     MASUK_DATA()
-                    TXTKODE.ReadOnly = False
-                    TXTKODE.ReadOnly = False
+                    TXTKODE.Enabled = True
+                    TXTKODE.Enabled = True
                     TXTQTY.Text = QTY
-                    TXTQTY.ReadOnly = True
+                    TXTQTY.Enabled = False
                     TXTKODE.Clear()
                     TXTKODE.Select()
                 End If

@@ -289,9 +289,9 @@ Partial Class FR_KELUAR
         '
         'TXTDISKON
         '
+        Me.TXTDISKON.Enabled = False
         Me.TXTDISKON.Location = New System.Drawing.Point(1010, 55)
         Me.TXTDISKON.Name = "TXTDISKON"
-        Me.TXTDISKON.ReadOnly = True
         Me.TXTDISKON.Size = New System.Drawing.Size(89, 30)
         Me.TXTDISKON.TabIndex = 13
         '
@@ -306,9 +306,9 @@ Partial Class FR_KELUAR
         '
         'TXTTOTAL
         '
+        Me.TXTTOTAL.Enabled = False
         Me.TXTTOTAL.Location = New System.Drawing.Point(1304, 55)
         Me.TXTTOTAL.Name = "TXTTOTAL"
-        Me.TXTTOTAL.ReadOnly = True
         Me.TXTTOTAL.Size = New System.Drawing.Size(172, 30)
         Me.TXTTOTAL.TabIndex = 11
         '
@@ -323,9 +323,9 @@ Partial Class FR_KELUAR
         '
         'TXTQTY
         '
+        Me.TXTQTY.Enabled = False
         Me.TXTQTY.Location = New System.Drawing.Point(1157, 55)
         Me.TXTQTY.Name = "TXTQTY"
-        Me.TXTQTY.ReadOnly = True
         Me.TXTQTY.Size = New System.Drawing.Size(120, 30)
         Me.TXTQTY.TabIndex = 9
         '
@@ -353,25 +353,25 @@ Partial Class FR_KELUAR
         '
         'TXTHARGA
         '
+        Me.TXTHARGA.Enabled = False
         Me.TXTHARGA.Location = New System.Drawing.Point(811, 55)
         Me.TXTHARGA.Name = "TXTHARGA"
-        Me.TXTHARGA.ReadOnly = True
         Me.TXTHARGA.Size = New System.Drawing.Size(172, 30)
         Me.TXTHARGA.TabIndex = 7
         '
         'TXTSATUAN
         '
+        Me.TXTSATUAN.Enabled = False
         Me.TXTSATUAN.Location = New System.Drawing.Point(664, 55)
         Me.TXTSATUAN.Name = "TXTSATUAN"
-        Me.TXTSATUAN.ReadOnly = True
         Me.TXTSATUAN.Size = New System.Drawing.Size(120, 30)
         Me.TXTSATUAN.TabIndex = 6
         '
         'TXTBARANG
         '
+        Me.TXTBARANG.Enabled = False
         Me.TXTBARANG.Location = New System.Drawing.Point(271, 55)
         Me.TXTBARANG.Name = "TXTBARANG"
-        Me.TXTBARANG.ReadOnly = True
         Me.TXTBARANG.Size = New System.Drawing.Size(366, 30)
         Me.TXTBARANG.TabIndex = 5
         '
@@ -457,20 +457,20 @@ Partial Class FR_KELUAR
         '
         'TXTTOTALHARGA
         '
+        Me.TXTTOTALHARGA.Enabled = False
         Me.TXTTOTALHARGA.Font = New System.Drawing.Font("Segoe UI", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TXTTOTALHARGA.Location = New System.Drawing.Point(174, 123)
         Me.TXTTOTALHARGA.Name = "TXTTOTALHARGA"
-        Me.TXTTOTALHARGA.ReadOnly = True
         Me.TXTTOTALHARGA.Size = New System.Drawing.Size(262, 31)
         Me.TXTTOTALHARGA.TabIndex = 17
         Me.TXTTOTALHARGA.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'TXTDISKON_RUPIAH
         '
+        Me.TXTDISKON_RUPIAH.Enabled = False
         Me.TXTDISKON_RUPIAH.Font = New System.Drawing.Font("Segoe UI", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TXTDISKON_RUPIAH.Location = New System.Drawing.Point(280, 77)
         Me.TXTDISKON_RUPIAH.Name = "TXTDISKON_RUPIAH"
-        Me.TXTDISKON_RUPIAH.ReadOnly = True
         Me.TXTDISKON_RUPIAH.Size = New System.Drawing.Size(156, 31)
         Me.TXTDISKON_RUPIAH.TabIndex = 16
         Me.TXTDISKON_RUPIAH.Text = "0"
@@ -518,10 +518,10 @@ Partial Class FR_KELUAR
         '
         'TXTSUBTOTAL
         '
+        Me.TXTSUBTOTAL.Enabled = False
         Me.TXTSUBTOTAL.Font = New System.Drawing.Font("Segoe UI", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TXTSUBTOTAL.Location = New System.Drawing.Point(174, 31)
         Me.TXTSUBTOTAL.Name = "TXTSUBTOTAL"
-        Me.TXTSUBTOTAL.ReadOnly = True
         Me.TXTSUBTOTAL.Size = New System.Drawing.Size(262, 31)
         Me.TXTSUBTOTAL.TabIndex = 11
         Me.TXTSUBTOTAL.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -552,10 +552,10 @@ Partial Class FR_KELUAR
         '
         'TXTKEMBALIAN
         '
+        Me.TXTKEMBALIAN.Enabled = False
         Me.TXTKEMBALIAN.Font = New System.Drawing.Font("DS-Digital", 24.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TXTKEMBALIAN.Location = New System.Drawing.Point(164, 100)
         Me.TXTKEMBALIAN.Name = "TXTKEMBALIAN"
-        Me.TXTKEMBALIAN.ReadOnly = True
         Me.TXTKEMBALIAN.Size = New System.Drawing.Size(286, 47)
         Me.TXTKEMBALIAN.TabIndex = 13
         Me.TXTKEMBALIAN.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -572,10 +572,10 @@ Partial Class FR_KELUAR
         '
         'TXTBAYAR
         '
+        Me.TXTBAYAR.Enabled = False
         Me.TXTBAYAR.Font = New System.Drawing.Font("DS-Digital", 24.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TXTBAYAR.Location = New System.Drawing.Point(164, 39)
         Me.TXTBAYAR.Name = "TXTBAYAR"
-        Me.TXTBAYAR.ReadOnly = True
         Me.TXTBAYAR.Size = New System.Drawing.Size(286, 47)
         Me.TXTBAYAR.TabIndex = 11
         Me.TXTBAYAR.TextAlign = System.Windows.Forms.HorizontalAlignment.Right

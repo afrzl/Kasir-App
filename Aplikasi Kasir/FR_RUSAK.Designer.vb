@@ -43,6 +43,8 @@ Partial Class FR_RUSAK
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.TXTCARI = New System.Windows.Forms.TextBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.TXTSTOK = New System.Windows.Forms.TextBox()
         Me.TXTKODE = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.TXTBARANG = New System.Windows.Forms.TextBox()
@@ -239,7 +241,7 @@ Partial Class FR_RUSAK
         Me.DGTAMPIL.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
         DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
         DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
         DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
@@ -252,7 +254,7 @@ Partial Class FR_RUSAK
         Me.DGTAMPIL.ReadOnly = True
         DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText
         DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
         DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
@@ -272,12 +274,12 @@ Partial Class FR_RUSAK
         Me.ContextMenuStrip1.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.HapusToolStripMenuItem})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(211, 56)
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(121, 28)
         '
         'HapusToolStripMenuItem
         '
         Me.HapusToolStripMenuItem.Name = "HapusToolStripMenuItem"
-        Me.HapusToolStripMenuItem.Size = New System.Drawing.Size(210, 24)
+        Me.HapusToolStripMenuItem.Size = New System.Drawing.Size(120, 24)
         Me.HapusToolStripMenuItem.Text = "Hapus"
         '
         'Panel3
@@ -301,6 +303,8 @@ Partial Class FR_RUSAK
         '
         'Panel2
         '
+        Me.Panel2.Controls.Add(Me.Label10)
+        Me.Panel2.Controls.Add(Me.TXTSTOK)
         Me.Panel2.Controls.Add(Me.TXTKODE)
         Me.Panel2.Controls.Add(Me.Label9)
         Me.Panel2.Controls.Add(Me.TXTBARANG)
@@ -320,8 +324,29 @@ Partial Class FR_RUSAK
         Me.Panel2.Size = New System.Drawing.Size(518, 728)
         Me.Panel2.TabIndex = 20
         '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label10.Location = New System.Drawing.Point(10, 256)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(40, 23)
+        Me.Label10.TabIndex = 22
+        Me.Label10.Text = "QTY"
+        '
+        'TXTSTOK
+        '
+        Me.TXTSTOK.Enabled = False
+        Me.TXTSTOK.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TXTSTOK.Location = New System.Drawing.Point(151, 204)
+        Me.TXTSTOK.Name = "TXTSTOK"
+        Me.TXTSTOK.ReadOnly = True
+        Me.TXTSTOK.Size = New System.Drawing.Size(214, 30)
+        Me.TXTSTOK.TabIndex = 23
+        '
         'TXTKODE
         '
+        Me.TXTKODE.Enabled = False
         Me.TXTKODE.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TXTKODE.Location = New System.Drawing.Point(151, 58)
         Me.TXTKODE.Name = "TXTKODE"
@@ -341,6 +366,7 @@ Partial Class FR_RUSAK
         '
         'TXTBARANG
         '
+        Me.TXTBARANG.Enabled = False
         Me.TXTBARANG.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TXTBARANG.Location = New System.Drawing.Point(151, 105)
         Me.TXTBARANG.Name = "TXTBARANG"
@@ -360,6 +386,7 @@ Partial Class FR_RUSAK
         '
         'TXTHARGA
         '
+        Me.TXTHARGA.Enabled = False
         Me.TXTHARGA.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TXTHARGA.Location = New System.Drawing.Point(151, 155)
         Me.TXTHARGA.Name = "TXTHARGA"
@@ -434,7 +461,7 @@ Partial Class FR_RUSAK
         Me.BTNSIMPAN.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.BTNSIMPAN.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BTNSIMPAN.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.BTNSIMPAN.Location = New System.Drawing.Point(151, 280)
+        Me.BTNSIMPAN.Location = New System.Drawing.Point(151, 318)
         Me.BTNSIMPAN.Name = "BTNSIMPAN"
         Me.BTNSIMPAN.Size = New System.Drawing.Size(189, 50)
         Me.BTNSIMPAN.TabIndex = 5
@@ -475,14 +502,14 @@ Partial Class FR_RUSAK
         Me.Label8.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label8.Location = New System.Drawing.Point(10, 208)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(40, 23)
+        Me.Label8.Size = New System.Drawing.Size(76, 23)
         Me.Label8.TabIndex = 2
-        Me.Label8.Text = "QTY"
+        Me.Label8.Text = "Sisa Stok"
         '
         'TXTQTY
         '
         Me.TXTQTY.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TXTQTY.Location = New System.Drawing.Point(151, 205)
+        Me.TXTQTY.Location = New System.Drawing.Point(151, 252)
         Me.TXTQTY.Name = "TXTQTY"
         Me.TXTQTY.Size = New System.Drawing.Size(214, 30)
         Me.TXTQTY.TabIndex = 2
@@ -807,4 +834,6 @@ Partial Class FR_RUSAK
     Friend WithEvents TXTBARANG As TextBox
     Friend WithEvents TXTKODE As TextBox
     Friend WithEvents Label9 As Label
+    Friend WithEvents Label10 As Label
+    Friend WithEvents TXTSTOK As TextBox
 End Class

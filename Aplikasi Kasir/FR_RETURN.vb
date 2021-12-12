@@ -296,4 +296,8 @@ Public Class FR_RETURN
     Private Sub BTNRUSAK_Click(sender As Object, e As EventArgs) Handles BTNRUSAK.Click
         BUKA_FORM(FR_RUSAK)
     End Sub
+
+    Private Sub BTNMASUK_Click(sender As Object, e As EventArgs) Handles BTNMASUK.Click
+        BUKA_FORM(FR_MASUK)
+    End Sub
 End Class

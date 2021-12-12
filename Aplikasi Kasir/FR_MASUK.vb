@@ -51,6 +51,7 @@ Public Class FR_MASUK
             STR = "SELECT RTRIM(Id_trans) AS 'ID Transaksi'," &
             " RTRIM(Kode) AS 'Kode Barang'," &
             " (SELECT RTRIM(Barang) FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) AS 'Nama Barang'," &
+            " RTRIM((SELECT Person FROM tbl_transaksi_parent WHERE RTRIM(tbl_transaksi_parent.Id_trans) = RTRIM(tbl_transaksi_child.Id_trans))) as 'Supplier'," &
             " Jumlah as 'Stok Masuk'," &
             " Harga AS 'Harga Partai'," &
             " Stok AS 'Stok Sisa'" &
@@ -61,6 +62,7 @@ Public Class FR_MASUK
             STR = "SELECT RTRIM(Id_trans) AS 'ID Transaksi'," &
             " RTRIM(Kode) AS 'Kode Barang'," &
             " (SELECT RTRIM(Barang) FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) AS 'Nama Barang'," &
+            " RTRIM((SELECT Person FROM tbl_transaksi_parent WHERE RTRIM(tbl_transaksi_parent.Id_trans) = RTRIM(tbl_transaksi_child.Id_trans))) as 'Supplier'," &
             " Jumlah as 'Stok Masuk'," &
             " Harga AS 'Harga Partai'," &
             " Stok AS 'Stok Sisa'" &
@@ -72,6 +74,7 @@ Public Class FR_MASUK
             STR = "SELECT RTRIM(Id_trans) AS 'ID Transaksi'," &
             " RTRIM(Kode) AS 'Kode Barang'," &
             " (SELECT RTRIM(Barang) FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) AS 'Nama Barang'," &
+            " RTRIM((SELECT Person FROM tbl_transaksi_parent WHERE RTRIM(tbl_transaksi_parent.Id_trans) = RTRIM(tbl_transaksi_child.Id_trans))) as 'Supplier'," &
             " Jumlah as 'Stok Masuk'," &
             " Harga AS 'Harga Partai'," &
             " Stok AS 'Stok Sisa'" &
@@ -83,6 +86,7 @@ Public Class FR_MASUK
             STR = "SELECT RTRIM(Id_trans) AS 'ID Transaksi'," &
             " RTRIM(Kode) AS 'Kode Barang'," &
             " (SELECT RTRIM(Barang) FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) AS 'Nama Barang'," &
+            " RTRIM((SELECT Person FROM tbl_transaksi_parent WHERE RTRIM(tbl_transaksi_parent.Id_trans) = RTRIM(tbl_transaksi_child.Id_trans))) as 'Supplier'," &
             " Jumlah as 'Stok Masuk'," &
             " Harga AS 'Harga Partai'," &
             " Stok AS 'Stok Sisa'" &
@@ -96,7 +100,7 @@ Public Class FR_MASUK
         DA.Fill(TBL, START_RECORD, TAMPIL_RECORD, 0)
         DGTAMPIL.DataSource = TBL.Tables(0)
 
-        DGTAMPIL.Columns(4).DefaultCellStyle.Format = "Rp ###,##"
+        DGTAMPIL.Columns(5).DefaultCellStyle.Format = "Rp ###,##"
 
         DGTAMPIL.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
         DGTAMPIL.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
@@ -104,10 +108,11 @@ Public Class FR_MASUK
         DGTAMPIL.Columns(3).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
         DGTAMPIL.Columns(4).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
         DGTAMPIL.Columns(5).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+        DGTAMPIL.Columns(6).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
 
-        DGTAMPIL.Columns(3).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-        DGTAMPIL.Columns(4).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        DGTAMPIL.Columns(5).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DGTAMPIL.Columns(4).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DGTAMPIL.Columns(5).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DGTAMPIL.Columns(6).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
 
         BTNPREV.Enabled = True
         BTNNEXT.Enabled = True
