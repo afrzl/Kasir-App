@@ -44,7 +44,7 @@ Public Class FR_KASIR
 
     Private Function AUTOID() As String
         Dim ID_AWAL As String = Format(TXTTGL.Value, "yyyyMMdd")
-        Dim STR As String = "SELECT TOP 1 Id FROM tbl_karyawan WHERE LEFT(Id, 8) = '" & ID_AWAL & "' ORDER BY Id DESC"
+        Dim STR As String = "SELECT TOP 1 Id FROM tbl_karyawan ORDER BY Id DESC"
         Dim CMD As SqlCommand
         CMD = New SqlCommand(STR, CONN)
         Dim RD As SqlDataReader
