@@ -81,7 +81,8 @@ Public Class FR_MENU
     Sub TAMPIL()
         Dim STR As String = "SELECT RTRIM(Kode) AS Kode," &
             " RTRIM(Barang) As 'Nama Barang'," &
-            " (SELECT COALESCE(SUM(Stok),0) FROM tbl_transaksi_child WHERE RTRIM(tbl_transaksi_child.Kode) = RTRIM(tbl_barang.Kode) AND (LEFT(Id_trans,1)='M' or LEFT(Id_trans,1)='R')) AS Stok" &
+            " (SELECT COALESCE(SUM(Stok),0) FROM tbl_transaksi_child WHERE RTRIM(tbl_transaksi_child.Kode) = RTRIM(tbl_barang.Kode) AND (LEFT(Id_trans,1)='M' or LEFT(Id_trans,1)='R')) AS Stok," &
+            " RTRIM(tbl_barang.Satuan) AS 'Satuan'" &
             " FROM tbl_barang WHERE Barang Like '%" & TXTCARISTOK.Text & "%'" &
             " AND (SELECT COALESCE(SUM(Stok),0) FROM tbl_transaksi_child WHERE RTRIM(tbl_transaksi_child.Kode) = RTRIM(tbl_barang.Kode) AND (LEFT(Id_trans,1)='M' or LEFT(Id_trans,1)='R')) != 0"
         Dim DA As SqlDataAdapter
@@ -92,6 +93,11 @@ Public Class FR_MENU
         DGSTOK.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
         DGSTOK.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
         DGSTOK.Columns(2).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+        DGSTOK.Columns(3).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+
+        DGSTOK.Columns(2).DefaultCellStyle.Format = "###.##"
+        DGSTOK.Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DGSTOK.Columns(3).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
     End Sub
 
     Private Sub TXTCARISTOK_TextChanged(sender As Object, e As EventArgs) Handles TXTCARISTOK.TextChanged

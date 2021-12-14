@@ -25,6 +25,7 @@ Partial Class FR_KELUAR
         Me.components = New System.ComponentModel.Container()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.PNATAS = New System.Windows.Forms.Panel()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
@@ -40,6 +41,7 @@ Partial Class FR_KELUAR
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.LBTOTAL = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.BTNCANCEL = New System.Windows.Forms.Button()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.TXTDISKON = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -79,8 +81,6 @@ Partial Class FR_KELUAR
         Me.QTY = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Diskon = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TOTAL = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CLICK_KANAN = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.HapusBarangToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PEWAKTU = New System.Windows.Forms.Timer(Me.components)
         Me.PRINTNOTA = New System.Drawing.Printing.PrintDocument()
         Me.PNATAS.SuspendLayout()
@@ -94,7 +94,6 @@ Partial Class FR_KELUAR
         Me.GroupBox6.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
         CType(Me.DGTAMPIL, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.CLICK_KANAN.SuspendLayout()
         Me.SuspendLayout()
         '
         'PNATAS
@@ -254,6 +253,7 @@ Partial Class FR_KELUAR
         '
         Me.GroupBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox1.Controls.Add(Me.BTNCANCEL)
         Me.GroupBox1.Controls.Add(Me.Label6)
         Me.GroupBox1.Controls.Add(Me.TXTDISKON)
         Me.GroupBox1.Controls.Add(Me.Label5)
@@ -277,6 +277,20 @@ Partial Class FR_KELUAR
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Data Barang"
+        '
+        'BTNCANCEL
+        '
+        Me.BTNCANCEL.BackColor = System.Drawing.Color.Crimson
+        Me.BTNCANCEL.FlatAppearance.BorderSize = 0
+        Me.BTNCANCEL.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNCANCEL.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BTNCANCEL.Location = New System.Drawing.Point(11, 92)
+        Me.BTNCANCEL.Name = "BTNCANCEL"
+        Me.BTNCANCEL.Size = New System.Drawing.Size(109, 33)
+        Me.BTNCANCEL.TabIndex = 15
+        Me.BTNCANCEL.Text = "Cancel (Esc)"
+        Me.BTNCANCEL.UseVisualStyleBackColor = False
+        Me.BTNCANCEL.Visible = False
         '
         'Label6
         '
@@ -498,6 +512,7 @@ Partial Class FR_KELUAR
         '
         'TXTDISKON_PERSEN
         '
+        Me.TXTDISKON_PERSEN.Enabled = False
         Me.TXTDISKON_PERSEN.Font = New System.Drawing.Font("Segoe UI", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TXTDISKON_PERSEN.Location = New System.Drawing.Point(174, 77)
         Me.TXTDISKON_PERSEN.Name = "TXTDISKON_PERSEN"
@@ -586,10 +601,13 @@ Partial Class FR_KELUAR
         Me.DGTAMPIL.AllowUserToDeleteRows = False
         Me.DGTAMPIL.AllowUserToResizeColumns = False
         Me.DGTAMPIL.AllowUserToResizeRows = False
+        Me.DGTAMPIL.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DGTAMPIL.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
         DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
         DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
@@ -597,13 +615,23 @@ Partial Class FR_KELUAR
         Me.DGTAMPIL.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.DGTAMPIL.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGTAMPIL.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.KODE, Me.BARANG, Me.SATUAN, Me.HARGA, Me.QTY, Me.Diskon, Me.TOTAL})
-        Me.DGTAMPIL.Dock = System.Windows.Forms.DockStyle.Fill
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DGTAMPIL.DefaultCellStyle = DataGridViewCellStyle2
         Me.DGTAMPIL.Location = New System.Drawing.Point(0, 322)
+        Me.DGTAMPIL.MultiSelect = False
         Me.DGTAMPIL.Name = "DGTAMPIL"
+        Me.DGTAMPIL.ReadOnly = True
         Me.DGTAMPIL.RowHeadersVisible = False
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DGTAMPIL.RowsDefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DGTAMPIL.RowsDefaultCellStyle = DataGridViewCellStyle3
         Me.DGTAMPIL.RowTemplate.Height = 30
+        Me.DGTAMPIL.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DGTAMPIL.Size = New System.Drawing.Size(1366, 252)
         Me.DGTAMPIL.TabIndex = 2
         '
@@ -612,7 +640,7 @@ Partial Class FR_KELUAR
         Me.KODE.HeaderText = "KODE"
         Me.KODE.Name = "KODE"
         Me.KODE.ReadOnly = True
-        Me.KODE.Width = 94
+        Me.KODE.Width = 83
         '
         'BARANG
         '
@@ -640,13 +668,14 @@ Partial Class FR_KELUAR
         Me.QTY.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
         Me.QTY.HeaderText = "QTY"
         Me.QTY.Name = "QTY"
+        Me.QTY.ReadOnly = True
         '
         'Diskon
         '
         Me.Diskon.HeaderText = "DISKON"
         Me.Diskon.Name = "Diskon"
         Me.Diskon.ReadOnly = True
-        Me.Diskon.Width = 113
+        Me.Diskon.Width = 102
         '
         'TOTAL
         '
@@ -654,19 +683,6 @@ Partial Class FR_KELUAR
         Me.TOTAL.HeaderText = "TOTAL"
         Me.TOTAL.Name = "TOTAL"
         Me.TOTAL.ReadOnly = True
-        '
-        'CLICK_KANAN
-        '
-        Me.CLICK_KANAN.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.CLICK_KANAN.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.HapusBarangToolStripMenuItem})
-        Me.CLICK_KANAN.Name = "CLICK_KANAN"
-        Me.CLICK_KANAN.Size = New System.Drawing.Size(172, 28)
-        '
-        'HapusBarangToolStripMenuItem
-        '
-        Me.HapusBarangToolStripMenuItem.Name = "HapusBarangToolStripMenuItem"
-        Me.HapusBarangToolStripMenuItem.Size = New System.Drawing.Size(171, 24)
-        Me.HapusBarangToolStripMenuItem.Text = "Hapus Barang"
         '
         'PEWAKTU
         '
@@ -704,7 +720,6 @@ Partial Class FR_KELUAR
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
         CType(Me.DGTAMPIL, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.CLICK_KANAN.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -725,8 +740,6 @@ Partial Class FR_KELUAR
     Friend WithEvents PNBAWAH As Panel
     Friend WithEvents DGTAMPIL As DataGridView
     Friend WithEvents Panel1 As Panel
-    Friend WithEvents CLICK_KANAN As ContextMenuStrip
-    Friend WithEvents HapusBarangToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents Label8 As Label
     Friend WithEvents TXTKASIR As TextBox
     Friend WithEvents TXTPEMBELI As TextBox
@@ -767,4 +780,5 @@ Partial Class FR_KELUAR
     Friend WithEvents Diskon As DataGridViewTextBoxColumn
     Friend WithEvents TOTAL As DataGridViewTextBoxColumn
     Friend WithEvents PRINTNOTA As Printing.PrintDocument
+    Friend WithEvents BTNCANCEL As Button
 End Class

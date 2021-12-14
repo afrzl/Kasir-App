@@ -686,8 +686,8 @@ Partial Class FR_RETURN
         '
         'FR_RETURN
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 23.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(120.0!, 120.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.ClientSize = New System.Drawing.Size(1366, 768)
         Me.Controls.Add(Me.PNCONTENT)
         Me.Controls.Add(Me.PNLEFT)

@@ -23,10 +23,10 @@ Partial Class FR_DISKON
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.DGTAMPIL = New System.Windows.Forms.DataGridView()
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.HapusToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -34,7 +34,6 @@ Partial Class FR_DISKON
         Me.CBTAMPIL = New System.Windows.Forms.ComboBox()
         Me.BTNNEXT = New System.Windows.Forms.Button()
         Me.BTNPREV = New System.Windows.Forms.Button()
-        Me.TXTCARI = New System.Windows.Forms.TextBox()
         Me.PNCARI = New System.Windows.Forms.Panel()
         Me.DGCARI = New System.Windows.Forms.DataGridView()
         Me.TXTCARI_BARANG = New System.Windows.Forms.TextBox()
@@ -42,13 +41,17 @@ Partial Class FR_DISKON
         Me.Label7 = New System.Windows.Forms.Label()
         Me.LBBARANG = New System.Windows.Forms.Label()
         Me.BTNCARI = New System.Windows.Forms.Button()
-        Me.BTNSTOK = New System.Windows.Forms.Button()
+        Me.BTNSIMPAN = New System.Windows.Forms.Button()
         Me.TXTKODE = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.PNCONTENT = New System.Windows.Forms.Panel()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.TXTMIN = New System.Windows.Forms.TextBox()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.CBJENIS = New System.Windows.Forms.ComboBox()
+        Me.Label11 = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.TXTDISKON = New System.Windows.Forms.TextBox()
         Me.Label13 = New System.Windows.Forms.Label()
@@ -103,30 +106,30 @@ Partial Class FR_DISKON
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DGTAMPIL.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DGTAMPIL.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DGTAMPIL.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle5
         Me.DGTAMPIL.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGTAMPIL.ContextMenuStrip = Me.ContextMenuStrip1
         Me.DGTAMPIL.Location = New System.Drawing.Point(532, 98)
         Me.DGTAMPIL.Name = "DGTAMPIL"
         Me.DGTAMPIL.ReadOnly = True
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DGTAMPIL.RowHeadersDefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DGTAMPIL.RowHeadersDefaultCellStyle = DataGridViewCellStyle6
         Me.DGTAMPIL.RowHeadersVisible = False
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DGTAMPIL.RowsDefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle7.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.DGTAMPIL.RowsDefaultCellStyle = DataGridViewCellStyle7
         Me.DGTAMPIL.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.DGTAMPIL.RowTemplate.Height = 30
         Me.DGTAMPIL.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
@@ -151,7 +154,6 @@ Partial Class FR_DISKON
         Me.Panel3.Controls.Add(Me.CBTAMPIL)
         Me.Panel3.Controls.Add(Me.BTNNEXT)
         Me.Panel3.Controls.Add(Me.BTNPREV)
-        Me.Panel3.Controls.Add(Me.TXTCARI)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel3.Location = New System.Drawing.Point(517, 40)
         Me.Panel3.Name = "Panel3"
@@ -165,9 +167,9 @@ Partial Class FR_DISKON
         Me.CBTAMPIL.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.CBTAMPIL.FormattingEnabled = True
         Me.CBTAMPIL.Items.AddRange(New Object() {"Semua", "Berlalu", "Sekarang", "Akan Datang"})
-        Me.CBTAMPIL.Location = New System.Drawing.Point(329, 15)
+        Me.CBTAMPIL.Location = New System.Drawing.Point(15, 15)
         Me.CBTAMPIL.Name = "CBTAMPIL"
-        Me.CBTAMPIL.Size = New System.Drawing.Size(121, 31)
+        Me.CBTAMPIL.Size = New System.Drawing.Size(435, 31)
         Me.CBTAMPIL.TabIndex = 20
         '
         'BTNNEXT
@@ -200,16 +202,6 @@ Partial Class FR_DISKON
         Me.BTNPREV.Text = "<"
         Me.BTNPREV.UseVisualStyleBackColor = False
         '
-        'TXTCARI
-        '
-        Me.TXTCARI.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TXTCARI.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TXTCARI.Location = New System.Drawing.Point(15, 15)
-        Me.TXTCARI.Name = "TXTCARI"
-        Me.TXTCARI.Size = New System.Drawing.Size(308, 30)
-        Me.TXTCARI.TabIndex = 9
-        '
         'PNCARI
         '
         Me.PNCARI.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
@@ -236,8 +228,8 @@ Partial Class FR_DISKON
         Me.DGCARI.Name = "DGCARI"
         Me.DGCARI.ReadOnly = True
         Me.DGCARI.RowHeadersVisible = False
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DGCARI.RowsDefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.DGCARI.RowsDefaultCellStyle = DataGridViewCellStyle1
         Me.DGCARI.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.DGCARI.RowTemplate.Height = 30
         Me.DGCARI.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
@@ -258,31 +250,34 @@ Partial Class FR_DISKON
         '
         Me.LBSATUAN.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LBSATUAN.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LBSATUAN.Location = New System.Drawing.Point(151, 96)
+        Me.LBSATUAN.Location = New System.Drawing.Point(151, 145)
         Me.LBSATUAN.Name = "LBSATUAN"
         Me.LBSATUAN.Size = New System.Drawing.Size(343, 26)
         Me.LBSATUAN.TabIndex = 14
         Me.LBSATUAN.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.LBSATUAN.Visible = False
         '
         'Label7
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(10, 99)
+        Me.Label7.Location = New System.Drawing.Point(10, 148)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(63, 23)
         Me.Label7.TabIndex = 13
         Me.Label7.Text = "Satuan"
+        Me.Label7.Visible = False
         '
         'LBBARANG
         '
         Me.LBBARANG.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LBBARANG.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LBBARANG.Location = New System.Drawing.Point(151, 55)
+        Me.LBBARANG.Location = New System.Drawing.Point(151, 104)
         Me.LBBARANG.Name = "LBBARANG"
         Me.LBBARANG.Size = New System.Drawing.Size(343, 26)
         Me.LBBARANG.TabIndex = 11
         Me.LBBARANG.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.LBBARANG.Visible = False
         '
         'BTNCARI
         '
@@ -291,64 +286,70 @@ Partial Class FR_DISKON
         Me.BTNCARI.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.BTNCARI.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BTNCARI.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.BTNCARI.Location = New System.Drawing.Point(371, 12)
+        Me.BTNCARI.Location = New System.Drawing.Point(371, 61)
         Me.BTNCARI.Name = "BTNCARI"
         Me.BTNCARI.Size = New System.Drawing.Size(123, 30)
         Me.BTNCARI.TabIndex = 10
         Me.BTNCARI.Text = "Cari (F1)"
         Me.BTNCARI.UseVisualStyleBackColor = False
+        Me.BTNCARI.Visible = False
         '
-        'BTNSTOK
+        'BTNSIMPAN
         '
-        Me.BTNSTOK.BackColor = System.Drawing.Color.DarkGreen
-        Me.BTNSTOK.FlatAppearance.BorderSize = 0
-        Me.BTNSTOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BTNSTOK.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BTNSTOK.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.BTNSTOK.Location = New System.Drawing.Point(151, 279)
-        Me.BTNSTOK.Name = "BTNSTOK"
-        Me.BTNSTOK.Size = New System.Drawing.Size(189, 51)
-        Me.BTNSTOK.TabIndex = 5
-        Me.BTNSTOK.Text = "Simpan Diskon"
-        Me.BTNSTOK.UseVisualStyleBackColor = False
+        Me.BTNSIMPAN.BackColor = System.Drawing.Color.DarkGreen
+        Me.BTNSIMPAN.FlatAppearance.BorderSize = 0
+        Me.BTNSIMPAN.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNSIMPAN.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNSIMPAN.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BTNSIMPAN.Location = New System.Drawing.Point(151, 242)
+        Me.BTNSIMPAN.Name = "BTNSIMPAN"
+        Me.BTNSIMPAN.Size = New System.Drawing.Size(189, 51)
+        Me.BTNSIMPAN.TabIndex = 5
+        Me.BTNSIMPAN.Text = "Simpan Diskon"
+        Me.BTNSIMPAN.UseVisualStyleBackColor = False
+        Me.BTNSIMPAN.Visible = False
         '
         'TXTKODE
         '
         Me.TXTKODE.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TXTKODE.Location = New System.Drawing.Point(151, 12)
+        Me.TXTKODE.Location = New System.Drawing.Point(151, 61)
         Me.TXTKODE.Name = "TXTKODE"
         Me.TXTKODE.Size = New System.Drawing.Size(214, 30)
         Me.TXTKODE.TabIndex = 1
+        Me.TXTKODE.Visible = False
         '
         'Label5
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(10, 15)
+        Me.Label5.Location = New System.Drawing.Point(10, 64)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(108, 23)
         Me.Label5.TabIndex = 0
         Me.Label5.Text = "Kode Barang"
+        Me.Label5.Visible = False
         '
         'Label6
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(10, 58)
+        Me.Label6.Location = New System.Drawing.Point(10, 107)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(115, 23)
         Me.Label6.TabIndex = 1
         Me.Label6.Text = "Nama Barang"
+        Me.Label6.Visible = False
         '
         'Label10
         '
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(10, 184)
+        Me.Label10.Location = New System.Drawing.Point(10, 147)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(105, 23)
         Me.Label10.TabIndex = 4
         Me.Label10.Text = "Akhir Diskon"
+        Me.Label10.Visible = False
         '
         'PNCONTENT
         '
@@ -364,6 +365,10 @@ Partial Class FR_DISKON
         '
         'Panel2
         '
+        Me.Panel2.Controls.Add(Me.TXTMIN)
+        Me.Panel2.Controls.Add(Me.Label12)
+        Me.Panel2.Controls.Add(Me.CBJENIS)
+        Me.Panel2.Controls.Add(Me.Label11)
         Me.Panel2.Controls.Add(Me.Label14)
         Me.Panel2.Controls.Add(Me.TXTDISKON)
         Me.Panel2.Controls.Add(Me.Label13)
@@ -374,69 +379,115 @@ Partial Class FR_DISKON
         Me.Panel2.Controls.Add(Me.Label7)
         Me.Panel2.Controls.Add(Me.LBBARANG)
         Me.Panel2.Controls.Add(Me.BTNCARI)
-        Me.Panel2.Controls.Add(Me.BTNSTOK)
+        Me.Panel2.Controls.Add(Me.BTNSIMPAN)
         Me.Panel2.Controls.Add(Me.TXTKODE)
         Me.Panel2.Controls.Add(Me.Label5)
-        Me.Panel2.Controls.Add(Me.Label6)
         Me.Panel2.Controls.Add(Me.Label9)
         Me.Panel2.Controls.Add(Me.Label10)
+        Me.Panel2.Controls.Add(Me.Label6)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Left
         Me.Panel2.Location = New System.Drawing.Point(0, 40)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(517, 728)
         Me.Panel2.TabIndex = 20
         '
+        'TXTMIN
+        '
+        Me.TXTMIN.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TXTMIN.Location = New System.Drawing.Point(151, 61)
+        Me.TXTMIN.Name = "TXTMIN"
+        Me.TXTMIN.Size = New System.Drawing.Size(343, 30)
+        Me.TXTMIN.TabIndex = 26
+        Me.TXTMIN.Visible = False
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label12.Location = New System.Drawing.Point(10, 65)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(128, 23)
+        Me.Label12.TabIndex = 25
+        Me.Label12.Text = "Minimum Trans"
+        Me.Label12.Visible = False
+        '
+        'CBJENIS
+        '
+        Me.CBJENIS.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CBJENIS.FormattingEnabled = True
+        Me.CBJENIS.Items.AddRange(New Object() {"Diskon Barang", "Diskon Transaksi"})
+        Me.CBJENIS.Location = New System.Drawing.Point(151, 19)
+        Me.CBJENIS.Name = "CBJENIS"
+        Me.CBJENIS.Size = New System.Drawing.Size(343, 31)
+        Me.CBJENIS.TabIndex = 24
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label11.Location = New System.Drawing.Point(10, 23)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(102, 23)
+        Me.Label11.TabIndex = 23
+        Me.Label11.Text = "Jenis Diskon"
+        '
         'Label14
         '
         Me.Label14.AutoSize = True
         Me.Label14.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label14.Location = New System.Drawing.Point(213, 229)
+        Me.Label14.Location = New System.Drawing.Point(213, 192)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(24, 23)
         Me.Label14.TabIndex = 22
         Me.Label14.Text = "%"
+        Me.Label14.Visible = False
         '
         'TXTDISKON
         '
         Me.TXTDISKON.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TXTDISKON.Location = New System.Drawing.Point(151, 225)
+        Me.TXTDISKON.Location = New System.Drawing.Point(151, 188)
         Me.TXTDISKON.Name = "TXTDISKON"
         Me.TXTDISKON.Size = New System.Drawing.Size(56, 30)
         Me.TXTDISKON.TabIndex = 20
+        Me.TXTDISKON.Visible = False
         '
         'Label13
         '
         Me.Label13.AutoSize = True
         Me.Label13.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label13.Location = New System.Drawing.Point(10, 228)
+        Me.Label13.Location = New System.Drawing.Point(10, 191)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(61, 23)
         Me.Label13.TabIndex = 21
         Me.Label13.Text = "Diskon"
+        Me.Label13.Visible = False
         '
         'TXTTGLAKHIR
         '
-        Me.TXTTGLAKHIR.Location = New System.Drawing.Point(151, 180)
+        Me.TXTTGLAKHIR.Location = New System.Drawing.Point(151, 143)
         Me.TXTTGLAKHIR.Name = "TXTTGLAKHIR"
         Me.TXTTGLAKHIR.Size = New System.Drawing.Size(298, 30)
         Me.TXTTGLAKHIR.TabIndex = 19
+        Me.TXTTGLAKHIR.Visible = False
         '
         'TXTTGLAWAL
         '
-        Me.TXTTGLAWAL.Location = New System.Drawing.Point(151, 138)
+        Me.TXTTGLAWAL.Location = New System.Drawing.Point(151, 101)
         Me.TXTTGLAWAL.Name = "TXTTGLAWAL"
         Me.TXTTGLAWAL.Size = New System.Drawing.Size(298, 30)
         Me.TXTTGLAWAL.TabIndex = 18
+        Me.TXTTGLAWAL.Visible = False
         '
         'Label9
         '
         Me.Label9.AutoSize = True
         Me.Label9.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(10, 141)
+        Me.Label9.Location = New System.Drawing.Point(10, 104)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(102, 23)
         Me.Label9.TabIndex = 3
         Me.Label9.Text = "Awal Diskon"
+        Me.Label9.Visible = False
         '
         'PNTOP
         '
@@ -822,7 +873,6 @@ Partial Class FR_DISKON
         CType(Me.DGTAMPIL, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ContextMenuStrip1.ResumeLayout(False)
         Me.Panel3.ResumeLayout(False)
-        Me.Panel3.PerformLayout()
         Me.PNCARI.ResumeLayout(False)
         Me.PNCARI.PerformLayout()
         CType(Me.DGCARI, System.ComponentModel.ISupportInitialize).EndInit()
@@ -853,7 +903,7 @@ Partial Class FR_DISKON
     Friend WithEvents Label7 As Label
     Friend WithEvents LBBARANG As Label
     Friend WithEvents BTNCARI As Button
-    Friend WithEvents BTNSTOK As Button
+    Friend WithEvents BTNSIMPAN As Button
     Friend WithEvents TXTKODE As TextBox
     Friend WithEvents Label5 As Label
     Friend WithEvents Label6 As Label
@@ -893,4 +943,8 @@ Partial Class FR_DISKON
     Friend WithEvents BTNDASHBOARD As Button
     Friend WithEvents BTNRUSAK As Button
     Friend WithEvents BTNRETURN As Button
+    Friend WithEvents CBJENIS As ComboBox
+    Friend WithEvents Label11 As Label
+    Friend WithEvents TXTMIN As TextBox
+    Friend WithEvents Label12 As Label
 End Class

@@ -117,33 +117,6 @@ Public Class FR_KELUAR
         TOTAL_HARGA()
     End Sub
 
-    Private Sub DGTAMPIL_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DGTAMPIL.CellEndEdit
-        If e.ColumnIndex = 4 Then
-            Dim QTY As String = ""
-            QTY = DGTAMPIL.Item("Qty", e.RowIndex).Value
-            Dim KODEBR As String = DGTAMPIL.Item("Kode", e.RowIndex).Value
-            If IsNumeric(QTY) Then
-                If CARI_STOK(KODEBR) < 0 Then
-                    MsgBox("Stok barang tidak mencukupi!")
-                    DGTAMPIL.Item("Qty", e.RowIndex).Value = QTY_AWAL
-                Else
-                    DGTAMPIL.Item("Total", e.RowIndex).Value = QTY * DGTAMPIL.Item("Harga", e.RowIndex).Value
-                    TOTAL_HARGA()
-                End If
-            Else
-                MsgBox("QTY tidak valid!")
-                DGTAMPIL.Item("Qty", e.RowIndex).Value = QTY_AWAL
-            End If
-        End If
-    End Sub
-
-    Dim QTY_AWAL As Integer = 0
-    Private Sub DGTAMPIL_CellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles DGTAMPIL.CellBeginEdit
-        If e.ColumnIndex = 4 Then
-            QTY_AWAL = DGTAMPIL.Item("Qty", e.RowIndex).Value
-        End If
-    End Sub
-
     Private Function CARI_STOK(ByVal Kode As String) As Double
         CARI_STOK = 0
         Dim STR As String
@@ -156,7 +129,7 @@ Public Class FR_KELUAR
         Dim RD As SqlDataReader
         RD = CMD.ExecuteReader
 
-        Dim STOK_DATA As Integer = 0
+        Dim STOK_DATA As Double = 0
         If RD.HasRows Then
             RD.Read()
             STOK_DATA = RD.Item("Stok")
@@ -183,7 +156,6 @@ Public Class FR_KELUAR
             TOT_HARGA = TOT_HARGA + DGTAMPIL.Item("Total", N).Value
         Next
 
-        LBTOTAL.Text = Format(TOT_HARGA, "##,##0")
         TXTSUBTOTAL.Text = TOT_HARGA
 
         If Not LBTOTAL.Text = 0 Then
@@ -226,14 +198,9 @@ Public Class FR_KELUAR
         TXTQTY.Text = DGTAMPIL.Rows(e.RowIndex).Cells("QTY").Value
         TXTTOTAL.Text = DGTAMPIL.Rows(e.RowIndex).Cells("Total").Value
 
+        BTNCANCEL.Visible = True
+        BTNCARI.Visible = False
         TXTQTY.Select()
-    End Sub
-
-    Private Sub HapusBarangToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HapusBarangToolStripMenuItem.Click
-        For Each ECELL As DataGridViewCell In DGTAMPIL.SelectedCells
-            DGTAMPIL.Rows.RemoveAt(ECELL.RowIndex)
-        Next
-        TOTAL_HARGA()
     End Sub
 
     Private Sub FR_KELUAR_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -416,7 +383,29 @@ Public Class FR_KELUAR
         End If
     End Sub
 
+    Sub CARI_DISKON()
+        Dim TGL_SKRG As String = Format(Date.Now, "yyyy-MM-dd")
+
+        Dim STR As String = "SELECT COALESCE(SUM(Diskon),0) AS 'Diskon' FROM tbl_diskon" &
+                " WHERE Kode IS NULL" &
+                " AND Min_transaksi <= '" & CInt(TXTSUBTOTAL.Text) & "'" &
+                " AND Tgl_awal <= '" & TGL_SKRG & "'" &
+                " And Tgl_akhir >= '" & TGL_SKRG & "'"
+        Dim CMD As New SqlCommand(STR, CONN)
+        Dim RD As SqlDataReader
+        RD = CMD.ExecuteReader()
+        If RD.HasRows Then
+            RD.Read()
+            TXTDISKON_PERSEN.Text = RD.Item("Diskon")
+            RD.Close()
+        Else
+            TXTDISKON_PERSEN.Text = 0
+            RD.Close()
+        End If
+    End Sub
+
     Private Sub TXTSUBTOTAL_TextChanged(sender As Object, e As EventArgs) Handles TXTSUBTOTAL.TextChanged
+        CARI_DISKON()
         HITUNGDISKON_RUPIAH()
     End Sub
 
@@ -427,7 +416,7 @@ Public Class FR_KELUAR
 
         If e.KeyChar = Chr(13) Then
             Dim HARGA As Long = 0
-            If Not TXTHARGA.Text = "" Then
+            If TXTHARGA.Text <> "" Then
                 HARGA = CLng(TXTHARGA.Text)
             End If
             Dim JUMLAH_QTY As Double = 0
@@ -469,9 +458,10 @@ Public Class FR_KELUAR
                 Else
                     MASUK_DATA()
                     TXTKODE.Enabled = True
-                    TXTKODE.Enabled = True
                     TXTQTY.Text = QTY
                     TXTQTY.Enabled = False
+                    BTNCARI.Visible = True
+                    BTNCANCEL.Visible = False
                     TXTKODE.Clear()
                     TXTKODE.Select()
                 End If
@@ -511,12 +501,21 @@ Public Class FR_KELUAR
                 TXTKODE.Select()
             End If
         End If
+
+        Dim KeyAscii As Short = Asc(e.KeyChar)
+        If (e.KeyChar Like "[A-Z, a-z]" _
+            OrElse e.KeyChar Like "[0-9]" _
+            OrElse KeyAscii = Keys.Back) Then
+            KeyAscii = 0
+        End If
+
+        e.Handled = CBool(KeyAscii)
     End Sub
 
     Sub CARI_DATA()
         Dim TGL_SKRG As String = Format(Date.Now, "yyyy-MM-dd")
 
-        Dim STR As String = "SELECT * FROM tbl_barang" &
+        Dim STR As String = "SELECT Barang, Satuan FROM tbl_barang" &
             " WHERE RTRIM(Kode)='" & TXTKODE.Text & "'"
         Dim CMD As New SqlCommand(STR, CONN)
         Dim RD As SqlDataReader
@@ -526,7 +525,7 @@ Public Class FR_KELUAR
             TXTBARANG.Text = RD.Item("Barang").ToString.Trim
             TXTSATUAN.Text = RD.Item("Satuan").ToString.Trim
             RD.Close()
-            STR = "SELECT Diskon FROM tbl_diskon" &
+            STR = "SELECT COALESCE(SUM(Diskon),0) AS 'Diskon' FROM tbl_diskon" &
                 " WHERE Kode='" & TXTKODE.Text & "'" &
                 " AND Tgl_awal <= '" & TGL_SKRG & "'" &
                 " And Tgl_akhir >= '" & TGL_SKRG & "'"
@@ -680,5 +679,30 @@ Public Class FR_KELUAR
         PRINTNOTA.DefaultPageSettings.Landscape = False
         PRINTNOTA.DocumentName = "Stroke"
         PRINTNOTA.Print()
+    End Sub
+
+    Private Sub BTNCANCEL_Click(sender As Object, e As EventArgs) Handles BTNCANCEL.Click
+        TXTKODE.Enabled = True
+        TXTQTY.Enabled = False
+        BTNCARI.Visible = True
+        BTNCANCEL.Visible = False
+        TXTKODE.Clear()
+        TXTKODE.Select()
+    End Sub
+
+    Private Sub TXTQTY_KeyDown(sender As Object, e As KeyEventArgs) Handles TXTQTY.KeyDown
+        Select Case e.KeyCode
+            Case Keys.Escape
+                TXTKODE.Enabled = True
+                TXTQTY.Enabled = False
+                BTNCARI.Visible = True
+                BTNCANCEL.Visible = False
+                TXTKODE.Clear()
+                TXTKODE.Select()
+        End Select
+    End Sub
+
+    Private Sub TXTTOTALHARGA_TextChanged(sender As Object, e As EventArgs) Handles TXTTOTALHARGA.TextChanged
+        LBTOTAL.Text = Format(CInt(TXTTOTALHARGA.Text), "##,##0")
     End Sub
 End Class
