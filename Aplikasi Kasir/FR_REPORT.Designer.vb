@@ -48,6 +48,7 @@ Partial Class FR_REPORT
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.BTNLOGOUT = New System.Windows.Forms.Button()
         Me.PNCONTENT = New System.Windows.Forms.Panel()
+        Me.CRV = New CrystalDecisions.Windows.Forms.CrystalReportViewer()
         Me.DGTAMPIL = New System.Windows.Forms.DataGridView()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.BTNCETAK = New System.Windows.Forms.Button()
@@ -383,6 +384,7 @@ Partial Class FR_REPORT
         '
         'PNCONTENT
         '
+        Me.PNCONTENT.Controls.Add(Me.CRV)
         Me.PNCONTENT.Controls.Add(Me.DGTAMPIL)
         Me.PNCONTENT.Controls.Add(Me.Panel3)
         Me.PNCONTENT.Controls.Add(Me.PNTOP)
@@ -391,6 +393,28 @@ Partial Class FR_REPORT
         Me.PNCONTENT.Name = "PNCONTENT"
         Me.PNCONTENT.Size = New System.Drawing.Size(1096, 768)
         Me.PNCONTENT.TabIndex = 19
+        '
+        'CRV
+        '
+        Me.CRV.ActiveViewIndex = -1
+        Me.CRV.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.CRV.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.CRV.Cursor = System.Windows.Forms.Cursors.Default
+        Me.CRV.Font = New System.Drawing.Font("Arial", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CRV.Location = New System.Drawing.Point(22, 107)
+        Me.CRV.Name = "CRV"
+        Me.CRV.ShowCloseButton = False
+        Me.CRV.ShowCopyButton = False
+        Me.CRV.ShowGroupTreeButton = False
+        Me.CRV.ShowLogo = False
+        Me.CRV.ShowParameterPanelButton = False
+        Me.CRV.ShowRefreshButton = False
+        Me.CRV.Size = New System.Drawing.Size(1062, 635)
+        Me.CRV.TabIndex = 65
+        Me.CRV.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None
+        Me.CRV.Visible = False
         '
         'DGTAMPIL
         '
@@ -439,6 +463,7 @@ Partial Class FR_REPORT
         Me.DGTAMPIL.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DGTAMPIL.Size = New System.Drawing.Size(1062, 635)
         Me.DGTAMPIL.TabIndex = 64
+        Me.DGTAMPIL.Visible = False
         '
         'Panel3
         '
@@ -469,6 +494,7 @@ Partial Class FR_REPORT
         Me.BTNCETAK.TabIndex = 66
         Me.BTNCETAK.Text = "CETAK"
         Me.BTNCETAK.UseVisualStyleBackColor = False
+        Me.BTNCETAK.Visible = False
         '
         'BTNTAMPIL
         '
@@ -664,4 +690,5 @@ Partial Class FR_REPORT
     Friend WithEvents BTNCETAK As Button
     Friend WithEvents BTNRUSAK As Button
     Friend WithEvents BTNRETURN As Button
+    Friend WithEvents CRV As CrystalDecisions.Windows.Forms.CrystalReportViewer
 End Class

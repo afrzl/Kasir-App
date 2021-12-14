@@ -1,4 +1,5 @@
 ﻿Imports System.Data.SqlClient
+Imports System.Drawing.Printing
 
 Public Class FR_KELUAR
     Private Sub PEWAKTU_Tick(sender As Object, e As EventArgs) Handles PEWAKTU.Tick
@@ -9,7 +10,7 @@ Public Class FR_KELUAR
         Me.WindowState = FormWindowState.Minimized
     End Sub
 
-    Private Function CARI_HARGA(ByVal QTY As Integer)
+    Private Function CARI_HARGA(ByVal QTY As Long) As Long
         Dim STR As String = "SELECT * FROM tbl_barang" &
             " WHERE RTRIM(Kode)='" & TXTKODE.Text & "'"
         Dim CMD As New SqlCommand(STR, CONN)
@@ -17,14 +18,20 @@ Public Class FR_KELUAR
         RD = CMD.ExecuteReader
         If RD.HasRows Then
             RD.Read()
-            Dim END1 As Integer = CInt(RD.Item("End1"))
-            Dim START2 As Integer = CInt(RD.Item("Start2"))
-            Dim END2 As Integer = CInt(RD.Item("End2"))
-            Dim START3 As Integer = CInt(RD.Item("Start3"))
-            Dim END3 As Integer = CInt(RD.Item("End3"))
-            Dim START4 As Integer = CInt(RD.Item("Start4"))
-            Dim END4 As Integer = CInt(RD.Item("End4"))
-            Dim START5 As Integer = CInt(RD.Item("Start5"))
+            Dim END1 As Long = CLng(RD.Item("End1"))
+            Dim START2 As Long = CLng(RD.Item("Start2"))
+            Dim END2 As Long = CLng(RD.Item("End2"))
+            Dim START3 As Long = CLng(RD.Item("Start3"))
+            Dim END3 As Long = CLng(RD.Item("End3"))
+            Dim START4 As Long = CLng(RD.Item("Start4"))
+            Dim END4 As Long = CLng(RD.Item("End4"))
+            Dim START5 As Long = CLng(RD.Item("Start5"))
+
+            Dim HARGA1 As Long = CLng(RD.Item("Harga1"))
+            Dim HARGA2 As Long = CLng(RD.Item("Harga2"))
+            Dim HARGA3 As Long = CLng(RD.Item("Harga3"))
+            Dim HARGA4 As Long = CLng(RD.Item("Harga4"))
+            Dim HARGA5 As Long = CLng(RD.Item("Harga5"))
 
             If Not QTY = 0 Then
                 If Not END1 = 0 Then
@@ -32,45 +39,45 @@ Public Class FR_KELUAR
                         If Not END3 = 0 Then
                             If Not END4 = 0 Then
                                 If QTY <= END1 Then
-                                    CARI_HARGA = CInt(RD.Item("Harga1"))
+                                    CARI_HARGA = HARGA1
                                 ElseIf QTY <= END2 And QTY >= START2 Then
-                                    CARI_HARGA = CInt(RD.Item("Harga2"))
+                                    CARI_HARGA = HARGA2
                                 ElseIf QTY <= END3 And QTY >= START3 Then
-                                    CARI_HARGA = CInt(RD.Item("Harga3"))
+                                    CARI_HARGA = HARGA3
                                 ElseIf QTY <= END4 And QTY >= START4 Then
-                                    CARI_HARGA = CInt(RD.Item("Harga4"))
+                                    CARI_HARGA = HARGA4
                                 Else
-                                    CARI_HARGA = CInt(RD.Item("Harga5"))
+                                    CARI_HARGA = HARGA5
                                 End If
                             Else
                                 If QTY <= END1 Then
-                                    CARI_HARGA = CInt(RD.Item("Harga1"))
+                                    CARI_HARGA = HARGA1
                                 ElseIf QTY <= END2 And QTY >= START2 Then
-                                    CARI_HARGA = CInt(RD.Item("Harga2"))
+                                    CARI_HARGA = HARGA2
                                 ElseIf QTY <= END3 And QTY >= START3 Then
-                                    CARI_HARGA = CInt(RD.Item("Harga3"))
+                                    CARI_HARGA = HARGA3
                                 Else
-                                    CARI_HARGA = CInt(RD.Item("Harga4"))
+                                    CARI_HARGA = HARGA4
                                 End If
                             End If
                         Else
                             If QTY <= END1 Then
-                                CARI_HARGA = CInt(RD.Item("Harga1"))
+                                CARI_HARGA = HARGA1
                             ElseIf QTY <= END2 And QTY >= START2 Then
-                                CARI_HARGA = CInt(RD.Item("Harga2"))
+                                CARI_HARGA = HARGA2
                             Else
-                                CARI_HARGA = CInt(RD.Item("Harga3"))
+                                CARI_HARGA = HARGA3
                             End If
                         End If
                     Else
                         If QTY <= END1 Then
-                            CARI_HARGA = CInt(RD.Item("Harga1"))
+                            CARI_HARGA = HARGA1
                         Else
-                            CARI_HARGA = CInt(RD.Item("Harga2"))
+                            CARI_HARGA = HARGA2
                         End If
                     End If
                 Else
-                    CARI_HARGA = CInt(RD.Item("Harga1"))
+                    CARI_HARGA = HARGA1
                 End If
             Else
                 CARI_HARGA = 0
@@ -95,8 +102,8 @@ Public Class FR_KELUAR
         Next
 
         If ADA_DATA = True Then
-            DGTAMPIL.Rows(BARIS_DATA).Cells("Qty").Value = DGTAMPIL.Rows(BARIS_DATA).Cells("Qty").Value + CInt(TXTQTY.Text)
-            Dim JUMLAH_QTY As Integer = DGTAMPIL.Rows(BARIS_DATA).Cells("Qty").Value
+            DGTAMPIL.Rows(BARIS_DATA).Cells("Qty").Value = DGTAMPIL.Rows(BARIS_DATA).Cells("Qty").Value + Convert.ToDouble(TXTQTY.Text)
+            Dim JUMLAH_QTY As Double = DGTAMPIL.Rows(BARIS_DATA).Cells("Qty").Value
             DGTAMPIL.Rows(BARIS_DATA).Cells("Harga").Value = CARI_HARGA(JUMLAH_QTY)
             DGTAMPIL.Rows(BARIS_DATA).Cells("Diskon").Value = (CInt(TXTDISKON.Text) / 100 * DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Harga").Value) * DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Qty").Value
             DGTAMPIL.Rows(BARIS_DATA).Cells("Total").Value = (DGTAMPIL.Rows(BARIS_DATA).Cells("Qty").Value * DGTAMPIL.Rows(BARIS_DATA).Cells("Harga").Value) - DGTAMPIL.Rows(BARIS_DATA).Cells("Diskon").Value
@@ -141,7 +148,7 @@ Public Class FR_KELUAR
         End If
     End Sub
 
-    Private Function CARI_STOK(ByVal Kode As String) As Integer
+    Private Function CARI_STOK(ByVal Kode As String) As Double
         CARI_STOK = 0
         Dim STR As String
 
@@ -163,7 +170,7 @@ Public Class FR_KELUAR
             STOK_DATA = 0
         End If
 
-        Dim STOK_ORDER As Integer = CInt(TXTQTY.Text)
+        Dim STOK_ORDER As Double = Convert.ToDouble(TXTQTY.Text)
         For N = 0 To DGTAMPIL.RowCount - 1
             If DGTAMPIL.Item("Kode", N).Value = Kode Then
                 STOK_ORDER = STOK_ORDER + DGTAMPIL.Item("QTY", N).Value
@@ -242,6 +249,7 @@ Public Class FR_KELUAR
         PEWAKTU.Enabled = True
     End Sub
 
+    Dim ID_TRANSAKSI As String
     Sub INPUT_DB()
         If DGTAMPIL.Rows.Count <= 0 Then Exit Sub
         Dim SUBTOTAL As Integer = TXTSUBTOTAL.Text
@@ -249,15 +257,15 @@ Public Class FR_KELUAR
         Dim HARGA_AKHIR As Integer = TXTTOTALHARGA.Text
         Dim BAYAR As Integer = TXTBAYAR.Text
         Dim KEMBALIAN As Integer = TXTKEMBALIAN.Text
-        Dim ID_TRANS As String = AUTOID()
-        Dim JUMLAH_ITEM As Integer = 0
+        ID_TRANSAKSI = AUTOID()
+        Dim JUMLAH_ITEM As Double = 0
         For Each EROW As DataGridViewRow In DGTAMPIL.Rows
             JUMLAH_ITEM += EROW.Cells("QTY").Value
         Next
 
         Dim STR As String = "INSERT INTO tbl_transaksi_parent" &
             " (Id_trans, Id_kasir, Tgl, Jenis, Person, Harga, Diskon, Jumlah_item, Harga_total, Harga_tunai, Harga_kembali)" &
-            " VALUES('" & ID_TRANS & "'," &
+            " VALUES('" & ID_TRANSAKSI & "'," &
             " '" & My.Settings.ID_ACCOUNT & "'," &
             " '" & Format(Date.Now, "MM/dd/yyyy HH:mm:ss") & "'," &
             " 'K'," &
@@ -273,7 +281,7 @@ Public Class FR_KELUAR
 
         For Each EROW As DataGridViewRow In DGTAMPIL.Rows
             Dim KODE_PRODUK As String = EROW.Cells("Kode").Value
-            Dim JUMLAH_PRODUK As Integer = EROW.Cells("QTY").Value
+            Dim JUMLAH_PRODUK As Double = EROW.Cells("QTY").Value
             Dim HARGA_PRODUK As Integer = EROW.Cells("Harga").Value * JUMLAH_PRODUK
             Dim DISKON_PRODUK As Integer = EROW.Cells("Diskon").Value
             Dim HARGA_AKHIR_PRODUK As Integer = HARGA_PRODUK - DISKON_PRODUK
@@ -288,7 +296,7 @@ Public Class FR_KELUAR
             End If
 
             STR = "INSERT INTO tbl_transaksi_child (Id_trans, Kode, Jumlah, Harga_beli, Harga, Diskon, Harga_akhir) VALUES" &
-                    " ('" & ID_TRANS & "'," &
+                    " ('" & ID_TRANSAKSI & "'," &
                     " '" & KODE_PRODUK & "'," &
                     " '" & JUMLAH_PRODUK & "'," &
                     " '" & HARGA_BELI_PRODUK & "'," &
@@ -301,15 +309,15 @@ Public Class FR_KELUAR
     End Sub
 
     Private Function CARI_HARGA_BELI(ByVal KODE As String) As Integer
-        Dim STR As String = "SELECT TOP 1 (Id_trans) AS Id_trans, Harga, Stok FROM tbl_transaksi_child WHERE LEFT(Id_trans,1)='M' AND Kode='" & KODE & "' AND Stok != 0 ORDER BY Id ASC"
         Dim ID_TRANS As String = ""
+        Dim STR As String = "SELECT TOP 1 (Id_trans) AS Id_trans, Harga, Stok FROM tbl_transaksi_child WHERE LEFT(Id_trans,1)='M' AND Kode='" & KODE & "' AND Stok != 0 ORDER BY Id ASC"
         Dim CMD As SqlCommand
         CMD = New SqlCommand(STR, CONN)
         Dim RD As SqlDataReader
         RD = CMD.ExecuteReader
         RD.Read()
         If RD.HasRows Then
-            Dim STOK_AKHIR As Integer = RD.Item("Stok") - 1
+            Dim STOK_AKHIR As Double = RD.Item("Stok") - 1
             ID_TRANS = RD.Item("Id_trans").ToString.Trim
             CARI_HARGA_BELI = RD.Item("Harga")
             RD.Close()
@@ -384,6 +392,7 @@ Public Class FR_KELUAR
         If e.KeyChar = Chr(13) Then
             If TXTKEMBALIAN.Text >= "0" Then
                 INPUT_DB()
+                PRINT_NOTA()
                 FR_KELUAR_KEMBALIAN.LBKEMBALI.Text = Format(CInt(TXTKEMBALIAN.Text), "##,##0")
                 FR_KELUAR_KEMBALIAN.Show()
                 FR_KELUAR_KEMBALIAN.BTNTUTUP.Select()
@@ -403,18 +412,18 @@ Public Class FR_KELUAR
     End Sub
 
     Private Sub TXTQTY_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTQTY.KeyPress
-        If Not ((e.KeyChar >= "0" And e.KeyChar <= "9") Or e.KeyChar = vbBack) Then
-            e.Handled = True
-        End If
+        'If Not ((e.KeyChar >= "0" And e.KeyChar <= "9") Or e.KeyChar = vbBack) Then
+        'e.Handled = True
+        'End If
 
         If e.KeyChar = Chr(13) Then
-            Dim HARGA As Integer = 0
+            Dim HARGA As Long = 0
             If Not TXTHARGA.Text = "" Then
-                HARGA = CInt(TXTHARGA.Text)
+                HARGA = CLng(TXTHARGA.Text)
             End If
-            Dim JUMLAH_QTY As Integer = 0
+            Dim JUMLAH_QTY As Double = 0
             If Not TXTQTY.Text = "" Then
-                JUMLAH_QTY = CInt(TXTQTY.Text)
+                JUMLAH_QTY = Convert.ToDouble(TXTQTY.Text)
             End If
 
             If JUMLAH_QTY = 0 Then
@@ -433,7 +442,7 @@ Public Class FR_KELUAR
                 TXTKODE.Clear()
                 TXTKODE.Select()
             Else
-                Dim QTY As Integer = CInt(TXTQTY.Text)
+                Dim QTY As Double = Convert.ToDouble(TXTQTY.Text)
                 Dim BARIS_DATA As Integer = 0
                 For N = 0 To DGTAMPIL.Rows.Count - 1
                     Dim Kode As String = DGTAMPIL.Item("Kode", N).Value
@@ -442,7 +451,7 @@ Public Class FR_KELUAR
                         Exit For
                     End If
                 Next
-                TXTQTY.Text = CInt(TXTQTY.Text) - DGTAMPIL.Rows(BARIS_DATA).Cells("Qty").Value
+                TXTQTY.Text = Convert.ToDouble(TXTQTY.Text) - DGTAMPIL.Rows(BARIS_DATA).Cells("Qty").Value
 
                 If CARI_STOK(TXTKODE.Text) < 0 Then
                     TXTQTY.Text = QTY
@@ -462,16 +471,16 @@ Public Class FR_KELUAR
     End Sub
 
     Private Sub TXTQTY_TextChanged(sender As Object, e As EventArgs) Handles TXTQTY.TextChanged
-        Dim HARGA As Integer = 0
+        Dim HARGA As Long = 0
         If Not TXTHARGA.Text = "" Then
-            HARGA = CInt(TXTHARGA.Text)
+            HARGA = CLng(TXTHARGA.Text)
         End If
-        Dim JUMLAH_QTY As Integer = 0
+        Dim JUMLAH_QTY As Double = 0
         If Not TXTQTY.Text = "" Then
-            JUMLAH_QTY = CInt(TXTQTY.Text)
+            JUMLAH_QTY = Convert.ToDouble(TXTQTY.Text)
         End If
-        TXTHARGA.Text = CARI_HARGA(JUMLAH_QTY)
-        HARGA = CInt(TXTHARGA.Text)
+            TXTHARGA.Text = CARI_HARGA(JUMLAH_QTY)
+        HARGA = CLng(TXTHARGA.Text)
         TXTTOTAL.Text = HARGA * JUMLAH_QTY * (100 - CInt(TXTDISKON.Text)) / 100
     End Sub
 
@@ -563,5 +572,104 @@ Public Class FR_KELUAR
         If Not ((e.KeyChar >= "0" And e.KeyChar <= "9") Or e.KeyChar = vbBack) Then
             e.Handled = True
         End If
+    End Sub
+
+    'PRINTING
+    '=================================================================================
+    'KERTAS 
+    ReadOnly lebarKertas As Integer = 304 'Ukuran Kertas 78 mm
+    ReadOnly tinggiKertas As Integer = 304
+    ReadOnly marginLeft As Integer = 20
+    ReadOnly marginRight As Integer = 20
+    ReadOnly jarakBaris As Integer = 20
+    Dim totalBaris As Integer = 0
+
+
+    'JENIS DAN UKURAN HURUF
+    ReadOnly fontJudul As New Font("Segoe UI", 12, FontStyle.Bold)
+    ReadOnly fontRegular As New Font("Segoe UI", 10, FontStyle.Regular)
+    ReadOnly fontTotal As New Font("Segoe UI", 10, FontStyle.Bold)
+
+    Private Function BarisBaru(jumlah_baris)
+        totalBaris += jumlah_baris
+        Return totalBaris * jarakBaris
+    End Function
+
+    Private Function BarisYangSama()
+        Return BarisBaru(0)
+    End Function
+
+    Private Sub PRINTNOTA_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles PRINTNOTA.PrintPage
+        Dim textCenter, textLeft, textRight As New StringFormat
+        textCenter.Alignment = StringAlignment.Center
+        textLeft.Alignment = StringAlignment.Near
+        textRight.Alignment = StringAlignment.Far
+
+        e.Graphics.DrawString("Toko Maju Jaya", fontJudul, Brushes.Black, lebarKertas / 2, BarisYangSama, textCenter)
+        e.Graphics.DrawString("Jl. Sirandu No. 20 Comal,", fontRegular, Brushes.Black, lebarKertas / 2, BarisBaru(1), textCenter)
+        e.Graphics.DrawString("Kab. Pemalang, 52363", fontRegular, Brushes.Black, lebarKertas / 2, BarisBaru(1), textCenter)
+        BarisBaru(1)
+
+        e.Graphics.DrawString(LBTGL.Text, fontRegular, Brushes.Black, (lebarKertas - marginRight), BarisBaru(1), textRight)
+
+        e.Graphics.DrawString(ID_TRANSAKSI, fontRegular, Brushes.Black, (lebarKertas - marginRight), BarisBaru(1), textRight)
+        e.Graphics.DrawString("Kasir : " & TXTKASIR.Text, fontRegular, Brushes.Black, marginLeft, BarisYangSama, textLeft)
+
+        e.Graphics.DrawLine(Pens.Black, marginLeft, BarisBaru(1), (lebarKertas - marginRight), BarisYangSama)
+        BarisBaru(1)
+
+        For Each EROW As DataGridViewRow In DGTAMPIL.Rows
+            e.Graphics.DrawString(EROW.Cells("BARANG").Value, fontRegular, Brushes.Black, marginLeft, BarisYangSama, textLeft)
+            If CInt(EROW.Cells("DISKON").Value) = 0 Then
+                e.Graphics.DrawString(EROW.Cells("QTY").Value & " " & EROW.Cells("SATUAN") & " x " & Format(CInt(EROW.Cells("HARGA").Value), "##,##0"), fontRegular, Brushes.Black, marginLeft, BarisBaru(1), textLeft)
+            Else
+                e.Graphics.DrawString(EROW.Cells("QTY").Value & " x " & Format(CInt(EROW.Cells("HARGA").Value), "##,##0") & " (Disc. " & Format(CInt(EROW.Cells("DISKON").Value), "##,##0") & ")", fontRegular, Brushes.Black, marginLeft, BarisBaru(1), textLeft)
+            End If
+            e.Graphics.DrawString(Format(CInt(EROW.Cells("TOTAL").Value), "##,##0"), fontRegular, Brushes.Black, (lebarKertas - marginRight), BarisYangSama, textRight)
+            BarisBaru(1)
+        Next
+
+        e.Graphics.DrawLine(Pens.Black, marginLeft, BarisYangSama, (lebarKertas - marginRight), BarisYangSama)
+        If CInt(TXTDISKON_RUPIAH.Text) = 0 Then
+            e.Graphics.DrawString("Subtotal", fontRegular, Brushes.Black, marginLeft, BarisYangSama, textLeft)
+            e.Graphics.DrawString(Format(CInt(TXTSUBTOTAL.Text), "Rp ##,##0"), fontRegular, Brushes.Black, (lebarKertas - marginRight), BarisYangSama, textRight)
+        Else
+            e.Graphics.DrawString("Subtotal", fontRegular, Brushes.Black, marginLeft, BarisYangSama, textLeft)
+            e.Graphics.DrawString(Format(CInt(TXTSUBTOTAL.Text), "Rp ##,##0"), fontRegular, Brushes.Black, (lebarKertas - marginRight), BarisYangSama, textRight)
+
+            e.Graphics.DrawString("Diskon", fontRegular, Brushes.Black, marginLeft, BarisBaru(1), textLeft)
+            e.Graphics.DrawString(Format(CInt(TXTDISKON_RUPIAH.Text), "Rp ##,##0"), fontRegular, Brushes.Black, (lebarKertas - marginRight), BarisYangSama, textRight)
+        End If
+
+        BarisBaru(1)
+        e.Graphics.DrawLine(Pens.Black, marginLeft, BarisYangSama, (lebarKertas - marginRight), BarisYangSama)
+
+        e.Graphics.DrawString("Total", fontRegular, Brushes.Black, marginLeft, BarisYangSama, textLeft)
+        e.Graphics.DrawString(Format(CInt(TXTTOTALHARGA.Text), "Rp ##,##0"), fontTotal, Brushes.Black, (lebarKertas - marginRight), BarisYangSama, textRight)
+
+        e.Graphics.DrawString("Tunai", fontRegular, Brushes.Black, marginLeft, BarisBaru(1), textLeft)
+        e.Graphics.DrawString(Format(CInt(TXTBAYAR.Text), "Rp ##,##0"), fontRegular, Brushes.Black, (lebarKertas - marginRight), BarisYangSama, textRight)
+
+        e.Graphics.DrawString("Kembali", fontRegular, Brushes.Black, marginLeft, BarisBaru(1), textLeft)
+        e.Graphics.DrawString(Format(CInt(TXTKEMBALIAN.Text), "Rp ##,##0"), fontRegular, Brushes.Black, (lebarKertas - marginRight), BarisYangSama, textRight)
+
+        BarisBaru(1)
+        e.Graphics.DrawLine(Pens.Black, marginLeft, BarisYangSama, (lebarKertas - marginRight), BarisYangSama)
+
+        e.Graphics.DrawString("Barang yang sudah dibeli", fontRegular, Brushes.Black, lebarKertas / 2, BarisBaru(1), textCenter)
+        e.Graphics.DrawString("tidak dapat ditukar/dikembalikan", fontRegular, Brushes.Black, lebarKertas / 2, BarisBaru(1), textCenter)
+        e.Graphics.DrawString("TERIMA KASIH", fontRegular, Brushes.Black, lebarKertas / 2, BarisBaru(1), textCenter)
+
+        BarisBaru(1)
+    End Sub
+
+    Sub PRINT_NOTA()
+        Dim ps As New PrinterSettings
+        PRINTNOTA.OriginAtMargins = False
+        PRINTNOTA.PrinterSettings = ps
+        PRINTNOTA.DefaultPageSettings.PaperSize = New PaperSize("Custom", lebarKertas, tinggiKertas + BarisBaru(DGTAMPIL.Rows.Count))
+        PRINTNOTA.DefaultPageSettings.Landscape = False
+        PRINTNOTA.DocumentName = "Stroke"
+        PRINTNOTA.Print()
     End Sub
 End Class

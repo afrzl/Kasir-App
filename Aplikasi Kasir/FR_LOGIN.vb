@@ -8,7 +8,7 @@ Public Class FR_LOGIN
             MsgBox("Password harus diisi!")
             TXTPASSWORD.Select()
         Else
-            Dim STR As String = "SELECT * FROM tbl_karyawan WHERE Id='" & TXTID.Text & "' AND Password='" & TXTPASSWORD.Text & "'"
+            Dim STR As String = "SELECT RTRIM(Nama) AS Nama, RTRIM(Role) AS Role FROM tbl_karyawan WHERE Id='" & TXTID.Text & "' AND Password='" & TXTPASSWORD.Text & "'"
             Dim CMD As SqlCommand
             CMD = New SqlCommand(STR, CONN)
             Dim RD As SqlDataReader
@@ -18,6 +18,7 @@ Public Class FR_LOGIN
                 If RD.Item("Role") = 1 Then
                     My.Settings.ID_ACCOUNT = TXTID.Text
                     NAMA_LOGIN = RD.Item("Nama").ToString.Trim
+                    RD.Close()
 
                     Dim FR As New FR_MENU
                     FR.Show()

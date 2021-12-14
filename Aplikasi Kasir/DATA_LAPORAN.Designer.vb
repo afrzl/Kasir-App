@@ -695,6 +695,12 @@ Partial Public Class DATA_LAPORAN
         
         Private columnQTY As Global.System.Data.DataColumn
         
+        Private columnHarga_QTY As Global.System.Data.DataColumn
+        
+        Private columnLaba_Item As Global.System.Data.DataColumn
+        
+        Private columnJenis As Global.System.Data.DataColumn
+        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub New()
@@ -867,6 +873,30 @@ Partial Public Class DATA_LAPORAN
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property Harga_QTYColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnHarga_QTY
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property Laba_ItemColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnLaba_Item
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property JenisColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnJenis
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -920,9 +950,12 @@ Partial Public Class DATA_LAPORAN
                     ByVal Bayar As Integer,  _
                     ByVal Kembalian As Integer,  _
                     ByVal Laba As Integer,  _
-                    ByVal QTY As String) As TBL_KELUARRow
+                    ByVal QTY As Integer,  _
+                    ByVal Harga_QTY As Integer,  _
+                    ByVal Laba_Item As Integer,  _
+                    ByVal Jenis As String) As TBL_KELUARRow
             Dim rowTBL_KELUARRow As TBL_KELUARRow = CType(Me.NewRow,TBL_KELUARRow)
-            Dim columnValuesArray() As Object = New Object() {ID_Transaksi, Tanggal, Kasir, Pembeli, Jumlah_Item, Kode_Barang, Nama_Barang, Harga_Jual, Diskon, Harga, Total, Diskon_Transaksi, Total_Akhir, Bayar, Kembalian, Laba, QTY}
+            Dim columnValuesArray() As Object = New Object() {ID_Transaksi, Tanggal, Kasir, Pembeli, Jumlah_Item, Kode_Barang, Nama_Barang, Harga_Jual, Diskon, Harga, Total, Diskon_Transaksi, Total_Akhir, Bayar, Kembalian, Laba, QTY, Harga_QTY, Laba_Item, Jenis}
             rowTBL_KELUARRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowTBL_KELUARRow)
             Return rowTBL_KELUARRow
@@ -962,6 +995,9 @@ Partial Public Class DATA_LAPORAN
             Me.columnKembalian = MyBase.Columns("Kembalian")
             Me.columnLaba = MyBase.Columns("Laba")
             Me.columnQTY = MyBase.Columns("QTY")
+            Me.columnHarga_QTY = MyBase.Columns("Harga QTY")
+            Me.columnLaba_Item = MyBase.Columns("Laba Item")
+            Me.columnJenis = MyBase.Columns("Jenis")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -999,8 +1035,14 @@ Partial Public Class DATA_LAPORAN
             MyBase.Columns.Add(Me.columnKembalian)
             Me.columnLaba = New Global.System.Data.DataColumn("Laba", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnLaba)
-            Me.columnQTY = New Global.System.Data.DataColumn("QTY", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            Me.columnQTY = New Global.System.Data.DataColumn("QTY", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnQTY)
+            Me.columnHarga_QTY = New Global.System.Data.DataColumn("Harga QTY", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnHarga_QTY)
+            Me.columnLaba_Item = New Global.System.Data.DataColumn("Laba Item", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnLaba_Item)
+            Me.columnJenis = New Global.System.Data.DataColumn("Jenis", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnJenis)
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -1619,16 +1661,61 @@ Partial Public Class DATA_LAPORAN
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Property QTY() As String
+        Public Property QTY() As Integer
             Get
                 Try 
-                    Return CType(Me(Me.tableTBL_KELUAR.QTYColumn),String)
+                    Return CType(Me(Me.tableTBL_KELUAR.QTYColumn),Integer)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("The value for column 'QTY' in table 'TBL_KELUAR' is DBNull.", e)
                 End Try
             End Get
             Set
                 Me(Me.tableTBL_KELUAR.QTYColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property Harga_QTY() As Integer
+            Get
+                Try 
+                    Return CType(Me(Me.tableTBL_KELUAR.Harga_QTYColumn),Integer)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Harga QTY' in table 'TBL_KELUAR' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableTBL_KELUAR.Harga_QTYColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property Laba_Item() As Integer
+            Get
+                Try 
+                    Return CType(Me(Me.tableTBL_KELUAR.Laba_ItemColumn),Integer)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Laba Item' in table 'TBL_KELUAR' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableTBL_KELUAR.Laba_ItemColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property Jenis() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableTBL_KELUAR.JenisColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Jenis' in table 'TBL_KELUAR' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableTBL_KELUAR.JenisColumn) = value
             End Set
         End Property
         
@@ -1834,6 +1921,42 @@ Partial Public Class DATA_LAPORAN
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub SetQTYNull()
             Me(Me.tableTBL_KELUAR.QTYColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsHarga_QTYNull() As Boolean
+            Return Me.IsNull(Me.tableTBL_KELUAR.Harga_QTYColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetHarga_QTYNull()
+            Me(Me.tableTBL_KELUAR.Harga_QTYColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsLaba_ItemNull() As Boolean
+            Return Me.IsNull(Me.tableTBL_KELUAR.Laba_ItemColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetLaba_ItemNull()
+            Me(Me.tableTBL_KELUAR.Laba_ItemColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsJenisNull() As Boolean
+            Return Me.IsNull(Me.tableTBL_KELUAR.JenisColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetJenisNull()
+            Me(Me.tableTBL_KELUAR.JenisColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     

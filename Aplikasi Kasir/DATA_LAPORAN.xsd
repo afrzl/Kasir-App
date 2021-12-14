@@ -45,7 +45,10 @@
               <xs:element name="Bayar" msprop:Generator_ColumnVarNameInTable="columnBayar" msprop:Generator_ColumnPropNameInRow="Bayar" msprop:Generator_ColumnPropNameInTable="BayarColumn" msprop:Generator_UserColumnName="Bayar" type="xs:int" minOccurs="0" />
               <xs:element name="Kembalian" msprop:Generator_ColumnVarNameInTable="columnKembalian" msprop:Generator_ColumnPropNameInRow="Kembalian" msprop:Generator_ColumnPropNameInTable="KembalianColumn" msprop:Generator_UserColumnName="Kembalian" type="xs:int" minOccurs="0" />
               <xs:element name="Laba" msprop:Generator_ColumnVarNameInTable="columnLaba" msprop:Generator_ColumnPropNameInRow="Laba" msprop:Generator_ColumnPropNameInTable="LabaColumn" msprop:Generator_UserColumnName="Laba" type="xs:int" minOccurs="0" />
-              <xs:element name="QTY" msprop:Generator_ColumnVarNameInTable="columnQTY" msprop:Generator_ColumnPropNameInRow="QTY" msprop:Generator_ColumnPropNameInTable="QTYColumn" msprop:Generator_UserColumnName="QTY" type="xs:string" minOccurs="0" />
+              <xs:element name="QTY" msprop:Generator_ColumnVarNameInTable="columnQTY" msprop:Generator_ColumnPropNameInRow="QTY" msprop:Generator_ColumnPropNameInTable="QTYColumn" msprop:Generator_UserColumnName="QTY" type="xs:int" minOccurs="0" />
+              <xs:element name="Harga_x0020_QTY" msprop:Generator_ColumnVarNameInTable="columnHarga_QTY" msprop:Generator_ColumnPropNameInRow="Harga_QTY" msprop:Generator_ColumnPropNameInTable="Harga_QTYColumn" msprop:Generator_UserColumnName="Harga QTY" type="xs:int" minOccurs="0" />
+              <xs:element name="Laba_x0020_Item" msprop:Generator_ColumnVarNameInTable="columnLaba_Item" msprop:Generator_ColumnPropNameInRow="Laba_Item" msprop:Generator_ColumnPropNameInTable="Laba_ItemColumn" msprop:Generator_UserColumnName="Laba Item" type="xs:int" minOccurs="0" />
+              <xs:element name="Jenis" msprop:Generator_ColumnVarNameInTable="columnJenis" msprop:Generator_ColumnPropNameInRow="Jenis" msprop:Generator_ColumnPropNameInTable="JenisColumn" msprop:Generator_UserColumnName="Jenis" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

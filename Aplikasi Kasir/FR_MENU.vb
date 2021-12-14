@@ -1,45 +1,9 @@
-﻿Public Class FR_MENU
-    Private Sub LogoutToolStripMenuItem_Click(sender As Object, e As EventArgs)
-        Dim FR As New FR_LOGIN
-        My.Settings.ID_ACCOUNT = 0
-        FR.Show()
-        Me.Hide()
-    End Sub
+﻿Imports System.Data.SqlClient
 
-    Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs)
-        End
-    End Sub
-
+Public Class FR_MENU
     Sub BUKA_FORM(ByVal FR As Form)
         FR.Show()
         Me.Hide()
-    End Sub
-
-    Private Sub DataKaryawanToolStripMenuItem_Click(sender As Object, e As EventArgs)
-        BUKA_FORM(FR_KASIR)
-    End Sub
-
-    Private Sub DataBarangToolStripMenuItem_Click(sender As Object, e As EventArgs)
-        BUKA_FORM(FR_PRODUK)
-    End Sub
-
-    Private Sub BarangMasukToolStripMenuItem_Click(sender As Object, e As EventArgs)
-        BUKA_FORM(FR_MASUK)
-    End Sub
-
-    Private Sub BarangKeluarToolStripMenuItem_Click(sender As Object, e As EventArgs)
-        'BUKA_FORM(FR_KELUAR)'
-        Dim FR As New FR_KELUAR
-        FR.Show()
-        Me.Hide()
-    End Sub
-
-    Private Sub LaporanToolStripMenuItem_Click(sender As Object, e As EventArgs)
-        BUKA_FORM(FR_REPORT)
-    End Sub
-
-    Private Sub TentangToolStripMenuItem_Click(sender As Object, e As EventArgs)
-        BUKA_FORM(FR_TENTANG)
     End Sub
 
     Private Sub FR_MENU_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -47,14 +11,11 @@
         PEWAKTU.Enabled = True
 
         LBLUSER.Text = NAMA_LOGIN
+        TAMPIL()
     End Sub
 
     Private Sub PEWAKTU_Tick(sender As Object, e As EventArgs) Handles PEWAKTU.Tick
         LBTGL.Text = Format(Date.Now, "dd MMMM yyyy HH:mm:ss")
-    End Sub
-
-    Private Sub FR_MENU_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
-        End
     End Sub
 
     Private Sub BTNEXIT_Click(sender As Object, e As EventArgs)
@@ -66,7 +27,7 @@
 
     Private Sub BTNCLOSE_Click(sender As Object, e As EventArgs) Handles BTNCLOSE.Click
         If MsgBox("Apakah anda yakin akan keluar dari aplikasi?", vbYesNo) = vbYes Then
-            Me.Close()
+            End
         End If
     End Sub
 
@@ -115,5 +76,29 @@
 
     Private Sub BTNRUSAK_Click(sender As Object, e As EventArgs) Handles BTNRUSAK.Click
         BUKA_FORM(FR_RUSAK)
+    End Sub
+
+    Sub TAMPIL()
+        Dim STR As String = "SELECT RTRIM(Kode) AS Kode," &
+            " RTRIM(Barang) As 'Nama Barang'," &
+            " (SELECT COALESCE(SUM(Stok),0) FROM tbl_transaksi_child WHERE RTRIM(tbl_transaksi_child.Kode) = RTRIM(tbl_barang.Kode) AND (LEFT(Id_trans,1)='M' or LEFT(Id_trans,1)='R')) AS Stok" &
+            " FROM tbl_barang WHERE Barang Like '%" & TXTCARISTOK.Text & "%'" &
+            " AND (SELECT COALESCE(SUM(Stok),0) FROM tbl_transaksi_child WHERE RTRIM(tbl_transaksi_child.Kode) = RTRIM(tbl_barang.Kode) AND (LEFT(Id_trans,1)='M' or LEFT(Id_trans,1)='R')) != 0"
+        Dim DA As SqlDataAdapter
+        DA = New SqlDataAdapter(STR, CONN)
+        Dim TBL As New DataTable
+        DA.Fill(TBL)
+        DGSTOK.DataSource = TBL
+        DGSTOK.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+        DGSTOK.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+        DGSTOK.Columns(2).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+    End Sub
+
+    Private Sub TXTCARISTOK_TextChanged(sender As Object, e As EventArgs) Handles TXTCARISTOK.TextChanged
+        TAMPIL()
+    End Sub
+
+    Private Sub FR_MENU_Activated(sender As Object, e As EventArgs) Handles Me.Activated
+        TAMPIL()
     End Sub
 End Class

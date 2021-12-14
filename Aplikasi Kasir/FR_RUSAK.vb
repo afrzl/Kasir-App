@@ -57,8 +57,8 @@ Public Class FR_RUSAK
             " RTRIM((SELECT Barang FROM tbl_barang WHERE RTRIM(tbl_barang.Kode) = RTRIM(tbl_transaksi_child.Kode))) AS 'Nama Barang'," &
             " RTRIM((SELECT Nama FROM tbl_karyawan WHERE RTRIM(tbl_karyawan.Id) = RTRIM(tbl_transaksi_parent.Id_kasir))) AS 'Kasir'," &
             " tbl_transaksi_parent.Tgl AS 'Tanggal'," &
-            " RTRIM(tbl_transaksi_parent.Person) AS 'Pembeli'," &
-            " tbl_transaksi_child.Harga as 'Harga Beli'," &
+            " RTRIM(tbl_transaksi_parent.Person) AS 'Supplier'," &
+            " tbl_transaksi_child.Harga_beli as 'Rugi'," &
             " RTRIM(tbl_transaksi_child.Jumlah) AS 'QTY'" &
             " FROM tbl_transaksi_child " &
             " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_parent.Id_trans = tbl_transaksi_child.Id_trans" &
@@ -226,20 +226,25 @@ Public Class FR_RUSAK
             RD.Close()
 
             STR = "INSERT INTO tbl_transaksi_parent" &
-                " (Id_trans, Id_kasir, Tgl, Jenis, Person)" &
+                " (Id_trans, Id_kasir, Tgl, Jenis, Person, Harga, Diskon, Jumlah_item)" &
                 " VALUES('" & ID_TRANS & "'," &
                 " '" & My.Settings.ID_ACCOUNT & "'," &
                 " '" & Format(Date.Now, "MM/dd/yyyy HH:mm:ss") & "'," &
                 " 'C'," &
-                " '" & SUPPLIER & "')"
+                " '" & SUPPLIER & "'," &
+                " 0," &
+                " 0," &
+                " '" & TXTQTY.Text & "')"
             CMD = New SqlCommand(STR, CONN)
             CMD.ExecuteNonQuery()
 
-            STR = "INSERT INTO tbl_transaksi_child (Id_trans, Kode, Jumlah, Harga) VALUES" &
+            STR = "INSERT INTO tbl_transaksi_child (Id_trans, Kode, Jumlah, Harga_beli, Harga, Harga_akhir) VALUES" &
                         " ('" & ID_TRANS & "'," &
                         " '" & TXTKODE.Text & "'," &
                         " '" & TXTQTY.Text & "'," &
-                        " '" & TXTHARGA.Text & "')"
+                        " '" & CInt(TXTHARGA.Text) * CInt(TXTQTY.Text) & "'," &
+                        " 0," &
+                        " 0)"
             CMD = New SqlCommand(STR, CONN)
             CMD.ExecuteNonQuery()
 
@@ -292,6 +297,7 @@ Public Class FR_RUSAK
         If MsgBox("Apakah anda yakin akan menghapus data transaksi?", vbYesNo) = vbYes Then
 
             Dim IDTRANS As String = DGTAMPIL.Item(0, DGTAMPIL.CurrentRow.Index).Value
+            Dim NAMA_BARANG As String = DGTAMPIL.Item(2, DGTAMPIL.CurrentRow.Index).Value.ToString.Trim
 
             Dim CMD As New SqlCommand("DELETE FROM tbl_transaksi_parent WHERE Id_trans='" & IDTRANS & "'", CONN)
             CMD.ExecuteNonQuery()
@@ -301,7 +307,6 @@ Public Class FR_RUSAK
 
             Dim ID_MASUK As String = "M" + Mid(IDTRANS, 2, 9)
             Dim STOK_AWAL As Integer
-            Dim NAMA_BARANG As String
 
             Dim STR As String = "SELECT RTRIM(Stok) AS Stok, " &
                 " (SELECT Barang FROM tbl_barang WHERE RTRIM(tbl_barang.Kode) = RTRIM(tbl_transaksi_child.Kode)) AS Nama" &
@@ -327,7 +332,7 @@ Public Class FR_RUSAK
             CMD.ExecuteNonQuery()
 
             TAMPIL()
-            MsgBox("Data barang rusak berhasil dihapus, dan stok barang " & DGTAMPIL.Item(2, DGTAMPIL.CurrentRow.Index).Value & " ditambah.")
+            MsgBox("Data barang rusak berhasil dihapus, dan stok barang " & NAMA_BARANG & " ditambah.")
         End If
     End Sub
 

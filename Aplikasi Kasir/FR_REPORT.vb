@@ -69,7 +69,10 @@ Public Class FR_REPORT
 
     Dim STR As String = ""
     Dim TBL As New DataTable
+    Dim TOTALLABA As Integer = 0
+    Dim TOTALITEM As Integer = 0
     Sub TAMPIL()
+        TOTALLABA = 0
         Select Case CBJENIS.SelectedIndex
             Case 0
                 STR = "SELECT RTRIM(Id_trans) AS 'ID Transaksi'," &
@@ -86,12 +89,14 @@ Public Class FR_REPORT
                     " ORDER BY Id ASC"
             Case 1
                 STR = "SELECT RTRIM(tbl_transaksi_child.Id_trans) AS 'ID Transaksi'," &
+                    " RTRIM(tbl_transaksi_parent.Jenis) AS 'Jenis'," &
                     " tbl_transaksi_parent.Tgl AS 'Tanggal'," &
                     " RTRIM((SELECT Nama FROM tbl_karyawan WHERE Id = tbl_transaksi_parent.Id_kasir)) AS 'Kasir'," &
                     " RTRIM(tbl_transaksi_parent.Person) AS 'Pembeli'," &
                     " RTRIM(tbl_transaksi_parent.Jumlah_item) AS 'Jumlah Item'," &
                     " RTRIM(tbl_transaksi_child.Kode) As 'Kode Barang'," &
                     " RTRIM((SELECT Barang FROM tbl_barang WHERE Kode = tbl_transaksi_child.Kode)) AS 'Nama Barang'," &
+                    " (tbl_transaksi_child.Harga / tbl_transaksi_child.Jumlah)  AS 'Harga QTY'," &
                     " tbl_transaksi_child.Jumlah AS 'QTY'," &
                     " tbl_transaksi_child.Harga  AS 'Harga Jual'," &
                     " tbl_transaksi_child.Diskon AS 'Diskon'," &
@@ -101,12 +106,14 @@ Public Class FR_REPORT
                     " tbl_transaksi_parent.Harga_total AS 'Total Akhir'," &
                     " tbl_transaksi_parent.Harga_tunai AS 'Bayar'," &
                     " tbl_transaksi_parent.Harga_kembali AS 'Kembalian'," &
+                    " (tbl_transaksi_child.Harga_akhir - tbl_transaksi_child.Harga_beli) AS 'Laba Item'," &
                     " (SELECT COALESCE(SUM(tbl_transaksi_child.Harga_akhir), 0) - COALESCE(SUM(tbl_transaksi_child.Harga_beli), 0) FROM tbl_transaksi_child WHERE tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans) - tbl_transaksi_parent.Diskon AS 'Laba'" &
                     " From tbl_transaksi_child inner Join tbl_transaksi_parent On tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans" &
-                    " Where Left(tbl_transaksi_child.Id_trans, 1) = 'K'" &
+                    " Where (Left(tbl_transaksi_child.Id_trans, 1) = 'K' OR Left(tbl_transaksi_child.Id_trans, 1) = 'C')" &
                     " And tbl_transaksi_parent.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd 00:00:00") & "'" &
                     " And tbl_transaksi_parent.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd 23:59:59") & "'" &
                     " ORDER BY tbl_transaksi_child.Id ASC"
+
         End Select
 
         Dim DA As New SqlDataAdapter(STR, CONN)
@@ -114,10 +121,6 @@ Public Class FR_REPORT
         TBL.Columns.Clear()
         DA.Fill(TBL)
         DGTAMPIL.DataSource = TBL
-
-        For Each ECOLUMN As DataGridViewColumn In DGTAMPIL.Columns
-            ECOLUMN.SortMode = DataGridViewColumnSortMode.NotSortable
-        Next
 
         Select Case CBJENIS.SelectedIndex
             Case 0
@@ -132,32 +135,16 @@ Public Class FR_REPORT
 
                 DGTAMPIL.Columns(6).DefaultCellStyle.Format = "###,###,###"
             Case 1
-                DGTAMPIL.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-                DGTAMPIL.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-                DGTAMPIL.Columns(2).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-                DGTAMPIL.Columns(3).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-                DGTAMPIL.Columns(4).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-                DGTAMPIL.Columns(5).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-                DGTAMPIL.Columns(6).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-                DGTAMPIL.Columns(7).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-                DGTAMPIL.Columns(8).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-                DGTAMPIL.Columns(9).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-                DGTAMPIL.Columns(10).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-                DGTAMPIL.Columns(11).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-                DGTAMPIL.Columns(12).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-                DGTAMPIL.Columns(13).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-                DGTAMPIL.Columns(14).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-                DGTAMPIL.Columns(15).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+                For N = 0 To DGTAMPIL.Rows.Count - 1
+                    TOTALLABA += CInt(DGTAMPIL.Rows(N).Cells(19).Value)
+                    TOTALITEM += CInt(DGTAMPIL.Rows(N).Cells(5).Value)
+                Next
+
                 For N = 1 To DGTAMPIL.Rows.Count - 1
-                    DGTAMPIL.Columns(7).DefaultCellStyle.Format = "###,###,###"
-                    DGTAMPIL.Columns(8).DefaultCellStyle.Format = "###,###,###"
-                    DGTAMPIL.Columns(9).DefaultCellStyle.Format = "###,###,###"
-                    DGTAMPIL.Columns(10).DefaultCellStyle.Format = "###,###,###"
-                    DGTAMPIL.Columns(11).DefaultCellStyle.Format = "###,###,###"
-                    DGTAMPIL.Columns(12).DefaultCellStyle.Format = "###,###,###"
-                    DGTAMPIL.Columns(13).DefaultCellStyle.Format = "###,###,###"
-                    DGTAMPIL.Columns(14).DefaultCellStyle.Format = "###,###,###"
-                    DGTAMPIL.Columns(15).DefaultCellStyle.Format = "###,###,###"
+                    If DGTAMPIL.Rows(N).Cells(0).Value = DGTAMPIL.Rows(N - 1).Cells(0).Value Then
+                        TOTALLABA -= DGTAMPIL.Rows(N - 1).Cells(19).Value
+                        TOTALITEM -= DGTAMPIL.Rows(N - 1).Cells(5).Value
+                    End If
                 Next
         End Select
     End Sub
@@ -165,6 +152,38 @@ Public Class FR_REPORT
     Private Sub BTNTAMPIL_Click(sender As Object, e As EventArgs) Handles BTNTAMPIL.Click
         If CBJENIS.Text <> "" Then
             TAMPIL()
+        End If
+        If DGTAMPIL.Rows.Count > 0 Then
+            Select Case CBJENIS.SelectedIndex
+                Case 0
+                    Dim RPT As New RPT_MASUK
+                    With RPT
+                        .SetDataSource(TBL)
+                        .SetParameterValue("tgl_mulai", TXTTGLAWAL.Value)
+                        .SetParameterValue("tgl_akhir", TXTTGLAKHIR.Value)
+                    End With
+
+                    CRV.Visible = True
+                    BTNCETAK.Visible = True
+                    CRV.ReportSource = RPT
+                Case 1
+                    Dim RPT As New RPT_KELUAR
+                    With RPT
+                        .SetDataSource(TBL)
+                        .SetParameterValue("total_laba", TOTALLABA)
+                        .SetParameterValue("total_item", TOTALITEM)
+                        .SetParameterValue("tgl_mulai", TXTTGLAWAL.Value)
+                        .SetParameterValue("tgl_akhir", TXTTGLAKHIR.Value)
+                    End With
+
+                    CRV.Visible = True
+                    BTNCETAK.Visible = True
+                    CRV.ReportSource = RPT
+            End Select
+        Else
+            MsgBox("Tidak ada transaksi")
+            CRV.Visible = False
+            BTNCETAK.Visible = False
         End If
     End Sub
 
@@ -201,6 +220,8 @@ Public Class FR_REPORT
                     Dim RPT As New RPT_KELUAR
                     With RPT
                         .SetDataSource(TBL)
+                        .SetParameterValue("total_laba", TOTALLABA)
+                        .SetParameterValue("total_item", TOTALITEM)
                         .SetParameterValue("tgl_mulai", TXTTGLAWAL.Value)
                         .SetParameterValue("tgl_akhir", TXTTGLAKHIR.Value)
                     End With

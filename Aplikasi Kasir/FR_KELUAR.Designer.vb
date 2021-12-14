@@ -82,7 +82,7 @@ Partial Class FR_KELUAR
         Me.CLICK_KANAN = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.HapusBarangToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PEWAKTU = New System.Windows.Forms.Timer(Me.components)
-        Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
+        Me.PRINTNOTA = New System.Drawing.Printing.PrintDocument()
         Me.PNATAS.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
@@ -671,6 +671,9 @@ Partial Class FR_KELUAR
         'PEWAKTU
         '
         '
+        'PRINTNOTA
+        '
+        '
         'FR_KELUAR
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(120.0!, 120.0!)
@@ -753,7 +756,6 @@ Partial Class FR_KELUAR
     Friend WithEvents TXTDISKON_PERSEN As TextBox
     Friend WithEvents Label15 As Label
     Friend WithEvents TXTSUBTOTAL As TextBox
-    Friend WithEvents BackgroundWorker1 As System.ComponentModel.BackgroundWorker
     Friend WithEvents Label6 As Label
     Friend WithEvents TXTDISKON As TextBox
     Friend WithEvents Label5 As Label
@@ -764,4 +766,5 @@ Partial Class FR_KELUAR
     Friend WithEvents QTY As DataGridViewTextBoxColumn
     Friend WithEvents Diskon As DataGridViewTextBoxColumn
     Friend WithEvents TOTAL As DataGridViewTextBoxColumn
+    Friend WithEvents PRINTNOTA As Printing.PrintDocument
 End Class

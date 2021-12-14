@@ -23,6 +23,9 @@ Partial Class FR_MENU
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.PEWAKTU = New System.Windows.Forms.Timer(Me.components)
         Me.PNLEFT = New System.Windows.Forms.Panel()
         Me.BTNRUSAK = New System.Windows.Forms.Button()
@@ -50,6 +53,9 @@ Partial Class FR_MENU
         Me.BTNMINIMIZE = New System.Windows.Forms.Button()
         Me.BTNCLOSE = New System.Windows.Forms.Button()
         Me.PNCONTENT = New System.Windows.Forms.Panel()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.DGSTOK = New System.Windows.Forms.DataGridView()
+        Me.TXTCARISTOK = New System.Windows.Forms.TextBox()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.PNLEFT.SuspendLayout()
@@ -57,6 +63,8 @@ Partial Class FR_MENU
         Me.PNTOP.SuspendLayout()
         Me.PNCONTROL.SuspendLayout()
         Me.PNCONTENT.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
+        CType(Me.DGSTOK, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PEWAKTU
@@ -428,6 +436,7 @@ Partial Class FR_MENU
         '
         'PNCONTENT
         '
+        Me.PNCONTENT.Controls.Add(Me.GroupBox1)
         Me.PNCONTENT.Controls.Add(Me.Button3)
         Me.PNCONTENT.Controls.Add(Me.Button2)
         Me.PNCONTENT.Dock = System.Windows.Forms.DockStyle.Fill
@@ -435,6 +444,70 @@ Partial Class FR_MENU
         Me.PNCONTENT.Name = "PNCONTENT"
         Me.PNCONTENT.Size = New System.Drawing.Size(1096, 728)
         Me.PNCONTENT.TabIndex = 11
+        '
+        'GroupBox1
+        '
+        Me.GroupBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox1.Controls.Add(Me.DGSTOK)
+        Me.GroupBox1.Controls.Add(Me.TXTCARISTOK)
+        Me.GroupBox1.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GroupBox1.Location = New System.Drawing.Point(10, 409)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(1074, 307)
+        Me.GroupBox1.TabIndex = 19
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Stok Barang Tersedia"
+        '
+        'DGSTOK
+        '
+        Me.DGSTOK.AllowUserToAddRows = False
+        Me.DGSTOK.AllowUserToDeleteRows = False
+        Me.DGSTOK.AllowUserToResizeColumns = False
+        Me.DGSTOK.AllowUserToResizeRows = False
+        Me.DGSTOK.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.DGSTOK.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.NullValue = "-"
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DGSTOK.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        Me.DGSTOK.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DGSTOK.Location = New System.Drawing.Point(22, 75)
+        Me.DGSTOK.Name = "DGSTOK"
+        Me.DGSTOK.ReadOnly = True
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DGSTOK.RowHeadersDefaultCellStyle = DataGridViewCellStyle2
+        Me.DGSTOK.RowHeadersVisible = False
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.DGSTOK.RowsDefaultCellStyle = DataGridViewCellStyle3
+        Me.DGSTOK.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.DGSTOK.RowTemplate.Height = 30
+        Me.DGSTOK.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.DGSTOK.Size = New System.Drawing.Size(1046, 226)
+        Me.DGSTOK.TabIndex = 67
+        '
+        'TXTCARISTOK
+        '
+        Me.TXTCARISTOK.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TXTCARISTOK.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TXTCARISTOK.Location = New System.Drawing.Point(22, 39)
+        Me.TXTCARISTOK.Name = "TXTCARISTOK"
+        Me.TXTCARISTOK.Size = New System.Drawing.Size(1046, 30)
+        Me.TXTCARISTOK.TabIndex = 66
         '
         'Button3
         '
@@ -487,6 +560,9 @@ Partial Class FR_MENU
         Me.PNTOP.PerformLayout()
         Me.PNCONTROL.ResumeLayout(False)
         Me.PNCONTENT.ResumeLayout(False)
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
+        CType(Me.DGSTOK, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -519,4 +595,7 @@ Partial Class FR_MENU
     Friend WithEvents BTNDASHBOARD As Button
     Friend WithEvents BTNRUSAK As Button
     Friend WithEvents BTNRETURN As Button
+    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents DGSTOK As DataGridView
+    Friend WithEvents TXTCARISTOK As TextBox
 End Class

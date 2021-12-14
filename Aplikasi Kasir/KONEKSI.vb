@@ -1,7 +1,7 @@
 ﻿Imports System.Data.SqlClient
 Module KONEKSI
     Public CONN As SqlConnection
-    Public NAMA_LOGIN As String = "a"
+    Public NAMA_LOGIN As String = ""
 
     Public Sub KONEKAN()
         'SERVER=NAMA SERVER;USER ID=USERID;PASSWORD=PASSWORD;DATABASE=DATABASE;'
