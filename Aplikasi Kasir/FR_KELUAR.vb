@@ -19,13 +19,9 @@ Public Class FR_KELUAR
         If RD.HasRows Then
             RD.Read()
             Dim END1 As Long = CLng(RD.Item("End1"))
-            Dim START2 As Long = CLng(RD.Item("Start2"))
             Dim END2 As Long = CLng(RD.Item("End2"))
-            Dim START3 As Long = CLng(RD.Item("Start3"))
             Dim END3 As Long = CLng(RD.Item("End3"))
-            Dim START4 As Long = CLng(RD.Item("Start4"))
             Dim END4 As Long = CLng(RD.Item("End4"))
-            Dim START5 As Long = CLng(RD.Item("Start5"))
 
             Dim HARGA1 As Long = CLng(RD.Item("Harga1"))
             Dim HARGA2 As Long = CLng(RD.Item("Harga2"))
@@ -40,11 +36,11 @@ Public Class FR_KELUAR
                             If Not END4 = 0 Then
                                 If QTY <= END1 Then
                                     CARI_HARGA = HARGA1
-                                ElseIf QTY <= END2 And QTY >= START2 Then
+                                ElseIf QTY <= END2 And QTY > END1 Then
                                     CARI_HARGA = HARGA2
-                                ElseIf QTY <= END3 And QTY >= START3 Then
+                                ElseIf QTY <= END3 And QTY > END2 Then
                                     CARI_HARGA = HARGA3
-                                ElseIf QTY <= END4 And QTY >= START4 Then
+                                ElseIf QTY <= END4 And QTY > END3 Then
                                     CARI_HARGA = HARGA4
                                 Else
                                     CARI_HARGA = HARGA5
@@ -52,9 +48,9 @@ Public Class FR_KELUAR
                             Else
                                 If QTY <= END1 Then
                                     CARI_HARGA = HARGA1
-                                ElseIf QTY <= END2 And QTY >= START2 Then
+                                ElseIf QTY <= END2 And QTY > END1 Then
                                     CARI_HARGA = HARGA2
-                                ElseIf QTY <= END3 And QTY >= START3 Then
+                                ElseIf QTY <= END3 And QTY > END2 Then
                                     CARI_HARGA = HARGA3
                                 Else
                                     CARI_HARGA = HARGA4
@@ -63,7 +59,7 @@ Public Class FR_KELUAR
                         Else
                             If QTY <= END1 Then
                                 CARI_HARGA = HARGA1
-                            ElseIf QTY <= END2 And QTY >= START2 Then
+                            ElseIf QTY <= END2 And QTY > END1 Then
                                 CARI_HARGA = HARGA2
                             Else
                                 CARI_HARGA = HARGA3
@@ -241,6 +237,7 @@ Public Class FR_KELUAR
     End Sub
 
     Private Sub FR_KELUAR_Load(sender As Object, e As EventArgs) Handles Me.Load
+
         TXTKODE.Select()
         TXTKASIR.Text = NAMA_LOGIN
         TXTPEMBELI.Text = "USER"
@@ -260,7 +257,7 @@ Public Class FR_KELUAR
         ID_TRANSAKSI = AUTOID()
         Dim JUMLAH_ITEM As Double = 0
         For Each EROW As DataGridViewRow In DGTAMPIL.Rows
-            JUMLAH_ITEM += EROW.Cells("QTY").Value
+            JUMLAH_ITEM += Convert.ToDouble(EROW.Cells("QTY").Value)
         Next
 
         Dim STR As String = "INSERT INTO tbl_transaksi_parent" &
@@ -272,7 +269,7 @@ Public Class FR_KELUAR
             " '" & TXTPEMBELI.Text & "'," &
             " '" & SUBTOTAL & "'," &
             " '" & DISKON & "'," &
-            " '" & JUMLAH_ITEM & "'," &
+            " " & JUMLAH_ITEM.ToString.Replace(",", ".") & "," &
             " '" & HARGA_AKHIR & "'," &
             " '" & BAYAR & "'," &
             " '" & KEMBALIAN & "')"
@@ -287,18 +284,12 @@ Public Class FR_KELUAR
             Dim HARGA_AKHIR_PRODUK As Integer = HARGA_PRODUK - DISKON_PRODUK
             Dim HARGA_BELI_PRODUK As Integer = 0
 
-            If Not JUMLAH_PRODUK = 1 Then
-                For N As Integer = 1 To JUMLAH_PRODUK
-                    HARGA_BELI_PRODUK += CARI_HARGA_BELI(KODE_PRODUK)
-                Next N
-            Else
-                HARGA_BELI_PRODUK = CARI_HARGA_BELI(KODE_PRODUK)
-            End If
+            HARGA_BELI_PRODUK = CARI_HARGA_BELI(KODE_PRODUK, JUMLAH_PRODUK)
 
             STR = "INSERT INTO tbl_transaksi_child (Id_trans, Kode, Jumlah, Harga_beli, Harga, Diskon, Harga_akhir) VALUES" &
                     " ('" & ID_TRANSAKSI & "'," &
                     " '" & KODE_PRODUK & "'," &
-                    " '" & JUMLAH_PRODUK & "'," &
+                    " " & JUMLAH_PRODUK.ToString.Replace(",", ".") & "," &
                     " '" & HARGA_BELI_PRODUK & "'," &
                     " '" & HARGA_PRODUK & "'," &
                     " '" & DISKON_PRODUK & "'," &
@@ -308,23 +299,41 @@ Public Class FR_KELUAR
         Next
     End Sub
 
-    Private Function CARI_HARGA_BELI(ByVal KODE As String) As Integer
+    Private Function CARI_HARGA_BELI(ByVal KODE As String, ByVal QTY As Double) As Integer
         Dim ID_TRANS As String = ""
-        Dim STR As String = "SELECT TOP 1 (Id_trans) AS Id_trans, Harga, Stok FROM tbl_transaksi_child WHERE LEFT(Id_trans,1)='M' AND Kode='" & KODE & "' AND Stok != 0 ORDER BY Id ASC"
-        Dim CMD As SqlCommand
-        CMD = New SqlCommand(STR, CONN)
-        Dim RD As SqlDataReader
-        RD = CMD.ExecuteReader
-        RD.Read()
-        If RD.HasRows Then
-            Dim STOK_AKHIR As Double = RD.Item("Stok") - 1
-            ID_TRANS = RD.Item("Id_trans").ToString.Trim
-            CARI_HARGA_BELI = RD.Item("Harga")
-            RD.Close()
-            STR = "UPDATE tbl_transaksi_child SET Stok='" & STOK_AKHIR & "' WHERE Id_trans='" & ID_TRANS & "'"
-        End If
-        CMD = New SqlCommand(STR, CONN)
-        CMD.ExecuteNonQuery()
+        Dim HARGA_BELI As Integer = 0
+        Dim QUANTITY As Double = QTY
+        While QUANTITY <> 0
+            Dim STR As String = "SELECT TOP 1 (Id_trans) AS Id_trans, Harga, Stok FROM tbl_transaksi_child WHERE LEFT(Id_trans,1)='M' AND Kode='" & KODE & "' AND Stok != 0 ORDER BY Id ASC"
+            Dim CMD As SqlCommand
+            CMD = New SqlCommand(STR, CONN)
+            Dim RD As SqlDataReader
+            RD = CMD.ExecuteReader
+            If RD.HasRows Then
+                RD.Read()
+                ID_TRANS = RD.Item("Id_trans")
+                Dim STOKTERSEDIA As Double = RD.Item("Stok")
+                If STOKTERSEDIA < QUANTITY Then
+                    Dim STOK_AKHIR As Double = 0
+                    QUANTITY -= STOKTERSEDIA
+                    HARGA_BELI += RD.Item("Harga") * STOKTERSEDIA
+                    RD.Close()
+                    STR = "UPDATE tbl_transaksi_child SET Stok='" & STOK_AKHIR & "' WHERE Id_trans='" & ID_TRANS & "'"
+                    CMD = New SqlCommand(STR, CONN)
+                    CMD.ExecuteNonQuery()
+                Else
+                    Dim STOK_AKHIR As Double = STOKTERSEDIA - QUANTITY
+                    HARGA_BELI += (RD.Item("Harga") * QUANTITY)
+                    QUANTITY = 0
+                    RD.Close()
+                    STR = "UPDATE tbl_transaksi_child SET Stok=" & STOK_AKHIR.ToString.Replace(",", ".") & " WHERE Id_trans='" & ID_TRANS & "'"
+                    CMD = New SqlCommand(STR, CONN)
+                    CMD.ExecuteNonQuery()
+                End If
+                RD.Close()
+            End If
+        End While
+        Return HARGA_BELI
     End Function
 
     Private Function AUTOID() As String
@@ -412,9 +421,9 @@ Public Class FR_KELUAR
     End Sub
 
     Private Sub TXTQTY_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTQTY.KeyPress
-        'If Not ((e.KeyChar >= "0" And e.KeyChar <= "9") Or e.KeyChar = vbBack) Then
-        'e.Handled = True
-        'End If
+        If Not ((e.KeyChar >= "0" And e.KeyChar <= "9") Or e.KeyChar = vbBack Or e.KeyChar = ",") Then
+            e.Handled = True
+        End If
 
         If e.KeyChar = Chr(13) Then
             Dim HARGA As Long = 0
@@ -621,9 +630,9 @@ Public Class FR_KELUAR
         For Each EROW As DataGridViewRow In DGTAMPIL.Rows
             e.Graphics.DrawString(EROW.Cells("BARANG").Value, fontRegular, Brushes.Black, marginLeft, BarisYangSama, textLeft)
             If CInt(EROW.Cells("DISKON").Value) = 0 Then
-                e.Graphics.DrawString(EROW.Cells("QTY").Value & " " & EROW.Cells("SATUAN") & " x " & Format(CInt(EROW.Cells("HARGA").Value), "##,##0"), fontRegular, Brushes.Black, marginLeft, BarisBaru(1), textLeft)
+                e.Graphics.DrawString(Convert.ToDouble(EROW.Cells("QTY").Value) & " " & EROW.Cells("SATUAN").Value & " x " & Format(CInt(EROW.Cells("HARGA").Value), "##,##0"), fontRegular, Brushes.Black, marginLeft, BarisBaru(1), textLeft)
             Else
-                e.Graphics.DrawString(EROW.Cells("QTY").Value & " x " & Format(CInt(EROW.Cells("HARGA").Value), "##,##0") & " (Disc. " & Format(CInt(EROW.Cells("DISKON").Value), "##,##0") & ")", fontRegular, Brushes.Black, marginLeft, BarisBaru(1), textLeft)
+                e.Graphics.DrawString(Convert.ToDouble(EROW.Cells("QTY").Value) & " " & EROW.Cells("SATUAN").Value & " x " & Format(CInt(EROW.Cells("HARGA").Value), "##,##0") & " (Disc. " & Format(CInt(EROW.Cells("DISKON").Value), "##,##0") & ")", fontRegular, Brushes.Black, marginLeft, BarisBaru(1), textLeft)
             End If
             e.Graphics.DrawString(Format(CInt(EROW.Cells("TOTAL").Value), "##,##0"), fontRegular, Brushes.Black, (lebarKertas - marginRight), BarisYangSama, textRight)
             BarisBaru(1)

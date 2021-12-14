@@ -23,9 +23,9 @@ Partial Class FR_PRODUK
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.PEWAKTU = New System.Windows.Forms.Timer(Me.components)
         Me.LBTGL = New System.Windows.Forms.Label()
         Me.PNCONTROL = New System.Windows.Forms.Panel()
@@ -39,25 +39,26 @@ Partial Class FR_PRODUK
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.BTNLOGOUT = New System.Windows.Forms.Button()
         Me.PNCONTENT = New System.Windows.Forms.Panel()
+        Me.Label19 = New System.Windows.Forms.Label()
+        Me.Label17 = New System.Windows.Forms.Label()
+        Me.Label18 = New System.Windows.Forms.Label()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.Label15 = New System.Windows.Forms.Label()
         Me.BTNNEXT = New System.Windows.Forms.Button()
         Me.BTNPREV = New System.Windows.Forms.Button()
-        Me.TXTSTART5 = New System.Windows.Forms.TextBox()
+        Me.TXTEND5 = New System.Windows.Forms.TextBox()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.TXTHARGA5 = New System.Windows.Forms.TextBox()
         Me.TXTEND4 = New System.Windows.Forms.TextBox()
-        Me.TXTSTART4 = New System.Windows.Forms.TextBox()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.TXTHARGA4 = New System.Windows.Forms.TextBox()
         Me.BTNCANCEL = New System.Windows.Forms.Button()
         Me.BTNUBAH = New System.Windows.Forms.Button()
         Me.TXTEND3 = New System.Windows.Forms.TextBox()
-        Me.TXTSTART3 = New System.Windows.Forms.TextBox()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.TXTEND2 = New System.Windows.Forms.TextBox()
-        Me.TXTSTART2 = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.TXTEND1 = New System.Windows.Forms.TextBox()
-        Me.TXTSTART1 = New System.Windows.Forms.TextBox()
         Me.DGTAMPIL = New System.Windows.Forms.DataGridView()
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.HapusToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -228,25 +229,26 @@ Partial Class FR_PRODUK
         '
         'PNCONTENT
         '
+        Me.PNCONTENT.Controls.Add(Me.Label19)
+        Me.PNCONTENT.Controls.Add(Me.Label17)
+        Me.PNCONTENT.Controls.Add(Me.Label18)
+        Me.PNCONTENT.Controls.Add(Me.Label16)
+        Me.PNCONTENT.Controls.Add(Me.Label15)
         Me.PNCONTENT.Controls.Add(Me.BTNNEXT)
         Me.PNCONTENT.Controls.Add(Me.BTNPREV)
-        Me.PNCONTENT.Controls.Add(Me.TXTSTART5)
+        Me.PNCONTENT.Controls.Add(Me.TXTEND5)
         Me.PNCONTENT.Controls.Add(Me.Label13)
         Me.PNCONTENT.Controls.Add(Me.TXTHARGA5)
         Me.PNCONTENT.Controls.Add(Me.TXTEND4)
-        Me.PNCONTENT.Controls.Add(Me.TXTSTART4)
         Me.PNCONTENT.Controls.Add(Me.Label12)
         Me.PNCONTENT.Controls.Add(Me.TXTHARGA4)
         Me.PNCONTENT.Controls.Add(Me.BTNCANCEL)
         Me.PNCONTENT.Controls.Add(Me.BTNUBAH)
         Me.PNCONTENT.Controls.Add(Me.TXTEND3)
-        Me.PNCONTENT.Controls.Add(Me.TXTSTART3)
         Me.PNCONTENT.Controls.Add(Me.Label11)
         Me.PNCONTENT.Controls.Add(Me.TXTEND2)
-        Me.PNCONTENT.Controls.Add(Me.TXTSTART2)
         Me.PNCONTENT.Controls.Add(Me.Label10)
         Me.PNCONTENT.Controls.Add(Me.TXTEND1)
-        Me.PNCONTENT.Controls.Add(Me.TXTSTART1)
         Me.PNCONTENT.Controls.Add(Me.DGTAMPIL)
         Me.PNCONTENT.Controls.Add(Me.BTNSIMPAN)
         Me.PNCONTENT.Controls.Add(Me.TXTHARGA3)
@@ -266,6 +268,56 @@ Partial Class FR_PRODUK
         Me.PNCONTENT.Name = "PNCONTENT"
         Me.PNCONTENT.Size = New System.Drawing.Size(1096, 768)
         Me.PNCONTENT.TabIndex = 18
+        '
+        'Label19
+        '
+        Me.Label19.AutoSize = True
+        Me.Label19.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label19.Location = New System.Drawing.Point(428, 465)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(56, 23)
+        Me.Label19.TabIndex = 68
+        Me.Label19.Text = "/ item"
+        '
+        'Label17
+        '
+        Me.Label17.AutoSize = True
+        Me.Label17.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label17.Location = New System.Drawing.Point(428, 414)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(56, 23)
+        Me.Label17.TabIndex = 67
+        Me.Label17.Text = "/ item"
+        '
+        'Label18
+        '
+        Me.Label18.AutoSize = True
+        Me.Label18.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label18.Location = New System.Drawing.Point(428, 363)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(56, 23)
+        Me.Label18.TabIndex = 66
+        Me.Label18.Text = "/ item"
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label16.Location = New System.Drawing.Point(428, 312)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(56, 23)
+        Me.Label16.TabIndex = 65
+        Me.Label16.Text = "/ item"
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label15.Location = New System.Drawing.Point(428, 261)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(56, 23)
+        Me.Label15.TabIndex = 64
+        Me.Label15.Text = "/ item"
         '
         'BTNNEXT
         '
@@ -297,25 +349,25 @@ Partial Class FR_PRODUK
         Me.BTNPREV.Text = "<"
         Me.BTNPREV.UseVisualStyleBackColor = False
         '
-        'TXTSTART5
+        'TXTEND5
         '
-        Me.TXTSTART5.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TXTSTART5.Location = New System.Drawing.Point(97, 461)
-        Me.TXTSTART5.Name = "TXTSTART5"
-        Me.TXTSTART5.ReadOnly = True
-        Me.TXTSTART5.Size = New System.Drawing.Size(40, 30)
-        Me.TXTSTART5.TabIndex = 61
-        Me.TXTSTART5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.TXTEND5.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TXTEND5.Location = New System.Drawing.Point(97, 461)
+        Me.TXTEND5.Name = "TXTEND5"
+        Me.TXTEND5.ReadOnly = True
+        Me.TXTEND5.Size = New System.Drawing.Size(40, 30)
+        Me.TXTEND5.TabIndex = 61
+        Me.TXTEND5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label13
         '
         Me.Label13.AutoSize = True
         Me.Label13.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label13.Location = New System.Drawing.Point(57, 465)
+        Me.Label13.Location = New System.Drawing.Point(60, 465)
         Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(34, 23)
+        Me.Label13.Size = New System.Drawing.Size(22, 23)
         Me.Label13.TabIndex = 59
-        Me.Label13.Text = ">="
+        Me.Label13.Text = ">"
         '
         'TXTHARGA5
         '
@@ -336,25 +388,15 @@ Partial Class FR_PRODUK
         Me.TXTEND4.TabIndex = 10
         Me.TXTEND4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'TXTSTART4
-        '
-        Me.TXTSTART4.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TXTSTART4.Location = New System.Drawing.Point(22, 410)
-        Me.TXTSTART4.Name = "TXTSTART4"
-        Me.TXTSTART4.ReadOnly = True
-        Me.TXTSTART4.Size = New System.Drawing.Size(40, 30)
-        Me.TXTSTART4.TabIndex = 56
-        Me.TXTSTART4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
         'Label12
         '
         Me.Label12.AutoSize = True
         Me.Label12.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label12.Location = New System.Drawing.Point(71, 414)
+        Me.Label12.Location = New System.Drawing.Point(54, 414)
         Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(17, 23)
+        Me.Label12.Size = New System.Drawing.Size(34, 23)
         Me.Label12.TabIndex = 55
-        Me.Label12.Text = "-"
+        Me.Label12.Text = "<="
         '
         'TXTHARGA4
         '
@@ -405,25 +447,15 @@ Partial Class FR_PRODUK
         Me.TXTEND3.TabIndex = 8
         Me.TXTEND3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'TXTSTART3
-        '
-        Me.TXTSTART3.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TXTSTART3.Location = New System.Drawing.Point(22, 359)
-        Me.TXTSTART3.Name = "TXTSTART3"
-        Me.TXTSTART3.ReadOnly = True
-        Me.TXTSTART3.Size = New System.Drawing.Size(40, 30)
-        Me.TXTSTART3.TabIndex = 50
-        Me.TXTSTART3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
         'Label11
         '
         Me.Label11.AutoSize = True
         Me.Label11.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label11.Location = New System.Drawing.Point(71, 363)
+        Me.Label11.Location = New System.Drawing.Point(54, 363)
         Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(17, 23)
+        Me.Label11.Size = New System.Drawing.Size(34, 23)
         Me.Label11.TabIndex = 49
-        Me.Label11.Text = "-"
+        Me.Label11.Text = "<="
         '
         'TXTEND2
         '
@@ -435,25 +467,15 @@ Partial Class FR_PRODUK
         Me.TXTEND2.TabIndex = 6
         Me.TXTEND2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'TXTSTART2
-        '
-        Me.TXTSTART2.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TXTSTART2.Location = New System.Drawing.Point(22, 308)
-        Me.TXTSTART2.Name = "TXTSTART2"
-        Me.TXTSTART2.ReadOnly = True
-        Me.TXTSTART2.Size = New System.Drawing.Size(40, 30)
-        Me.TXTSTART2.TabIndex = 47
-        Me.TXTSTART2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
         'Label10
         '
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(71, 312)
+        Me.Label10.Location = New System.Drawing.Point(54, 312)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(17, 23)
+        Me.Label10.Size = New System.Drawing.Size(34, 23)
         Me.Label10.TabIndex = 46
-        Me.Label10.Text = "-"
+        Me.Label10.Text = "<="
         '
         'TXTEND1
         '
@@ -463,17 +485,6 @@ Partial Class FR_PRODUK
         Me.TXTEND1.Size = New System.Drawing.Size(40, 30)
         Me.TXTEND1.TabIndex = 4
         Me.TXTEND1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'TXTSTART1
-        '
-        Me.TXTSTART1.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TXTSTART1.Location = New System.Drawing.Point(22, 257)
-        Me.TXTSTART1.Name = "TXTSTART1"
-        Me.TXTSTART1.ReadOnly = True
-        Me.TXTSTART1.Size = New System.Drawing.Size(40, 30)
-        Me.TXTSTART1.TabIndex = 44
-        Me.TXTSTART1.Text = "1"
-        Me.TXTSTART1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'DGTAMPIL
         '
@@ -485,31 +496,31 @@ Partial Class FR_PRODUK
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DGTAMPIL.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle4.NullValue = "-"
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DGTAMPIL.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.NullValue = "-"
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DGTAMPIL.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.DGTAMPIL.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGTAMPIL.ContextMenuStrip = Me.ContextMenuStrip1
         Me.DGTAMPIL.Location = New System.Drawing.Point(24, 619)
         Me.DGTAMPIL.Name = "DGTAMPIL"
         Me.DGTAMPIL.ReadOnly = True
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DGTAMPIL.RowHeadersDefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DGTAMPIL.RowHeadersDefaultCellStyle = DataGridViewCellStyle2
         Me.DGTAMPIL.RowHeadersVisible = False
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DGTAMPIL.RowsDefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.DGTAMPIL.RowsDefaultCellStyle = DataGridViewCellStyle3
         Me.DGTAMPIL.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.DGTAMPIL.RowTemplate.Height = 30
         Me.DGTAMPIL.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
@@ -566,11 +577,11 @@ Partial Class FR_PRODUK
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(71, 261)
+        Me.Label6.Location = New System.Drawing.Point(54, 261)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(17, 23)
+        Me.Label6.Size = New System.Drawing.Size(34, 23)
         Me.Label6.TabIndex = 39
-        Me.Label6.Text = "-"
+        Me.Label6.Text = "<="
         '
         'TXTCARI
         '
@@ -951,22 +962,18 @@ Partial Class FR_PRODUK
     Friend WithEvents DGTAMPIL As DataGridView
     Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
     Friend WithEvents HapusToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents TXTSTART1 As TextBox
     Friend WithEvents Label6 As Label
     Friend WithEvents TXTEND3 As TextBox
-    Friend WithEvents TXTSTART3 As TextBox
     Friend WithEvents Label11 As Label
     Friend WithEvents TXTEND2 As TextBox
-    Friend WithEvents TXTSTART2 As TextBox
     Friend WithEvents Label10 As Label
     Friend WithEvents TXTEND1 As TextBox
     Friend WithEvents BTNUBAH As Button
     Friend WithEvents BTNCANCEL As Button
-    Friend WithEvents TXTSTART5 As TextBox
+    Friend WithEvents TXTEND5 As TextBox
     Friend WithEvents Label13 As Label
     Friend WithEvents TXTHARGA5 As TextBox
     Friend WithEvents TXTEND4 As TextBox
-    Friend WithEvents TXTSTART4 As TextBox
     Friend WithEvents Label12 As Label
     Friend WithEvents TXTHARGA4 As TextBox
     Friend WithEvents Label1 As Label
@@ -983,4 +990,9 @@ Partial Class FR_PRODUK
     Friend WithEvents BTNPREV As Button
     Friend WithEvents BTNRUSAK As Button
     Friend WithEvents BTNRETURN As Button
+    Friend WithEvents Label19 As Label
+    Friend WithEvents Label17 As Label
+    Friend WithEvents Label18 As Label
+    Friend WithEvents Label16 As Label
+    Friend WithEvents Label15 As Label
 End Class

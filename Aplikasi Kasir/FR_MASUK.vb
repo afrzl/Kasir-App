@@ -165,7 +165,6 @@ Public Class FR_MASUK
         If PNCARI.Visible = False Then
             PNCARI.Visible = True
             BTNCARI.Text = "Tutup (F1)"
-            'TXTCARI.Clear()'
             TXTCARI_BARANG.Clear()
             DGCARI.DataSource = Nothing
             TXTCARI_BARANG.Select()
@@ -185,16 +184,16 @@ Public Class FR_MASUK
         RD = CMD.ExecuteReader
         RD.Read()
         Dim HARGA_TERENDAH As Integer = 0
-        If Not RD.Item("Start5") = 0 Then
+        If RD.Item("End4") <> 0 Then
             HARGA_TERENDAH = RD.Item("Harga5")
         Else
-            If Not RD.Item("Start4") = 0 Then
+            If RD.Item("End3") <> 0 Then
                 HARGA_TERENDAH = RD.Item("Harga4")
             Else
-                If Not RD.Item("Start3") = 0 Then
+                If RD.Item("End3") <> 0 Then
                     HARGA_TERENDAH = RD.Item("Harga3")
                 Else
-                    If Not RD.Item("Start2") = 0 Then
+                    If RD.Item("End2") <> 0 Then
                         HARGA_TERENDAH = RD.Item("Harga2")
                     Else
                         HARGA_TERENDAH = RD.Item("Harga1")
