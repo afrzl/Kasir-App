@@ -613,9 +613,9 @@ Public Class FR_KELUAR
         textLeft.Alignment = StringAlignment.Near
         textRight.Alignment = StringAlignment.Far
 
-        e.Graphics.DrawString("Toko Maju Jaya", fontJudul, Brushes.Black, lebarKertas / 2, BarisYangSama, textCenter)
-        e.Graphics.DrawString("Jl. Sirandu No. 20 Comal,", fontRegular, Brushes.Black, lebarKertas / 2, BarisBaru(1), textCenter)
-        e.Graphics.DrawString("Kab. Pemalang, 52363", fontRegular, Brushes.Black, lebarKertas / 2, BarisBaru(1), textCenter)
+        e.Graphics.DrawString(NAMA_TOKO, fontJudul, Brushes.Black, lebarKertas / 2, BarisYangSama, textCenter)
+        e.Graphics.DrawString(ALAMAT_TOKO, fontRegular, Brushes.Black, lebarKertas / 2, BarisBaru(1), textCenter)
+        e.Graphics.DrawString(NO_TOKO, fontRegular, Brushes.Black, lebarKertas / 2, BarisBaru(1), textCenter)
         BarisBaru(1)
 
         e.Graphics.DrawString(LBTGL.Text, fontRegular, Brushes.Black, (lebarKertas - marginRight), BarisBaru(1), textRight)
@@ -675,6 +675,7 @@ Public Class FR_KELUAR
         Dim ps As New PrinterSettings
         PRINTNOTA.OriginAtMargins = False
         PRINTNOTA.PrinterSettings = ps
+        PRINTNOTA.PrinterSettings.PrinterName = PRINTER_NOTA
         PRINTNOTA.DefaultPageSettings.PaperSize = New PaperSize("Custom", lebarKertas, tinggiKertas + BarisBaru(DGTAMPIL.Rows.Count))
         PRINTNOTA.DefaultPageSettings.Landscape = False
         PRINTNOTA.DocumentName = "Stroke"

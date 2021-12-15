@@ -120,71 +120,38 @@ Public Class FR_REPORT
         TBL.Clear()
         TBL.Columns.Clear()
         DA.Fill(TBL)
-        DGTAMPIL.DataSource = TBL
-
-        Select Case CBJENIS.SelectedIndex
-            Case 0
-                DGTAMPIL.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-                DGTAMPIL.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-                DGTAMPIL.Columns(2).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-                DGTAMPIL.Columns(3).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-                DGTAMPIL.Columns(4).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-                DGTAMPIL.Columns(5).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-                DGTAMPIL.Columns(6).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-                DGTAMPIL.Columns(7).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-
-                DGTAMPIL.Columns(6).DefaultCellStyle.Format = "###,###,###"
-            Case 1
-                For N = 0 To DGTAMPIL.Rows.Count - 1
-                    TOTALLABA += CInt(DGTAMPIL.Rows(N).Cells(19).Value)
-                    TOTALITEM += CInt(DGTAMPIL.Rows(N).Cells(5).Value)
-                Next
-
-                For N = 1 To DGTAMPIL.Rows.Count - 1
-                    If DGTAMPIL.Rows(N).Cells(0).Value = DGTAMPIL.Rows(N - 1).Cells(0).Value Then
-                        TOTALLABA -= DGTAMPIL.Rows(N - 1).Cells(19).Value
-                        TOTALITEM -= DGTAMPIL.Rows(N - 1).Cells(5).Value
-                    End If
-                Next
-        End Select
     End Sub
 
     Private Sub BTNTAMPIL_Click(sender As Object, e As EventArgs) Handles BTNTAMPIL.Click
         If CBJENIS.Text <> "" Then
             TAMPIL()
         End If
-        If DGTAMPIL.Rows.Count > 0 Then
-            Select Case CBJENIS.SelectedIndex
-                Case 0
-                    Dim RPT As New RPT_MASUK
-                    With RPT
-                        .SetDataSource(TBL)
-                        .SetParameterValue("tgl_mulai", TXTTGLAWAL.Value)
-                        .SetParameterValue("tgl_akhir", TXTTGLAKHIR.Value)
-                    End With
+        Select Case CBJENIS.SelectedIndex
+            Case 0
+                Dim RPT As New RPT_MASUK
+                With RPT
+                    .SetDataSource(TBL)
+                    .SetParameterValue("tgl_mulai", TXTTGLAWAL.Value)
+                    .SetParameterValue("tgl_akhir", TXTTGLAKHIR.Value)
+                End With
 
-                    CRV.Visible = True
-                    BTNCETAK.Visible = True
-                    CRV.ReportSource = RPT
-                Case 1
-                    Dim RPT As New RPT_KELUAR
-                    With RPT
-                        .SetDataSource(TBL)
-                        .SetParameterValue("total_laba", TOTALLABA)
-                        .SetParameterValue("total_item", TOTALITEM)
-                        .SetParameterValue("tgl_mulai", TXTTGLAWAL.Value)
-                        .SetParameterValue("tgl_akhir", TXTTGLAKHIR.Value)
-                    End With
+                CRV.Visible = True
+                BTNCETAK.Visible = True
+                CRV.ReportSource = RPT
+            Case 1
+                Dim RPT As New RPT_KELUAR
+                With RPT
+                    .SetDataSource(TBL)
+                    .SetParameterValue("total_laba", TOTALLABA)
+                    .SetParameterValue("total_item", TOTALITEM)
+                    .SetParameterValue("tgl_mulai", TXTTGLAWAL.Value)
+                    .SetParameterValue("tgl_akhir", TXTTGLAKHIR.Value)
+                End With
 
-                    CRV.Visible = True
-                    BTNCETAK.Visible = True
-                    CRV.ReportSource = RPT
-            End Select
-        Else
-            MsgBox("Tidak ada transaksi")
-            CRV.Visible = False
-            BTNCETAK.Visible = False
-        End If
+                CRV.Visible = True
+                BTNCETAK.Visible = True
+                CRV.ReportSource = RPT
+        End Select
     End Sub
 
     Private Sub TXTTGLAWAL_ValueChanged(sender As Object, e As EventArgs) Handles TXTTGLAWAL.ValueChanged
@@ -201,38 +168,7 @@ Public Class FR_REPORT
     End Sub
 
     Private Sub BTNCETAK_Click(sender As Object, e As EventArgs) Handles BTNCETAK.Click
-        If DGTAMPIL.Rows.Count > 0 Then
-            Select Case CBJENIS.SelectedIndex
-                Case 0
-                    Dim RPT As New RPT_MASUK
-                    With RPT
-                        .SetDataSource(TBL)
-                        .SetParameterValue("tgl_mulai", TXTTGLAWAL.Value)
-                        .SetParameterValue("tgl_akhir", TXTTGLAKHIR.Value)
-                    End With
 
-                    Dim FR As New FR_PREVIEW
-                    With FR
-                        .CRV.ReportSource = RPT
-                        .ShowDialog()
-                    End With
-                Case 1
-                    Dim RPT As New RPT_KELUAR
-                    With RPT
-                        .SetDataSource(TBL)
-                        .SetParameterValue("total_laba", TOTALLABA)
-                        .SetParameterValue("total_item", TOTALITEM)
-                        .SetParameterValue("tgl_mulai", TXTTGLAWAL.Value)
-                        .SetParameterValue("tgl_akhir", TXTTGLAKHIR.Value)
-                    End With
-
-                    Dim FR As New FR_PREVIEW
-                    With FR
-                        .CRV.ReportSource = RPT
-                        .ShowDialog()
-                    End With
-            End Select
-        End If
     End Sub
 
     Private Sub BTNRETURN_Click(sender As Object, e As EventArgs) Handles BTNRETURN.Click

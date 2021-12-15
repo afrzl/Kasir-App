@@ -248,8 +248,6 @@
     <Compile Include="nitip.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Printer.vb" />
-    <Compile Include="PrintingFormat.vb" />
     <Compile Include="RPT_KELUAR.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

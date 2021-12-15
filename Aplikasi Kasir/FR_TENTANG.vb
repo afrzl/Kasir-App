@@ -1,4 +1,6 @@
 ﻿Imports System.Data.SqlClient
+Imports System.Drawing.Printing
+
 Public Class FR_TENTANG
     Sub BUKA_FORM(ByVal FR As Form)
         FR.Show()
@@ -41,6 +43,8 @@ Public Class FR_TENTANG
         LBTGL.Text = Format(Date.Now, "dd MMMM yyyy HH:mm:ss")
         PEWAKTU.Enabled = True
         LBLUSER.Text = NAMA_LOGIN
+        KONDISI_AWAL()
+        KONDISI_AWAL_TOKO()
         TAMPIL()
     End Sub
 
@@ -73,11 +77,40 @@ Public Class FR_TENTANG
             LBTGLLAHIR.Text = RD.Item("Tgl_lahir")
             LBJK.Text = JK
             LBNO.Text = RD.Item("No_hp").ToString.Trim
+
+            TXTID.Text = LBID.Text
+            TXTNAMA.Text = LBNAMA.Text
+            TXTROLE.Text = LBROLE.Text
+            TXTALAMAT.Text = LBALAMAT.Text
+            TXTTGL.Value = LBTGLLAHIR.Text
+            TXTJK.Text = LBJK.Text
+            TXTNO.Text = LBNO.Text
             RD.Close()
         Else
             RD.Close()
         End If
         RD.Close()
+
+        AMBIL_DATA_REGISTRY()
+        LBNAMATOKO.Text = NAMA_TOKO
+        LBALAMATTOKO.Text = ALAMAT_TOKO
+        LBNOTOKO.Text = NO_TOKO
+        LBPRINTER_NOTA.Text = PRINTER_NOTA
+
+        TXTNAMATOKO.Text = LBNAMATOKO.Text
+        TXTALAMATTOKO.Text = LBALAMATTOKO.Text
+        TXTNOTOKO.Text = LBNOTOKO.Text
+        TXTPRINTER_NOTA.Text = LBPRINTER_NOTA.Text
+    End Sub
+
+    Sub TAMPIL_TOKO()
+        LBNAMATOKO.Text = My.Settings.NAMA_TOKO
+        LBALAMATTOKO.Text = My.Settings.ALAMAT_TOKO
+        LBNOTOKO.Text = My.Settings.NOHP_TOKO
+
+        TXTNAMATOKO.Text = My.Settings.NAMA_TOKO
+        TXTALAMATTOKO.Text = My.Settings.ALAMAT_TOKO
+        TXTNOTOKO.Text = My.Settings.NOHP_TOKO
     End Sub
 
     Private Sub BTNSIMPAN_Click(sender As Object, e As EventArgs) Handles BTNSIMPAN.Click
@@ -143,5 +176,211 @@ Public Class FR_TENTANG
 
     Private Sub BTNMINIMIZE_Click(sender As Object, e As EventArgs) Handles BTNMINIMIZE.Click
         Me.WindowState = FormWindowState.Minimized
+    End Sub
+
+    Sub KONDISI_AWAL()
+        LBID.Visible = True
+        LBNAMA.Visible = True
+        LBROLE.Visible = True
+        LBALAMAT.Visible = True
+        LBTGLLAHIR.Visible = True
+        LBJK.Visible = True
+        LBNO.Visible = True
+
+        TXTID.Visible = False
+        TXTNAMA.Visible = False
+        TXTROLE.Visible = False
+        TXTALAMAT.Visible = False
+        TXTTGL.Visible = False
+        TXTJK.Visible = False
+        TXTNO.Visible = False
+        BTNUBAH.Visible = True
+        BTNSIMPANDIRI.Visible = False
+        BTNCANCELDIRI.Visible = False
+    End Sub
+
+    Sub KONDISI_EDIT()
+        LBID.Visible = False
+        LBNAMA.Visible = False
+        LBROLE.Visible = False
+        LBALAMAT.Visible = False
+        LBTGLLAHIR.Visible = False
+        LBJK.Visible = False
+        LBNO.Visible = False
+
+        TXTID.Visible = True
+        TXTNAMA.Visible = True
+        TXTROLE.Visible = True
+        TXTALAMAT.Visible = True
+        TXTTGL.Visible = True
+        TXTJK.Visible = True
+        TXTNO.Visible = True
+        BTNUBAH.Visible = False
+        BTNSIMPANDIRI.Visible = True
+        BTNCANCELDIRI.Visible = True
+    End Sub
+
+    Sub KONDISI_AWAL_TOKO()
+        LBNAMATOKO.Visible = True
+        LBALAMATTOKO.Visible = True
+        LBNOTOKO.Visible = True
+
+        TXTNAMATOKO.Visible = False
+        TXTALAMATTOKO.Visible = False
+        TXTNOTOKO.Visible = False
+
+        BTNUBAHTOKO.Visible = True
+        BTNSIMPANTOKO.Visible = False
+        BTNCANCELTOKO.Visible = False
+
+        LBPRINTER_NOTA.Visible = True
+        TXTPRINTER_NOTA.Visible = False
+    End Sub
+
+    Sub KONDISI_EDIT_TOKO()
+        LBNAMATOKO.Visible = False
+        LBALAMATTOKO.Visible = False
+        LBNOTOKO.Visible = False
+
+        TXTNAMATOKO.Visible = True
+        TXTALAMATTOKO.Visible = True
+        TXTNOTOKO.Visible = True
+
+        BTNUBAHTOKO.Visible = False
+        BTNSIMPANTOKO.Visible = True
+        BTNCANCELTOKO.Visible = True
+
+        LBPRINTER_NOTA.Visible = False
+        TXTPRINTER_NOTA.Visible = True
+
+        TXTPRINTER_NOTA.Items.Clear()
+        For Each NAMA_PRINTER As String In PrinterSettings.InstalledPrinters
+            TXTPRINTER_NOTA.Items.Add(NAMA_PRINTER)
+        Next
+    End Sub
+
+    Private Sub BTNUBAH_Click(sender As Object, e As EventArgs) Handles BTNUBAH.Click
+        TAMPIL()
+        KONDISI_EDIT()
+        TXTNAMA.Select()
+    End Sub
+
+    Private Sub BTNCANCELDIRI_Click(sender As Object, e As EventArgs) Handles BTNCANCELDIRI.Click
+        TAMPIL()
+        KONDISI_AWAL()
+    End Sub
+
+    Private Sub TXTNO_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTNO.KeyPress
+        If Not ((e.KeyChar >= "0" And e.KeyChar <= "9") Or e.KeyChar = vbBack) Then
+            e.Handled = True
+        End If
+        If e.KeyChar = Chr(13) Then
+            BTNSIMPANDIRI.Select()
+        End If
+    End Sub
+
+    Private Sub TXTNAMA_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTNAMA.KeyPress
+        If e.KeyChar = Chr(13) Then
+            TXTALAMAT.Select()
+        End If
+    End Sub
+
+    Private Sub TXTALAMAT_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTALAMAT.KeyPress
+        If e.KeyChar = Chr(13) Then
+            TXTJK.Select()
+        End If
+    End Sub
+
+    Private Sub TXTJK_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTJK.KeyPress
+        If e.KeyChar = Chr(13) Then
+            TXTNO.Select()
+        End If
+    End Sub
+
+    Private Sub BTNSIMPANDIRI_Click(sender As Object, e As EventArgs) Handles BTNSIMPANDIRI.Click
+        If TXTNAMA.Text = "" Or TXTROLE.Text = "" Then
+            MsgBox("Data tidak lengkap!")
+        Else
+            Dim jk As String = ""
+            If TXTJK.Text = "Laki-laki" Then
+                jk = "L"
+            ElseIf TXTJK.Text = "Perempuan" Then
+                jk = "P"
+            End If
+
+            Dim STR As String
+            Dim CMD As SqlCommand
+
+            STR = "SELECT * FROM tbl_karyawan WHERE Id='" & TXTID.Text & "'"
+            CMD = New SqlCommand(STR, CONN)
+            Dim RD As SqlDataReader
+            RD = CMD.ExecuteReader
+            If RD.HasRows Then
+                RD.Close()
+                STR = "UPDATE tbl_karyawan SET Nama='" & TXTNAMA.Text &
+                    "',Alamat='" & TXTALAMAT.Text &
+                    "',Tgl_lahir='" & Format(TXTTGL.Value, "MM/dd/yyyy") &
+                    "',JK='" & jk &
+                    "',No_hp='" & TXTNO.Text &
+                    "' WHERE Id='" & TXTID.Text & "'"
+            Else
+                RD.Close()
+                MsgBox("Error")
+            End If
+            CMD = New SqlCommand(STR, CONN)
+            CMD.ExecuteNonQuery()
+            MsgBox("Data berhasil diri berhasil diperbarui")
+            TAMPIL()
+            KONDISI_AWAL()
+        End If
+    End Sub
+
+    Private Sub BTNUBAHTOKO_Click(sender As Object, e As EventArgs) Handles BTNUBAHTOKO.Click
+        KONDISI_EDIT_TOKO()
+        TAMPIL()
+        TXTNAMATOKO.Select()
+    End Sub
+
+    Private Sub BTNCANCELTOKO_Click(sender As Object, e As EventArgs) Handles BTNCANCELTOKO.Click
+        TAMPIL()
+        KONDISI_AWAL_TOKO()
+    End Sub
+
+    Private Sub BTNSIMPANTOKO_Click(sender As Object, e As EventArgs) Handles BTNSIMPANTOKO.Click
+        Dim NOTOKO As Integer = 0
+        If TXTNOTOKO.Text <> "" Then
+            NOTOKO = 1
+        End If
+        If TXTNAMATOKO.Text = "" Or TXTALAMATTOKO.Text = "" Or NOTOKO = 0 Then
+            MsgBox("Data tidak lengkap!")
+        Else
+            If MsgBox("Apakah anda yakin akan mengubah data toko?", vbYesNo) = vbYes Then
+                MASUK_REGISTRY(TXTNAMATOKO.Text, TXTALAMATTOKO.Text, TXTNOTOKO.Text, TXTPRINTER_NOTA.Text)
+                KONDISI_AWAL_TOKO()
+                TAMPIL()
+            End If
+        End If
+    End Sub
+
+    Private Sub TXTNAMATOKO_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTNAMATOKO.KeyPress
+        If e.KeyChar = Chr(13) Then
+            TXTALAMATTOKO.Select()
+        End If
+    End Sub
+
+    Private Sub TXTALAMATTOKO_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTALAMATTOKO.KeyPress
+        If e.KeyChar = Chr(13) Then
+            TXTNOTOKO.Select()
+        End If
+    End Sub
+
+    Private Sub TXTNOTOKO_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTNOTOKO.KeyPress
+        If e.KeyChar = Chr(13) Then
+            BTNSIMPANTOKO.Select()
+        End If
+
+        If Not ((e.KeyChar >= "0" And e.KeyChar <= "9") Or e.KeyChar = vbBack) Then
+            e.Handled = True
+        End If
     End Sub
 End Class
