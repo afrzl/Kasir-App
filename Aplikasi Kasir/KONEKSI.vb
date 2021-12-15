@@ -2,6 +2,7 @@
 Module KONEKSI
     Public CONN As SqlConnection
     Public NAMA_LOGIN As String = ""
+    Public ROLE As Integer = 0
 
     Public NAMA_TOKO As String
     Public ALAMAT_TOKO As String
@@ -43,5 +44,7 @@ Module KONEKSI
             End With
             End
         End Try
+
+        AMBIL_DATA_REGISTRY()
     End Sub
 End Module

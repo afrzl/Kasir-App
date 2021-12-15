@@ -18,6 +18,7 @@ Public Class FR_LOGIN
                 If RD.Item("Role") = 1 Then
                     My.Settings.ID_ACCOUNT = TXTID.Text
                     NAMA_LOGIN = RD.Item("Nama").ToString.Trim
+                    ROLE = RD.Item("Role")
                     RD.Close()
 
                     Dim FR As New FR_MENU
@@ -26,7 +27,19 @@ Public Class FR_LOGIN
                 ElseIf RD.Item("Role") = 2 Then
                     My.Settings.ID_ACCOUNT = TXTID.Text
                     NAMA_LOGIN = RD.Item("Nama").ToString.Trim
-                    MsgBox("Kasir")
+                    ROLE = RD.Item("Role")
+                    RD.Close()
+
+                    MsgBox("Admin Barang")
+                ElseIf RD.Item("Role") = 3 Then
+                    My.Settings.ID_ACCOUNT = TXTID.Text
+                    NAMA_LOGIN = RD.Item("Nama").ToString.Trim
+                    ROLE = RD.Item("Role")
+                    RD.Close()
+
+                    Dim FR As New FR_KASIR_DASHBOARD
+                    FR.Show()
+                    Me.Hide()
                 End If
                 RD.Close()
             Else

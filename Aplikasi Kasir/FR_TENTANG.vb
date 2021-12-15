@@ -60,6 +60,8 @@ Public Class FR_TENTANG
             Dim ROLE As String
             If RD.Item("Role") = 1 Then
                 ROLE = "Administrator"
+            ElseIf RD.Item("Role") = 2 Then
+                ROLE = "Admin Barang"
             Else
                 ROLE = "Kasir"
             End If

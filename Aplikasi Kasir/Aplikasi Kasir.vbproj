@@ -226,6 +226,12 @@
     <Compile Include="FR_TENTANG.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FR_KASIR_DASHBOARD.Designer.vb">
+      <DependentUpon>FR_KASIR_DASHBOARD.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FR_KASIR_DASHBOARD.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="KONEKSI.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -338,6 +344,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FR_TENTANG.resx">
       <DependentUpon>FR_TENTANG.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FR_KASIR_DASHBOARD.resx">
+      <DependentUpon>FR_KASIR_DASHBOARD.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\licenses.licx" />
     <EmbeddedResource Include="My Project\Resources.resx">

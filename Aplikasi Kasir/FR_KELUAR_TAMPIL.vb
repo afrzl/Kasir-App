@@ -51,4 +51,28 @@ Public Class FR_KELUAR_TAMPIL
     Private Sub TXTCARI_TextChanged(sender As Object, e As EventArgs) Handles TXTCARI.TextChanged
         TAMPIL()
     End Sub
+
+    Private Sub DGCARI_KeyPress(sender As Object, e As KeyPressEventArgs) Handles DGCARI.KeyPress
+        On Error Resume Next
+        If e.KeyChar = ChrW(Keys.Enter) And DGCARI.Rows.Count - 1 = DGCARI.CurrentRow.Index Then
+            DGCARI.CurrentCell = DGCARI.Rows(DGCARI.CurrentRow.Index).Cells(0)
+            FR_KELUAR.TXTKODE.Text = DGCARI.SelectedCells(0).Value
+            FR_KELUAR.TXTKODE.Select()
+            FR_KELUAR.Enabled = True
+            Me.Close()
+        ElseIf e.KeyChar = ChrW(Keys.Enter) Then
+            DGCARI.CurrentCell = DGCARI.Rows(DGCARI.CurrentRow.Index - 1).Cells(0)
+            DGCARI.CurrentCell = DGCARI.Rows(DGCARI.CurrentRow.Index).Cells(0)
+            FR_KELUAR.TXTKODE.Text = DGCARI.SelectedCells(0).Value
+            FR_KELUAR.TXTKODE.Select()
+            FR_KELUAR.Enabled = True
+            Me.Close()
+        End If
+    End Sub
+
+    Private Sub TXTCARI_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTCARI.KeyPress
+        If e.KeyChar = Chr(13) Then
+            DGCARI.Select()
+        End If
+    End Sub
 End Class

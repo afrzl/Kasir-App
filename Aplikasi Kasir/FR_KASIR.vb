@@ -36,6 +36,8 @@ Public Class FR_KASIR
 
             If DGTAMPIL.Rows(N).Cells(6).Value = 1 Then
                 DGTAMPIL.Rows(N).Cells(6).Value = "Administrator"
+            ElseIf DGTAMPIL.Rows(N).Cells(6).Value = 2 Then
+                DGTAMPIL.Rows(N).Cells(6).Value = "Admin Barang"
             Else
                 DGTAMPIL.Rows(N).Cells(6).Value = "Kasir"
             End If
@@ -89,8 +91,10 @@ Public Class FR_KASIR
                 TXTJK.Text = "Perempuan"
             End If
             If RD.Item("Role") = 1 Then
-                CBROLE.Text = "Admin"
+                CBROLE.Text = "Administrator"
             ElseIf RD.Item("Role") = 2 Then
+                CBROLE.Text = "Admin barang"
+            ElseIf RD.Item("Role") = 3 Then
                 CBROLE.Text = "Kasir"
             End If
             TXTNOHP.Text = RD.Item("No_hp").ToString.Trim
@@ -120,10 +124,12 @@ Public Class FR_KASIR
             End If
 
             Dim role As Integer
-            If CBROLE.Text = "Admin" Then
+            If CBROLE.SelectedIndex = 0 Then
                 role = 1
-            ElseIf CBROLE.Text = "Kasir" Then
+            ElseIf CBROLE.SelectedIndex = 1 Then
                 role = 2
+            ElseIf CBROLE.SelectedIndex = 2 Then
+                role = 3
             End If
 
             Dim ID As String = AUTOID()
@@ -162,11 +168,7 @@ Public Class FR_KASIR
             CMD = New SqlCommand(STR, CONN)
             CMD.ExecuteNonQuery()
             MsgBox("Data berhasil disimpan dengan ID : " & ID)
-            TXTID.Visible = False
-            LBID.Visible = False
-            TXTID.Text = ""
-            TXTNAMA.Select()
-            TAMPIL()
+            KONDISI_AWAL()
         End If
     End Sub
 
@@ -195,7 +197,7 @@ Public Class FR_KASIR
         End If
     End Sub
 
-    Private Sub BTNREFRESH_Click(sender As Object, e As EventArgs) Handles BTNREFRESH.Click
+    Sub KONDISI_AWAL()
         TXTID.Visible = False
         LBID.Visible = False
         TXTID.Text = ""
@@ -207,6 +209,13 @@ Public Class FR_KASIR
         TXTTGL.Value = DateTime.Now
         CBROLE.SelectedIndex = -1
         TXTJK.SelectedIndex = -1
+        TXTID.Select()
+
+        TAMPIL()
+    End Sub
+
+    Private Sub BTNREFRESH_Click(sender As Object, e As EventArgs) Handles BTNREFRESH.Click
+        KONDISI_AWAL()
     End Sub
 
     Private Sub TXTNAMA_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTNAMA.KeyPress

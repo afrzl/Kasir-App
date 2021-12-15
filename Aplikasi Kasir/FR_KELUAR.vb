@@ -328,9 +328,14 @@ Public Class FR_KELUAR
     End Function
 
     Private Sub BTNCLOSE_Click(sender As Object, e As EventArgs) Handles BTNCLOSE.Click
-        Dim FR As New FR_MENU
+        Dim FR As Form
+        If ROLE = 1 Then
+            FR = New FR_MENU
+        ElseIf ROLE = 3 Then
+            FR = New FR_KASIR_DASHBOARD
+        End If
         FR.Show()
-        Me.Hide()
+        Me.Close()
     End Sub
 
     Private Sub TXTDISKON_PERSEN_TextChanged(sender As Object, e As EventArgs) Handles TXTDISKON_PERSEN.TextChanged
@@ -485,21 +490,37 @@ Public Class FR_KELUAR
 
     Private Sub TXTKODE_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTKODE.KeyPress
         If e.KeyChar = Chr(13) Then
-            TXTQTY.Text = 1
-            Dim JUMLAH_QTY As Integer = 0
-            If Not TXTQTY.Text = "" Then
-                JUMLAH_QTY = CInt(TXTQTY.Text)
-            End If
+            Dim STR As String = "SELECT Barang" &
+                                " From tbl_barang WHERE kode='" & TXTKODE.Text & "'"
+            Dim CMD As SqlCommand
+            CMD = New SqlCommand(Str, CONN)
+            Dim RD As SqlDataReader
+            RD = CMD.ExecuteReader
 
-            TXTHARGA.Text = CARI_HARGA(JUMLAH_QTY)
-            If CARI_STOK(TXTKODE.Text) < 0 Then
-                MsgBox("Stok barang tidak mencukupi!")
-                TXTKODE.Clear()
+            If RD.HasRows Then
+                RD.Close()
+                TXTQTY.Text = 1
+                Dim JUMLAH_QTY As Integer = 0
+                If Not TXTQTY.Text = "" Then
+                    JUMLAH_QTY = CInt(TXTQTY.Text)
+                End If
+
+                TXTHARGA.Text = CARI_HARGA(JUMLAH_QTY)
+                If CARI_STOK(TXTKODE.Text) < 0 Then
+                    MsgBox("Stok barang tidak mencukupi!")
+                    TXTKODE.Clear()
+                Else
+                    MASUK_DATA()
+                    TXTKODE.Clear()
+                    TXTKODE.Select()
+                End If
             Else
-                MASUK_DATA()
-                TXTKODE.Clear()
+                RD.Close()
+                MsgBox("Barang tidak ditemukan!")
+                TXTKODE.Text = ""
                 TXTKODE.Select()
             End If
+            RD.Close()
         End If
 
         Dim KeyAscii As Short = Asc(e.KeyChar)
