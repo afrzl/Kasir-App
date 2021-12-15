@@ -177,11 +177,11 @@
     <Compile Include="FR_MASUK.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FR_MENU.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="FR_MENU.Designer.vb">
       <DependentUpon>FR_MENU.vb</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FR_MENU.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FR_LOGIN.Designer.vb">
@@ -247,6 +247,32 @@
     </Compile>
     <Compile Include="nitip.vb">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Printer.vb" />
+    <Compile Include="PrintingFormat.vb" />
+    <Compile Include="RPT_GRAFIK_LABA_BULANAN.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RPT_GRAFIK_LABA_BULANAN.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="RPT_GRAFIK_LABA_HARIAN.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RPT_GRAFIK_LABA_HARIAN.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="RPT_GRAFIK_PENJUALAN_BULANAN.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RPT_GRAFIK_PENJUALAN_BULANAN.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="RPT_GRAFIK_PENJUALAN_HARIAN.vb">
+      <DependentUpon>RPT_GRAFIK_PENJUALAN_HARIAN.rpt</DependentUpon>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="RPT_KELUAR.vb">
       <AutoGen>True</AutoGen>
@@ -322,6 +348,22 @@
     </EmbeddedResource>
     <EmbeddedResource Include="nitip.resx">
       <DependentUpon>nitip.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RPT_GRAFIK_LABA_BULANAN.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RPT_GRAFIK_LABA_BULANAN.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RPT_GRAFIK_LABA_HARIAN.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RPT_GRAFIK_LABA_HARIAN.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RPT_GRAFIK_PENJUALAN_BULANAN.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RPT_GRAFIK_PENJUALAN_BULANAN.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RPT_GRAFIK_PENJUALAN_HARIAN.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RPT_GRAFIK_PENJUALAN_HARIAN.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="RPT_KELUAR.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

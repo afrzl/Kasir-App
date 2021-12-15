@@ -113,42 +113,6 @@ Namespace My
                 Me("ID_ACCOUNT") = value
             End Set
         End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-        Public Property NAMA_TOKO() As String
-            Get
-                Return CType(Me("NAMA_TOKO"),String)
-            End Get
-            Set
-                Me("NAMA_TOKO") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-        Public Property ALAMAT_TOKO() As String
-            Get
-                Return CType(Me("ALAMAT_TOKO"),String)
-            End Get
-            Set
-                Me("ALAMAT_TOKO") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-        Public Property NOHP_TOKO() As String
-            Get
-                Return CType(Me("NOHP_TOKO"),String)
-            End Get
-            Set
-                Me("NOHP_TOKO") = value
-            End Set
-        End Property
     End Class
 End Namespace
 

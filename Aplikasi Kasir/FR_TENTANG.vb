@@ -104,13 +104,13 @@ Public Class FR_TENTANG
     End Sub
 
     Sub TAMPIL_TOKO()
-        LBNAMATOKO.Text = My.Settings.NAMA_TOKO
-        LBALAMATTOKO.Text = My.Settings.ALAMAT_TOKO
-        LBNOTOKO.Text = My.Settings.NOHP_TOKO
+        LBNAMATOKO.Text = NAMA_TOKO
+        LBALAMATTOKO.Text = ALAMAT_TOKO
+        LBNOTOKO.Text = NO_TOKO
 
-        TXTNAMATOKO.Text = My.Settings.NAMA_TOKO
-        TXTALAMATTOKO.Text = My.Settings.ALAMAT_TOKO
-        TXTNOTOKO.Text = My.Settings.NOHP_TOKO
+        TXTNAMATOKO.Text = LBNAMATOKO.Text
+        TXTALAMATTOKO.Text = LBALAMATTOKO.Text
+        TXTNOTOKO.Text = LBNOTOKO.Text
     End Sub
 
     Private Sub BTNSIMPAN_Click(sender As Object, e As EventArgs) Handles BTNSIMPAN.Click

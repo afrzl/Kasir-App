@@ -506,7 +506,7 @@ Partial Class FR_REPORT
         Me.CBJENIS.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CBJENIS.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CBJENIS.FormattingEnabled = True
-        Me.CBJENIS.Items.AddRange(New Object() {"Transaksi Masuk", "Transaksi Keluar"})
+        Me.CBJENIS.Items.AddRange(New Object() {"Transaksi Masuk", "Transaksi Keluar", "Grafik Penjualan Harian", "Grafik Penjualan Bulanan", "Grafik Laba Harian", "Grafik Laba Bulanan"})
         Me.CBJENIS.Location = New System.Drawing.Point(138, 15)
         Me.CBJENIS.Name = "CBJENIS"
         Me.CBJENIS.Size = New System.Drawing.Size(208, 31)

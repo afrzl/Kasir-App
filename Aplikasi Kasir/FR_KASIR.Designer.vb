@@ -478,7 +478,7 @@ Partial Class FR_KASIR
         Me.BTNTENTANG.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
         Me.BTNTENTANG.Size = New System.Drawing.Size(270, 35)
         Me.BTNTENTANG.TabIndex = 37
-        Me.BTNTENTANG.Text = "     Setting"
+        Me.BTNTENTANG.Text = "     Kasir"
         Me.BTNTENTANG.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.BTNTENTANG.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.BTNTENTANG.UseVisualStyleBackColor = True

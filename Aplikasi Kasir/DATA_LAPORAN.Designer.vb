@@ -669,7 +669,7 @@ Partial Public Class DATA_LAPORAN
         
         Private columnPembeli As Global.System.Data.DataColumn
         
-        Private columnJumlah_Item As Global.System.Data.DataColumn
+        Private columnJumlah_item As Global.System.Data.DataColumn
         
         Private columnKode_Barang As Global.System.Data.DataColumn
         
@@ -770,9 +770,9 @@ Partial Public Class DATA_LAPORAN
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public ReadOnly Property Jumlah_ItemColumn() As Global.System.Data.DataColumn
+        Public ReadOnly Property Jumlah_itemColumn() As Global.System.Data.DataColumn
             Get
-                Return Me.columnJumlah_Item
+                Return Me.columnJumlah_item
             End Get
         End Property
         
@@ -938,7 +938,7 @@ Partial Public Class DATA_LAPORAN
                     ByVal Tanggal As Date,  _
                     ByVal Kasir As String,  _
                     ByVal Pembeli As String,  _
-                    ByVal Jumlah_Item As Integer,  _
+                    ByVal Jumlah_item As Decimal,  _
                     ByVal Kode_Barang As String,  _
                     ByVal Nama_Barang As String,  _
                     ByVal Harga_Jual As Integer,  _
@@ -950,12 +950,12 @@ Partial Public Class DATA_LAPORAN
                     ByVal Bayar As Integer,  _
                     ByVal Kembalian As Integer,  _
                     ByVal Laba As Integer,  _
-                    ByVal QTY As Integer,  _
+                    ByVal QTY As Double,  _
                     ByVal Harga_QTY As Integer,  _
                     ByVal Laba_Item As Integer,  _
                     ByVal Jenis As String) As TBL_KELUARRow
             Dim rowTBL_KELUARRow As TBL_KELUARRow = CType(Me.NewRow,TBL_KELUARRow)
-            Dim columnValuesArray() As Object = New Object() {ID_Transaksi, Tanggal, Kasir, Pembeli, Jumlah_Item, Kode_Barang, Nama_Barang, Harga_Jual, Diskon, Harga, Total, Diskon_Transaksi, Total_Akhir, Bayar, Kembalian, Laba, QTY, Harga_QTY, Laba_Item, Jenis}
+            Dim columnValuesArray() As Object = New Object() {ID_Transaksi, Tanggal, Kasir, Pembeli, Jumlah_item, Kode_Barang, Nama_Barang, Harga_Jual, Diskon, Harga, Total, Diskon_Transaksi, Total_Akhir, Bayar, Kembalian, Laba, QTY, Harga_QTY, Laba_Item, Jenis}
             rowTBL_KELUARRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowTBL_KELUARRow)
             Return rowTBL_KELUARRow
@@ -982,7 +982,7 @@ Partial Public Class DATA_LAPORAN
             Me.columnTanggal = MyBase.Columns("Tanggal")
             Me.columnKasir = MyBase.Columns("Kasir")
             Me.columnPembeli = MyBase.Columns("Pembeli")
-            Me.columnJumlah_Item = MyBase.Columns("Jumlah Item")
+            Me.columnJumlah_item = MyBase.Columns("Jumlah_item")
             Me.columnKode_Barang = MyBase.Columns("Kode Barang")
             Me.columnNama_Barang = MyBase.Columns("Nama Barang")
             Me.columnHarga_Jual = MyBase.Columns("Harga Jual")
@@ -1011,8 +1011,8 @@ Partial Public Class DATA_LAPORAN
             MyBase.Columns.Add(Me.columnKasir)
             Me.columnPembeli = New Global.System.Data.DataColumn("Pembeli", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnPembeli)
-            Me.columnJumlah_Item = New Global.System.Data.DataColumn("Jumlah Item", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnJumlah_Item)
+            Me.columnJumlah_item = New Global.System.Data.DataColumn("Jumlah_item", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnJumlah_item)
             Me.columnKode_Barang = New Global.System.Data.DataColumn("Kode Barang", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnKode_Barang)
             Me.columnNama_Barang = New Global.System.Data.DataColumn("Nama Barang", GetType(String), Nothing, Global.System.Data.MappingType.Element)
@@ -1035,7 +1035,7 @@ Partial Public Class DATA_LAPORAN
             MyBase.Columns.Add(Me.columnKembalian)
             Me.columnLaba = New Global.System.Data.DataColumn("Laba", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnLaba)
-            Me.columnQTY = New Global.System.Data.DataColumn("QTY", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            Me.columnQTY = New Global.System.Data.DataColumn("QTY", GetType(Double), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnQTY)
             Me.columnHarga_QTY = New Global.System.Data.DataColumn("Harga QTY", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnHarga_QTY)
@@ -1043,6 +1043,7 @@ Partial Public Class DATA_LAPORAN
             MyBase.Columns.Add(Me.columnLaba_Item)
             Me.columnJenis = New Global.System.Data.DataColumn("Jenis", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnJenis)
+            Me.columnJumlah_item.Caption = "Jumlah Item"
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -1481,16 +1482,16 @@ Partial Public Class DATA_LAPORAN
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Property Jumlah_Item() As Integer
+        Public Property Jumlah_item() As Decimal
             Get
                 Try 
-                    Return CType(Me(Me.tableTBL_KELUAR.Jumlah_ItemColumn),Integer)
+                    Return CType(Me(Me.tableTBL_KELUAR.Jumlah_itemColumn),Decimal)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'Jumlah Item' in table 'TBL_KELUAR' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Jumlah_item' in table 'TBL_KELUAR' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableTBL_KELUAR.Jumlah_ItemColumn) = value
+                Me(Me.tableTBL_KELUAR.Jumlah_itemColumn) = value
             End Set
         End Property
         
@@ -1661,10 +1662,10 @@ Partial Public Class DATA_LAPORAN
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Property QTY() As Integer
+        Public Property QTY() As Double
             Get
                 Try 
-                    Return CType(Me(Me.tableTBL_KELUAR.QTYColumn),Integer)
+                    Return CType(Me(Me.tableTBL_KELUAR.QTYColumn),Double)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("The value for column 'QTY' in table 'TBL_KELUAR' is DBNull.", e)
                 End Try
@@ -1769,14 +1770,14 @@ Partial Public Class DATA_LAPORAN
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Function IsJumlah_ItemNull() As Boolean
-            Return Me.IsNull(Me.tableTBL_KELUAR.Jumlah_ItemColumn)
+        Public Function IsJumlah_itemNull() As Boolean
+            Return Me.IsNull(Me.tableTBL_KELUAR.Jumlah_itemColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Sub SetJumlah_ItemNull()
-            Me(Me.tableTBL_KELUAR.Jumlah_ItemColumn) = Global.System.Convert.DBNull
+        Public Sub SetJumlah_itemNull()
+            Me(Me.tableTBL_KELUAR.Jumlah_itemColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _

@@ -478,7 +478,7 @@ Public Class FR_KELUAR
         If Not TXTQTY.Text = "" Then
             JUMLAH_QTY = Convert.ToDouble(TXTQTY.Text)
         End If
-            TXTHARGA.Text = CARI_HARGA(JUMLAH_QTY)
+        TXTHARGA.Text = CARI_HARGA(JUMLAH_QTY)
         HARGA = CLng(TXTHARGA.Text)
         TXTTOTAL.Text = HARGA * JUMLAH_QTY * (100 - CInt(TXTDISKON.Text)) / 100
     End Sub

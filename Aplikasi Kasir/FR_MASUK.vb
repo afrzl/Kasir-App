@@ -96,7 +96,7 @@ Public Class FR_MASUK
         End If
         Dim DA As SqlDataAdapter
         Dim TBL As New DataSet
-        DA = New SqlDataAdapter(Str, CONN)
+        DA = New SqlDataAdapter(STR, CONN)
         DA.Fill(TBL, START_RECORD, TAMPIL_RECORD, 0)
         DGTAMPIL.DataSource = TBL.Tables(0)
 
@@ -119,7 +119,7 @@ Public Class FR_MASUK
 
         Dim TOTAL_RECORD As Integer = 0
         Dim TBL_DATA As New DataTable
-        DA = New SqlDataAdapter(Str, CONN)
+        DA = New SqlDataAdapter(STR, CONN)
         DA.Fill(TBL_DATA)
 
         TOTAL_RECORD = TBL_DATA.Rows.Count
