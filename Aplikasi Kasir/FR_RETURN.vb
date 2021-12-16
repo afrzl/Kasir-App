@@ -55,7 +55,7 @@ Public Class FR_RETURN
             " tbl_transaksi_parent.Tgl AS 'Tanggal'," &
             " RTRIM(tbl_transaksi_parent.Person) AS 'Pembeli'," &
             " tbl_transaksi_child.Harga as 'Harga'," &
-            " RTRIM(tbl_transaksi_child.Jumlah) AS 'QTY'" &
+            " tbl_transaksi_child.Jumlah AS 'QTY'" &
             " FROM tbl_transaksi_child " &
             " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans" &
             " WHERE LEFT(tbl_transaksi_child.Id_trans, 1) = 'R' AND" &
@@ -76,6 +76,7 @@ Public Class FR_RETURN
         DGTAMPIL.Columns(7).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
 
         DGTAMPIL.Columns(6).DefaultCellStyle.Format = "Rp ###,##"
+        DGTAMPIL.Columns(7).DefaultCellStyle.Format = "###.##"
         DGTAMPIL.Columns(6).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DGTAMPIL.Columns(7).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
     End Sub
@@ -124,7 +125,8 @@ Public Class FR_RETURN
         Dim STR As String = "SELECT RTRIM(Id_trans) AS 'ID Transaksi'," &
             " Tgl AS 'Tanggal Transaksi'" &
             " FROM tbl_transaksi_parent WHERE LEFT(Id_trans, 1) = 'K'" &
-            " AND Id_trans Like '%" & TXTCARI_TRANS.Text & "%'"
+            " AND Id_trans Like '%" & TXTCARI_TRANS.Text & "%'" &
+            " ORDER BY Id DESC"
         Dim DA As SqlDataAdapter
         DA = New SqlDataAdapter(STR, CONN)
         Dim TBL As New DataTable
@@ -151,32 +153,39 @@ Public Class FR_RETURN
         DGCARI.DataSource = Nothing
     End Sub
 
-    Dim JUMLAH As Integer = 0
-    'Private Sub CBKODE_TextChanged(sender As Object, e As EventArgs) Handles CBKODE.TextChanged
-    '    On Error Resume Next
-    '    Dim STR As String = "SELECT Harga_akhir, RTRIM(Jumlah) AS Jumlah" _
-    '                        & " FROM tbl_transaksi_child WHERE Id_trans='" _
-    '                        & TXTID.Text _
-    '                        & "'" _
-    '                        & " AND Kode = '" _
-    '                        & CBKODE.SelectedValue _
-    '                        & "'"
-    '    Dim CMD As New SqlCommand(STR, CONN)
-    '    Dim RD As SqlDataReader
-    '    RD = CMD.ExecuteReader
-    '    If RD.HasRows Then
-    '        RD.Read()
-    '        TXTHARGA.Text = Convert.ToInt32(RD.Item("Harga_akhir") / RD.Item("Jumlah"))
-    '        JUMLAH = CInt(RD.Item("Jumlah"))
-    '        RD.Close()
-    '    Else
-    '        RD.Close()
-    '    End If
-    '    RD.Close()
-    'End Sub
+    Dim JUMLAH As Double = 0
+    Private Sub CBKODE_TextChanged(sender As Object, e As EventArgs) Handles CBKODE.TextChanged
+        On Error Resume Next
+        Dim STR As String = "SELECT Harga_akhir AS 'Harga_akhir'," &
+                            " (COALESCE(Jumlah, 0)) AS 'Jumlah'," _
+                            & "(SELECT COALESCE(SUM(Jumlah),0) FROM tbl_transaksi_child WHERE LEFT(Id_trans, 10) = 'R" & Mid(TXTID.Text, 2, 9) & "' AND Kode = '" & CBKODE.SelectedValue & "') AS 'Return'" _
+                            & " FROM tbl_transaksi_child WHERE Id_trans='" _
+                            & TXTID.Text _
+                            & "'" _
+                            & " AND Kode = '" _
+                            & CBKODE.SelectedValue _
+                            & "'"
+        Dim CMD As New SqlCommand(STR, CONN)
+        Dim RD As SqlDataReader
+        RD = CMD.ExecuteReader
+        If RD.HasRows Then
+            RD.Read()
+            Dim HARGA As Integer = RD.Item("Harga_akhir")
+            Dim QUANTITY As String = Format(RD.Item("Jumlah"), "###.##")
+            Dim HARGA_SATUAN As Integer = HARGA / QUANTITY
+            TXTHARGA.Text = HARGA_SATUAN
+            Dim TERSEDIARETURN As Double = Format(RD.Item("Jumlah"), "###.##")
+            Dim SUDAHRETURN As Double = Format(RD.Item("Return"), "###.##")
+            JUMLAH = TERSEDIARETURN - SUDAHRETURN
+            RD.Close()
+        Else
+            RD.Close()
+        End If
+        RD.Close()
+    End Sub
 
     Private Sub TXTQTY_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTQTY.KeyPress
-        If Not ((e.KeyChar >= "0" And e.KeyChar <= "9") Or e.KeyChar = vbBack) Then
+        If Not ((e.KeyChar >= "0" And e.KeyChar <= "9") Or e.KeyChar = vbBack Or e.KeyChar = ",") Then
             e.Handled = True
         End If
 
@@ -223,9 +232,9 @@ Public Class FR_RETURN
     End Function
 
     Private Sub BTNSIMPAN_Click(sender As Object, e As EventArgs) Handles BTNSIMPAN.Click
-        Dim QTY As Integer = 0
+        Dim QTY As Double = 0
         If TXTQTY.Text <> "" Then
-            QTY = CInt(TXTQTY.Text)
+            QTY = Convert.ToDouble(TXTQTY.Text)
         End If
         If TXTID.Text = "" Or CBKODE.Text = "" Or QTY = 0 Then
             MsgBox("Data tidak lengkap!")
@@ -269,9 +278,9 @@ Public Class FR_RETURN
             STR = "INSERT INTO tbl_transaksi_child (Id_trans, Kode, Jumlah, Harga, Stok) VALUES" &
                         " ('" & ID_TRANS & "'," &
                         " '" & CBKODE.SelectedValue & "'," &
-                        " '" & TXTQTY.Text & "'," &
+                        " " & TXTQTY.Text.Replace(",", ".") & "," &
                         " '" & TXTHARGA.Text & "'," &
-                        " '" & TXTQTY.Text & "')"
+                        " " & TXTQTY.Text.Replace(",", ".") & ")"
             CMD = New SqlCommand(STR, CONN)
             CMD.ExecuteNonQuery()
 
@@ -348,30 +357,30 @@ Public Class FR_RETURN
         End If
     End Sub
 
-    Private Sub CBKODE_Leave(sender As Object, e As EventArgs) Handles CBKODE.Leave
-        On Error Resume Next
-        Dim STR As String = "SELECT Harga_akhir AS 'Harga_akhir'," &
-                            " (COALESCE(Jumlah, 0)) AS 'Jumlah'" _
-                            & " FROM tbl_transaksi_child WHERE Id_trans='" _
-                            & TXTID.Text _
-                            & "'" _
-                            & " AND Kode = '" _
-                            & CBKODE.SelectedValue _
-                            & "'"
-        Dim CMD As New SqlCommand(STR, CONN)
-        Dim RD As SqlDataReader
-        RD = CMD.ExecuteReader
-        If RD.HasRows Then
-            RD.Read()
-            Dim HARGA As Integer = RD.Item("Harga_akhir")
-            Dim QUANTITY As String = Format(RD.Item("Jumlah"), "###.##")
-            Dim HARGA_SATUAN As Integer = HARGA / QUANTITY
-            TXTHARGA.Text = HARGA_SATUAN
-            JUMLAH = CInt(RD.Item("Jumlah"))
-            RD.Close()
-        Else
-            RD.Close()
-        End If
-        RD.Close()
-    End Sub
+    'Private Sub CBKODE_Leave(sender As Object, e As EventArgs) Handles CBKODE.Leave
+    '    On Error Resume Next
+    '    Dim STR As String = "SELECT Harga_akhir AS 'Harga_akhir'," &
+    '                        " (COALESCE(Jumlah, 0)) AS 'Jumlah'" _
+    '                        & " FROM tbl_transaksi_child WHERE Id_trans='" _
+    '                        & TXTID.Text _
+    '                        & "'" _
+    '                        & " AND Kode = '" _
+    '                        & CBKODE.SelectedValue _
+    '                        & "'"
+    '    Dim CMD As New SqlCommand(STR, CONN)
+    '    Dim RD As SqlDataReader
+    '    RD = CMD.ExecuteReader
+    '    If RD.HasRows Then
+    '        RD.Read()
+    '        Dim HARGA As Integer = RD.Item("Harga_akhir")
+    '        Dim QUANTITY As String = Format(RD.Item("Jumlah"), "###.##")
+    '        Dim HARGA_SATUAN As Integer = HARGA / QUANTITY
+    '        TXTHARGA.Text = HARGA_SATUAN
+    '        JUMLAH = CInt(RD.Item("Jumlah"))
+    '        RD.Close()
+    '    Else
+    '        RD.Close()
+    '    End If
+    '    RD.Close()
+    'End Sub
 End Class
