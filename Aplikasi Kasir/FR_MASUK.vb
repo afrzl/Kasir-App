@@ -1,6 +1,9 @@
 ﻿Imports System.Data.SqlClient
+Imports System.Drawing.Printing
 
 Public Class FR_MASUK
+
+    Dim ID_TRANSAKSI As String
     Private Sub PEWAKTU_Tick(sender As Object, e As EventArgs) Handles PEWAKTU.Tick
         LBTGL.Text = Format(Date.Now, "dd MMMM yyyy HH:mm:ss")
     End Sub
@@ -36,14 +39,12 @@ Public Class FR_MASUK
         LBTGL.Text = Format(Date.Now, "dd MMMM yyyy HH:mm:ss")
         PEWAKTU.Enabled = True
         LBLUSER.Text = NAMA_LOGIN
-        CBTAMPIL.SelectedIndex = 0
 
-        TXTKODE.Select()
-        TAMPIL()
+        TXTSUPPLIER.Select()
     End Sub
 
     Dim START_RECORD As Integer = 0
-    Dim TAMPIL_RECORD As Integer = 30
+    Dim TAMPIL_RECORD As Integer = 50
 
     Sub TAMPIL()
         Dim STR As String
@@ -98,21 +99,23 @@ Public Class FR_MASUK
         Dim TBL As New DataSet
         DA = New SqlDataAdapter(STR, CONN)
         DA.Fill(TBL, START_RECORD, TAMPIL_RECORD, 0)
-        DGTAMPIL.DataSource = TBL.Tables(0)
+        DGHISTORY.DataSource = TBL.Tables(0)
 
-        DGTAMPIL.Columns(5).DefaultCellStyle.Format = "Rp ###,##"
+        DGHISTORY.Columns(4).DefaultCellStyle.Format = "###.##"
+        DGHISTORY.Columns(5).DefaultCellStyle.Format = "Rp ###,##"
+        DGHISTORY.Columns(6).DefaultCellStyle.Format = "###.##"
 
-        DGTAMPIL.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-        DGTAMPIL.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-        DGTAMPIL.Columns(2).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-        DGTAMPIL.Columns(3).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-        DGTAMPIL.Columns(4).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-        DGTAMPIL.Columns(5).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-        DGTAMPIL.Columns(6).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+        DGHISTORY.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+        DGHISTORY.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+        DGHISTORY.Columns(2).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+        DGHISTORY.Columns(3).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+        DGHISTORY.Columns(4).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+        DGHISTORY.Columns(5).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+        DGHISTORY.Columns(6).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
 
-        DGTAMPIL.Columns(4).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-        DGTAMPIL.Columns(5).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        DGTAMPIL.Columns(6).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DGHISTORY.Columns(4).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DGHISTORY.Columns(5).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DGHISTORY.Columns(6).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
 
         BTNPREV.Enabled = True
         BTNNEXT.Enabled = True
@@ -243,13 +246,13 @@ Public Class FR_MASUK
         RD = CMD.ExecuteReader
         If RD.HasRows Then
             RD.Read()
-            LBBARANG.Text = RD.Item("Barang").ToString.Trim
-            LBSATUAN.Text = RD.Item("Satuan").ToString.Trim
+            TXTBARANG.Text = RD.Item("Barang").ToString.Trim
+            TXTSATUAN.Text = RD.Item("Satuan").ToString.Trim
             RD.Close()
         Else
             RD.Close()
-            LBBARANG.Text = ""
-            LBSATUAN.Text = ""
+            TXTBARANG.Text = ""
+            TXTSATUAN.Text = ""
         End If
         RD.Close()
     End Sub
@@ -266,19 +269,63 @@ Public Class FR_MASUK
         End If
 
         If e.KeyChar = Chr(13) Then
-            TXTSUPPLIER.Select()
+            TXTHARGAPARTAI.Select()
         End If
     End Sub
 
     Private Sub TXTSUPPLIER_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTSUPPLIER.KeyPress
         If e.KeyChar = Chr(13) Then
-            TXTHARGAPARTAI.Select()
+            TXTKODE.Select()
         End If
+    End Sub
+
+    Sub TOTAL_HARGA()
+        Dim TOT_HARGA As Integer = 0
+        For N = 0 To DGTAMPIL.Rows.Count - 1
+            TOT_HARGA = TOT_HARGA + DGTAMPIL.Item("Total", N).Value
+        Next
+
+        LBTOTAL.Text = TOT_HARGA
+
+        If LBTOTAL.Text <> 0 Then
+            BTNSTOK.Visible = True
+        Else
+            BTNSTOK.Visible = False
+        End If
+    End Sub
+
+    Sub MASUK_DATA()
+        DGTAMPIL.Rows.Add()
+        DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("KODE").Value = TXTKODE.Text
+        DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("BARANG").Value = TXTBARANG.Text
+        DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("SATUAN").Value = TXTSATUAN.Text
+        DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("HARGA").Value = TXTHARGAPARTAI.Text
+        DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("QTY").Value = TXTJUMLAH.Text
+        DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("TOTAL").Value = TXTHARGAPARTAI.Text * TXTJUMLAH.Text
+
+        TOTAL_HARGA()
     End Sub
 
     Private Sub TXTHARGAPARTAI_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTHARGAPARTAI.KeyPress
         If e.KeyChar = Chr(13) Then
-            BTNSTOK.Select()
+            If TXTKODE.Text = "" Or TXTBARANG.Text = "" Or TXTJUMLAH.Text = "" Or TXTHARGAPARTAI.Text = "" Then
+                MsgBox("Data tidak lengkap!")
+                TXTKODE.Select()
+            ElseIf CInt(TXTJUMLAH.Text) <= 0 Then
+                MsgBox("Jumlah barang harus lebih dari 0!")
+            Else
+                If CEK_HARGA() = True Then
+                    MASUK_DATA()
+                    TXTKODE.Text = ""
+                    TXTJUMLAH.Text = ""
+                    TXTHARGAPARTAI.Text = ""
+                    TXTKODE.Select()
+                Else
+                    MsgBox("Harga partai harus lebih rendah dari harga jual produk, silahkan ubah harga jual!")
+                    TXTHARGAPARTAI.Clear()
+                    TXTHARGAPARTAI.Select()
+                End If
+            End If
         End If
 
         If Not ((e.KeyChar >= "0" And e.KeyChar <= "9") Or e.KeyChar = vbBack) Then
@@ -294,50 +341,13 @@ Public Class FR_MASUK
         CARI_BARANG()
     End Sub
 
-    Private Sub BTNTAMBAH_Click(sender As Object, e As EventArgs) Handles BTNTAMBAH.Click
+    Private Sub BTNTAMBAH_Click(sender As Object, e As EventArgs)
         BUKA_FORM(FR_PRODUK)
-    End Sub
-
-    Private Sub BTNSTOK_Click(sender As Object, e As EventArgs) Handles BTNSTOK.Click
-        If TXTKODE.Text = "" Or LBBARANG.Text = "" Or TXTJUMLAH.Text = "" Or TXTHARGAPARTAI.Text = "" Then
-            MsgBox("Data tidak lengkap!")
-            TXTKODE.Select()
-        ElseIf CInt(TXTJUMLAH.Text) <= 0 Then
-            MsgBox("Jumlah barang harus lebih dari 0!")
-        Else
-            If CEK_HARGA() = True Then
-                Dim ID_TRANS As String = AUTOID()
-                Dim STR As String = "INSERT INTO tbl_transaksi_child (Id_trans, Kode, Jumlah, Harga, Stok) VALUES('" &
-                    ID_TRANS & "','" &
-                    TXTKODE.Text & "','" &
-                    CInt(TXTJUMLAH.Text) & "','" &
-                    CInt(TXTHARGAPARTAI.Text) & "','" &
-                    CInt(TXTJUMLAH.Text) & "')"
-                Dim CMD As New SqlCommand(STR, CONN)
-                CMD.ExecuteNonQuery()
-
-                STR = "INSERT INTO tbl_transaksi_parent (Id_trans, Id_kasir, Tgl, Jenis, Person) VALUES" &
-                "('" & ID_TRANS & "','" & My.Settings.ID_ACCOUNT & "','" & Format(Date.Now, "MM/dd/yyyy h:m:s") & "','M','" & TXTSUPPLIER.Text & "')"
-                CMD = New SqlCommand(STR, CONN)
-                CMD.ExecuteNonQuery()
-                MsgBox("Data tersimpan")
-                TXTKODE.Clear()
-                TXTJUMLAH.Clear()
-                TXTHARGAPARTAI.Clear()
-                TXTSUPPLIER.Clear()
-                TXTKODE.Select()
-                TAMPIL()
-            Else
-                MsgBox("Harga partai harus lebih rendah dari harga jual produk, silahkan ubah harga jual!")
-                TXTHARGAPARTAI.Clear()
-                TXTHARGAPARTAI.Select()
-            End If
-        End If
     End Sub
 
     Private Sub HapusToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HapusToolStripMenuItem.Click
         If MsgBox("Apakah anda yakin akan menghapus data transaksi?", vbYesNo) = vbYes Then
-            Dim IDX As String = DGTAMPIL.Item(0, DGTAMPIL.CurrentRow.Index).Value
+            Dim IDX As String = DGHISTORY.Item(0, DGHISTORY.CurrentRow.Index).Value
             Dim CMD As New SqlCommand("DELETE FROM tbl_transaksi_child WHERE Id_trans='" & IDX & "'", CONN)
             CMD.ExecuteNonQuery()
 
@@ -365,7 +375,7 @@ Public Class FR_MASUK
     Private Sub DGCARI_PreviewKeyDown(sender As Object, e As PreviewKeyDownEventArgs)
         If (e.KeyCode = Keys.Enter) Then
             On Error Resume Next
-            TXTKODE.Text = DGCARI.Item(0, DGTAMPIL.CurrentRow.Index).Value
+            TXTKODE.Text = DGCARI.Item(0, DGHISTORY.CurrentRow.Index).Value
             BTNCARI.Text = "Cari (F1)"
             TXTJUMLAH.Select()
             PNCARI.Visible = False
@@ -447,5 +457,196 @@ Public Class FR_MASUK
 
     Private Sub BTNRUSAK_Click(sender As Object, e As EventArgs) Handles BTNRUSAK.Click
         BUKA_FORM(FR_RUSAK)
+    End Sub
+
+    Private Sub DGTAMPIL_CellMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles DGTAMPIL.CellMouseClick
+        On Error Resume Next
+        TXTKODE.Enabled = False
+        TXTJUMLAH.Enabled = False
+        TXTHARGAPARTAI.Enabled = False
+
+        TXTKODE.Text = DGTAMPIL.Rows(e.RowIndex).Cells("Kode").Value
+        TXTHARGAPARTAI.Text = DGTAMPIL.Rows(e.RowIndex).Cells("Harga").Value
+        TXTJUMLAH.Text = DGTAMPIL.Rows(e.RowIndex).Cells("QTY").Value
+
+        BTNCANCEL.Visible = True
+        BTNCARI.Visible = False
+        BTNHAPUS.Visible = True
+    End Sub
+
+    Private Sub BTNCANCEL_Click(sender As Object, e As EventArgs) Handles BTNCANCEL.Click
+        TXTKODE.Enabled = True
+        TXTJUMLAH.Enabled = True
+        TXTHARGAPARTAI.Enabled = True
+        BTNCARI.Visible = True
+        BTNCANCEL.Visible = False
+        BTNHAPUS.Visible = False
+        TXTKODE.Clear()
+        TXTJUMLAH.Clear()
+        TXTHARGAPARTAI.Clear()
+        TXTKODE.Select()
+    End Sub
+
+    Private Sub BTNHAPUS_Click(sender As Object, e As EventArgs) Handles BTNHAPUS.Click
+        Dim BARIS_DATA As Integer = 0
+        For N = 0 To DGTAMPIL.Rows.Count - 1
+            Dim Kode As String = DGTAMPIL.Item("Kode", N).Value
+            If Kode = TXTKODE.Text Then
+                BARIS_DATA = N
+                Exit For
+            End If
+        Next
+        DGTAMPIL.Rows.RemoveAt(BARIS_DATA)
+        TOTAL_HARGA()
+        TXTJUMLAH.Enabled = True
+        TXTKODE.Enabled = True
+        TXTHARGAPARTAI.Enabled = True
+        TXTKODE.Clear()
+        TXTJUMLAH.Clear()
+        TXTHARGAPARTAI.Clear()
+        TXTKODE.Select()
+    End Sub
+
+    Private Sub BTNSTOK_Click(sender As Object, e As EventArgs) Handles BTNSTOK.Click
+        INPUT_DB()
+        PRINT_NOTA()
+        MsgBox("Data pembelian sukses disimpan. Stok barang ditambah")
+        DGTAMPIL.Rows.Clear()
+    End Sub
+
+    Sub INPUT_DB()
+        If DGTAMPIL.Rows.Count <= 0 Then Exit Sub
+        ID_TRANSAKSI = AUTOID()
+        Dim JUMLAH_ITEM As Integer = DGTAMPIL.Rows.Count
+        Dim HARGA_TOTAL As Integer = 0
+        For Each EROW As DataGridViewRow In DGTAMPIL.Rows
+            HARGA_TOTAL += CInt(EROW.Cells("TOTAL").Value)
+        Next
+
+        Dim STR As String = "INSERT INTO tbl_transaksi_parent" &
+            " (Id_trans, Id_kasir, Tgl, Jenis, Person, Harga, Jumlah_item)" &
+            " VALUES('" & ID_TRANSAKSI & "'," &
+            " '" & My.Settings.ID_ACCOUNT & "'," &
+            " '" & Format(Date.Now, "MM/dd/yyyy HH:mm:ss") & "'," &
+            " 'M'," &
+            " '" & TXTSUPPLIER.Text & "'," &
+            " '" & HARGA_TOTAL & "'," &
+            " '" & JUMLAH_ITEM & "')"
+        Dim CMD As New SqlCommand(STR, CONN)
+        CMD.ExecuteNonQuery()
+
+        For Each EROW As DataGridViewRow In DGTAMPIL.Rows
+            Dim KODE_PRODUK As String = EROW.Cells("Kode").Value
+            Dim JUMLAH_PRODUK As Double = EROW.Cells("QTY").Value.ToString.Replace(",", ".")
+            Dim HARGA_PRODUK As Integer = EROW.Cells("Harga").Value
+
+            STR = "INSERT INTO tbl_transaksi_child (Id_trans, Kode, Jumlah, Harga, Stok) VALUES" &
+                    " ('" & ID_TRANSAKSI & "'," &
+                    " '" & KODE_PRODUK & "'," &
+                    " " & JUMLAH_PRODUK & "," &
+                    " '" & HARGA_PRODUK & "'," &
+                    " '" & JUMLAH_PRODUK & "')"
+            CMD = New SqlCommand(STR, CONN)
+            CMD.ExecuteNonQuery()
+        Next
+    End Sub
+
+    'PRINTING
+    '=================================================================================
+    'KERTAS 
+    ReadOnly lebarKertas As Integer = 304 'Ukuran Kertas 78 mm
+    ReadOnly tinggiKertas As Integer = 304
+    ReadOnly marginLeft As Integer = 20
+    ReadOnly marginRight As Integer = 20
+    ReadOnly jarakBaris As Integer = 20
+    Dim totalBaris As Integer = 0
+
+
+    'JENIS DAN UKURAN HURUF
+    ReadOnly fontJudul As New Font("Segoe UI", 12, FontStyle.Bold)
+    ReadOnly fontRegular As New Font("Segoe UI", 10, FontStyle.Regular)
+    ReadOnly fontTotal As New Font("Segoe UI", 10, FontStyle.Bold)
+
+    Private Function BarisBaru(jumlah_baris)
+        totalBaris += jumlah_baris
+        Return totalBaris * jarakBaris
+    End Function
+
+    Private Function BarisYangSama()
+        Return BarisBaru(0)
+    End Function
+
+    Private Sub PRINTNOTA_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles PRINTNOTA.PrintPage
+        Dim textCenter, textLeft, textRight As New StringFormat
+        textCenter.Alignment = StringAlignment.Center
+        textLeft.Alignment = StringAlignment.Near
+        textRight.Alignment = StringAlignment.Far
+
+        Dim IMAGE As Image = Image.FromFile("C:\Users\muham\OneDrive - student.uns.ac.id\Pictures\indomaret.png")
+        e.Graphics.DrawImage(IMAGE, 102, BarisYangSama(), 100, 50)
+
+        e.Graphics.DrawString(NAMA_TOKO, fontJudul, Brushes.Black, lebarKertas / 2, BarisBaru(3), textCenter)
+        e.Graphics.DrawString(ALAMAT_TOKO, fontRegular, Brushes.Black, lebarKertas / 2, BarisBaru(1), textCenter)
+        e.Graphics.DrawString(NO_TOKO, fontRegular, Brushes.Black, lebarKertas / 2, BarisBaru(1), textCenter)
+        BarisBaru(1)
+
+        e.Graphics.DrawString("PEMBELIAN BARANG", fontRegular, Brushes.Black, lebarKertas / 2, BarisBaru(1), textCenter)
+
+        e.Graphics.DrawString(LBTGL.Text, fontRegular, Brushes.Black, (lebarKertas - marginRight), BarisBaru(1), textRight)
+
+        e.Graphics.DrawString(ID_TRANSAKSI, fontRegular, Brushes.Black, (lebarKertas - marginRight), BarisBaru(1), textRight)
+        e.Graphics.DrawString("Kasir : " & LBLUSER.Text, fontRegular, Brushes.Black, marginLeft, BarisYangSama, textLeft)
+
+        e.Graphics.DrawLine(Pens.Black, marginLeft, BarisBaru(1), (lebarKertas - marginRight), BarisYangSama)
+        BarisBaru(1)
+
+        For Each EROW As DataGridViewRow In DGTAMPIL.Rows
+            e.Graphics.DrawString(EROW.Cells("BARANG").Value, fontRegular, Brushes.Black, marginLeft, BarisYangSama, textLeft)
+            e.Graphics.DrawString(Convert.ToDouble(EROW.Cells("QTY").Value) & " " & EROW.Cells("SATUAN").Value & " x " & Format(CInt(EROW.Cells("HARGA").Value), "##,##0"), fontRegular, Brushes.Black, marginLeft, BarisBaru(1), textLeft)
+            e.Graphics.DrawString(Format(CInt(EROW.Cells("TOTAL").Value), "##,##0"), fontRegular, Brushes.Black, (lebarKertas - marginRight), BarisYangSama, textRight)
+            BarisBaru(1)
+        Next
+
+        BarisBaru(1)
+        e.Graphics.DrawLine(Pens.Black, marginLeft, BarisYangSama, (lebarKertas - marginRight), BarisYangSama)
+
+        e.Graphics.DrawString("Total", fontRegular, Brushes.Black, marginLeft, BarisYangSama, textLeft)
+        e.Graphics.DrawString(Format(CInt(LBTOTAL.Text), "Rp ##,##0"), fontTotal, Brushes.Black, (lebarKertas - marginRight), BarisYangSama, textRight)
+
+        BarisBaru(1)
+        e.Graphics.DrawLine(Pens.Black, marginLeft, BarisYangSama, (lebarKertas - marginRight), BarisYangSama)
+
+        e.Graphics.DrawString("Barang yang sudah dibeli", fontRegular, Brushes.Black, lebarKertas / 2, BarisBaru(1), textCenter)
+        e.Graphics.DrawString("tidak dapat ditukar/dikembalikan", fontRegular, Brushes.Black, lebarKertas / 2, BarisBaru(1), textCenter)
+        e.Graphics.DrawString("TERIMA KASIH", fontRegular, Brushes.Black, lebarKertas / 2, BarisBaru(1), textCenter)
+
+        BarisBaru(1)
+    End Sub
+
+    Sub PRINT_NOTA()
+        Dim ps As New PrinterSettings
+        PRINTNOTA.OriginAtMargins = False
+        PRINTNOTA.PrinterSettings = ps
+        PRINTNOTA.PrinterSettings.PrinterName = PRINTER_NOTA
+        PRINTNOTA.DefaultPageSettings.PaperSize = New PaperSize("Custom", lebarKertas, tinggiKertas + BarisBaru(DGTAMPIL.Rows.Count))
+        PRINTNOTA.DefaultPageSettings.Landscape = False
+        PRINTNOTA.DocumentName = "Stroke"
+        PRINTNOTA.Print()
+    End Sub
+
+    Private Sub BTNHISTORY_Click(sender As Object, e As EventArgs) Handles BTNHISTORY.Click
+        PNHISTORY.Visible = True
+        BTNSTOK.Visible = False
+        BTNHISTORY.Visible = False
+        BTNTRANSAKSI.Visible = True
+        CBTAMPIL.SelectedIndex = 1
+        TAMPIL()
+    End Sub
+
+    Private Sub BTNTRANSAKSI_Click(sender As Object, e As EventArgs) Handles BTNTRANSAKSI.Click
+        PNHISTORY.Visible = False
+        BTNSTOK.Visible = True
+        BTNTRANSAKSI.Visible = False
+        BTNHISTORY.Visible = True
     End Sub
 End Class

@@ -23,12 +23,15 @@ Partial Class FR_MASUK
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.PNCONTROL = New System.Windows.Forms.Panel()
         Me.BTNMINIMIZE = New System.Windows.Forms.Button()
         Me.BTNCLOSE = New System.Windows.Forms.Button()
@@ -56,24 +59,27 @@ Partial Class FR_MASUK
         Me.BTNDASHBOARD = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.PNCONTENT = New System.Windows.Forms.Panel()
-        Me.DGTAMPIL = New System.Windows.Forms.DataGridView()
-        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.HapusToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.CBTAMPIL = New System.Windows.Forms.ComboBox()
-        Me.BTNNEXT = New System.Windows.Forms.Button()
-        Me.BTNPREV = New System.Windows.Forms.Button()
-        Me.TXTCARI = New System.Windows.Forms.TextBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.PNCARI = New System.Windows.Forms.Panel()
         Me.DGCARI = New System.Windows.Forms.DataGridView()
+        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.HapusToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TXTCARI_BARANG = New System.Windows.Forms.TextBox()
-        Me.LBSATUAN = New System.Windows.Forms.Label()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.BTNTAMBAH = New System.Windows.Forms.Button()
-        Me.LBBARANG = New System.Windows.Forms.Label()
-        Me.BTNCARI = New System.Windows.Forms.Button()
+        Me.BTNHAPUS = New System.Windows.Forms.Button()
+        Me.BTNCANCEL = New System.Windows.Forms.Button()
+        Me.DGTAMPIL = New System.Windows.Forms.DataGridView()
+        Me.KODE = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.BARANG = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SATUAN = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.HARGA = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.QTY = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TOTAL = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.BTNSTOK = New System.Windows.Forms.Button()
+        Me.TXTSATUAN = New System.Windows.Forms.TextBox()
+        Me.TXTBARANG = New System.Windows.Forms.TextBox()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.BTNCARI = New System.Windows.Forms.Button()
         Me.TXTKODE = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.TXTHARGAPARTAI = New System.Windows.Forms.TextBox()
@@ -83,17 +89,32 @@ Partial Class FR_MASUK
         Me.TXTJUMLAH = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.PNHISTORY = New System.Windows.Forms.Panel()
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.CBTAMPIL = New System.Windows.Forms.ComboBox()
+        Me.BTNNEXT = New System.Windows.Forms.Button()
+        Me.BTNPREV = New System.Windows.Forms.Button()
+        Me.TXTCARI = New System.Windows.Forms.TextBox()
+        Me.DGHISTORY = New System.Windows.Forms.DataGridView()
+        Me.LBTOTAL = New System.Windows.Forms.Label()
+        Me.PRINTNOTA = New System.Drawing.Printing.PrintDocument()
+        Me.BTNHISTORY = New System.Windows.Forms.Button()
+        Me.BTNTRANSAKSI = New System.Windows.Forms.Button()
         Me.PNCONTROL.SuspendLayout()
         Me.PNTOP.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.PNLEFT.SuspendLayout()
         Me.PNCONTENT.SuspendLayout()
-        CType(Me.DGTAMPIL, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.ContextMenuStrip1.SuspendLayout()
-        Me.Panel3.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.PNCARI.SuspendLayout()
         CType(Me.DGCARI, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ContextMenuStrip1.SuspendLayout()
+        CType(Me.DGTAMPIL, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox2.SuspendLayout()
+        Me.PNHISTORY.SuspendLayout()
+        Me.Panel3.SuspendLayout()
+        CType(Me.DGHISTORY, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PNCONTROL
@@ -465,8 +486,6 @@ Partial Class FR_MASUK
         '
         'PNCONTENT
         '
-        Me.PNCONTENT.Controls.Add(Me.DGTAMPIL)
-        Me.PNCONTENT.Controls.Add(Me.Panel3)
         Me.PNCONTENT.Controls.Add(Me.Panel2)
         Me.PNCONTENT.Controls.Add(Me.PNTOP)
         Me.PNCONTENT.Dock = System.Windows.Forms.DockStyle.Fill
@@ -475,43 +494,86 @@ Partial Class FR_MASUK
         Me.PNCONTENT.Size = New System.Drawing.Size(1096, 768)
         Me.PNCONTENT.TabIndex = 20
         '
-        'DGTAMPIL
+        'Panel2
         '
-        Me.DGTAMPIL.AllowUserToAddRows = False
-        Me.DGTAMPIL.AllowUserToDeleteRows = False
-        Me.DGTAMPIL.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+        Me.Panel2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.DGTAMPIL.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DGTAMPIL.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
-        Me.DGTAMPIL.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DGTAMPIL.ContextMenuStrip = Me.ContextMenuStrip1
-        Me.DGTAMPIL.Location = New System.Drawing.Point(532, 98)
-        Me.DGTAMPIL.Name = "DGTAMPIL"
-        Me.DGTAMPIL.ReadOnly = True
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DGTAMPIL.RowHeadersDefaultCellStyle = DataGridViewCellStyle2
-        Me.DGTAMPIL.RowHeadersVisible = False
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DGTAMPIL.RowsDefaultCellStyle = DataGridViewCellStyle3
-        Me.DGTAMPIL.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DGTAMPIL.RowTemplate.Height = 30
-        Me.DGTAMPIL.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DGTAMPIL.Size = New System.Drawing.Size(552, 658)
-        Me.DGTAMPIL.TabIndex = 22
+        Me.Panel2.Controls.Add(Me.BTNTRANSAKSI)
+        Me.Panel2.Controls.Add(Me.PNHISTORY)
+        Me.Panel2.Controls.Add(Me.BTNHISTORY)
+        Me.Panel2.Controls.Add(Me.PNCARI)
+        Me.Panel2.Controls.Add(Me.BTNHAPUS)
+        Me.Panel2.Controls.Add(Me.BTNCANCEL)
+        Me.Panel2.Controls.Add(Me.DGTAMPIL)
+        Me.Panel2.Controls.Add(Me.BTNSTOK)
+        Me.Panel2.Controls.Add(Me.TXTSATUAN)
+        Me.Panel2.Controls.Add(Me.TXTBARANG)
+        Me.Panel2.Controls.Add(Me.Label11)
+        Me.Panel2.Controls.Add(Me.Label7)
+        Me.Panel2.Controls.Add(Me.BTNCARI)
+        Me.Panel2.Controls.Add(Me.TXTKODE)
+        Me.Panel2.Controls.Add(Me.Label5)
+        Me.Panel2.Controls.Add(Me.TXTHARGAPARTAI)
+        Me.Panel2.Controls.Add(Me.Label6)
+        Me.Panel2.Controls.Add(Me.TXTSUPPLIER)
+        Me.Panel2.Controls.Add(Me.Label8)
+        Me.Panel2.Controls.Add(Me.TXTJUMLAH)
+        Me.Panel2.Controls.Add(Me.Label9)
+        Me.Panel2.Controls.Add(Me.Label10)
+        Me.Panel2.Controls.Add(Me.GroupBox2)
+        Me.Panel2.Location = New System.Drawing.Point(0, 40)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(1096, 728)
+        Me.Panel2.TabIndex = 20
+        '
+        'PNCARI
+        '
+        Me.PNCARI.Controls.Add(Me.DGCARI)
+        Me.PNCARI.Controls.Add(Me.TXTCARI_BARANG)
+        Me.PNCARI.Location = New System.Drawing.Point(31, 17)
+        Me.PNCARI.Name = "PNCARI"
+        Me.PNCARI.Size = New System.Drawing.Size(448, 234)
+        Me.PNCARI.TabIndex = 15
+        Me.PNCARI.Visible = False
+        '
+        'DGCARI
+        '
+        Me.DGCARI.AllowUserToAddRows = False
+        Me.DGCARI.AllowUserToDeleteRows = False
+        Me.DGCARI.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.DGCARI.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
+        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle16.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DGCARI.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle16
+        Me.DGCARI.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DGCARI.ContextMenuStrip = Me.ContextMenuStrip1
+        Me.DGCARI.Location = New System.Drawing.Point(3, 35)
+        Me.DGCARI.Name = "DGCARI"
+        Me.DGCARI.ReadOnly = True
+        DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle17.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle17.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DGCARI.RowHeadersDefaultCellStyle = DataGridViewCellStyle17
+        Me.DGCARI.RowHeadersVisible = False
+        DataGridViewCellStyle18.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.DGCARI.RowsDefaultCellStyle = DataGridViewCellStyle18
+        Me.DGCARI.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.DGCARI.RowTemplate.Height = 30
+        Me.DGCARI.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.DGCARI.Size = New System.Drawing.Size(436, 196)
+        Me.DGCARI.TabIndex = 23
         '
         'ContextMenuStrip1
         '
@@ -526,6 +588,305 @@ Partial Class FR_MASUK
         Me.HapusToolStripMenuItem.Size = New System.Drawing.Size(120, 24)
         Me.HapusToolStripMenuItem.Text = "Hapus"
         '
+        'TXTCARI_BARANG
+        '
+        Me.TXTCARI_BARANG.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TXTCARI_BARANG.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TXTCARI_BARANG.Location = New System.Drawing.Point(3, 3)
+        Me.TXTCARI_BARANG.Name = "TXTCARI_BARANG"
+        Me.TXTCARI_BARANG.Size = New System.Drawing.Size(436, 26)
+        Me.TXTCARI_BARANG.TabIndex = 16
+        '
+        'BTNHAPUS
+        '
+        Me.BTNHAPUS.BackColor = System.Drawing.Color.Crimson
+        Me.BTNHAPUS.FlatAppearance.BorderSize = 0
+        Me.BTNHAPUS.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNHAPUS.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNHAPUS.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BTNHAPUS.Location = New System.Drawing.Point(162, 216)
+        Me.BTNHAPUS.Name = "BTNHAPUS"
+        Me.BTNHAPUS.Size = New System.Drawing.Size(125, 35)
+        Me.BTNHAPUS.TabIndex = 23
+        Me.BTNHAPUS.Text = "Hapus"
+        Me.BTNHAPUS.UseVisualStyleBackColor = False
+        Me.BTNHAPUS.Visible = False
+        '
+        'BTNCANCEL
+        '
+        Me.BTNCANCEL.BackColor = System.Drawing.Color.Navy
+        Me.BTNCANCEL.FlatAppearance.BorderSize = 0
+        Me.BTNCANCEL.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNCANCEL.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNCANCEL.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BTNCANCEL.Location = New System.Drawing.Point(31, 216)
+        Me.BTNCANCEL.Name = "BTNCANCEL"
+        Me.BTNCANCEL.Size = New System.Drawing.Size(125, 35)
+        Me.BTNCANCEL.TabIndex = 22
+        Me.BTNCANCEL.Text = "Cancel (Esc)"
+        Me.BTNCANCEL.UseVisualStyleBackColor = False
+        Me.BTNCANCEL.Visible = False
+        '
+        'DGTAMPIL
+        '
+        Me.DGTAMPIL.AllowUserToAddRows = False
+        Me.DGTAMPIL.AllowUserToDeleteRows = False
+        Me.DGTAMPIL.AllowUserToResizeColumns = False
+        Me.DGTAMPIL.AllowUserToResizeRows = False
+        Me.DGTAMPIL.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.DGTAMPIL.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DGTAMPIL.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle4
+        Me.DGTAMPIL.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DGTAMPIL.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.KODE, Me.BARANG, Me.SATUAN, Me.HARGA, Me.QTY, Me.TOTAL})
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DGTAMPIL.DefaultCellStyle = DataGridViewCellStyle5
+        Me.DGTAMPIL.Location = New System.Drawing.Point(31, 267)
+        Me.DGTAMPIL.MultiSelect = False
+        Me.DGTAMPIL.Name = "DGTAMPIL"
+        Me.DGTAMPIL.ReadOnly = True
+        Me.DGTAMPIL.RowHeadersVisible = False
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DGTAMPIL.RowsDefaultCellStyle = DataGridViewCellStyle6
+        Me.DGTAMPIL.RowTemplate.Height = 30
+        Me.DGTAMPIL.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.DGTAMPIL.Size = New System.Drawing.Size(1053, 347)
+        Me.DGTAMPIL.TabIndex = 20
+        '
+        'KODE
+        '
+        Me.KODE.HeaderText = "KODE"
+        Me.KODE.Name = "KODE"
+        Me.KODE.ReadOnly = True
+        Me.KODE.Width = 83
+        '
+        'BARANG
+        '
+        Me.BARANG.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.BARANG.HeaderText = "NAMA BARANG"
+        Me.BARANG.Name = "BARANG"
+        Me.BARANG.ReadOnly = True
+        '
+        'SATUAN
+        '
+        Me.SATUAN.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.SATUAN.HeaderText = "SATUAN"
+        Me.SATUAN.Name = "SATUAN"
+        Me.SATUAN.ReadOnly = True
+        '
+        'HARGA
+        '
+        Me.HARGA.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.HARGA.HeaderText = "HARGA"
+        Me.HARGA.Name = "HARGA"
+        Me.HARGA.ReadOnly = True
+        '
+        'QTY
+        '
+        Me.QTY.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.QTY.HeaderText = "QTY"
+        Me.QTY.Name = "QTY"
+        Me.QTY.ReadOnly = True
+        '
+        'TOTAL
+        '
+        Me.TOTAL.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.TOTAL.HeaderText = "TOTAL"
+        Me.TOTAL.Name = "TOTAL"
+        Me.TOTAL.ReadOnly = True
+        '
+        'BTNSTOK
+        '
+        Me.BTNSTOK.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BTNSTOK.BackColor = System.Drawing.Color.DarkGreen
+        Me.BTNSTOK.FlatAppearance.BorderSize = 0
+        Me.BTNSTOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNSTOK.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNSTOK.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BTNSTOK.Location = New System.Drawing.Point(706, 645)
+        Me.BTNSTOK.Name = "BTNSTOK"
+        Me.BTNSTOK.Size = New System.Drawing.Size(189, 51)
+        Me.BTNSTOK.TabIndex = 5
+        Me.BTNSTOK.Text = "Tambah Stok"
+        Me.BTNSTOK.UseVisualStyleBackColor = False
+        '
+        'TXTSATUAN
+        '
+        Me.TXTSATUAN.Enabled = False
+        Me.TXTSATUAN.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TXTSATUAN.Location = New System.Drawing.Point(485, 175)
+        Me.TXTSATUAN.Name = "TXTSATUAN"
+        Me.TXTSATUAN.Size = New System.Drawing.Size(72, 30)
+        Me.TXTSATUAN.TabIndex = 19
+        '
+        'TXTBARANG
+        '
+        Me.TXTBARANG.Enabled = False
+        Me.TXTBARANG.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TXTBARANG.Location = New System.Drawing.Point(258, 175)
+        Me.TXTBARANG.Name = "TXTBARANG"
+        Me.TXTBARANG.Size = New System.Drawing.Size(214, 30)
+        Me.TXTBARANG.TabIndex = 18
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label11.Location = New System.Drawing.Point(967, 179)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(56, 23)
+        Me.Label11.TabIndex = 16
+        Me.Label11.Text = "/ item"
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.Location = New System.Drawing.Point(485, 139)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(63, 23)
+        Me.Label7.TabIndex = 13
+        Me.Label7.Text = "Satuan"
+        '
+        'BTNCARI
+        '
+        Me.BTNCARI.BackColor = System.Drawing.Color.Navy
+        Me.BTNCARI.FlatAppearance.BorderSize = 0
+        Me.BTNCARI.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNCARI.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNCARI.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BTNCARI.Location = New System.Drawing.Point(31, 216)
+        Me.BTNCARI.Name = "BTNCARI"
+        Me.BTNCARI.Size = New System.Drawing.Size(125, 35)
+        Me.BTNCARI.TabIndex = 10
+        Me.BTNCARI.Text = "Cari (F1)"
+        Me.BTNCARI.UseVisualStyleBackColor = False
+        '
+        'TXTKODE
+        '
+        Me.TXTKODE.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TXTKODE.Location = New System.Drawing.Point(31, 175)
+        Me.TXTKODE.Name = "TXTKODE"
+        Me.TXTKODE.Size = New System.Drawing.Size(214, 30)
+        Me.TXTKODE.TabIndex = 1
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Location = New System.Drawing.Point(31, 139)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(108, 23)
+        Me.Label5.TabIndex = 0
+        Me.Label5.Text = "Kode Barang"
+        '
+        'TXTHARGAPARTAI
+        '
+        Me.TXTHARGAPARTAI.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TXTHARGAPARTAI.Location = New System.Drawing.Point(772, 175)
+        Me.TXTHARGAPARTAI.Name = "TXTHARGAPARTAI"
+        Me.TXTHARGAPARTAI.Size = New System.Drawing.Size(189, 30)
+        Me.TXTHARGAPARTAI.TabIndex = 4
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.Location = New System.Drawing.Point(258, 139)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(115, 23)
+        Me.Label6.TabIndex = 1
+        Me.Label6.Text = "Nama Barang"
+        '
+        'TXTSUPPLIER
+        '
+        Me.TXTSUPPLIER.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TXTSUPPLIER.Location = New System.Drawing.Point(151, 91)
+        Me.TXTSUPPLIER.Name = "TXTSUPPLIER"
+        Me.TXTSUPPLIER.Size = New System.Drawing.Size(325, 30)
+        Me.TXTSUPPLIER.TabIndex = 3
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.Location = New System.Drawing.Point(570, 139)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(40, 23)
+        Me.Label8.TabIndex = 2
+        Me.Label8.Text = "QTY"
+        '
+        'TXTJUMLAH
+        '
+        Me.TXTJUMLAH.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TXTJUMLAH.Location = New System.Drawing.Point(570, 175)
+        Me.TXTJUMLAH.Name = "TXTJUMLAH"
+        Me.TXTJUMLAH.Size = New System.Drawing.Size(189, 30)
+        Me.TXTJUMLAH.TabIndex = 2
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label9.Location = New System.Drawing.Point(31, 95)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(72, 23)
+        Me.Label9.TabIndex = 3
+        Me.Label9.Text = "Supplier"
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label10.Location = New System.Drawing.Point(772, 139)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(104, 23)
+        Me.Label10.TabIndex = 4
+        Me.Label10.Text = "Harga Partai"
+        '
+        'GroupBox2
+        '
+        Me.GroupBox2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox2.Controls.Add(Me.LBTOTAL)
+        Me.GroupBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GroupBox2.ForeColor = System.Drawing.Color.Crimson
+        Me.GroupBox2.Location = New System.Drawing.Point(500, 9)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(584, 127)
+        Me.GroupBox2.TabIndex = 21
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "Total Harga"
+        '
+        'PNHISTORY
+        '
+        Me.PNHISTORY.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.PNHISTORY.Controls.Add(Me.Panel3)
+        Me.PNHISTORY.Controls.Add(Me.DGHISTORY)
+        Me.PNHISTORY.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.PNHISTORY.Location = New System.Drawing.Point(31, 0)
+        Me.PNHISTORY.Name = "PNHISTORY"
+        Me.PNHISTORY.Size = New System.Drawing.Size(1053, 614)
+        Me.PNHISTORY.TabIndex = 18
+        Me.PNHISTORY.Visible = False
+        '
         'Panel3
         '
         Me.Panel3.Controls.Add(Me.CBTAMPIL)
@@ -533,9 +894,9 @@ Partial Class FR_MASUK
         Me.Panel3.Controls.Add(Me.BTNPREV)
         Me.Panel3.Controls.Add(Me.TXTCARI)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Panel3.Location = New System.Drawing.Point(517, 40)
+        Me.Panel3.Location = New System.Drawing.Point(0, 0)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(579, 61)
+        Me.Panel3.Size = New System.Drawing.Size(1053, 61)
         Me.Panel3.TabIndex = 21
         '
         'CBTAMPIL
@@ -546,7 +907,7 @@ Partial Class FR_MASUK
         Me.CBTAMPIL.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CBTAMPIL.FormattingEnabled = True
         Me.CBTAMPIL.Items.AddRange(New Object() {"Semua", "Sisa", "Habis"})
-        Me.CBTAMPIL.Location = New System.Drawing.Point(329, 13)
+        Me.CBTAMPIL.Location = New System.Drawing.Point(805, 13)
         Me.CBTAMPIL.Name = "CBTAMPIL"
         Me.CBTAMPIL.Size = New System.Drawing.Size(121, 31)
         Me.CBTAMPIL.TabIndex = 21
@@ -559,7 +920,7 @@ Partial Class FR_MASUK
         Me.BTNNEXT.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.BTNNEXT.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BTNNEXT.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.BTNNEXT.Location = New System.Drawing.Point(512, 14)
+        Me.BTNNEXT.Location = New System.Drawing.Point(988, 14)
         Me.BTNNEXT.Name = "BTNNEXT"
         Me.BTNNEXT.Size = New System.Drawing.Size(50, 29)
         Me.BTNNEXT.TabIndex = 19
@@ -574,7 +935,7 @@ Partial Class FR_MASUK
         Me.BTNPREV.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.BTNPREV.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BTNPREV.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.BTNPREV.Location = New System.Drawing.Point(456, 14)
+        Me.BTNPREV.Location = New System.Drawing.Point(932, 14)
         Me.BTNPREV.Name = "BTNPREV"
         Me.BTNPREV.Size = New System.Drawing.Size(50, 29)
         Me.BTNPREV.TabIndex = 18
@@ -586,248 +947,94 @@ Partial Class FR_MASUK
         Me.TXTCARI.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TXTCARI.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TXTCARI.Location = New System.Drawing.Point(15, 15)
+        Me.TXTCARI.Location = New System.Drawing.Point(0, 15)
         Me.TXTCARI.Name = "TXTCARI"
-        Me.TXTCARI.Size = New System.Drawing.Size(308, 26)
+        Me.TXTCARI.Size = New System.Drawing.Size(799, 26)
         Me.TXTCARI.TabIndex = 9
         '
-        'Panel2
+        'DGHISTORY
         '
-        Me.Panel2.Controls.Add(Me.PNCARI)
-        Me.Panel2.Controls.Add(Me.LBSATUAN)
-        Me.Panel2.Controls.Add(Me.Label7)
-        Me.Panel2.Controls.Add(Me.BTNTAMBAH)
-        Me.Panel2.Controls.Add(Me.LBBARANG)
-        Me.Panel2.Controls.Add(Me.BTNCARI)
-        Me.Panel2.Controls.Add(Me.BTNSTOK)
-        Me.Panel2.Controls.Add(Me.TXTKODE)
-        Me.Panel2.Controls.Add(Me.Label5)
-        Me.Panel2.Controls.Add(Me.TXTHARGAPARTAI)
-        Me.Panel2.Controls.Add(Me.Label6)
-        Me.Panel2.Controls.Add(Me.TXTSUPPLIER)
-        Me.Panel2.Controls.Add(Me.Label8)
-        Me.Panel2.Controls.Add(Me.TXTJUMLAH)
-        Me.Panel2.Controls.Add(Me.Label9)
-        Me.Panel2.Controls.Add(Me.Label10)
-        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Left
-        Me.Panel2.Location = New System.Drawing.Point(0, 40)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(517, 728)
-        Me.Panel2.TabIndex = 20
-        '
-        'PNCARI
-        '
-        Me.PNCARI.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.PNCARI.Controls.Add(Me.DGCARI)
-        Me.PNCARI.Controls.Add(Me.TXTCARI_BARANG)
-        Me.PNCARI.Location = New System.Drawing.Point(3, 425)
-        Me.PNCARI.Name = "PNCARI"
-        Me.PNCARI.Size = New System.Drawing.Size(517, 303)
-        Me.PNCARI.TabIndex = 15
-        Me.PNCARI.Visible = False
-        '
-        'DGCARI
-        '
-        Me.DGCARI.AllowUserToAddRows = False
-        Me.DGCARI.AllowUserToDeleteRows = False
-        Me.DGCARI.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+        Me.DGHISTORY.AllowUserToAddRows = False
+        Me.DGHISTORY.AllowUserToDeleteRows = False
+        Me.DGHISTORY.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.DGCARI.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DGCARI.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle4
-        Me.DGCARI.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DGCARI.ContextMenuStrip = Me.ContextMenuStrip1
-        Me.DGCARI.Location = New System.Drawing.Point(3, 35)
-        Me.DGCARI.Name = "DGCARI"
-        Me.DGCARI.ReadOnly = True
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DGCARI.RowHeadersDefaultCellStyle = DataGridViewCellStyle5
-        Me.DGCARI.RowHeadersVisible = False
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DGCARI.RowsDefaultCellStyle = DataGridViewCellStyle6
-        Me.DGCARI.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DGCARI.RowTemplate.Height = 30
-        Me.DGCARI.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DGCARI.Size = New System.Drawing.Size(505, 256)
-        Me.DGCARI.TabIndex = 23
+        Me.DGHISTORY.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DGHISTORY.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        Me.DGHISTORY.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DGHISTORY.ContextMenuStrip = Me.ContextMenuStrip1
+        Me.DGHISTORY.Location = New System.Drawing.Point(0, 67)
+        Me.DGHISTORY.Name = "DGHISTORY"
+        Me.DGHISTORY.ReadOnly = True
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DGHISTORY.RowHeadersDefaultCellStyle = DataGridViewCellStyle2
+        Me.DGHISTORY.RowHeadersVisible = False
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.DGHISTORY.RowsDefaultCellStyle = DataGridViewCellStyle3
+        Me.DGHISTORY.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.DGHISTORY.RowTemplate.Height = 30
+        Me.DGHISTORY.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.DGHISTORY.Size = New System.Drawing.Size(1053, 547)
+        Me.DGHISTORY.TabIndex = 22
         '
-        'TXTCARI_BARANG
+        'LBTOTAL
         '
-        Me.TXTCARI_BARANG.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.LBTOTAL.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TXTCARI_BARANG.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TXTCARI_BARANG.Location = New System.Drawing.Point(3, 3)
-        Me.TXTCARI_BARANG.Name = "TXTCARI_BARANG"
-        Me.TXTCARI_BARANG.Size = New System.Drawing.Size(505, 26)
-        Me.TXTCARI_BARANG.TabIndex = 16
+        Me.LBTOTAL.Font = New System.Drawing.Font("DS-Digital", 49.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBTOTAL.Location = New System.Drawing.Point(6, 24)
+        Me.LBTOTAL.Name = "LBTOTAL"
+        Me.LBTOTAL.Size = New System.Drawing.Size(572, 92)
+        Me.LBTOTAL.TabIndex = 0
+        Me.LBTOTAL.Text = "0"
+        Me.LBTOTAL.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'LBSATUAN
+        'PRINTNOTA
         '
-        Me.LBSATUAN.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBSATUAN.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LBSATUAN.Location = New System.Drawing.Point(151, 96)
-        Me.LBSATUAN.Name = "LBSATUAN"
-        Me.LBSATUAN.Size = New System.Drawing.Size(343, 26)
-        Me.LBSATUAN.TabIndex = 14
-        Me.LBSATUAN.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'Label7
+        'BTNHISTORY
         '
-        Me.Label7.AutoSize = True
-        Me.Label7.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(10, 99)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(63, 23)
-        Me.Label7.TabIndex = 13
-        Me.Label7.Text = "Satuan"
+        Me.BTNHISTORY.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BTNHISTORY.BackColor = System.Drawing.Color.Navy
+        Me.BTNHISTORY.FlatAppearance.BorderSize = 0
+        Me.BTNHISTORY.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNHISTORY.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNHISTORY.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BTNHISTORY.Location = New System.Drawing.Point(901, 645)
+        Me.BTNHISTORY.Name = "BTNHISTORY"
+        Me.BTNHISTORY.Size = New System.Drawing.Size(189, 51)
+        Me.BTNHISTORY.TabIndex = 24
+        Me.BTNHISTORY.Text = "Riwayat Transaksi"
+        Me.BTNHISTORY.UseVisualStyleBackColor = False
         '
-        'BTNTAMBAH
+        'BTNTRANSAKSI
         '
-        Me.BTNTAMBAH.BackColor = System.Drawing.Color.Navy
-        Me.BTNTAMBAH.FlatAppearance.BorderSize = 0
-        Me.BTNTAMBAH.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BTNTAMBAH.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BTNTAMBAH.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.BTNTAMBAH.Location = New System.Drawing.Point(348, 138)
-        Me.BTNTAMBAH.Name = "BTNTAMBAH"
-        Me.BTNTAMBAH.Size = New System.Drawing.Size(146, 30)
-        Me.BTNTAMBAH.TabIndex = 12
-        Me.BTNTAMBAH.Text = "Tambah Barang"
-        Me.BTNTAMBAH.UseVisualStyleBackColor = False
-        '
-        'LBBARANG
-        '
-        Me.LBBARANG.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBBARANG.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LBBARANG.Location = New System.Drawing.Point(151, 55)
-        Me.LBBARANG.Name = "LBBARANG"
-        Me.LBBARANG.Size = New System.Drawing.Size(343, 26)
-        Me.LBBARANG.TabIndex = 11
-        Me.LBBARANG.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'BTNCARI
-        '
-        Me.BTNCARI.BackColor = System.Drawing.Color.Navy
-        Me.BTNCARI.FlatAppearance.BorderSize = 0
-        Me.BTNCARI.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BTNCARI.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BTNCARI.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.BTNCARI.Location = New System.Drawing.Point(371, 12)
-        Me.BTNCARI.Name = "BTNCARI"
-        Me.BTNCARI.Size = New System.Drawing.Size(123, 30)
-        Me.BTNCARI.TabIndex = 10
-        Me.BTNCARI.Text = "Cari (F1)"
-        Me.BTNCARI.UseVisualStyleBackColor = False
-        '
-        'BTNSTOK
-        '
-        Me.BTNSTOK.BackColor = System.Drawing.Color.DarkGreen
-        Me.BTNSTOK.FlatAppearance.BorderSize = 0
-        Me.BTNSTOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BTNSTOK.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BTNSTOK.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.BTNSTOK.Location = New System.Drawing.Point(151, 273)
-        Me.BTNSTOK.Name = "BTNSTOK"
-        Me.BTNSTOK.Size = New System.Drawing.Size(189, 51)
-        Me.BTNSTOK.TabIndex = 5
-        Me.BTNSTOK.Text = "Tambah Stok"
-        Me.BTNSTOK.UseVisualStyleBackColor = False
-        '
-        'TXTKODE
-        '
-        Me.TXTKODE.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TXTKODE.Location = New System.Drawing.Point(151, 12)
-        Me.TXTKODE.Name = "TXTKODE"
-        Me.TXTKODE.Size = New System.Drawing.Size(214, 30)
-        Me.TXTKODE.TabIndex = 1
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(10, 15)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(108, 23)
-        Me.Label5.TabIndex = 0
-        Me.Label5.Text = "Kode Barang"
-        '
-        'TXTHARGAPARTAI
-        '
-        Me.TXTHARGAPARTAI.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TXTHARGAPARTAI.Location = New System.Drawing.Point(151, 224)
-        Me.TXTHARGAPARTAI.Name = "TXTHARGAPARTAI"
-        Me.TXTHARGAPARTAI.Size = New System.Drawing.Size(135, 30)
-        Me.TXTHARGAPARTAI.TabIndex = 4
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(10, 58)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(115, 23)
-        Me.Label6.TabIndex = 1
-        Me.Label6.Text = "Nama Barang"
-        '
-        'TXTSUPPLIER
-        '
-        Me.TXTSUPPLIER.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TXTSUPPLIER.Location = New System.Drawing.Point(151, 181)
-        Me.TXTSUPPLIER.Name = "TXTSUPPLIER"
-        Me.TXTSUPPLIER.Size = New System.Drawing.Size(343, 30)
-        Me.TXTSUPPLIER.TabIndex = 3
-        '
-        'Label8
-        '
-        Me.Label8.AutoSize = True
-        Me.Label8.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(10, 141)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(64, 23)
-        Me.Label8.TabIndex = 2
-        Me.Label8.Text = "Jumlah"
-        '
-        'TXTJUMLAH
-        '
-        Me.TXTJUMLAH.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TXTJUMLAH.Location = New System.Drawing.Point(151, 138)
-        Me.TXTJUMLAH.Name = "TXTJUMLAH"
-        Me.TXTJUMLAH.Size = New System.Drawing.Size(189, 30)
-        Me.TXTJUMLAH.TabIndex = 2
-        '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(10, 184)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(72, 23)
-        Me.Label9.TabIndex = 3
-        Me.Label9.Text = "Supplier"
-        '
-        'Label10
-        '
-        Me.Label10.AutoSize = True
-        Me.Label10.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(10, 227)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(104, 23)
-        Me.Label10.TabIndex = 4
-        Me.Label10.Text = "Harga Partai"
+        Me.BTNTRANSAKSI.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BTNTRANSAKSI.BackColor = System.Drawing.Color.Navy
+        Me.BTNTRANSAKSI.FlatAppearance.BorderSize = 0
+        Me.BTNTRANSAKSI.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNTRANSAKSI.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNTRANSAKSI.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BTNTRANSAKSI.Location = New System.Drawing.Point(901, 645)
+        Me.BTNTRANSAKSI.Name = "BTNTRANSAKSI"
+        Me.BTNTRANSAKSI.Size = New System.Drawing.Size(189, 51)
+        Me.BTNTRANSAKSI.TabIndex = 25
+        Me.BTNTRANSAKSI.Text = "Transaksi Masuk"
+        Me.BTNTRANSAKSI.UseVisualStyleBackColor = False
+        Me.BTNTRANSAKSI.Visible = False
         '
         'FR_MASUK
         '
@@ -848,15 +1055,18 @@ Partial Class FR_MASUK
         Me.PNLEFT.ResumeLayout(False)
         Me.PNLEFT.PerformLayout()
         Me.PNCONTENT.ResumeLayout(False)
-        CType(Me.DGTAMPIL, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.ContextMenuStrip1.ResumeLayout(False)
-        Me.Panel3.ResumeLayout(False)
-        Me.Panel3.PerformLayout()
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
         Me.PNCARI.ResumeLayout(False)
         Me.PNCARI.PerformLayout()
         CType(Me.DGCARI, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ContextMenuStrip1.ResumeLayout(False)
+        CType(Me.DGTAMPIL, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox2.ResumeLayout(False)
+        Me.PNHISTORY.ResumeLayout(False)
+        Me.Panel3.ResumeLayout(False)
+        Me.Panel3.PerformLayout()
+        CType(Me.DGHISTORY, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -879,10 +1089,7 @@ Partial Class FR_MASUK
     Friend WithEvents Panel2 As Panel
     Friend WithEvents PNCARI As Panel
     Friend WithEvents TXTCARI_BARANG As TextBox
-    Friend WithEvents LBSATUAN As Label
     Friend WithEvents Label7 As Label
-    Friend WithEvents BTNTAMBAH As Button
-    Friend WithEvents LBBARANG As Label
     Friend WithEvents BTNCARI As Button
     Friend WithEvents BTNSTOK As Button
     Friend WithEvents TXTKODE As TextBox
@@ -900,7 +1107,7 @@ Partial Class FR_MASUK
     Friend WithEvents TXTCARI As TextBox
     Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
     Friend WithEvents HapusToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents DGTAMPIL As DataGridView
+    Friend WithEvents DGHISTORY As DataGridView
     Friend WithEvents DGCARI As DataGridView
     Friend WithEvents Label1 As Label
     Friend WithEvents BTNDISKON As Button
@@ -915,4 +1122,22 @@ Partial Class FR_MASUK
     Friend WithEvents CBTAMPIL As ComboBox
     Friend WithEvents BTNRUSAK As Button
     Friend WithEvents BTNRETURN As Button
+    Friend WithEvents PNHISTORY As Panel
+    Friend WithEvents Label11 As Label
+    Friend WithEvents TXTSATUAN As TextBox
+    Friend WithEvents TXTBARANG As TextBox
+    Friend WithEvents DGTAMPIL As DataGridView
+    Friend WithEvents KODE As DataGridViewTextBoxColumn
+    Friend WithEvents BARANG As DataGridViewTextBoxColumn
+    Friend WithEvents SATUAN As DataGridViewTextBoxColumn
+    Friend WithEvents HARGA As DataGridViewTextBoxColumn
+    Friend WithEvents QTY As DataGridViewTextBoxColumn
+    Friend WithEvents TOTAL As DataGridViewTextBoxColumn
+    Friend WithEvents GroupBox2 As GroupBox
+    Friend WithEvents LBTOTAL As Label
+    Friend WithEvents BTNCANCEL As Button
+    Friend WithEvents BTNHAPUS As Button
+    Friend WithEvents PRINTNOTA As Printing.PrintDocument
+    Friend WithEvents BTNHISTORY As Button
+    Friend WithEvents BTNTRANSAKSI As Button
 End Class

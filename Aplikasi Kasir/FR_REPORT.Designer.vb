@@ -403,7 +403,9 @@ Partial Class FR_REPORT
         Me.CRV.ShowGroupTreeButton = False
         Me.CRV.ShowLogo = False
         Me.CRV.ShowParameterPanelButton = False
+        Me.CRV.ShowPrintButton = False
         Me.CRV.ShowRefreshButton = False
+        Me.CRV.ShowTextSearchButton = False
         Me.CRV.Size = New System.Drawing.Size(1062, 635)
         Me.CRV.TabIndex = 65
         Me.CRV.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None
@@ -431,7 +433,7 @@ Partial Class FR_REPORT
         Me.BTNCETAK.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.BTNCETAK.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BTNCETAK.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.BTNCETAK.Location = New System.Drawing.Point(1035, 10)
+        Me.BTNCETAK.Location = New System.Drawing.Point(489, 10)
         Me.BTNCETAK.Name = "BTNCETAK"
         Me.BTNCETAK.Size = New System.Drawing.Size(124, 41)
         Me.BTNCETAK.TabIndex = 66
@@ -446,7 +448,7 @@ Partial Class FR_REPORT
         Me.BTNTAMPIL.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.BTNTAMPIL.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BTNTAMPIL.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.BTNTAMPIL.Location = New System.Drawing.Point(907, 10)
+        Me.BTNTAMPIL.Location = New System.Drawing.Point(362, 10)
         Me.BTNTAMPIL.Name = "BTNTAMPIL"
         Me.BTNTAMPIL.Size = New System.Drawing.Size(121, 41)
         Me.BTNTAMPIL.TabIndex = 65
@@ -506,7 +508,7 @@ Partial Class FR_REPORT
         Me.CBJENIS.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CBJENIS.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CBJENIS.FormattingEnabled = True
-        Me.CBJENIS.Items.AddRange(New Object() {"Transaksi Masuk", "Transaksi Keluar", "Grafik Penjualan Harian", "Grafik Penjualan Bulanan", "Grafik Laba Harian", "Grafik Laba Bulanan"})
+        Me.CBJENIS.Items.AddRange(New Object() {"Stok", "Transaksi Masuk", "Transaksi Keluar", "Grafik Penjualan Harian", "Grafik Penjualan Bulanan", "Grafik Laba Harian", "Grafik Laba Bulanan"})
         Me.CBJENIS.Location = New System.Drawing.Point(138, 15)
         Me.CBJENIS.Name = "CBJENIS"
         Me.CBJENIS.Size = New System.Drawing.Size(208, 31)
