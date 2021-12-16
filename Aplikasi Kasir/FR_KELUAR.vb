@@ -271,7 +271,7 @@ Public Class FR_KELUAR
         Dim HARGA_BELI As Integer = 0
         Dim QUANTITY As Double = QTY
         While QUANTITY <> 0
-            Dim STR As String = "SELECT TOP 1 (Id_trans) AS Id_trans, Harga, Stok FROM tbl_transaksi_child WHERE LEFT(Id_trans,1)='M' AND Kode='" & KODE & "' AND Stok != 0 ORDER BY Id ASC"
+            Dim STR As String = "SELECT TOP 1 (Id_trans) AS Id_trans, Harga, Stok FROM tbl_transaksi_child WHERE (LEFT(Id_trans,1)='M' or LEFT(Id_trans,1)='R') AND Kode='" & KODE & "' AND Stok != 0 ORDER BY Id ASC"
             Dim CMD As SqlCommand
             CMD = New SqlCommand(STR, CONN)
             Dim RD As SqlDataReader
@@ -299,6 +299,7 @@ Public Class FR_KELUAR
                 End If
                 RD.Close()
             End If
+            RD.Close()
         End While
         Return HARGA_BELI
     End Function
@@ -459,6 +460,7 @@ Public Class FR_KELUAR
                 If CARI_STOK(TXTKODE.Text) < 0 Then
                     TXTQTY.Text = QTY
                     MsgBox("Stok barang tidak mencukupi!")
+                    TXTQTY.Text = DGTAMPIL.Rows(BARIS_DATA).Cells("Qty").Value
                     TXTQTY.Select()
                 Else
                     MASUK_DATA()

@@ -164,23 +164,23 @@ Public Class FR_PRODUK
             TXTHARGA1.ReadOnly = False
             Dim END1 As String = ""
             If Not RD.Item("End1") = 0 Then
-                END1 = RD.Item("End1")
+                END1 = Format(RD.Item("End1"), "###.##")
             End If
             Dim END2 As String = ""
             If Not RD.Item("End2") = 0 Then
-                END2 = RD.Item("End2")
+                END2 = Format(RD.Item("End2"), "###.##")
             Else
                 TXTEND2.ReadOnly = True
             End If
             Dim END3 As String = ""
             If Not RD.Item("End3") = 0 Then
-                END3 = RD.Item("End3")
+                END3 = Format(RD.Item("End3"), "###.##")
             Else
                 TXTEND3.ReadOnly = True
             End If
             Dim END4 As String = ""
             If Not RD.Item("End4") = 0 Then
-                END4 = RD.Item("End4")
+                END4 = Format(RD.Item("End4"), "###.##")
             Else
                 TXTEND4.ReadOnly = True
             End If

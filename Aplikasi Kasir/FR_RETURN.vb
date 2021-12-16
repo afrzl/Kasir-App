@@ -49,10 +49,13 @@ Public Class FR_RETURN
 
     Sub TAMPIL()
         Dim STR As String = "SELECT tbl_transaksi_child.Id_trans as 'ID Transaksi'," &
+            " RTRIM(tbl_transaksi_child.Kode) AS 'Kode Barang', " &
+            " RTRIM((SELECT Barang FROM tbl_barang WHERE RTRIM(tbl_barang.Kode) = RTRIM(tbl_transaksi_child.Kode))) AS 'Nama Barang'," &
             " RTRIM((SELECT Nama FROM tbl_karyawan WHERE RTRIM(tbl_karyawan.Id) = RTRIM(tbl_transaksi_parent.Id_kasir))) AS 'Kasir'," &
             " tbl_transaksi_parent.Tgl AS 'Tanggal'," &
             " RTRIM(tbl_transaksi_parent.Person) AS 'Pembeli'," &
-            " tbl_transaksi_child.Harga as 'Harga Jual'" &
+            " tbl_transaksi_child.Harga as 'Harga'," &
+            " RTRIM(tbl_transaksi_child.Jumlah) AS 'QTY'" &
             " FROM tbl_transaksi_child " &
             " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans" &
             " WHERE LEFT(tbl_transaksi_child.Id_trans, 1) = 'R' AND" &
@@ -64,13 +67,17 @@ Public Class FR_RETURN
         DGTAMPIL.DataSource = TBL
 
         DGTAMPIL.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-        DGTAMPIL.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+        DGTAMPIL.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
         DGTAMPIL.Columns(2).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
         DGTAMPIL.Columns(3).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-        DGTAMPIL.Columns(4).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+        DGTAMPIL.Columns(4).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+        DGTAMPIL.Columns(5).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+        DGTAMPIL.Columns(6).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+        DGTAMPIL.Columns(7).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
 
-        DGTAMPIL.Columns(4).DefaultCellStyle.Format = "Rp ###,##"
-        DGTAMPIL.Columns(4).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DGTAMPIL.Columns(6).DefaultCellStyle.Format = "Rp ###,##"
+        DGTAMPIL.Columns(6).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DGTAMPIL.Columns(7).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
     End Sub
 
     Sub DATA_TRANSAKSI()
@@ -83,15 +90,18 @@ Public Class FR_RETURN
         DA = New SqlDataAdapter(STR, CONN)
         DA.Fill(TBL)
 
-        CBKODE.DataSource = TBL
-        CBKODE.DisplayMember = "Barang"
-        CBKODE.ValueMember = "Kode"
-        CBKODE.SelectedIndex = -1
-    End Sub
+        If TBL.Rows.Count = 0 Then
+            MsgBox("Transaksi tidak ditemukan")
+            TXTID.Clear()
+            TXTID.Select()
+        Else
+            CBKODE.DataSource = TBL
+            CBKODE.DisplayMember = "Barang"
+            CBKODE.ValueMember = "Kode"
+            CBKODE.ValueMember = "Kode"
+            CBKODE.Select()
+        End If
 
-    Private Sub TXTID_TextChanged(sender As Object, e As EventArgs) Handles TXTID.TextChanged
-        CBKODE.SelectedIndex = -1
-        DATA_TRANSAKSI()
     End Sub
 
     Sub TAMPIL_PNCARI()
@@ -136,30 +146,34 @@ Public Class FR_RETURN
         On Error Resume Next
         TXTID.Text = DGCARI.Item(0, e.RowIndex).Value
         BTNCARI.Text = "Cari (F1)"
-        CBKODE.Select()
+        TXTID.Select()
         PNCARI.Visible = False
         DGCARI.DataSource = Nothing
     End Sub
 
     Dim JUMLAH As Integer = 0
-    Private Sub CBKODE_TextChanged(sender As Object, e As EventArgs) Handles CBKODE.TextChanged
-        On Error Resume Next
-        Dim STR As String = "SELECT Harga_akhir, RTRIM(Jumlah) AS Jumlah" &
-            " FROM tbl_transaksi_child WHERE Id_trans='" & TXTID.Text & "'" &
-            " AND Kode = '" & CBKODE.SelectedValue & "'"
-        Dim CMD As New SqlCommand(STR, CONN)
-        Dim RD As SqlDataReader
-        RD = CMD.ExecuteReader
-        If RD.HasRows Then
-            RD.Read()
-            TXTHARGA.Text = CInt(RD.Item("Harga_akhir") / RD.Item("Jumlah"))
-            JUMLAH = CInt(RD.Item("Jumlah"))
-            RD.Close()
-        Else
-            RD.Close()
-        End If
-        RD.Close()
-    End Sub
+    'Private Sub CBKODE_TextChanged(sender As Object, e As EventArgs) Handles CBKODE.TextChanged
+    '    On Error Resume Next
+    '    Dim STR As String = "SELECT Harga_akhir, RTRIM(Jumlah) AS Jumlah" _
+    '                        & " FROM tbl_transaksi_child WHERE Id_trans='" _
+    '                        & TXTID.Text _
+    '                        & "'" _
+    '                        & " AND Kode = '" _
+    '                        & CBKODE.SelectedValue _
+    '                        & "'"
+    '    Dim CMD As New SqlCommand(STR, CONN)
+    '    Dim RD As SqlDataReader
+    '    RD = CMD.ExecuteReader
+    '    If RD.HasRows Then
+    '        RD.Read()
+    '        TXTHARGA.Text = Convert.ToInt32(RD.Item("Harga_akhir") / RD.Item("Jumlah"))
+    '        JUMLAH = CInt(RD.Item("Jumlah"))
+    '        RD.Close()
+    '    Else
+    '        RD.Close()
+    '    End If
+    '    RD.Close()
+    'End Sub
 
     Private Sub TXTQTY_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTQTY.KeyPress
         If Not ((e.KeyChar >= "0" And e.KeyChar <= "9") Or e.KeyChar = vbBack) Then
@@ -183,6 +197,31 @@ Public Class FR_RETURN
         End If
     End Sub
 
+    Private Function CARI_ID(ByVal ID As String) As String
+        Dim ID_RETURN As String = "R" + ID
+        Dim STR As String = "SELECT TOP 1 (Id_trans) AS Id_trans FROM tbl_transaksi_parent" &
+                            " WHERE LEFT(Id_trans, 10)='" & ID_RETURN & "' ORDER BY Id DESC"
+        Dim CMD As SqlCommand
+        CMD = New SqlCommand(STR, CONN)
+        Dim RD As SqlDataReader
+        RD = CMD.ExecuteReader
+        If RD.HasRows Then
+            RD.Read()
+            If Mid(RD.Item("Id_trans"), 1, 10) = ID_RETURN Then
+                Dim KODE As Integer = Mid(RD.Item("Id_trans"), 11, 2) + 1
+                RD.Close()
+                CARI_ID = Format(KODE, "00")
+            Else
+                RD.Close()
+                CARI_ID = Format(1, "00")
+            End If
+        Else
+            RD.Close()
+            CARI_ID = Format(1, "00")
+        End If
+        RD.Close()
+    End Function
+
     Private Sub BTNSIMPAN_Click(sender As Object, e As EventArgs) Handles BTNSIMPAN.Click
         Dim QTY As Integer = 0
         If TXTQTY.Text <> "" Then
@@ -196,7 +235,7 @@ Public Class FR_RETURN
             TXTQTY.Clear()
             TXTQTY.Select()
         Else
-            Dim ID_TRANS As String = "R" + Mid(TXTID.Text, 2)
+            Dim ID_TRANS As String = "R" + Mid(TXTID.Text, 2) + CARI_ID(Mid(TXTID.Text, 2))
             Dim PEMBELI As String = ""
 
             Dim STR As String
@@ -236,7 +275,7 @@ Public Class FR_RETURN
             CMD = New SqlCommand(STR, CONN)
             CMD.ExecuteNonQuery()
 
-            MsgBox("Return berhasil disimpan! Stok " & CBKODE.SelectedText & " ditambah.")
+            MsgBox("Return berhasil disimpan! Stok " & CBKODE.Text & " ditambah.")
             TXTID.Clear()
             TXTQTY.Clear()
             TXTHARGA.Clear()
@@ -283,13 +322,15 @@ Public Class FR_RETURN
     Private Sub HapusToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HapusToolStripMenuItem.Click
         If MsgBox("Apakah anda yakin akan menghapus data transaksi?", vbYesNo) = vbYes Then
             Dim IDX As String = DGTAMPIL.Item(0, DGTAMPIL.CurrentRow.Index).Value
+            Dim NAMA_BARANG As String = DGTAMPIL.Item(2, DGTAMPIL.CurrentRow.Index).Value.ToString.Trim
+
             Dim CMD As New SqlCommand("DELETE FROM tbl_transaksi_child WHERE Id_trans='" & IDX & "'", CONN)
             CMD.ExecuteNonQuery()
 
             CMD = New SqlCommand("DELETE FROM tbl_transaksi_parent WHERE Id_trans='" & IDX & "'", CONN)
             CMD.ExecuteNonQuery()
             TAMPIL()
-            MsgBox("Data return barang berhasil dihapus")
+            MsgBox("Data barang rusak berhasil dihapus, dan stok barang " & NAMA_BARANG & " ditambah.")
         End If
     End Sub
 
@@ -299,5 +340,38 @@ Public Class FR_RETURN
 
     Private Sub BTNMASUK_Click(sender As Object, e As EventArgs) Handles BTNMASUK.Click
         BUKA_FORM(FR_MASUK)
+    End Sub
+
+    Private Sub TXTID_Leave(sender As Object, e As EventArgs) Handles TXTID.Leave
+        If TXTID.Text <> "" Then
+            DATA_TRANSAKSI()
+        End If
+    End Sub
+
+    Private Sub CBKODE_Leave(sender As Object, e As EventArgs) Handles CBKODE.Leave
+        On Error Resume Next
+        Dim STR As String = "SELECT Harga_akhir AS 'Harga_akhir'," &
+                            " (COALESCE(Jumlah, 0)) AS 'Jumlah'" _
+                            & " FROM tbl_transaksi_child WHERE Id_trans='" _
+                            & TXTID.Text _
+                            & "'" _
+                            & " AND Kode = '" _
+                            & CBKODE.SelectedValue _
+                            & "'"
+        Dim CMD As New SqlCommand(STR, CONN)
+        Dim RD As SqlDataReader
+        RD = CMD.ExecuteReader
+        If RD.HasRows Then
+            RD.Read()
+            Dim HARGA As Integer = RD.Item("Harga_akhir")
+            Dim QUANTITY As String = Format(RD.Item("Jumlah"), "###.##")
+            Dim HARGA_SATUAN As Integer = HARGA / QUANTITY
+            TXTHARGA.Text = HARGA_SATUAN
+            JUMLAH = CInt(RD.Item("Jumlah"))
+            RD.Close()
+        Else
+            RD.Close()
+        End If
+        RD.Close()
     End Sub
 End Class
