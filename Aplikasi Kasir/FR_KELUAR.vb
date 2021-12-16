@@ -10,7 +10,7 @@ Public Class FR_KELUAR
         Me.WindowState = FormWindowState.Minimized
     End Sub
 
-    Private Function CARI_HARGA(ByVal QTY As Long) As Long
+    Private Function CARI_HARGA(ByVal QTY As Double) As Long
         Dim STR As String = "SELECT * FROM tbl_barang" &
             " WHERE RTRIM(Kode)='" & TXTKODE.Text & "'"
         Dim CMD As New SqlCommand(STR, CONN)
@@ -18,10 +18,10 @@ Public Class FR_KELUAR
         RD = CMD.ExecuteReader
         If RD.HasRows Then
             RD.Read()
-            Dim END1 As Long = CLng(RD.Item("End1"))
-            Dim END2 As Long = CLng(RD.Item("End2"))
-            Dim END3 As Long = CLng(RD.Item("End3"))
-            Dim END4 As Long = CLng(RD.Item("End4"))
+            Dim END1 As Double = RD.Item("End1")
+            Dim END2 As Double = RD.Item("End2")
+            Dim END3 As Double = RD.Item("End3")
+            Dim END4 As Double = RD.Item("End4")
 
             Dim HARGA1 As Long = CLng(RD.Item("Harga1"))
             Dim HARGA2 As Long = CLng(RD.Item("Harga2"))
@@ -636,7 +636,10 @@ Public Class FR_KELUAR
         textLeft.Alignment = StringAlignment.Near
         textRight.Alignment = StringAlignment.Far
 
-        e.Graphics.DrawString(NAMA_TOKO, fontJudul, Brushes.Black, lebarKertas / 2, BarisYangSama, textCenter)
+        Dim IMAGE As Image = Image.FromFile("C:\Users\muham\OneDrive - student.uns.ac.id\Pictures\indomaret.png")
+        e.Graphics.DrawImage(IMAGE, 102, BarisYangSama(), 100, 50)
+
+        e.Graphics.DrawString(NAMA_TOKO, fontJudul, Brushes.Black, lebarKertas / 2, BarisBaru(3), textCenter)
         e.Graphics.DrawString(ALAMAT_TOKO, fontRegular, Brushes.Black, lebarKertas / 2, BarisBaru(1), textCenter)
         e.Graphics.DrawString(NO_TOKO, fontRegular, Brushes.Black, lebarKertas / 2, BarisBaru(1), textCenter)
         BarisBaru(1)

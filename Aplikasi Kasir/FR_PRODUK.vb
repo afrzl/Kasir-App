@@ -506,7 +506,7 @@ Public Class FR_PRODUK
 
     Private Sub TXTEND2_Leave(sender As Object, e As EventArgs) Handles TXTEND2.Leave
         If TXTEND2.Text <> "" Then
-            If TXTEND2.Text <= TXTEND1.Text Then
+            If Convert.ToDouble(TXTEND2.Text) <= Convert.ToDouble(TXTEND1.Text) Then
                 TXTEND2.Clear()
                 MsgBox("Item harus lebih besar dari sebelumnya!")
                 TXTEND2.Select()
@@ -520,7 +520,7 @@ Public Class FR_PRODUK
 
     Private Sub TXTEND3_Leave(sender As Object, e As EventArgs) Handles TXTEND3.Leave
         If TXTEND3.Text <> "" Then
-            If TXTEND3.Text <= CInt(TXTEND2.Text) Then
+            If Convert.ToDouble(TXTEND3.Text) <= Convert.ToDouble(TXTEND2.Text) Then
                 TXTEND3.Clear()
                 MsgBox("Item harus lebih besar dari sebelumnya!")
                 TXTEND3.Select()
@@ -534,7 +534,7 @@ Public Class FR_PRODUK
 
     Private Sub TXTEND4_Leave(sender As Object, e As EventArgs) Handles TXTEND4.Leave
         If TXTEND4.Text <> "" Then
-            If TXTEND4.Text <= CInt(TXTEND3.Text) Then
+            If Convert.ToDouble(TXTEND4.Text) <= Convert.ToDouble(TXTEND3.Text) Then
                 TXTEND4.Clear()
                 MsgBox("Item harus lebih besar dari sebelumnya!")
                 TXTEND4.Select()
@@ -548,7 +548,7 @@ Public Class FR_PRODUK
 
     Private Sub TXTEND1_Leave(sender As Object, e As EventArgs) Handles TXTEND1.Leave
         If TXTEND1.Text <> "" Then
-            If TXTEND1.Text <= 0 Then
+            If Convert.ToDouble(TXTEND1.Text) <= 0 Then
                 TXTEND1.Clear()
                 MsgBox("Item harus lebih besar dari 0!")
             Else
