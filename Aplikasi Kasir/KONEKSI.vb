@@ -1,4 +1,5 @@
 ﻿Imports System.Data.SqlClient
+Imports Microsoft.Win32
 Module KONEKSI
     Public CONN As SqlConnection
     Public NAMA_LOGIN As String = ""
@@ -8,12 +9,14 @@ Module KONEKSI
     Public ALAMAT_TOKO As String
     Public NO_TOKO As String
     Public PRINTER_NOTA As String
+    Public URL_LOGO As String
 
-    Public Sub MASUK_REGISTRY(ByVal TOKO As String, ByVal ALAMAT As String, ByVal NO As String, ByVal PRINTER As String)
+    Public Sub MASUK_REGISTRY(ByVal TOKO As String, ByVal ALAMAT As String, ByVal NO As String, ByVal PRINTER As String, ByVal URLLOGO As Byte())
         Call SaveSetting("POS", "Setting", "Nama_toko", TOKO)
         Call SaveSetting("POS", "Setting", "Alamat_toko", ALAMAT)
         Call SaveSetting("POS", "Setting", "No_toko", NO)
         Call SaveSetting("POS", "Setting", "Printer_nota", PRINTER)
+        Call SaveSetting("POS", "Setting", "Url_logo", Convert.ToBase64String(URLLOGO))
 
         AMBIL_DATA_REGISTRY()
     End Sub
@@ -23,6 +26,7 @@ Module KONEKSI
         ALAMAT_TOKO = GetSetting("POS", "Setting", "Alamat_toko", "")
         NO_TOKO = GetSetting("POS", "Setting", "No_toko", "")
         PRINTER_NOTA = GetSetting("POS", "Setting", "Printer_nota", "")
+        URL_LOGO = GetSetting("POS", "Setting", "Url_logo", "")
     End Sub
 
     Public Sub KONEKAN()

@@ -162,7 +162,8 @@ Partial Class FR_DISKON
         '
         'CBTAMPIL
         '
-        Me.CBTAMPIL.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.CBTAMPIL.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.CBTAMPIL.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CBTAMPIL.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.CBTAMPIL.FormattingEnabled = True

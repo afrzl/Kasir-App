@@ -39,6 +39,8 @@ Partial Class FR_PRODUK
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.BTNLOGOUT = New System.Windows.Forms.Button()
         Me.PNCONTENT = New System.Windows.Forms.Panel()
+        Me.PBBARCODE = New System.Windows.Forms.PictureBox()
+        Me.BTNCETAK = New System.Windows.Forms.Button()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.Label18 = New System.Windows.Forms.Label()
@@ -89,10 +91,12 @@ Partial Class FR_PRODUK
         Me.BTNKASIR = New System.Windows.Forms.Button()
         Me.BTNDASHBOARD = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
+        Me.PRINTBARCODE = New System.Drawing.Printing.PrintDocument()
         Me.PNCONTROL.SuspendLayout()
         Me.PNTOP.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.PNCONTENT.SuspendLayout()
+        CType(Me.PBBARCODE, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DGTAMPIL, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ContextMenuStrip1.SuspendLayout()
         Me.PNLEFT.SuspendLayout()
@@ -229,6 +233,8 @@ Partial Class FR_PRODUK
         '
         'PNCONTENT
         '
+        Me.PNCONTENT.Controls.Add(Me.PBBARCODE)
+        Me.PNCONTENT.Controls.Add(Me.BTNCETAK)
         Me.PNCONTENT.Controls.Add(Me.Label19)
         Me.PNCONTENT.Controls.Add(Me.Label17)
         Me.PNCONTENT.Controls.Add(Me.Label18)
@@ -268,6 +274,31 @@ Partial Class FR_PRODUK
         Me.PNCONTENT.Name = "PNCONTENT"
         Me.PNCONTENT.Size = New System.Drawing.Size(1096, 768)
         Me.PNCONTENT.TabIndex = 18
+        '
+        'PBBARCODE
+        '
+        Me.PBBARCODE.Location = New System.Drawing.Point(432, 157)
+        Me.PBBARCODE.Name = "PBBARCODE"
+        Me.PBBARCODE.Size = New System.Drawing.Size(132, 59)
+        Me.PBBARCODE.TabIndex = 70
+        Me.PBBARCODE.TabStop = False
+        Me.PBBARCODE.Visible = False
+        '
+        'BTNCETAK
+        '
+        Me.BTNCETAK.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BTNCETAK.BackColor = System.Drawing.Color.Navy
+        Me.BTNCETAK.FlatAppearance.BorderSize = 0
+        Me.BTNCETAK.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNCETAK.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNCETAK.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BTNCETAK.Location = New System.Drawing.Point(866, 528)
+        Me.BTNCETAK.Name = "BTNCETAK"
+        Me.BTNCETAK.Size = New System.Drawing.Size(183, 40)
+        Me.BTNCETAK.TabIndex = 69
+        Me.BTNCETAK.Text = "CETAK BARCODE"
+        Me.BTNCETAK.UseVisualStyleBackColor = False
+        Me.BTNCETAK.Visible = False
         '
         'Label19
         '
@@ -905,6 +936,9 @@ Partial Class FR_PRODUK
         Me.Button1.TabIndex = 0
         Me.Button1.UseVisualStyleBackColor = False
         '
+        'PRINTBARCODE
+        '
+        '
         'FR_PRODUK
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(120.0!, 120.0!)
@@ -924,6 +958,7 @@ Partial Class FR_PRODUK
         Me.Panel1.ResumeLayout(False)
         Me.PNCONTENT.ResumeLayout(False)
         Me.PNCONTENT.PerformLayout()
+        CType(Me.PBBARCODE, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DGTAMPIL, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ContextMenuStrip1.ResumeLayout(False)
         Me.PNLEFT.ResumeLayout(False)
@@ -995,4 +1030,7 @@ Partial Class FR_PRODUK
     Friend WithEvents Label18 As Label
     Friend WithEvents Label16 As Label
     Friend WithEvents Label15 As Label
+    Friend WithEvents BTNCETAK As Button
+    Friend WithEvents PRINTBARCODE As Printing.PrintDocument
+    Friend WithEvents PBBARCODE As PictureBox
 End Class

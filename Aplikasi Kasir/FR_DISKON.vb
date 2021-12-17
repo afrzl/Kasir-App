@@ -35,7 +35,7 @@ Public Class FR_DISKON
         LBTGL.Text = Format(Date.Now, "dd MMMM yyyy HH:mm:ss")
         PEWAKTU.Enabled = True
         LBLUSER.Text = NAMA_LOGIN
-        CBTAMPIL.Text = "Semua"
+        CBTAMPIL.Text = "Sekarang"
 
         TXTKODE.Select()
         TAMPIL()

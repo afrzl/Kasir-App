@@ -357,30 +357,10 @@ Public Class FR_RETURN
         End If
     End Sub
 
-    'Private Sub CBKODE_Leave(sender As Object, e As EventArgs) Handles CBKODE.Leave
-    '    On Error Resume Next
-    '    Dim STR As String = "SELECT Harga_akhir AS 'Harga_akhir'," &
-    '                        " (COALESCE(Jumlah, 0)) AS 'Jumlah'" _
-    '                        & " FROM tbl_transaksi_child WHERE Id_trans='" _
-    '                        & TXTID.Text _
-    '                        & "'" _
-    '                        & " AND Kode = '" _
-    '                        & CBKODE.SelectedValue _
-    '                        & "'"
-    '    Dim CMD As New SqlCommand(STR, CONN)
-    '    Dim RD As SqlDataReader
-    '    RD = CMD.ExecuteReader
-    '    If RD.HasRows Then
-    '        RD.Read()
-    '        Dim HARGA As Integer = RD.Item("Harga_akhir")
-    '        Dim QUANTITY As String = Format(RD.Item("Jumlah"), "###.##")
-    '        Dim HARGA_SATUAN As Integer = HARGA / QUANTITY
-    '        TXTHARGA.Text = HARGA_SATUAN
-    '        JUMLAH = CInt(RD.Item("Jumlah"))
-    '        RD.Close()
-    '    Else
-    '        RD.Close()
-    '    End If
-    '    RD.Close()
-    'End Sub
+    Private Sub BTNLOGOUT_Click(sender As Object, e As EventArgs) Handles BTNLOGOUT.Click
+        Dim FR As New FR_LOGIN
+        My.Settings.ID_ACCOUNT = 0
+        FR.Show()
+        Me.Hide()
+    End Sub
 End Class

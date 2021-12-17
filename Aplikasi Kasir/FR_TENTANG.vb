@@ -1,5 +1,6 @@
 ﻿Imports System.Data.SqlClient
 Imports System.Drawing.Printing
+Imports System.IO
 
 Public Class FR_TENTANG
     Sub BUKA_FORM(ByVal FR As Form)
@@ -106,13 +107,13 @@ Public Class FR_TENTANG
     End Sub
 
     Sub TAMPIL_TOKO()
-        LBNAMATOKO.Text = NAMA_TOKO
-        LBALAMATTOKO.Text = ALAMAT_TOKO
-        LBNOTOKO.Text = NO_TOKO
+        Dim IMAGESTREAM As New MemoryStream
+        IMAGESTREAM = New MemoryStream(Convert.FromBase64String(URL_LOGO))
 
         TXTNAMATOKO.Text = LBNAMATOKO.Text
         TXTALAMATTOKO.Text = LBALAMATTOKO.Text
         TXTNOTOKO.Text = LBNOTOKO.Text
+        PBLOGO.Image = Image.FromStream(IMAGESTREAM)
     End Sub
 
     Private Sub BTNSIMPAN_Click(sender As Object, e As EventArgs) Handles BTNSIMPAN.Click
@@ -237,6 +238,10 @@ Public Class FR_TENTANG
 
         LBPRINTER_NOTA.Visible = True
         TXTPRINTER_NOTA.Visible = False
+
+        BTNBROWSE.Visible = False
+
+        TAMPIL_TOKO()
     End Sub
 
     Sub KONDISI_EDIT_TOKO()
@@ -254,6 +259,8 @@ Public Class FR_TENTANG
 
         LBPRINTER_NOTA.Visible = False
         TXTPRINTER_NOTA.Visible = True
+
+        BTNBROWSE.Visible = True
 
         TXTPRINTER_NOTA.Items.Clear()
         For Each NAMA_PRINTER As String In PrinterSettings.InstalledPrinters
@@ -350,6 +357,13 @@ Public Class FR_TENTANG
 
     Private Sub BTNSIMPANTOKO_Click(sender As Object, e As EventArgs) Handles BTNSIMPANTOKO.Click
         Dim NOTOKO As Integer = 0
+
+        Dim IMGBYTE As Byte() = Nothing
+        Dim MS As New MemoryStream
+        PBLOGO.Image.Save(MS, Imaging.ImageFormat.Jpeg)
+        IMGBYTE = MS.GetBuffer()
+
+
         If TXTNOTOKO.Text <> "" Then
             NOTOKO = 1
         End If
@@ -357,7 +371,7 @@ Public Class FR_TENTANG
             MsgBox("Data tidak lengkap!")
         Else
             If MsgBox("Apakah anda yakin akan mengubah data toko?", vbYesNo) = vbYes Then
-                MASUK_REGISTRY(TXTNAMATOKO.Text, TXTALAMATTOKO.Text, TXTNOTOKO.Text, TXTPRINTER_NOTA.Text)
+                MASUK_REGISTRY(TXTNAMATOKO.Text, TXTALAMATTOKO.Text, TXTNOTOKO.Text, TXTPRINTER_NOTA.Text, IMGBYTE)
                 KONDISI_AWAL_TOKO()
                 TAMPIL()
             End If
@@ -384,5 +398,29 @@ Public Class FR_TENTANG
         If Not ((e.KeyChar >= "0" And e.KeyChar <= "9") Or e.KeyChar = vbBack) Then
             e.Handled = True
         End If
+    End Sub
+
+    Private Sub BTNBROWSE_Click(sender As Object, e As EventArgs) Handles BTNBROWSE.Click
+        Dim OPF As New OpenFileDialog
+        OPF.Filter = "Choose Image(*.JPG;*.JPEG;*.PNG)|*.jpg;*.jpeg;*.png"
+
+        If OPF.ShowDialog = System.Windows.Forms.DialogResult.OK Then
+            PBLOGO.Image = Image.FromFile(OPF.FileName)
+        End If
+    End Sub
+
+    Private Sub BTNRETURN_Click(sender As Object, e As EventArgs) Handles BTNRETURN.Click
+        BUKA_FORM(FR_RETURN)
+    End Sub
+
+    Private Sub BTNMASUK_Click(sender As Object, e As EventArgs) Handles BTNMASUK.Click
+        BUKA_FORM(FR_MASUK)
+    End Sub
+
+    Private Sub BTNLOGOUT_Click(sender As Object, e As EventArgs) Handles BTNLOGOUT.Click
+        Dim FR As New FR_LOGIN
+        My.Settings.ID_ACCOUNT = 0
+        FR.Show()
+        Me.Hide()
     End Sub
 End Class

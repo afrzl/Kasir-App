@@ -1,5 +1,6 @@
 ﻿Imports System.Data.SqlClient
 Imports System.Drawing.Printing
+Imports System.IO
 
 Public Class FR_MASUK
 
@@ -285,7 +286,7 @@ Public Class FR_MASUK
             TOT_HARGA = TOT_HARGA + DGTAMPIL.Item("Total", N).Value
         Next
 
-        LBTOTAL.Text = TOT_HARGA
+        LBTOTAL.Text = Format(TOT_HARGA, "##,##0")
 
         If LBTOTAL.Text <> 0 Then
             BTNSTOK.Visible = True
@@ -512,6 +513,7 @@ Public Class FR_MASUK
         PRINT_NOTA()
         MsgBox("Data pembelian sukses disimpan. Stok barang ditambah")
         DGTAMPIL.Rows.Clear()
+        TOTAL_HARGA()
     End Sub
 
     Sub INPUT_DB()
@@ -577,15 +579,21 @@ Public Class FR_MASUK
     End Function
 
     Private Sub PRINTNOTA_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles PRINTNOTA.PrintPage
+        Dim IMAGESTREAM As New MemoryStream
+        IMAGESTREAM = New MemoryStream(Convert.FromBase64String(URL_LOGO))
+
         Dim textCenter, textLeft, textRight As New StringFormat
         textCenter.Alignment = StringAlignment.Center
         textLeft.Alignment = StringAlignment.Near
         textRight.Alignment = StringAlignment.Far
+        Dim WIDTH As Single = 150
+        Dim HEIGHT As Single = 100
+        Dim JARAK As Single = (lebarKertas - WIDTH) / 2
 
-        Dim IMAGE As Image = Image.FromFile("C:\Users\muham\OneDrive - student.uns.ac.id\Pictures\indomaret.png")
-        e.Graphics.DrawImage(IMAGE, 102, BarisYangSama(), 100, 50)
+        Dim IMAGE As Image = IMAGE.FromStream(IMAGESTREAM)
+        e.Graphics.DrawImage(IMAGE, JARAK, BarisYangSama(), WIDTH, HEIGHT)
 
-        e.Graphics.DrawString(NAMA_TOKO, fontJudul, Brushes.Black, lebarKertas / 2, BarisBaru(3), textCenter)
+        e.Graphics.DrawString(NAMA_TOKO, fontJudul, Brushes.Black, lebarKertas / 2, BarisBaru(HEIGHT / jarakBaris), textCenter)
         e.Graphics.DrawString(ALAMAT_TOKO, fontRegular, Brushes.Black, lebarKertas / 2, BarisBaru(1), textCenter)
         e.Graphics.DrawString(NO_TOKO, fontRegular, Brushes.Black, lebarKertas / 2, BarisBaru(1), textCenter)
         BarisBaru(1)
@@ -598,7 +606,6 @@ Public Class FR_MASUK
         e.Graphics.DrawString("Kasir : " & LBLUSER.Text, fontRegular, Brushes.Black, marginLeft, BarisYangSama, textLeft)
 
         e.Graphics.DrawLine(Pens.Black, marginLeft, BarisBaru(1), (lebarKertas - marginRight), BarisYangSama)
-        BarisBaru(1)
 
         For Each EROW As DataGridViewRow In DGTAMPIL.Rows
             e.Graphics.DrawString(EROW.Cells("BARANG").Value, fontRegular, Brushes.Black, marginLeft, BarisYangSama, textLeft)
@@ -606,8 +613,6 @@ Public Class FR_MASUK
             e.Graphics.DrawString(Format(CInt(EROW.Cells("TOTAL").Value), "##,##0"), fontRegular, Brushes.Black, (lebarKertas - marginRight), BarisYangSama, textRight)
             BarisBaru(1)
         Next
-
-        BarisBaru(1)
         e.Graphics.DrawLine(Pens.Black, marginLeft, BarisYangSama, (lebarKertas - marginRight), BarisYangSama)
 
         e.Graphics.DrawString("Total", fontRegular, Brushes.Black, marginLeft, BarisYangSama, textLeft)

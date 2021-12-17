@@ -346,4 +346,11 @@ Public Class FR_RUSAK
     Private Sub BTNMASUK_Click(sender As Object, e As EventArgs) Handles BTNMASUK.Click
         BUKA_FORM(FR_MASUK)
     End Sub
+
+    Private Sub BTNLOGOUT_Click(sender As Object, e As EventArgs) Handles BTNLOGOUT.Click
+        Dim FR As New FR_LOGIN
+        My.Settings.ID_ACCOUNT = 0
+        FR.Show()
+        Me.Hide()
+    End Sub
 End Class

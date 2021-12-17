@@ -73,6 +73,9 @@
     <Reference Include="FontAwesome.Sharp, Version=5.15.4.0, Culture=neutral, PublicKeyToken=d16d1e4e568ec10f, processorArchitecture=MSIL">
       <HintPath>..\packages\FontAwesome.Sharp.5.15.4\lib\net472\FontAwesome.Sharp.dll</HintPath>
     </Reference>
+    <Reference Include="MessagingToolkit.Barcode">
+      <HintPath>..\..\..\..\..\..\..\Downloads\MessagingToolkit.Barcode.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -312,6 +315,9 @@
     <EmbeddedResource Include="FR_KASIR.resx">
       <DependentUpon>FR_KASIR.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FR_KASIR_DASHBOARD.resx">
+      <DependentUpon>FR_KASIR_DASHBOARD.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FR_KELUAR.resx">
       <DependentUpon>FR_KELUAR.vb</DependentUpon>
     </EmbeddedResource>
@@ -345,14 +351,17 @@
     <EmbeddedResource Include="FR_RETURN.resx">
       <DependentUpon>FR_RETURN.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FR_RETURN.resx">
+      <DependentUpon>FR_RETURN.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FR_RUSAK.resx">
       <DependentUpon>FR_RUSAK.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FR_TENTANG.resx">
       <DependentUpon>FR_TENTANG.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FR_KASIR_DASHBOARD.resx">
-      <DependentUpon>FR_KASIR_DASHBOARD.vb</DependentUpon>
+    <EmbeddedResource Include="FR_TENTANG.resx">
+      <DependentUpon>FR_TENTANG.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\licenses.licx" />
     <EmbeddedResource Include="My Project\Resources.resx">

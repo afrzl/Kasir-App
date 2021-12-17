@@ -31,6 +31,11 @@ Partial Class FR_TENTANG
         Me.BTNCLOSE = New System.Windows.Forms.Button()
         Me.PNCONTENT = New System.Windows.Forms.Panel()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.BTNBROWSE = New System.Windows.Forms.Button()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.PBLOGO = New System.Windows.Forms.PictureBox()
+        Me.LBPRINTER_NOTA = New System.Windows.Forms.Label()
+        Me.Label20 = New System.Windows.Forms.Label()
         Me.BTNCANCELTOKO = New System.Windows.Forms.Button()
         Me.LBALAMATTOKO = New System.Windows.Forms.Label()
         Me.LBNOTOKO = New System.Windows.Forms.Label()
@@ -41,8 +46,9 @@ Partial Class FR_TENTANG
         Me.Label14 = New System.Windows.Forms.Label()
         Me.TXTNAMATOKO = New System.Windows.Forms.TextBox()
         Me.Label13 = New System.Windows.Forms.Label()
-        Me.BTNSIMPANTOKO = New System.Windows.Forms.Button()
         Me.BTNUBAHTOKO = New System.Windows.Forms.Button()
+        Me.TXTPRINTER_NOTA = New System.Windows.Forms.ComboBox()
+        Me.BTNSIMPANTOKO = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.BTNSIMPAN = New System.Windows.Forms.Button()
         Me.TXTPWBARU2 = New System.Windows.Forms.TextBox()
@@ -96,12 +102,10 @@ Partial Class FR_TENTANG
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.BTNLOGOUT = New System.Windows.Forms.Button()
         Me.PEWAKTU = New System.Windows.Forms.Timer(Me.components)
-        Me.LBPRINTER_NOTA = New System.Windows.Forms.Label()
-        Me.Label20 = New System.Windows.Forms.Label()
-        Me.TXTPRINTER_NOTA = New System.Windows.Forms.ComboBox()
         Me.PNCONTROL.SuspendLayout()
         Me.PNCONTENT.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
+        CType(Me.PBLOGO, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.PNTOP.SuspendLayout()
@@ -189,6 +193,9 @@ Partial Class FR_TENTANG
         Me.GroupBox3.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox3.Controls.Add(Me.BTNBROWSE)
+        Me.GroupBox3.Controls.Add(Me.Label16)
+        Me.GroupBox3.Controls.Add(Me.PBLOGO)
         Me.GroupBox3.Controls.Add(Me.LBPRINTER_NOTA)
         Me.GroupBox3.Controls.Add(Me.Label20)
         Me.GroupBox3.Controls.Add(Me.BTNCANCELTOKO)
@@ -210,6 +217,57 @@ Partial Class FR_TENTANG
         Me.GroupBox3.TabIndex = 8
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Toko Setting"
+        '
+        'BTNBROWSE
+        '
+        Me.BTNBROWSE.BackColor = System.Drawing.Color.Navy
+        Me.BTNBROWSE.FlatAppearance.BorderSize = 0
+        Me.BTNBROWSE.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNBROWSE.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNBROWSE.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BTNBROWSE.Location = New System.Drawing.Point(936, 62)
+        Me.BTNBROWSE.Name = "BTNBROWSE"
+        Me.BTNBROWSE.Size = New System.Drawing.Size(133, 50)
+        Me.BTNBROWSE.TabIndex = 39
+        Me.BTNBROWSE.Text = "Pilih Foto"
+        Me.BTNBROWSE.UseVisualStyleBackColor = False
+        Me.BTNBROWSE.Visible = False
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.Location = New System.Drawing.Point(639, 36)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(88, 23)
+        Me.Label16.TabIndex = 38
+        Me.Label16.Text = "Logo Toko"
+        '
+        'PBLOGO
+        '
+        Me.PBLOGO.Location = New System.Drawing.Point(643, 62)
+        Me.PBLOGO.Name = "PBLOGO"
+        Me.PBLOGO.Size = New System.Drawing.Size(287, 164)
+        Me.PBLOGO.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PBLOGO.TabIndex = 37
+        Me.PBLOGO.TabStop = False
+        '
+        'LBPRINTER_NOTA
+        '
+        Me.LBPRINTER_NOTA.AutoSize = True
+        Me.LBPRINTER_NOTA.Location = New System.Drawing.Point(234, 201)
+        Me.LBPRINTER_NOTA.Name = "LBPRINTER_NOTA"
+        Me.LBPRINTER_NOTA.Size = New System.Drawing.Size(104, 23)
+        Me.LBPRINTER_NOTA.TabIndex = 35
+        Me.LBPRINTER_NOTA.Text = "Printer Nota"
+        '
+        'Label20
+        '
+        Me.Label20.AutoSize = True
+        Me.Label20.Location = New System.Drawing.Point(26, 201)
+        Me.Label20.Name = "Label20"
+        Me.Label20.Size = New System.Drawing.Size(104, 23)
+        Me.Label20.TabIndex = 33
+        Me.Label20.Text = "Printer Nota"
         '
         'BTNCANCELTOKO
         '
@@ -300,20 +358,6 @@ Partial Class FR_TENTANG
         Me.Label13.TabIndex = 25
         Me.Label13.Text = "Nama Toko"
         '
-        'BTNSIMPANTOKO
-        '
-        Me.BTNSIMPANTOKO.BackColor = System.Drawing.Color.DarkGreen
-        Me.BTNSIMPANTOKO.FlatAppearance.BorderSize = 0
-        Me.BTNSIMPANTOKO.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BTNSIMPANTOKO.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BTNSIMPANTOKO.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.BTNSIMPANTOKO.Location = New System.Drawing.Point(238, 239)
-        Me.BTNSIMPANTOKO.Name = "BTNSIMPANTOKO"
-        Me.BTNSIMPANTOKO.Size = New System.Drawing.Size(189, 50)
-        Me.BTNSIMPANTOKO.TabIndex = 26
-        Me.BTNSIMPANTOKO.Text = "Simpan Data Toko"
-        Me.BTNSIMPANTOKO.UseVisualStyleBackColor = False
-        '
         'BTNUBAHTOKO
         '
         Me.BTNUBAHTOKO.BackColor = System.Drawing.Color.Navy
@@ -327,6 +371,29 @@ Partial Class FR_TENTANG
         Me.BTNUBAHTOKO.TabIndex = 25
         Me.BTNUBAHTOKO.Text = "Ubah Data Toko"
         Me.BTNUBAHTOKO.UseVisualStyleBackColor = False
+        '
+        'TXTPRINTER_NOTA
+        '
+        Me.TXTPRINTER_NOTA.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.TXTPRINTER_NOTA.FormattingEnabled = True
+        Me.TXTPRINTER_NOTA.Location = New System.Drawing.Point(234, 197)
+        Me.TXTPRINTER_NOTA.Name = "TXTPRINTER_NOTA"
+        Me.TXTPRINTER_NOTA.Size = New System.Drawing.Size(311, 31)
+        Me.TXTPRINTER_NOTA.TabIndex = 36
+        '
+        'BTNSIMPANTOKO
+        '
+        Me.BTNSIMPANTOKO.BackColor = System.Drawing.Color.DarkGreen
+        Me.BTNSIMPANTOKO.FlatAppearance.BorderSize = 0
+        Me.BTNSIMPANTOKO.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNSIMPANTOKO.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNSIMPANTOKO.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BTNSIMPANTOKO.Location = New System.Drawing.Point(238, 239)
+        Me.BTNSIMPANTOKO.Name = "BTNSIMPANTOKO"
+        Me.BTNSIMPANTOKO.Size = New System.Drawing.Size(189, 50)
+        Me.BTNSIMPANTOKO.TabIndex = 26
+        Me.BTNSIMPANTOKO.Text = "Simpan Data Toko"
+        Me.BTNSIMPANTOKO.UseVisualStyleBackColor = False
         '
         'GroupBox2
         '
@@ -970,33 +1037,6 @@ Partial Class FR_TENTANG
         'PEWAKTU
         '
         '
-        'LBPRINTER_NOTA
-        '
-        Me.LBPRINTER_NOTA.AutoSize = True
-        Me.LBPRINTER_NOTA.Location = New System.Drawing.Point(234, 201)
-        Me.LBPRINTER_NOTA.Name = "LBPRINTER_NOTA"
-        Me.LBPRINTER_NOTA.Size = New System.Drawing.Size(104, 23)
-        Me.LBPRINTER_NOTA.TabIndex = 35
-        Me.LBPRINTER_NOTA.Text = "Printer Nota"
-        '
-        'Label20
-        '
-        Me.Label20.AutoSize = True
-        Me.Label20.Location = New System.Drawing.Point(26, 201)
-        Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(104, 23)
-        Me.Label20.TabIndex = 33
-        Me.Label20.Text = "Printer Nota"
-        '
-        'TXTPRINTER_NOTA
-        '
-        Me.TXTPRINTER_NOTA.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.TXTPRINTER_NOTA.FormattingEnabled = True
-        Me.TXTPRINTER_NOTA.Location = New System.Drawing.Point(234, 197)
-        Me.TXTPRINTER_NOTA.Name = "TXTPRINTER_NOTA"
-        Me.TXTPRINTER_NOTA.Size = New System.Drawing.Size(311, 31)
-        Me.TXTPRINTER_NOTA.TabIndex = 36
-        '
         'FR_TENTANG
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 23.0!)
@@ -1016,6 +1056,7 @@ Partial Class FR_TENTANG
         Me.PNCONTENT.ResumeLayout(False)
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
+        CType(Me.PBLOGO, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
@@ -1105,4 +1146,7 @@ Partial Class FR_TENTANG
     Friend WithEvents LBPRINTER_NOTA As Label
     Friend WithEvents Label20 As Label
     Friend WithEvents TXTPRINTER_NOTA As ComboBox
+    Friend WithEvents BTNBROWSE As Button
+    Friend WithEvents Label16 As Label
+    Friend WithEvents PBLOGO As PictureBox
 End Class

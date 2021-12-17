@@ -1,5 +1,5 @@
-﻿Imports System.ComponentModel
-Imports System.Data.SqlClient
+﻿Imports System.Data.SqlClient
+Imports System.Drawing.Printing
 Public Class FR_PRODUK
     Private Sub PEWAKTU_Tick(sender As Object, e As EventArgs) Handles PEWAKTU.Tick
         LBTGL.Text = Format(Date.Now, "dd MMMM yyyy HH:mm:ss")
@@ -42,13 +42,14 @@ Public Class FR_PRODUK
     End Sub
 
     Dim START_RECORD As Integer = 0
-    Dim TAMPIL_RECORD As Integer = 10
+    Dim TAMPIL_RECORD As Integer = 30
     Sub TAMPIL()
         Dim STR As String = "SELECT RTRIM(Kode) AS 'Kode Barang'," &
             " RTRIM(Barang) AS 'Nama Barang'," &
             " RTRIM(Satuan) AS 'Satuan'," &
             " Harga1 AS 'Harga Satuan' FROM tbl_barang" &
-            " WHERE Barang LIKE '%" & TXTCARI.Text & "%'"
+            " WHERE Barang LIKE '%" & TXTCARI.Text & "%'" &
+            " ORDER BY 'Nama Barang' ASC"
 
         Dim DA As SqlDataAdapter
         Dim TBL As New DataSet
@@ -319,6 +320,12 @@ Public Class FR_PRODUK
         BTNSIMPAN.Visible = False
         BTNCANCEL.Visible = True
         BTNUBAH.Visible = True
+        BTNCETAK.Visible = True
+
+        Dim GENERATE As New MessagingToolkit.Barcode.BarcodeEncoder
+        PBBARCODE.Image = New Bitmap(GENERATE.Encode(MessagingToolkit.Barcode.BarcodeFormat.Code128A, TXTKODE.Text))
+        PBBARCODE.SizeMode = PictureBoxSizeMode.StretchImage
+
     End Sub
 
     Private Sub TXTEND1_TextChanged(sender As Object, e As EventArgs) Handles TXTEND1.TextChanged
@@ -386,6 +393,8 @@ Public Class FR_PRODUK
         BTNSIMPAN.Visible = True
         BTNUBAH.Visible = False
         BTNCANCEL.Visible = False
+        PBBARCODE.Visible = False
+        BTNCETAK.Visible = False
         CBSATUAN.SelectedIndex = -1
         TXTKODE.Select()
     End Sub
@@ -557,5 +566,35 @@ Public Class FR_PRODUK
         Else
             TXTHARGA1.Select()
         End If
+    End Sub
+
+    Dim WIDTH_BARCODE As Integer = 170
+    Dim HEIGHT_BARCODE As Integer = 56
+    Dim PPD As New PrintDialog
+
+    Private Sub BTNCETAK_Click(sender As Object, e As EventArgs) Handles BTNCETAK.Click
+        PPD.Document = PRINTBARCODE
+        PPD.PrinterSettings = PRINTBARCODE.PrinterSettings
+        PRINTBARCODE.DefaultPageSettings.PaperSize = New PaperSize("A4", 595, 841)
+        PPD.AllowSomePages = True
+
+        If PPD.ShowDialog = DialogResult.OK Then
+            PRINTBARCODE.PrinterSettings = PRINTBARCODE.PrinterSettings
+            PRINTBARCODE.Print()
+        End If
+    End Sub
+
+    Private Sub PRINTBARCODE_PrintPage(sender As Object, e As PrintPageEventArgs) Handles PRINTBARCODE.PrintPage
+        Dim X As Integer = 30
+        Dim Y As Integer = 10
+
+        For i As Integer = 1 To 16
+            X = 50
+            For j As Integer = 1 To 4
+                e.Graphics.DrawImage(PBBARCODE.Image, X, Y, WIDTH_BARCODE, HEIGHT_BARCODE)
+                X = X + WIDTH_BARCODE + 10
+            Next
+            Y = Y + HEIGHT_BARCODE + 10
+        Next
     End Sub
 End Class
