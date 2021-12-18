@@ -142,4 +142,8 @@ Public Class FR_KASIR_DASHBOARD
         CMD = New SqlCommand(STR, CONN)
         LBKELUARHARI.Text = Convert.ToInt16(CMD.ExecuteScalar())
     End Sub
+
+    Private Sub BTNRETURN_Click(sender As Object, e As EventArgs) Handles BTNRETURN.Click
+        BUKA_FORM(FR_RETURN)
+    End Sub
 End Class

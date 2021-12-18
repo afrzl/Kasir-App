@@ -205,13 +205,14 @@ Public Class FR_KELUAR
     End Sub
 
     Private Sub FR_KELUAR_Load(sender As Object, e As EventArgs) Handles Me.Load
-
         TXTKODE.Select()
         TXTKASIR.Text = NAMA_LOGIN
         TXTPEMBELI.Text = "USER"
         LBTGL.Text = Format(Date.Now, "dd MMMM yyyy HH:mm:ss")
 
         PEWAKTU.Enabled = True
+
+        ALAMATTOKO.Text = ALAMAT_TOKO
     End Sub
 
     Dim ID_TRANSAKSI As String
@@ -496,7 +497,7 @@ Public Class FR_KELUAR
             Dim STR As String = "SELECT Barang" &
                                 " From tbl_barang WHERE kode='" & TXTKODE.Text & "'"
             Dim CMD As SqlCommand
-            CMD = New SqlCommand(Str, CONN)
+            CMD = New SqlCommand(STR, CONN)
             Dim RD As SqlDataReader
             RD = CMD.ExecuteReader
 
@@ -647,7 +648,7 @@ Public Class FR_KELUAR
         e.Graphics.DrawImage(IMAGE, JARAK, BarisYangSama(), WIDTH, HEIGHT)
 
         e.Graphics.DrawString(NAMA_TOKO, fontJudul, Brushes.Black, lebarKertas / 2, BarisBaru(HEIGHT / jarakBaris), textCenter)
-        e.Graphics.DrawString(ALAMAT_TOKO, fontRegular, Brushes.Black, lebarKertas / 2, BarisBaru(1), textCenter)
+        e.Graphics.DrawString(ALAMATTOKO.Text, fontRegular, Brushes.Black, New Rectangle(20, BarisBaru(1), lebarKertas - 30, BarisBaru(1)), textCenter)
         e.Graphics.DrawString(NO_TOKO, fontRegular, Brushes.Black, lebarKertas / 2, BarisBaru(1), textCenter)
         BarisBaru(1)
 

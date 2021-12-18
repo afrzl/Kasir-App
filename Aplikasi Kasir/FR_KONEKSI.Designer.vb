@@ -37,22 +37,22 @@ Partial Class FR_KONEKSI
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.Label1.Location = New System.Drawing.Point(56, 62)
+        Me.Label1.Location = New System.Drawing.Point(56, 60)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(77, 20)
+        Me.Label1.Size = New System.Drawing.Size(79, 28)
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "SERVER"
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.Label2.Location = New System.Drawing.Point(56, 103)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(55, 20)
+        Me.Label2.Size = New System.Drawing.Size(59, 28)
         Me.Label2.TabIndex = 1
         Me.Label2.Text = "USER"
         Me.Label2.TextAlign = System.Drawing.ContentAlignment.TopCenter
@@ -60,76 +60,84 @@ Partial Class FR_KONEKSI
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.Label3.Location = New System.Drawing.Point(56, 191)
+        Me.Label3.Location = New System.Drawing.Point(56, 189)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(99, 20)
+        Me.Label3.Size = New System.Drawing.Size(105, 28)
         Me.Label3.TabIndex = 3
         Me.Label3.Text = "DATABASE"
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label4.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.Label4.Location = New System.Drawing.Point(56, 150)
+        Me.Label4.Location = New System.Drawing.Point(56, 146)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(107, 20)
+        Me.Label4.Size = New System.Drawing.Size(117, 28)
         Me.Label4.TabIndex = 2
         Me.Label4.Text = "PASSWORD"
         '
         'TXTSERVER
         '
-        Me.TXTSERVER.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TXTSERVER.Font = New System.Drawing.Font("Segoe UI", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TXTSERVER.Location = New System.Drawing.Point(236, 59)
         Me.TXTSERVER.Name = "TXTSERVER"
-        Me.TXTSERVER.Size = New System.Drawing.Size(400, 27)
+        Me.TXTSERVER.Size = New System.Drawing.Size(400, 31)
         Me.TXTSERVER.TabIndex = 4
         '
         'TXTUSER
         '
-        Me.TXTUSER.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TXTUSER.Location = New System.Drawing.Point(236, 100)
+        Me.TXTUSER.Font = New System.Drawing.Font("Segoe UI", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TXTUSER.Location = New System.Drawing.Point(236, 102)
         Me.TXTUSER.Name = "TXTUSER"
-        Me.TXTUSER.Size = New System.Drawing.Size(400, 27)
+        Me.TXTUSER.Size = New System.Drawing.Size(400, 31)
         Me.TXTUSER.TabIndex = 5
         '
         'TXTDATABASE
         '
-        Me.TXTDATABASE.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TXTDATABASE.Font = New System.Drawing.Font("Segoe UI", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TXTDATABASE.Location = New System.Drawing.Point(236, 188)
         Me.TXTDATABASE.Name = "TXTDATABASE"
-        Me.TXTDATABASE.Size = New System.Drawing.Size(400, 27)
+        Me.TXTDATABASE.Size = New System.Drawing.Size(400, 31)
         Me.TXTDATABASE.TabIndex = 7
         '
         'TXTPASSWORD
         '
-        Me.TXTPASSWORD.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TXTPASSWORD.Location = New System.Drawing.Point(236, 147)
+        Me.TXTPASSWORD.Font = New System.Drawing.Font("Segoe UI", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TXTPASSWORD.Location = New System.Drawing.Point(236, 145)
         Me.TXTPASSWORD.Name = "TXTPASSWORD"
-        Me.TXTPASSWORD.Size = New System.Drawing.Size(400, 27)
+        Me.TXTPASSWORD.Size = New System.Drawing.Size(400, 31)
         Me.TXTPASSWORD.TabIndex = 6
         '
         'BTNCONNECT
         '
-        Me.BTNCONNECT.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNCONNECT.BackColor = System.Drawing.Color.DarkGreen
+        Me.BTNCONNECT.FlatAppearance.BorderSize = 0
+        Me.BTNCONNECT.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNCONNECT.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNCONNECT.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.BTNCONNECT.Location = New System.Drawing.Point(511, 254)
         Me.BTNCONNECT.Name = "BTNCONNECT"
         Me.BTNCONNECT.Size = New System.Drawing.Size(125, 35)
         Me.BTNCONNECT.TabIndex = 8
         Me.BTNCONNECT.Text = "CONNECT"
-        Me.BTNCONNECT.UseVisualStyleBackColor = True
+        Me.BTNCONNECT.UseVisualStyleBackColor = False
         '
         'BTNEXIT
         '
-        Me.BTNEXIT.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNEXIT.BackColor = System.Drawing.Color.Maroon
+        Me.BTNEXIT.FlatAppearance.BorderSize = 0
+        Me.BTNEXIT.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNEXIT.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNEXIT.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.BTNEXIT.Location = New System.Drawing.Point(236, 254)
         Me.BTNEXIT.Name = "BTNEXIT"
         Me.BTNEXIT.Size = New System.Drawing.Size(109, 35)
         Me.BTNEXIT.TabIndex = 9
         Me.BTNEXIT.Text = "EXIT"
-        Me.BTNEXIT.UseVisualStyleBackColor = True
+        Me.BTNEXIT.UseVisualStyleBackColor = False
         '
         'FR_KONEKSI
         '

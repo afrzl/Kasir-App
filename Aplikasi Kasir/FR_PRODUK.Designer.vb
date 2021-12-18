@@ -29,17 +29,13 @@ Partial Class FR_PRODUK
         Me.PEWAKTU = New System.Windows.Forms.Timer(Me.components)
         Me.LBTGL = New System.Windows.Forms.Label()
         Me.PNCONTROL = New System.Windows.Forms.Panel()
-        Me.BTNMINIMIZE = New System.Windows.Forms.Button()
-        Me.BTNCLOSE = New System.Windows.Forms.Button()
         Me.PNTOP = New System.Windows.Forms.Panel()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.LBLUSER = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.BTNLOGOUT = New System.Windows.Forms.Button()
         Me.PNCONTENT = New System.Windows.Forms.Panel()
-        Me.PBBARCODE = New System.Windows.Forms.PictureBox()
         Me.BTNCETAK = New System.Windows.Forms.Button()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.Label17 = New System.Windows.Forms.Label()
@@ -78,11 +74,15 @@ Partial Class FR_PRODUK
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.PNLEFT = New System.Windows.Forms.Panel()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.PRINTBARCODE = New System.Drawing.Printing.PrintDocument()
+        Me.BTNMINIMIZE = New System.Windows.Forms.Button()
+        Me.BTNCLOSE = New System.Windows.Forms.Button()
+        Me.PBBARCODE = New System.Windows.Forms.PictureBox()
         Me.BTNRUSAK = New System.Windows.Forms.Button()
         Me.BTNRETURN = New System.Windows.Forms.Button()
-        Me.Label1 = New System.Windows.Forms.Label()
         Me.BTNDISKON = New System.Windows.Forms.Button()
-        Me.Label14 = New System.Windows.Forms.Label()
         Me.BTNTENTANG = New System.Windows.Forms.Button()
         Me.BTNLAPORAN = New System.Windows.Forms.Button()
         Me.BTNKELUAR = New System.Windows.Forms.Button()
@@ -91,15 +91,15 @@ Partial Class FR_PRODUK
         Me.BTNKASIR = New System.Windows.Forms.Button()
         Me.BTNDASHBOARD = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.PRINTBARCODE = New System.Drawing.Printing.PrintDocument()
+        Me.BTNLOGOUT = New System.Windows.Forms.Button()
         Me.PNCONTROL.SuspendLayout()
         Me.PNTOP.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.PNCONTENT.SuspendLayout()
-        CType(Me.PBBARCODE, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DGTAMPIL, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ContextMenuStrip1.SuspendLayout()
         Me.PNLEFT.SuspendLayout()
+        CType(Me.PBBARCODE, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PEWAKTU
@@ -127,28 +127,6 @@ Partial Class FR_PRODUK
         Me.PNCONTROL.Name = "PNCONTROL"
         Me.PNCONTROL.Size = New System.Drawing.Size(76, 40)
         Me.PNCONTROL.TabIndex = 0
-        '
-        'BTNMINIMIZE
-        '
-        Me.BTNMINIMIZE.FlatAppearance.BorderSize = 0
-        Me.BTNMINIMIZE.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BTNMINIMIZE.Image = Global.Aplikasi_Kasir.My.Resources.Resources.minimize15px
-        Me.BTNMINIMIZE.Location = New System.Drawing.Point(11, 10)
-        Me.BTNMINIMIZE.Name = "BTNMINIMIZE"
-        Me.BTNMINIMIZE.Size = New System.Drawing.Size(18, 18)
-        Me.BTNMINIMIZE.TabIndex = 2
-        Me.BTNMINIMIZE.UseVisualStyleBackColor = True
-        '
-        'BTNCLOSE
-        '
-        Me.BTNCLOSE.FlatAppearance.BorderSize = 0
-        Me.BTNCLOSE.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BTNCLOSE.Image = Global.Aplikasi_Kasir.My.Resources.Resources.close15px
-        Me.BTNCLOSE.Location = New System.Drawing.Point(46, 10)
-        Me.BTNCLOSE.Name = "BTNCLOSE"
-        Me.BTNCLOSE.Size = New System.Drawing.Size(18, 18)
-        Me.BTNCLOSE.TabIndex = 0
-        Me.BTNCLOSE.UseVisualStyleBackColor = True
         '
         'PNTOP
         '
@@ -213,24 +191,6 @@ Partial Class FR_PRODUK
         Me.Panel1.Size = New System.Drawing.Size(270, 64)
         Me.Panel1.TabIndex = 0
         '
-        'BTNLOGOUT
-        '
-        Me.BTNLOGOUT.FlatAppearance.BorderSize = 0
-        Me.BTNLOGOUT.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BTNLOGOUT.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BTNLOGOUT.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.BTNLOGOUT.Image = Global.Aplikasi_Kasir.My.Resources.Resources.logout
-        Me.BTNLOGOUT.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNLOGOUT.Location = New System.Drawing.Point(3, 17)
-        Me.BTNLOGOUT.Name = "BTNLOGOUT"
-        Me.BTNLOGOUT.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
-        Me.BTNLOGOUT.Size = New System.Drawing.Size(270, 35)
-        Me.BTNLOGOUT.TabIndex = 14
-        Me.BTNLOGOUT.Text = "     Logout"
-        Me.BTNLOGOUT.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNLOGOUT.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.BTNLOGOUT.UseVisualStyleBackColor = True
-        '
         'PNCONTENT
         '
         Me.PNCONTENT.Controls.Add(Me.PBBARCODE)
@@ -274,15 +234,6 @@ Partial Class FR_PRODUK
         Me.PNCONTENT.Name = "PNCONTENT"
         Me.PNCONTENT.Size = New System.Drawing.Size(1096, 768)
         Me.PNCONTENT.TabIndex = 18
-        '
-        'PBBARCODE
-        '
-        Me.PBBARCODE.Location = New System.Drawing.Point(432, 157)
-        Me.PBBARCODE.Name = "PBBARCODE"
-        Me.PBBARCODE.Size = New System.Drawing.Size(132, 59)
-        Me.PBBARCODE.TabIndex = 70
-        Me.PBBARCODE.TabStop = False
-        Me.PBBARCODE.Visible = False
         '
         'BTNCETAK
         '
@@ -382,10 +333,10 @@ Partial Class FR_PRODUK
         '
         'TXTEND5
         '
+        Me.TXTEND5.Enabled = False
         Me.TXTEND5.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TXTEND5.Location = New System.Drawing.Point(97, 461)
         Me.TXTEND5.Name = "TXTEND5"
-        Me.TXTEND5.ReadOnly = True
         Me.TXTEND5.Size = New System.Drawing.Size(40, 30)
         Me.TXTEND5.TabIndex = 61
         Me.TXTEND5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -402,19 +353,19 @@ Partial Class FR_PRODUK
         '
         'TXTHARGA5
         '
+        Me.TXTHARGA5.Enabled = False
         Me.TXTHARGA5.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TXTHARGA5.Location = New System.Drawing.Point(189, 461)
         Me.TXTHARGA5.Name = "TXTHARGA5"
-        Me.TXTHARGA5.ReadOnly = True
         Me.TXTHARGA5.Size = New System.Drawing.Size(226, 30)
         Me.TXTHARGA5.TabIndex = 12
         '
         'TXTEND4
         '
+        Me.TXTEND4.Enabled = False
         Me.TXTEND4.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TXTEND4.Location = New System.Drawing.Point(97, 410)
         Me.TXTEND4.Name = "TXTEND4"
-        Me.TXTEND4.ReadOnly = True
         Me.TXTEND4.Size = New System.Drawing.Size(40, 30)
         Me.TXTEND4.TabIndex = 10
         Me.TXTEND4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -431,10 +382,10 @@ Partial Class FR_PRODUK
         '
         'TXTHARGA4
         '
+        Me.TXTHARGA4.Enabled = False
         Me.TXTHARGA4.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TXTHARGA4.Location = New System.Drawing.Point(189, 410)
         Me.TXTHARGA4.Name = "TXTHARGA4"
-        Me.TXTHARGA4.ReadOnly = True
         Me.TXTHARGA4.Size = New System.Drawing.Size(226, 30)
         Me.TXTHARGA4.TabIndex = 11
         '
@@ -470,10 +421,10 @@ Partial Class FR_PRODUK
         '
         'TXTEND3
         '
+        Me.TXTEND3.Enabled = False
         Me.TXTEND3.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TXTEND3.Location = New System.Drawing.Point(97, 359)
         Me.TXTEND3.Name = "TXTEND3"
-        Me.TXTEND3.ReadOnly = True
         Me.TXTEND3.Size = New System.Drawing.Size(40, 30)
         Me.TXTEND3.TabIndex = 8
         Me.TXTEND3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -490,10 +441,10 @@ Partial Class FR_PRODUK
         '
         'TXTEND2
         '
+        Me.TXTEND2.Enabled = False
         Me.TXTEND2.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TXTEND2.Location = New System.Drawing.Point(97, 308)
         Me.TXTEND2.Name = "TXTEND2"
-        Me.TXTEND2.ReadOnly = True
         Me.TXTEND2.Size = New System.Drawing.Size(40, 30)
         Me.TXTEND2.TabIndex = 6
         Me.TXTEND2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -588,19 +539,19 @@ Partial Class FR_PRODUK
         '
         'TXTHARGA3
         '
+        Me.TXTHARGA3.Enabled = False
         Me.TXTHARGA3.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TXTHARGA3.Location = New System.Drawing.Point(189, 359)
         Me.TXTHARGA3.Name = "TXTHARGA3"
-        Me.TXTHARGA3.ReadOnly = True
         Me.TXTHARGA3.Size = New System.Drawing.Size(226, 30)
         Me.TXTHARGA3.TabIndex = 9
         '
         'TXTHARGA2
         '
+        Me.TXTHARGA2.Enabled = False
         Me.TXTHARGA2.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TXTHARGA2.Location = New System.Drawing.Point(189, 308)
         Me.TXTHARGA2.Name = "TXTHARGA2"
-        Me.TXTHARGA2.ReadOnly = True
         Me.TXTHARGA2.Size = New System.Drawing.Size(226, 30)
         Me.TXTHARGA2.TabIndex = 7
         '
@@ -725,6 +676,59 @@ Partial Class FR_PRODUK
         Me.PNLEFT.Size = New System.Drawing.Size(270, 768)
         Me.PNLEFT.TabIndex = 17
         '
+        'Label1
+        '
+        Me.Label1.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.Label1.Location = New System.Drawing.Point(0, 298)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(5, 25)
+        Me.Label1.TabIndex = 28
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label14.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.Label14.Location = New System.Drawing.Point(7, 146)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(125, 28)
+        Me.Label14.TabIndex = 20
+        Me.Label14.Text = "Menu Utama"
+        '
+        'PRINTBARCODE
+        '
+        '
+        'BTNMINIMIZE
+        '
+        Me.BTNMINIMIZE.FlatAppearance.BorderSize = 0
+        Me.BTNMINIMIZE.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNMINIMIZE.Image = Global.Aplikasi_Kasir.My.Resources.Resources.minimize15px
+        Me.BTNMINIMIZE.Location = New System.Drawing.Point(11, 10)
+        Me.BTNMINIMIZE.Name = "BTNMINIMIZE"
+        Me.BTNMINIMIZE.Size = New System.Drawing.Size(18, 18)
+        Me.BTNMINIMIZE.TabIndex = 2
+        Me.BTNMINIMIZE.UseVisualStyleBackColor = True
+        '
+        'BTNCLOSE
+        '
+        Me.BTNCLOSE.FlatAppearance.BorderSize = 0
+        Me.BTNCLOSE.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNCLOSE.Image = Global.Aplikasi_Kasir.My.Resources.Resources.close15px
+        Me.BTNCLOSE.Location = New System.Drawing.Point(46, 10)
+        Me.BTNCLOSE.Name = "BTNCLOSE"
+        Me.BTNCLOSE.Size = New System.Drawing.Size(18, 18)
+        Me.BTNCLOSE.TabIndex = 0
+        Me.BTNCLOSE.UseVisualStyleBackColor = True
+        '
+        'PBBARCODE
+        '
+        Me.PBBARCODE.Location = New System.Drawing.Point(432, 157)
+        Me.PBBARCODE.Name = "PBBARCODE"
+        Me.PBBARCODE.Size = New System.Drawing.Size(132, 59)
+        Me.PBBARCODE.TabIndex = 70
+        Me.PBBARCODE.TabStop = False
+        Me.PBBARCODE.Visible = False
+        '
         'BTNRUSAK
         '
         Me.BTNRUSAK.FlatAppearance.BorderSize = 0
@@ -761,14 +765,6 @@ Partial Class FR_PRODUK
         Me.BTNRETURN.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.BTNRETURN.UseVisualStyleBackColor = True
         '
-        'Label1
-        '
-        Me.Label1.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.Label1.Location = New System.Drawing.Point(0, 298)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(5, 25)
-        Me.Label1.TabIndex = 28
-        '
         'BTNDISKON
         '
         Me.BTNDISKON.FlatAppearance.BorderSize = 0
@@ -787,17 +783,6 @@ Partial Class FR_PRODUK
         Me.BTNDISKON.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.BTNDISKON.UseVisualStyleBackColor = True
         '
-        'Label14
-        '
-        Me.Label14.AutoSize = True
-        Me.Label14.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label14.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.Label14.Location = New System.Drawing.Point(7, 146)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(125, 28)
-        Me.Label14.TabIndex = 20
-        Me.Label14.Text = "Menu Utama"
-        '
         'BTNTENTANG
         '
         Me.BTNTENTANG.FlatAppearance.BorderSize = 0
@@ -811,7 +796,7 @@ Partial Class FR_PRODUK
         Me.BTNTENTANG.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
         Me.BTNTENTANG.Size = New System.Drawing.Size(270, 35)
         Me.BTNTENTANG.TabIndex = 27
-        Me.BTNTENTANG.Text = "     Tentang"
+        Me.BTNTENTANG.Text = "     Setting"
         Me.BTNTENTANG.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.BTNTENTANG.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.BTNTENTANG.UseVisualStyleBackColor = True
@@ -936,8 +921,23 @@ Partial Class FR_PRODUK
         Me.Button1.TabIndex = 0
         Me.Button1.UseVisualStyleBackColor = False
         '
-        'PRINTBARCODE
+        'BTNLOGOUT
         '
+        Me.BTNLOGOUT.FlatAppearance.BorderSize = 0
+        Me.BTNLOGOUT.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNLOGOUT.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNLOGOUT.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BTNLOGOUT.Image = Global.Aplikasi_Kasir.My.Resources.Resources.logout
+        Me.BTNLOGOUT.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.BTNLOGOUT.Location = New System.Drawing.Point(3, 17)
+        Me.BTNLOGOUT.Name = "BTNLOGOUT"
+        Me.BTNLOGOUT.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
+        Me.BTNLOGOUT.Size = New System.Drawing.Size(270, 35)
+        Me.BTNLOGOUT.TabIndex = 14
+        Me.BTNLOGOUT.Text = "     Logout"
+        Me.BTNLOGOUT.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.BTNLOGOUT.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.BTNLOGOUT.UseVisualStyleBackColor = True
         '
         'FR_PRODUK
         '
@@ -958,11 +958,11 @@ Partial Class FR_PRODUK
         Me.Panel1.ResumeLayout(False)
         Me.PNCONTENT.ResumeLayout(False)
         Me.PNCONTENT.PerformLayout()
-        CType(Me.PBBARCODE, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DGTAMPIL, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ContextMenuStrip1.ResumeLayout(False)
         Me.PNLEFT.ResumeLayout(False)
         Me.PNLEFT.PerformLayout()
+        CType(Me.PBBARCODE, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

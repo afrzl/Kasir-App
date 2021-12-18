@@ -38,6 +38,11 @@ Partial Class FR_KASIR_DASHBOARD
         Me.LBTGL = New System.Windows.Forms.Label()
         Me.PNCONTROL = New System.Windows.Forms.Panel()
         Me.PNCONTENT = New System.Windows.Forms.Panel()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.BTNNEXT = New System.Windows.Forms.Button()
+        Me.BTNPREV = New System.Windows.Forms.Button()
+        Me.DGSTOK = New System.Windows.Forms.DataGridView()
+        Me.TXTCARISTOK = New System.Windows.Forms.TextBox()
         Me.LBKELUARHARI = New System.Windows.Forms.Label()
         Me.Button10 = New System.Windows.Forms.Button()
         Me.Button11 = New System.Windows.Forms.Button()
@@ -54,11 +59,7 @@ Partial Class FR_KASIR_DASHBOARD
         Me.BTNDASHBOARD = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.BTNLOGOUT = New System.Windows.Forms.Button()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.BTNNEXT = New System.Windows.Forms.Button()
-        Me.BTNPREV = New System.Windows.Forms.Button()
-        Me.DGSTOK = New System.Windows.Forms.DataGridView()
-        Me.TXTCARISTOK = New System.Windows.Forms.TextBox()
+        Me.Panel2 = New System.Windows.Forms.Panel()
         Me.PNLEFT.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.PNTOP.SuspendLayout()
@@ -66,18 +67,13 @@ Partial Class FR_KASIR_DASHBOARD
         Me.PNCONTENT.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         CType(Me.DGSTOK, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
         '
         'PNLEFT
         '
         Me.PNLEFT.BackColor = System.Drawing.Color.FromArgb(CType(CType(63, Byte), Integer), CType(CType(48, Byte), Integer), CType(CType(120, Byte), Integer))
-        Me.PNLEFT.Controls.Add(Me.BTNRETURN)
-        Me.PNLEFT.Controls.Add(Me.Label11)
-        Me.PNLEFT.Controls.Add(Me.Label1)
-        Me.PNLEFT.Controls.Add(Me.BTNTENTANG)
-        Me.PNLEFT.Controls.Add(Me.BTNLAPORAN)
-        Me.PNLEFT.Controls.Add(Me.BTNKELUAR)
-        Me.PNLEFT.Controls.Add(Me.BTNDASHBOARD)
+        Me.PNLEFT.Controls.Add(Me.Panel2)
         Me.PNLEFT.Controls.Add(Me.Label4)
         Me.PNLEFT.Controls.Add(Me.Label3)
         Me.PNLEFT.Controls.Add(Me.LBLUSER)
@@ -93,7 +89,7 @@ Partial Class FR_KASIR_DASHBOARD
         'Label11
         '
         Me.Label11.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.Label11.Location = New System.Drawing.Point(0, 194)
+        Me.Label11.Location = New System.Drawing.Point(0, 82)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(5, 25)
         Me.Label11.TabIndex = 28
@@ -103,7 +99,7 @@ Partial Class FR_KASIR_DASHBOARD
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.Label1.Location = New System.Drawing.Point(7, 146)
+        Me.Label1.Location = New System.Drawing.Point(7, 34)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(125, 28)
         Me.Label1.TabIndex = 20
@@ -209,6 +205,105 @@ Partial Class FR_KASIR_DASHBOARD
         Me.PNCONTENT.Name = "PNCONTENT"
         Me.PNCONTENT.Size = New System.Drawing.Size(1096, 728)
         Me.PNCONTENT.TabIndex = 12
+        '
+        'GroupBox1
+        '
+        Me.GroupBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox1.Controls.Add(Me.BTNNEXT)
+        Me.GroupBox1.Controls.Add(Me.BTNPREV)
+        Me.GroupBox1.Controls.Add(Me.DGSTOK)
+        Me.GroupBox1.Controls.Add(Me.TXTCARISTOK)
+        Me.GroupBox1.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GroupBox1.Location = New System.Drawing.Point(6, 227)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(1074, 489)
+        Me.GroupBox1.TabIndex = 41
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Stok Barang Tersedia"
+        '
+        'BTNNEXT
+        '
+        Me.BTNNEXT.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BTNNEXT.BackColor = System.Drawing.Color.DarkBlue
+        Me.BTNNEXT.FlatAppearance.BorderSize = 0
+        Me.BTNNEXT.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNNEXT.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNNEXT.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BTNNEXT.Location = New System.Drawing.Point(1018, 40)
+        Me.BTNNEXT.Name = "BTNNEXT"
+        Me.BTNNEXT.Size = New System.Drawing.Size(50, 29)
+        Me.BTNNEXT.TabIndex = 21
+        Me.BTNNEXT.Text = ">"
+        Me.BTNNEXT.UseVisualStyleBackColor = False
+        '
+        'BTNPREV
+        '
+        Me.BTNPREV.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BTNPREV.BackColor = System.Drawing.Color.DarkBlue
+        Me.BTNPREV.FlatAppearance.BorderSize = 0
+        Me.BTNPREV.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNPREV.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNPREV.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BTNPREV.Location = New System.Drawing.Point(962, 40)
+        Me.BTNPREV.Name = "BTNPREV"
+        Me.BTNPREV.Size = New System.Drawing.Size(50, 29)
+        Me.BTNPREV.TabIndex = 20
+        Me.BTNPREV.Text = "<"
+        Me.BTNPREV.UseVisualStyleBackColor = False
+        '
+        'DGSTOK
+        '
+        Me.DGSTOK.AllowUserToAddRows = False
+        Me.DGSTOK.AllowUserToDeleteRows = False
+        Me.DGSTOK.AllowUserToResizeColumns = False
+        Me.DGSTOK.AllowUserToResizeRows = False
+        Me.DGSTOK.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.NullValue = "-"
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DGSTOK.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        Me.DGSTOK.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DGSTOK.Location = New System.Drawing.Point(22, 75)
+        Me.DGSTOK.MultiSelect = False
+        Me.DGSTOK.Name = "DGSTOK"
+        Me.DGSTOK.ReadOnly = True
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DGSTOK.RowHeadersDefaultCellStyle = DataGridViewCellStyle2
+        Me.DGSTOK.RowHeadersVisible = False
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.DGSTOK.RowsDefaultCellStyle = DataGridViewCellStyle3
+        Me.DGSTOK.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.DGSTOK.RowTemplate.Height = 30
+        Me.DGSTOK.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.DGSTOK.ShowCellErrors = False
+        Me.DGSTOK.ShowEditingIcon = False
+        Me.DGSTOK.ShowRowErrors = False
+        Me.DGSTOK.Size = New System.Drawing.Size(1046, 408)
+        Me.DGSTOK.TabIndex = 67
+        '
+        'TXTCARISTOK
+        '
+        Me.TXTCARISTOK.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TXTCARISTOK.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TXTCARISTOK.Location = New System.Drawing.Point(22, 39)
+        Me.TXTCARISTOK.Name = "TXTCARISTOK"
+        Me.TXTCARISTOK.Size = New System.Drawing.Size(934, 30)
+        Me.TXTCARISTOK.TabIndex = 66
         '
         'LBKELUARHARI
         '
@@ -323,7 +418,7 @@ Partial Class FR_KASIR_DASHBOARD
         Me.BTNRETURN.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.BTNRETURN.Image = Global.Aplikasi_Kasir.My.Resources.Resources.transaksi
         Me.BTNRETURN.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNRETURN.Location = New System.Drawing.Point(0, 291)
+        Me.BTNRETURN.Location = New System.Drawing.Point(0, 179)
         Me.BTNRETURN.Name = "BTNRETURN"
         Me.BTNRETURN.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
         Me.BTNRETURN.Size = New System.Drawing.Size(270, 35)
@@ -341,7 +436,7 @@ Partial Class FR_KASIR_DASHBOARD
         Me.BTNTENTANG.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.BTNTENTANG.Image = Global.Aplikasi_Kasir.My.Resources.Resources.tentang
         Me.BTNTENTANG.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNTENTANG.Location = New System.Drawing.Point(0, 393)
+        Me.BTNTENTANG.Location = New System.Drawing.Point(0, 281)
         Me.BTNTENTANG.Name = "BTNTENTANG"
         Me.BTNTENTANG.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
         Me.BTNTENTANG.Size = New System.Drawing.Size(270, 35)
@@ -359,7 +454,7 @@ Partial Class FR_KASIR_DASHBOARD
         Me.BTNLAPORAN.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.BTNLAPORAN.Image = Global.Aplikasi_Kasir.My.Resources.Resources.laporan
         Me.BTNLAPORAN.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNLAPORAN.Location = New System.Drawing.Point(0, 342)
+        Me.BTNLAPORAN.Location = New System.Drawing.Point(0, 230)
         Me.BTNLAPORAN.Name = "BTNLAPORAN"
         Me.BTNLAPORAN.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
         Me.BTNLAPORAN.Size = New System.Drawing.Size(270, 35)
@@ -377,7 +472,7 @@ Partial Class FR_KASIR_DASHBOARD
         Me.BTNKELUAR.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.BTNKELUAR.Image = Global.Aplikasi_Kasir.My.Resources.Resources.transaksi
         Me.BTNKELUAR.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNKELUAR.Location = New System.Drawing.Point(0, 240)
+        Me.BTNKELUAR.Location = New System.Drawing.Point(0, 128)
         Me.BTNKELUAR.Name = "BTNKELUAR"
         Me.BTNKELUAR.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
         Me.BTNKELUAR.Size = New System.Drawing.Size(270, 35)
@@ -395,7 +490,7 @@ Partial Class FR_KASIR_DASHBOARD
         Me.BTNDASHBOARD.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.BTNDASHBOARD.Image = Global.Aplikasi_Kasir.My.Resources.Resources.data_master
         Me.BTNDASHBOARD.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNDASHBOARD.Location = New System.Drawing.Point(0, 189)
+        Me.BTNDASHBOARD.Location = New System.Drawing.Point(0, 77)
         Me.BTNDASHBOARD.Name = "BTNDASHBOARD"
         Me.BTNDASHBOARD.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
         Me.BTNDASHBOARD.Size = New System.Drawing.Size(270, 35)
@@ -435,104 +530,19 @@ Partial Class FR_KASIR_DASHBOARD
         Me.BTNLOGOUT.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.BTNLOGOUT.UseVisualStyleBackColor = True
         '
-        'GroupBox1
+        'Panel2
         '
-        Me.GroupBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.GroupBox1.Controls.Add(Me.BTNNEXT)
-        Me.GroupBox1.Controls.Add(Me.BTNPREV)
-        Me.GroupBox1.Controls.Add(Me.DGSTOK)
-        Me.GroupBox1.Controls.Add(Me.TXTCARISTOK)
-        Me.GroupBox1.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox1.Location = New System.Drawing.Point(6, 227)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(1074, 489)
-        Me.GroupBox1.TabIndex = 41
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Stok Barang Tersedia"
-        '
-        'BTNNEXT
-        '
-        Me.BTNNEXT.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BTNNEXT.BackColor = System.Drawing.Color.DarkBlue
-        Me.BTNNEXT.FlatAppearance.BorderSize = 0
-        Me.BTNNEXT.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BTNNEXT.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BTNNEXT.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.BTNNEXT.Location = New System.Drawing.Point(1018, 40)
-        Me.BTNNEXT.Name = "BTNNEXT"
-        Me.BTNNEXT.Size = New System.Drawing.Size(50, 29)
-        Me.BTNNEXT.TabIndex = 21
-        Me.BTNNEXT.Text = ">"
-        Me.BTNNEXT.UseVisualStyleBackColor = False
-        '
-        'BTNPREV
-        '
-        Me.BTNPREV.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BTNPREV.BackColor = System.Drawing.Color.DarkBlue
-        Me.BTNPREV.FlatAppearance.BorderSize = 0
-        Me.BTNPREV.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BTNPREV.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BTNPREV.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.BTNPREV.Location = New System.Drawing.Point(962, 40)
-        Me.BTNPREV.Name = "BTNPREV"
-        Me.BTNPREV.Size = New System.Drawing.Size(50, 29)
-        Me.BTNPREV.TabIndex = 20
-        Me.BTNPREV.Text = "<"
-        Me.BTNPREV.UseVisualStyleBackColor = False
-        '
-        'DGSTOK
-        '
-        Me.DGSTOK.AllowUserToAddRows = False
-        Me.DGSTOK.AllowUserToDeleteRows = False
-        Me.DGSTOK.AllowUserToResizeColumns = False
-        Me.DGSTOK.AllowUserToResizeRows = False
-        Me.DGSTOK.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle1.NullValue = "-"
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DGSTOK.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
-        Me.DGSTOK.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DGSTOK.Location = New System.Drawing.Point(22, 75)
-        Me.DGSTOK.MultiSelect = False
-        Me.DGSTOK.Name = "DGSTOK"
-        Me.DGSTOK.ReadOnly = True
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DGSTOK.RowHeadersDefaultCellStyle = DataGridViewCellStyle2
-        Me.DGSTOK.RowHeadersVisible = False
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DGSTOK.RowsDefaultCellStyle = DataGridViewCellStyle3
-        Me.DGSTOK.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DGSTOK.RowTemplate.Height = 30
-        Me.DGSTOK.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DGSTOK.ShowCellErrors = False
-        Me.DGSTOK.ShowEditingIcon = False
-        Me.DGSTOK.ShowRowErrors = False
-        Me.DGSTOK.Size = New System.Drawing.Size(1046, 408)
-        Me.DGSTOK.TabIndex = 67
-        '
-        'TXTCARISTOK
-        '
-        Me.TXTCARISTOK.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TXTCARISTOK.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TXTCARISTOK.Location = New System.Drawing.Point(22, 39)
-        Me.TXTCARISTOK.Name = "TXTCARISTOK"
-        Me.TXTCARISTOK.Size = New System.Drawing.Size(934, 30)
-        Me.TXTCARISTOK.TabIndex = 66
+        Me.Panel2.Controls.Add(Me.Label1)
+        Me.Panel2.Controls.Add(Me.BTNRETURN)
+        Me.Panel2.Controls.Add(Me.Label11)
+        Me.Panel2.Controls.Add(Me.BTNKELUAR)
+        Me.Panel2.Controls.Add(Me.BTNLAPORAN)
+        Me.Panel2.Controls.Add(Me.BTNTENTANG)
+        Me.Panel2.Controls.Add(Me.BTNDASHBOARD)
+        Me.Panel2.Location = New System.Drawing.Point(0, 112)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(270, 375)
+        Me.Panel2.TabIndex = 54
         '
         'FR_KASIR_DASHBOARD
         '
@@ -559,6 +569,8 @@ Partial Class FR_KASIR_DASHBOARD
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         CType(Me.DGSTOK, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel2.ResumeLayout(False)
+        Me.Panel2.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -596,4 +608,5 @@ Partial Class FR_KASIR_DASHBOARD
     Friend WithEvents BTNPREV As Button
     Friend WithEvents DGSTOK As DataGridView
     Friend WithEvents TXTCARISTOK As TextBox
+    Friend WithEvents Panel2 As Panel
 End Class

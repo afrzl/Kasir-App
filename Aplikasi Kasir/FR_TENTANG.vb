@@ -36,11 +36,23 @@ Public Class FR_TENTANG
         LBTGL.Text = Format(Date.Now, "dd MMMM yyyy HH:mm:ss")
     End Sub
 
-    Private Sub BTNRUSAK_Click(sender As Object, e As EventArgs) Handles BTNRUSAK.Click
-        BUKA_FORM(FR_RUSAK)
-    End Sub
-
     Private Sub FR_TENTANG_Load(sender As Object, e As EventArgs) Handles Me.Load
+        Select Case ROLE
+            Case 1
+                GBTOKO.Visible = True
+                PNADMIN.Visible = True
+                PNKASIR.Visible = False
+                Label3.Text = "Administrator"
+            Case 2
+                GBTOKO.Visible = False
+                Label3.Text = "Admin Barang"
+            Case 3
+                GBTOKO.Visible = False
+                PNADMIN.Visible = False
+                PNKASIR.Visible = True
+                Label3.Text = "Kasir"
+        End Select
+
         LBTGL.Text = Format(Date.Now, "dd MMMM yyyy HH:mm:ss")
         PEWAKTU.Enabled = True
         LBLUSER.Text = NAMA_LOGIN
@@ -172,7 +184,14 @@ Public Class FR_TENTANG
     End Sub
 
     Private Sub BTNCLOSE_Click(sender As Object, e As EventArgs) Handles BTNCLOSE.Click
-        Dim FR As New FR_MENU
+        Dim FR As New Form
+        Select Case ROLE
+            Case 1
+                FR = FR_MENU
+            Case 2
+            Case 3
+                FR = FR_KASIR_DASHBOARD
+        End Select
         FR.Show()
         Me.Close()
     End Sub
@@ -409,7 +428,26 @@ Public Class FR_TENTANG
         End If
     End Sub
 
-    Private Sub BTNRETURN_Click(sender As Object, e As EventArgs) Handles BTNRETURN.Click
+    Private Sub BTNLOGOUT_Click(sender As Object, e As EventArgs) Handles BTNLOGOUT.Click
+        Dim FR As New FR_LOGIN
+        My.Settings.ID_ACCOUNT = 0
+        FR.Show()
+        Me.Close()
+    End Sub
+
+    Private Sub BTNDASHBOARDKASIR_Click(sender As Object, e As EventArgs) Handles BTNDASHBOARDKASIR.Click
+        BUKA_FORM(FR_KASIR_DASHBOARD)
+    End Sub
+
+    Private Sub BTNKELUARKASIR_Click(sender As Object, e As EventArgs) Handles BTNKELUARKASIR.Click
+        BUKA_FORM(FR_KELUAR)
+    End Sub
+
+    Private Sub BTNLAPORANKASIR_Click(sender As Object, e As EventArgs) Handles BTNLAPORANKASIR.Click
+        BUKA_FORM(FR_REPORT)
+    End Sub
+
+    Private Sub BTNRETURNKASIR_Click(sender As Object, e As EventArgs) Handles BTNRETURNKASIR.Click
         BUKA_FORM(FR_RETURN)
     End Sub
 
@@ -417,10 +455,11 @@ Public Class FR_TENTANG
         BUKA_FORM(FR_MASUK)
     End Sub
 
-    Private Sub BTNLOGOUT_Click(sender As Object, e As EventArgs) Handles BTNLOGOUT.Click
-        Dim FR As New FR_LOGIN
-        My.Settings.ID_ACCOUNT = 0
-        FR.Show()
-        Me.Hide()
+    Private Sub BTNRETURN_Click(sender As Object, e As EventArgs) Handles BTNRETURN.Click
+        BUKA_FORM(FR_RETURN)
+    End Sub
+
+    Private Sub BTNRUSAK_Click(sender As Object, e As EventArgs) Handles BTNRUSAK.Click
+        BUKA_FORM(FR_RUSAK)
     End Sub
 End Class

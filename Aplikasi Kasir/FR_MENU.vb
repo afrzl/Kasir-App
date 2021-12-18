@@ -71,7 +71,7 @@ Public Class FR_MENU
         Dim FR As New FR_LOGIN
         My.Settings.ID_ACCOUNT = 0
         FR.Show()
-        Me.Hide()
+        Me.Close()
     End Sub
 
     Private Sub BTNRETURN_Click(sender As Object, e As EventArgs) Handles BTNRETURN.Click
@@ -175,5 +175,16 @@ Public Class FR_MENU
         STR = "SELECT COUNT(*) FROM tbl_transaksi_parent WHERE Jenis='K' AND (Tgl >= '" & TGLAWAL & "' AND Tgl <= '" & TGLAKHIR & "')"
         CMD = New SqlCommand(STR, CONN)
         LBKELUARHARI.Text = Convert.ToInt16(CMD.ExecuteScalar())
+    End Sub
+
+    Private Sub TXTCARISTOK_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTCARISTOK.KeyPress
+        Dim KeyAscii As Short = Asc(e.KeyChar)
+        If (e.KeyChar Like "[A-Z, a-z]" _
+            OrElse e.KeyChar Like "[0-9]" _
+            OrElse KeyAscii = Keys.Back) Then
+            KeyAscii = 0
+        End If
+
+        e.Handled = CBool(KeyAscii)
     End Sub
 End Class

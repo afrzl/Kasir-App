@@ -29,6 +29,8 @@ Partial Class FR_KELUAR_TAMPIL
         Me.PNCONTROL = New System.Windows.Forms.Panel()
         Me.BTNCLOSE = New System.Windows.Forms.Button()
         Me.PNCONTENT = New System.Windows.Forms.Panel()
+        Me.BTNNEXT = New System.Windows.Forms.Button()
+        Me.BTNPREV = New System.Windows.Forms.Button()
         Me.DGCARI = New System.Windows.Forms.DataGridView()
         Me.TXTCARI = New System.Windows.Forms.TextBox()
         Me.PNTOP.SuspendLayout()
@@ -69,6 +71,8 @@ Partial Class FR_KELUAR_TAMPIL
         '
         'PNCONTENT
         '
+        Me.PNCONTENT.Controls.Add(Me.BTNNEXT)
+        Me.PNCONTENT.Controls.Add(Me.BTNPREV)
         Me.PNCONTENT.Controls.Add(Me.DGCARI)
         Me.PNCONTENT.Controls.Add(Me.TXTCARI)
         Me.PNCONTENT.Dock = System.Windows.Forms.DockStyle.Fill
@@ -76,6 +80,36 @@ Partial Class FR_KELUAR_TAMPIL
         Me.PNCONTENT.Name = "PNCONTENT"
         Me.PNCONTENT.Size = New System.Drawing.Size(923, 407)
         Me.PNCONTENT.TabIndex = 22
+        '
+        'BTNNEXT
+        '
+        Me.BTNNEXT.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BTNNEXT.BackColor = System.Drawing.Color.DarkBlue
+        Me.BTNNEXT.FlatAppearance.BorderSize = 0
+        Me.BTNNEXT.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNNEXT.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNNEXT.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BTNNEXT.Location = New System.Drawing.Point(861, 7)
+        Me.BTNNEXT.Name = "BTNNEXT"
+        Me.BTNNEXT.Size = New System.Drawing.Size(50, 29)
+        Me.BTNNEXT.TabIndex = 67
+        Me.BTNNEXT.Text = ">"
+        Me.BTNNEXT.UseVisualStyleBackColor = False
+        '
+        'BTNPREV
+        '
+        Me.BTNPREV.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BTNPREV.BackColor = System.Drawing.Color.DarkBlue
+        Me.BTNPREV.FlatAppearance.BorderSize = 0
+        Me.BTNPREV.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNPREV.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNPREV.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BTNPREV.Location = New System.Drawing.Point(805, 7)
+        Me.BTNPREV.Name = "BTNPREV"
+        Me.BTNPREV.Size = New System.Drawing.Size(50, 29)
+        Me.BTNPREV.TabIndex = 66
+        Me.BTNPREV.Text = "<"
+        Me.BTNPREV.UseVisualStyleBackColor = False
         '
         'DGCARI
         '
@@ -124,7 +158,7 @@ Partial Class FR_KELUAR_TAMPIL
         Me.TXTCARI.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TXTCARI.Location = New System.Drawing.Point(12, 6)
         Me.TXTCARI.Name = "TXTCARI"
-        Me.TXTCARI.Size = New System.Drawing.Size(899, 30)
+        Me.TXTCARI.Size = New System.Drawing.Size(787, 30)
         Me.TXTCARI.TabIndex = 64
         '
         'FR_KELUAR_TAMPIL
@@ -155,4 +189,6 @@ Partial Class FR_KELUAR_TAMPIL
     Friend WithEvents PNCONTENT As Panel
     Friend WithEvents DGCARI As DataGridView
     Friend WithEvents TXTCARI As TextBox
+    Friend WithEvents BTNNEXT As Button
+    Friend WithEvents BTNPREV As Button
 End Class

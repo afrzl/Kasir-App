@@ -35,6 +35,18 @@ Public Class FR_RETURN
     End Sub
 
     Private Sub FR_RETURN_Load(sender As Object, e As EventArgs) Handles Me.Load
+        Select Case ROLE
+            Case 1
+                PNADMIN.Visible = True
+                PNKASIR.Visible = False
+                Label3.Text = "Administrator"
+            Case 2
+            Case 3
+                PNADMIN.Visible = False
+                PNKASIR.Visible = True
+                Label3.Text = "Kasir"
+        End Select
+
         LBTGL.Text = Format(Date.Now, "dd MMMM yyyy HH:mm:ss")
         PEWAKTU.Enabled = True
         LBLUSER.Text = NAMA_LOGIN
@@ -48,7 +60,10 @@ Public Class FR_RETURN
     End Sub
 
     Sub TAMPIL()
-        Dim STR As String = "SELECT tbl_transaksi_child.Id_trans as 'ID Transaksi'," &
+        Dim STR As String
+        Select Case ROLE
+            Case 1
+                STR = "SELECT tbl_transaksi_child.Id_trans as 'ID Transaksi'," &
             " RTRIM(tbl_transaksi_child.Kode) AS 'Kode Barang', " &
             " RTRIM((SELECT Barang FROM tbl_barang WHERE RTRIM(tbl_barang.Kode) = RTRIM(tbl_transaksi_child.Kode))) AS 'Nama Barang'," &
             " RTRIM((SELECT Nama FROM tbl_karyawan WHERE RTRIM(tbl_karyawan.Id) = RTRIM(tbl_transaksi_parent.Id_kasir))) AS 'Kasir'," &
@@ -60,6 +75,22 @@ Public Class FR_RETURN
             " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans" &
             " WHERE LEFT(tbl_transaksi_child.Id_trans, 1) = 'R' AND" &
             " tbl_transaksi_child.Id_trans LIKE '%" & TXTCARI.Text & "%'"
+            Case 2
+            Case 3
+                STR = "SELECT tbl_transaksi_child.Id_trans as 'ID Transaksi'," &
+            " RTRIM(tbl_transaksi_child.Kode) AS 'Kode Barang', " &
+            " RTRIM((SELECT Barang FROM tbl_barang WHERE RTRIM(tbl_barang.Kode) = RTRIM(tbl_transaksi_child.Kode))) AS 'Nama Barang'," &
+            " RTRIM((SELECT Nama FROM tbl_karyawan WHERE RTRIM(tbl_karyawan.Id) = RTRIM(tbl_transaksi_parent.Id_kasir))) AS 'Kasir'," &
+            " tbl_transaksi_parent.Tgl AS 'Tanggal'," &
+            " RTRIM(tbl_transaksi_parent.Person) AS 'Pembeli'," &
+            " tbl_transaksi_child.Harga as 'Harga'," &
+            " tbl_transaksi_child.Jumlah AS 'QTY'" &
+            " FROM tbl_transaksi_child " &
+            " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans" &
+            " WHERE LEFT(tbl_transaksi_child.Id_trans, 1) = 'R' AND" &
+            " tbl_transaksi_parent.Id_kasir = '" & ROLE & "' AND" &
+            " tbl_transaksi_child.Id_trans LIKE '%" & TXTCARI.Text & "%'"
+        End Select
         Dim DA As SqlDataAdapter
         DA = New SqlDataAdapter(STR, CONN)
         Dim TBL As New DataTable
@@ -122,11 +153,24 @@ Public Class FR_RETURN
     End Sub
 
     Sub CARI_TRANSAKSI()
-        Dim STR As String = "SELECT RTRIM(Id_trans) AS 'ID Transaksi'," &
-            " Tgl AS 'Tanggal Transaksi'" &
-            " FROM tbl_transaksi_parent WHERE LEFT(Id_trans, 1) = 'K'" &
-            " AND Id_trans Like '%" & TXTCARI_TRANS.Text & "%'" &
-            " ORDER BY Id DESC"
+        Dim STR As String
+        Select Case ROLE
+            Case 1
+                STR = "SELECT RTRIM(Id_trans) AS 'ID Transaksi'," &
+                      " Tgl AS 'Tanggal Transaksi'" &
+                      " FROM tbl_transaksi_parent WHERE LEFT(Id_trans, 1) = 'K'" &
+                      " AND Id_trans Like '%" & TXTCARI_TRANS.Text & "%'" &
+                      " ORDER BY Id DESC"
+            Case 2
+            Case 3
+                STR = "SELECT RTRIM(Id_trans) AS 'ID Transaksi'," &
+                      " Tgl AS 'Tanggal Transaksi'" &
+                      " FROM tbl_transaksi_parent WHERE LEFT(Id_trans, 1) = 'K'" &
+                      " AND Id_trans Like '%" & TXTCARI_TRANS.Text & "%'" &
+                      " AND Id_kasir = '" & My.Settings.ID_ACCOUNT & "'" &
+                      " ORDER BY Id DESC"
+        End Select
+
         Dim DA As SqlDataAdapter
         DA = New SqlDataAdapter(STR, CONN)
         Dim TBL As New DataTable
@@ -156,7 +200,8 @@ Public Class FR_RETURN
     Dim JUMLAH As Double = 0
     Private Sub CBKODE_TextChanged(sender As Object, e As EventArgs) Handles CBKODE.TextChanged
         On Error Resume Next
-        Dim STR As String = "SELECT Harga_akhir AS 'Harga_akhir'," &
+        Dim STR As String
+        STR = "SELECT Harga_akhir AS 'Harga_akhir'," &
                             " (COALESCE(Jumlah, 0)) AS 'Jumlah'," _
                             & "(SELECT COALESCE(SUM(Jumlah),0) FROM tbl_transaksi_child WHERE LEFT(Id_trans, 10) = 'R" & Mid(TXTID.Text, 2, 9) & "' AND Kode = '" & CBKODE.SelectedValue & "') AS 'Return'" _
                             & " FROM tbl_transaksi_child WHERE Id_trans='" _
@@ -315,7 +360,14 @@ Public Class FR_RETURN
     End Sub
 
     Private Sub BTNCLOSE_Click(sender As Object, e As EventArgs) Handles BTNCLOSE.Click
-        Dim FR As New FR_MENU
+        Dim FR As New Form
+        Select Case ROLE
+            Case 1
+                FR = FR_MENU
+            Case 2
+            Case 3
+                FR = FR_KASIR_DASHBOARD
+        End Select
         FR.Show()
         Me.Close()
     End Sub
@@ -361,6 +413,22 @@ Public Class FR_RETURN
         Dim FR As New FR_LOGIN
         My.Settings.ID_ACCOUNT = 0
         FR.Show()
-        Me.Hide()
+        Me.Close()
+    End Sub
+
+    Private Sub BTNDASHBOARDKASIR_Click(sender As Object, e As EventArgs) Handles BTNDASHBOARDKASIR.Click
+        BUKA_FORM(FR_KASIR_DASHBOARD)
+    End Sub
+
+    Private Sub BTNKELUARKASIR_Click(sender As Object, e As EventArgs) Handles BTNKELUARKASIR.Click
+        BUKA_FORM(FR_KELUAR)
+    End Sub
+
+    Private Sub BTNLAPORANKASIR_Click(sender As Object, e As EventArgs) Handles BTNLAPORANKASIR.Click
+        BUKA_FORM(FR_REPORT)
+    End Sub
+
+    Private Sub BTNSETTINGKASIR_Click(sender As Object, e As EventArgs) Handles BTNSETTINGKASIR.Click
+        BUKA_FORM(FR_TENTANG)
     End Sub
 End Class

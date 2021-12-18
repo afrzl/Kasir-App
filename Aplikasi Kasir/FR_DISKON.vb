@@ -20,7 +20,7 @@ Public Class FR_DISKON
         Dim FR As New FR_LOGIN
         My.Settings.ID_ACCOUNT = 0
         FR.Show()
-        Me.Hide()
+        Me.Close()
     End Sub
 
     Private Sub BTNCLOSE_Click(sender As Object, e As EventArgs) Handles BTNCLOSE.Click

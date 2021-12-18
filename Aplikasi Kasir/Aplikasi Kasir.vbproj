@@ -284,9 +284,15 @@
       <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="RPT_KELUAR.vb">
+      <DependentUpon>RPT_KELUAR.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="RPT_KELUAR_KASIR.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>RPT_KELUAR.rpt</DependentUpon>
+      <DependentUpon>RPT_KELUAR_KASIR.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="RPT_MASUK.vb">
@@ -351,14 +357,8 @@
     <EmbeddedResource Include="FR_RETURN.resx">
       <DependentUpon>FR_RETURN.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FR_RETURN.resx">
-      <DependentUpon>FR_RETURN.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="FR_RUSAK.resx">
       <DependentUpon>FR_RUSAK.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FR_TENTANG.resx">
-      <DependentUpon>FR_TENTANG.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FR_TENTANG.resx">
       <DependentUpon>FR_TENTANG.vb</DependentUpon>
@@ -392,6 +392,10 @@
     <EmbeddedResource Include="RPT_KELUAR.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RPT_KELUAR.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RPT_KELUAR_KASIR.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RPT_KELUAR_KASIR.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="RPT_MASUK.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

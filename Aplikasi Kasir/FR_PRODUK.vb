@@ -10,18 +10,11 @@ Public Class FR_PRODUK
         Me.Close()
     End Sub
 
-    Private Sub BTNEXIT_Click(sender As Object, e As EventArgs)
-        Dim FR As New FR_LOGIN
-        My.Settings.ID_ACCOUNT = 0
-        FR.Show()
-        Me.Hide()
-    End Sub
-
     Private Sub BTNLOGOUT_Click(sender As Object, e As EventArgs) Handles BTNLOGOUT.Click
         Dim FR As New FR_LOGIN
         My.Settings.ID_ACCOUNT = 0
         FR.Show()
-        Me.Hide()
+        Me.Close()
     End Sub
 
     Private Sub BTNCLOSE_Click(sender As Object, e As EventArgs) Handles BTNCLOSE.Click
@@ -42,7 +35,7 @@ Public Class FR_PRODUK
     End Sub
 
     Dim START_RECORD As Integer = 0
-    Dim TAMPIL_RECORD As Integer = 30
+    Dim TAMPIL_RECORD As Integer = 12
     Sub TAMPIL()
         Dim STR As String = "SELECT RTRIM(Kode) AS 'Kode Barang'," &
             " RTRIM(Barang) AS 'Nama Barang'," &
@@ -96,23 +89,50 @@ Public Class FR_PRODUK
         If e.KeyChar = Chr(13) Then
             TXTNAMA.Select()
         End If
+
+        Dim KeyAscii As Short = Asc(e.KeyChar)
+        If (e.KeyChar Like "[A-Z, a-z]" _
+            OrElse e.KeyChar Like "[0-9]" _
+            OrElse KeyAscii = Keys.Back) Then
+            KeyAscii = 0
+        End If
+
+        e.Handled = CBool(KeyAscii)
     End Sub
 
     Private Sub TXTNAMA_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTNAMA.KeyPress
         If e.KeyChar = Chr(13) Then
             CBSATUAN.Select()
         End If
+
+        Dim KeyAscii As Short = Asc(e.KeyChar)
+        If (e.KeyChar Like "[A-Z, a-z]" _
+            OrElse e.KeyChar Like "[0-9]" _
+            OrElse KeyAscii = Keys.Back) Then
+            KeyAscii = 0
+        End If
+
+        e.Handled = CBool(KeyAscii)
     End Sub
 
     Private Sub CBSATUAN_KeyPress(sender As Object, e As KeyPressEventArgs) Handles CBSATUAN.KeyPress
         If e.KeyChar = Chr(13) Then
             TXTEND1.Select()
         End If
+
+        Dim KeyAscii As Short = Asc(e.KeyChar)
+        If (e.KeyChar Like "[A-Z, a-z]" _
+            OrElse e.KeyChar Like "[0-9]" _
+            OrElse KeyAscii = Keys.Back) Then
+            KeyAscii = 0
+        End If
+
+        e.Handled = CBool(KeyAscii)
     End Sub
 
     Private Sub TXTHARGA1_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTHARGA1.KeyPress
         If e.KeyChar = Chr(13) Then
-            If TXTEND2.ReadOnly = True Then
+            If TXTEND2.Enabled = False Then
                 BTNSIMPAN.Select()
             Else
                 TXTEND2.Select()
@@ -126,7 +146,7 @@ Public Class FR_PRODUK
 
     Private Sub TXTHARGA2_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTHARGA2.KeyPress
         If e.KeyChar = Chr(13) Then
-            If TXTEND3.ReadOnly = True Then
+            If TXTEND3.Enabled = False Then
                 BTNSIMPAN.Select()
             Else
                 TXTEND3.Select()
@@ -140,7 +160,7 @@ Public Class FR_PRODUK
 
     Private Sub TXTHARGA3_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTHARGA3.KeyPress
         If e.KeyChar = Chr(13) Then
-            If TXTEND4.ReadOnly = True Then
+            If TXTEND4.Enabled = False Then
                 BTNSIMPAN.Select()
             Else
                 TXTEND4.Select()
@@ -152,75 +172,12 @@ Public Class FR_PRODUK
         End If
     End Sub
 
-    Private Sub TXTKODE_TextChanged(sender As Object, e As EventArgs) Handles TXTKODE.TextChanged
-        Dim STR As String = "SELECT * FROM tbl_barang WHERE RTRIM(Kode)='" & TXTKODE.Text & "'"
-        Dim CMD As SqlCommand
-        CMD = New SqlCommand(STR, CONN)
-        Dim RD As SqlDataReader
-        RD = CMD.ExecuteReader
-        If RD.HasRows Then
-            RD.Read()
-            TXTNAMA.ReadOnly = False
-            TXTEND1.ReadOnly = False
-            TXTHARGA1.ReadOnly = False
-            Dim END1 As String = ""
-            If Not RD.Item("End1") = 0 Then
-                END1 = Format(RD.Item("End1"), "###.##")
-            End If
-            Dim END2 As String = ""
-            If Not RD.Item("End2") = 0 Then
-                END2 = Format(RD.Item("End2"), "###.##")
-            Else
-                TXTEND2.ReadOnly = True
-            End If
-            Dim END3 As String = ""
-            If Not RD.Item("End3") = 0 Then
-                END3 = Format(RD.Item("End3"), "###.##")
-            Else
-                TXTEND3.ReadOnly = True
-            End If
-            Dim END4 As String = ""
-            If Not RD.Item("End4") = 0 Then
-                END4 = Format(RD.Item("End4"), "###.##")
-            Else
-                TXTEND4.ReadOnly = True
-            End If
-
-            TXTNAMA.Text = RD.Item("Barang").ToString.Trim
-            CBSATUAN.Text = RD.Item("Satuan").ToString.Trim
-            TXTHARGA1.Text = CInt(RD.Item("Harga1"))
-            TXTEND1.Text = END1
-            TXTHARGA2.Text = CInt(RD.Item("Harga2"))
-            TXTEND2.Text = END2
-            TXTHARGA3.Text = CInt(RD.Item("Harga3"))
-            TXTEND3.Text = END3
-            TXTHARGA4.Text = CInt(RD.Item("Harga4"))
-            TXTEND4.Text = END4
-            TXTHARGA5.Text = CInt(RD.Item("Harga5"))
-            RD.Close()
-        Else
-            RD.Close()
-            TXTNAMA.Clear()
-            TXTEND1.Clear()
-            TXTHARGA1.Clear()
-            TXTHARGA2.Clear()
-            TXTEND2.Clear()
-            TXTHARGA3.Clear()
-            TXTEND3.Clear()
-            TXTHARGA4.Clear()
-            TXTEND4.Clear()
-            TXTHARGA5.Clear()
-            CBSATUAN.SelectedIndex = -1
-        End If
-        RD.Close()
-    End Sub
-
     Private Sub BTNSIMPAN_Click(sender As Object, e As EventArgs) Handles BTNSIMPAN.Click
         If TXTKODE.Text = "" Or TXTNAMA.Text = "" Or CBSATUAN.Text = "" Then
             MsgBox("Isikan data secara lengkap!")
             TXTKODE.Select()
         Else
-            If (TXTHARGA1.ReadOnly = False And TXTHARGA1.Text = "") Or (TXTHARGA2.ReadOnly = False And TXTHARGA2.Text = "") Or (TXTHARGA3.ReadOnly = False And TXTHARGA3.Text = "") Or (TXTHARGA4.ReadOnly = False And TXTHARGA4.Text = "") Or (TXTHARGA5.ReadOnly = False And TXTHARGA5.Text = "") Then
+            If (TXTHARGA1.Enabled = True And TXTHARGA1.Text = "") Or (TXTHARGA2.Enabled = True And TXTHARGA2.Text = "") Or (TXTHARGA3.Enabled = True And TXTHARGA3.Text = "") Or (TXTHARGA4.Enabled = True And TXTHARGA4.Text = "") Or (TXTHARGA5.Enabled = True And TXTHARGA5.Text = "") Then
                 MsgBox("Isikan data secara lengkap!")
             Else
                 Dim END1 As Double = 0
@@ -281,7 +238,7 @@ Public Class FR_PRODUK
                 CMD.ExecuteNonQuery()
                 MsgBox("Data produk berhasil disimpan.")
                 TXTKODE.Clear()
-                TXTKODE.ReadOnly = False
+                TXTKODE.Enabled = True
                 TXTKODE.Select()
                 TAMPIL()
             End If
@@ -305,38 +262,18 @@ Public Class FR_PRODUK
     Private Sub DGTAMPIL_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGTAMPIL.CellClick
         On Error Resume Next
         TXTKODE.Text = DGTAMPIL.Item(0, e.RowIndex).Value
-        TXTKODE.ReadOnly = True
-        TXTNAMA.ReadOnly = True
-        CBSATUAN.DropDownStyle = ComboBoxStyle.DropDownList
-        TXTEND1.ReadOnly = True
-        TXTHARGA1.ReadOnly = True
-        TXTHARGA2.ReadOnly = True
-        TXTEND2.ReadOnly = True
-        TXTHARGA3.ReadOnly = True
-        TXTEND3.ReadOnly = True
-        TXTHARGA4.ReadOnly = True
-        TXTEND4.ReadOnly = True
-        TXTHARGA5.ReadOnly = True
-        BTNSIMPAN.Visible = False
-        BTNCANCEL.Visible = True
-        BTNUBAH.Visible = True
-        BTNCETAK.Visible = True
-
-        Dim GENERATE As New MessagingToolkit.Barcode.BarcodeEncoder
-        PBBARCODE.Image = New Bitmap(GENERATE.Encode(MessagingToolkit.Barcode.BarcodeFormat.Code128A, TXTKODE.Text))
-        PBBARCODE.SizeMode = PictureBoxSizeMode.StretchImage
-
+        CARI_PRODUK()
     End Sub
 
     Private Sub TXTEND1_TextChanged(sender As Object, e As EventArgs) Handles TXTEND1.TextChanged
         If TXTEND1.Text = "" Or TXTEND1.Text = "0" Then
-            TXTEND2.ReadOnly = True
+            TXTEND2.Enabled = False
             TXTEND2.Text = ""
-            TXTHARGA2.ReadOnly = True
+            TXTHARGA2.Enabled = False
         Else
             If TXTEND1.Text > "0" Then
-                TXTEND2.ReadOnly = False
-                TXTHARGA2.ReadOnly = False
+                TXTEND2.Enabled = True
+                TXTHARGA2.Enabled = True
             End If
         End If
         TXTHARGA2.Text = ""
@@ -364,13 +301,13 @@ Public Class FR_PRODUK
 
     Private Sub TXTEND2_TextChanged(sender As Object, e As EventArgs) Handles TXTEND2.TextChanged
         If TXTEND2.Text = "" Or TXTEND2.Text = "0" Then
-            TXTEND3.ReadOnly = True
+            TXTEND3.Enabled = False
             TXTEND3.Text = ""
-            TXTHARGA3.ReadOnly = True
+            TXTHARGA3.Enabled = False
         Else
             If TXTEND2.Text > "0" Then
-                TXTEND3.ReadOnly = False
-                TXTHARGA3.ReadOnly = False
+                TXTEND3.Enabled = True
+                TXTHARGA3.Enabled = True
             End If
         End If
         TXTHARGA3.Text = ""
@@ -380,22 +317,12 @@ Public Class FR_PRODUK
         Dim KODE As String = TXTKODE.Text
         TXTKODE.Text = ""
         TXTKODE.Text = KODE
-        BTNSIMPAN.Visible = True
-        BTNUBAH.Visible = False
+        EDIT_PRODUK()
     End Sub
 
     Private Sub BTNCANCEL_Click(sender As Object, e As EventArgs) Handles BTNCANCEL.Click
         TXTKODE.Clear()
-        TXTKODE.ReadOnly = False
-        TXTNAMA.ReadOnly = False
-        TXTEND1.ReadOnly = False
-        TXTHARGA1.ReadOnly = False
-        BTNSIMPAN.Visible = True
-        BTNUBAH.Visible = False
-        BTNCANCEL.Visible = False
-        PBBARCODE.Visible = False
-        BTNCETAK.Visible = False
-        CBSATUAN.SelectedIndex = -1
+        CARI_PRODUK()
         TXTKODE.Select()
     End Sub
 
@@ -421,13 +348,13 @@ Public Class FR_PRODUK
 
     Private Sub TXTEND3_TextChanged(sender As Object, e As EventArgs) Handles TXTEND3.TextChanged
         If TXTEND3.Text = "" Or TXTEND3.Text = "0" Then
-            TXTEND4.ReadOnly = True
+            TXTEND4.Enabled = False
             TXTEND4.Text = ""
-            TXTHARGA4.ReadOnly = True
+            TXTHARGA4.Enabled = False
         Else
             If TXTEND3.Text > "0" Then
-                TXTHARGA4.ReadOnly = False
-                TXTEND4.ReadOnly = False
+                TXTHARGA4.Enabled = True
+                TXTEND4.Enabled = True
             End If
         End If
         TXTHARGA4.Text = ""
@@ -436,10 +363,10 @@ Public Class FR_PRODUK
     Private Sub TXTEND4_TextChanged(sender As Object, e As EventArgs) Handles TXTEND4.TextChanged
         If TXTEND4.Text = "" Or TXTEND4.Text = "0" Then
             TXTEND5.Text = ""
-            TXTHARGA5.ReadOnly = True
+            TXTHARGA5.Enabled = False
         ElseIf TXTEND4.Text > "0" Then
             TXTEND5.Text = TXTEND4.Text
-            TXTHARGA5.ReadOnly = False
+            TXTHARGA5.Enabled = True
         End If
     End Sub
 
@@ -596,5 +523,126 @@ Public Class FR_PRODUK
             Next
             Y = Y + HEIGHT_BARCODE + 10
         Next
+    End Sub
+
+    Sub EDIT_PRODUK()
+        TXTNAMA.Enabled = True
+        TXTEND1.Enabled = True
+        TXTHARGA1.Enabled = True
+        CBSATUAN.Enabled = True
+        If TXTEND2.Text <> "" Then
+            TXTEND2.Enabled = True
+            TXTHARGA2.Enabled = True
+            TXTHARGA3.Enabled = True
+        End If
+        If TXTEND3.Text <> "" Then
+            TXTEND3.Enabled = True
+            TXTHARGA3.Enabled = True
+            TXTHARGA4.Enabled = True
+        End If
+        If TXTEND4.Text <> "" Then
+            TXTEND4.Enabled = True
+            TXTHARGA4.Enabled = True
+            TXTHARGA5.Enabled = True
+        End If
+    End Sub
+
+    Sub CARI_PRODUK()
+        Dim STR As String = "SELECT * FROM tbl_barang WHERE RTRIM(Kode)='" & TXTKODE.Text & "'"
+        Dim CMD As SqlCommand
+        CMD = New SqlCommand(STR, CONN)
+        Dim RD As SqlDataReader
+        RD = CMD.ExecuteReader
+        If RD.HasRows Then
+            RD.Read()
+            TXTNAMA.Enabled = True
+            TXTEND1.Enabled = True
+            TXTHARGA1.Enabled = True
+            Dim END1 As String = ""
+            If Not RD.Item("End1") = 0 Then
+                END1 = Format(RD.Item("End1"), "###.##")
+            End If
+            Dim END2 As String = ""
+            If Not RD.Item("End2") = 0 Then
+                END2 = Format(RD.Item("End2"), "###.##")
+            Else
+                TXTEND2.Enabled = False
+            End If
+            Dim END3 As String = ""
+            If Not RD.Item("End3") = 0 Then
+                END3 = Format(RD.Item("End3"), "###.##")
+            Else
+                TXTEND3.Enabled = False
+            End If
+            Dim END4 As String = ""
+            If Not RD.Item("End4") = 0 Then
+                END4 = Format(RD.Item("End4"), "###.##")
+            Else
+                TXTEND4.Enabled = False
+            End If
+
+            TXTNAMA.Text = RD.Item("Barang").ToString.Trim
+            CBSATUAN.Text = RD.Item("Satuan").ToString.Trim
+            TXTHARGA1.Text = CInt(RD.Item("Harga1"))
+            TXTEND1.Text = END1
+            TXTHARGA2.Text = CInt(RD.Item("Harga2"))
+            TXTEND2.Text = END2
+            TXTHARGA3.Text = CInt(RD.Item("Harga3"))
+            TXTEND3.Text = END3
+            TXTHARGA4.Text = CInt(RD.Item("Harga4"))
+            TXTEND4.Text = END4
+            TXTHARGA5.Text = CInt(RD.Item("Harga5"))
+            RD.Close()
+
+            TXTKODE.Enabled = False
+            TXTNAMA.Enabled = False
+            CBSATUAN.DropDownStyle = ComboBoxStyle.DropDownList
+            TXTEND1.Enabled = False
+            TXTHARGA1.Enabled = False
+            TXTHARGA2.Enabled = False
+            TXTEND2.Enabled = False
+            TXTHARGA3.Enabled = False
+            TXTEND3.Enabled = False
+            TXTHARGA4.Enabled = False
+            TXTEND4.Enabled = False
+            TXTHARGA5.Enabled = False
+            BTNSIMPAN.Visible = False
+            BTNCANCEL.Visible = True
+            BTNUBAH.Visible = True
+            BTNCETAK.Visible = True
+            CBSATUAN.Enabled = False
+
+            Dim GENERATE As New MessagingToolkit.Barcode.BarcodeEncoder
+            PBBARCODE.Image = New Bitmap(GENERATE.Encode(MessagingToolkit.Barcode.BarcodeFormat.Code128A, TXTKODE.Text))
+            PBBARCODE.SizeMode = PictureBoxSizeMode.StretchImage
+        Else
+            RD.Close()
+            TXTNAMA.Clear()
+            TXTEND1.Clear()
+            TXTHARGA1.Clear()
+            TXTHARGA2.Clear()
+            TXTEND2.Clear()
+            TXTHARGA3.Clear()
+            TXTEND3.Clear()
+            TXTHARGA4.Clear()
+            TXTEND4.Clear()
+            TXTHARGA5.Clear()
+            CBSATUAN.SelectedIndex = -1
+
+            TXTKODE.Enabled = True
+            TXTNAMA.Enabled = True
+            TXTEND1.Enabled = True
+            TXTHARGA1.Enabled = True
+            BTNSIMPAN.Visible = True
+            BTNCANCEL.Visible = False
+            BTNUBAH.Visible = False
+            BTNCETAK.Visible = False
+            CBSATUAN.Enabled = True
+        End If
+        RD.Close()
+    End Sub
+
+    Private Sub TXTKODE_Leave(sender As Object, e As EventArgs) Handles TXTKODE.Leave
+        CARI_PRODUK()
     End Sub
 End Class

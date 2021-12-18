@@ -351,6 +351,6 @@ Public Class FR_RUSAK
         Dim FR As New FR_LOGIN
         My.Settings.ID_ACCOUNT = 0
         FR.Show()
-        Me.Hide()
+        Me.Close()
     End Sub
 End Class

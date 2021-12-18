@@ -25,7 +25,7 @@ Public Class FR_MASUK
         Dim FR As New FR_LOGIN
         My.Settings.ID_ACCOUNT = 0
         FR.Show()
-        Me.Hide()
+        Me.Close()
     End Sub
 
     Private Sub BTNCLOSE_Click(sender As Object, e As EventArgs) Handles BTNCLOSE.Click
@@ -50,7 +50,7 @@ Public Class FR_MASUK
     Sub TAMPIL()
         Dim STR As String
         If CBTAMPIL.SelectedIndex = 0 Then
-            STR = "SELECT RTRIM(Id_trans) AS 'ID Transaksi'," &
+            STR = "SELECT Id, RTRIM(Id_trans) AS 'ID Transaksi'," &
             " RTRIM(Kode) AS 'Kode Barang'," &
             " (SELECT RTRIM(Barang) FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) AS 'Nama Barang'," &
             " RTRIM((SELECT Person FROM tbl_transaksi_parent WHERE RTRIM(tbl_transaksi_parent.Id_trans) = RTRIM(tbl_transaksi_child.Id_trans))) as 'Supplier'," &
@@ -61,7 +61,7 @@ Public Class FR_MASUK
             " (SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) Like '%" & TXTCARI.Text & "%'" &
             " ORDER BY Id ASC"
         ElseIf CBTAMPIL.SelectedIndex = 1 Then
-            STR = "SELECT RTRIM(Id_trans) AS 'ID Transaksi'," &
+            STR = "SELECT Id, RTRIM(Id_trans) AS 'ID Transaksi'," &
             " RTRIM(Kode) AS 'Kode Barang'," &
             " (SELECT RTRIM(Barang) FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) AS 'Nama Barang'," &
             " RTRIM((SELECT Person FROM tbl_transaksi_parent WHERE RTRIM(tbl_transaksi_parent.Id_trans) = RTRIM(tbl_transaksi_child.Id_trans))) as 'Supplier'," &
@@ -73,7 +73,7 @@ Public Class FR_MASUK
             " AND Stok != 0" &
             " ORDER BY Id ASC"
         ElseIf CBTAMPIL.SelectedIndex = 2 Then
-            STR = "SELECT RTRIM(Id_trans) AS 'ID Transaksi'," &
+            STR = "SELECT Id, RTRIM(Id_trans) AS 'ID Transaksi'," &
             " RTRIM(Kode) AS 'Kode Barang'," &
             " (SELECT RTRIM(Barang) FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) AS 'Nama Barang'," &
             " RTRIM((SELECT Person FROM tbl_transaksi_parent WHERE RTRIM(tbl_transaksi_parent.Id_trans) = RTRIM(tbl_transaksi_child.Id_trans))) as 'Supplier'," &
@@ -85,7 +85,7 @@ Public Class FR_MASUK
             " AND Stok = 0" &
             " ORDER BY Id ASC"
         Else
-            STR = "SELECT RTRIM(Id_trans) AS 'ID Transaksi'," &
+            STR = "SELECT Id, RTRIM(Id_trans) AS 'ID Transaksi'," &
             " RTRIM(Kode) AS 'Kode Barang'," &
             " (SELECT RTRIM(Barang) FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) AS 'Nama Barang'," &
             " RTRIM((SELECT Person FROM tbl_transaksi_parent WHERE RTRIM(tbl_transaksi_parent.Id_trans) = RTRIM(tbl_transaksi_child.Id_trans))) as 'Supplier'," &
@@ -102,17 +102,19 @@ Public Class FR_MASUK
         DA.Fill(TBL, START_RECORD, TAMPIL_RECORD, 0)
         DGHISTORY.DataSource = TBL.Tables(0)
 
-        DGHISTORY.Columns(4).DefaultCellStyle.Format = "###.##"
-        DGHISTORY.Columns(5).DefaultCellStyle.Format = "Rp ###,##"
-        DGHISTORY.Columns(6).DefaultCellStyle.Format = "###.##"
+        DGHISTORY.Columns(0).Visible = False
 
-        DGHISTORY.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-        DGHISTORY.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+        DGHISTORY.Columns(5).DefaultCellStyle.Format = "###.##"
+        DGHISTORY.Columns(6).DefaultCellStyle.Format = "Rp ###,##"
+        DGHISTORY.Columns(7).DefaultCellStyle.Format = "###.##"
+
+        DGHISTORY.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
         DGHISTORY.Columns(2).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-        DGHISTORY.Columns(3).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+        DGHISTORY.Columns(3).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
         DGHISTORY.Columns(4).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
         DGHISTORY.Columns(5).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
         DGHISTORY.Columns(6).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+        DGHISTORY.Columns(7).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
 
         DGHISTORY.Columns(4).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         DGHISTORY.Columns(5).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -232,31 +234,13 @@ Public Class FR_MASUK
                 RD.Close()
                 AUTOID = "M" + ID_AWAL + Format(1, "000")
             End If
+            RD.Close()
         Else
             RD.Close()
             AUTOID = "M" + ID_AWAL + Format(1, "000")
         End If
         RD.Close()
     End Function
-
-    Private Sub TXTKODE_TextChanged(sender As Object, e As EventArgs) Handles TXTKODE.TextChanged
-        Dim STR As String = "SELECT * FROM tbl_barang WHERE RTRIM(Kode)='" & TXTKODE.Text & "'"
-        Dim CMD As SqlCommand
-        CMD = New SqlCommand(STR, CONN)
-        Dim RD As SqlDataReader
-        RD = CMD.ExecuteReader
-        If RD.HasRows Then
-            RD.Read()
-            TXTBARANG.Text = RD.Item("Barang").ToString.Trim
-            TXTSATUAN.Text = RD.Item("Satuan").ToString.Trim
-            RD.Close()
-        Else
-            RD.Close()
-            TXTBARANG.Text = ""
-            TXTSATUAN.Text = ""
-        End If
-        RD.Close()
-    End Sub
 
     Private Sub TXTKODE_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTKODE.KeyPress
         If e.KeyChar = Chr(13) Then
@@ -348,12 +332,22 @@ Public Class FR_MASUK
 
     Private Sub HapusToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HapusToolStripMenuItem.Click
         If MsgBox("Apakah anda yakin akan menghapus data transaksi?", vbYesNo) = vbYes Then
+            DGHISTORY.Columns(0).Visible = False
             Dim IDX As String = DGHISTORY.Item(0, DGHISTORY.CurrentRow.Index).Value
-            Dim CMD As New SqlCommand("DELETE FROM tbl_transaksi_child WHERE Id_trans='" & IDX & "'", CONN)
+            Dim IDTrans As String = DGHISTORY.Item(1, DGHISTORY.CurrentRow.Index).Value
+            Dim CMD As New SqlCommand("DELETE FROM tbl_transaksi_child WHERE Id='" & IDX & "'", CONN)
             CMD.ExecuteNonQuery()
 
-            CMD = New SqlCommand("DELETE FROM tbl_transaksi_parent WHERE Id_trans='" & IDX & "'", CONN)
-            CMD.ExecuteNonQuery()
+            Dim STR As String = "SELECT * FROM tbl_transaksi_child WHERE RTRIM(Id_trans)='" & IDTrans & "'"
+            CMD = New SqlCommand(STR, CONN)
+            Dim RD As SqlDataReader
+            RD = CMD.ExecuteReader
+            If Not RD.HasRows Then
+                RD.Close()
+                CMD = New SqlCommand("DELETE FROM tbl_transaksi_parent WHERE Id_trans='" & IDTrans & "'", CONN)
+                CMD.ExecuteNonQuery()
+            End If
+            RD.Close()
             TAMPIL()
             MsgBox("Data transaksi berhasil dihapus")
         End If
@@ -653,5 +647,29 @@ Public Class FR_MASUK
         BTNSTOK.Visible = True
         BTNTRANSAKSI.Visible = False
         BTNHISTORY.Visible = True
+    End Sub
+
+    Private Sub TXTKODE_Leave(sender As Object, e As EventArgs) Handles TXTKODE.Leave
+        If TXTKODE.Text <> "" Then
+            Dim STR As String = "SELECT * FROM tbl_barang WHERE RTRIM(Kode)='" & TXTKODE.Text & "'"
+            Dim CMD As SqlCommand
+            CMD = New SqlCommand(STR, CONN)
+            Dim RD As SqlDataReader
+            RD = CMD.ExecuteReader
+            If RD.HasRows Then
+                RD.Read()
+                TXTBARANG.Text = RD.Item("Barang").ToString.Trim
+                TXTSATUAN.Text = RD.Item("Satuan").ToString.Trim
+                RD.Close()
+            Else
+                RD.Close()
+                MsgBox("Produk tidak ditemukan")
+                TXTKODE.Text = ""
+                TXTKODE.Select()
+                TXTBARANG.Text = ""
+                TXTSATUAN.Text = ""
+            End If
+            RD.Close()
+        End If
     End Sub
 End Class

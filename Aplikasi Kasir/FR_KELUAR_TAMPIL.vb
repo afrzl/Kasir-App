@@ -6,6 +6,9 @@ Public Class FR_KELUAR_TAMPIL
         Me.Close()
     End Sub
 
+    Dim START_RECORD As Integer = 0
+    Dim TAMPIL_RECORD As Integer = 10
+
     Sub TAMPIL()
         Dim STR As String = "SELECT RTRIM(Kode) AS Kode," &
             " RTRIM(Barang) As 'Nama Barang'," &
@@ -13,10 +16,11 @@ Public Class FR_KELUAR_TAMPIL
             " RTRIM(Satuan) As 'Satuan'" &
             " FROM tbl_barang WHERE Barang Like '%" & TXTCARI.Text & "%'"
         Dim DA As SqlDataAdapter
+        Dim TBL As New DataSet
         DA = New SqlDataAdapter(STR, CONN)
-        Dim TBL As New DataTable
-        DA.Fill(TBL)
-        DGCARI.DataSource = TBL
+        DA.Fill(TBL, START_RECORD, TAMPIL_RECORD, 0)
+        DGCARI.DataSource = TBL.Tables(0)
+
         DGCARI.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
         DGCARI.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
         DGCARI.Columns(2).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
@@ -33,7 +37,41 @@ Public Class FR_KELUAR_TAMPIL
                 End If
             Next
         Next
+
+        BTNPREV.Enabled = True
+        BTNNEXT.Enabled = True
+
+        Dim TOTAL_RECORD As Integer = 0
+        Dim TBL_DATA As New DataTable
+        DA = New SqlDataAdapter(STR, CONN)
+        DA.Fill(TBL_DATA)
+
+        TOTAL_RECORD = TBL_DATA.Rows.Count
+
+        If TOTAL_RECORD = 0 Then
+            BTNPREV.Enabled = False
+            BTNNEXT.Enabled = False
+        ElseIf START_RECORD = 0 Then
+            BTNPREV.Enabled = False
+        ElseIf TOTAL_RECORD <= TAMPIL_RECORD Then
+            BTNNEXT.Enabled = False
+        ElseIf TOTAL_RECORD - START_RECORD <= TAMPIL_RECORD Then
+            BTNNEXT.Enabled = False
+        Else
+            BTNPREV.Enabled = True
+            BTNNEXT.Enabled = True
+        End If
     End Sub
+    Private Sub BTNNEXT_Click(sender As Object, e As EventArgs) Handles BTNNEXT.Click
+        START_RECORD = START_RECORD + TAMPIL_RECORD
+        TAMPIL()
+    End Sub
+
+    Private Sub BTNPREV_Click(sender As Object, e As EventArgs) Handles BTNPREV.Click
+        START_RECORD = START_RECORD - TAMPIL_RECORD
+        TAMPIL()
+    End Sub
+
 
     Private Sub FR_KELUAR_TAMPIL_Load(sender As Object, e As EventArgs) Handles Me.Load
         TAMPIL()
@@ -74,5 +112,30 @@ Public Class FR_KELUAR_TAMPIL
         If e.KeyChar = Chr(13) Then
             DGCARI.Select()
         End If
+
+        Dim KeyAscii As Short = Asc(e.KeyChar)
+        If (e.KeyChar Like "[A-Z, a-z]" _
+            OrElse e.KeyChar Like "[0-9]" _
+            OrElse KeyAscii = Keys.Back) Then
+            KeyAscii = 0
+        End If
+
+        e.Handled = CBool(KeyAscii)
+    End Sub
+
+    Private Sub FR_KELUAR_TAMPIL_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
+        Select Case e.KeyCode
+            Case Keys.F1
+                FR_KELUAR.Enabled = True
+                Me.Close()
+        End Select
+    End Sub
+
+    Private Sub TXTCARI_KeyDown(sender As Object, e As KeyEventArgs) Handles TXTCARI.KeyDown
+        Select Case e.KeyCode
+            Case Keys.F1
+                FR_KELUAR.Enabled = True
+                Me.Close()
+        End Select
     End Sub
 End Class
