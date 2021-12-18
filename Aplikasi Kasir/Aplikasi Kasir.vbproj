@@ -138,6 +138,12 @@
     <Compile Include="DATA_LAPORAN.vb">
       <DependentUpon>DATA_LAPORAN.xsd</DependentUpon>
     </Compile>
+    <Compile Include="FR_OPS_DASHBOARD.Designer.vb">
+      <DependentUpon>FR_OPS_DASHBOARD.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FR_OPS_DASHBOARD.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FR_DISKON.Designer.vb">
       <DependentUpon>FR_DISKON.vb</DependentUpon>
     </Compile>
@@ -315,6 +321,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="FR_OPS_DASHBOARD.resx">
+      <DependentUpon>FR_OPS_DASHBOARD.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FR_DISKON.resx">
       <DependentUpon>FR_DISKON.vb</DependentUpon>
     </EmbeddedResource>

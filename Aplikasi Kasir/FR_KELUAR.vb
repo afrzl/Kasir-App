@@ -334,6 +334,8 @@ Public Class FR_KELUAR
         Dim FR As Form
         If ROLE = 1 Then
             FR = New FR_MENU
+        ElseIf role = 2 Then
+            FR = New FR_OPS_DASHBOARD
         ElseIf ROLE = 3 Then
             FR = New FR_KASIR_DASHBOARD
         End If

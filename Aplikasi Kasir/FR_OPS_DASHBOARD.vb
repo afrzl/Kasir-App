@@ -1,8 +1,8 @@
 ﻿Imports System.Data.SqlClient
 
-Public Class FR_MENU
+Public Class FR_OPS_DASHBOARD
     Dim START_RECORD As Integer = 0
-    Dim TAMPIL_RECORD As Integer = 15
+    Dim TAMPIL_RECORD As Integer = 30
 
     Sub BUKA_FORM(ByVal FR As Form)
         FR.Show()
@@ -23,29 +23,12 @@ Public Class FR_MENU
 
     Private Sub BTNCLOSE_Click(sender As Object, e As EventArgs) Handles BTNCLOSE.Click
         If MsgBox("Apakah anda yakin akan keluar dari aplikasi?", vbYesNo) = vbYes Then
-            Me.Close()
             End
         End If
     End Sub
 
     Private Sub BTNMINIMIZE_Click(sender As Object, e As EventArgs) Handles BTNMINIMIZE.Click
         Me.WindowState = FormWindowState.Minimized
-    End Sub
-
-    Private Sub BTNDISKON_Click(sender As Object, e As EventArgs) Handles BTNDISKON.Click
-        BUKA_FORM(FR_DISKON)
-    End Sub
-
-    Private Sub BTNKASIR_Click(sender As Object, e As EventArgs) Handles BTNKASIR.Click
-        BUKA_FORM(FR_KASIR)
-    End Sub
-
-    Private Sub BTNBARANG_Click(sender As Object, e As EventArgs) Handles BTNBARANG.Click
-        BUKA_FORM(FR_PRODUK)
-    End Sub
-
-    Private Sub BTNMASUK_Click(sender As Object, e As EventArgs) Handles BTNMASUK.Click
-        BUKA_FORM(FR_MASUK)
     End Sub
 
     Private Sub BTNKELUAR_Click(sender As Object, e As EventArgs) Handles BTNKELUAR.Click
@@ -67,22 +50,13 @@ Public Class FR_MENU
         Me.Close()
     End Sub
 
-    Private Sub BTNRETURN_Click(sender As Object, e As EventArgs) Handles BTNRETURN.Click
-        BUKA_FORM(FR_RETURN)
-    End Sub
-
-    Private Sub BTNRUSAK_Click(sender As Object, e As EventArgs) Handles BTNRUSAK.Click
-        BUKA_FORM(FR_RUSAK)
-    End Sub
-
     Sub TAMPIL()
         Dim STR As String = "SELECT RTRIM(Kode) AS Kode," &
             " RTRIM(Barang) As 'Nama Barang'," &
             " (SELECT COALESCE(SUM(Stok),0) FROM tbl_transaksi_child WHERE RTRIM(tbl_transaksi_child.Kode) = RTRIM(tbl_barang.Kode) AND (LEFT(Id_trans,1)='M' or LEFT(Id_trans,1)='R')) AS Stok," &
             " RTRIM(tbl_barang.Satuan) AS 'Satuan'" &
             " FROM tbl_barang WHERE Barang Like '%" & TXTCARISTOK.Text & "%'" &
-            " AND (SELECT COALESCE(SUM(Stok),0) FROM tbl_transaksi_child WHERE RTRIM(tbl_transaksi_child.Kode) = RTRIM(tbl_barang.Kode) AND (LEFT(Id_trans,1)='M' or LEFT(Id_trans,1)='R')) != 0" &
-            " ORDER BY 'Nama Barang' ASC"
+            " AND (SELECT COALESCE(SUM(Stok),0) FROM tbl_transaksi_child WHERE RTRIM(tbl_transaksi_child.Kode) = RTRIM(tbl_barang.Kode) AND (LEFT(Id_trans,1)='M' or LEFT(Id_trans,1)='R')) != 0"
 
         Dim DA As SqlDataAdapter
         Dim TBL As New DataSet
@@ -134,7 +108,7 @@ Public Class FR_MENU
         TAMPIL()
     End Sub
 
-    Private Sub TXTCARISTOK_TextChanged(sender As Object, e As EventArgs) Handles TXTCARISTOK.TextChanged
+    Private Sub TXTCARISTOK_TextChanged(sender As Object, e As EventArgs)
         TAMPIL()
     End Sub
 
@@ -149,35 +123,37 @@ Public Class FR_MENU
 
         Dim STR As String
         Dim CMD As SqlCommand
-        STR = "SELECT COUNT(*) FROM tbl_karyawan"
-        CMD = New SqlCommand(STR, CONN)
-        LBKASIR.Text = Convert.ToInt16(CMD.ExecuteScalar())
 
-        STR = "SELECT COUNT(*) FROM tbl_barang"
-        CMD = New SqlCommand(STR, CONN)
-        LBBARANG.Text = Convert.ToInt16(CMD.ExecuteScalar())
-
-        STR = "SELECT COUNT(*) FROM tbl_transaksi_parent WHERE Jenis='M'"
+        STR = "SELECT COUNT(*) FROM tbl_transaksi_parent WHERE Jenis='M' AND Id_kasir = '" & My.Settings.ID_ACCOUNT & "'"
         CMD = New SqlCommand(STR, CONN)
         LBMASUK.Text = Convert.ToInt16(CMD.ExecuteScalar())
 
-        STR = "SELECT COUNT(*) FROM tbl_transaksi_parent WHERE Jenis='K'"
+        STR = "SELECT COUNT(*) FROM tbl_transaksi_parent WHERE Jenis='M'" &
+            " And (Tgl >= '" & TGLAWAL & "' AND Tgl <= '" & TGLAKHIR & "')" &
+            " AND Id_kasir = '" & My.Settings.ID_ACCOUNT & "'"
+        CMD = New SqlCommand(STR, CONN)
+        LBMASUKHARI.Text = Convert.ToInt16(CMD.ExecuteScalar())
+
+        STR = "SELECT COUNT(*) FROM tbl_transaksi_parent WHERE Jenis='K' AND Id_kasir = '" & My.Settings.ID_ACCOUNT & "'"
         CMD = New SqlCommand(STR, CONN)
         LBKELUAR.Text = Convert.ToInt16(CMD.ExecuteScalar())
 
-        STR = "SELECT COUNT(*) FROM tbl_transaksi_parent WHERE Jenis='K' AND (Tgl >= '" & TGLAWAL & "' AND Tgl <= '" & TGLAKHIR & "')"
+        STR = "SELECT COUNT(*) FROM tbl_transaksi_parent WHERE Jenis='K'" &
+            " And (Tgl >= '" & TGLAWAL & "' AND Tgl <= '" & TGLAKHIR & "')" &
+            " AND Id_kasir = '" & My.Settings.ID_ACCOUNT & "'"
         CMD = New SqlCommand(STR, CONN)
         LBKELUARHARI.Text = Convert.ToInt16(CMD.ExecuteScalar())
     End Sub
 
-    Private Sub TXTCARISTOK_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTCARISTOK.KeyPress
-        Dim KeyAscii As Short = Asc(e.KeyChar)
-        If (e.KeyChar Like "[A-Z, a-z]" _
-            OrElse e.KeyChar Like "[0-9]" _
-            OrElse KeyAscii = Keys.Back) Then
-            KeyAscii = 0
-        End If
+    Private Sub BTNRETURN_Click(sender As Object, e As EventArgs) Handles BTNRETURN.Click
+        BUKA_FORM(FR_RETURN)
+    End Sub
 
-        e.Handled = CBool(KeyAscii)
+    Private Sub BTNMASUK_Click(sender As Object, e As EventArgs) Handles BTNMASUK.Click
+        BUKA_FORM(FR_MASUK)
+    End Sub
+
+    Private Sub BTNRUSAK_Click(sender As Object, e As EventArgs) Handles BTNRUSAK.Click
+        BUKA_FORM(FR_RUSAK)
     End Sub
 End Class

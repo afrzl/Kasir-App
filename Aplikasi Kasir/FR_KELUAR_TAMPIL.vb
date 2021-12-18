@@ -14,7 +14,8 @@ Public Class FR_KELUAR_TAMPIL
             " RTRIM(Barang) As 'Nama Barang'," &
             " (SELECT COALESCE(SUM(Stok),0) FROM tbl_transaksi_child WHERE RTRIM(tbl_transaksi_child.Kode) = RTRIM(tbl_barang.Kode) AND (LEFT(Id_trans,1)='M' or LEFT(Id_trans,1)='R')) AS Stok," &
             " RTRIM(Satuan) As 'Satuan'" &
-            " FROM tbl_barang WHERE Barang Like '%" & TXTCARI.Text & "%'"
+            " FROM tbl_barang WHERE Barang Like '%" & TXTCARI.Text & "%'" &
+            " ORDER BY 'Nama Barang' ASC"
         Dim DA As SqlDataAdapter
         Dim TBL As New DataSet
         DA = New SqlDataAdapter(STR, CONN)

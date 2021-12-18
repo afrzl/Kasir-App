@@ -9,13 +9,6 @@ Public Class FR_DISKON
         Me.Close()
     End Sub
 
-    Private Sub BTNEXIT_Click(sender As Object, e As EventArgs)
-        Dim FR As New FR_LOGIN
-        My.Settings.ID_ACCOUNT = 0
-        FR.Show()
-        Me.Hide()
-    End Sub
-
     Private Sub BTNLOGOUT_Click(sender As Object, e As EventArgs) Handles BTNLOGOUT.Click
         Dim FR As New FR_LOGIN
         My.Settings.ID_ACCOUNT = 0

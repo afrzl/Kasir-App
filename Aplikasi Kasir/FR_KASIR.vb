@@ -37,7 +37,7 @@ Public Class FR_KASIR
             If DGTAMPIL.Rows(N).Cells(6).Value = 1 Then
                 DGTAMPIL.Rows(N).Cells(6).Value = "Administrator"
             ElseIf DGTAMPIL.Rows(N).Cells(6).Value = 2 Then
-                DGTAMPIL.Rows(N).Cells(6).Value = "Admin Barang"
+                DGTAMPIL.Rows(N).Cells(6).Value = "Operator"
             Else
                 DGTAMPIL.Rows(N).Cells(6).Value = "Kasir"
             End If
@@ -63,13 +63,6 @@ Public Class FR_KASIR
         RD.Close()
     End Function
 
-    Private Sub BTNEXIT_Click(sender As Object, e As EventArgs)
-        Dim FR As New FR_LOGIN
-        My.Settings.ID_ACCOUNT = 0
-        FR.Show()
-        Me.Hide()
-    End Sub
-
     Private Sub TXTCARI_TextChanged(sender As Object, e As EventArgs) Handles TXTCARI.TextChanged
         TAMPIL()
     End Sub
@@ -93,7 +86,7 @@ Public Class FR_KASIR
             If RD.Item("Role") = 1 Then
                 CBROLE.Text = "Administrator"
             ElseIf RD.Item("Role") = 2 Then
-                CBROLE.Text = "Admin barang"
+                CBROLE.Text = "Operator"
             ElseIf RD.Item("Role") = 3 Then
                 CBROLE.Text = "Kasir"
             End If

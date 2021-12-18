@@ -22,13 +22,6 @@ Public Class FR_KASIR_DASHBOARD
         LBTGL.Text = Format(Date.Now, "dd MMMM yyyy HH:mm:ss")
     End Sub
 
-    Private Sub BTNEXIT_Click(sender As Object, e As EventArgs)
-        Dim FR As New FR_LOGIN
-        My.Settings.ID_ACCOUNT = 0
-        FR.Show()
-        Me.Hide()
-    End Sub
-
     Private Sub BTNCLOSE_Click(sender As Object, e As EventArgs) Handles BTNCLOSE.Click
         If MsgBox("Apakah anda yakin akan keluar dari aplikasi?", vbYesNo) = vbYes Then
             End
@@ -55,7 +48,7 @@ Public Class FR_KASIR_DASHBOARD
         Dim FR As New FR_LOGIN
         My.Settings.ID_ACCOUNT = 0
         FR.Show()
-        Me.Hide()
+        Me.Close()
     End Sub
 
     Sub TAMPIL()

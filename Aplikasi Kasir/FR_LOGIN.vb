@@ -30,7 +30,9 @@ Public Class FR_LOGIN
                     ROLE = RD.Item("Role")
                     RD.Close()
 
-                    MsgBox("Admin Barang")
+                    Dim FR As New FR_OPS_DASHBOARD
+                    FR.Show()
+                    Me.Hide()
                 ElseIf RD.Item("Role") = 3 Then
                     My.Settings.ID_ACCOUNT = TXTID.Text
                     NAMA_LOGIN = RD.Item("Nama").ToString.Trim
