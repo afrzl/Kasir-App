@@ -302,9 +302,15 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="RPT_MASUK.vb">
+      <DependentUpon>RPT_MASUK.rpt</DependentUpon>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="RPT_MASUK_OPS.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>RPT_MASUK.rpt</DependentUpon>
+      <DependentUpon>RPT_MASUK_OPS.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="RPT_STOK.vb">
@@ -409,6 +415,10 @@
     <EmbeddedResource Include="RPT_MASUK.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RPT_MASUK.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RPT_MASUK_OPS.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RPT_MASUK_OPS.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="RPT_STOK.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

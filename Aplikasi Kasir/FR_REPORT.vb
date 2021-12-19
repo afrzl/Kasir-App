@@ -15,6 +15,7 @@ Public Class FR_REPORT
             Case 1
                 BUKA_FORM(FR_MENU)
             Case 2
+                BUKA_FORM(FR_OPS_DASHBOARD)
             Case 3
                 BUKA_FORM(FR_KASIR_DASHBOARD)
         End Select
@@ -36,6 +37,7 @@ Public Class FR_REPORT
             Case 1
                 PNADMIN.Visible = True
                 PNKASIR.Visible = False
+                PNOPS.Visible = False
                 Label3.Text = "Administrator"
                 CBJENIS.Items.Clear()
                 With CBJENIS
@@ -48,9 +50,20 @@ Public Class FR_REPORT
                     .Items.Add("Grafik Laba Bulanan")
                 End With
             Case 2
+                PNADMIN.Visible = False
+                PNKASIR.Visible = False
+                PNOPS.Visible = True
+                Label3.Text = "Operator"
+                CBJENIS.Items.Clear()
+                With CBJENIS
+                    .Items.Add("Stok")
+                    .Items.Add("Transaksi Masuk")
+                    .Items.Add("Transaksi Keluar")
+                End With
             Case 3
                 PNADMIN.Visible = False
                 PNKASIR.Visible = True
+                PNOPS.Visible = False
                 Label3.Text = "Kasir"
                 CBJENIS.Items.Clear()
                 With CBJENIS
@@ -70,6 +83,7 @@ Public Class FR_REPORT
     Dim TBL As New DataTable
     Dim TOTALLABA As Integer = 0
     Dim TOTALITEM As Double = 0
+    Dim TOTALPEMBELIAN As Integer = 0
 
     Dim ADA_TRANSAKSI As Boolean
     Sub TAMPIL()
@@ -86,18 +100,24 @@ Public Class FR_REPORT
                     " FROM tbl_barang" &
                     " ORDER BY 'Nama Barang' ASC"
                     Case 1
-                        STR = "SELECT RTRIM(Id_trans) AS 'ID Transaksi'," &
-                    " RTRIM((SELECT Person FROM tbl_transaksi_parent WHERE RTRIM(Id_trans) = RTRIM(tbl_transaksi_child.Id_trans))) AS 'Supplier'," &
-                    " RTRIM((SELECT Nama FROM tbl_karyawan WHERE Id = (SELECT Id_kasir FROM tbl_transaksi_parent WHERE RTRIM(Id_trans) = RTRIM(tbl_transaksi_child.Id_trans)))) AS 'Kasir'," &
-                    " RTRIM(Kode) AS 'Kode Barang'," &
-                    " RTRIM((SELECT Barang FROM tbl_barang WHERE kode = tbl_transaksi_child.kode)) as 'Nama Barang'," &
-                    " RTRIM(Jumlah) AS 'Stok Masuk'," &
-                    " Harga AS 'Harga Partai'," &
-                    " RTRIM(Stok) AS 'Stok Sisa'" &
-                    " FROM tbl_transaksi_child WHERE LEFT(Id_trans, 1) = 'M'" &
-                    " AND (SELECT Tgl FROM tbl_transaksi_parent WHERE RTRIM(Id_trans) = rtrim(tbl_transaksi_child.Id_trans)) >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd 00:00:00") & "'" &
-                    " AND (SELECT Tgl FROM tbl_transaksi_parent WHERE RTRIM(Id_trans) = rtrim(tbl_transaksi_child.Id_trans)) <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd 23:59:59") & "'" &
-                    " ORDER BY Id ASC"
+                        STR = "SELECT RTRIM(tbl_transaksi_child.Id_trans) AS 'ID Transaksi'," &
+                    " RTRIM(tbl_transaksi_parent.Jenis) AS 'Jenis'," &
+                    " tbl_transaksi_parent.Tgl AS 'Tanggal'," &
+                    " RTRIM((SELECT Nama FROM tbl_karyawan WHERE Id = tbl_transaksi_parent.Id_kasir)) AS 'Kasir'," &
+                    " RTRIM(tbl_transaksi_parent.Person) AS 'Supplier'," &
+                    " tbl_transaksi_parent.Jumlah_item AS 'Jumlah_item'," &
+                    " RTRIM(tbl_transaksi_child.Kode) As 'Kode Barang'," &
+                    " RTRIM((SELECT Barang FROM tbl_barang WHERE Kode = tbl_transaksi_child.Kode)) AS 'Nama Barang'," &
+                    " tbl_transaksi_child.Harga  AS 'Harga QTY'," &
+                    " tbl_transaksi_child.Jumlah AS 'Stok Masuk'," &
+                    " (tbl_transaksi_child.Harga * tbl_transaksi_child.Jumlah) AS 'Harga'," &
+                    " tbl_transaksi_child.Stok AS 'Sisa Stok'," &
+                    " tbl_transaksi_parent.Harga AS 'Total'" &
+                    " From tbl_transaksi_child inner Join tbl_transaksi_parent On tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans" &
+                    " Where (Left(tbl_transaksi_child.Id_trans, 1) = 'M' OR Left(tbl_transaksi_child.Id_trans, 1) = 'R')" &
+                    " And tbl_transaksi_parent.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd 00:00:00") & "'" &
+                    " And tbl_transaksi_parent.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd 23:59:59") & "'" &
+                    " ORDER BY tbl_transaksi_child.Id ASC"
                     Case 2
                         STR = "SELECT RTRIM(tbl_transaksi_child.Id_trans) AS 'ID Transaksi'," &
                     " RTRIM(tbl_transaksi_parent.Jenis) AS 'Jenis'," &
@@ -164,6 +184,62 @@ Public Class FR_REPORT
                     " ORDER BY tbl_transaksi_child.Id ASC"
                 End Select
             Case 2
+                Select Case CBJENIS.SelectedIndex
+                    Case 0
+                        STR = "SELECT Kode AS 'Kode Barang'," &
+                    " Barang AS 'Nama Barang'," &
+                    " Satuan AS 'Satuan'," &
+                    " (SELECT COALESCE(SUM(Jumlah), 0) FROM tbl_transaksi_child WHERE LEFT(tbl_transaksi_child.Id_trans, 1) = 'M' AND tbl_transaksi_child.Kode = tbl_barang.Kode) AS 'Barang Masuk'," &
+                    " (SELECT COALESCE(SUM(Jumlah), 0) FROM tbl_transaksi_child WHERE LEFT(tbl_transaksi_child.Id_trans, 1) = 'K' AND tbl_transaksi_child.Kode = tbl_barang.Kode) AS 'Barang Keluar'" &
+                    " FROM tbl_barang" &
+                    " ORDER BY 'Nama Barang' ASC"
+                    Case 1
+                        STR = "SELECT RTRIM(tbl_transaksi_child.Id_trans) AS 'ID Transaksi'," &
+                    " RTRIM(tbl_transaksi_parent.Jenis) AS 'Jenis'," &
+                    " tbl_transaksi_parent.Tgl AS 'Tanggal'," &
+                    " RTRIM((SELECT Nama FROM tbl_karyawan WHERE Id = tbl_transaksi_parent.Id_kasir)) AS 'Kasir'," &
+                    " RTRIM(tbl_transaksi_parent.Person) AS 'Supplier'," &
+                    " tbl_transaksi_parent.Jumlah_item AS 'Jumlah_item'," &
+                    " RTRIM(tbl_transaksi_child.Kode) As 'Kode Barang'," &
+                    " RTRIM((SELECT Barang FROM tbl_barang WHERE Kode = tbl_transaksi_child.Kode)) AS 'Nama Barang'," &
+                    " tbl_transaksi_child.Harga  AS 'Harga QTY'," &
+                    " tbl_transaksi_child.Jumlah AS 'Stok Masuk'," &
+                    " (tbl_transaksi_child.Harga * tbl_transaksi_child.Jumlah) AS 'Harga'," &
+                    " tbl_transaksi_child.Stok AS 'Sisa Stok'," &
+                    " tbl_transaksi_parent.Harga AS 'Total'" &
+                    " From tbl_transaksi_child inner Join tbl_transaksi_parent On tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans" &
+                    " Where (Left(tbl_transaksi_child.Id_trans, 1) = 'M' OR Left(tbl_transaksi_child.Id_trans, 1) = 'R')" &
+                    " And tbl_transaksi_parent.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd 00:00:00") & "'" &
+                    " And tbl_transaksi_parent.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd 23:59:59") & "'" &
+                    " AND tbl_transaksi_parent.Id_kasir = '" & My.Settings.ID_ACCOUNT & "'" &
+                    " ORDER BY tbl_transaksi_child.Id ASC"
+                    Case 2
+                        STR = "SELECT RTRIM(tbl_transaksi_child.Id_trans) AS 'ID Transaksi'," &
+                    " RTRIM(tbl_transaksi_parent.Jenis) AS 'Jenis'," &
+                    " tbl_transaksi_parent.Tgl AS 'Tanggal'," &
+                    " RTRIM((SELECT Nama FROM tbl_karyawan WHERE Id = tbl_transaksi_parent.Id_kasir)) AS 'Kasir'," &
+                    " RTRIM(tbl_transaksi_parent.Person) AS 'Pembeli'," &
+                    " tbl_transaksi_parent.Jumlah_item AS 'Jumlah_item'," &
+                    " RTRIM(tbl_transaksi_child.Kode) As 'Kode Barang'," &
+                    " RTRIM((SELECT Barang FROM tbl_barang WHERE Kode = tbl_transaksi_child.Kode)) AS 'Nama Barang'," &
+                    " (tbl_transaksi_child.Harga / tbl_transaksi_child.Jumlah)  AS 'Harga QTY'," &
+                    " tbl_transaksi_child.Jumlah AS 'QTY'," &
+                    " tbl_transaksi_child.Harga  AS 'Harga Jual'," &
+                    " tbl_transaksi_child.Diskon AS 'Diskon'," &
+                    " tbl_transaksi_child.Harga_akhir AS 'Harga'," &
+                    " tbl_transaksi_parent.Harga AS 'Total'," &
+                    " tbl_transaksi_parent.Diskon AS 'Diskon Transaksi'," &
+                    " tbl_transaksi_parent.Harga_total AS 'Total Akhir'," &
+                    " tbl_transaksi_parent.Harga_tunai AS 'Bayar'," &
+                    " tbl_transaksi_parent.Harga_kembali AS 'Kembalian'," &
+                    " (SELECT COALESCE(SUM(tbl_transaksi_child.Harga_akhir), 0) - COALESCE(SUM(tbl_transaksi_child.Harga_beli), 0) FROM tbl_transaksi_child WHERE tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans) - tbl_transaksi_parent.Diskon AS 'Laba'" &
+                    " From tbl_transaksi_child inner Join tbl_transaksi_parent On tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans" &
+                    " Where (Left(tbl_transaksi_child.Id_trans, 1) = 'K' OR Left(tbl_transaksi_child.Id_trans, 1) = 'C')" &
+                    " And tbl_transaksi_parent.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd 00:00:00") & "'" &
+                    " And tbl_transaksi_parent.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd 23:59:59") & "'" &
+                    " AND tbl_transaksi_parent.Id_kasir = '" & My.Settings.ID_ACCOUNT & "'" &
+                    " ORDER BY tbl_transaksi_child.Id ASC"
+                End Select
             Case 3
                 Select Case CBJENIS.SelectedIndex
                     Case 0
@@ -218,7 +294,8 @@ Public Class FR_REPORT
                         Case 0
                 ' sementara tidak ada
                         Case 1
-
+                            TOTALITEM = Convert.ToDouble(TBL.Compute("SUM(Jumlah_item)", ""))
+                            TOTALPEMBELIAN = Convert.ToDouble(TBL.Compute("SUM(Total)", ""))
                         Case 2
                             TOTALLABA = Convert.ToDouble(TBL.Compute("SUM(Laba)", ""))
                             TOTALITEM = Convert.ToDouble(TBL.Compute("SUM(Jumlah_item)", ""))
@@ -232,6 +309,16 @@ Public Class FR_REPORT
                             TOTALLABA = Convert.ToDouble(TBL.Compute("SUM(Laba)", ""))
                     End Select
                 Case 2
+                    Select Case CBJENIS.SelectedIndex
+                        Case 0
+                ' sementara tidak ada
+                        Case 1
+                            TOTALITEM = Convert.ToDouble(TBL.Compute("SUM(Jumlah_item)", ""))
+                            TOTALPEMBELIAN = Convert.ToDouble(TBL.Compute("SUM(Total)", ""))
+                        Case 2
+                            TOTALLABA = Convert.ToDouble(TBL.Compute("SUM(Laba)", ""))
+                            TOTALITEM = Convert.ToDouble(TBL.Compute("SUM(Jumlah_item)", ""))
+                    End Select
                 Case 3
                     Select Case CBJENIS.SelectedIndex
                         Case 0
@@ -312,6 +399,8 @@ Public Class FR_REPORT
                             Dim RPT As New RPT_MASUK
                             With RPT
                                 .SetDataSource(TBL)
+                                .SetParameterValue("total_item", TOTALITEM)
+                                .SetParameterValue("total_beli", TOTALPEMBELIAN)
                                 .SetParameterValue("tgl_mulai", TXTTGLAWAL.Value.ToString("dd MMMM yyyy"))
                                 .SetParameterValue("tgl_akhir", TXTTGLAKHIR.Value.ToString("dd MMMM yyyy"))
                             End With
@@ -376,6 +465,41 @@ Public Class FR_REPORT
                             CRV.ReportSource = RPT
                     End Select
                 Case 2
+                    Select Case CBJENIS.SelectedIndex
+                        Case 0
+                            Dim RPT As New RPT_STOK
+                            With RPT
+                                .SetDataSource(TBL)
+                                .SetParameterValue("datetime", LBTGL.Text)
+                            End With
+
+                            BTNCETAK.Visible = True
+                            CRV.ReportSource = RPT
+                        Case 1
+                            Dim RPT As New RPT_MASUK_OPS
+                            With RPT
+                                .SetDataSource(TBL)
+                                .SetParameterValue("total_item", TOTALITEM)
+                                .SetParameterValue("total_beli", TOTALPEMBELIAN)
+                                .SetParameterValue("tgl_mulai", TXTTGLAWAL.Value.ToString("dd MMMM yyyy"))
+                                .SetParameterValue("tgl_akhir", TXTTGLAKHIR.Value.ToString("dd MMMM yyyy"))
+                            End With
+
+                            BTNCETAK.Visible = True
+                            CRV.ReportSource = RPT
+                        Case 2
+                            Dim RPT As New RPT_KELUAR
+                            With RPT
+                                .SetDataSource(TBL)
+                                .SetParameterValue("total_laba", TOTALLABA)
+                                .SetParameterValue("total_item", TOTALITEM)
+                                .SetParameterValue("tgl_mulai", TXTTGLAWAL.Value.ToString("dd MMMM yyyy"))
+                                .SetParameterValue("tgl_akhir", TXTTGLAKHIR.Value.ToString("dd MMMM yyyy"))
+                            End With
+
+                            BTNCETAK.Visible = True
+                            CRV.ReportSource = RPT
+                    End Select
                 Case 3
                     Select Case CBJENIS.SelectedIndex
                         Case 0
@@ -463,6 +587,21 @@ Public Class FR_REPORT
                         KONDISI_BULAN()
                 End Select
             Case 2
+                Select Case CBJENIS.SelectedIndex
+                    Case 0
+                        Label6.Visible = False
+                        Label7.Visible = False
+                        TXTTGLAWAL.Visible = False
+                        TXTTGLAKHIR.Visible = False
+                        BTNTAMPIL.Visible = True
+
+                        BTNTAMPIL.Location = New Point(362, 10)
+                        BTNCETAK.Location = New Point(489, 10)
+                    Case 1
+                        KONDISI_TANGGAL()
+                    Case 2
+                        KONDISI_TANGGAL()
+                End Select
             Case 3
                 Select Case CBJENIS.SelectedIndex
                     Case 0
@@ -542,6 +681,30 @@ Public Class FR_REPORT
     End Sub
 
     Private Sub BTNTENTANG_Click(sender As Object, e As EventArgs) Handles BTNTENTANG.Click
+        BUKA_FORM(FR_TENTANG)
+    End Sub
+
+    Private Sub BTNDASHBOARDOPS_Click(sender As Object, e As EventArgs) Handles BTNDASHBOARDOPS.Click
+        BUKA_FORM(FR_OPS_DASHBOARD)
+    End Sub
+
+    Private Sub BTNMASUKOPS_Click(sender As Object, e As EventArgs) Handles BTNMASUKOPS.Click
+        BUKA_FORM(FR_MASUK)
+    End Sub
+
+    Private Sub BTNKELUAROPS_Click(sender As Object, e As EventArgs) Handles BTNKELUAROPS.Click
+        BUKA_FORM(FR_KELUAR)
+    End Sub
+
+    Private Sub BTNRETURNOPS_Click(sender As Object, e As EventArgs) Handles BTNRETURNOPS.Click
+        BUKA_FORM(FR_RETURN)
+    End Sub
+
+    Private Sub BTNRUSAKOPS_Click(sender As Object, e As EventArgs) Handles BTNRUSAKOPS.Click
+        BUKA_FORM(FR_RUSAK)
+    End Sub
+
+    Private Sub BTNTENTANGOPS_Click(sender As Object, e As EventArgs) Handles BTNTENTANGOPS.Click
         BUKA_FORM(FR_TENTANG)
     End Sub
 End Class

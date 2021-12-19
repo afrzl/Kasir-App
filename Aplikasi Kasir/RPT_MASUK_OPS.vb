@@ -18,7 +18,7 @@ Imports System
 Imports System.ComponentModel
 
 
-Public Class RPT_MASUK
+Public Class RPT_MASUK_OPS
     Inherits ReportClass
     
     Public Sub New()
@@ -27,7 +27,7 @@ Public Class RPT_MASUK
     
     Public Overrides Property ResourceName() As String
         Get
-            Return "RPT_MASUK.rpt"
+            Return "RPT_MASUK_OPS.rpt"
         End Get
         Set
             'Do nothing
@@ -45,7 +45,7 @@ Public Class RPT_MASUK
     
     Public Overrides Property FullResourceName() As String
         Get
-            Return "Aplikasi_Kasir.RPT_MASUK.rpt"
+            Return "Aplikasi_Kasir.RPT_MASUK_OPS.rpt"
         End Get
         Set
             'Do nothing
@@ -142,7 +142,7 @@ Public Class RPT_MASUK
 End Class
 
 <System.Drawing.ToolboxBitmapAttribute(GetType(CrystalDecisions.[Shared].ExportOptions), "report.bmp")>  _
-Public Class CachedRPT_MASUK
+Public Class CachedRPT_MASUK_OPS
     Inherits Component
     Implements ICachedReport
     
@@ -184,7 +184,7 @@ Public Class CachedRPT_MASUK
     End Property
     
     Public Overridable Function CreateReport() As CrystalDecisions.CrystalReports.Engine.ReportDocument Implements CrystalDecisions.ReportSource.ICachedReport.CreateReport
-        Dim rpt As RPT_MASUK = New RPT_MASUK()
+        Dim rpt As RPT_MASUK_OPS = New RPT_MASUK_OPS()
         rpt.Site = Me.Site
         Return rpt
     End Function

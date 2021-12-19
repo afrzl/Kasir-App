@@ -42,14 +42,19 @@ Public Class FR_TENTANG
                 GBTOKO.Visible = True
                 PNADMIN.Visible = True
                 PNKASIR.Visible = False
+                PNOPS.Visible = False
                 Label3.Text = "Administrator"
             Case 2
                 GBTOKO.Visible = False
-                Label3.Text = "Admin Barang"
+                PNADMIN.Visible = True
+                PNKASIR.Visible = False
+                PNOPS.Visible = True
+                Label3.Text = "Operator"
             Case 3
                 GBTOKO.Visible = False
                 PNADMIN.Visible = False
                 PNKASIR.Visible = True
+                PNOPS.Visible = False
                 Label3.Text = "Kasir"
         End Select
 
@@ -189,6 +194,7 @@ Public Class FR_TENTANG
             Case 1
                 FR = FR_MENU
             Case 2
+                FR = FR_OPS_DASHBOARD
             Case 3
                 FR = FR_KASIR_DASHBOARD
         End Select
@@ -461,5 +467,29 @@ Public Class FR_TENTANG
 
     Private Sub BTNRUSAK_Click(sender As Object, e As EventArgs) Handles BTNRUSAK.Click
         BUKA_FORM(FR_RUSAK)
+    End Sub
+
+    Private Sub BTNDASHBOARDOPS_Click(sender As Object, e As EventArgs) Handles BTNDASHBOARDOPS.Click
+        BUKA_FORM(FR_OPS_DASHBOARD)
+    End Sub
+
+    Private Sub BTNMASUKOPS_Click(sender As Object, e As EventArgs) Handles BTNMASUKOPS.Click
+        BUKA_FORM(FR_MASUK)
+    End Sub
+
+    Private Sub BTNKELUAROPS_Click(sender As Object, e As EventArgs) Handles BTNKELUAROPS.Click
+        BUKA_FORM(FR_KELUAR)
+    End Sub
+
+    Private Sub BTNRETURNOPS_Click(sender As Object, e As EventArgs) Handles BTNRETURNOPS.Click
+        BUKA_FORM(FR_RETURN)
+    End Sub
+
+    Private Sub BTNRUSAKOPS_Click(sender As Object, e As EventArgs) Handles BTNRUSAKOPS.Click
+        BUKA_FORM(FR_RUSAK)
+    End Sub
+
+    Private Sub BTNLAPORANOPS_Click(sender As Object, e As EventArgs) Handles BTNLAPORANOPS.Click
+        BUKA_FORM(FR_REPORT)
     End Sub
 End Class

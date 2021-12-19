@@ -355,19 +355,29 @@ Partial Public Class DATA_LAPORAN
         
         Private columnID_Transaksi As Global.System.Data.DataColumn
         
-        Private columnSupplier As Global.System.Data.DataColumn
+        Private columnJenis As Global.System.Data.DataColumn
+        
+        Private columnTanggal As Global.System.Data.DataColumn
         
         Private columnKasir As Global.System.Data.DataColumn
+        
+        Private columnSupplier As Global.System.Data.DataColumn
+        
+        Private columnJumlah_item As Global.System.Data.DataColumn
         
         Private columnKode_Barang As Global.System.Data.DataColumn
         
         Private columnNama_Barang As Global.System.Data.DataColumn
         
+        Private columnHarga_QTY As Global.System.Data.DataColumn
+        
         Private columnStok_Masuk As Global.System.Data.DataColumn
         
-        Private columnHarga_Partai As Global.System.Data.DataColumn
+        Private columnHarga As Global.System.Data.DataColumn
         
-        Private columnStok_Sisa As Global.System.Data.DataColumn
+        Private columnSisa_Stok As Global.System.Data.DataColumn
+        
+        Private columnTotal As Global.System.Data.DataColumn
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
@@ -414,9 +424,17 @@ Partial Public Class DATA_LAPORAN
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public ReadOnly Property SupplierColumn() As Global.System.Data.DataColumn
+        Public ReadOnly Property JenisColumn() As Global.System.Data.DataColumn
             Get
-                Return Me.columnSupplier
+                Return Me.columnJenis
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property TanggalColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnTanggal
             End Get
         End Property
         
@@ -425,6 +443,22 @@ Partial Public Class DATA_LAPORAN
         Public ReadOnly Property KasirColumn() As Global.System.Data.DataColumn
             Get
                 Return Me.columnKasir
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property SupplierColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnSupplier
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property Jumlah_itemColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnJumlah_item
             End Get
         End Property
         
@@ -446,6 +480,14 @@ Partial Public Class DATA_LAPORAN
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property Harga_QTYColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnHarga_QTY
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public ReadOnly Property Stok_MasukColumn() As Global.System.Data.DataColumn
             Get
                 Return Me.columnStok_Masuk
@@ -454,17 +496,25 @@ Partial Public Class DATA_LAPORAN
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public ReadOnly Property Harga_PartaiColumn() As Global.System.Data.DataColumn
+        Public ReadOnly Property HargaColumn() As Global.System.Data.DataColumn
             Get
-                Return Me.columnHarga_Partai
+                Return Me.columnHarga
             End Get
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public ReadOnly Property Stok_SisaColumn() As Global.System.Data.DataColumn
+        Public ReadOnly Property Sisa_StokColumn() As Global.System.Data.DataColumn
             Get
-                Return Me.columnStok_Sisa
+                Return Me.columnSisa_Stok
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property TotalColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnTotal
             End Get
         End Property
         
@@ -505,9 +555,9 @@ Partial Public Class DATA_LAPORAN
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Overloads Function AddTBL_MASUKRow(ByVal ID_Transaksi As String, ByVal Supplier As String, ByVal Kasir As String, ByVal Kode_Barang As String, ByVal Nama_Barang As String, ByVal Stok_Masuk As Integer, ByVal Harga_Partai As Integer, ByVal Stok_Sisa As Integer) As TBL_MASUKRow
+        Public Overloads Function AddTBL_MASUKRow(ByVal ID_Transaksi As String, ByVal Jenis As String, ByVal Tanggal As Date, ByVal Kasir As String, ByVal Supplier As String, ByVal Jumlah_item As Integer, ByVal Kode_Barang As String, ByVal Nama_Barang As String, ByVal Harga_QTY As Integer, ByVal Stok_Masuk As Decimal, ByVal Harga As Integer, ByVal Sisa_Stok As Decimal, ByVal Total As Integer) As TBL_MASUKRow
             Dim rowTBL_MASUKRow As TBL_MASUKRow = CType(Me.NewRow,TBL_MASUKRow)
-            Dim columnValuesArray() As Object = New Object() {ID_Transaksi, Supplier, Kasir, Kode_Barang, Nama_Barang, Stok_Masuk, Harga_Partai, Stok_Sisa}
+            Dim columnValuesArray() As Object = New Object() {ID_Transaksi, Jenis, Tanggal, Kasir, Supplier, Jumlah_item, Kode_Barang, Nama_Barang, Harga_QTY, Stok_Masuk, Harga, Sisa_Stok, Total}
             rowTBL_MASUKRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowTBL_MASUKRow)
             Return rowTBL_MASUKRow
@@ -531,13 +581,18 @@ Partial Public Class DATA_LAPORAN
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Friend Sub InitVars()
             Me.columnID_Transaksi = MyBase.Columns("ID Transaksi")
-            Me.columnSupplier = MyBase.Columns("Supplier")
+            Me.columnJenis = MyBase.Columns("Jenis")
+            Me.columnTanggal = MyBase.Columns("Tanggal")
             Me.columnKasir = MyBase.Columns("Kasir")
+            Me.columnSupplier = MyBase.Columns("Supplier")
+            Me.columnJumlah_item = MyBase.Columns("Jumlah_item")
             Me.columnKode_Barang = MyBase.Columns("Kode Barang")
             Me.columnNama_Barang = MyBase.Columns("Nama Barang")
+            Me.columnHarga_QTY = MyBase.Columns("Harga QTY")
             Me.columnStok_Masuk = MyBase.Columns("Stok Masuk")
-            Me.columnHarga_Partai = MyBase.Columns("Harga Partai")
-            Me.columnStok_Sisa = MyBase.Columns("Stok Sisa")
+            Me.columnHarga = MyBase.Columns("Harga")
+            Me.columnSisa_Stok = MyBase.Columns("Sisa Stok")
+            Me.columnTotal = MyBase.Columns("Total")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -545,20 +600,30 @@ Partial Public Class DATA_LAPORAN
         Private Sub InitClass()
             Me.columnID_Transaksi = New Global.System.Data.DataColumn("ID Transaksi", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnID_Transaksi)
-            Me.columnSupplier = New Global.System.Data.DataColumn("Supplier", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnSupplier)
+            Me.columnJenis = New Global.System.Data.DataColumn("Jenis", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnJenis)
+            Me.columnTanggal = New Global.System.Data.DataColumn("Tanggal", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnTanggal)
             Me.columnKasir = New Global.System.Data.DataColumn("Kasir", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnKasir)
+            Me.columnSupplier = New Global.System.Data.DataColumn("Supplier", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnSupplier)
+            Me.columnJumlah_item = New Global.System.Data.DataColumn("Jumlah_item", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnJumlah_item)
             Me.columnKode_Barang = New Global.System.Data.DataColumn("Kode Barang", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnKode_Barang)
             Me.columnNama_Barang = New Global.System.Data.DataColumn("Nama Barang", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnNama_Barang)
-            Me.columnStok_Masuk = New Global.System.Data.DataColumn("Stok Masuk", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            Me.columnHarga_QTY = New Global.System.Data.DataColumn("Harga QTY", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnHarga_QTY)
+            Me.columnStok_Masuk = New Global.System.Data.DataColumn("Stok Masuk", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnStok_Masuk)
-            Me.columnHarga_Partai = New Global.System.Data.DataColumn("Harga Partai", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnHarga_Partai)
-            Me.columnStok_Sisa = New Global.System.Data.DataColumn("Stok Sisa", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnStok_Sisa)
+            Me.columnHarga = New Global.System.Data.DataColumn("Harga", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnHarga)
+            Me.columnSisa_Stok = New Global.System.Data.DataColumn("Sisa Stok", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnSisa_Stok)
+            Me.columnTotal = New Global.System.Data.DataColumn("Total", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnTotal)
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -1544,16 +1609,31 @@ Partial Public Class DATA_LAPORAN
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Property Supplier() As String
+        Public Property Jenis() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableTBL_MASUK.SupplierColumn),String)
+                    Return CType(Me(Me.tableTBL_MASUK.JenisColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'Supplier' in table 'TBL_MASUK' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Jenis' in table 'TBL_MASUK' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableTBL_MASUK.SupplierColumn) = value
+                Me(Me.tableTBL_MASUK.JenisColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property Tanggal() As Date
+            Get
+                Try 
+                    Return CType(Me(Me.tableTBL_MASUK.TanggalColumn),Date)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Tanggal' in table 'TBL_MASUK' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableTBL_MASUK.TanggalColumn) = value
             End Set
         End Property
         
@@ -1569,6 +1649,36 @@ Partial Public Class DATA_LAPORAN
             End Get
             Set
                 Me(Me.tableTBL_MASUK.KasirColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property Supplier() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableTBL_MASUK.SupplierColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Supplier' in table 'TBL_MASUK' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableTBL_MASUK.SupplierColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property Jumlah_item() As Integer
+            Get
+                Try 
+                    Return CType(Me(Me.tableTBL_MASUK.Jumlah_itemColumn),Integer)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Jumlah_item' in table 'TBL_MASUK' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableTBL_MASUK.Jumlah_itemColumn) = value
             End Set
         End Property
         
@@ -1604,10 +1714,25 @@ Partial Public Class DATA_LAPORAN
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Property Stok_Masuk() As Integer
+        Public Property Harga_QTY() As Integer
             Get
                 Try 
-                    Return CType(Me(Me.tableTBL_MASUK.Stok_MasukColumn),Integer)
+                    Return CType(Me(Me.tableTBL_MASUK.Harga_QTYColumn),Integer)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Harga QTY' in table 'TBL_MASUK' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableTBL_MASUK.Harga_QTYColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property Stok_Masuk() As Decimal
+            Get
+                Try 
+                    Return CType(Me(Me.tableTBL_MASUK.Stok_MasukColumn),Decimal)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("The value for column 'Stok Masuk' in table 'TBL_MASUK' is DBNull.", e)
                 End Try
@@ -1619,31 +1744,46 @@ Partial Public Class DATA_LAPORAN
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Property Harga_Partai() As Integer
+        Public Property Harga() As Integer
             Get
                 Try 
-                    Return CType(Me(Me.tableTBL_MASUK.Harga_PartaiColumn),Integer)
+                    Return CType(Me(Me.tableTBL_MASUK.HargaColumn),Integer)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'Harga Partai' in table 'TBL_MASUK' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Harga' in table 'TBL_MASUK' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableTBL_MASUK.Harga_PartaiColumn) = value
+                Me(Me.tableTBL_MASUK.HargaColumn) = value
             End Set
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Property Stok_Sisa() As Integer
+        Public Property Sisa_Stok() As Decimal
             Get
                 Try 
-                    Return CType(Me(Me.tableTBL_MASUK.Stok_SisaColumn),Integer)
+                    Return CType(Me(Me.tableTBL_MASUK.Sisa_StokColumn),Decimal)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'Stok Sisa' in table 'TBL_MASUK' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Sisa Stok' in table 'TBL_MASUK' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableTBL_MASUK.Stok_SisaColumn) = value
+                Me(Me.tableTBL_MASUK.Sisa_StokColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property Total() As Integer
+            Get
+                Try 
+                    Return CType(Me(Me.tableTBL_MASUK.TotalColumn),Integer)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Total' in table 'TBL_MASUK' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableTBL_MASUK.TotalColumn) = value
             End Set
         End Property
         
@@ -1661,14 +1801,26 @@ Partial Public Class DATA_LAPORAN
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Function IsSupplierNull() As Boolean
-            Return Me.IsNull(Me.tableTBL_MASUK.SupplierColumn)
+        Public Function IsJenisNull() As Boolean
+            Return Me.IsNull(Me.tableTBL_MASUK.JenisColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Sub SetSupplierNull()
-            Me(Me.tableTBL_MASUK.SupplierColumn) = Global.System.Convert.DBNull
+        Public Sub SetJenisNull()
+            Me(Me.tableTBL_MASUK.JenisColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsTanggalNull() As Boolean
+            Return Me.IsNull(Me.tableTBL_MASUK.TanggalColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetTanggalNull()
+            Me(Me.tableTBL_MASUK.TanggalColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -1681,6 +1833,30 @@ Partial Public Class DATA_LAPORAN
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub SetKasirNull()
             Me(Me.tableTBL_MASUK.KasirColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsSupplierNull() As Boolean
+            Return Me.IsNull(Me.tableTBL_MASUK.SupplierColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetSupplierNull()
+            Me(Me.tableTBL_MASUK.SupplierColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsJumlah_itemNull() As Boolean
+            Return Me.IsNull(Me.tableTBL_MASUK.Jumlah_itemColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetJumlah_itemNull()
+            Me(Me.tableTBL_MASUK.Jumlah_itemColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -1709,6 +1885,18 @@ Partial Public Class DATA_LAPORAN
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsHarga_QTYNull() As Boolean
+            Return Me.IsNull(Me.tableTBL_MASUK.Harga_QTYColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetHarga_QTYNull()
+            Me(Me.tableTBL_MASUK.Harga_QTYColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Function IsStok_MasukNull() As Boolean
             Return Me.IsNull(Me.tableTBL_MASUK.Stok_MasukColumn)
         End Function
@@ -1721,26 +1909,38 @@ Partial Public Class DATA_LAPORAN
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Function IsHarga_PartaiNull() As Boolean
-            Return Me.IsNull(Me.tableTBL_MASUK.Harga_PartaiColumn)
+        Public Function IsHargaNull() As Boolean
+            Return Me.IsNull(Me.tableTBL_MASUK.HargaColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Sub SetHarga_PartaiNull()
-            Me(Me.tableTBL_MASUK.Harga_PartaiColumn) = Global.System.Convert.DBNull
+        Public Sub SetHargaNull()
+            Me(Me.tableTBL_MASUK.HargaColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Function IsStok_SisaNull() As Boolean
-            Return Me.IsNull(Me.tableTBL_MASUK.Stok_SisaColumn)
+        Public Function IsSisa_StokNull() As Boolean
+            Return Me.IsNull(Me.tableTBL_MASUK.Sisa_StokColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Sub SetStok_SisaNull()
-            Me(Me.tableTBL_MASUK.Stok_SisaColumn) = Global.System.Convert.DBNull
+        Public Sub SetSisa_StokNull()
+            Me(Me.tableTBL_MASUK.Sisa_StokColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsTotalNull() As Boolean
+            Return Me.IsNull(Me.tableTBL_MASUK.TotalColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetTotalNull()
+            Me(Me.tableTBL_MASUK.TotalColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     
