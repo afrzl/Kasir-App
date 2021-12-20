@@ -231,8 +231,7 @@ Public Class FR_REPORT
                     " tbl_transaksi_parent.Diskon AS 'Diskon Transaksi'," &
                     " tbl_transaksi_parent.Harga_total AS 'Total Akhir'," &
                     " tbl_transaksi_parent.Harga_tunai AS 'Bayar'," &
-                    " tbl_transaksi_parent.Harga_kembali AS 'Kembalian'," &
-                    " (SELECT COALESCE(SUM(tbl_transaksi_child.Harga_akhir), 0) - COALESCE(SUM(tbl_transaksi_child.Harga_beli), 0) FROM tbl_transaksi_child WHERE tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans) - tbl_transaksi_parent.Diskon AS 'Laba'" &
+                    " tbl_transaksi_parent.Harga_kembali AS 'Kembalian'" &
                     " From tbl_transaksi_child inner Join tbl_transaksi_parent On tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans" &
                     " Where (Left(tbl_transaksi_child.Id_trans, 1) = 'K' OR Left(tbl_transaksi_child.Id_trans, 1) = 'C')" &
                     " And tbl_transaksi_parent.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd 00:00:00") & "'" &
@@ -296,16 +295,70 @@ Public Class FR_REPORT
                         Case 1
                             TOTALITEM = Convert.ToDouble(TBL.Compute("SUM(Jumlah_item)", ""))
                             TOTALPEMBELIAN = Convert.ToDouble(TBL.Compute("SUM(Total)", ""))
+
+                            For N = 1 To TBL.Rows.Count - 1
+                                If TBL.Rows(N).Item(0) = TBL.Rows(N - 1).Item(0) Then
+                                    TOTALPEMBELIAN -= TBL.Rows(N - 1).Item(12)
+                                    TOTALITEM -= TBL.Rows(N - 1).Item(5)
+                                End If
+                            Next
                         Case 2
                             TOTALLABA = Convert.ToDouble(TBL.Compute("SUM(Laba)", ""))
                             TOTALITEM = Convert.ToDouble(TBL.Compute("SUM(Jumlah_item)", ""))
+
+                            For N = 1 To TBL.Rows.Count - 1
+                                If TBL.Rows(N).Item(0) = TBL.Rows(N - 1).Item(0) Then
+                                    TOTALLABA -= TBL.Rows(N - 1).Item(19)
+                                    TOTALITEM -= TBL.Rows(N - 1).Item(5)
+                                End If
+                            Next
                         Case 3
+                            For N = 1 To TBL.Rows.Count - 1
+                                If TBL.Rows(N).Item(0) = TBL.Rows(N - 1).Item(0) Then
+                                    TBL.Rows(N).Item(1) = 0
+                                    For J = N To TBL.Rows.Count - 1
+                                        If TBL.Rows(J).Item(0) = TBL.Rows(J - 1).Item(0) Then
+                                            TBL.Rows(J).Item(1) = 0
+                                        End If
+                                    Next
+                                End If
+                            Next
                             TOTALITEM = Convert.ToDouble(TBL.Compute("SUM(Jumlah_item)", ""))
                         Case 4
+                            For N = 1 To TBL.Rows.Count - 1
+                                If TBL.Rows(N).Item(0) = TBL.Rows(N - 1).Item(0) Then
+                                    TBL.Rows(N).Item(1) = 0
+                                    For J = N To TBL.Rows.Count - 1
+                                        If TBL.Rows(J).Item(0) = TBL.Rows(J - 1).Item(0) Then
+                                            TBL.Rows(J).Item(1) = 0
+                                        End If
+                                    Next
+                                End If
+                            Next
                             TOTALITEM = Convert.ToDouble(TBL.Compute("SUM(Jumlah_item)", ""))
                         Case 5
+                            For N = 1 To TBL.Rows.Count - 1
+                                If TBL.Rows(N).Item(0) = TBL.Rows(N - 1).Item(0) Then
+                                    TBL.Rows(N).Item(1) = 0
+                                    For J = N To TBL.Rows.Count - 1
+                                        If TBL.Rows(J).Item(0) = TBL.Rows(J - 1).Item(0) Then
+                                            TBL.Rows(J).Item(1) = 0
+                                        End If
+                                    Next
+                                End If
+                            Next
                             TOTALLABA = Convert.ToDouble(TBL.Compute("SUM(Laba)", ""))
                         Case 6
+                            For N = 1 To TBL.Rows.Count - 1
+                                If TBL.Rows(N).Item(0) = TBL.Rows(N - 1).Item(0) Then
+                                    TBL.Rows(N).Item(1) = 0
+                                    For J = N To TBL.Rows.Count - 1
+                                        If TBL.Rows(J).Item(0) = TBL.Rows(J - 1).Item(0) Then
+                                            TBL.Rows(J).Item(1) = 0
+                                        End If
+                                    Next
+                                End If
+                            Next
                             TOTALLABA = Convert.ToDouble(TBL.Compute("SUM(Laba)", ""))
                     End Select
                 Case 2
@@ -315,9 +368,19 @@ Public Class FR_REPORT
                         Case 1
                             TOTALITEM = Convert.ToDouble(TBL.Compute("SUM(Jumlah_item)", ""))
                             TOTALPEMBELIAN = Convert.ToDouble(TBL.Compute("SUM(Total)", ""))
+                            For N = 1 To TBL.Rows.Count - 1
+                                If TBL.Rows(N).Item(0) = TBL.Rows(N - 1).Item(0) Then
+                                    TOTALPEMBELIAN -= TBL.Rows(N - 1).Item(12)
+                                    TOTALITEM -= TBL.Rows(N - 1).Item(5)
+                                End If
+                            Next
                         Case 2
-                            TOTALLABA = Convert.ToDouble(TBL.Compute("SUM(Laba)", ""))
                             TOTALITEM = Convert.ToDouble(TBL.Compute("SUM(Jumlah_item)", ""))
+                            For N = 1 To TBL.Rows.Count - 1
+                                If TBL.Rows(N).Item(0) = TBL.Rows(N - 1).Item(0) Then
+                                    TOTALITEM -= TBL.Rows(N - 1).Item(5)
+                                End If
+                            Next
                     End Select
                 Case 3
                     Select Case CBJENIS.SelectedIndex
@@ -325,6 +388,11 @@ Public Class FR_REPORT
                 ' sementara tidak ada
                         Case 1
                             TOTALITEM = Convert.ToDouble(TBL.Compute("SUM(Jumlah_item)", ""))
+                            For N = 1 To TBL.Rows.Count - 1
+                                If TBL.Rows(N).Item(0) = TBL.Rows(N - 1).Item(0) Then
+                                    TOTALITEM -= TBL.Rows(N - 1).Item(5)
+                                End If
+                            Next
                     End Select
             End Select
 
@@ -488,13 +556,13 @@ Public Class FR_REPORT
                             BTNCETAK.Visible = True
                             CRV.ReportSource = RPT
                         Case 2
-                            Dim RPT As New RPT_KELUAR
+                            Dim RPT As New RPT_KELUAR_KASIR
                             With RPT
                                 .SetDataSource(TBL)
-                                .SetParameterValue("total_laba", TOTALLABA)
                                 .SetParameterValue("total_item", TOTALITEM)
                                 .SetParameterValue("tgl_mulai", TXTTGLAWAL.Value.ToString("dd MMMM yyyy"))
                                 .SetParameterValue("tgl_akhir", TXTTGLAKHIR.Value.ToString("dd MMMM yyyy"))
+                                .SetParameterValue("nama_kasir", LBLUSER.Text)
                             End With
 
                             BTNCETAK.Visible = True

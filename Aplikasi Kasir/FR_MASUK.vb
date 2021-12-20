@@ -40,9 +40,11 @@ Public Class FR_MASUK
             Case 1
                 PNADMIN.Visible = True
                 PNOPS.Visible = False
+                Label3.Text = "Administrator"
             Case 2
                 PNADMIN.Visible = False
                 PNOPS.Visible = True
+                Label3.Text = "Operator"
         End Select
 
         LBTGL.Text = Format(Date.Now, "dd MMMM yyyy HH:mm:ss")
@@ -317,7 +319,7 @@ Public Class FR_MASUK
     End Sub
 
     Private Sub TXTJUMLAH_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTJUMLAH.KeyPress
-        If Not ((e.KeyChar >= "0" And e.KeyChar <= "9") Or e.KeyChar = vbBack) Then
+        If Not ((e.KeyChar >= "0" And e.KeyChar <= "9") Or e.KeyChar = vbBack Or e.KeyChar = ",") Then
             e.Handled = True
         End If
 
@@ -530,6 +532,9 @@ Public Class FR_MASUK
         TXTJUMLAH.Enabled = True
         TXTKODE.Enabled = True
         TXTHARGAPARTAI.Enabled = True
+        BTNCARI.Visible = True
+        BTNCANCEL.Visible = False
+        BTNHAPUS.Visible = False
         TXTKODE.Clear()
         TXTJUMLAH.Clear()
         TXTHARGAPARTAI.Clear()
@@ -547,10 +552,11 @@ Public Class FR_MASUK
     Sub INPUT_DB()
         If DGTAMPIL.Rows.Count <= 0 Then Exit Sub
         ID_TRANSAKSI = AUTOID()
-        Dim JUMLAH_ITEM As Integer = DGTAMPIL.Rows.Count
+        Dim JUMLAH_ITEM As Double = 0
         Dim HARGA_TOTAL As Integer = 0
         For Each EROW As DataGridViewRow In DGTAMPIL.Rows
             HARGA_TOTAL += CInt(EROW.Cells("TOTAL").Value)
+            JUMLAH_ITEM += Convert.ToDouble(EROW.Cells("QTY").Value)
         Next
 
         Dim STR As String = "INSERT INTO tbl_transaksi_parent" &
@@ -561,7 +567,7 @@ Public Class FR_MASUK
             " 'M'," &
             " '" & TXTSUPPLIER.Text & "'," &
             " '" & HARGA_TOTAL & "'," &
-            " '" & JUMLAH_ITEM & "')"
+            " '" & JUMLAH_ITEM.ToString.Replace(",", ".") & "')"
         Dim CMD As New SqlCommand(STR, CONN)
         CMD.ExecuteNonQuery()
 

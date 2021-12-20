@@ -110,7 +110,7 @@ Public Class FR_KELUAR
             DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Barang").Value = TXTBARANG.Text
             DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Satuan").Value = TXTSATUAN.Text
             DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Harga").Value = TXTHARGA.Text
-            DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Diskon").Value = CInt(TXTDISKON.Text) / 100 * DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Harga").Value
+            DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Diskon").Value = CInt(TXTDISKON.Text) / 100 * DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Harga").Value * DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Qty").Value
             DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Qty").Value = TXTQTY.Text
             DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Total").Value = TXTHARGA.Text - DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Diskon").Value
         End If
@@ -365,13 +365,15 @@ Public Class FR_KELUAR
     Private Sub TXTBAYAR_TextChanged(sender As Object, e As EventArgs) Handles TXTBAYAR.TextChanged
         Dim BAYAR As Integer = 0
         If Not TXTBAYAR.Text = "" Then
-            BAYAR = CInt(TXTBAYAR.Text)
+            BAYAR = TXTBAYAR.Text.Replace(".", "")
+            TXTBAYAR.Text = Format(CInt(TXTBAYAR.Text), "##,##0")
+            TXTBAYAR.SelectionStart = Len(TXTBAYAR.Text)
         End If
         Dim TOTALHARGA As Integer = 0
         If Not TXTTOTALHARGA.Text = "" Then
             TOTALHARGA = CInt(TXTTOTALHARGA.Text)
         End If
-        TXTKEMBALIAN.Text = BAYAR - TOTALHARGA
+        TXTKEMBALIAN.Text = Format(BAYAR - TOTALHARGA, "##,##0")
     End Sub
 
     Private Sub TXTBAYAR_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTBAYAR.KeyPress
@@ -445,8 +447,10 @@ Public Class FR_KELUAR
                 Next
                 DGTAMPIL.Rows.RemoveAt(BARIS_DATA)
                 TOTAL_HARGA()
-                TXTQTY.Enabled = False
                 TXTKODE.Enabled = True
+                TXTQTY.Enabled = False
+                BTNCARI.Visible = True
+                BTNCANCEL.Visible = False
                 TXTKODE.Clear()
                 TXTKODE.Select()
             Else
@@ -486,6 +490,9 @@ Public Class FR_KELUAR
             HARGA = CLng(TXTHARGA.Text)
         End If
         Dim JUMLAH_QTY As Double = 0
+        If TXTQTY.Text = "," Then
+            TXTQTY.Text = "0,"
+        End If
         If Not TXTQTY.Text = "" Then
             JUMLAH_QTY = Convert.ToDouble(TXTQTY.Text)
         End If

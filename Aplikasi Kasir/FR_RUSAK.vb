@@ -11,9 +11,11 @@ Public Class FR_RUSAK
             Case 1
                 PNADMIN.Visible = True
                 PNOPS.Visible = False
+                Label3.Text = "Administrator"
             Case 2
                 PNADMIN.Visible = False
                 PNOPS.Visible = True
+                Label3.Text = "Operator"
         End Select
         LBTGL.Text = Format(Date.Now, "dd MMMM yyyy HH:mm:ss")
         PEWAKTU.Enabled = True

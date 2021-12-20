@@ -12,21 +12,23 @@ Module KONEKSI
     Public URL_LOGO As String
 
     Public Sub MASUK_REGISTRY(ByVal TOKO As String, ByVal ALAMAT As String, ByVal NO As String, ByVal PRINTER As String, ByVal URLLOGO As Byte())
-        Call SaveSetting("POS", "Setting", "Nama_toko", TOKO)
-        Call SaveSetting("POS", "Setting", "Alamat_toko", ALAMAT)
-        Call SaveSetting("POS", "Setting", "No_toko", NO)
-        Call SaveSetting("POS", "Setting", "Printer_nota", PRINTER)
-        Call SaveSetting("POS", "Setting", "Url_logo", Convert.ToBase64String(URLLOGO))
+        With My.Computer.Registry
+            .SetValue("HKEY_CURRENT_USER\Software\Aplikasi Kasir", "Nama_toko", TOKO)
+            .SetValue("HKEY_CURRENT_USER\Software\Aplikasi Kasir", "Alamat_toko", ALAMAT)
+            .SetValue("HKEY_CURRENT_USER\Software\Aplikasi Kasir", "No_toko", NO)
+            .SetValue("HKEY_CURRENT_USER\Software\Aplikasi Kasir", "Printer_nota", PRINTER)
+            .SetValue("HKEY_CURRENT_USER\Software\Aplikasi Kasir", "Url_logo", Convert.ToBase64String(URLLOGO))
+        End With
 
         AMBIL_DATA_REGISTRY()
     End Sub
 
     Public Sub AMBIL_DATA_REGISTRY()
-        NAMA_TOKO = GetSetting("POS", "Setting", "Nama_toko", "")
-        ALAMAT_TOKO = GetSetting("POS", "Setting", "Alamat_toko", "")
-        NO_TOKO = GetSetting("POS", "Setting", "No_toko", "")
-        PRINTER_NOTA = GetSetting("POS", "Setting", "Printer_nota", "")
-        URL_LOGO = GetSetting("POS", "Setting", "Url_logo", "")
+        NAMA_TOKO = My.Computer.Registry.GetValue(“HKEY_CURRENT_USER\Software\Aplikasi Kasir”, “Nama_toko”, Nothing)
+        ALAMAT_TOKO = My.Computer.Registry.GetValue(“HKEY_CURRENT_USER\Software\Aplikasi Kasir”, “Alamat_toko”, Nothing)
+        NO_TOKO = My.Computer.Registry.GetValue(“HKEY_CURRENT_USER\Software\Aplikasi Kasir”, “No_toko”, Nothing)
+        PRINTER_NOTA = My.Computer.Registry.GetValue(“HKEY_CURRENT_USER\Software\Aplikasi Kasir”, “Printer_nota”, Nothing)
+        URL_LOGO = My.Computer.Registry.GetValue(“HKEY_CURRENT_USER\Software\Aplikasi Kasir”, “Url_logo”, Nothing)
     End Sub
 
     Public Sub KONEKAN()

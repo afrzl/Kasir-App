@@ -869,7 +869,7 @@ Partial Class FR_DISKON
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.Name = "FR_DISKON"
-        Me.Text = "FR_DISKON"
+        Me.Text = "MENU DISKON"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.DGTAMPIL, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ContextMenuStrip1.ResumeLayout(False)

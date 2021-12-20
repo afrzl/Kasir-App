@@ -173,7 +173,7 @@ Partial Class FR_KELUAR_TAMPIL
         Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.Name = "FR_KELUAR_TAMPIL"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "FR_KELUAR_TAMPIL"
+        Me.Text = "MENU BARANG KELUAR"
         Me.PNTOP.ResumeLayout(False)
         Me.PNCONTROL.ResumeLayout(False)
         Me.PNCONTENT.ResumeLayout(False)

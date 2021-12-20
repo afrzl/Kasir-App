@@ -785,7 +785,7 @@ Partial Class FR_MENU
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "FR_MENU"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "MENU UTAMA"
+        Me.Text = "DASHBOARD"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.PNLEFT.ResumeLayout(False)
         Me.PNLEFT.PerformLayout()

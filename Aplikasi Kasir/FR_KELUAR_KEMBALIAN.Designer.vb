@@ -89,7 +89,7 @@ Partial Class FR_KELUAR_KEMBALIAN
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "FR_KELUAR_KEMBALIAN"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "FR_KELUAR_KEMBALIAN"
+        Me.Text = "MENU BARANG KELUAR"
         Me.PNCONTENT.ResumeLayout(False)
         Me.GroupBox2.ResumeLayout(False)
         Me.ResumeLayout(False)

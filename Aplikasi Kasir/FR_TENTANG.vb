@@ -46,7 +46,7 @@ Public Class FR_TENTANG
                 Label3.Text = "Administrator"
             Case 2
                 GBTOKO.Visible = False
-                PNADMIN.Visible = True
+                PNADMIN.Visible = False
                 PNKASIR.Visible = False
                 PNOPS.Visible = True
                 Label3.Text = "Operator"
@@ -124,13 +124,15 @@ Public Class FR_TENTANG
     End Sub
 
     Sub TAMPIL_TOKO()
-        Dim IMAGESTREAM As New MemoryStream
-        IMAGESTREAM = New MemoryStream(Convert.FromBase64String(URL_LOGO))
+        If URL_LOGO <> "" Then
+            Dim IMAGESTREAM As New MemoryStream
+            IMAGESTREAM = New MemoryStream(Convert.FromBase64String(URL_LOGO))
+            PBLOGO.Image = Image.FromStream(IMAGESTREAM)
+        End If
 
         TXTNAMATOKO.Text = LBNAMATOKO.Text
         TXTALAMATTOKO.Text = LBALAMATTOKO.Text
         TXTNOTOKO.Text = LBNOTOKO.Text
-        PBLOGO.Image = Image.FromStream(IMAGESTREAM)
     End Sub
 
     Private Sub BTNSIMPAN_Click(sender As Object, e As EventArgs) Handles BTNSIMPAN.Click
@@ -364,6 +366,7 @@ Public Class FR_TENTANG
             CMD = New SqlCommand(STR, CONN)
             CMD.ExecuteNonQuery()
             MsgBox("Data berhasil diri berhasil diperbarui")
+            NAMA_LOGIN = TXTNAMA.Text
             TAMPIL()
             KONDISI_AWAL()
         End If

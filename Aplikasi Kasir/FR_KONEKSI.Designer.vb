@@ -158,7 +158,7 @@ Partial Class FR_KONEKSI
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "FR_KONEKSI"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "FR_KONEKSI"
+        Me.Text = "KONEKSI DATABASE"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

@@ -240,6 +240,7 @@ Public Class FR_PRODUK
                 TXTKODE.Clear()
                 TXTKODE.Enabled = True
                 TXTKODE.Select()
+                CARI_PRODUK()
                 TAMPIL()
             End If
         End If
@@ -530,6 +531,8 @@ Public Class FR_PRODUK
         TXTEND1.Enabled = True
         TXTHARGA1.Enabled = True
         CBSATUAN.Enabled = True
+        BTNUBAH.Visible = False
+        BTNSIMPAN.Visible = True
         If TXTEND2.Text <> "" Then
             TXTEND2.Enabled = True
             TXTHARGA2.Enabled = True

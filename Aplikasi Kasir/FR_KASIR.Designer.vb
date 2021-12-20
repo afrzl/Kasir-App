@@ -743,7 +743,7 @@ Partial Class FR_KASIR
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "FR_KASIR"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "FR_KASIR"
+        Me.Text = "MENU KASIR"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.PNCONTENT.ResumeLayout(False)
         Me.PNCONTENT.PerformLayout()

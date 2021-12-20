@@ -186,7 +186,7 @@ Partial Class FR_LOGIN
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "FR_LOGIN"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "FR_LOGIN"
+        Me.Text = "LOGIN"
         CType(Me.TXTPASSWORD, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TXTID, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PNTOP.ResumeLayout(False)
