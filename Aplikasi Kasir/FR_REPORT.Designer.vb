@@ -79,6 +79,7 @@ Partial Class FR_REPORT
         Me.BTNMINIMIZE = New System.Windows.Forms.Button()
         Me.BTNCLOSE = New System.Windows.Forms.Button()
         Me.PEWAKTU = New System.Windows.Forms.Timer(Me.components)
+        Me.BTNEXPORT = New System.Windows.Forms.Button()
         Me.PNLEFT.SuspendLayout()
         Me.PNOPS.SuspendLayout()
         Me.PNADMIN.SuspendLayout()
@@ -728,6 +729,7 @@ Partial Class FR_REPORT
         '
         'Panel3
         '
+        Me.Panel3.Controls.Add(Me.BTNEXPORT)
         Me.Panel3.Controls.Add(Me.BTNCETAK)
         Me.Panel3.Controls.Add(Me.BTNTAMPIL)
         Me.Panel3.Controls.Add(Me.TXTTGLAKHIR)
@@ -749,7 +751,7 @@ Partial Class FR_REPORT
         Me.BTNCETAK.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.BTNCETAK.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BTNCETAK.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.BTNCETAK.Location = New System.Drawing.Point(489, 10)
+        Me.BTNCETAK.Location = New System.Drawing.Point(778, 10)
         Me.BTNCETAK.Name = "BTNCETAK"
         Me.BTNCETAK.Size = New System.Drawing.Size(124, 41)
         Me.BTNCETAK.TabIndex = 66
@@ -888,6 +890,21 @@ Partial Class FR_REPORT
         'PEWAKTU
         '
         '
+        'BTNEXPORT
+        '
+        Me.BTNEXPORT.BackColor = System.Drawing.Color.Navy
+        Me.BTNEXPORT.FlatAppearance.BorderSize = 0
+        Me.BTNEXPORT.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNEXPORT.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNEXPORT.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BTNEXPORT.Location = New System.Drawing.Point(908, 10)
+        Me.BTNEXPORT.Name = "BTNEXPORT"
+        Me.BTNEXPORT.Size = New System.Drawing.Size(124, 41)
+        Me.BTNEXPORT.TabIndex = 67
+        Me.BTNEXPORT.Text = "EXPORT"
+        Me.BTNEXPORT.UseVisualStyleBackColor = False
+        Me.BTNEXPORT.Visible = False
+        '
         'FR_REPORT
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(120.0!, 120.0!)
@@ -974,4 +991,5 @@ Partial Class FR_REPORT
     Friend WithEvents BTNDASHBOARDOPS As Button
     Friend WithEvents Label12 As Label
     Friend WithEvents BTNRETURNOPS As Button
+    Friend WithEvents BTNEXPORT As Button
 End Class

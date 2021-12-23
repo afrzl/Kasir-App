@@ -1,4 +1,6 @@
 ﻿Imports System.Data.SqlClient
+Imports CrystalDecisions.CrystalReports.Engine
+Imports CrystalDecisions.Shared
 
 Public Class FR_REPORT
     Private Sub PEWAKTU_Tick(sender As Object, e As EventArgs) Handles PEWAKTU.Tick
@@ -464,6 +466,7 @@ Public Class FR_REPORT
         BTNTAMPIL.Visible = True
         BTNTAMPIL.Location = New Point(907, 10)
         BTNCETAK.Location = New Point(1035, 10)
+        BTNCETAK.Location = New Point(1163, 10)
 
         TXTTGLAWAL.ShowUpDown = True
         TXTTGLAWAL.Format = DateTimePickerFormat.Custom
@@ -484,6 +487,7 @@ Public Class FR_REPORT
         BTNTAMPIL.Visible = True
         BTNTAMPIL.Location = New Point(907, 10)
         BTNCETAK.Location = New Point(1035, 10)
+        BTNCETAK.Location = New Point(1163, 10)
 
         TXTTGLAWAL.ShowUpDown = False
         TXTTGLAWAL.Format = DateTimePickerFormat.Short
@@ -510,6 +514,7 @@ Public Class FR_REPORT
                             End With
 
                             BTNCETAK.Visible = True
+                            BTNEXPORT.Visible = True
                             CRV.ReportSource = RPT
                         Case 1
                             Dim RPT As New RPT_MASUK
@@ -522,6 +527,7 @@ Public Class FR_REPORT
                             End With
 
                             BTNCETAK.Visible = True
+                            BTNEXPORT.Visible = True
                             CRV.ReportSource = RPT
                         Case 2
                             Dim RPT As New RPT_KELUAR
@@ -534,6 +540,7 @@ Public Class FR_REPORT
                             End With
 
                             BTNCETAK.Visible = True
+                            BTNEXPORT.Visible = True
                             CRV.ReportSource = RPT
                         Case 3
                             Dim RPT As New RPT_PENJUALAN_HARIAN
@@ -544,6 +551,7 @@ Public Class FR_REPORT
                             End With
 
                             BTNCETAK.Visible = True
+                            BTNEXPORT.Visible = True
                             CRV.ReportSource = RPT
                         Case 4
                             Dim RPT As New RPT_PENJUALAN_BARANG
@@ -554,6 +562,7 @@ Public Class FR_REPORT
                             End With
 
                             BTNCETAK.Visible = True
+                            BTNEXPORT.Visible = True
                             CRV.ReportSource = RPT
                         Case 5
                             Dim RPT As New RPT_GRAFIK_PENJUALAN_HARIAN
@@ -565,6 +574,7 @@ Public Class FR_REPORT
                             End With
 
                             BTNCETAK.Visible = True
+                            BTNEXPORT.Visible = True
                             CRV.ReportSource = RPT
                         Case 6
                             Dim RPT As New RPT_GRAFIK_PENJUALAN_BULANAN
@@ -576,6 +586,7 @@ Public Class FR_REPORT
                             End With
 
                             BTNCETAK.Visible = True
+                            BTNEXPORT.Visible = True
                             CRV.ReportSource = RPT
                         Case 7
                             Dim RPT As New RPT_GRAFIK_PENJUALAN_BARANG_HARIAN
@@ -587,6 +598,7 @@ Public Class FR_REPORT
                             End With
 
                             BTNCETAK.Visible = True
+                            BTNEXPORT.Visible = True
                             CRV.ReportSource = RPT
                         Case 8
                             Dim RPT As New RPT_GRAFIK_LABA_HARIAN
@@ -598,6 +610,7 @@ Public Class FR_REPORT
                             End With
 
                             BTNCETAK.Visible = True
+                            BTNEXPORT.Visible = True
                             CRV.ReportSource = RPT
                         Case 9
                             Dim RPT As New RPT_GRAFIK_LABA_BULANAN
@@ -609,6 +622,7 @@ Public Class FR_REPORT
                             End With
 
                             BTNCETAK.Visible = True
+                            BTNEXPORT.Visible = True
                             CRV.ReportSource = RPT
                     End Select
                 Case 2
@@ -621,6 +635,7 @@ Public Class FR_REPORT
                             End With
 
                             BTNCETAK.Visible = True
+                            BTNEXPORT.Visible = True
                             CRV.ReportSource = RPT
                         Case 1
                             Dim RPT As New RPT_MASUK_OPS
@@ -633,6 +648,7 @@ Public Class FR_REPORT
                             End With
 
                             BTNCETAK.Visible = True
+                            BTNEXPORT.Visible = True
                             CRV.ReportSource = RPT
                         Case 2
                             Dim RPT As New RPT_KELUAR_KASIR
@@ -645,6 +661,7 @@ Public Class FR_REPORT
                             End With
 
                             BTNCETAK.Visible = True
+                            BTNEXPORT.Visible = True
                             CRV.ReportSource = RPT
                     End Select
                 Case 3
@@ -657,6 +674,7 @@ Public Class FR_REPORT
                             End With
 
                             BTNCETAK.Visible = True
+                            BTNEXPORT.Visible = True
                             CRV.ReportSource = RPT
                         Case 1
                             Dim RPT As New RPT_KELUAR_KASIR
@@ -669,6 +687,7 @@ Public Class FR_REPORT
                             End With
 
                             BTNCETAK.Visible = True
+                            BTNEXPORT.Visible = True
                             CRV.ReportSource = RPT
                     End Select
             End Select
@@ -720,6 +739,7 @@ Public Class FR_REPORT
 
                         BTNTAMPIL.Location = New Point(362, 10)
                         BTNCETAK.Location = New Point(489, 10)
+                        BTNEXPORT.Location = New Point(619, 10)
                     Case 1
                         KONDISI_TANGGAL()
                     Case 2
@@ -859,5 +879,13 @@ Public Class FR_REPORT
 
     Private Sub BTNTENTANGOPS_Click(sender As Object, e As EventArgs) Handles BTNTENTANGOPS.Click
         BUKA_FORM(FR_TENTANG)
+    End Sub
+
+    Private Sub BTNEXPORT_Click(sender As Object, e As EventArgs) Handles BTNEXPORT.Click
+        Dim formats As Integer
+        formats = (CrystalDecisions.Shared.ViewerExportFormats.PdfFormat Or CrystalDecisions.Shared.ViewerExportFormats.ExcelFormat)
+
+        CRV.AllowedExportFormats = formats
+        CRV.ExportReport()
     End Sub
 End Class
