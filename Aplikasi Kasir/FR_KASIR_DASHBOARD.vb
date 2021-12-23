@@ -32,15 +32,15 @@ Public Class FR_KASIR_DASHBOARD
         Me.WindowState = FormWindowState.Minimized
     End Sub
 
-    Private Sub BTNKELUAR_Click(sender As Object, e As EventArgs) Handles BTNKELUAR.Click
+    Private Sub BTNKELUAR_Click(sender As Object, e As EventArgs)
         BUKA_FORM(FR_KELUAR)
     End Sub
 
-    Private Sub BTNLAPORAN_Click(sender As Object, e As EventArgs) Handles BTNLAPORAN.Click
+    Private Sub BTNLAPORAN_Click(sender As Object, e As EventArgs)
         BUKA_FORM(FR_REPORT)
     End Sub
 
-    Private Sub BTNTENTANG_Click(sender As Object, e As EventArgs) Handles BTNTENTANG.Click
+    Private Sub BTNTENTANG_Click(sender As Object, e As EventArgs)
         BUKA_FORM(FR_TENTANG)
     End Sub
 
@@ -136,7 +136,27 @@ Public Class FR_KASIR_DASHBOARD
         LBKELUARHARI.Text = Convert.ToInt16(CMD.ExecuteScalar())
     End Sub
 
-    Private Sub BTNRETURN_Click(sender As Object, e As EventArgs) Handles BTNRETURN.Click
+    Private Sub BTNRETURN_Click(sender As Object, e As EventArgs)
         BUKA_FORM(FR_RETURN)
+    End Sub
+
+    Private Sub BTNLABELKASIR_Click(sender As Object, e As EventArgs) Handles BTNLABELKASIR.Click
+        BUKA_FORM(FR_CETAK_LABEL)
+    End Sub
+
+    Private Sub BTNKELUARKASIR_Click(sender As Object, e As EventArgs) Handles BTNKELUARKASIR.Click
+        BUKA_FORM(FR_KELUAR)
+    End Sub
+
+    Private Sub BTNRETURNKASIR_Click(sender As Object, e As EventArgs) Handles BTNRETURNKASIR.Click
+        BUKA_FORM(FR_RETURN)
+    End Sub
+
+    Private Sub BTNLAPORANKASIR_Click(sender As Object, e As EventArgs) Handles BTNLAPORANKASIR.Click
+        BUKA_FORM(FR_REPORT)
+    End Sub
+
+    Private Sub BTNSETTINGKASIR_Click(sender As Object, e As EventArgs) Handles BTNSETTINGKASIR.Click
+        BUKA_FORM(FR_TENTANG)
     End Sub
 End Class

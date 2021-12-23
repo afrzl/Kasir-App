@@ -301,12 +301,23 @@ Public Class FR_KASIR
         Me.WindowState = FormWindowState.Minimized
     End Sub
 
+    Private Sub BTNLOGOUT_Click(sender As Object, e As EventArgs) Handles BTNLOGOUT.Click
+        Dim FR As New FR_LOGIN
+        My.Settings.ID_ACCOUNT = 0
+        FR.Show()
+        Me.Close()
+    End Sub
+
     Private Sub BTNDASHBOARD_Click(sender As Object, e As EventArgs) Handles BTNDASHBOARD.Click
         BUKA_FORM(FR_MENU)
     End Sub
 
     Private Sub BTNBARANG_Click(sender As Object, e As EventArgs) Handles BTNBARANG.Click
         BUKA_FORM(FR_PRODUK)
+    End Sub
+
+    Private Sub BTNLABELADMIN_Click(sender As Object, e As EventArgs) Handles BTNLABELADMIN.Click
+        BUKA_FORM(FR_CETAK_LABEL)
     End Sub
 
     Private Sub BTNDISKON_Click(sender As Object, e As EventArgs) Handles BTNDISKON.Click
@@ -325,10 +336,6 @@ Public Class FR_KASIR
         BUKA_FORM(FR_REPORT)
     End Sub
 
-    Private Sub BTNTENTANG_Click(sender As Object, e As EventArgs) Handles BTNTENTANG.Click
-        BUKA_FORM(FR_TENTANG)
-    End Sub
-
     Private Sub BTNRETURN_Click(sender As Object, e As EventArgs) Handles BTNRETURN.Click
         BUKA_FORM(FR_RETURN)
     End Sub
@@ -337,10 +344,7 @@ Public Class FR_KASIR
         BUKA_FORM(FR_RUSAK)
     End Sub
 
-    Private Sub BTNLOGOUT_Click(sender As Object, e As EventArgs) Handles BTNLOGOUT.Click
-        Dim FR As New FR_LOGIN
-        My.Settings.ID_ACCOUNT = 0
-        FR.Show()
-        Me.Close()
+    Private Sub BTNTENTANG_Click(sender As Object, e As EventArgs) Handles BTNTENTANG.Click
+        BUKA_FORM(FR_TENTANG)
     End Sub
 End Class

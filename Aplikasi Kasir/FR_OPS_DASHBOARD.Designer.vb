@@ -28,14 +28,15 @@ Partial Class FR_OPS_DASHBOARD
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.PNLEFT = New System.Windows.Forms.Panel()
         Me.PNOPS = New System.Windows.Forms.Panel()
-        Me.BTNRUSAKOPS = New System.Windows.Forms.Button()
         Me.BTNMASUKOPS = New System.Windows.Forms.Button()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.BTNRETURNOPS = New System.Windows.Forms.Button()
-        Me.Label11 = New System.Windows.Forms.Label()
+        Me.Label23 = New System.Windows.Forms.Label()
         Me.BTNKELUAROPS = New System.Windows.Forms.Button()
         Me.BTNLAPORANOPS = New System.Windows.Forms.Button()
+        Me.Label24 = New System.Windows.Forms.Label()
+        Me.BTNRETURNOPS = New System.Windows.Forms.Button()
+        Me.BTNRUSAKOPS = New System.Windows.Forms.Button()
         Me.BTNTENTANGOPS = New System.Windows.Forms.Button()
+        Me.BTNLABELOPS = New System.Windows.Forms.Button()
         Me.BTNDASHBOARDOPS = New System.Windows.Forms.Button()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -96,37 +97,20 @@ Partial Class FR_OPS_DASHBOARD
         '
         'PNOPS
         '
-        Me.PNOPS.Controls.Add(Me.BTNRUSAKOPS)
         Me.PNOPS.Controls.Add(Me.BTNMASUKOPS)
-        Me.PNOPS.Controls.Add(Me.Label1)
-        Me.PNOPS.Controls.Add(Me.BTNRETURNOPS)
-        Me.PNOPS.Controls.Add(Me.Label11)
+        Me.PNOPS.Controls.Add(Me.Label23)
         Me.PNOPS.Controls.Add(Me.BTNKELUAROPS)
         Me.PNOPS.Controls.Add(Me.BTNLAPORANOPS)
+        Me.PNOPS.Controls.Add(Me.Label24)
+        Me.PNOPS.Controls.Add(Me.BTNRETURNOPS)
+        Me.PNOPS.Controls.Add(Me.BTNRUSAKOPS)
         Me.PNOPS.Controls.Add(Me.BTNTENTANGOPS)
+        Me.PNOPS.Controls.Add(Me.BTNLABELOPS)
         Me.PNOPS.Controls.Add(Me.BTNDASHBOARDOPS)
         Me.PNOPS.Location = New System.Drawing.Point(0, 112)
         Me.PNOPS.Name = "PNOPS"
         Me.PNOPS.Size = New System.Drawing.Size(270, 508)
-        Me.PNOPS.TabIndex = 54
-        '
-        'BTNRUSAKOPS
-        '
-        Me.BTNRUSAKOPS.FlatAppearance.BorderSize = 0
-        Me.BTNRUSAKOPS.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BTNRUSAKOPS.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BTNRUSAKOPS.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.BTNRUSAKOPS.Image = Global.Aplikasi_Kasir.My.Resources.Resources.transaksi
-        Me.BTNRUSAKOPS.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNRUSAKOPS.Location = New System.Drawing.Point(0, 285)
-        Me.BTNRUSAKOPS.Name = "BTNRUSAKOPS"
-        Me.BTNRUSAKOPS.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
-        Me.BTNRUSAKOPS.Size = New System.Drawing.Size(270, 35)
-        Me.BTNRUSAKOPS.TabIndex = 55
-        Me.BTNRUSAKOPS.Text = "     Barang Rusak"
-        Me.BTNRUSAKOPS.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNRUSAKOPS.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.BTNRUSAKOPS.UseVisualStyleBackColor = True
+        Me.PNOPS.TabIndex = 59
         '
         'BTNMASUKOPS
         '
@@ -136,7 +120,7 @@ Partial Class FR_OPS_DASHBOARD
         Me.BTNMASUKOPS.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.BTNMASUKOPS.Image = Global.Aplikasi_Kasir.My.Resources.Resources.transaksi
         Me.BTNMASUKOPS.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNMASUKOPS.Location = New System.Drawing.Point(0, 129)
+        Me.BTNMASUKOPS.Location = New System.Drawing.Point(0, 179)
         Me.BTNMASUKOPS.Name = "BTNMASUKOPS"
         Me.BTNMASUKOPS.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
         Me.BTNMASUKOPS.Size = New System.Drawing.Size(270, 35)
@@ -146,42 +130,16 @@ Partial Class FR_OPS_DASHBOARD
         Me.BTNMASUKOPS.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.BTNMASUKOPS.UseVisualStyleBackColor = True
         '
-        'Label1
+        'Label23
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.Label1.Location = New System.Drawing.Point(7, 34)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(125, 28)
-        Me.Label1.TabIndex = 20
-        Me.Label1.Text = "Menu Utama"
-        '
-        'BTNRETURNOPS
-        '
-        Me.BTNRETURNOPS.FlatAppearance.BorderSize = 0
-        Me.BTNRETURNOPS.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BTNRETURNOPS.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BTNRETURNOPS.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.BTNRETURNOPS.Image = Global.Aplikasi_Kasir.My.Resources.Resources.transaksi
-        Me.BTNRETURNOPS.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNRETURNOPS.Location = New System.Drawing.Point(0, 233)
-        Me.BTNRETURNOPS.Name = "BTNRETURNOPS"
-        Me.BTNRETURNOPS.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
-        Me.BTNRETURNOPS.Size = New System.Drawing.Size(270, 35)
-        Me.BTNRETURNOPS.TabIndex = 53
-        Me.BTNRETURNOPS.Text = "     Barang Return"
-        Me.BTNRETURNOPS.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNRETURNOPS.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.BTNRETURNOPS.UseVisualStyleBackColor = True
-        '
-        'Label11
-        '
-        Me.Label11.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.Label11.Location = New System.Drawing.Point(0, 82)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(5, 25)
-        Me.Label11.TabIndex = 28
+        Me.Label23.AutoSize = True
+        Me.Label23.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label23.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.Label23.Location = New System.Drawing.Point(7, 34)
+        Me.Label23.Name = "Label23"
+        Me.Label23.Size = New System.Drawing.Size(125, 28)
+        Me.Label23.TabIndex = 20
+        Me.Label23.Text = "Menu Utama"
         '
         'BTNKELUAROPS
         '
@@ -191,7 +149,7 @@ Partial Class FR_OPS_DASHBOARD
         Me.BTNKELUAROPS.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.BTNKELUAROPS.Image = Global.Aplikasi_Kasir.My.Resources.Resources.transaksi
         Me.BTNKELUAROPS.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNKELUAROPS.Location = New System.Drawing.Point(0, 181)
+        Me.BTNKELUAROPS.Location = New System.Drawing.Point(0, 230)
         Me.BTNKELUAROPS.Name = "BTNKELUAROPS"
         Me.BTNKELUAROPS.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
         Me.BTNKELUAROPS.Size = New System.Drawing.Size(270, 35)
@@ -209,7 +167,7 @@ Partial Class FR_OPS_DASHBOARD
         Me.BTNLAPORANOPS.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.BTNLAPORANOPS.Image = Global.Aplikasi_Kasir.My.Resources.Resources.laporan
         Me.BTNLAPORANOPS.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNLAPORANOPS.Location = New System.Drawing.Point(0, 337)
+        Me.BTNLAPORANOPS.Location = New System.Drawing.Point(0, 383)
         Me.BTNLAPORANOPS.Name = "BTNLAPORANOPS"
         Me.BTNLAPORANOPS.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
         Me.BTNLAPORANOPS.Size = New System.Drawing.Size(270, 35)
@@ -219,6 +177,50 @@ Partial Class FR_OPS_DASHBOARD
         Me.BTNLAPORANOPS.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.BTNLAPORANOPS.UseVisualStyleBackColor = True
         '
+        'Label24
+        '
+        Me.Label24.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.Label24.Location = New System.Drawing.Point(0, 82)
+        Me.Label24.Name = "Label24"
+        Me.Label24.Size = New System.Drawing.Size(5, 25)
+        Me.Label24.TabIndex = 28
+        '
+        'BTNRETURNOPS
+        '
+        Me.BTNRETURNOPS.FlatAppearance.BorderSize = 0
+        Me.BTNRETURNOPS.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNRETURNOPS.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNRETURNOPS.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BTNRETURNOPS.Image = Global.Aplikasi_Kasir.My.Resources.Resources.transaksi
+        Me.BTNRETURNOPS.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.BTNRETURNOPS.Location = New System.Drawing.Point(0, 281)
+        Me.BTNRETURNOPS.Name = "BTNRETURNOPS"
+        Me.BTNRETURNOPS.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
+        Me.BTNRETURNOPS.Size = New System.Drawing.Size(270, 35)
+        Me.BTNRETURNOPS.TabIndex = 53
+        Me.BTNRETURNOPS.Text = "     Barang Return"
+        Me.BTNRETURNOPS.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.BTNRETURNOPS.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.BTNRETURNOPS.UseVisualStyleBackColor = True
+        '
+        'BTNRUSAKOPS
+        '
+        Me.BTNRUSAKOPS.FlatAppearance.BorderSize = 0
+        Me.BTNRUSAKOPS.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNRUSAKOPS.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNRUSAKOPS.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BTNRUSAKOPS.Image = Global.Aplikasi_Kasir.My.Resources.Resources.transaksi
+        Me.BTNRUSAKOPS.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.BTNRUSAKOPS.Location = New System.Drawing.Point(0, 332)
+        Me.BTNRUSAKOPS.Name = "BTNRUSAKOPS"
+        Me.BTNRUSAKOPS.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
+        Me.BTNRUSAKOPS.Size = New System.Drawing.Size(270, 35)
+        Me.BTNRUSAKOPS.TabIndex = 55
+        Me.BTNRUSAKOPS.Text = "     Barang Rusak"
+        Me.BTNRUSAKOPS.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.BTNRUSAKOPS.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.BTNRUSAKOPS.UseVisualStyleBackColor = True
+        '
         'BTNTENTANGOPS
         '
         Me.BTNTENTANGOPS.FlatAppearance.BorderSize = 0
@@ -227,7 +229,7 @@ Partial Class FR_OPS_DASHBOARD
         Me.BTNTENTANGOPS.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.BTNTENTANGOPS.Image = Global.Aplikasi_Kasir.My.Resources.Resources.tentang
         Me.BTNTENTANGOPS.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNTENTANGOPS.Location = New System.Drawing.Point(0, 389)
+        Me.BTNTENTANGOPS.Location = New System.Drawing.Point(0, 434)
         Me.BTNTENTANGOPS.Name = "BTNTENTANGOPS"
         Me.BTNTENTANGOPS.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
         Me.BTNTENTANGOPS.Size = New System.Drawing.Size(270, 35)
@@ -236,6 +238,24 @@ Partial Class FR_OPS_DASHBOARD
         Me.BTNTENTANGOPS.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.BTNTENTANGOPS.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.BTNTENTANGOPS.UseVisualStyleBackColor = True
+        '
+        'BTNLABELOPS
+        '
+        Me.BTNLABELOPS.FlatAppearance.BorderSize = 0
+        Me.BTNLABELOPS.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNLABELOPS.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNLABELOPS.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BTNLABELOPS.Image = Global.Aplikasi_Kasir.My.Resources.Resources.transaksi
+        Me.BTNLABELOPS.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.BTNLABELOPS.Location = New System.Drawing.Point(0, 128)
+        Me.BTNLABELOPS.Name = "BTNLABELOPS"
+        Me.BTNLABELOPS.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
+        Me.BTNLABELOPS.Size = New System.Drawing.Size(270, 35)
+        Me.BTNLABELOPS.TabIndex = 56
+        Me.BTNLABELOPS.Text = "     Cetak Label"
+        Me.BTNLABELOPS.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.BTNLABELOPS.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.BTNLABELOPS.UseVisualStyleBackColor = True
         '
         'BTNDASHBOARDOPS
         '
@@ -708,14 +728,6 @@ Partial Class FR_OPS_DASHBOARD
     End Sub
 
     Friend WithEvents PNLEFT As Panel
-    Friend WithEvents PNOPS As Panel
-    Friend WithEvents Label1 As Label
-    Friend WithEvents BTNRETURNOPS As Button
-    Friend WithEvents Label11 As Label
-    Friend WithEvents BTNKELUAROPS As Button
-    Friend WithEvents BTNLAPORANOPS As Button
-    Friend WithEvents BTNTENTANGOPS As Button
-    Friend WithEvents BTNDASHBOARDOPS As Button
     Friend WithEvents Label4 As Label
     Friend WithEvents Label3 As Label
     Friend WithEvents LBLUSER As Label
@@ -740,8 +752,6 @@ Partial Class FR_OPS_DASHBOARD
     Friend WithEvents LBMASUK As Label
     Friend WithEvents Button8 As Button
     Friend WithEvents Button9 As Button
-    Friend WithEvents BTNMASUKOPS As Button
-    Friend WithEvents BTNRUSAKOPS As Button
     Friend WithEvents LBKELUARHARI As Label
     Friend WithEvents Button2 As Button
     Friend WithEvents Button3 As Button
@@ -749,4 +759,15 @@ Partial Class FR_OPS_DASHBOARD
     Friend WithEvents Button4 As Button
     Friend WithEvents Button5 As Button
     Friend WithEvents PEWAKTU As Timer
+    Friend WithEvents PNOPS As Panel
+    Friend WithEvents BTNMASUKOPS As Button
+    Friend WithEvents Label23 As Label
+    Friend WithEvents BTNKELUAROPS As Button
+    Friend WithEvents BTNLAPORANOPS As Button
+    Friend WithEvents Label24 As Label
+    Friend WithEvents BTNRETURNOPS As Button
+    Friend WithEvents BTNRUSAKOPS As Button
+    Friend WithEvents BTNTENTANGOPS As Button
+    Friend WithEvents BTNLABELOPS As Button
+    Friend WithEvents BTNDASHBOARDOPS As Button
 End Class

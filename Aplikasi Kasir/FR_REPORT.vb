@@ -466,7 +466,7 @@ Public Class FR_REPORT
         BTNTAMPIL.Visible = True
         BTNTAMPIL.Location = New Point(907, 10)
         BTNCETAK.Location = New Point(1035, 10)
-        BTNCETAK.Location = New Point(1163, 10)
+        BTNEXPORT.Location = New Point(1163, 10)
 
         TXTTGLAWAL.ShowUpDown = True
         TXTTGLAWAL.Format = DateTimePickerFormat.Custom
@@ -487,7 +487,7 @@ Public Class FR_REPORT
         BTNTAMPIL.Visible = True
         BTNTAMPIL.Location = New Point(907, 10)
         BTNCETAK.Location = New Point(1035, 10)
-        BTNCETAK.Location = New Point(1163, 10)
+        BTNEXPORT.Location = New Point(1163, 10)
 
         TXTTGLAWAL.ShowUpDown = False
         TXTTGLAWAL.Format = DateTimePickerFormat.Short
@@ -770,6 +770,7 @@ Public Class FR_REPORT
 
                         BTNTAMPIL.Location = New Point(362, 10)
                         BTNCETAK.Location = New Point(489, 10)
+                        BTNEXPORT.Location = New Point(619, 10)
                     Case 1
                         KONDISI_TANGGAL()
                     Case 2
@@ -786,6 +787,7 @@ Public Class FR_REPORT
 
                         BTNTAMPIL.Location = New Point(362, 10)
                         BTNCETAK.Location = New Point(489, 10)
+                        BTNEXPORT.Location = New Point(619, 10)
                     Case 1
                         KONDISI_TANGGAL()
                 End Select
@@ -805,32 +807,24 @@ Public Class FR_REPORT
         End If
     End Sub
 
-    Private Sub BTNDASHBOARDKASIR_Click(sender As Object, e As EventArgs) Handles BTNDASHBOARDKASIR.Click
-        BUKA_FORM(FR_KASIR_DASHBOARD)
-    End Sub
+    Private Sub BTNEXPORT_Click(sender As Object, e As EventArgs) Handles BTNEXPORT.Click
+        Dim formats As Integer
+        formats = (CrystalDecisions.Shared.ViewerExportFormats.PdfFormat Or CrystalDecisions.Shared.ViewerExportFormats.ExcelFormat)
 
-    Private Sub BTNKELUARKASIR_Click(sender As Object, e As EventArgs) Handles BTNKELUARKASIR.Click
-        BUKA_FORM(FR_KELUAR)
-    End Sub
-
-    Private Sub BTNRETURNKASIR_Click(sender As Object, e As EventArgs) Handles BTNRETURNKASIR.Click
-        BUKA_FORM(FR_RETURN)
-    End Sub
-
-    Private Sub BTNSETTINGKASIR_Click(sender As Object, e As EventArgs) Handles BTNSETTINGKASIR.Click
-        BUKA_FORM(FR_TENTANG)
+        CRV.AllowedExportFormats = formats
+        CRV.ExportReport()
     End Sub
 
     Private Sub BTNDASHBOARD_Click(sender As Object, e As EventArgs) Handles BTNDASHBOARD.Click
         BUKA_FORM(FR_MENU)
     End Sub
 
-    Private Sub BTNKASIR_Click(sender As Object, e As EventArgs) Handles BTNKASIR.Click
-        BUKA_FORM(FR_KASIR)
-    End Sub
-
     Private Sub BTNBARANG_Click(sender As Object, e As EventArgs) Handles BTNBARANG.Click
         BUKA_FORM(FR_PRODUK)
+    End Sub
+
+    Private Sub BTNLABELADMIN_Click(sender As Object, e As EventArgs) Handles BTNLABELADMIN.Click
+        BUKA_FORM(FR_CETAK_LABEL)
     End Sub
 
     Private Sub BTNDISKON_Click(sender As Object, e As EventArgs) Handles BTNDISKON.Click
@@ -845,10 +839,6 @@ Public Class FR_REPORT
         BUKA_FORM(FR_KELUAR)
     End Sub
 
-    Private Sub BTNRETURN_Click(sender As Object, e As EventArgs) Handles BTNRETURN.Click
-        BUKA_FORM(FR_RETURN)
-    End Sub
-
     Private Sub BTNRUSAK_Click(sender As Object, e As EventArgs) Handles BTNRUSAK.Click
         BUKA_FORM(FR_RUSAK)
     End Sub
@@ -857,8 +847,16 @@ Public Class FR_REPORT
         BUKA_FORM(FR_TENTANG)
     End Sub
 
+    Private Sub BTNKASIR_Click(sender As Object, e As EventArgs) Handles BTNKASIR.Click
+        BUKA_FORM(FR_KASIR)
+    End Sub
+
     Private Sub BTNDASHBOARDOPS_Click(sender As Object, e As EventArgs) Handles BTNDASHBOARDOPS.Click
         BUKA_FORM(FR_OPS_DASHBOARD)
+    End Sub
+
+    Private Sub BTNLABELOPS_Click(sender As Object, e As EventArgs) Handles BTNLABELOPS.Click
+        BUKA_FORM(FR_CETAK_LABEL)
     End Sub
 
     Private Sub BTNMASUKOPS_Click(sender As Object, e As EventArgs) Handles BTNMASUKOPS.Click
@@ -881,11 +879,27 @@ Public Class FR_REPORT
         BUKA_FORM(FR_TENTANG)
     End Sub
 
-    Private Sub BTNEXPORT_Click(sender As Object, e As EventArgs) Handles BTNEXPORT.Click
-        Dim formats As Integer
-        formats = (CrystalDecisions.Shared.ViewerExportFormats.PdfFormat Or CrystalDecisions.Shared.ViewerExportFormats.ExcelFormat)
+    Private Sub BTNDASHBOARDKASIR_Click(sender As Object, e As EventArgs) Handles BTNDASHBOARDKASIR.Click
+        BUKA_FORM(FR_KASIR_DASHBOARD)
+    End Sub
 
-        CRV.AllowedExportFormats = formats
-        CRV.ExportReport()
+    Private Sub BTNRETURN_Click(sender As Object, e As EventArgs)
+        BUKA_FORM(FR_RETURN)
+    End Sub
+
+    Private Sub BTNLABELKASIR_Click(sender As Object, e As EventArgs) Handles BTNLABELKASIR.Click
+        BUKA_FORM(FR_CETAK_LABEL)
+    End Sub
+
+    Private Sub BTNKELUARKASIR_Click(sender As Object, e As EventArgs) Handles BTNKELUARKASIR.Click
+        BUKA_FORM(FR_KELUAR)
+    End Sub
+
+    Private Sub BTNRETURNKASIR_Click(sender As Object, e As EventArgs) Handles BTNRETURNKASIR.Click
+        BUKA_FORM(FR_RETURN)
+    End Sub
+
+    Private Sub BTNSETTINGKASIR_Click(sender As Object, e As EventArgs) Handles BTNSETTINGKASIR.Click
+        BUKA_FORM(FR_TENTANG)
     End Sub
 End Class

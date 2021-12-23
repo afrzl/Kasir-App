@@ -31,18 +31,6 @@ Public Class FR_OPS_DASHBOARD
         Me.WindowState = FormWindowState.Minimized
     End Sub
 
-    Private Sub BTNKELUAROPS_Click(sender As Object, e As EventArgs) Handles BTNKELUAROPS.Click
-        BUKA_FORM(FR_KELUAR)
-    End Sub
-
-    Private Sub BTNLAPORANOPS_Click(sender As Object, e As EventArgs) Handles BTNLAPORANOPS.Click
-        BUKA_FORM(FR_REPORT)
-    End Sub
-
-    Private Sub BTNTENTANGOPS_Click(sender As Object, e As EventArgs) Handles BTNTENTANGOPS.Click
-        BUKA_FORM(FR_TENTANG)
-    End Sub
-
     Private Sub BTNLOGOUT_Click(sender As Object, e As EventArgs) Handles BTNLOGOUT.Click
         Dim FR As New FR_LOGIN
         My.Settings.ID_ACCOUNT = 0
@@ -145,15 +133,31 @@ Public Class FR_OPS_DASHBOARD
         LBKELUARHARI.Text = Convert.ToInt16(CMD.ExecuteScalar())
     End Sub
 
-    Private Sub BTNRETURNOPS_Click(sender As Object, e As EventArgs) Handles BTNRETURNOPS.Click
-        BUKA_FORM(FR_RETURN)
+    Private Sub BTNLABELOPS_Click(sender As Object, e As EventArgs) Handles BTNLABELOPS.Click
+        BUKA_FORM(FR_CETAK_LABEL)
     End Sub
 
     Private Sub BTNMASUKOPS_Click(sender As Object, e As EventArgs) Handles BTNMASUKOPS.Click
         BUKA_FORM(FR_MASUK)
     End Sub
 
+    Private Sub BTNKELUAROPS_Click(sender As Object, e As EventArgs) Handles BTNKELUAROPS.Click
+        BUKA_FORM(FR_KELUAR)
+    End Sub
+
+    Private Sub BTNRETURNOPS_Click(sender As Object, e As EventArgs) Handles BTNRETURNOPS.Click
+        BUKA_FORM(FR_RETURN)
+    End Sub
+
     Private Sub BTNRUSAKOPS_Click(sender As Object, e As EventArgs) Handles BTNRUSAKOPS.Click
         BUKA_FORM(FR_RUSAK)
+    End Sub
+
+    Private Sub BTNLAPORANOPS_Click(sender As Object, e As EventArgs) Handles BTNLAPORANOPS.Click
+        BUKA_FORM(FR_REPORT)
+    End Sub
+
+    Private Sub BTNTENTANGOPS_Click(sender As Object, e As EventArgs) Handles BTNTENTANGOPS.Click
+        BUKA_FORM(FR_TENTANG)
     End Sub
 End Class

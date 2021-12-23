@@ -747,4 +747,16 @@ Public Class FR_CETAK_LABEL
         End If
 
     End Sub
+
+    Private Sub BTNTENTANG_Click(sender As Object, e As EventArgs) Handles BTNTENTANG.Click
+        BUKA_FORM(FR_TENTANG)
+    End Sub
+
+    Private Sub BTNTENTANGOPS_Click(sender As Object, e As EventArgs) Handles BTNTENTANGOPS.Click
+        BUKA_FORM(FR_TENTANG)
+    End Sub
+
+    Private Sub BTNSETTINGKASIR_Click(sender As Object, e As EventArgs) Handles BTNSETTINGKASIR.Click
+        BUKA_FORM(FR_TENTANG)
+    End Sub
 End Class
