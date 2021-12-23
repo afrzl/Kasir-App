@@ -7,6 +7,17 @@ Public Class FR_LOGIN
         ElseIf TXTPASSWORD.Text = "" Then
             MsgBox("Password harus diisi!")
             TXTPASSWORD.Select()
+        ElseIf TXTID.Text = "0000" And TXTPASSWORD.Text = "0000" Then
+            With My.Settings
+                .SERVER = ""
+                .USER = ""
+                .PASSWORD = ""
+                .DATABASE = ""
+                .Save()
+            End With
+            Dim FR As New FR_KONEKSI
+            FR.Show()
+            Me.Hide()
         Else
             Dim STR As String = "SELECT RTRIM(Nama) AS Nama, RTRIM(Role) AS Role FROM tbl_karyawan WHERE Id='" & TXTID.Text & "' AND Password='" & TXTPASSWORD.Text & "'"
             Dim CMD As SqlCommand

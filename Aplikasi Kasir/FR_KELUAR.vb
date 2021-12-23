@@ -110,7 +110,7 @@ Public Class FR_KELUAR
             DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Barang").Value = TXTBARANG.Text
             DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Satuan").Value = TXTSATUAN.Text
             DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Harga").Value = TXTHARGA.Text
-            DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Diskon").Value = CInt(TXTDISKON.Text) / 100 * DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Harga").Value * DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Qty").Value
+            DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Diskon").Value = CInt(TXTDISKON.Text) / 100 * DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Harga").Value
             DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Qty").Value = TXTQTY.Text
             DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Total").Value = TXTHARGA.Text - DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Diskon").Value
         End If
@@ -561,6 +561,7 @@ Public Class FR_KELUAR
             RD.Close()
             STR = "SELECT COALESCE(SUM(Diskon),0) AS 'Diskon' FROM tbl_diskon" &
                 " WHERE Kode='" & TXTKODE.Text & "'" &
+                " AND Jenis = 'B'" &
                 " AND Tgl_awal <= '" & TGL_SKRG & "'" &
                 " And Tgl_akhir >= '" & TGL_SKRG & "'"
             CMD = New SqlCommand(STR, CONN)

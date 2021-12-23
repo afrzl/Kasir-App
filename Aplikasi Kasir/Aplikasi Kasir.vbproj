@@ -171,6 +171,12 @@
     <Compile Include="DATA_LAPORAN.vb">
       <DependentUpon>DATA_LAPORAN.xsd</DependentUpon>
     </Compile>
+    <Compile Include="FR_CETAK_LABEL.Designer.vb">
+      <DependentUpon>FR_CETAK_LABEL.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FR_CETAK_LABEL.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FR_OPS_DASHBOARD.Designer.vb">
       <DependentUpon>FR_OPS_DASHBOARD.vb</DependentUpon>
     </Compile>
@@ -274,6 +280,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
     </Compile>
+    <Compile Include="My Project\FR_CETAK_LABEL.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -283,6 +292,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="RPT_CETAKLABEL.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RPT_CETAKLABEL.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="RPT_GRAFIK_LABA_BULANAN.vb">
       <AutoGen>True</AutoGen>
@@ -296,6 +311,12 @@
       <DependentUpon>RPT_GRAFIK_LABA_HARIAN.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="RPT_GRAFIK_PENJUALAN_BARANG_HARIAN.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RPT_GRAFIK_PENJUALAN_BARANG_HARIAN.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="RPT_GRAFIK_PENJUALAN_BULANAN.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -303,10 +324,10 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="RPT_GRAFIK_PENJUALAN_HARIAN.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
       <DependentUpon>RPT_GRAFIK_PENJUALAN_HARIAN.rpt</DependentUpon>
       <SubType>Component</SubType>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="RPT_KELUAR.vb">
       <DependentUpon>RPT_KELUAR.rpt</DependentUpon>
@@ -332,6 +353,18 @@
       <DependentUpon>RPT_MASUK_OPS.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="RPT_PENJUALAN_BARANG.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RPT_PENJUALAN_BARANG.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="RPT_PENJUALAN_HARIAN.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RPT_PENJUALAN_HARIAN.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="RPT_STOK.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -340,6 +373,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="FR_CETAK_LABEL.resx">
+      <DependentUpon>FR_CETAK_LABEL.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FR_DISKON.resx">
       <DependentUpon>FR_DISKON.vb</DependentUpon>
     </EmbeddedResource>
@@ -395,6 +431,10 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="RPT_CETAKLABEL.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RPT_CETAKLABEL.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="RPT_GRAFIK_LABA_BULANAN.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RPT_GRAFIK_LABA_BULANAN.vb</LastGenOutput>
@@ -402,6 +442,10 @@
     <EmbeddedResource Include="RPT_GRAFIK_LABA_HARIAN.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RPT_GRAFIK_LABA_HARIAN.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RPT_GRAFIK_PENJUALAN_BARANG_HARIAN.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RPT_GRAFIK_PENJUALAN_BARANG_HARIAN.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="RPT_GRAFIK_PENJUALAN_BULANAN.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -426,6 +470,14 @@
     <EmbeddedResource Include="RPT_MASUK_OPS.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RPT_MASUK_OPS.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RPT_PENJUALAN_BARANG.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RPT_PENJUALAN_BARANG.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RPT_PENJUALAN_HARIAN.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RPT_PENJUALAN_HARIAN.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="RPT_STOK.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
