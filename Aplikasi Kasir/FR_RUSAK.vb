@@ -23,17 +23,55 @@ Public Class FR_RUSAK
 
         TXTID.Select()
         TAMPIL()
+        TAMPIL_EXPIRED()
     End Sub
 
     Private Sub PEWAKTU_Tick(sender As Object, e As EventArgs) Handles PEWAKTU.Tick
         LBTGL.Text = Format(Date.Now, "dd MMMM yyyy HH:mm:ss")
     End Sub
 
+    Sub TAMPIL_EXPIRED()
+        Dim TANGGAL_HARI_INI As String = Format(Date.Now, "yyyy-MM-dd")
+
+        Dim STR As String = "SELECT tbl_transaksi_child.Id," &
+            " RTRIM(tbl_transaksi_child.Id_trans) As 'ID Transaksi'," &
+            " RTRIM(tbl_transaksi_child.Kode) AS 'Kode Barang'," &
+            " RTRIM((SELECT Barang FROM tbl_barang WHERE RTRIM(tbl_barang.Kode) = RTRIM(tbl_transaksi_child.Kode))) AS 'Nama Barang'," &
+            " tbl_transaksi_parent.Tgl AS 'Tanggal Masuk'," &
+            " RTRIM(tbl_transaksi_parent.Person) AS 'Supplier'," &
+            " tbl_transaksi_child.Jumlah AS 'QTY'," &
+            " tbl_transaksi_child.Tgl_exp AS 'Tanggal Expired'" &
+            " FROM tbl_transaksi_child " &
+            " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_parent.Id_trans = tbl_transaksi_child.Id_trans" &
+            " WHERE LEFT(tbl_transaksi_child.Id_trans, 1) = 'M' AND" &
+            " tbl_transaksi_child.Stok != 0 AND" &
+            " tbl_transaksi_child.Tgl_exp <= DATEADD(day,+7, GETDATE())"
+
+        Dim DA As SqlDataAdapter
+        DA = New SqlDataAdapter(STR, CONN)
+        Dim TBL As New DataTable
+        DA.Fill(TBL)
+        DGEXPIRED.DataSource = TBL
+
+        DGEXPIRED.Columns(0).Visible = False
+        DGEXPIRED.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+        DGEXPIRED.Columns(2).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+        DGEXPIRED.Columns(3).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+        DGEXPIRED.Columns(4).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+        DGEXPIRED.Columns(5).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+        DGEXPIRED.Columns(6).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+        DGEXPIRED.Columns(7).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+
+        DGEXPIRED.Columns(6).DefaultCellStyle.Format = "###.##"
+        DGEXPIRED.Columns(6).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+    End Sub
+
     Sub TAMPIL()
         Dim STR As String
         Select Case ROLE
             Case 1
-                STR = "SELECT RTRIM(tbl_transaksi_child.Id_trans) as 'ID Transaksi'," &
+                STR = "SELECT Id_awal, " &
+                    " RTRIM(tbl_transaksi_child.Id_trans) As 'ID Transaksi'," &
             " RTRIM(tbl_transaksi_child.Kode) AS 'Kode Barang'," &
             " RTRIM((SELECT Barang FROM tbl_barang WHERE RTRIM(tbl_barang.Kode) = RTRIM(tbl_transaksi_child.Kode))) AS 'Nama Barang'," &
             " RTRIM((SELECT Nama FROM tbl_karyawan WHERE RTRIM(tbl_karyawan.Id) = RTRIM(tbl_transaksi_parent.Id_kasir))) AS 'Kasir'," &
@@ -46,7 +84,8 @@ Public Class FR_RUSAK
             " WHERE LEFT(tbl_transaksi_child.Id_trans, 1) = 'C' AND" &
             " tbl_transaksi_child.Id_trans LIKE '%" & TXTCARI.Text & "%'"
             Case 2
-                STR = "SELECT RTRIM(tbl_transaksi_child.Id_trans) as 'ID Transaksi'," &
+                STR = "SELECT Id_awal, " &
+                    " RTRIM(tbl_transaksi_child.Id_trans) as 'ID Transaksi'," &
             " RTRIM(tbl_transaksi_child.Kode) AS 'Kode Barang'," &
             " RTRIM((SELECT Barang FROM tbl_barang WHERE RTRIM(tbl_barang.Kode) = RTRIM(tbl_transaksi_child.Kode))) AS 'Nama Barang'," &
             " RTRIM((SELECT Nama FROM tbl_karyawan WHERE RTRIM(tbl_karyawan.Id) = RTRIM(tbl_transaksi_parent.Id_kasir))) AS 'Kasir'," &
@@ -67,19 +106,20 @@ Public Class FR_RUSAK
         DA.Fill(TBL)
         DGTAMPIL.DataSource = TBL
 
-        DGTAMPIL.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+        DGTAMPIL.Columns(0).Visible = False
         DGTAMPIL.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-        DGTAMPIL.Columns(2).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+        DGTAMPIL.Columns(2).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
         DGTAMPIL.Columns(3).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
         DGTAMPIL.Columns(4).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
         DGTAMPIL.Columns(5).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-        DGTAMPIL.Columns(6).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-        DGTAMPIL.Columns(7).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+        DGTAMPIL.Columns(6).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+        DGTAMPIL.Columns(7).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+        DGTAMPIL.Columns(8).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
 
-        DGTAMPIL.Columns(6).DefaultCellStyle.Format = "Rp ###,##"
-        DGTAMPIL.Columns(7).DefaultCellStyle.Format = "###.##"
-        DGTAMPIL.Columns(6).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        DGTAMPIL.Columns(7).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DGTAMPIL.Columns(7).DefaultCellStyle.Format = "Rp ###,##"
+        DGTAMPIL.Columns(8).DefaultCellStyle.Format = "###.##"
+        DGTAMPIL.Columns(7).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DGTAMPIL.Columns(8).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
     End Sub
 
     Sub TAMPIL_PNCARI()
@@ -103,6 +143,7 @@ Public Class FR_RUSAK
             " Tgl AS 'Tanggal Transaksi'" &
             " FROM tbl_transaksi_parent WHERE LEFT(Id_trans, 1) = 'M'" &
             " AND Id_trans Like '%" & TXTCARI_TRANS.Text & "%'" &
+            " AND (SELECT COALESCE(SUM(Stok), 0) FROM tbl_transaksi_child WHERE tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans) > 0" &
             " ORDER BY Tgl DESC"
         Dim DA As SqlDataAdapter
         DA = New SqlDataAdapter(STR, CONN)
@@ -127,10 +168,11 @@ Public Class FR_RUSAK
     End Sub
 
     Sub DATA_TRANSAKSI()
-        Dim STR As String = "SELECT RTRIM(Kode) AS Kode," &
+        Dim STR As String = "SELECT Id, RTRIM(Kode) AS Kode," &
            " (SELECT RTRIM(Barang) FROM tbl_barang WHERE RTRIM(Kode) = RTRIM(tbl_transaksi_child.Kode)) AS Barang" &
            " FROM tbl_transaksi_child" &
-           " WHERE Id_trans = '" & TXTID.Text & "'"
+           " WHERE Id_trans = '" & TXTID.Text & "'" &
+           " AND (SELECT COALESCE(SUM(Stok), 0) FROM tbl_transaksi_child WHERE tbl_transaksi_child.Id_trans = tbl_transaksi_child.Id_trans) > 0"
         Dim DA As SqlDataAdapter
         Dim TBL As New DataTable
         DA = New SqlDataAdapter(STR, CONN)
@@ -143,7 +185,7 @@ Public Class FR_RUSAK
         Else
             CBKODE.DataSource = TBL
             CBKODE.DisplayMember = "Barang"
-            CBKODE.ValueMember = "Kode"
+            CBKODE.ValueMember = "Id"
             CBKODE.Select()
         End If
     End Sub
@@ -219,9 +261,10 @@ Public Class FR_RUSAK
             CMD = New SqlCommand(STR, CONN)
             CMD.ExecuteNonQuery()
 
-            STR = "INSERT INTO tbl_transaksi_child (Id_trans, Kode, Jumlah, Harga_beli, Harga, Harga_akhir) VALUES" &
+            STR = "INSERT INTO tbl_transaksi_child (Id_trans, Id_awal, Kode, Jumlah, Harga_beli, Harga, Harga_akhir) VALUES" &
                         " ('" & ID_TRANS & "'," &
                         " '" & CBKODE.SelectedValue & "'," &
+                        " '" & KODEBARANG & "'," &
                         " " & TXTQTY.Text.Replace(",", ".") & "," &
                         " '" & CInt(TXTHARGA.Text) * QTY & "'," &
                         " 0," &
@@ -231,7 +274,8 @@ Public Class FR_RUSAK
 
             TXTSTOKAKHIR.Text = Convert.ToDouble(TXTSTOK.Text) - QTY
 
-            STR = "UPDATE tbl_transaksi_child SET Stok=" & TXTSTOKAKHIR.Text.Replace(",", ".") & " WHERE Id_trans='" & TXTID.Text & "'"
+            STR = "UPDATE tbl_transaksi_child SET Stok=" & TXTSTOKAKHIR.Text.Replace(",", ".") & " WHERE Id_trans='" & TXTID.Text & "'" &
+                " AND Id = '" & CBKODE.SelectedValue & "'"
             CMD = New SqlCommand(STR, CONN)
             CMD.ExecuteNonQuery()
 
@@ -242,6 +286,7 @@ Public Class FR_RUSAK
             TXTSTOK.Text = 0
             CBKODE.SelectedIndex = -1
             TAMPIL()
+            TAMPIL_EXPIRED()
             TXTID.Select()
         End If
     End Sub
@@ -285,9 +330,12 @@ Public Class FR_RUSAK
     Private Sub HapusToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HapusToolStripMenuItem.Click
         If MsgBox("Apakah anda yakin akan menghapus data transaksi?", vbYesNo) = vbYes Then
 
-            Dim IDTRANS As String = DGTAMPIL.Item(0, DGTAMPIL.CurrentRow.Index).Value
-            Dim KODE_BARANG As String = DGTAMPIL.Item(1, DGTAMPIL.CurrentRow.Index).Value.ToString.Trim
-            Dim NAMA_BARANG As String = DGTAMPIL.Item(2, DGTAMPIL.CurrentRow.Index).Value.ToString.Trim
+            DGTAMPIL.Columns(0).Visible = True
+            Dim IDTRANS As String = DGTAMPIL.Item(1, DGTAMPIL.CurrentRow.Index).Value
+            Dim KODE_BARANG As String = DGTAMPIL.Item(2, DGTAMPIL.CurrentRow.Index).Value.ToString.Trim
+            Dim NAMA_BARANG As String = DGTAMPIL.Item(3, DGTAMPIL.CurrentRow.Index).Value.ToString.Trim
+            Dim ID_AWAL As Integer = DGTAMPIL.Item(0, DGTAMPIL.CurrentRow.Index).Value
+            DGTAMPIL.Columns(0).Visible = False
 
             Dim CMD As New SqlCommand("DELETE FROM tbl_transaksi_parent WHERE Id_trans='" & IDTRANS & "'", CONN)
             CMD.ExecuteNonQuery()
@@ -300,8 +348,7 @@ Public Class FR_RUSAK
 
             Dim STR As String = "SELECT Stok AS Stok, " &
                 " (SELECT Barang FROM tbl_barang WHERE RTRIM(tbl_barang.Kode) = RTRIM(tbl_transaksi_child.Kode)) AS Nama" &
-                " FROM tbl_transaksi_child WHERE RTRIM(Id_trans)='" & ID_MASUK & "'" &
-                " AND RTRIM(Kode) = '" & KODE_BARANG & "'"
+                " FROM tbl_transaksi_child WHERE Id='" & ID_AWAL & "'"
             CMD = New SqlCommand(STR, CONN)
             Dim RD As SqlDataReader
             RD = CMD.ExecuteReader
@@ -316,14 +363,14 @@ Public Class FR_RUSAK
             End If
             RD.Close()
 
-            TXTSTOKAKHIR.Text = STOK_AWAL + DGTAMPIL.Item(7, DGTAMPIL.CurrentRow.Index).Value
+            TXTSTOKAKHIR.Text = STOK_AWAL + DGTAMPIL.Item(8, DGTAMPIL.CurrentRow.Index).Value
 
-            STR = "UPDATE tbl_transaksi_child SET Stok=" & TXTSTOKAKHIR.Text.Replace(",", ".") & " WHERE Id_trans='" & ID_MASUK & "'" &
-                " AND RTRIM(Kode) = '" & KODE_BARANG & "'"
+            STR = "UPDATE tbl_transaksi_child SET Stok=" & TXTSTOKAKHIR.Text.Replace(",", ".") & " WHERE Id='" & ID_AWAL & "'"
             CMD = New SqlCommand(STR, CONN)
             CMD.ExecuteNonQuery()
 
             TAMPIL()
+            TAMPIL_EXPIRED()
             MsgBox("Data barang rusak berhasil dihapus, dan stok barang " & NAMA_BARANG & " ditambah.")
         End If
     End Sub
@@ -344,16 +391,32 @@ Public Class FR_RUSAK
 
     Sub CARI_HARGA()
         Dim STR As String
+
+        STR = "SELECT RTRIM(Kode) AS Kode " &
+                " FROM tbl_transaksi_child" &
+                " WHERE Id = '" & CBKODE.SelectedValue & "'"
+        Dim CMD As SqlCommand
+        CMD = New SqlCommand(STR, CONN)
+        Dim RD As SqlDataReader
+        RD = CMD.ExecuteReader
+        If RD.HasRows Then
+            RD.Read()
+            KODEBARANG = RD.Item("Kode")
+            RD.Close()
+        Else
+            RD.Close()
+        End If
+        RD.Close()
+
         STR = "SELECT Harga AS 'Harga'," _
                             & "(COALESCE(Stok, 0)) AS 'Stok'" _
                             & " FROM tbl_transaksi_child WHERE Id_trans='" _
                             & TXTID.Text _
                             & "'" _
                             & " AND Kode = '" _
-                            & CBKODE.SelectedValue _
+                            & KODEBARANG _
                             & "'"
-        Dim CMD As New SqlCommand(STR, CONN)
-        Dim RD As SqlDataReader
+        CMD = New SqlCommand(STR, CONN)
         RD = CMD.ExecuteReader
         If RD.HasRows Then
             RD.Read()
@@ -370,16 +433,10 @@ Public Class FR_RUSAK
         RD.Close()
     End Sub
 
-    Private Sub TXTID_Leave(sender As Object, e As EventArgs) Handles TXTID.Leave
-        If TXTID.Text <> "" Then
-            DATA_TRANSAKSI()
-            CBKODE.SelectedIndex = 0
-            CARI_HARGA()
-        End If
-    End Sub
-
+    Dim KODEBARANG As String
     Private Sub CBKODE_TextChanged(sender As Object, e As EventArgs) Handles CBKODE.TextChanged
         On Error Resume Next
+
         CARI_HARGA()
     End Sub
 
@@ -455,5 +512,24 @@ Public Class FR_RUSAK
 
     Private Sub BTNTENTANGOPS_Click(sender As Object, e As EventArgs) Handles BTNTENTANGOPS.Click
         BUKA_FORM(FR_TENTANG)
+    End Sub
+
+    Private Sub DGEXPIRED_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGEXPIRED.CellClick
+        On Error Resume Next
+        TXTID.Text = DGEXPIRED.Item(1, e.RowIndex).Value
+
+        DGEXPIRED.Columns(0).Visible = True
+        CBKODE.SelectedValue = DGEXPIRED.Item(0, e.RowIndex).Value
+        DGEXPIRED.Columns(0).Visible = False
+        TXTQTY.Text = Format(DGEXPIRED.Item(6, e.RowIndex).Value, "###.##")
+        CARI_HARGA()
+    End Sub
+
+    Private Sub TXTID_TextChanged(sender As Object, e As EventArgs) Handles TXTID.TextChanged
+        If TXTID.Text <> "" Then
+            DATA_TRANSAKSI()
+            CBKODE.SelectedIndex = 0
+            CARI_HARGA()
+        End If
     End Sub
 End Class

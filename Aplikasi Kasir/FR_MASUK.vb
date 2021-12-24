@@ -50,6 +50,7 @@ Public Class FR_MASUK
         LBTGL.Text = Format(Date.Now, "dd MMMM yyyy HH:mm:ss")
         PEWAKTU.Enabled = True
         LBLUSER.Text = NAMA_LOGIN
+        CBJENISEXP.SelectedIndex = 0
 
         TXTSUPPLIER.Select()
     End Sub
@@ -357,31 +358,31 @@ Public Class FR_MASUK
         DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("HARGA").Value = TXTHARGAPARTAI.Text
         DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("QTY").Value = TXTJUMLAH.Text
         DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("TOTAL").Value = TXTHARGAPARTAI.Text * TXTJUMLAH.Text
+        If CBJENISEXP.SelectedIndex = 1 Then
+            DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("EXPIRED").Value = Format(DTEXP.Value, "dd-MM-yyyy")
+        Else
+            DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("EXPIRED").Value = "-"
+        End If
 
         TOTAL_HARGA()
     End Sub
 
     Private Sub TXTHARGAPARTAI_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTHARGAPARTAI.KeyPress
         If e.KeyChar = Chr(13) Then
-            If TXTKODE.Text = "" Or TXTBARANG.Text = "" Or TXTJUMLAH.Text = "" Or TXTHARGAPARTAI.Text = "" Then
-                MsgBox("Data tidak lengkap!")
-                TXTKODE.Select()
-            ElseIf CInt(TXTJUMLAH.Text) <= 0 Then
-                MsgBox("Jumlah barang harus lebih dari 0!")
-            Else
+            If TXTHARGAPARTAI.Text <> "" Then
                 Dim HARGAPARTAI As Integer
-                Int32.TryParse(TXTHARGAPARTAI.Text, HARGAPARTAI)
-                If HARGAPARTAI < CInt(TXTHARGATERENDAH.Text) Then
-                    MASUK_DATA()
-                    TXTKODE.Text = ""
-                    TXTJUMLAH.Text = ""
-                    TXTHARGAPARTAI.Text = ""
-                    TXTKODE.Select()
-                Else
-                    MsgBox("Harga partai harus lebih rendah dari harga jual produk, silahkan ubah harga jual!")
-                    TXTHARGAPARTAI.Clear()
-                    TXTHARGAPARTAI.Select()
+                If TXTHARGAPARTAI.Text <> "" Then
+                    Int32.TryParse(TXTHARGAPARTAI.Text, HARGAPARTAI)
+                    If HARGAPARTAI > CInt(TXTHARGATERENDAH.Text) Then
+                        MsgBox("Harga partai harus lebih rendah dari harga jual produk, silahkan ubah harga jual!")
+                        TXTHARGAPARTAI.Clear()
+                        TXTHARGAPARTAI.Select()
+                    Else
+                        CBJENISEXP.Select()
+                    End If
                 End If
+            Else
+                CBJENISEXP.Select()
             End If
         End If
 
@@ -492,17 +493,19 @@ Public Class FR_MASUK
 
     Private Sub DGTAMPIL_CellMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles DGTAMPIL.CellMouseClick
         On Error Resume Next
-        TXTKODE.Enabled = False
-        TXTJUMLAH.Enabled = False
-        TXTHARGAPARTAI.Enabled = False
+        If DGTAMPIL.Rows.Count > 0 Then
+            TXTKODE.Enabled = False
+            TXTJUMLAH.Enabled = False
+            TXTHARGAPARTAI.Enabled = False
 
-        TXTKODE.Text = DGTAMPIL.Rows(e.RowIndex).Cells("Kode").Value
-        TXTHARGAPARTAI.Text = DGTAMPIL.Rows(e.RowIndex).Cells("Harga").Value
-        TXTJUMLAH.Text = DGTAMPIL.Rows(e.RowIndex).Cells("QTY").Value
+            TXTKODE.Text = DGTAMPIL.Rows(e.RowIndex).Cells("Kode").Value
+            TXTHARGAPARTAI.Text = DGTAMPIL.Rows(e.RowIndex).Cells("Harga").Value
+            TXTJUMLAH.Text = DGTAMPIL.Rows(e.RowIndex).Cells("QTY").Value
 
-        BTNCANCEL.Visible = True
-        BTNCARI.Visible = False
-        BTNHAPUS.Visible = True
+            BTNCANCEL.Visible = True
+            BTNCARI.Visible = False
+            BTNHAPUS.Visible = True
+        End If
     End Sub
 
     Private Sub BTNCANCEL_Click(sender As Object, e As EventArgs) Handles BTNCANCEL.Click
@@ -575,13 +578,23 @@ Public Class FR_MASUK
             Dim KODE_PRODUK As String = EROW.Cells("Kode").Value
             Dim JUMLAH_PRODUK As Double = EROW.Cells("QTY").Value.ToString.Replace(",", ".")
             Dim HARGA_PRODUK As Integer = EROW.Cells("Harga").Value
-
-            STR = "INSERT INTO tbl_transaksi_child (Id_trans, Kode, Jumlah, Harga, Stok) VALUES" &
+            If EROW.Cells("EXPIRED").Value = "-" Then
+                STR = "INSERT INTO tbl_transaksi_child (Id_trans, Kode, Jumlah, Harga, Stok) VALUES" &
                     " ('" & ID_TRANSAKSI & "'," &
                     " '" & KODE_PRODUK & "'," &
                     " " & JUMLAH_PRODUK & "," &
                     " '" & HARGA_PRODUK & "'," &
                     " '" & JUMLAH_PRODUK & "')"
+            Else
+                Dim TGL_EXP As String = Format(Convert.ToDateTime(EROW.Cells("EXPIRED").Value), "yyyy-MM-dd")
+                STR = "INSERT INTO tbl_transaksi_child (Id_trans, Kode, Jumlah, Harga, Stok, Tgl_exp) VALUES" &
+                        " ('" & ID_TRANSAKSI & "'," &
+                        " '" & KODE_PRODUK & "'," &
+                        " " & JUMLAH_PRODUK & "," &
+                        " '" & HARGA_PRODUK & "'," &
+                        " '" & JUMLAH_PRODUK & "'," &
+                        " '" & TGL_EXP & "')"
+            End If
             CMD = New SqlCommand(STR, CONN)
             CMD.ExecuteNonQuery()
         Next
@@ -803,5 +816,111 @@ Public Class FR_MASUK
 
     Private Sub BTNDASHBOARDOPS_Click(sender As Object, e As EventArgs) Handles BTNDASHBOARDOPS.Click
         BUKA_FORM(FR_OPS_DASHBOARD)
+    End Sub
+
+    Private Sub CBJENISEXP_KeyPress(sender As Object, e As KeyPressEventArgs) Handles CBJENISEXP.KeyPress
+        If e.KeyChar = Chr(13) Then
+            If CBJENISEXP.SelectedIndex = 0 Then
+                If TXTKODE.Text = "" Or TXTBARANG.Text = "" Or TXTJUMLAH.Text = "" Or TXTHARGAPARTAI.Text = "" Or CBJENISEXP.Text = "" Then
+                    MsgBox("Data tidak lengkap!")
+                    TXTKODE.Select()
+                Else
+                    MASUK_DATA()
+                    TXTKODE.Text = ""
+                    TXTJUMLAH.Text = ""
+                    TXTHARGAPARTAI.Text = ""
+                    CBJENISEXP.SelectedIndex = 0
+                    DTEXP.Value = Date.Now
+                    TXTKODE.Select()
+                End If
+            ElseIf CBJENISEXP.SelectedIndex = 1 Then
+                Label14.Visible = True
+                DTEXP.Visible = True
+                DTEXP.Select()
+            End If
+        End If
+    End Sub
+
+    Private Sub CBJENISEXP_TextChanged(sender As Object, e As EventArgs) Handles CBJENISEXP.TextChanged
+        If CBJENISEXP.SelectedIndex = 0 Then
+            Label14.Visible = False
+            DTEXP.Visible = False
+        ElseIf CBJENISEXP.SelectedIndex = 1 Then
+            Label14.Visible = True
+            DTEXP.Visible = True
+        End If
+    End Sub
+
+    Private Sub TXTHARGAPARTAI_Leave(sender As Object, e As EventArgs) Handles TXTHARGAPARTAI.Leave
+        Dim HARGAPARTAI As Integer
+        If TXTHARGAPARTAI.Text <> "" Then
+            Int32.TryParse(TXTHARGAPARTAI.Text, HARGAPARTAI)
+            If HARGAPARTAI > CInt(TXTHARGATERENDAH.Text) Then
+                MsgBox("Harga partai harus lebih rendah dari harga jual produk, silahkan ubah harga jual!")
+                TXTHARGAPARTAI.Clear()
+                TXTHARGAPARTAI.Select()
+            End If
+        End If
+    End Sub
+
+    Private Sub CBJENISEXP_Leave(sender As Object, e As EventArgs) Handles CBJENISEXP.Leave
+        If CBJENISEXP.SelectedIndex = 0 Then
+            Label14.Visible = False
+            DTEXP.Visible = False
+        ElseIf CBJENISEXP.SelectedIndex = 1 Then
+            Label14.Visible = True
+            DTEXP.Visible = True
+        End If
+    End Sub
+
+    Private Sub DTEXP_KeyPress(sender As Object, e As KeyPressEventArgs) Handles DTEXP.KeyPress
+        If e.KeyChar = Chr(13) Then
+            If TXTKODE.Text = "" Or TXTBARANG.Text = "" Or TXTJUMLAH.Text = "" Or TXTHARGAPARTAI.Text = "" Or CBJENISEXP.Text = "" Then
+                MsgBox("Data tidak lengkap!")
+                TXTKODE.Select()
+            ElseIf DTEXP.Value <= Date.Now Then
+                MsgBox("Barang masuk tidak boleh expired")
+            Else
+                MASUK_DATA()
+                TXTKODE.Text = ""
+                TXTJUMLAH.Text = ""
+                TXTHARGAPARTAI.Text = ""
+                CBJENISEXP.SelectedIndex = 0
+                DTEXP.Value = Date.Now
+                TXTKODE.Select()
+            End If
+        End If
+    End Sub
+
+    Private Sub TXTJUMLAH_Leave(sender As Object, e As EventArgs) Handles TXTJUMLAH.Leave
+        Dim QTY As Integer
+        Int32.TryParse(TXTJUMLAH.Text, QTY)
+        If TXTJUMLAH.Text <> "" And QTY = 0 Then
+            MsgBox("QTY harus lebih dari 0")
+            TXTJUMLAH.Clear()
+            TXTJUMLAH.Select()
+        End If
+    End Sub
+
+    Private Sub DTEXP_Leave(sender As Object, e As EventArgs) Handles DTEXP.Leave
+        If DTEXP.Value <= Date.Now Then
+            MsgBox("Barang masuk tidak boleh expired")
+            DTEXP.Select()
+        End If
+    End Sub
+
+    Private Sub BTNINPUT_Click(sender As Object, e As EventArgs) Handles BTNINPUT.Click
+        If TXTKODE.Text = "" Or TXTBARANG.Text = "" Or TXTJUMLAH.Text = "" Or TXTHARGAPARTAI.Text = "" Or CBJENISEXP.Text = "" Then
+            MsgBox("Data tidak lengkap!")
+            TXTKODE.Select()
+        Else
+            MASUK_DATA()
+            TXTKODE.Text = ""
+            TXTJUMLAH.Text = ""
+            TXTHARGAPARTAI.Text = ""
+            CBJENISEXP.SelectedIndex = 0
+            DTEXP.Value = Date.Now
+            TXTKODE.Select()
+        End If
     End Sub
 End Class

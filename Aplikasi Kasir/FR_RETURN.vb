@@ -146,6 +146,7 @@ Public Class FR_RETURN
         STR = "SELECT RTRIM(Id_trans) AS 'ID Transaksi'," &
                       " Tgl AS 'Tanggal Transaksi'" &
                       " FROM tbl_transaksi_parent WHERE LEFT(Id_trans, 1) = 'K'" &
+                      " AND Tgl >= DATEADD(day,-7, GETDATE())" &
                       " AND Id_trans Like '%" & TXTCARI_TRANS.Text & "%'" &
                       " ORDER BY Id DESC"
 
@@ -187,7 +188,8 @@ Public Class FR_RETURN
                             & "'" _
                             & " AND Kode = '" _
                             & CBKODE.SelectedValue _
-                            & "'"
+                            & "'" _
+                            & " AND (SELECT Tgl FROM tbl_transaksi_parent WHERE tbl_transaksi_parent.Id_trans = tbl_transaksi_child.Id_trans) >= DATEADD(day,-7, GETDATE())"
         Dim CMD As New SqlCommand(STR, CONN)
         Dim RD As SqlDataReader
         RD = CMD.ExecuteReader

@@ -10,12 +10,34 @@ Public Class FR_OPS_DASHBOARD
     End Sub
 
     Private Sub FR_MENU_Load(sender As Object, e As EventArgs) Handles Me.Load
+        If CEK_EXPIRED() = True Then
+            MsgBox("Terdapat barang yang akan expired. Silahkan cek di menu barang rusak!")
+        End If
+
         LBTGL.Text = Format(Date.Now, "dd MMMM yyyy HH:mm:ss")
         PEWAKTU.Enabled = True
 
         LBLUSER.Text = NAMA_LOGIN
         TAMPIL()
     End Sub
+
+    Private Function CEK_EXPIRED() As Boolean
+        Dim STR As String = "SELECT * FROM tbl_transaksi_child WHERE LEFT(Id_trans, 1) = 'M'" &
+            " AND Tgl_exp <= DATEADD(day,+7, GETDATE())" &
+            " AND Stok != 0"
+        Dim CMD As SqlCommand
+        CMD = New SqlCommand(STR, CONN)
+        Dim RD As SqlDataReader
+        RD = CMD.ExecuteReader
+        If RD.HasRows Then
+            RD.Close()
+            CEK_EXPIRED = True
+        Else
+            RD.Close()
+            CEK_EXPIRED = False
+        End If
+        RD.Close()
+    End Function
 
     Private Sub PEWAKTU_Tick(sender As Object, e As EventArgs) Handles PEWAKTU.Tick
         LBTGL.Text = Format(Date.Now, "dd MMMM yyyy HH:mm:ss")
