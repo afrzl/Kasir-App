@@ -2103,6 +2103,8 @@ Partial Public Class DATA_LAPORAN
         
         Private columnHarga_Jual As Global.System.Data.DataColumn
         
+        Private columnDiskon As Global.System.Data.DataColumn
+        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub New()
@@ -2195,6 +2197,14 @@ Partial Public Class DATA_LAPORAN
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property DiskonColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnDiskon
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -2231,9 +2241,9 @@ Partial Public Class DATA_LAPORAN
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Overloads Function AddTBL_PENJUALANRow(ByVal ID_Transaksi As String, ByVal Kode_Barang As String, ByVal Nama_Barang As String, ByVal Tanggal As Date, ByVal Jumlah_Item As Decimal, ByVal Harga_Beli As Integer, ByVal Harga_Jual As Integer) As TBL_PENJUALANRow
+        Public Overloads Function AddTBL_PENJUALANRow(ByVal ID_Transaksi As String, ByVal Kode_Barang As String, ByVal Nama_Barang As String, ByVal Tanggal As Date, ByVal Jumlah_Item As Decimal, ByVal Harga_Beli As Integer, ByVal Harga_Jual As Integer, ByVal Diskon As Integer) As TBL_PENJUALANRow
             Dim rowTBL_PENJUALANRow As TBL_PENJUALANRow = CType(Me.NewRow,TBL_PENJUALANRow)
-            Dim columnValuesArray() As Object = New Object() {ID_Transaksi, Kode_Barang, Nama_Barang, Tanggal, Jumlah_Item, Harga_Beli, Harga_Jual}
+            Dim columnValuesArray() As Object = New Object() {ID_Transaksi, Kode_Barang, Nama_Barang, Tanggal, Jumlah_Item, Harga_Beli, Harga_Jual, Diskon}
             rowTBL_PENJUALANRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowTBL_PENJUALANRow)
             Return rowTBL_PENJUALANRow
@@ -2263,6 +2273,7 @@ Partial Public Class DATA_LAPORAN
             Me.columnJumlah_Item = MyBase.Columns("Jumlah Item")
             Me.columnHarga_Beli = MyBase.Columns("Harga Beli")
             Me.columnHarga_Jual = MyBase.Columns("Harga Jual")
+            Me.columnDiskon = MyBase.Columns("Diskon")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -2282,6 +2293,8 @@ Partial Public Class DATA_LAPORAN
             MyBase.Columns.Add(Me.columnHarga_Beli)
             Me.columnHarga_Jual = New Global.System.Data.DataColumn("Harga Jual", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnHarga_Jual)
+            Me.columnDiskon = New Global.System.Data.DataColumn("Diskon", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnDiskon)
             Me.columnID_Transaksi.Caption = "ID Trans"
         End Sub
         
@@ -4029,6 +4042,21 @@ Partial Public Class DATA_LAPORAN
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property Diskon() As Integer
+            Get
+                Try 
+                    Return CType(Me(Me.tableTBL_PENJUALAN.DiskonColumn),Integer)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Diskon' in table 'TBL_PENJUALAN' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableTBL_PENJUALAN.DiskonColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Function IsID_TransaksiNull() As Boolean
             Return Me.IsNull(Me.tableTBL_PENJUALAN.ID_TransaksiColumn)
         End Function
@@ -4109,6 +4137,18 @@ Partial Public Class DATA_LAPORAN
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub SetHarga_JualNull()
             Me(Me.tableTBL_PENJUALAN.Harga_JualColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsDiskonNull() As Boolean
+            Return Me.IsNull(Me.tableTBL_PENJUALAN.DiskonColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetDiskonNull()
+            Me(Me.tableTBL_PENJUALAN.DiskonColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     

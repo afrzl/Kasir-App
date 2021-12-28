@@ -170,9 +170,9 @@ Public Class FR_MASUK
 
         DGHISTORY.Columns(0).Visible = False
 
-        DGHISTORY.Columns(5).DefaultCellStyle.Format = "###.##"
+        DGHISTORY.Columns(5).DefaultCellStyle.Format = "##0.##"
         DGHISTORY.Columns(6).DefaultCellStyle.Format = "Rp ###,##"
-        DGHISTORY.Columns(7).DefaultCellStyle.Format = "###.##"
+        DGHISTORY.Columns(7).DefaultCellStyle.Format = "##0.##"
 
         DGHISTORY.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
         DGHISTORY.Columns(2).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
@@ -719,10 +719,10 @@ Public Class FR_MASUK
                 If RD.Item("End3") <> 0 Then
                     HARGA_TERENDAH = RD.Item("Harga4")
                 Else
-                    If RD.Item("End3") <> 0 Then
+                    If RD.Item("End2") <> 0 Then
                         HARGA_TERENDAH = RD.Item("Harga3")
                     Else
-                        If RD.Item("End2") <> 0 Then
+                        If RD.Item("End1") <> 0 Then
                             HARGA_TERENDAH = RD.Item("Harga2")
                         Else
                             HARGA_TERENDAH = RD.Item("Harga1")

@@ -70,7 +70,7 @@ Public Class FR_KASIR_DASHBOARD
         DGSTOK.Columns(2).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
         DGSTOK.Columns(3).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
 
-        DGSTOK.Columns(2).DefaultCellStyle.Format = "###.##"
+        DGSTOK.Columns(2).DefaultCellStyle.Format = "##0.##"
         DGSTOK.Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         DGSTOK.Columns(3).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
 

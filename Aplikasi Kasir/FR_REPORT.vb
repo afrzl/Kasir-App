@@ -166,7 +166,8 @@ Public Class FR_REPORT
                                 " (SELECT Tgl FROM tbl_transaksi_parent WHERE tbl_transaksi_parent.Id_trans = tbl_transaksi_child.Id_trans) AS 'Tanggal', " &
                                 " Jumlah AS 'Jumlah Item'," &
                                 " Harga_beli AS 'Harga Beli'," &
-                                " (SELECT Harga_total FROM tbl_transaksi_parent WHERE tbl_transaksi_parent.Id_trans = tbl_transaksi_child.Id_trans) AS 'Harga Jual'" &
+                                " Harga_akhir AS 'Harga Jual'," &
+                                " (SELECT Diskon FROM tbl_transaksi_parent WHERE tbl_transaksi_parent.Id_trans = tbl_transaksi_child.Id_trans) AS 'Diskon'" &
                                 " FROM tbl_transaksi_child" &
                                 " WHERE (LEFT(Id_trans, 1) = 'K' or LEFT(Id_trans, 1) = 'C')" &
                                 " AND (SELECT Tgl FROM tbl_transaksi_parent WHERE tbl_transaksi_parent.Id_trans = tbl_transaksi_child.Id_trans) >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd 00:00:00") & "'" &
@@ -353,7 +354,8 @@ Public Class FR_REPORT
                         Case 4
                             For N = 1 To TBL.Rows.Count - 1
                                 If TBL.Rows(N).Item(0) = TBL.Rows(N - 1).Item(0) Then
-                                    TBL.Rows(N).Item(6) = 0
+                                    'TBL.Rows(N).Item(6) = 0
+                                    TBL.Rows(N).Item(7) = 0
                                 End If
                             Next
                         Case 5

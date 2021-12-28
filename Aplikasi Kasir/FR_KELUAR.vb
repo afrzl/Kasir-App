@@ -140,6 +140,9 @@ Public Class FR_KELUAR
             STOK_DATA = 0
         End If
 
+        If STOK_DATA < 1 And STOK_DATA > 0 Then
+            TXTQTY.Text = Format(STOK_DATA, "##0.##")
+        End If
         Dim STOK_ORDER As Double = Convert.ToDouble(TXTQTY.Text)
         For N = 0 To DGTAMPIL.RowCount - 1
             If DGTAMPIL.Item("Kode", N).Value = Kode Then
@@ -273,7 +276,12 @@ Public Class FR_KELUAR
         Dim HARGA_BELI As Integer = 0
         Dim QUANTITY As Double = QTY
         While QUANTITY <> 0
-            Dim STR As String = "SELECT TOP 1 (Id_trans) AS Id_trans, Harga, Stok FROM tbl_transaksi_child WHERE (LEFT(Id_trans,1)='M' or LEFT(Id_trans,1)='R') AND Kode='" & KODE & "' AND Stok != 0 ORDER BY Id ASC"
+            Dim STR As String = "SELECT TOP 1 Id," &
+                " Id_trans," &
+                " Harga," &
+                " Stok" &
+                " FROM tbl_transaksi_child WHERE (LEFT(Id_trans,1)='M' or LEFT(Id_trans,1)='R')" &
+                " And Kode='" & KODE & "' AND Stok != 0 ORDER BY Id ASC"
             Dim CMD As SqlCommand
             CMD = New SqlCommand(STR, CONN)
             Dim RD As SqlDataReader
@@ -281,13 +289,14 @@ Public Class FR_KELUAR
             If RD.HasRows Then
                 RD.Read()
                 ID_TRANS = RD.Item("Id_trans")
+                Dim ID As Integer = RD.Item("Id")
                 Dim STOKTERSEDIA As Double = RD.Item("Stok")
                 If STOKTERSEDIA < QUANTITY Then
                     Dim STOK_AKHIR As Double = 0
                     QUANTITY -= STOKTERSEDIA
                     HARGA_BELI += RD.Item("Harga") * STOKTERSEDIA
                     RD.Close()
-                    STR = "UPDATE tbl_transaksi_child SET Stok='" & STOK_AKHIR & "' WHERE Id_trans='" & ID_TRANS & "'"
+                    STR = "UPDATE tbl_transaksi_child SET Stok='" & STOK_AKHIR & "' WHERE Id='" & ID & "'"
                     CMD = New SqlCommand(STR, CONN)
                     CMD.ExecuteNonQuery()
                 Else
@@ -295,7 +304,7 @@ Public Class FR_KELUAR
                     HARGA_BELI += (RD.Item("Harga") * QUANTITY)
                     QUANTITY = 0
                     RD.Close()
-                    STR = "UPDATE tbl_transaksi_child SET Stok=" & STOK_AKHIR.ToString.Replace(",", ".") & " WHERE Id_trans='" & ID_TRANS & "'"
+                    STR = "UPDATE tbl_transaksi_child SET Stok=" & STOK_AKHIR.ToString.Replace(",", ".") & " WHERE Id='" & ID & "'"
                     CMD = New SqlCommand(STR, CONN)
                     CMD.ExecuteNonQuery()
                 End If
@@ -518,7 +527,6 @@ Public Class FR_KELUAR
                     JUMLAH_QTY = CInt(TXTQTY.Text)
                 End If
 
-                TXTHARGA.Text = CARI_HARGA(JUMLAH_QTY)
                 If CARI_STOK(TXTKODE.Text) < 0 Then
                     MsgBox("Stok barang tidak mencukupi!")
                     TXTKODE.Clear()
@@ -651,14 +659,14 @@ Public Class FR_KELUAR
         textLeft.Alignment = StringAlignment.Near
         textRight.Alignment = StringAlignment.Far
         Dim WIDTH As Single = 150
-        Dim HEIGHT As Single = 100
+        Dim HEIGHT As Single = 75
         Dim JARAK As Single = (lebarKertas - WIDTH) / 2
 
         Dim IMAGE As Image = Image.FromStream(IMAGESTREAM)
         e.Graphics.DrawImage(IMAGE, JARAK, BarisYangSama(), WIDTH, HEIGHT)
 
         e.Graphics.DrawString(NAMA_TOKO, fontJudul, Brushes.Black, lebarKertas / 2, BarisBaru(HEIGHT / jarakBaris), textCenter)
-        e.Graphics.DrawString(ALAMATTOKO.Text, fontRegular, Brushes.Black, New Rectangle(20, BarisBaru(1), lebarKertas - 30, BarisBaru(1)), textCenter)
+        e.Graphics.DrawString(ALAMATTOKO.Text, fontRegular, Brushes.Black, New Rectangle(20, BarisBaru(1), lebarKertas - 30, BarisYangSama), textCenter)
         e.Graphics.DrawString(NO_TOKO, fontRegular, Brushes.Black, lebarKertas / 2, BarisBaru(1), textCenter)
         BarisBaru(1)
 

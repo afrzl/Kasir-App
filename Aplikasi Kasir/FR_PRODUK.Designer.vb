@@ -511,6 +511,7 @@ Partial Class FR_PRODUK
         DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.DGTAMPIL.RowHeadersDefaultCellStyle = DataGridViewCellStyle2
         Me.DGTAMPIL.RowHeadersVisible = False
+        Me.DGTAMPIL.RowHeadersWidth = 51
         DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.DGTAMPIL.RowsDefaultCellStyle = DataGridViewCellStyle3
         Me.DGTAMPIL.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -589,7 +590,7 @@ Partial Class FR_PRODUK
         '
         Me.CBSATUAN.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CBSATUAN.FormattingEnabled = True
-        Me.CBSATUAN.Items.AddRange(New Object() {"Pcs", "Kg", "Liter", "Dus"})
+        Me.CBSATUAN.Items.AddRange(New Object() {"Pcs", "Pack", "Kg", "Liter", "Dus"})
         Me.CBSATUAN.Location = New System.Drawing.Point(189, 157)
         Me.CBSATUAN.Name = "CBSATUAN"
         Me.CBSATUAN.Size = New System.Drawing.Size(226, 31)

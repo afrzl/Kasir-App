@@ -98,7 +98,7 @@ Public Class FR_RETURN
         DGTAMPIL.Columns(7).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
 
         DGTAMPIL.Columns(6).DefaultCellStyle.Format = "Rp ###,##"
-        DGTAMPIL.Columns(7).DefaultCellStyle.Format = "###.##"
+        DGTAMPIL.Columns(7).DefaultCellStyle.Format = "##0.##"
         DGTAMPIL.Columns(6).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DGTAMPIL.Columns(7).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
     End Sub
@@ -196,7 +196,7 @@ Public Class FR_RETURN
         If RD.HasRows Then
             RD.Read()
             Dim HARGA As Integer = RD.Item("Harga_akhir")
-            Dim QUANTITY As String = Format(RD.Item("Jumlah"), "###.##")
+            Dim QUANTITY As String = Format(RD.Item("Jumlah"), "##0.##")
             Dim HARGA_SATUAN As Integer = HARGA / QUANTITY
             TXTHARGA.Text = HARGA_SATUAN
             Dim TERSEDIARETURN As Double = RD.Item("Jumlah")

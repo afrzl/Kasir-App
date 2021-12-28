@@ -244,32 +244,32 @@ Public Class FR_CETAK_LABEL
                     DGCETAK.Rows(DGCETAK.Rows.Count - 1).Cells("BARANG").Value = RD.Item("Barang")
                     DGCETAK.Rows(DGCETAK.Rows.Count - 1).Cells("SATUAN").Value = RD.Item("Satuan")
                     If RD.Item("End1") <> 0 Then
-                        DGCETAK.Rows(DGCETAK.Rows.Count - 1).Cells("OPSI1").Value = "0 - " & Format(RD.Item("End1"), "###.##")
+                        DGCETAK.Rows(DGCETAK.Rows.Count - 1).Cells("OPSI1").Value = "0 - " & Format(RD.Item("End1"), "##0.##")
                     End If
                     If RD.Item("Harga1") <> 0 Then
                         DGCETAK.Rows(DGCETAK.Rows.Count - 1).Cells("HARGA1").Value = Format(RD.Item("Harga1"), "##,##0")
                     End If
                     If RD.Item("End2") <> 0 Then
-                        DGCETAK.Rows(DGCETAK.Rows.Count - 1).Cells("OPSI2").Value = Format(RD.Item("End1"), "###.##") & " - " & Format(RD.Item("End2"), "###.##")
+                        DGCETAK.Rows(DGCETAK.Rows.Count - 1).Cells("OPSI2").Value = Format(RD.Item("End1"), "##0.##") & " - " & Format(RD.Item("End2"), "##0.##")
                     ElseIf RD.Item("End2") = 0 And RD.Item("End1") <> 0 Then
-                        DGCETAK.Rows(DGCETAK.Rows.Count - 1).Cells("OPSI2").Value = " > " & Format(RD.Item("End1"), "###.##")
+                        DGCETAK.Rows(DGCETAK.Rows.Count - 1).Cells("OPSI2").Value = " > " & Format(RD.Item("End1"), "##0.##")
                     End If
                     If RD.Item("Harga2") <> 0 Then
                         DGCETAK.Rows(DGCETAK.Rows.Count - 1).Cells("HARGA2").Value = Format(RD.Item("Harga2"), "##,##0")
                     End If
                     If RD.Item("End3") <> 0 Then
-                        DGCETAK.Rows(DGCETAK.Rows.Count - 1).Cells("OPSI3").Value = Format(RD.Item("End2"), "###.##") & " - " & Format(RD.Item("End3"), "###.##")
+                        DGCETAK.Rows(DGCETAK.Rows.Count - 1).Cells("OPSI3").Value = Format(RD.Item("End2"), "##0.##") & " - " & Format(RD.Item("End3"), "##0.##")
                     ElseIf RD.Item("End3") = 0 And RD.Item("End2") <> 0 Then
-                        DGCETAK.Rows(DGCETAK.Rows.Count - 1).Cells("OPSI3").Value = " > " & Format(RD.Item("End2"), "###.##")
+                        DGCETAK.Rows(DGCETAK.Rows.Count - 1).Cells("OPSI3").Value = " > " & Format(RD.Item("End2"), "##0.##")
                     End If
                     If RD.Item("Harga3") <> 0 Then
                         DGCETAK.Rows(DGCETAK.Rows.Count - 1).Cells("HARGA3").Value = Format(RD.Item("Harga3"), "##,##0")
                     End If
                     If RD.Item("End4") <> 0 Then
-                        DGCETAK.Rows(DGCETAK.Rows.Count - 1).Cells("OPSI4").Value = Format(RD.Item("End3"), "###.##") & " - " & Format(RD.Item("End4"), "###.##")
-                        DGCETAK.Rows(DGCETAK.Rows.Count - 1).Cells("OPSI5").Value = " > " & Format(RD.Item("End4"), "###.##")
+                        DGCETAK.Rows(DGCETAK.Rows.Count - 1).Cells("OPSI4").Value = Format(RD.Item("End3"), "##0.##") & " - " & Format(RD.Item("End4"), "##0.##")
+                        DGCETAK.Rows(DGCETAK.Rows.Count - 1).Cells("OPSI5").Value = " > " & Format(RD.Item("End4"), "##0.##")
                     ElseIf RD.Item("End4") = 0 And RD.Item("End3") <> 0 Then
-                        DGCETAK.Rows(DGCETAK.Rows.Count - 1).Cells("OPSI4").Value = " > " & Format(RD.Item("End3"), "###.##")
+                        DGCETAK.Rows(DGCETAK.Rows.Count - 1).Cells("OPSI4").Value = " > " & Format(RD.Item("End3"), "##0.##")
                     End If
                     If RD.Item("Harga4") <> 0 Then
                         DGCETAK.Rows(DGCETAK.Rows.Count - 1).Cells("HARGA4").Value = Format(RD.Item("Harga4"), "##,##0")
@@ -598,15 +598,15 @@ Public Class FR_CETAK_LABEL
                     DT.Rows.Add(TBL.Rows(N).Item(0),
                             TBL.Rows(N).Item(1),
                             TBL.Rows(N).Item(2),
-                            "0 - " & Format(TBL.Rows(N).Item(4), "###.##"),
+                            "0 - " & Format(TBL.Rows(N).Item(4), "##0.##"),
                             Format(TBL.Rows(N).Item(3), "###,##"),
-                            Format(TBL.Rows(N).Item(4), "###.##") & " - " & Format(TBL.Rows(N).Item(6), "###.##"),
+                            Format(TBL.Rows(N).Item(4), "##0.##") & " - " & Format(TBL.Rows(N).Item(6), "##0.##"),
                             Format(TBL.Rows(N).Item(5), "###,##"),
-                            Format(TBL.Rows(N).Item(6), "###.##") & " - " & Format(TBL.Rows(N).Item(8), "###.##"),
+                            Format(TBL.Rows(N).Item(6), "##0.##") & " - " & Format(TBL.Rows(N).Item(8), "##0.##"),
                             Format(TBL.Rows(N).Item(7), "###,##"),
-                            Format(TBL.Rows(N).Item(8), "###.##") & " - " & Format(TBL.Rows(N).Item(10), "###.##"),
+                            Format(TBL.Rows(N).Item(8), "##0.##") & " - " & Format(TBL.Rows(N).Item(10), "##0.##"),
                             Format(TBL.Rows(N).Item(9), "###,##"),
-                            " > " & Format(TBL.Rows(N).Item(10), "###.##"),
+                            " > " & Format(TBL.Rows(N).Item(10), "##0.##"),
                             Format(TBL.Rows(N).Item(11), "###,##"),
                             "Disc. " & TBL.Rows(N).Item(12) & " - " & TBL.Rows(N).Item(13),
                             TBL.Rows(N).Item(14) & "%")
@@ -614,15 +614,15 @@ Public Class FR_CETAK_LABEL
                     DT.Rows.Add(TBL.Rows(N).Item(0),
                             TBL.Rows(N).Item(1),
                             TBL.Rows(N).Item(2),
-                            "0 - " & Format(TBL.Rows(N).Item(4), "###.##"),
+                            "0 - " & Format(TBL.Rows(N).Item(4), "##0.##"),
                             Format(TBL.Rows(N).Item(3), "###,##"),
-                            Format(TBL.Rows(N).Item(4), "###.##") & " - " & Format(TBL.Rows(N).Item(6), "###.##"),
+                            Format(TBL.Rows(N).Item(4), "##0.##") & " - " & Format(TBL.Rows(N).Item(6), "##0.##"),
                             Format(TBL.Rows(N).Item(5), "###,##"),
-                            Format(TBL.Rows(N).Item(6), "###.##") & " - " & Format(TBL.Rows(N).Item(8), "###.##"),
+                            Format(TBL.Rows(N).Item(6), "##0.##") & " - " & Format(TBL.Rows(N).Item(8), "##0.##"),
                             Format(TBL.Rows(N).Item(7), "###,##"),
-                            Format(TBL.Rows(N).Item(8), "###.##") & " - " & Format(TBL.Rows(N).Item(10), "###.##"),
+                            Format(TBL.Rows(N).Item(8), "##0.##") & " - " & Format(TBL.Rows(N).Item(10), "##0.##"),
                             Format(TBL.Rows(N).Item(9), "###,##"),
-                            " > " & Format(TBL.Rows(N).Item(10), "###.##"),
+                            " > " & Format(TBL.Rows(N).Item(10), "##0.##"),
                             Format(TBL.Rows(N).Item(11), "###,##"))
                 End If
             ElseIf TBL.Rows(N).Item(4) <> 0 And TBL.Rows(N).Item(6) <> 0 And TBL.Rows(N).Item(8) <> 0 And TBL.Rows(N).Item(10) = 0 Then
@@ -630,13 +630,13 @@ Public Class FR_CETAK_LABEL
                     DT.Rows.Add(TBL.Rows(N).Item(0),
                             TBL.Rows(N).Item(1),
                             TBL.Rows(N).Item(2),
-                            "0 - " & Format(TBL.Rows(N).Item(4), "###.##"),
+                            "0 - " & Format(TBL.Rows(N).Item(4), "##0.##"),
                             Format(TBL.Rows(N).Item(3), "###,##"),
-                            Format(TBL.Rows(N).Item(4), "###.##") & " - " & Format(TBL.Rows(N).Item(6), "###.##"),
+                            Format(TBL.Rows(N).Item(4), "##0.##") & " - " & Format(TBL.Rows(N).Item(6), "##0.##"),
                             Format(TBL.Rows(N).Item(5), "###,##"),
-                            Format(TBL.Rows(N).Item(6), "###.##") & " - " & Format(TBL.Rows(N).Item(8), "###.##"),
+                            Format(TBL.Rows(N).Item(6), "##0.##") & " - " & Format(TBL.Rows(N).Item(8), "##0.##"),
                             Format(TBL.Rows(N).Item(7), "###,##"),
-                            " > " & Format(TBL.Rows(N).Item(8), "###.##"),
+                            " > " & Format(TBL.Rows(N).Item(8), "##0.##"),
                             Format(TBL.Rows(N).Item(9), "###,##"),
                             "Disc. " & TBL.Rows(N).Item(12) & " - " & TBL.Rows(N).Item(13),
                             TBL.Rows(N).Item(14) & "%")
@@ -644,13 +644,13 @@ Public Class FR_CETAK_LABEL
                     DT.Rows.Add(TBL.Rows(N).Item(0),
                             TBL.Rows(N).Item(1),
                             TBL.Rows(N).Item(2),
-                            "0 - " & Format(TBL.Rows(N).Item(4), "###.##"),
+                            "0 - " & Format(TBL.Rows(N).Item(4), "##0.##"),
                             Format(TBL.Rows(N).Item(3), "###,##"),
-                            Format(TBL.Rows(N).Item(4), "###.##") & " - " & Format(TBL.Rows(N).Item(6), "###.##"),
+                            Format(TBL.Rows(N).Item(4), "##0.##") & " - " & Format(TBL.Rows(N).Item(6), "##0.##"),
                             Format(TBL.Rows(N).Item(5), "###,##"),
-                            Format(TBL.Rows(N).Item(6), "###.##") & " - " & Format(TBL.Rows(N).Item(8), "###.##"),
+                            Format(TBL.Rows(N).Item(6), "##0.##") & " - " & Format(TBL.Rows(N).Item(8), "##0.##"),
                             Format(TBL.Rows(N).Item(7), "###,##"),
-                            " > " & Format(TBL.Rows(N).Item(8), "###.##"),
+                            " > " & Format(TBL.Rows(N).Item(8), "##0.##"),
                             Format(TBL.Rows(N).Item(9), "###,##"))
                 End If
             ElseIf TBL.Rows(N).Item(4) <> 0 And TBL.Rows(N).Item(6) <> 0 And TBL.Rows(N).Item(8) = 0 And TBL.Rows(N).Item(10) = 0 Then
@@ -658,11 +658,11 @@ Public Class FR_CETAK_LABEL
                     DT.Rows.Add(TBL.Rows(N).Item(0),
                             TBL.Rows(N).Item(1),
                             TBL.Rows(N).Item(2),
-                            "0 - " & Format(TBL.Rows(N).Item(4), "###.##"),
+                            "0 - " & Format(TBL.Rows(N).Item(4), "##0.##"),
                             Format(TBL.Rows(N).Item(3), "###,##"),
-                            Format(TBL.Rows(N).Item(4), "###.##") & " - " & Format(TBL.Rows(N).Item(6), "###.##"),
+                            Format(TBL.Rows(N).Item(4), "##0.##") & " - " & Format(TBL.Rows(N).Item(6), "##0.##"),
                             Format(TBL.Rows(N).Item(5), "###,##"),
-                            " > " & Format(TBL.Rows(N).Item(6), "###.##"),
+                            " > " & Format(TBL.Rows(N).Item(6), "##0.##"),
                             Format(TBL.Rows(N).Item(7), "###,##"),
                             "Disc. " & TBL.Rows(N).Item(12) & " - " & TBL.Rows(N).Item(13),
                             TBL.Rows(N).Item(14) & "%")
@@ -670,11 +670,11 @@ Public Class FR_CETAK_LABEL
                     DT.Rows.Add(TBL.Rows(N).Item(0),
                             TBL.Rows(N).Item(1),
                             TBL.Rows(N).Item(2),
-                            "0 - " & Format(TBL.Rows(N).Item(4), "###.##"),
+                            "0 - " & Format(TBL.Rows(N).Item(4), "##0.##"),
                             Format(TBL.Rows(N).Item(3), "###,##"),
-                            Format(TBL.Rows(N).Item(4), "###.##") & " - " & Format(TBL.Rows(N).Item(6), "###.##"),
+                            Format(TBL.Rows(N).Item(4), "##0.##") & " - " & Format(TBL.Rows(N).Item(6), "##0.##"),
                             Format(TBL.Rows(N).Item(5), "###,##"),
-                            " > " & Format(TBL.Rows(N).Item(6), "###.##"),
+                            " > " & Format(TBL.Rows(N).Item(6), "##0.##"),
                             Format(TBL.Rows(N).Item(7), "###,##"))
                 End If
             ElseIf TBL.Rows(N).Item(4) <> 0 And TBL.Rows(N).Item(6) = 0 And TBL.Rows(N).Item(8) = 0 And TBL.Rows(N).Item(10) = 0 Then
@@ -682,9 +682,9 @@ Public Class FR_CETAK_LABEL
                     DT.Rows.Add(TBL.Rows(N).Item(0),
                             TBL.Rows(N).Item(1),
                             TBL.Rows(N).Item(2),
-                            "0 - " & Format(TBL.Rows(N).Item(4), "###.##"),
+                            "0 - " & Format(TBL.Rows(N).Item(4), "##0.##"),
                             Format(TBL.Rows(N).Item(3), "###,##"),
-                            " > " & Format(TBL.Rows(N).Item(4), "###.##"),
+                            " > " & Format(TBL.Rows(N).Item(4), "##0.##"),
                             Format(TBL.Rows(N).Item(5), "###,##"),
                             "Disc. " & TBL.Rows(N).Item(12) & " - " & TBL.Rows(N).Item(13),
                             TBL.Rows(N).Item(14) & "%")
@@ -692,9 +692,9 @@ Public Class FR_CETAK_LABEL
                     DT.Rows.Add(TBL.Rows(N).Item(0),
                             TBL.Rows(N).Item(1),
                             TBL.Rows(N).Item(2),
-                            "0 - " & Format(TBL.Rows(N).Item(4), "###.##"),
+                            "0 - " & Format(TBL.Rows(N).Item(4), "##0.##"),
                             Format(TBL.Rows(N).Item(3), "###,##"),
-                            " > " & Format(TBL.Rows(N).Item(4), "###.##"),
+                            " > " & Format(TBL.Rows(N).Item(4), "##0.##"),
                             Format(TBL.Rows(N).Item(5), "###,##"))
                 End If
             ElseIf TBL.Rows(N).Item(4) = 0 And TBL.Rows(N).Item(6) = 0 And TBL.Rows(N).Item(8) = 0 And TBL.Rows(N).Item(10) = 0 Then

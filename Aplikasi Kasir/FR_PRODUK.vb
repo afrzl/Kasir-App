@@ -527,23 +527,23 @@ Public Class FR_PRODUK
             TXTHARGA1.Enabled = True
             Dim END1 As String = ""
             If Not RD.Item("End1") = 0 Then
-                END1 = Format(RD.Item("End1"), "###.##")
+                END1 = Format(RD.Item("End1"), "##0.##")
             End If
             Dim END2 As String = ""
             If Not RD.Item("End2") = 0 Then
-                END2 = Format(RD.Item("End2"), "###.##")
+                END2 = Format(RD.Item("End2"), "##0.##")
             Else
                 TXTEND2.Enabled = False
             End If
             Dim END3 As String = ""
             If Not RD.Item("End3") = 0 Then
-                END3 = Format(RD.Item("End3"), "###.##")
+                END3 = Format(RD.Item("End3"), "##0.##")
             Else
                 TXTEND3.Enabled = False
             End If
             Dim END4 As String = ""
             If Not RD.Item("End4") = 0 Then
-                END4 = Format(RD.Item("End4"), "###.##")
+                END4 = Format(RD.Item("End4"), "##0.##")
             Else
                 TXTEND4.Enabled = False
             End If

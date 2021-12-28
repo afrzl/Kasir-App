@@ -62,7 +62,7 @@ Public Class FR_RUSAK
         DGEXPIRED.Columns(6).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
         DGEXPIRED.Columns(7).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
 
-        DGEXPIRED.Columns(6).DefaultCellStyle.Format = "###.##"
+        DGEXPIRED.Columns(6).DefaultCellStyle.Format = "##0.##"
         DGEXPIRED.Columns(6).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
     End Sub
 
@@ -117,7 +117,7 @@ Public Class FR_RUSAK
         DGTAMPIL.Columns(8).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
 
         DGTAMPIL.Columns(7).DefaultCellStyle.Format = "Rp ###,##"
-        DGTAMPIL.Columns(8).DefaultCellStyle.Format = "###.##"
+        DGTAMPIL.Columns(8).DefaultCellStyle.Format = "##0.##"
         DGTAMPIL.Columns(7).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DGTAMPIL.Columns(8).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
     End Sub
@@ -422,7 +422,7 @@ Public Class FR_RUSAK
             RD.Read()
             TXTHARGA.Text = CInt(RD.Item("Harga"))
             If RD.Item("Stok") <> 0 Then
-                TXTSTOK.Text = Format(RD.Item("Stok"), "###.##")
+                TXTSTOK.Text = Format(RD.Item("Stok"), "##0.##")
             Else
                 TXTSTOK.Text = 0
             End If
@@ -521,7 +521,7 @@ Public Class FR_RUSAK
         DGEXPIRED.Columns(0).Visible = True
         CBKODE.SelectedValue = DGEXPIRED.Item(0, e.RowIndex).Value
         DGEXPIRED.Columns(0).Visible = False
-        TXTQTY.Text = Format(DGEXPIRED.Item(6, e.RowIndex).Value, "###.##")
+        TXTQTY.Text = Format(DGEXPIRED.Item(6, e.RowIndex).Value, "##0.##")
         CARI_HARGA()
     End Sub
 
