@@ -112,7 +112,7 @@ Public Class FR_KELUAR
             DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Harga").Value = TXTHARGA.Text
             DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Diskon").Value = CInt(TXTDISKON.Text) / 100 * DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Harga").Value
             DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Qty").Value = TXTQTY.Text
-            DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Total").Value = TXTHARGA.Text - DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Diskon").Value
+            DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Total").Value = TXTTOTAL.Text
         End If
 
         TOTAL_HARGA()
@@ -140,9 +140,6 @@ Public Class FR_KELUAR
             STOK_DATA = 0
         End If
 
-        If STOK_DATA < 1 And STOK_DATA > 0 Then
-            TXTQTY.Text = Format(STOK_DATA, "##0.##")
-        End If
         Dim STOK_ORDER As Double = Convert.ToDouble(TXTQTY.Text)
         For N = 0 To DGTAMPIL.RowCount - 1
             If DGTAMPIL.Item("Kode", N).Value = Kode Then
@@ -464,7 +461,7 @@ Public Class FR_KELUAR
                 TXTKODE.Select()
             Else
                 Dim QTY As Double = Convert.ToDouble(TXTQTY.Text)
-                Dim BARIS_DATA As Integer = 0
+                Dim BARIS_DATA As Integer = -1
                 For N = 0 To DGTAMPIL.Rows.Count - 1
                     Dim Kode As String = DGTAMPIL.Item("Kode", N).Value
                     If Kode = TXTKODE.Text Then
@@ -472,12 +469,21 @@ Public Class FR_KELUAR
                         Exit For
                     End If
                 Next
-                TXTQTY.Text = Convert.ToDouble(TXTQTY.Text) - DGTAMPIL.Rows(BARIS_DATA).Cells("Qty").Value
+
+                If BARIS_DATA > -1 Then
+                    TXTQTY.Text = Convert.ToDouble(TXTQTY.Text) - DGTAMPIL.Rows(BARIS_DATA).Cells("Qty").Value
+                End If
 
                 If CARI_STOK(TXTKODE.Text) < 0 Then
                     TXTQTY.Text = QTY
                     MsgBox("Stok barang tidak mencukupi!")
-                    TXTQTY.Text = DGTAMPIL.Rows(BARIS_DATA).Cells("Qty").Value
+                    If BARIS_DATA = -1 Then
+                        TXTQTY.Text = 1
+                        TXTKODE.Clear()
+                        TXTKODE.Select()
+                    Else
+                        TXTQTY.Text = DGTAMPIL.Rows(BARIS_DATA).Cells("Qty").Value
+                    End If
                     TXTQTY.Select()
                 Else
                     MASUK_DATA()
@@ -527,6 +533,7 @@ Public Class FR_KELUAR
                     JUMLAH_QTY = CInt(TXTQTY.Text)
                 End If
 
+                TXTHARGA.Text = CARI_HARGA(JUMLAH_QTY)
                 If CARI_STOK(TXTKODE.Text) < 0 Then
                     MsgBox("Stok barang tidak mencukupi!")
                     TXTKODE.Clear()
@@ -566,6 +573,7 @@ Public Class FR_KELUAR
             RD.Read()
             TXTBARANG.Text = RD.Item("Barang").ToString.Trim
             TXTSATUAN.Text = RD.Item("Satuan").ToString.Trim
+            TXTQTY.Enabled = True
             RD.Close()
             STR = "SELECT COALESCE(SUM(Diskon),0) AS 'Diskon' FROM tbl_diskon" &
                 " WHERE Kode='" & TXTKODE.Text & "'" &
@@ -584,6 +592,7 @@ Public Class FR_KELUAR
             End If
             TXTQTY.Text = 1
         Else
+            TXTQTY.Enabled = False
             RD.Close()
         End If
     End Sub

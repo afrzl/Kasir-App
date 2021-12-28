@@ -348,7 +348,6 @@ Partial Class FR_KELUAR
         '
         'TXTQTY
         '
-        Me.TXTQTY.Enabled = False
         Me.TXTQTY.Location = New System.Drawing.Point(1157, 55)
         Me.TXTQTY.Name = "TXTQTY"
         Me.TXTQTY.Size = New System.Drawing.Size(120, 30)
@@ -639,6 +638,7 @@ Partial Class FR_KELUAR
         Me.DGTAMPIL.Name = "DGTAMPIL"
         Me.DGTAMPIL.ReadOnly = True
         Me.DGTAMPIL.RowHeadersVisible = False
+        Me.DGTAMPIL.RowHeadersWidth = 51
         DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         Me.DGTAMPIL.RowsDefaultCellStyle = DataGridViewCellStyle3
         Me.DGTAMPIL.RowTemplate.Height = 30
@@ -649,14 +649,16 @@ Partial Class FR_KELUAR
         'KODE
         '
         Me.KODE.HeaderText = "KODE"
+        Me.KODE.MinimumWidth = 6
         Me.KODE.Name = "KODE"
         Me.KODE.ReadOnly = True
-        Me.KODE.Width = 83
+        Me.KODE.Width = 85
         '
         'BARANG
         '
         Me.BARANG.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
         Me.BARANG.HeaderText = "NAMA BARANG"
+        Me.BARANG.MinimumWidth = 6
         Me.BARANG.Name = "BARANG"
         Me.BARANG.ReadOnly = True
         '
@@ -664,6 +666,7 @@ Partial Class FR_KELUAR
         '
         Me.SATUAN.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
         Me.SATUAN.HeaderText = "SATUAN"
+        Me.SATUAN.MinimumWidth = 6
         Me.SATUAN.Name = "SATUAN"
         Me.SATUAN.ReadOnly = True
         '
@@ -671,6 +674,7 @@ Partial Class FR_KELUAR
         '
         Me.HARGA.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
         Me.HARGA.HeaderText = "HARGA"
+        Me.HARGA.MinimumWidth = 6
         Me.HARGA.Name = "HARGA"
         Me.HARGA.ReadOnly = True
         '
@@ -678,20 +682,23 @@ Partial Class FR_KELUAR
         '
         Me.QTY.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
         Me.QTY.HeaderText = "QTY"
+        Me.QTY.MinimumWidth = 6
         Me.QTY.Name = "QTY"
         Me.QTY.ReadOnly = True
         '
         'Diskon
         '
         Me.Diskon.HeaderText = "DISKON"
+        Me.Diskon.MinimumWidth = 6
         Me.Diskon.Name = "Diskon"
         Me.Diskon.ReadOnly = True
-        Me.Diskon.Width = 102
+        Me.Diskon.Width = 104
         '
         'TOTAL
         '
         Me.TOTAL.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
         Me.TOTAL.HeaderText = "TOTAL"
+        Me.TOTAL.MinimumWidth = 6
         Me.TOTAL.Name = "TOTAL"
         Me.TOTAL.ReadOnly = True
         '
