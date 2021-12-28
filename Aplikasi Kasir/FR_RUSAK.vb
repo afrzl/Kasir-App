@@ -39,7 +39,7 @@ Public Class FR_RUSAK
             " RTRIM((SELECT Barang FROM tbl_barang WHERE RTRIM(tbl_barang.Kode) = RTRIM(tbl_transaksi_child.Kode))) AS 'Nama Barang'," &
             " tbl_transaksi_parent.Tgl AS 'Tanggal Masuk'," &
             " RTRIM(tbl_transaksi_parent.Person) AS 'Supplier'," &
-            " tbl_transaksi_child.Jumlah AS 'QTY'," &
+            " tbl_transaksi_child.Stok AS 'QTY'," &
             " tbl_transaksi_child.Tgl_exp AS 'Tanggal Expired'" &
             " FROM tbl_transaksi_child " &
             " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_parent.Id_trans = tbl_transaksi_child.Id_trans" &
@@ -410,8 +410,8 @@ Public Class FR_RUSAK
 
         STR = "SELECT Harga AS 'Harga'," _
                             & "(COALESCE(Stok, 0)) AS 'Stok'" _
-                            & " FROM tbl_transaksi_child WHERE Id_trans='" _
-                            & TXTID.Text _
+                            & " FROM tbl_transaksi_child WHERE Id='" _
+                            & CBKODE.SelectedValue _
                             & "'" _
                             & " AND Kode = '" _
                             & KODEBARANG _
@@ -521,8 +521,8 @@ Public Class FR_RUSAK
         DGEXPIRED.Columns(0).Visible = True
         CBKODE.SelectedValue = DGEXPIRED.Item(0, e.RowIndex).Value
         DGEXPIRED.Columns(0).Visible = False
-        TXTQTY.Text = Format(DGEXPIRED.Item(6, e.RowIndex).Value, "##0.##")
         CARI_HARGA()
+        TXTQTY.Text = TXTSTOK.Text
     End Sub
 
     Private Sub TXTID_TextChanged(sender As Object, e As EventArgs) Handles TXTID.TextChanged
@@ -531,5 +531,11 @@ Public Class FR_RUSAK
             CBKODE.SelectedIndex = 0
             CARI_HARGA()
         End If
+    End Sub
+
+    Private Sub CBKODE_SelectedValueChanged(sender As Object, e As EventArgs) Handles CBKODE.SelectedValueChanged
+        On Error Resume Next
+
+        CARI_HARGA()
     End Sub
 End Class
