@@ -26,6 +26,7 @@ Partial Class FR_OPS_DASHBOARD
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FR_OPS_DASHBOARD))
         Me.PNLEFT = New System.Windows.Forms.Panel()
         Me.PNOPS = New System.Windows.Forms.Panel()
         Me.BTNMASUKOPS = New System.Windows.Forms.Button()
@@ -592,6 +593,7 @@ Partial Class FR_OPS_DASHBOARD
         DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.DGSTOK.RowHeadersDefaultCellStyle = DataGridViewCellStyle2
         Me.DGSTOK.RowHeadersVisible = False
+        Me.DGSTOK.RowHeadersWidth = 51
         DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.DGSTOK.RowsDefaultCellStyle = DataGridViewCellStyle3
         Me.DGSTOK.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -706,6 +708,7 @@ Partial Class FR_OPS_DASHBOARD
         Me.Controls.Add(Me.PNLEFT)
         Me.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.Name = "FR_OPS_DASHBOARD"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen

@@ -22,6 +22,7 @@ Partial Class FR_LOGIN
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FR_LOGIN))
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TXTPASSWORD = New Syncfusion.Windows.Forms.Tools.TextBoxExt()
         Me.TXTID = New Syncfusion.Windows.Forms.Tools.TextBoxExt()
@@ -184,6 +185,7 @@ Partial Class FR_LOGIN
         Me.Controls.Add(Me.TXTID)
         Me.Controls.Add(Me.TXTPASSWORD)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "FR_LOGIN"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "LOGIN"

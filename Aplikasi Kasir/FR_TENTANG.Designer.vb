@@ -23,6 +23,7 @@ Partial Class FR_TENTANG
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FR_TENTANG))
         Me.LBTGL = New System.Windows.Forms.Label()
         Me.PNCONTROL = New System.Windows.Forms.Panel()
         Me.BTNMINIMIZE = New System.Windows.Forms.Button()
@@ -157,10 +158,10 @@ Partial Class FR_TENTANG
         Me.PNCONTROL.Controls.Add(Me.BTNMINIMIZE)
         Me.PNCONTROL.Controls.Add(Me.BTNCLOSE)
         Me.PNCONTROL.Dock = System.Windows.Forms.DockStyle.Right
-        Me.PNCONTROL.Location = New System.Drawing.Point(1074, 0)
+        Me.PNCONTROL.Location = New System.Drawing.Point(1020, 0)
         Me.PNCONTROL.Margin = New System.Windows.Forms.Padding(2)
         Me.PNCONTROL.Name = "PNCONTROL"
-        Me.PNCONTROL.Size = New System.Drawing.Size(76, 32)
+        Me.PNCONTROL.Size = New System.Drawing.Size(76, 40)
         Me.PNCONTROL.TabIndex = 0
         '
         'BTNMINIMIZE
@@ -193,10 +194,10 @@ Partial Class FR_TENTANG
         Me.PNCONTENT.Controls.Add(Me.GroupBox2)
         Me.PNCONTENT.Controls.Add(Me.GroupBox1)
         Me.PNCONTENT.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.PNCONTENT.Location = New System.Drawing.Point(216, 32)
+        Me.PNCONTENT.Location = New System.Drawing.Point(270, 40)
         Me.PNCONTENT.Margin = New System.Windows.Forms.Padding(2)
         Me.PNCONTENT.Name = "PNCONTENT"
-        Me.PNCONTENT.Size = New System.Drawing.Size(1150, 736)
+        Me.PNCONTENT.Size = New System.Drawing.Size(1096, 728)
         Me.PNCONTENT.TabIndex = 14
         '
         'GBTOKO
@@ -226,7 +227,7 @@ Partial Class FR_TENTANG
         Me.GBTOKO.Margin = New System.Windows.Forms.Padding(2)
         Me.GBTOKO.Name = "GBTOKO"
         Me.GBTOKO.Padding = New System.Windows.Forms.Padding(2)
-        Me.GBTOKO.Size = New System.Drawing.Size(1179, 319)
+        Me.GBTOKO.Size = New System.Drawing.Size(1125, 311)
         Me.GBTOKO.TabIndex = 8
         Me.GBTOKO.TabStop = False
         Me.GBTOKO.Text = "Toko Setting"
@@ -547,7 +548,7 @@ Partial Class FR_TENTANG
         Me.GroupBox1.Margin = New System.Windows.Forms.Padding(2)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Padding = New System.Windows.Forms.Padding(2)
-        Me.GroupBox1.Size = New System.Drawing.Size(662, 402)
+        Me.GroupBox1.Size = New System.Drawing.Size(608, 402)
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Data Diri"
@@ -805,10 +806,10 @@ Partial Class FR_TENTANG
         Me.PNTOP.Controls.Add(Me.LBTGL)
         Me.PNTOP.Controls.Add(Me.PNCONTROL)
         Me.PNTOP.Dock = System.Windows.Forms.DockStyle.Top
-        Me.PNTOP.Location = New System.Drawing.Point(216, 0)
+        Me.PNTOP.Location = New System.Drawing.Point(270, 0)
         Me.PNTOP.Margin = New System.Windows.Forms.Padding(2)
         Me.PNTOP.Name = "PNTOP"
-        Me.PNTOP.Size = New System.Drawing.Size(1150, 32)
+        Me.PNTOP.Size = New System.Drawing.Size(1096, 40)
         Me.PNTOP.TabIndex = 13
         '
         'Label4
@@ -874,7 +875,7 @@ Partial Class FR_TENTANG
         Me.PNLEFT.Location = New System.Drawing.Point(0, 0)
         Me.PNLEFT.Margin = New System.Windows.Forms.Padding(2)
         Me.PNLEFT.Name = "PNLEFT"
-        Me.PNLEFT.Size = New System.Drawing.Size(216, 768)
+        Me.PNLEFT.Size = New System.Drawing.Size(270, 768)
         Me.PNLEFT.TabIndex = 12
         '
         'PNKASIR
@@ -1490,7 +1491,7 @@ Partial Class FR_TENTANG
         Me.Panel1.Location = New System.Drawing.Point(0, 704)
         Me.Panel1.Margin = New System.Windows.Forms.Padding(2)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(216, 64)
+        Me.Panel1.Size = New System.Drawing.Size(270, 64)
         Me.Panel1.TabIndex = 0
         '
         'BTNLOGOUT
@@ -1525,6 +1526,7 @@ Partial Class FR_TENTANG
         Me.Controls.Add(Me.PNLEFT)
         Me.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.Name = "FR_TENTANG"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen

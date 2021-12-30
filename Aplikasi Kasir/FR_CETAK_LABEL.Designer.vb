@@ -29,6 +29,7 @@ Partial Class FR_CETAK_LABEL
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FR_CETAK_LABEL))
         Me.PNLEFT = New System.Windows.Forms.Panel()
         Me.PNKASIR = New System.Windows.Forms.Panel()
         Me.Label21 = New System.Windows.Forms.Label()
@@ -940,6 +941,7 @@ Partial Class FR_CETAK_LABEL
         DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.DGCETAK.RowHeadersDefaultCellStyle = DataGridViewCellStyle2
         Me.DGCETAK.RowHeadersVisible = False
+        Me.DGCETAK.RowHeadersWidth = 51
         DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.DGCETAK.RowsDefaultCellStyle = DataGridViewCellStyle3
         Me.DGCETAK.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -952,14 +954,16 @@ Partial Class FR_CETAK_LABEL
         '
         Me.KODE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
         Me.KODE.HeaderText = "Kode"
+        Me.KODE.MinimumWidth = 6
         Me.KODE.Name = "KODE"
         Me.KODE.ReadOnly = True
-        Me.KODE.Width = 76
+        Me.KODE.Width = 78
         '
         'BARANG
         '
         Me.BARANG.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
         Me.BARANG.HeaderText = "Nama Barang"
+        Me.BARANG.MinimumWidth = 6
         Me.BARANG.Name = "BARANG"
         Me.BARANG.ReadOnly = True
         '
@@ -967,103 +971,116 @@ Partial Class FR_CETAK_LABEL
         '
         Me.SATUAN.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
         Me.SATUAN.HeaderText = "Satuan"
+        Me.SATUAN.MinimumWidth = 6
         Me.SATUAN.Name = "SATUAN"
         Me.SATUAN.ReadOnly = True
-        Me.SATUAN.Width = 90
+        Me.SATUAN.Width = 92
         '
         'OPSI1
         '
         Me.OPSI1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
         Me.OPSI1.HeaderText = "Opsi 1"
+        Me.OPSI1.MinimumWidth = 6
         Me.OPSI1.Name = "OPSI1"
         Me.OPSI1.ReadOnly = True
-        Me.OPSI1.Width = 85
+        Me.OPSI1.Width = 87
         '
         'HARGA1
         '
         Me.HARGA1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
         Me.HARGA1.HeaderText = "Harga 1"
+        Me.HARGA1.MinimumWidth = 6
         Me.HARGA1.Name = "HARGA1"
         Me.HARGA1.ReadOnly = True
-        Me.HARGA1.Width = 97
+        Me.HARGA1.Width = 99
         '
         'OPSI2
         '
         Me.OPSI2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
         Me.OPSI2.HeaderText = "Opsi 2"
+        Me.OPSI2.MinimumWidth = 6
         Me.OPSI2.Name = "OPSI2"
         Me.OPSI2.ReadOnly = True
-        Me.OPSI2.Width = 85
+        Me.OPSI2.Width = 87
         '
         'HARGA2
         '
         Me.HARGA2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
         Me.HARGA2.HeaderText = "Harga 2"
+        Me.HARGA2.MinimumWidth = 6
         Me.HARGA2.Name = "HARGA2"
         Me.HARGA2.ReadOnly = True
-        Me.HARGA2.Width = 97
+        Me.HARGA2.Width = 99
         '
         'OPSI3
         '
         Me.OPSI3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
         Me.OPSI3.HeaderText = "Opsi 3"
+        Me.OPSI3.MinimumWidth = 6
         Me.OPSI3.Name = "OPSI3"
         Me.OPSI3.ReadOnly = True
-        Me.OPSI3.Width = 85
+        Me.OPSI3.Width = 87
         '
         'HARGA3
         '
         Me.HARGA3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
         Me.HARGA3.HeaderText = "Harga 3"
+        Me.HARGA3.MinimumWidth = 6
         Me.HARGA3.Name = "HARGA3"
         Me.HARGA3.ReadOnly = True
-        Me.HARGA3.Width = 97
+        Me.HARGA3.Width = 99
         '
         'OPSI4
         '
         Me.OPSI4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
         Me.OPSI4.HeaderText = "Opsi 4"
+        Me.OPSI4.MinimumWidth = 6
         Me.OPSI4.Name = "OPSI4"
         Me.OPSI4.ReadOnly = True
-        Me.OPSI4.Width = 85
+        Me.OPSI4.Width = 87
         '
         'HARGA4
         '
         Me.HARGA4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
         Me.HARGA4.HeaderText = "Harga 4"
+        Me.HARGA4.MinimumWidth = 6
         Me.HARGA4.Name = "HARGA4"
         Me.HARGA4.ReadOnly = True
-        Me.HARGA4.Width = 97
+        Me.HARGA4.Width = 99
         '
         'OPSI5
         '
         Me.OPSI5.HeaderText = "Opsi 5"
+        Me.OPSI5.MinimumWidth = 6
         Me.OPSI5.Name = "OPSI5"
         Me.OPSI5.ReadOnly = True
-        Me.OPSI5.Width = 85
+        Me.OPSI5.Width = 87
         '
         'HARGA5
         '
         Me.HARGA5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
         Me.HARGA5.HeaderText = "Harga5"
+        Me.HARGA5.MinimumWidth = 6
         Me.HARGA5.Name = "HARGA5"
         Me.HARGA5.ReadOnly = True
-        Me.HARGA5.Width = 92
+        Me.HARGA5.Width = 94
         '
         'TGL_DISKON
         '
         Me.TGL_DISKON.HeaderText = "Tgl Diskon"
+        Me.TGL_DISKON.MinimumWidth = 6
         Me.TGL_DISKON.Name = "TGL_DISKON"
         Me.TGL_DISKON.ReadOnly = True
-        Me.TGL_DISKON.Width = 114
+        Me.TGL_DISKON.Width = 116
         '
         'DISKON
         '
         Me.DISKON.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
         Me.DISKON.HeaderText = "Diskon"
+        Me.DISKON.MinimumWidth = 6
         Me.DISKON.Name = "DISKON"
         Me.DISKON.ReadOnly = True
-        Me.DISKON.Width = 88
+        Me.DISKON.Width = 90
         '
         'Label5
         '
@@ -1136,6 +1153,7 @@ Partial Class FR_CETAK_LABEL
         DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.DGBARANG.RowHeadersDefaultCellStyle = DataGridViewCellStyle5
         Me.DGBARANG.RowHeadersVisible = False
+        Me.DGBARANG.RowHeadersWidth = 51
         DataGridViewCellStyle6.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.DGBARANG.RowsDefaultCellStyle = DataGridViewCellStyle6
         Me.DGBARANG.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -1167,10 +1185,11 @@ Partial Class FR_CETAK_LABEL
         Me.Controls.Add(Me.PNLEFT)
         Me.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "FR_CETAK_LABEL"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "e"
+        Me.Text = "MENU CETAK LABEL"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.PNLEFT.ResumeLayout(False)
         Me.PNLEFT.PerformLayout()

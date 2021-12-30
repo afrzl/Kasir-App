@@ -30,6 +30,7 @@ Partial Class FR_MASUK
         Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FR_MASUK))
         Me.PNCONTROL = New System.Windows.Forms.Panel()
         Me.BTNMINIMIZE = New System.Windows.Forms.Button()
         Me.BTNCLOSE = New System.Windows.Forms.Button()
@@ -1430,6 +1431,7 @@ Partial Class FR_MASUK
         Me.Controls.Add(Me.PNCONTENT)
         Me.Controls.Add(Me.PNLEFT)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "FR_MASUK"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "MENU BARANG MASUK"

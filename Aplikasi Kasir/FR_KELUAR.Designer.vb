@@ -26,6 +26,7 @@ Partial Class FR_KELUAR
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FR_KELUAR))
         Me.PNATAS = New System.Windows.Forms.Panel()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
@@ -84,6 +85,7 @@ Partial Class FR_KELUAR
         Me.TOTAL = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.PEWAKTU = New System.Windows.Forms.Timer(Me.components)
         Me.PRINTNOTA = New System.Drawing.Printing.PrintDocument()
+        Me.BTNINPUT = New System.Windows.Forms.Button()
         Me.PNATAS.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
@@ -264,6 +266,7 @@ Partial Class FR_KELUAR
         '
         Me.GroupBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox1.Controls.Add(Me.BTNINPUT)
         Me.GroupBox1.Controls.Add(Me.BTNCANCEL)
         Me.GroupBox1.Controls.Add(Me.Label6)
         Me.GroupBox1.Controls.Add(Me.TXTDISKON)
@@ -708,6 +711,20 @@ Partial Class FR_KELUAR
         'PRINTNOTA
         '
         '
+        'BTNINPUT
+        '
+        Me.BTNINPUT.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BTNINPUT.BackColor = System.Drawing.Color.DarkGreen
+        Me.BTNINPUT.FlatAppearance.BorderSize = 0
+        Me.BTNINPUT.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNINPUT.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BTNINPUT.Location = New System.Drawing.Point(1227, 92)
+        Me.BTNINPUT.Name = "BTNINPUT"
+        Me.BTNINPUT.Size = New System.Drawing.Size(109, 33)
+        Me.BTNINPUT.TabIndex = 16
+        Me.BTNINPUT.Text = "Input (Enter)"
+        Me.BTNINPUT.UseVisualStyleBackColor = False
+        '
         'FR_KELUAR
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(120.0!, 120.0!)
@@ -717,6 +734,7 @@ Partial Class FR_KELUAR
         Me.Controls.Add(Me.PNBAWAH)
         Me.Controls.Add(Me.PNATAS)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.KeyPreview = True
         Me.Name = "FR_KELUAR"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -800,4 +818,5 @@ Partial Class FR_KELUAR
     Friend WithEvents PRINTNOTA As Printing.PrintDocument
     Friend WithEvents BTNCANCEL As Button
     Friend WithEvents ALAMATTOKO As RichTextBox
+    Friend WithEvents BTNINPUT As Button
 End Class

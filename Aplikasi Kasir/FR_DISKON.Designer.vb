@@ -27,6 +27,7 @@ Partial Class FR_DISKON
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FR_DISKON))
         Me.DGTAMPIL = New System.Windows.Forms.DataGridView()
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.HapusToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -105,37 +106,44 @@ Partial Class FR_DISKON
         Me.DGTAMPIL.AllowUserToAddRows = False
         Me.DGTAMPIL.AllowUserToDeleteRows = False
         Me.DGTAMPIL.AllowUserToResizeColumns = False
+        Me.DGTAMPIL.AllowUserToResizeRows = False
         Me.DGTAMPIL.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DGTAMPIL.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
         DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
         DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
         DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.DGTAMPIL.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
-        Me.DGTAMPIL.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DGTAMPIL.ColumnHeadersHeight = 30
+        Me.DGTAMPIL.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
         Me.DGTAMPIL.ContextMenuStrip = Me.ContextMenuStrip1
         Me.DGTAMPIL.Location = New System.Drawing.Point(532, 98)
         Me.DGTAMPIL.Name = "DGTAMPIL"
         Me.DGTAMPIL.ReadOnly = True
         DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText
         DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
         DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.DGTAMPIL.RowHeadersDefaultCellStyle = DataGridViewCellStyle2
         Me.DGTAMPIL.RowHeadersVisible = False
+        Me.DGTAMPIL.RowHeadersWidth = 51
         DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.DGTAMPIL.RowsDefaultCellStyle = DataGridViewCellStyle3
         Me.DGTAMPIL.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.DGTAMPIL.RowTemplate.Height = 30
         Me.DGTAMPIL.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.DGTAMPIL.ShowCellErrors = False
+        Me.DGTAMPIL.ShowCellToolTips = False
+        Me.DGTAMPIL.ShowEditingIcon = False
+        Me.DGTAMPIL.ShowRowErrors = False
         Me.DGTAMPIL.Size = New System.Drawing.Size(552, 658)
         Me.DGTAMPIL.TabIndex = 22
         '
@@ -222,6 +230,8 @@ Partial Class FR_DISKON
         '
         Me.DGCARI.AllowUserToAddRows = False
         Me.DGCARI.AllowUserToDeleteRows = False
+        Me.DGCARI.AllowUserToResizeColumns = False
+        Me.DGCARI.AllowUserToResizeRows = False
         Me.DGCARI.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -229,14 +239,20 @@ Partial Class FR_DISKON
         Me.DGCARI.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGCARI.ContextMenuStrip = Me.ContextMenuStrip1
         Me.DGCARI.Location = New System.Drawing.Point(3, 35)
+        Me.DGCARI.MultiSelect = False
         Me.DGCARI.Name = "DGCARI"
         Me.DGCARI.ReadOnly = True
         Me.DGCARI.RowHeadersVisible = False
+        Me.DGCARI.RowHeadersWidth = 51
         DataGridViewCellStyle4.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.DGCARI.RowsDefaultCellStyle = DataGridViewCellStyle4
         Me.DGCARI.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.DGCARI.RowTemplate.Height = 30
         Me.DGCARI.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.DGCARI.ShowCellErrors = False
+        Me.DGCARI.ShowCellToolTips = False
+        Me.DGCARI.ShowEditingIcon = False
+        Me.DGCARI.ShowRowErrors = False
         Me.DGCARI.Size = New System.Drawing.Size(505, 256)
         Me.DGCARI.TabIndex = 23
         '
@@ -470,7 +486,7 @@ Partial Class FR_DISKON
         '
         Me.TXTTGLAKHIR.Location = New System.Drawing.Point(151, 143)
         Me.TXTTGLAKHIR.Name = "TXTTGLAKHIR"
-        Me.TXTTGLAKHIR.Size = New System.Drawing.Size(298, 30)
+        Me.TXTTGLAKHIR.Size = New System.Drawing.Size(343, 30)
         Me.TXTTGLAKHIR.TabIndex = 19
         Me.TXTTGLAKHIR.Visible = False
         '
@@ -478,7 +494,7 @@ Partial Class FR_DISKON
         '
         Me.TXTTGLAWAL.Location = New System.Drawing.Point(151, 101)
         Me.TXTTGLAWAL.Name = "TXTTGLAWAL"
-        Me.TXTTGLAWAL.Size = New System.Drawing.Size(298, 30)
+        Me.TXTTGLAWAL.Size = New System.Drawing.Size(343, 30)
         Me.TXTTGLAWAL.TabIndex = 18
         Me.TXTTGLAWAL.Visible = False
         '
@@ -897,6 +913,7 @@ Partial Class FR_DISKON
         Me.Controls.Add(Me.PNLEFT)
         Me.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.Name = "FR_DISKON"
         Me.Text = "MENU DISKON"

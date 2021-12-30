@@ -22,6 +22,7 @@ Partial Class FR_KELUAR_KEMBALIAN
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FR_KELUAR_KEMBALIAN))
         Me.PNCONTENT = New System.Windows.Forms.Panel()
         Me.BTNTUTUP = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
@@ -87,6 +88,7 @@ Partial Class FR_KELUAR_KEMBALIAN
         Me.ClientSize = New System.Drawing.Size(923, 282)
         Me.Controls.Add(Me.PNCONTENT)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "FR_KELUAR_KEMBALIAN"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "MENU BARANG KELUAR"

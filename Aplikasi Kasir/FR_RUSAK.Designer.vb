@@ -31,6 +31,7 @@ Partial Class FR_RUSAK
         Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FR_RUSAK))
         Me.Label4 = New System.Windows.Forms.Label()
         Me.PEWAKTU = New System.Windows.Forms.Timer(Me.components)
         Me.PNCONTENT = New System.Windows.Forms.Panel()
@@ -1062,6 +1063,7 @@ Partial Class FR_RUSAK
         Me.Controls.Add(Me.PNLEFT)
         Me.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "FR_RUSAK"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen

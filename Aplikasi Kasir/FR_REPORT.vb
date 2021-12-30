@@ -885,10 +885,6 @@ Public Class FR_REPORT
         BUKA_FORM(FR_KASIR_DASHBOARD)
     End Sub
 
-    Private Sub BTNRETURN_Click(sender As Object, e As EventArgs)
-        BUKA_FORM(FR_RETURN)
-    End Sub
-
     Private Sub BTNLABELKASIR_Click(sender As Object, e As EventArgs) Handles BTNLABELKASIR.Click
         BUKA_FORM(FR_CETAK_LABEL)
     End Sub
@@ -903,5 +899,9 @@ Public Class FR_REPORT
 
     Private Sub BTNSETTINGKASIR_Click(sender As Object, e As EventArgs) Handles BTNSETTINGKASIR.Click
         BUKA_FORM(FR_TENTANG)
+    End Sub
+
+    Private Sub BTNRETURN_Click(sender As Object, e As EventArgs) Handles BTNRETURN.Click
+        BUKA_FORM(FR_RETURN)
     End Sub
 End Class

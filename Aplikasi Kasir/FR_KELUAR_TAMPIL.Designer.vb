@@ -25,6 +25,7 @@ Partial Class FR_KELUAR_TAMPIL
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FR_KELUAR_TAMPIL))
         Me.PNTOP = New System.Windows.Forms.Panel()
         Me.PNCONTROL = New System.Windows.Forms.Panel()
         Me.BTNCLOSE = New System.Windows.Forms.Button()
@@ -143,6 +144,7 @@ Partial Class FR_KELUAR_TAMPIL
         DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.DGCARI.RowHeadersDefaultCellStyle = DataGridViewCellStyle2
         Me.DGCARI.RowHeadersVisible = False
+        Me.DGCARI.RowHeadersWidth = 51
         DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.DGCARI.RowsDefaultCellStyle = DataGridViewCellStyle3
         Me.DGCARI.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -170,6 +172,7 @@ Partial Class FR_KELUAR_TAMPIL
         Me.Controls.Add(Me.PNTOP)
         Me.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.Name = "FR_KELUAR_TAMPIL"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
