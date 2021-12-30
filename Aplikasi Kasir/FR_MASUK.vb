@@ -634,18 +634,18 @@ Public Class FR_MASUK
         textLeft.Alignment = StringAlignment.Near
         textRight.Alignment = StringAlignment.Far
         Dim WIDTH As Single = 150
-        Dim HEIGHT As Single = 100
+        Dim HEIGHT As Single = 75
         Dim JARAK As Single = (lebarKertas - WIDTH) / 2
 
-        Dim IMAGE As Image = IMAGE.FromStream(IMAGESTREAM)
+        Dim IMAGE As Image = Image.FromStream(IMAGESTREAM)
         e.Graphics.DrawImage(IMAGE, JARAK, BarisYangSama(), WIDTH, HEIGHT)
 
         e.Graphics.DrawString(NAMA_TOKO, fontJudul, Brushes.Black, lebarKertas / 2, BarisBaru(HEIGHT / jarakBaris), textCenter)
-        e.Graphics.DrawString(ALAMATTOKO.Text, fontRegular, Brushes.Black, New Rectangle(20, BarisBaru(1), lebarKertas - 30, BarisBaru(1)), textCenter)
+        e.Graphics.DrawString(ALAMATTOKO.Text, fontRegular, Brushes.Black, New Rectangle(20, BarisBaru(1), lebarKertas - 30, BarisYangSama), textCenter)
         e.Graphics.DrawString(NO_TOKO, fontRegular, Brushes.Black, lebarKertas / 2, BarisBaru(1), textCenter)
         BarisBaru(1)
 
-        e.Graphics.DrawString("PEMBELIAN BARANG", fontRegular, Brushes.Black, lebarKertas / 2, BarisBaru(1), textCenter)
+        e.Graphics.DrawString("BARANG MASUK", fontRegular, Brushes.Black, lebarKertas / 2, BarisBaru(1), textCenter)
 
         e.Graphics.DrawString(LBTGL.Text, fontRegular, Brushes.Black, (lebarKertas - marginRight), BarisBaru(1), textRight)
 
