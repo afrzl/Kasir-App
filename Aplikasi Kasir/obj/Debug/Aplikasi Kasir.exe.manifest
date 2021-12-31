@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Aplikasi Kasir.exe" size="2516912">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Aplikasi Kasir.exe" size="2515888">
       <assemblyIdentity name="Aplikasi Kasir" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>IXB1rnnTahZkoI/4KkhTQBjh2/R4kbyEf+8OlkcwH/c=</dsig:DigestValue>
+        <dsig:DigestValue>DNr4ac+hBbgU6QOdI6DTr+Hq4sWXcBy4jJ5BkmSccKI=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

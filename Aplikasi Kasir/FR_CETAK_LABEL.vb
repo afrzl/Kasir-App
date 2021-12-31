@@ -115,11 +115,6 @@ Public Class FR_CETAK_LABEL
         PEWAKTU.Enabled = True
         LBLUSER.Text = NAMA_LOGIN
         TAMPIL_BARANG()
-        If DGBARANG.Rows.Count > 0 Then
-            ID_CLICK = DGBARANG.Item(0, 0).Value
-        Else
-            ID_CLICK = ""
-        End If
     End Sub
 
     Dim TBL_DATA As New DataTable
@@ -204,12 +199,12 @@ Public Class FR_CETAK_LABEL
     Sub MASUK_DATA()
         Dim ADA_DATA As Boolean = False
 
-        If ID_CLICK = "" Then
+        If DGBARANG.Item(0, DGBARANG.CurrentRow.Index).Value = "" Then
             MsgBox("Tidak ada data yang dipilih!")
         Else
             For N = 0 To DGCETAK.Rows.Count - 1
                 Dim Kode As String = DGCETAK.Item("Kode", N).Value
-                If Kode = ID_CLICK Then
+                If Kode = DGBARANG.Item(0, DGBARANG.CurrentRow.Index).Value Then
                     ADA_DATA = True
                     Exit For
                 End If
@@ -231,7 +226,7 @@ Public Class FR_CETAK_LABEL
                     " Harga4," &
                     " End4," &
                     " Harga5" &
-                    " From tbl_barang WHERE Kode='" & ID_CLICK & "'"
+                    " From tbl_barang WHERE Kode='" & DGBARANG.Item(0, DGBARANG.CurrentRow.Index).Value & "'"
                 Dim CMD As SqlCommand
                 CMD = New SqlCommand(STR, CONN)
                 Dim RD As SqlDataReader
@@ -240,7 +235,7 @@ Public Class FR_CETAK_LABEL
                 If RD.HasRows Then
                     RD.Read()
                     DGCETAK.Rows.Add()
-                    DGCETAK.Rows(DGCETAK.Rows.Count - 1).Cells("KODE").Value = ID_CLICK
+                    DGCETAK.Rows(DGCETAK.Rows.Count - 1).Cells("KODE").Value = DGBARANG.Item(0, DGBARANG.CurrentRow.Index).Value
                     DGCETAK.Rows(DGCETAK.Rows.Count - 1).Cells("BARANG").Value = RD.Item("Barang")
                     DGCETAK.Rows(DGCETAK.Rows.Count - 1).Cells("SATUAN").Value = RD.Item("Satuan")
                     If RD.Item("End1") <> 0 Then
@@ -296,7 +291,7 @@ Public Class FR_CETAK_LABEL
                         " Tgl_awal AS 'Tanggal Awal'," &
                         " Tgl_akhir AS 'Tanggal Akhir'" &
                         " FROM tbl_diskon" &
-                        " WHERE Kode='" & ID_CLICK & "'" &
+                        " WHERE Kode='" & DGBARANG.Item(0, DGBARANG.CurrentRow.Index).Value & "'" &
                         " AND Jenis = 'B'" &
                         " AND Tgl_awal <= '" & TGL_SKRG & "'" &
                         " And Tgl_akhir >= '" & TGL_SKRG & "'"
@@ -326,38 +321,16 @@ Public Class FR_CETAK_LABEL
         MASUK_DATA()
     End Sub
 
-    Dim ID_CLICK As String
-    Private Sub DGBARANG_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGBARANG.CellClick
-        On Error Resume Next
-        ID_CLICK = DGBARANG.Item(0, e.RowIndex).Value
-    End Sub
-
-    Private Sub TXTCARI_TextChanged(sender As Object, e As EventArgs) Handles TXTCARI.TextChanged
-        TAMPIL_BARANG()
-        If DGBARANG.Rows.Count > 0 Then
-            ID_CLICK = DGBARANG.Item(0, 0).Value
-        Else
-            ID_CLICK = ""
-        End If
-    End Sub
-
-    Dim ID_CETAK_CLICK As Integer
-
     Private Sub BTNKELUARDG_Click(sender As Object, e As EventArgs) Handles BTNKELUARDG.Click
         Dim BARIS_DATA As Integer = 0
         For N = 0 To DGCETAK.Rows.Count - 1
             Dim Kode As String = DGCETAK.Item("KODE", N).Value
-            If Kode = ID_CETAK_CLICK Then
+            If Kode = DGCETAK.Item(0, DGCETAK.CurrentRow.Index).Value Then
                 BARIS_DATA = N
                 Exit For
             End If
         Next
         DGCETAK.Rows.RemoveAt(BARIS_DATA)
-    End Sub
-
-    Private Sub DGCETAK_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGCETAK.CellClick
-        On Error Resume Next
-        ID_CETAK_CLICK = DGCETAK.Item(0, e.RowIndex).Value
     End Sub
 
     Private Sub BTNPRINT_Click(sender As Object, e As EventArgs) Handles BTNPRINT.Click
@@ -758,5 +731,12 @@ Public Class FR_CETAK_LABEL
 
     Private Sub BTNSETTINGKASIR_Click(sender As Object, e As EventArgs) Handles BTNSETTINGKASIR.Click
         BUKA_FORM(FR_TENTANG)
+    End Sub
+
+    Private Sub DGBARANG_KeyDown(sender As Object, e As KeyEventArgs) Handles DGBARANG.KeyDown
+        If (e.KeyCode = Keys.Enter) Then
+            e.Handled = True
+            MASUK_DATA()
+        End If
     End Sub
 End Class

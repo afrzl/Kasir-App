@@ -337,6 +337,8 @@ Public Class FR_RETURN
         Select Case e.KeyCode
             Case Keys.F1
                 TAMPIL_PNCARI()
+            Case Keys.Enter
+                DGCARI.Select()
         End Select
     End Sub
 
@@ -344,6 +346,14 @@ Public Class FR_RETURN
         Select Case e.KeyCode
             Case Keys.F1
                 TAMPIL_PNCARI()
+            Case Keys.Enter
+                e.Handled = True
+                DGCARI.CurrentCell = DGCARI.Rows(DGCARI.CurrentRow.Index).Cells(0)
+                TXTID.Text = DGCARI.SelectedCells(0).Value
+                BTNCARI.Text = "Cari (F1)"
+                TXTID.Select()
+                PNCARI.Visible = False
+                DGCARI.DataSource = Nothing
         End Select
     End Sub
 

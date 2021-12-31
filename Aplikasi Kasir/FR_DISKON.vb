@@ -220,7 +220,7 @@ Public Class FR_DISKON
 
     Private Sub TXTKODE_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTKODE.KeyPress
         If e.KeyChar = Chr(13) Then
-            TXTTGLAWAL.Select()
+            TXTDISKON.Select()
         End If
     End Sub
 
@@ -263,6 +263,7 @@ Public Class FR_DISKON
         BTNCARI.Text = "Cari (F1)"
         PNCARI.Visible = False
         DGCARI.DataSource = Nothing
+        TXTKODE.Select()
     End Sub
 
     Private Sub TXTTGLAKHIR_ValueChanged(sender As Object, e As EventArgs) Handles TXTTGLAKHIR.ValueChanged
@@ -311,18 +312,6 @@ Public Class FR_DISKON
     Private Sub TXTTGLAKHIR_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTTGLAKHIR.KeyPress
         If e.KeyChar = Chr(13) Then
             TXTDISKON.Select()
-        End If
-    End Sub
-
-    Private Sub DGCARI_KeyPress(sender As Object, e As KeyPressEventArgs) Handles DGCARI.KeyPress
-        On Error Resume Next
-        If e.KeyChar = ChrW(Keys.Enter) Then
-            DGCARI.CurrentCell = DGCARI.Rows(DGCARI.CurrentRow.Index - 1).Cells(0)
-            TXTKODE.Text = DGCARI.SelectedCells(0).Value
-            BTNCARI.Text = "Cari (F1)"
-            PNCARI.Visible = False
-            DGCARI.DataSource = Nothing
-            TXTTGLAWAL.Select()
         End If
     End Sub
 
@@ -443,7 +432,7 @@ Public Class FR_DISKON
     Private Sub CBJENIS_KeyPress(sender As Object, e As KeyPressEventArgs) Handles CBJENIS.KeyPress
         If e.KeyChar = Chr(13) Then
             If CBJENIS.SelectedIndex = 0 Then
-                TXTTGLAWAL.Select()
+                TXTKODE.Select()
             ElseIf CBJENIS.SelectedIndex = 1 Then
                 TXTMIN.Select()
             End If
@@ -488,5 +477,17 @@ Public Class FR_DISKON
 
     Private Sub BTNKASIR_Click(sender As Object, e As EventArgs) Handles BTNKASIR.Click
         BUKA_FORM(FR_KASIR)
+    End Sub
+
+    Private Sub DGCARI_KeyDown(sender As Object, e As KeyEventArgs) Handles DGCARI.KeyDown
+        If (e.KeyCode = Keys.Enter) Then
+            e.Handled = True
+            DGCARI.CurrentCell = DGCARI.Rows(DGCARI.CurrentRow.Index).Cells(0)
+            TXTKODE.Text = DGCARI.SelectedCells(0).Value
+            BTNCARI.Text = "Cari (F1)"
+            PNCARI.Visible = False
+            DGCARI.DataSource = Nothing
+            TXTKODE.Select()
+        End If
     End Sub
 End Class

@@ -91,16 +91,9 @@ Public Class FR_KELUAR_TAMPIL
         TAMPIL()
     End Sub
 
-    Private Sub DGCARI_KeyPress(sender As Object, e As KeyPressEventArgs) Handles DGCARI.KeyPress
-        On Error Resume Next
-        If e.KeyChar = ChrW(Keys.Enter) And DGCARI.Rows.Count - 1 = DGCARI.CurrentRow.Index Then
-            DGCARI.CurrentCell = DGCARI.Rows(DGCARI.CurrentRow.Index).Cells(0)
-            FR_KELUAR.TXTKODE.Text = DGCARI.SelectedCells(0).Value
-            FR_KELUAR.TXTKODE.Select()
-            FR_KELUAR.Enabled = True
-            Me.Close()
-        ElseIf e.KeyChar = ChrW(Keys.Enter) Then
-            DGCARI.CurrentCell = DGCARI.Rows(DGCARI.CurrentRow.Index - 1).Cells(0)
+    Private Sub DGCARI_KeyDown(sender As Object, e As KeyEventArgs) Handles DGCARI.KeyDown
+        If (e.KeyCode = Keys.Enter) Then
+            e.Handled = True
             DGCARI.CurrentCell = DGCARI.Rows(DGCARI.CurrentRow.Index).Cells(0)
             FR_KELUAR.TXTKODE.Text = DGCARI.SelectedCells(0).Value
             FR_KELUAR.TXTKODE.Select()
