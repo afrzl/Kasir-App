@@ -11,10 +11,12 @@ Public Class FR_PRODUK
     End Sub
 
     Private Sub BTNLOGOUT_Click(sender As Object, e As EventArgs) Handles BTNLOGOUT.Click
-        Dim FR As New FR_LOGIN
-        My.Settings.ID_ACCOUNT = 0
-        FR.Show()
-        Me.Close()
+        If MsgBox("Apakah anda yakin akan logout?", vbYesNo) = vbYes Then
+            Dim FR As New FR_LOGIN
+            My.Settings.ID_ACCOUNT = 0
+            FR.Show()
+            Me.Close()
+        End If
     End Sub
 
     Private Sub BTNCLOSE_Click(sender As Object, e As EventArgs) Handles BTNCLOSE.Click
@@ -90,14 +92,9 @@ Public Class FR_PRODUK
             TXTNAMA.Select()
         End If
 
-        Dim KeyAscii As Short = Asc(e.KeyChar)
-        If (e.KeyChar Like "[A-Z, a-z]" _
-            OrElse e.KeyChar Like "[0-9]" _
-            OrElse KeyAscii = Keys.Back) Then
-            KeyAscii = 0
+        If e.KeyChar = "'" Then
+            e.Handled = True
         End If
-
-        e.Handled = CBool(KeyAscii)
     End Sub
 
     Private Sub TXTNAMA_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTNAMA.KeyPress
@@ -105,14 +102,9 @@ Public Class FR_PRODUK
             CBSATUAN.Select()
         End If
 
-        Dim KeyAscii As Short = Asc(e.KeyChar)
-        If (e.KeyChar Like "[A-Z, a-z]" _
-            OrElse e.KeyChar Like "[0-9]" _
-            OrElse KeyAscii = Keys.Back) Then
-            KeyAscii = 0
+        If e.KeyChar = "'" Then
+            e.Handled = True
         End If
-
-        e.Handled = CBool(KeyAscii)
     End Sub
 
     Private Sub CBSATUAN_KeyPress(sender As Object, e As KeyPressEventArgs) Handles CBSATUAN.KeyPress
@@ -651,5 +643,11 @@ Public Class FR_PRODUK
 
     Private Sub BTNKASIR_Click(sender As Object, e As EventArgs) Handles BTNKASIR.Click
         BUKA_FORM(FR_KASIR)
+    End Sub
+
+    Private Sub TXTCARI_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTCARI.KeyPress
+        If e.KeyChar = "'" Then
+            e.Handled = True
+        End If
     End Sub
 End Class

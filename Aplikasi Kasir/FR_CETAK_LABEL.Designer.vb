@@ -961,11 +961,12 @@ Partial Class FR_CETAK_LABEL
         '
         'BARANG
         '
-        Me.BARANG.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.BARANG.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
         Me.BARANG.HeaderText = "Nama Barang"
         Me.BARANG.MinimumWidth = 6
         Me.BARANG.Name = "BARANG"
         Me.BARANG.ReadOnly = True
+        Me.BARANG.Width = 144
         '
         'SATUAN
         '

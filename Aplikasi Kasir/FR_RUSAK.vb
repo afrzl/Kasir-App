@@ -249,7 +249,7 @@ Public Class FR_RUSAK
             RD.Close()
 
             STR = "INSERT INTO tbl_transaksi_parent" &
-                " (Id_trans, Id_kasir, Tgl, Jenis, Person, Harga, Diskon, Jumlah_item)" &
+                " (Id_trans, Id_kasir, Tgl, Jenis, Person, Harga, Diskon, Jumlah_item, Harga_total)" &
                 " VALUES('" & ID_TRANS & "'," &
                 " '" & My.Settings.ID_ACCOUNT & "'," &
                 " '" & Format(Date.Now, "MM/dd/yyyy HH:mm:ss") & "'," &
@@ -257,7 +257,8 @@ Public Class FR_RUSAK
                 " '" & SUPPLIER & "'," &
                 " 0," &
                 " 0," &
-                " " & TXTQTY.Text.Replace(",", ".") & ")"
+                " " & TXTQTY.Text.Replace(",", ".") & "," &
+                " 0)"
             CMD = New SqlCommand(STR, CONN)
             CMD.ExecuteNonQuery()
 
@@ -304,6 +305,9 @@ Public Class FR_RUSAK
     Private Sub TXTID_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTID.KeyPress
         If e.KeyChar = Chr(13) Then
             CBKODE.Select()
+        End If
+        If e.KeyChar = "'" Then
+            e.Handled = True
         End If
     End Sub
 
@@ -383,10 +387,12 @@ Public Class FR_RUSAK
     End Sub
 
     Private Sub BTNLOGOUT_Click(sender As Object, e As EventArgs) Handles BTNLOGOUT.Click
-        Dim FR As New FR_LOGIN
-        My.Settings.ID_ACCOUNT = 0
-        FR.Show()
-        Me.Close()
+        If MsgBox("Apakah anda yakin akan logout?", vbYesNo) = vbYes Then
+            Dim FR As New FR_LOGIN
+            My.Settings.ID_ACCOUNT = 0
+            FR.Show()
+            Me.Close()
+        End If
     End Sub
 
     Sub CARI_HARGA()
@@ -561,5 +567,17 @@ Public Class FR_RUSAK
                 PNCARI.Visible = False
                 DGCARI.DataSource = Nothing
         End Select
+    End Sub
+
+    Private Sub TXTCARI_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTCARI.KeyPress
+        If e.KeyChar = "'" Then
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub TXTCARI_TRANS_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTCARI_TRANS.KeyPress
+        If e.KeyChar = "'" Then
+            e.Handled = True
+        End If
     End Sub
 End Class

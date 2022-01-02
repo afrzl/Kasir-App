@@ -103,6 +103,9 @@ Public Class FR_LOGIN
         If e.KeyChar = Chr(13) Then
             BTNLOGIN.Select()
         End If
+        If e.KeyChar = "'" Then
+            e.Handled = True
+        End If
     End Sub
 
     Private Sub BTNMINIMIZE_Click(sender As Object, e As EventArgs) Handles BTNMINIMIZE.Click

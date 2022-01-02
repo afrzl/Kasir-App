@@ -295,11 +295,17 @@ Public Class FR_TENTANG
         If e.KeyChar = Chr(13) Then
             TXTALAMAT.Select()
         End If
+        If e.KeyChar = "'" Then
+            e.Handled = True
+        End If
     End Sub
 
     Private Sub TXTALAMAT_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTALAMAT.KeyPress
         If e.KeyChar = Chr(13) Then
             TXTJK.Select()
+        End If
+        If e.KeyChar = "'" Then
+            e.Handled = True
         End If
     End Sub
 
@@ -386,11 +392,17 @@ Public Class FR_TENTANG
         If e.KeyChar = Chr(13) Then
             TXTALAMATTOKO.Select()
         End If
+        If e.KeyChar = "'" Then
+            e.Handled = True
+        End If
     End Sub
 
     Private Sub TXTALAMATTOKO_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTALAMATTOKO.KeyPress
         If e.KeyChar = Chr(13) Then
             TXTNOTOKO.Select()
+        End If
+        If e.KeyChar = "'" Then
+            e.Handled = True
         End If
     End Sub
 
@@ -414,10 +426,12 @@ Public Class FR_TENTANG
     End Sub
 
     Private Sub BTNLOGOUT_Click(sender As Object, e As EventArgs) Handles BTNLOGOUT.Click
-        Dim FR As New FR_LOGIN
-        My.Settings.ID_ACCOUNT = 0
-        FR.Show()
-        Me.Close()
+        If MsgBox("Apakah anda yakin akan logout?", vbYesNo) = vbYes Then
+            Dim FR As New FR_LOGIN
+            My.Settings.ID_ACCOUNT = 0
+            FR.Show()
+            Me.Close()
+        End If
     End Sub
 
     Private Sub BTNKASIR_Click(sender As Object, e As EventArgs) Handles BTNKASIR.Click

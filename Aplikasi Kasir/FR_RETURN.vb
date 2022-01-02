@@ -228,6 +228,9 @@ Public Class FR_RETURN
         If e.KeyChar = Chr(13) Then
             CBKODE.Select()
         End If
+        If e.KeyChar = "'" Then
+            e.Handled = True
+        End If
     End Sub
 
     Private Sub CBKODE_KeyPress(sender As Object, e As KeyPressEventArgs) Handles CBKODE.KeyPress
@@ -403,10 +406,12 @@ Public Class FR_RETURN
     End Sub
 
     Private Sub BTNLOGOUT_Click(sender As Object, e As EventArgs) Handles BTNLOGOUT.Click
-        Dim FR As New FR_LOGIN
-        My.Settings.ID_ACCOUNT = 0
-        FR.Show()
-        Me.Close()
+        If MsgBox("Apakah anda yakin akan logout?", vbYesNo) = vbYes Then
+            Dim FR As New FR_LOGIN
+            My.Settings.ID_ACCOUNT = 0
+            FR.Show()
+            Me.Close()
+        End If
     End Sub
 
     Private Sub CBKODE_Leave(sender As Object, e As EventArgs) Handles CBKODE.Leave
@@ -501,5 +506,17 @@ Public Class FR_RETURN
 
     Private Sub BTNSETTINGKASIR_Click(sender As Object, e As EventArgs) Handles BTNSETTINGKASIR.Click
         BUKA_FORM(FR_TENTANG)
+    End Sub
+
+    Private Sub TXTCARI_TRANS_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTCARI_TRANS.KeyPress
+        If e.KeyChar = "'" Then
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub TXTCARI_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTCARI.KeyPress
+        If e.KeyChar = "'" Then
+            e.Handled = True
+        End If
     End Sub
 End Class

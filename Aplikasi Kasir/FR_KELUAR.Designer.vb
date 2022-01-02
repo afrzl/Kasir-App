@@ -43,6 +43,7 @@ Partial Class FR_KELUAR
         Me.ALAMATTOKO = New System.Windows.Forms.RichTextBox()
         Me.LBTOTAL = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.BTNINPUT = New System.Windows.Forms.Button()
         Me.BTNCANCEL = New System.Windows.Forms.Button()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.TXTDISKON = New System.Windows.Forms.TextBox()
@@ -85,7 +86,6 @@ Partial Class FR_KELUAR
         Me.TOTAL = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.PEWAKTU = New System.Windows.Forms.Timer(Me.components)
         Me.PRINTNOTA = New System.Drawing.Printing.PrintDocument()
-        Me.BTNINPUT = New System.Windows.Forms.Button()
         Me.PNATAS.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
@@ -291,6 +291,20 @@ Partial Class FR_KELUAR
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Data Barang"
+        '
+        'BTNINPUT
+        '
+        Me.BTNINPUT.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BTNINPUT.BackColor = System.Drawing.Color.DarkGreen
+        Me.BTNINPUT.FlatAppearance.BorderSize = 0
+        Me.BTNINPUT.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNINPUT.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BTNINPUT.Location = New System.Drawing.Point(1227, 92)
+        Me.BTNINPUT.Name = "BTNINPUT"
+        Me.BTNINPUT.Size = New System.Drawing.Size(109, 33)
+        Me.BTNINPUT.TabIndex = 16
+        Me.BTNINPUT.Text = "Input (Enter)"
+        Me.BTNINPUT.UseVisualStyleBackColor = False
         '
         'BTNCANCEL
         '
@@ -710,20 +724,6 @@ Partial Class FR_KELUAR
         '
         'PRINTNOTA
         '
-        '
-        'BTNINPUT
-        '
-        Me.BTNINPUT.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BTNINPUT.BackColor = System.Drawing.Color.DarkGreen
-        Me.BTNINPUT.FlatAppearance.BorderSize = 0
-        Me.BTNINPUT.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BTNINPUT.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.BTNINPUT.Location = New System.Drawing.Point(1227, 92)
-        Me.BTNINPUT.Name = "BTNINPUT"
-        Me.BTNINPUT.Size = New System.Drawing.Size(109, 33)
-        Me.BTNINPUT.TabIndex = 16
-        Me.BTNINPUT.Text = "Input (Enter)"
-        Me.BTNINPUT.UseVisualStyleBackColor = False
         '
         'FR_KELUAR
         '

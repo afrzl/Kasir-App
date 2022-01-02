@@ -107,14 +107,9 @@ Public Class FR_KELUAR_TAMPIL
             DGCARI.Select()
         End If
 
-        Dim KeyAscii As Short = Asc(e.KeyChar)
-        If (e.KeyChar Like "[A-Z, a-z]" _
-            OrElse e.KeyChar Like "[0-9]" _
-            OrElse KeyAscii = Keys.Back) Then
-            KeyAscii = 0
+        If e.KeyChar = "'" Then
+            e.Handled = True
         End If
-
-        e.Handled = CBool(KeyAscii)
     End Sub
 
     Private Sub FR_KELUAR_TAMPIL_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown

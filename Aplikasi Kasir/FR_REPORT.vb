@@ -28,10 +28,12 @@ Public Class FR_REPORT
     End Sub
 
     Private Sub BTNLOGOUT_Click(sender As Object, e As EventArgs) Handles BTNLOGOUT.Click
-        Dim FR As New FR_LOGIN
-        My.Settings.ID_ACCOUNT = 0
-        FR.Show()
-        Me.Close()
+        If MsgBox("Apakah anda yakin akan logout?", vbYesNo) = vbYes Then
+            Dim FR As New FR_LOGIN
+            My.Settings.ID_ACCOUNT = 0
+            FR.Show()
+            Me.Close()
+        End If
     End Sub
 
     Private Sub FR_REPORT_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -81,6 +83,8 @@ Public Class FR_REPORT
         LBLUSER.Text = NAMA_LOGIN
 
         KONDISI_AWAL()
+
+        CRV.Refresh()
     End Sub
 
 
@@ -430,8 +434,6 @@ Public Class FR_REPORT
                     End Select
                 Case 3
                     Select Case CBJENIS.SelectedIndex
-                        Case 0
-                ' sementara tidak ada
                         Case 1
                             TOTALITEM = Convert.ToDouble(TBL.Compute("SUM(Jumlah_item)", ""))
                             For N = 1 To TBL.Rows.Count - 1
@@ -509,6 +511,7 @@ Public Class FR_REPORT
                 Case 1
                     Select Case CBJENIS.SelectedIndex
                         Case 0
+                            CRV.Refresh()
                             Dim RPT As New RPT_STOK
                             With RPT
                                 .SetDataSource(TBL)
@@ -519,6 +522,7 @@ Public Class FR_REPORT
                             BTNEXPORT.Visible = True
                             CRV.ReportSource = RPT
                         Case 1
+                            CRV.Refresh()
                             Dim RPT As New RPT_MASUK
                             With RPT
                                 .SetDataSource(TBL)
@@ -532,6 +536,7 @@ Public Class FR_REPORT
                             BTNEXPORT.Visible = True
                             CRV.ReportSource = RPT
                         Case 2
+                            CRV.Refresh()
                             Dim RPT As New RPT_KELUAR
                             With RPT
                                 .SetDataSource(TBL)
@@ -545,6 +550,7 @@ Public Class FR_REPORT
                             BTNEXPORT.Visible = True
                             CRV.ReportSource = RPT
                         Case 3
+                            CRV.Refresh()
                             Dim RPT As New RPT_PENJUALAN_HARIAN
                             With RPT
                                 .SetDataSource(TBL)
@@ -556,6 +562,7 @@ Public Class FR_REPORT
                             BTNEXPORT.Visible = True
                             CRV.ReportSource = RPT
                         Case 4
+                            CRV.Refresh()
                             Dim RPT As New RPT_PENJUALAN_BARANG
                             With RPT
                                 .SetDataSource(TBL)
@@ -567,6 +574,7 @@ Public Class FR_REPORT
                             BTNEXPORT.Visible = True
                             CRV.ReportSource = RPT
                         Case 5
+                            CRV.Refresh()
                             Dim RPT As New RPT_GRAFIK_PENJUALAN_HARIAN
                             With RPT
                                 .SetDataSource(TBL)
@@ -579,6 +587,7 @@ Public Class FR_REPORT
                             BTNEXPORT.Visible = True
                             CRV.ReportSource = RPT
                         Case 6
+                            CRV.Refresh()
                             Dim RPT As New RPT_GRAFIK_PENJUALAN_BULANAN
                             With RPT
                                 .SetDataSource(TBL)
@@ -591,6 +600,7 @@ Public Class FR_REPORT
                             BTNEXPORT.Visible = True
                             CRV.ReportSource = RPT
                         Case 7
+                            CRV.Refresh()
                             Dim RPT As New RPT_GRAFIK_PENJUALAN_BARANG_HARIAN
                             With RPT
                                 .SetDataSource(TBL)
@@ -603,6 +613,7 @@ Public Class FR_REPORT
                             BTNEXPORT.Visible = True
                             CRV.ReportSource = RPT
                         Case 8
+                            CRV.Refresh()
                             Dim RPT As New RPT_GRAFIK_LABA_HARIAN
                             With RPT
                                 .SetDataSource(TBL)
@@ -615,6 +626,7 @@ Public Class FR_REPORT
                             BTNEXPORT.Visible = True
                             CRV.ReportSource = RPT
                         Case 9
+                            CRV.Refresh()
                             Dim RPT As New RPT_GRAFIK_LABA_BULANAN
                             With RPT
                                 .SetDataSource(TBL)
@@ -630,6 +642,7 @@ Public Class FR_REPORT
                 Case 2
                     Select Case CBJENIS.SelectedIndex
                         Case 0
+                            CRV.Refresh()
                             Dim RPT As New RPT_STOK
                             With RPT
                                 .SetDataSource(TBL)
@@ -640,6 +653,7 @@ Public Class FR_REPORT
                             BTNEXPORT.Visible = True
                             CRV.ReportSource = RPT
                         Case 1
+                            CRV.Refresh()
                             Dim RPT As New RPT_MASUK_OPS
                             With RPT
                                 .SetDataSource(TBL)
@@ -653,6 +667,7 @@ Public Class FR_REPORT
                             BTNEXPORT.Visible = True
                             CRV.ReportSource = RPT
                         Case 2
+                            CRV.Refresh()
                             Dim RPT As New RPT_KELUAR_KASIR
                             With RPT
                                 .SetDataSource(TBL)
@@ -669,6 +684,7 @@ Public Class FR_REPORT
                 Case 3
                     Select Case CBJENIS.SelectedIndex
                         Case 0
+                            CRV.Refresh()
                             Dim RPT As New RPT_STOK
                             With RPT
                                 .SetDataSource(TBL)
@@ -679,6 +695,7 @@ Public Class FR_REPORT
                             BTNEXPORT.Visible = True
                             CRV.ReportSource = RPT
                         Case 1
+                            CRV.Refresh()
                             Dim RPT As New RPT_KELUAR_KASIR
                             With RPT
                                 .SetDataSource(TBL)

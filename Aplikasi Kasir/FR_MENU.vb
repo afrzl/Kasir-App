@@ -37,10 +37,12 @@ Public Class FR_MENU
     End Sub
 
     Private Sub BTNLOGOUT_Click(sender As Object, e As EventArgs) Handles BTNLOGOUT.Click
-        Dim FR As New FR_LOGIN
-        My.Settings.ID_ACCOUNT = 0
-        FR.Show()
-        Me.Close()
+        If MsgBox("Apakah anda yakin akan logout?", vbYesNo) = vbYes Then
+            Dim FR As New FR_LOGIN
+            My.Settings.ID_ACCOUNT = 0
+            FR.Show()
+            Me.Close()
+        End If
     End Sub
 
     Sub TAMPIL()
@@ -157,14 +159,9 @@ Public Class FR_MENU
     End Sub
 
     Private Sub TXTCARISTOK_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTCARISTOK.KeyPress
-        Dim KeyAscii As Short = Asc(e.KeyChar)
-        If (e.KeyChar Like "[A-Z, a-z]" _
-            OrElse e.KeyChar Like "[0-9]" _
-            OrElse KeyAscii = Keys.Back) Then
-            KeyAscii = 0
+        If e.KeyChar = "'" Then
+            e.Handled = True
         End If
-
-        e.Handled = CBool(KeyAscii)
     End Sub
 
     Private Sub BTNLABELADMIN_Click(sender As Object, e As EventArgs) Handles BTNLABELADMIN.Click

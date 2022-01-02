@@ -180,10 +180,12 @@ Public Class FR_CETAK_LABEL
     End Sub
 
     Private Sub BTNLOGOUT_Click(sender As Object, e As EventArgs) Handles BTNLOGOUT.Click
-        Dim FR As New FR_LOGIN
-        My.Settings.ID_ACCOUNT = 0
-        FR.Show()
-        Me.Close()
+        If MsgBox("Apakah anda yakin akan logout?", vbYesNo) = vbYes Then
+            Dim FR As New FR_LOGIN
+            My.Settings.ID_ACCOUNT = 0
+            FR.Show()
+            Me.Close()
+        End If
     End Sub
 
     Private Sub BTNPREV_Click(sender As Object, e As EventArgs) Handles BTNPREV.Click
@@ -738,5 +740,15 @@ Public Class FR_CETAK_LABEL
             e.Handled = True
             MASUK_DATA()
         End If
+    End Sub
+
+    Private Sub TXTCARI_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTCARI.KeyPress
+        If e.KeyChar = "'" Then
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub TXTCARI_TextChanged(sender As Object, e As EventArgs) Handles TXTCARI.TextChanged
+        TAMPIL_BARANG()
     End Sub
 End Class

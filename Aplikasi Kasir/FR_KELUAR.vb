@@ -551,14 +551,9 @@ Public Class FR_KELUAR
             RD.Close()
         End If
 
-        Dim KeyAscii As Short = Asc(e.KeyChar)
-        If (e.KeyChar Like "[A-Z, a-z]" _
-            OrElse e.KeyChar Like "[0-9]" _
-            OrElse KeyAscii = Keys.Back) Then
-            KeyAscii = 0
+        If e.KeyChar = "'" Then
+            e.Handled = True
         End If
-
-        e.Handled = CBool(KeyAscii)
     End Sub
 
     Sub CARI_DATA()
@@ -861,5 +856,11 @@ Public Class FR_KELUAR
             End If
         End If
 
+    End Sub
+
+    Private Sub TXTPEMBELI_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTPEMBELI.KeyPress
+        If e.KeyChar = "'" Then
+            e.Handled = True
+        End If
     End Sub
 End Class

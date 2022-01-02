@@ -10,10 +10,12 @@ Public Class FR_DISKON
     End Sub
 
     Private Sub BTNLOGOUT_Click(sender As Object, e As EventArgs) Handles BTNLOGOUT.Click
-        Dim FR As New FR_LOGIN
-        My.Settings.ID_ACCOUNT = 0
-        FR.Show()
-        Me.Close()
+        If MsgBox("Apakah anda yakin akan logout?", vbYesNo) = vbYes Then
+            Dim FR As New FR_LOGIN
+            My.Settings.ID_ACCOUNT = 0
+            FR.Show()
+            Me.Close()
+        End If
     End Sub
 
     Private Sub BTNCLOSE_Click(sender As Object, e As EventArgs) Handles BTNCLOSE.Click
@@ -173,7 +175,8 @@ Public Class FR_DISKON
 
     Sub CARI_BARANG()
         Dim STR As String = "SELECT RTRIM(Kode) AS Kode,RTRIM(Barang) AS Barang" &
-            " FROM tbl_barang WHERE Barang Like '%" & TXTCARI_BARANG.Text & "%'"
+            " FROM tbl_barang WHERE Barang Like '%" & TXTCARI_BARANG.Text & "%'" &
+            " ORDER BY Barang ASC"
         Dim DA As SqlDataAdapter
         DA = New SqlDataAdapter(STR, CONN)
         Dim TBL As New DataTable
@@ -318,6 +321,9 @@ Public Class FR_DISKON
     Private Sub TXTCARI_BARANG_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTCARI_BARANG.KeyPress
         If e.KeyChar = Chr(13) Then
             DGCARI.Select()
+        End If
+        If e.KeyChar = "'" Then
+            e.Handled = True
         End If
     End Sub
 
@@ -480,14 +486,22 @@ Public Class FR_DISKON
     End Sub
 
     Private Sub DGCARI_KeyDown(sender As Object, e As KeyEventArgs) Handles DGCARI.KeyDown
+        On Error Resume Next
         If (e.KeyCode = Keys.Enter) Then
             e.Handled = True
             DGCARI.CurrentCell = DGCARI.Rows(DGCARI.CurrentRow.Index).Cells(0)
+
             TXTKODE.Text = DGCARI.SelectedCells(0).Value
             BTNCARI.Text = "Cari (F1)"
             PNCARI.Visible = False
             DGCARI.DataSource = Nothing
             TXTKODE.Select()
+        End If
+    End Sub
+
+    Private Sub CBTAMPIL_KeyPress(sender As Object, e As KeyPressEventArgs) Handles CBTAMPIL.KeyPress
+        If e.KeyChar = "'" Then
+            e.Handled = True
         End If
     End Sub
 End Class

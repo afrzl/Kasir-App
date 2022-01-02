@@ -15,10 +15,12 @@ Public Class FR_MASUK
     End Sub
 
     Private Sub BTNLOGOUT_Click(sender As Object, e As EventArgs) Handles BTNLOGOUT.Click
-        Dim FR As New FR_LOGIN
-        My.Settings.ID_ACCOUNT = 0
-        FR.Show()
-        Me.Close()
+        If MsgBox("Apakah anda yakin akan logout?", vbYesNo) = vbYes Then
+            Dim FR As New FR_LOGIN
+            My.Settings.ID_ACCOUNT = 0
+            FR.Show()
+            Me.Close()
+        End If
     End Sub
 
     Private Sub BTNCLOSE_Click(sender As Object, e As EventArgs) Handles BTNCLOSE.Click
@@ -317,6 +319,9 @@ Public Class FR_MASUK
         If e.KeyChar = Chr(13) Then
             TXTJUMLAH.Select()
         End If
+        If e.KeyChar = "'" Then
+            e.Handled = True
+        End If
     End Sub
 
     Private Sub TXTJUMLAH_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTJUMLAH.KeyPress
@@ -332,6 +337,9 @@ Public Class FR_MASUK
     Private Sub TXTSUPPLIER_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTSUPPLIER.KeyPress
         If e.KeyChar = Chr(13) Then
             TXTKODE.Select()
+        End If
+        If e.KeyChar = "'" Then
+            e.Handled = True
         End If
     End Sub
 
@@ -468,6 +476,9 @@ Public Class FR_MASUK
     Private Sub TXTCARI_BARANG_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTCARI_BARANG.KeyPress
         If e.KeyChar = Chr(13) Then
             DGCARI.Select()
+        End If
+        If e.KeyChar = "'" Then
+            e.Handled = True
         End If
     End Sub
 
@@ -917,6 +928,12 @@ Public Class FR_MASUK
             TXTKODE.Select()
             PNCARI.Visible = False
             DGCARI.DataSource = Nothing
+        End If
+    End Sub
+
+    Private Sub TXTCARI_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTCARI.KeyPress
+        If e.KeyChar = "'" Then
+            e.Handled = True
         End If
     End Sub
 End Class
