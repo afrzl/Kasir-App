@@ -810,12 +810,13 @@ Partial Class FR_REPORT
         '
         'BTNEXPORT
         '
+        Me.BTNEXPORT.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BTNEXPORT.BackColor = System.Drawing.Color.Navy
         Me.BTNEXPORT.FlatAppearance.BorderSize = 0
         Me.BTNEXPORT.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.BTNEXPORT.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BTNEXPORT.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.BTNEXPORT.Location = New System.Drawing.Point(908, 10)
+        Me.BTNEXPORT.Location = New System.Drawing.Point(960, 10)
         Me.BTNEXPORT.Name = "BTNEXPORT"
         Me.BTNEXPORT.Size = New System.Drawing.Size(124, 41)
         Me.BTNEXPORT.TabIndex = 67
@@ -825,12 +826,13 @@ Partial Class FR_REPORT
         '
         'BTNCETAK
         '
+        Me.BTNCETAK.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BTNCETAK.BackColor = System.Drawing.Color.Navy
         Me.BTNCETAK.FlatAppearance.BorderSize = 0
         Me.BTNCETAK.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.BTNCETAK.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BTNCETAK.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.BTNCETAK.Location = New System.Drawing.Point(778, 10)
+        Me.BTNCETAK.Location = New System.Drawing.Point(830, 10)
         Me.BTNCETAK.Name = "BTNCETAK"
         Me.BTNCETAK.Size = New System.Drawing.Size(124, 41)
         Me.BTNCETAK.TabIndex = 66
@@ -840,12 +842,13 @@ Partial Class FR_REPORT
         '
         'BTNTAMPIL
         '
+        Me.BTNTAMPIL.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BTNTAMPIL.BackColor = System.Drawing.Color.DarkGreen
         Me.BTNTAMPIL.FlatAppearance.BorderSize = 0
         Me.BTNTAMPIL.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.BTNTAMPIL.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BTNTAMPIL.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.BTNTAMPIL.Location = New System.Drawing.Point(362, 10)
+        Me.BTNTAMPIL.Location = New System.Drawing.Point(703, 10)
         Me.BTNTAMPIL.Name = "BTNTAMPIL"
         Me.BTNTAMPIL.Size = New System.Drawing.Size(121, 41)
         Me.BTNTAMPIL.TabIndex = 65

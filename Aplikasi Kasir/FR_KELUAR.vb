@@ -109,7 +109,7 @@ Public Class FR_KELUAR
             DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Kode").Value = TXTKODE.Text
             DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Barang").Value = TXTBARANG.Text
             DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Satuan").Value = TXTSATUAN.Text
-            DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Harga").Value = TXTHARGA.Text
+            DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Harga").Value = CARI_HARGA(TXTQTY.Text)
             DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Diskon").Value = CInt(TXTDISKON.Text) / 100 * DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Harga").Value
             DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Qty").Value = TXTQTY.Text
             DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Total").Value = TXTTOTAL.Text
@@ -435,68 +435,102 @@ Public Class FR_KELUAR
         End If
 
         If e.KeyChar = Chr(13) Then
-            Dim HARGA As Long = 0
-            If TXTHARGA.Text <> "" Then
-                HARGA = CLng(TXTHARGA.Text)
-            End If
-            Dim JUMLAH_QTY As Double = 0
-            If Not TXTQTY.Text = "" Then
-                JUMLAH_QTY = Convert.ToDouble(TXTQTY.Text)
-            End If
+            If TXTKODE.Enabled = True Then
+                Dim STR As String = "SELECT Barang" &
+                                    " From tbl_barang WHERE kode='" & TXTKODE.Text & "'"
+                Dim CMD As SqlCommand
+                CMD = New SqlCommand(STR, CONN)
+                Dim RD As SqlDataReader
+                RD = CMD.ExecuteReader
 
-            If JUMLAH_QTY = 0 Then
-                Dim BARIS_DATA As Integer = 0
-                For N = 0 To DGTAMPIL.Rows.Count - 1
-                    Dim Kode As String = DGTAMPIL.Item("Kode", N).Value
-                    If Kode = TXTKODE.Text Then
-                        BARIS_DATA = N
-                        Exit For
+                If RD.HasRows Then
+                    RD.Close()
+                    Dim JUMLAH_QTY As Integer = 0
+                    If Not TXTQTY.Text = "" Then
+                        JUMLAH_QTY = CInt(TXTQTY.Text)
                     End If
-                Next
-                DGTAMPIL.Rows.RemoveAt(BARIS_DATA)
-                TOTAL_HARGA()
-                TXTKODE.Enabled = True
-                BTNCARI.Visible = True
-                BTNCANCEL.Visible = False
-                TXTKODE.Clear()
-                TXTKODE.Select()
-            Else
-                Dim QTY As Double = Convert.ToDouble(TXTQTY.Text)
-                Dim BARIS_DATA As Integer = -1
-                For N = 0 To DGTAMPIL.Rows.Count - 1
-                    Dim Kode As String = DGTAMPIL.Item("Kode", N).Value
-                    If Kode = TXTKODE.Text Then
-                        BARIS_DATA = N
-                        Exit For
-                    End If
-                Next
 
-                If BARIS_DATA > -1 Then
-                    TXTQTY.Text = Convert.ToDouble(TXTQTY.Text) - DGTAMPIL.Rows(BARIS_DATA).Cells("Qty").Value
-                End If
-
-                If CARI_STOK(TXTKODE.Text) < 0 Then
-                    TXTQTY.Text = QTY
-                    MsgBox("Stok barang tidak mencukupi!")
-                    If BARIS_DATA = -1 Then
-                        TXTQTY.Text = 1
+                    TXTHARGA.Text = CARI_HARGA(JUMLAH_QTY)
+                    If CARI_STOK(TXTKODE.Text) < 0 Then
+                        MsgBox("Stok barang tidak mencukupi!")
+                        TXTKODE.Clear()
+                    Else
+                        MASUK_DATA()
                         TXTKODE.Clear()
                         TXTKODE.Select()
-                    Else
-                        TXTQTY.Text = DGTAMPIL.Rows(BARIS_DATA).Cells("Qty").Value
                     End If
-                    TXTQTY.Select()
                 Else
-                    MASUK_DATA()
+                    RD.Close()
+                    MsgBox("Barang tidak ditemukan!")
+                    TXTKODE.Text = ""
+                    TXTKODE.Select()
+                End If
+                RD.Close()
+            Else
+                Dim HARGA As Long = 0
+                If TXTHARGA.Text <> "" Then
+                    HARGA = CLng(TXTHARGA.Text)
+                End If
+                Dim JUMLAH_QTY As Double = 0
+                If Not TXTQTY.Text = "" Then
+                    JUMLAH_QTY = Convert.ToDouble(TXTQTY.Text)
+                End If
+
+                If JUMLAH_QTY = 0 Then
+                    Dim BARIS_DATA As Integer = 0
+                    For N = 0 To DGTAMPIL.Rows.Count - 1
+                        Dim Kode As String = DGTAMPIL.Item("Kode", N).Value
+                        If Kode = TXTKODE.Text Then
+                            BARIS_DATA = N
+                            Exit For
+                        End If
+                    Next
+                    DGTAMPIL.Rows.RemoveAt(BARIS_DATA)
+                    TOTAL_HARGA()
                     TXTKODE.Enabled = True
-                    TXTQTY.Text = QTY
                     BTNCARI.Visible = True
                     BTNCANCEL.Visible = False
                     TXTKODE.Clear()
                     TXTKODE.Select()
+                Else
+                    Dim QTY As Double = Convert.ToDouble(TXTQTY.Text)
+                    Dim BARIS_DATA As Integer = -1
+                    For N = 0 To DGTAMPIL.Rows.Count - 1
+                        Dim Kode As String = DGTAMPIL.Item("Kode", N).Value
+                        If Kode = TXTKODE.Text Then
+                            BARIS_DATA = N
+                            Exit For
+                        End If
+                    Next
+
+                    If BARIS_DATA > -1 Then
+                        TXTQTY.Text = Convert.ToDouble(TXTQTY.Text) - DGTAMPIL.Rows(BARIS_DATA).Cells("Qty").Value
+                    End If
+
+                    If CARI_STOK(TXTKODE.Text) < 0 Then
+                        TXTQTY.Text = QTY
+                        MsgBox("Stok barang tidak mencukupi!")
+                        If BARIS_DATA = -1 Then
+                            TXTQTY.Text = 1
+                            TXTKODE.Clear()
+                            TXTKODE.Select()
+                        Else
+                            TXTQTY.Text = DGTAMPIL.Rows(BARIS_DATA).Cells("Qty").Value
+                        End If
+                        TXTQTY.Select()
+                    Else
+                        MASUK_DATA()
+                        TXTKODE.Enabled = True
+                        TXTQTY.Text = QTY
+                        BTNCARI.Visible = True
+                        BTNCANCEL.Visible = False
+                        TXTKODE.Clear()
+                        TXTKODE.Select()
+                    End If
                 End If
             End If
         End If
+
     End Sub
 
     Private Sub TXTQTY_TextChanged(sender As Object, e As EventArgs) Handles TXTQTY.TextChanged

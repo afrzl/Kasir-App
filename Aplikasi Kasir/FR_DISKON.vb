@@ -223,7 +223,7 @@ Public Class FR_DISKON
 
     Private Sub TXTKODE_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTKODE.KeyPress
         If e.KeyChar = Chr(13) Then
-            TXTDISKON.Select()
+            TXTTGLAWAL.Select()
         End If
     End Sub
 
@@ -358,6 +358,10 @@ Public Class FR_DISKON
                 Label7.Visible = True
                 Label13.Visible = True
                 Label14.Visible = True
+                TXTTGLAWAL.Visible = True
+                TXTTGLAKHIR.Visible = True
+                Label9.Visible = True
+                Label10.Visible = True
                 TXTKODE.Visible = True
                 LBBARANG.Visible = True
                 LBSATUAN.Visible = True

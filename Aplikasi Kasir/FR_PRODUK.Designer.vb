@@ -591,7 +591,7 @@ Partial Class FR_PRODUK
         '
         Me.CBSATUAN.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CBSATUAN.FormattingEnabled = True
-        Me.CBSATUAN.Items.AddRange(New Object() {"Pcs", "Pack", "Kg", "Liter", "Dus"})
+        Me.CBSATUAN.Items.AddRange(New Object() {"Pcs", "Kg", "Pack", "Renteng", "Liter", "Dus"})
         Me.CBSATUAN.Location = New System.Drawing.Point(189, 157)
         Me.CBSATUAN.Name = "CBSATUAN"
         Me.CBSATUAN.Size = New System.Drawing.Size(226, 31)

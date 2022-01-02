@@ -45,6 +45,7 @@ Public Class FR_REPORT
                 Label3.Text = "Administrator"
                 CBJENIS.Items.Clear()
                 With CBJENIS
+                    .Items.Add("Harga")
                     .Items.Add("Stok")
                     .Items.Add("Transaksi Masuk")
                     .Items.Add("Transaksi Keluar")
@@ -63,6 +64,7 @@ Public Class FR_REPORT
                 Label3.Text = "Operator"
                 CBJENIS.Items.Clear()
                 With CBJENIS
+                    .Items.Add("Harga")
                     .Items.Add("Stok")
                     .Items.Add("Transaksi Masuk")
                     .Items.Add("Transaksi Keluar")
@@ -90,6 +92,7 @@ Public Class FR_REPORT
 
     Dim STR As String = ""
     Dim TBL As New DataTable
+    Dim DT As New DataTable
     Dim TOTALLABA As Integer = 0
     Dim TOTALITEM As Double = 0
     Dim TOTALPEMBELIAN As Integer = 0
@@ -101,6 +104,24 @@ Public Class FR_REPORT
             Case 1
                 Select Case CBJENIS.SelectedIndex
                     Case 0
+                        STR = "SELECT RTRIM(tbl_barang.Kode) AS 'Kode', " &
+                        " RTRIM(tbl_barang.Barang) as Barang," &
+                        " RTRIM(tbl_barang.Satuan) as Satuan," &
+                        " tbl_barang.Harga1," &
+                        " tbl_barang.End1," &
+                        " tbl_barang.Harga2," &
+                        " tbl_barang.End2," &
+                        " tbl_barang.Harga3," &
+                        " tbl_barang.End3," &
+                        " tbl_barang.Harga4," &
+                        " tbl_barang.End4," &
+                        " tbl_barang.Harga5," &
+                        " tbl_diskon.Tgl_awal," &
+                        " tbl_diskon.Tgl_akhir," &
+                        " tbl_diskon.Diskon" &
+                        " FROM tbl_barang LEFT OUTER JOIN tbl_diskon On tbl_diskon.Kode = tbl_barang.Kode" &
+                        " ORDER BY tbl_barang.Barang ASC"
+                    Case 1
                         STR = "SELECT Kode AS 'Kode Barang'," &
                     " Barang AS 'Nama Barang'," &
                     " Satuan AS 'Satuan'," &
@@ -108,7 +129,7 @@ Public Class FR_REPORT
                     " (SELECT COALESCE(SUM(Jumlah), 0) FROM tbl_transaksi_child WHERE (LEFT(tbl_transaksi_child.Id_trans, 1) = 'K' or LEFT(tbl_transaksi_child.Id_trans, 1) = 'C') AND tbl_transaksi_child.Kode = tbl_barang.Kode) AS 'Barang Keluar'" &
                     " FROM tbl_barang" &
                     " ORDER BY 'Nama Barang' ASC"
-                    Case 1
+                    Case 2
                         STR = "SELECT RTRIM(tbl_transaksi_child.Id_trans) AS 'ID Transaksi'," &
                     " RTRIM(tbl_transaksi_parent.Jenis) AS 'Jenis'," &
                     " tbl_transaksi_parent.Tgl AS 'Tanggal'," &
@@ -127,7 +148,7 @@ Public Class FR_REPORT
                     " And tbl_transaksi_parent.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd 00:00:00") & "'" &
                     " And tbl_transaksi_parent.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd 23:59:59") & "'" &
                     " ORDER BY tbl_transaksi_child.Id ASC"
-                    Case 2
+                    Case 3
                         STR = "SELECT RTRIM(tbl_transaksi_child.Id_trans) AS 'ID Transaksi'," &
                     " RTRIM(tbl_transaksi_parent.Jenis) AS 'Jenis'," &
                     " tbl_transaksi_parent.Tgl AS 'Tanggal'," &
@@ -153,7 +174,7 @@ Public Class FR_REPORT
                     " And tbl_transaksi_parent.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd 00:00:00") & "'" &
                     " And tbl_transaksi_parent.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd 23:59:59") & "'" &
                     " ORDER BY tbl_transaksi_child.Id ASC"
-                    Case 3
+                    Case 4
                         STR = "SELECT Id_trans AS 'ID Transaksi'," &
                                 " Tgl AS 'Tanggal', " &
                                 " Jumlah_item AS 'Jumlah Item'," &
@@ -163,7 +184,7 @@ Public Class FR_REPORT
                                 " WHERE (Jenis = 'K' or Jenis = 'C')" &
                                 " AND Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd 00:00:00") & "'" &
                                 " AND Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd 23:59:59") & "'"
-                    Case 4
+                    Case 5
                         STR = "SELECT Id_trans AS 'ID Transaksi'," &
                                 " Kode AS 'Kode Barang'," &
                                 " (SELECT Barang FROM tbl_barang WHERE tbl_barang.Kode = tbl_transaksi_child.Kode) AS 'Nama Barang'," &
@@ -177,7 +198,7 @@ Public Class FR_REPORT
                                 " AND (SELECT Tgl FROM tbl_transaksi_parent WHERE tbl_transaksi_parent.Id_trans = tbl_transaksi_child.Id_trans) >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd 00:00:00") & "'" &
                                 " AND (SELECT Tgl FROM tbl_transaksi_parent WHERE tbl_transaksi_parent.Id_trans = tbl_transaksi_child.Id_trans) <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd 23:59:59") & "'" &
                                 " ORDER BY ID ASC"
-                    Case 5
+                    Case 6
                         STR = "SELECT" &
                     " tbl_transaksi_parent.Tgl AS 'Tanggal'," &
                     " tbl_transaksi_parent.Jumlah_item AS 'Jumlah_item'" &
@@ -186,7 +207,7 @@ Public Class FR_REPORT
                     " And tbl_transaksi_parent.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd 00:00:00") & "'" &
                     " And tbl_transaksi_parent.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd 23:59:59") & "'" &
                     " ORDER BY tbl_transaksi_child.Id ASC"
-                    Case 6
+                    Case 7
                         Dim LASTDAYOFMONTH = DateTime.DaysInMonth(TXTTGLAKHIR.Value.ToString("yyyy"), TXTTGLAKHIR.Value.ToString("MM"))
                         STR = "SELECT" &
                     " tbl_transaksi_parent.Tgl AS 'Tanggal'," &
@@ -196,7 +217,7 @@ Public Class FR_REPORT
                     " And tbl_transaksi_parent.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd 00:00:00") & "'" &
                     " And tbl_transaksi_parent.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-" & LASTDAYOFMONTH & " 23:59:59") & "'" &
                     " ORDER BY tbl_transaksi_child.Id ASC"
-                    Case 7
+                    Case 8
                         STR = "SELECT " &
                    " tbl_transaksi_child.Kode AS 'Kode Barang'," &
                    " (SELECT Barang FROM tbl_barang WHERE tbl_barang.Kode = tbl_transaksi_child.Kode) AS 'Nama Barang'," &
@@ -206,7 +227,7 @@ Public Class FR_REPORT
                    " And tbl_transaksi_parent.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd 00:00:00") & "'" &
                    " And tbl_transaksi_parent.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd 23:59:59") & "'" &
                    " ORDER BY tbl_transaksi_child.Id ASC"
-                    Case 8
+                    Case 9
                         STR = "SELECT " &
                     " tbl_transaksi_parent.Tgl AS 'Tanggal'," &
                     " (SELECT COALESCE(SUM(tbl_transaksi_child.Harga_akhir), 0) - COALESCE(SUM(tbl_transaksi_child.Harga_beli), 0) FROM tbl_transaksi_child WHERE tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans) - tbl_transaksi_parent.Diskon AS 'Laba'" &
@@ -215,7 +236,7 @@ Public Class FR_REPORT
                     " And tbl_transaksi_parent.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd 00:00:00") & "'" &
                     " And tbl_transaksi_parent.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd 23:59:59") & "'" &
                     " ORDER BY tbl_transaksi_child.Id ASC"
-                    Case 9
+                    Case 10
                         Dim LASTDAYOFMONTH = DateTime.DaysInMonth(TXTTGLAKHIR.Value.ToString("yyyy"), TXTTGLAKHIR.Value.ToString("MM"))
                         STR = "SELECT " &
                     " tbl_transaksi_parent.Tgl AS 'Tanggal'," &
@@ -229,6 +250,24 @@ Public Class FR_REPORT
             Case 2
                 Select Case CBJENIS.SelectedIndex
                     Case 0
+                        STR = "SELECT RTRIM(tbl_barang.Kode) AS 'Kode', " &
+                        " RTRIM(tbl_barang.Barang) as Barang," &
+                        " RTRIM(tbl_barang.Satuan) as Satuan," &
+                        " tbl_barang.Harga1," &
+                        " tbl_barang.End1," &
+                        " tbl_barang.Harga2," &
+                        " tbl_barang.End2," &
+                        " tbl_barang.Harga3," &
+                        " tbl_barang.End3," &
+                        " tbl_barang.Harga4," &
+                        " tbl_barang.End4," &
+                        " tbl_barang.Harga5," &
+                        " tbl_diskon.Tgl_awal," &
+                        " tbl_diskon.Tgl_akhir," &
+                        " tbl_diskon.Diskon" &
+                        " FROM tbl_barang LEFT OUTER JOIN tbl_diskon On tbl_diskon.Kode = tbl_barang.Kode" &
+                        " ORDER BY tbl_barang.Barang ASC"
+                    Case 1
                         STR = "SELECT Kode AS 'Kode Barang'," &
                     " Barang AS 'Nama Barang'," &
                     " Satuan AS 'Satuan'," &
@@ -236,7 +275,7 @@ Public Class FR_REPORT
                     " (SELECT COALESCE(SUM(Jumlah), 0) FROM tbl_transaksi_child WHERE LEFT(tbl_transaksi_child.Id_trans, 1) = 'K' AND tbl_transaksi_child.Kode = tbl_barang.Kode) AS 'Barang Keluar'" &
                     " FROM tbl_barang" &
                     " ORDER BY 'Nama Barang' ASC"
-                    Case 1
+                    Case 2
                         STR = "SELECT RTRIM(tbl_transaksi_child.Id_trans) AS 'ID Transaksi'," &
                     " RTRIM(tbl_transaksi_parent.Jenis) AS 'Jenis'," &
                     " tbl_transaksi_parent.Tgl AS 'Tanggal'," &
@@ -256,7 +295,7 @@ Public Class FR_REPORT
                     " And tbl_transaksi_parent.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd 23:59:59") & "'" &
                     " AND tbl_transaksi_parent.Id_kasir = '" & My.Settings.ID_ACCOUNT & "'" &
                     " ORDER BY tbl_transaksi_child.Id ASC"
-                    Case 2
+                    Case 3
                         STR = "SELECT RTRIM(tbl_transaksi_child.Id_trans) AS 'ID Transaksi'," &
                     " RTRIM(tbl_transaksi_parent.Jenis) AS 'Jenis'," &
                     " tbl_transaksi_parent.Tgl AS 'Tanggal'," &
@@ -334,8 +373,149 @@ Public Class FR_REPORT
                 Case 1
                     Select Case CBJENIS.SelectedIndex
                         Case 0
-                ' sementara tidak ada
-                        Case 1
+                            With DT
+                                .Clear()
+                                .Columns.Clear()
+                                .Columns.Add("Kode")
+                                .Columns.Add("Nama Barang")
+                                .Columns.Add("Satuan")
+                                .Columns.Add("Opsi1")
+                                .Columns.Add("Harga1")
+                                .Columns.Add("Opsi2")
+                                .Columns.Add("Harga2")
+                                .Columns.Add("Opsi3")
+                                .Columns.Add("Harga3")
+                                .Columns.Add("Opsi4")
+                                .Columns.Add("Harga4")
+                                .Columns.Add("Opsi5")
+                                .Columns.Add("Harga5")
+                                .Columns.Add("Tanggal Diskon")
+                                .Columns.Add("Diskon")
+                            End With
+                            For N = 0 To TBL.Rows.Count - 1
+                                If TBL.Rows(N).Item(4) <> 0 And TBL.Rows(N).Item(6) <> 0 And TBL.Rows(N).Item(8) <> 0 And TBL.Rows(N).Item(10) <> 0 Then
+                                    If Not IsDBNull(TBL.Rows(N).Item(14)) Then
+                                        DT.Rows.Add(TBL.Rows(N).Item(0),
+                                                TBL.Rows(N).Item(1),
+                                                TBL.Rows(N).Item(2),
+                                                "0 - " & Format(TBL.Rows(N).Item(4), "##0.##"),
+                                                Format(TBL.Rows(N).Item(3), "###,##"),
+                                                Format(TBL.Rows(N).Item(4), "##0.##") & " - " & Format(TBL.Rows(N).Item(6), "##0.##"),
+                                                Format(TBL.Rows(N).Item(5), "###,##"),
+                                                Format(TBL.Rows(N).Item(6), "##0.##") & " - " & Format(TBL.Rows(N).Item(8), "##0.##"),
+                                                Format(TBL.Rows(N).Item(7), "###,##"),
+                                                Format(TBL.Rows(N).Item(8), "##0.##") & " - " & Format(TBL.Rows(N).Item(10), "##0.##"),
+                                                Format(TBL.Rows(N).Item(9), "###,##"),
+                                                " > " & Format(TBL.Rows(N).Item(10), "##0.##"),
+                                                Format(TBL.Rows(N).Item(11), "###,##"),
+                                                TBL.Rows(N).Item(12) & " - " & TBL.Rows(N).Item(13),
+                                                TBL.Rows(N).Item(14) & "%")
+                                    Else
+                                        DT.Rows.Add(TBL.Rows(N).Item(0),
+                                                TBL.Rows(N).Item(1),
+                                                TBL.Rows(N).Item(2),
+                                                "0 - " & Format(TBL.Rows(N).Item(4), "##0.##"),
+                                                Format(TBL.Rows(N).Item(3), "###,##"),
+                                                Format(TBL.Rows(N).Item(4), "##0.##") & " - " & Format(TBL.Rows(N).Item(6), "##0.##"),
+                                                Format(TBL.Rows(N).Item(5), "###,##"),
+                                                Format(TBL.Rows(N).Item(6), "##0.##") & " - " & Format(TBL.Rows(N).Item(8), "##0.##"),
+                                                Format(TBL.Rows(N).Item(7), "###,##"),
+                                                Format(TBL.Rows(N).Item(8), "##0.##") & " - " & Format(TBL.Rows(N).Item(10), "##0.##"),
+                                                Format(TBL.Rows(N).Item(9), "###,##"),
+                                                " > " & Format(TBL.Rows(N).Item(10), "##0.##"),
+                                                Format(TBL.Rows(N).Item(11), "###,##"))
+                                    End If
+                                ElseIf TBL.Rows(N).Item(4) <> 0 And TBL.Rows(N).Item(6) <> 0 And TBL.Rows(N).Item(8) <> 0 And TBL.Rows(N).Item(10) = 0 Then
+                                    If Not IsDBNull(TBL.Rows(N).Item(13)) Then
+                                        DT.Rows.Add(TBL.Rows(N).Item(0),
+                                                TBL.Rows(N).Item(1),
+                                                TBL.Rows(N).Item(2),
+                                                "0 - " & Format(TBL.Rows(N).Item(4), "##0.##"),
+                                                Format(TBL.Rows(N).Item(3), "###,##"),
+                                                Format(TBL.Rows(N).Item(4), "##0.##") & " - " & Format(TBL.Rows(N).Item(6), "##0.##"),
+                                                Format(TBL.Rows(N).Item(5), "###,##"),
+                                                Format(TBL.Rows(N).Item(6), "##0.##") & " - " & Format(TBL.Rows(N).Item(8), "##0.##"),
+                                                Format(TBL.Rows(N).Item(7), "###,##"),
+                                                " > " & Format(TBL.Rows(N).Item(8), "##0.##"),
+                                                Format(TBL.Rows(N).Item(9), "###,##"),
+                                                TBL.Rows(N).Item(12) & " - " & TBL.Rows(N).Item(13),
+                                                TBL.Rows(N).Item(14) & "%")
+                                    Else
+                                        DT.Rows.Add(TBL.Rows(N).Item(0),
+                                                TBL.Rows(N).Item(1),
+                                                TBL.Rows(N).Item(2),
+                                                "0 - " & Format(TBL.Rows(N).Item(4), "##0.##"),
+                                                Format(TBL.Rows(N).Item(3), "###,##"),
+                                                Format(TBL.Rows(N).Item(4), "##0.##") & " - " & Format(TBL.Rows(N).Item(6), "##0.##"),
+                                                Format(TBL.Rows(N).Item(5), "###,##"),
+                                                Format(TBL.Rows(N).Item(6), "##0.##") & " - " & Format(TBL.Rows(N).Item(8), "##0.##"),
+                                                Format(TBL.Rows(N).Item(7), "###,##"),
+                                                " > " & Format(TBL.Rows(N).Item(8), "##0.##"),
+                                                Format(TBL.Rows(N).Item(9), "###,##"))
+                                    End If
+                                ElseIf TBL.Rows(N).Item(4) <> 0 And TBL.Rows(N).Item(6) <> 0 And TBL.Rows(N).Item(8) = 0 And TBL.Rows(N).Item(10) = 0 Then
+                                    If Not IsDBNull(TBL.Rows(N).Item(13)) Then
+                                        DT.Rows.Add(TBL.Rows(N).Item(0),
+                                                TBL.Rows(N).Item(1),
+                                                TBL.Rows(N).Item(2),
+                                                "0 - " & Format(TBL.Rows(N).Item(4), "##0.##"),
+                                                Format(TBL.Rows(N).Item(3), "###,##"),
+                                                Format(TBL.Rows(N).Item(4), "##0.##") & " - " & Format(TBL.Rows(N).Item(6), "##0.##"),
+                                                Format(TBL.Rows(N).Item(5), "###,##"),
+                                                " > " & Format(TBL.Rows(N).Item(6), "##0.##"),
+                                                Format(TBL.Rows(N).Item(7), "###,##"),
+                                                TBL.Rows(N).Item(12) & " - " & TBL.Rows(N).Item(13),
+                                                TBL.Rows(N).Item(14) & "%")
+                                    Else
+                                        DT.Rows.Add(TBL.Rows(N).Item(0),
+                                                TBL.Rows(N).Item(1),
+                                                TBL.Rows(N).Item(2),
+                                                "0 - " & Format(TBL.Rows(N).Item(4), "##0.##"),
+                                                Format(TBL.Rows(N).Item(3), "###,##"),
+                                                Format(TBL.Rows(N).Item(4), "##0.##") & " - " & Format(TBL.Rows(N).Item(6), "##0.##"),
+                                                Format(TBL.Rows(N).Item(5), "###,##"),
+                                                " > " & Format(TBL.Rows(N).Item(6), "##0.##"),
+                                                Format(TBL.Rows(N).Item(7), "###,##"))
+                                    End If
+                                ElseIf TBL.Rows(N).Item(4) <> 0 And TBL.Rows(N).Item(6) = 0 And TBL.Rows(N).Item(8) = 0 And TBL.Rows(N).Item(10) = 0 Then
+                                    If Not IsDBNull(TBL.Rows(N).Item(13)) Then
+                                        DT.Rows.Add(TBL.Rows(N).Item(0),
+                                                TBL.Rows(N).Item(1),
+                                                TBL.Rows(N).Item(2),
+                                                "0 - " & Format(TBL.Rows(N).Item(4), "##0.##"),
+                                                Format(TBL.Rows(N).Item(3), "###,##"),
+                                                " > " & Format(TBL.Rows(N).Item(4), "##0.##"),
+                                                Format(TBL.Rows(N).Item(5), "###,##"),
+                                                TBL.Rows(N).Item(12) & " - " & TBL.Rows(N).Item(13),
+                                                TBL.Rows(N).Item(14) & "%")
+                                    Else
+                                        DT.Rows.Add(TBL.Rows(N).Item(0),
+                                                TBL.Rows(N).Item(1),
+                                                TBL.Rows(N).Item(2),
+                                                "0 - " & Format(TBL.Rows(N).Item(4), "##0.##"),
+                                                Format(TBL.Rows(N).Item(3), "###,##"),
+                                                " > " & Format(TBL.Rows(N).Item(4), "##0.##"),
+                                                Format(TBL.Rows(N).Item(5), "###,##"))
+                                    End If
+                                ElseIf TBL.Rows(N).Item(4) = 0 And TBL.Rows(N).Item(6) = 0 And TBL.Rows(N).Item(8) = 0 And TBL.Rows(N).Item(10) = 0 Then
+                                    If Not IsDBNull(TBL.Rows(N).Item(13)) Then
+                                        DT.Rows.Add(TBL.Rows(N).Item(0),
+                                                TBL.Rows(N).Item(1),
+                                                TBL.Rows(N).Item(2),
+                                                "",
+                                                Format(TBL.Rows(N).Item(3), "###,##"),
+                                                TBL.Rows(N).Item(12) & " - " & TBL.Rows(N).Item(13),
+                                                TBL.Rows(N).Item(14) & "%")
+                                    Else
+                                        DT.Rows.Add(TBL.Rows(N).Item(0),
+                                                TBL.Rows(N).Item(1),
+                                                TBL.Rows(N).Item(2),
+                                                "",
+                                                Format(TBL.Rows(N).Item(3), "###,##"))
+                                    End If
+                                End If
+                            Next
+                        Case 2
                             TOTALITEM = Convert.ToDouble(TBL.Compute("SUM(Jumlah_item)", ""))
                             TOTALPEMBELIAN = Convert.ToDouble(TBL.Compute("SUM(Total)", ""))
 
@@ -345,7 +525,7 @@ Public Class FR_REPORT
                                     TOTALITEM -= TBL.Rows(N - 1).Item(5)
                                 End If
                             Next
-                        Case 2
+                        Case 3
                             TOTALLABA = Convert.ToDouble(TBL.Compute("SUM(Laba)", ""))
                             TOTALITEM = Convert.ToDouble(TBL.Compute("SUM(Jumlah_item)", ""))
 
@@ -353,27 +533,16 @@ Public Class FR_REPORT
                                 If TBL.Rows(N).Item(0) = TBL.Rows(N - 1).Item(0) Then
                                     TOTALLABA -= TBL.Rows(N - 1).Item(19)
                                     TOTALITEM -= TBL.Rows(N - 1).Item(5)
+                                    TBL.Rows(N).Item(15) = 0
                                 End If
                             Next
-                        Case 4
+                        Case 5
                             For N = 1 To TBL.Rows.Count - 1
                                 If TBL.Rows(N).Item(0) = TBL.Rows(N - 1).Item(0) Then
                                     'TBL.Rows(N).Item(6) = 0
                                     TBL.Rows(N).Item(7) = 0
                                 End If
                             Next
-                        Case 5
-                            For N = 1 To TBL.Rows.Count - 1
-                                If TBL.Rows(N).Item(0) = TBL.Rows(N - 1).Item(0) Then
-                                    TBL.Rows(N).Item(1) = 0
-                                    For J = N To TBL.Rows.Count - 1
-                                        If TBL.Rows(J).Item(0) = TBL.Rows(J - 1).Item(0) Then
-                                            TBL.Rows(J).Item(1) = 0
-                                        End If
-                                    Next
-                                End If
-                            Next
-                            TOTALITEM = Convert.ToDouble(TBL.Compute("SUM(Jumlah_item)", ""))
                         Case 6
                             For N = 1 To TBL.Rows.Count - 1
                                 If TBL.Rows(N).Item(0) = TBL.Rows(N - 1).Item(0) Then
@@ -386,7 +555,19 @@ Public Class FR_REPORT
                                 End If
                             Next
                             TOTALITEM = Convert.ToDouble(TBL.Compute("SUM(Jumlah_item)", ""))
-                        Case 8
+                        Case 7
+                            For N = 1 To TBL.Rows.Count - 1
+                                If TBL.Rows(N).Item(0) = TBL.Rows(N - 1).Item(0) Then
+                                    TBL.Rows(N).Item(1) = 0
+                                    For J = N To TBL.Rows.Count - 1
+                                        If TBL.Rows(J).Item(0) = TBL.Rows(J - 1).Item(0) Then
+                                            TBL.Rows(J).Item(1) = 0
+                                        End If
+                                    Next
+                                End If
+                            Next
+                            TOTALITEM = Convert.ToDouble(TBL.Compute("SUM(Jumlah_item)", ""))
+                        Case 9
                             For N = 1 To TBL.Rows.Count - 1
                                 If TBL.Rows(N).Item(0) = TBL.Rows(N - 1).Item(0) Then
                                     TBL.Rows(N).Item(1) = 0
@@ -398,7 +579,7 @@ Public Class FR_REPORT
                                 End If
                             Next
                             TOTALLABA = Convert.ToDouble(TBL.Compute("SUM(Laba)", ""))
-                        Case 9
+                        Case 10
                             For N = 1 To TBL.Rows.Count - 1
                                 If TBL.Rows(N).Item(0) = TBL.Rows(N - 1).Item(0) Then
                                     TBL.Rows(N).Item(1) = 0
@@ -414,8 +595,149 @@ Public Class FR_REPORT
                 Case 2
                     Select Case CBJENIS.SelectedIndex
                         Case 0
-                ' sementara tidak ada
-                        Case 1
+                            With DT
+                                .Clear()
+                                .Columns.Clear()
+                                .Columns.Add("Kode")
+                                .Columns.Add("Nama Barang")
+                                .Columns.Add("Satuan")
+                                .Columns.Add("Opsi1")
+                                .Columns.Add("Harga1")
+                                .Columns.Add("Opsi2")
+                                .Columns.Add("Harga2")
+                                .Columns.Add("Opsi3")
+                                .Columns.Add("Harga3")
+                                .Columns.Add("Opsi4")
+                                .Columns.Add("Harga4")
+                                .Columns.Add("Opsi5")
+                                .Columns.Add("Harga5")
+                                .Columns.Add("Tanggal Diskon")
+                                .Columns.Add("Diskon")
+                            End With
+                            For N = 0 To TBL.Rows.Count - 1
+                                If TBL.Rows(N).Item(4) <> 0 And TBL.Rows(N).Item(6) <> 0 And TBL.Rows(N).Item(8) <> 0 And TBL.Rows(N).Item(10) <> 0 Then
+                                    If Not IsDBNull(TBL.Rows(N).Item(14)) Then
+                                        DT.Rows.Add(TBL.Rows(N).Item(0),
+                                                TBL.Rows(N).Item(1),
+                                                TBL.Rows(N).Item(2),
+                                                "0 - " & Format(TBL.Rows(N).Item(4), "##0.##"),
+                                                Format(TBL.Rows(N).Item(3), "###,##"),
+                                                Format(TBL.Rows(N).Item(4), "##0.##") & " - " & Format(TBL.Rows(N).Item(6), "##0.##"),
+                                                Format(TBL.Rows(N).Item(5), "###,##"),
+                                                Format(TBL.Rows(N).Item(6), "##0.##") & " - " & Format(TBL.Rows(N).Item(8), "##0.##"),
+                                                Format(TBL.Rows(N).Item(7), "###,##"),
+                                                Format(TBL.Rows(N).Item(8), "##0.##") & " - " & Format(TBL.Rows(N).Item(10), "##0.##"),
+                                                Format(TBL.Rows(N).Item(9), "###,##"),
+                                                " > " & Format(TBL.Rows(N).Item(10), "##0.##"),
+                                                Format(TBL.Rows(N).Item(11), "###,##"),
+                                                TBL.Rows(N).Item(12) & " - " & TBL.Rows(N).Item(13),
+                                                TBL.Rows(N).Item(14) & "%")
+                                    Else
+                                        DT.Rows.Add(TBL.Rows(N).Item(0),
+                                                TBL.Rows(N).Item(1),
+                                                TBL.Rows(N).Item(2),
+                                                "0 - " & Format(TBL.Rows(N).Item(4), "##0.##"),
+                                                Format(TBL.Rows(N).Item(3), "###,##"),
+                                                Format(TBL.Rows(N).Item(4), "##0.##") & " - " & Format(TBL.Rows(N).Item(6), "##0.##"),
+                                                Format(TBL.Rows(N).Item(5), "###,##"),
+                                                Format(TBL.Rows(N).Item(6), "##0.##") & " - " & Format(TBL.Rows(N).Item(8), "##0.##"),
+                                                Format(TBL.Rows(N).Item(7), "###,##"),
+                                                Format(TBL.Rows(N).Item(8), "##0.##") & " - " & Format(TBL.Rows(N).Item(10), "##0.##"),
+                                                Format(TBL.Rows(N).Item(9), "###,##"),
+                                                " > " & Format(TBL.Rows(N).Item(10), "##0.##"),
+                                                Format(TBL.Rows(N).Item(11), "###,##"))
+                                    End If
+                                ElseIf TBL.Rows(N).Item(4) <> 0 And TBL.Rows(N).Item(6) <> 0 And TBL.Rows(N).Item(8) <> 0 And TBL.Rows(N).Item(10) = 0 Then
+                                    If Not IsDBNull(TBL.Rows(N).Item(13)) Then
+                                        DT.Rows.Add(TBL.Rows(N).Item(0),
+                                                TBL.Rows(N).Item(1),
+                                                TBL.Rows(N).Item(2),
+                                                "0 - " & Format(TBL.Rows(N).Item(4), "##0.##"),
+                                                Format(TBL.Rows(N).Item(3), "###,##"),
+                                                Format(TBL.Rows(N).Item(4), "##0.##") & " - " & Format(TBL.Rows(N).Item(6), "##0.##"),
+                                                Format(TBL.Rows(N).Item(5), "###,##"),
+                                                Format(TBL.Rows(N).Item(6), "##0.##") & " - " & Format(TBL.Rows(N).Item(8), "##0.##"),
+                                                Format(TBL.Rows(N).Item(7), "###,##"),
+                                                " > " & Format(TBL.Rows(N).Item(8), "##0.##"),
+                                                Format(TBL.Rows(N).Item(9), "###,##"),
+                                                TBL.Rows(N).Item(12) & " - " & TBL.Rows(N).Item(13),
+                                                TBL.Rows(N).Item(14) & "%")
+                                    Else
+                                        DT.Rows.Add(TBL.Rows(N).Item(0),
+                                                TBL.Rows(N).Item(1),
+                                                TBL.Rows(N).Item(2),
+                                                "0 - " & Format(TBL.Rows(N).Item(4), "##0.##"),
+                                                Format(TBL.Rows(N).Item(3), "###,##"),
+                                                Format(TBL.Rows(N).Item(4), "##0.##") & " - " & Format(TBL.Rows(N).Item(6), "##0.##"),
+                                                Format(TBL.Rows(N).Item(5), "###,##"),
+                                                Format(TBL.Rows(N).Item(6), "##0.##") & " - " & Format(TBL.Rows(N).Item(8), "##0.##"),
+                                                Format(TBL.Rows(N).Item(7), "###,##"),
+                                                " > " & Format(TBL.Rows(N).Item(8), "##0.##"),
+                                                Format(TBL.Rows(N).Item(9), "###,##"))
+                                    End If
+                                ElseIf TBL.Rows(N).Item(4) <> 0 And TBL.Rows(N).Item(6) <> 0 And TBL.Rows(N).Item(8) = 0 And TBL.Rows(N).Item(10) = 0 Then
+                                    If Not IsDBNull(TBL.Rows(N).Item(13)) Then
+                                        DT.Rows.Add(TBL.Rows(N).Item(0),
+                                                TBL.Rows(N).Item(1),
+                                                TBL.Rows(N).Item(2),
+                                                "0 - " & Format(TBL.Rows(N).Item(4), "##0.##"),
+                                                Format(TBL.Rows(N).Item(3), "###,##"),
+                                                Format(TBL.Rows(N).Item(4), "##0.##") & " - " & Format(TBL.Rows(N).Item(6), "##0.##"),
+                                                Format(TBL.Rows(N).Item(5), "###,##"),
+                                                " > " & Format(TBL.Rows(N).Item(6), "##0.##"),
+                                                Format(TBL.Rows(N).Item(7), "###,##"),
+                                                TBL.Rows(N).Item(12) & " - " & TBL.Rows(N).Item(13),
+                                                TBL.Rows(N).Item(14) & "%")
+                                    Else
+                                        DT.Rows.Add(TBL.Rows(N).Item(0),
+                                                TBL.Rows(N).Item(1),
+                                                TBL.Rows(N).Item(2),
+                                                "0 - " & Format(TBL.Rows(N).Item(4), "##0.##"),
+                                                Format(TBL.Rows(N).Item(3), "###,##"),
+                                                Format(TBL.Rows(N).Item(4), "##0.##") & " - " & Format(TBL.Rows(N).Item(6), "##0.##"),
+                                                Format(TBL.Rows(N).Item(5), "###,##"),
+                                                " > " & Format(TBL.Rows(N).Item(6), "##0.##"),
+                                                Format(TBL.Rows(N).Item(7), "###,##"))
+                                    End If
+                                ElseIf TBL.Rows(N).Item(4) <> 0 And TBL.Rows(N).Item(6) = 0 And TBL.Rows(N).Item(8) = 0 And TBL.Rows(N).Item(10) = 0 Then
+                                    If Not IsDBNull(TBL.Rows(N).Item(13)) Then
+                                        DT.Rows.Add(TBL.Rows(N).Item(0),
+                                                TBL.Rows(N).Item(1),
+                                                TBL.Rows(N).Item(2),
+                                                "0 - " & Format(TBL.Rows(N).Item(4), "##0.##"),
+                                                Format(TBL.Rows(N).Item(3), "###,##"),
+                                                " > " & Format(TBL.Rows(N).Item(4), "##0.##"),
+                                                Format(TBL.Rows(N).Item(5), "###,##"),
+                                                TBL.Rows(N).Item(12) & " - " & TBL.Rows(N).Item(13),
+                                                TBL.Rows(N).Item(14) & "%")
+                                    Else
+                                        DT.Rows.Add(TBL.Rows(N).Item(0),
+                                                TBL.Rows(N).Item(1),
+                                                TBL.Rows(N).Item(2),
+                                                "0 - " & Format(TBL.Rows(N).Item(4), "##0.##"),
+                                                Format(TBL.Rows(N).Item(3), "###,##"),
+                                                " > " & Format(TBL.Rows(N).Item(4), "##0.##"),
+                                                Format(TBL.Rows(N).Item(5), "###,##"))
+                                    End If
+                                ElseIf TBL.Rows(N).Item(4) = 0 And TBL.Rows(N).Item(6) = 0 And TBL.Rows(N).Item(8) = 0 And TBL.Rows(N).Item(10) = 0 Then
+                                    If Not IsDBNull(TBL.Rows(N).Item(13)) Then
+                                        DT.Rows.Add(TBL.Rows(N).Item(0),
+                                                TBL.Rows(N).Item(1),
+                                                TBL.Rows(N).Item(2),
+                                                "",
+                                                Format(TBL.Rows(N).Item(3), "###,##"),
+                                                TBL.Rows(N).Item(12) & " - " & TBL.Rows(N).Item(13),
+                                                TBL.Rows(N).Item(14) & "%")
+                                    Else
+                                        DT.Rows.Add(TBL.Rows(N).Item(0),
+                                                TBL.Rows(N).Item(1),
+                                                TBL.Rows(N).Item(2),
+                                                "",
+                                                Format(TBL.Rows(N).Item(3), "###,##"))
+                                    End If
+                                End If
+                            Next
+                        Case 2
                             TOTALITEM = Convert.ToDouble(TBL.Compute("SUM(Jumlah_item)", ""))
                             TOTALPEMBELIAN = Convert.ToDouble(TBL.Compute("SUM(Total)", ""))
                             For N = 1 To TBL.Rows.Count - 1
@@ -424,7 +746,7 @@ Public Class FR_REPORT
                                     TOTALITEM -= TBL.Rows(N - 1).Item(5)
                                 End If
                             Next
-                        Case 2
+                        Case 3
                             TOTALITEM = Convert.ToDouble(TBL.Compute("SUM(Jumlah_item)", ""))
                             For N = 1 To TBL.Rows.Count - 1
                                 If TBL.Rows(N).Item(0) = TBL.Rows(N - 1).Item(0) Then
@@ -468,9 +790,6 @@ Public Class FR_REPORT
         TXTTGLAWAL.Visible = True
         TXTTGLAKHIR.Visible = True
         BTNTAMPIL.Visible = True
-        BTNTAMPIL.Location = New Point(907, 10)
-        BTNCETAK.Location = New Point(1035, 10)
-        BTNEXPORT.Location = New Point(1163, 10)
 
         TXTTGLAWAL.ShowUpDown = True
         TXTTGLAWAL.Format = DateTimePickerFormat.Custom
@@ -489,9 +808,6 @@ Public Class FR_REPORT
         TXTTGLAWAL.Visible = True
         TXTTGLAKHIR.Visible = True
         BTNTAMPIL.Visible = True
-        BTNTAMPIL.Location = New Point(907, 10)
-        BTNCETAK.Location = New Point(1035, 10)
-        BTNEXPORT.Location = New Point(1163, 10)
 
         TXTTGLAWAL.ShowUpDown = False
         TXTTGLAWAL.Format = DateTimePickerFormat.Short
@@ -512,6 +828,17 @@ Public Class FR_REPORT
                     Select Case CBJENIS.SelectedIndex
                         Case 0
                             CRV.Refresh()
+                            Dim RPT As New RPT_CETAKHARGA
+                            With RPT
+                                .SetDataSource(DT)
+                                .SetParameterValue("datetime", LBTGL.Text)
+                            End With
+
+                            BTNCETAK.Visible = True
+                            BTNEXPORT.Visible = True
+                            CRV.ReportSource = RPT
+                        Case 1
+                            CRV.Refresh()
                             Dim RPT As New RPT_STOK
                             With RPT
                                 .SetDataSource(TBL)
@@ -521,7 +848,7 @@ Public Class FR_REPORT
                             BTNCETAK.Visible = True
                             BTNEXPORT.Visible = True
                             CRV.ReportSource = RPT
-                        Case 1
+                        Case 2
                             CRV.Refresh()
                             Dim RPT As New RPT_MASUK
                             With RPT
@@ -535,7 +862,7 @@ Public Class FR_REPORT
                             BTNCETAK.Visible = True
                             BTNEXPORT.Visible = True
                             CRV.ReportSource = RPT
-                        Case 2
+                        Case 3
                             CRV.Refresh()
                             Dim RPT As New RPT_KELUAR
                             With RPT
@@ -549,7 +876,7 @@ Public Class FR_REPORT
                             BTNCETAK.Visible = True
                             BTNEXPORT.Visible = True
                             CRV.ReportSource = RPT
-                        Case 3
+                        Case 4
                             CRV.Refresh()
                             Dim RPT As New RPT_PENJUALAN_HARIAN
                             With RPT
@@ -561,7 +888,7 @@ Public Class FR_REPORT
                             BTNCETAK.Visible = True
                             BTNEXPORT.Visible = True
                             CRV.ReportSource = RPT
-                        Case 4
+                        Case 5
                             CRV.Refresh()
                             Dim RPT As New RPT_PENJUALAN_BARANG
                             With RPT
@@ -573,7 +900,7 @@ Public Class FR_REPORT
                             BTNCETAK.Visible = True
                             BTNEXPORT.Visible = True
                             CRV.ReportSource = RPT
-                        Case 5
+                        Case 6
                             CRV.Refresh()
                             Dim RPT As New RPT_GRAFIK_PENJUALAN_HARIAN
                             With RPT
@@ -586,7 +913,7 @@ Public Class FR_REPORT
                             BTNCETAK.Visible = True
                             BTNEXPORT.Visible = True
                             CRV.ReportSource = RPT
-                        Case 6
+                        Case 7
                             CRV.Refresh()
                             Dim RPT As New RPT_GRAFIK_PENJUALAN_BULANAN
                             With RPT
@@ -599,7 +926,7 @@ Public Class FR_REPORT
                             BTNCETAK.Visible = True
                             BTNEXPORT.Visible = True
                             CRV.ReportSource = RPT
-                        Case 7
+                        Case 8
                             CRV.Refresh()
                             Dim RPT As New RPT_GRAFIK_PENJUALAN_BARANG_HARIAN
                             With RPT
@@ -612,7 +939,7 @@ Public Class FR_REPORT
                             BTNCETAK.Visible = True
                             BTNEXPORT.Visible = True
                             CRV.ReportSource = RPT
-                        Case 8
+                        Case 9
                             CRV.Refresh()
                             Dim RPT As New RPT_GRAFIK_LABA_HARIAN
                             With RPT
@@ -625,7 +952,7 @@ Public Class FR_REPORT
                             BTNCETAK.Visible = True
                             BTNEXPORT.Visible = True
                             CRV.ReportSource = RPT
-                        Case 9
+                        Case 10
                             CRV.Refresh()
                             Dim RPT As New RPT_GRAFIK_LABA_BULANAN
                             With RPT
@@ -643,6 +970,17 @@ Public Class FR_REPORT
                     Select Case CBJENIS.SelectedIndex
                         Case 0
                             CRV.Refresh()
+                            Dim RPT As New RPT_CETAKHARGA
+                            With RPT
+                                .SetDataSource(DT)
+                                .SetParameterValue("datetime", LBTGL.Text)
+                            End With
+
+                            BTNCETAK.Visible = True
+                            BTNEXPORT.Visible = True
+                            CRV.ReportSource = RPT
+                        Case 1
+                            CRV.Refresh()
                             Dim RPT As New RPT_STOK
                             With RPT
                                 .SetDataSource(TBL)
@@ -652,7 +990,7 @@ Public Class FR_REPORT
                             BTNCETAK.Visible = True
                             BTNEXPORT.Visible = True
                             CRV.ReportSource = RPT
-                        Case 1
+                        Case 2
                             CRV.Refresh()
                             Dim RPT As New RPT_MASUK_OPS
                             With RPT
@@ -666,7 +1004,7 @@ Public Class FR_REPORT
                             BTNCETAK.Visible = True
                             BTNEXPORT.Visible = True
                             CRV.ReportSource = RPT
-                        Case 2
+                        Case 3
                             CRV.Refresh()
                             Dim RPT As New RPT_KELUAR_KASIR
                             With RPT
@@ -755,12 +1093,12 @@ Public Class FR_REPORT
                         TXTTGLAWAL.Visible = False
                         TXTTGLAKHIR.Visible = False
                         BTNTAMPIL.Visible = True
-
-                        BTNTAMPIL.Location = New Point(362, 10)
-                        BTNCETAK.Location = New Point(489, 10)
-                        BTNEXPORT.Location = New Point(619, 10)
                     Case 1
-                        KONDISI_TANGGAL()
+                        Label6.Visible = False
+                        Label7.Visible = False
+                        TXTTGLAWAL.Visible = False
+                        TXTTGLAKHIR.Visible = False
+                        BTNTAMPIL.Visible = True
                     Case 2
                         KONDISI_TANGGAL()
                     Case 3
@@ -770,12 +1108,14 @@ Public Class FR_REPORT
                     Case 5
                         KONDISI_TANGGAL()
                     Case 6
-                        KONDISI_BULAN()
-                    Case 7
                         KONDISI_TANGGAL()
+                    Case 7
+                        KONDISI_BULAN()
                     Case 8
                         KONDISI_TANGGAL()
                     Case 9
+                        KONDISI_TANGGAL()
+                    Case 10
                         KONDISI_BULAN()
                 End Select
             Case 2
@@ -786,13 +1126,15 @@ Public Class FR_REPORT
                         TXTTGLAWAL.Visible = False
                         TXTTGLAKHIR.Visible = False
                         BTNTAMPIL.Visible = True
-
-                        BTNTAMPIL.Location = New Point(362, 10)
-                        BTNCETAK.Location = New Point(489, 10)
-                        BTNEXPORT.Location = New Point(619, 10)
                     Case 1
-                        KONDISI_TANGGAL()
+                        Label6.Visible = False
+                        Label7.Visible = False
+                        TXTTGLAWAL.Visible = False
+                        TXTTGLAKHIR.Visible = False
+                        BTNTAMPIL.Visible = True
                     Case 2
+                        KONDISI_TANGGAL()
+                    Case 3
                         KONDISI_TANGGAL()
                 End Select
             Case 3
@@ -803,10 +1145,6 @@ Public Class FR_REPORT
                         TXTTGLAWAL.Visible = False
                         TXTTGLAKHIR.Visible = False
                         BTNTAMPIL.Visible = True
-
-                        BTNTAMPIL.Location = New Point(362, 10)
-                        BTNCETAK.Location = New Point(489, 10)
-                        BTNEXPORT.Location = New Point(619, 10)
                     Case 1
                         KONDISI_TANGGAL()
                 End Select
