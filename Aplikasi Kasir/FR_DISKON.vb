@@ -239,6 +239,7 @@ Public Class FR_DISKON
         If MsgBox("Apakah anda yakin akan menghapus data diskon?", vbYesNo) = vbYes Then
             DGTAMPIL.Columns(0).Visible = True
             Dim IDX As String = DGTAMPIL.CurrentRow.Cells("Id").Value
+            DGTAMPIL.Columns(0).Visible = False
             Dim CMD As New SqlCommand("DELETE FROM tbl_diskon WHERE Id='" & IDX & "'", CONN)
             CMD.ExecuteNonQuery()
             TAMPIL()
@@ -506,6 +507,51 @@ Public Class FR_DISKON
     Private Sub CBTAMPIL_KeyPress(sender As Object, e As KeyPressEventArgs) Handles CBTAMPIL.KeyPress
         If e.KeyChar = "'" Then
             e.Handled = True
+        End If
+    End Sub
+
+    Private Sub BTNCETAK_Click(sender As Object, e As EventArgs) Handles BTNCETAK.Click
+        Dim DT As New DataTable
+        With DT
+            .Columns.Add("Kode")
+            .Columns.Add("Nama Barang")
+            .Columns.Add("Tanggal")
+            .Columns.Add("Diskon")
+        End With
+        DT.Rows.Add(DGTAMPIL.CurrentRow.Cells("Kode Barang").Value,
+                    DGTAMPIL.CurrentRow.Cells("Nama Barang").Value,
+                    DGTAMPIL.CurrentRow.Cells("Tanggal Awal").Value & " - " & DGTAMPIL.CurrentRow.Cells("Tanggal Akhir").Value,
+                            DGTAMPIL.CurrentRow.Cells("Diskon (%)").Value)
+
+        Dim printDialog1 As New PrintDialog
+        Dim printDocument1 As New System.Drawing.Printing.PrintDocument
+        'Open the PrintDialog
+        printDialog1.Document = printDocument1
+
+        Dim dr As DialogResult = printDialog1.ShowDialog()
+
+        'Here's where you can catch them aborting the print..
+
+        If dr = System.Windows.Forms.DialogResult.OK Then
+            'Get the Copy times
+            Dim nCopies As Integer = printDocument1.PrinterSettings.Copies
+            'Get the number of Start Page
+            Dim sPage As Integer = printDocument1.PrinterSettings.FromPage
+            'Get the number of End page
+            Dim ePage As Integer = printDocument1.PrinterSettings.ToPage
+            'Get the printer name
+            Dim PrinterName As String = printDocument1.PrinterSettings.PrinterName
+
+            Dim RPT As New RPT_CETAKDISKON
+            Try
+                With RPT
+                    .SetDataSource(DT)
+                    .PrintOptions.PrinterName = PrinterName
+                    .PrintToPrinter(nCopies, False, sPage, ePage)
+                End With
+            Catch ex As Exception
+                MessageBox.Show(ex.ToString())
+            End Try
         End If
     End Sub
 End Class

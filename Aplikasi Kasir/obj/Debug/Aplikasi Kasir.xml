@@ -117,6 +117,11 @@ Represents the strongly named DataTable class.
 Represents the strongly named DataTable class.
 </summary>
 </member>
+<member name="T:Aplikasi_Kasir.DATA_LAPORAN.TBL_DISKONDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
 <member name="T:Aplikasi_Kasir.DATA_LAPORAN.TBL_MASUKRow">
 <summary>
 Represents strongly named DataRow class.
@@ -142,6 +147,11 @@ Represents strongly named DataRow class.
 Represents strongly named DataRow class.
 </summary>
 </member>
+<member name="T:Aplikasi_Kasir.DATA_LAPORAN.TBL_DISKONRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
 <member name="T:Aplikasi_Kasir.DATA_LAPORAN.TBL_MASUKRowChangeEvent">
 <summary>
 Row event argument class
@@ -163,6 +173,11 @@ Row event argument class
 </summary>
 </member>
 <member name="T:Aplikasi_Kasir.DATA_LAPORAN.TBL_PENJUALANRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Aplikasi_Kasir.DATA_LAPORAN.TBL_DISKONRowChangeEvent">
 <summary>
 Row event argument class
 </summary>

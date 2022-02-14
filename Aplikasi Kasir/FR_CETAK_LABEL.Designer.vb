@@ -78,6 +78,8 @@ Partial Class FR_CETAK_LABEL
         Me.BTNMINIMIZE = New System.Windows.Forms.Button()
         Me.BTNCLOSE = New System.Windows.Forms.Button()
         Me.PNCONTENT = New System.Windows.Forms.Panel()
+        Me.BTNKELUARALL = New System.Windows.Forms.Button()
+        Me.BTNMASUKPAGE = New System.Windows.Forms.Button()
         Me.BTNPRINTALL = New System.Windows.Forms.Button()
         Me.BTNPRINT = New System.Windows.Forms.Button()
         Me.BTNKELUARDG = New System.Windows.Forms.Button()
@@ -834,6 +836,8 @@ Partial Class FR_CETAK_LABEL
         '
         'PNCONTENT
         '
+        Me.PNCONTENT.Controls.Add(Me.BTNKELUARALL)
+        Me.PNCONTENT.Controls.Add(Me.BTNMASUKPAGE)
         Me.PNCONTENT.Controls.Add(Me.BTNPRINTALL)
         Me.PNCONTENT.Controls.Add(Me.BTNPRINT)
         Me.PNCONTENT.Controls.Add(Me.BTNKELUARDG)
@@ -849,6 +853,36 @@ Partial Class FR_CETAK_LABEL
         Me.PNCONTENT.Name = "PNCONTENT"
         Me.PNCONTENT.Size = New System.Drawing.Size(1096, 728)
         Me.PNCONTENT.TabIndex = 15
+        '
+        'BTNKELUARALL
+        '
+        Me.BTNKELUARALL.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BTNKELUARALL.BackColor = System.Drawing.Color.Crimson
+        Me.BTNKELUARALL.FlatAppearance.BorderSize = 0
+        Me.BTNKELUARALL.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNKELUARALL.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNKELUARALL.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BTNKELUARALL.Location = New System.Drawing.Point(861, 679)
+        Me.BTNKELUARALL.Name = "BTNKELUARALL"
+        Me.BTNKELUARALL.Size = New System.Drawing.Size(186, 39)
+        Me.BTNKELUARALL.TabIndex = 75
+        Me.BTNKELUARALL.Text = "Keluarkan Semua"
+        Me.BTNKELUARALL.UseVisualStyleBackColor = False
+        '
+        'BTNMASUKPAGE
+        '
+        Me.BTNMASUKPAGE.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BTNMASUKPAGE.BackColor = System.Drawing.Color.Crimson
+        Me.BTNMASUKPAGE.FlatAppearance.BorderSize = 0
+        Me.BTNMASUKPAGE.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNMASUKPAGE.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNMASUKPAGE.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BTNMASUKPAGE.Location = New System.Drawing.Point(881, 51)
+        Me.BTNMASUKPAGE.Name = "BTNMASUKPAGE"
+        Me.BTNMASUKPAGE.Size = New System.Drawing.Size(168, 39)
+        Me.BTNMASUKPAGE.TabIndex = 74
+        Me.BTNMASUKPAGE.Text = "Masuk 1 Page"
+        Me.BTNMASUKPAGE.UseVisualStyleBackColor = False
         '
         'BTNPRINTALL
         '
@@ -947,7 +981,7 @@ Partial Class FR_CETAK_LABEL
         Me.DGCETAK.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.DGCETAK.RowTemplate.Height = 30
         Me.DGCETAK.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DGCETAK.Size = New System.Drawing.Size(1025, 262)
+        Me.DGCETAK.Size = New System.Drawing.Size(1025, 219)
         Me.DGCETAK.TabIndex = 69
         '
         'KODE
@@ -1100,7 +1134,7 @@ Partial Class FR_CETAK_LABEL
         Me.BTNNEXT.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.BTNNEXT.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BTNNEXT.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.BTNNEXT.Location = New System.Drawing.Point(999, 56)
+        Me.BTNNEXT.Location = New System.Drawing.Point(825, 57)
         Me.BTNNEXT.Name = "BTNNEXT"
         Me.BTNNEXT.Size = New System.Drawing.Size(50, 29)
         Me.BTNNEXT.TabIndex = 67
@@ -1115,7 +1149,7 @@ Partial Class FR_CETAK_LABEL
         Me.BTNPREV.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.BTNPREV.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BTNPREV.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.BTNPREV.Location = New System.Drawing.Point(943, 56)
+        Me.BTNPREV.Location = New System.Drawing.Point(769, 57)
         Me.BTNPREV.Name = "BTNPREV"
         Me.BTNPREV.Size = New System.Drawing.Size(50, 29)
         Me.BTNPREV.TabIndex = 66
@@ -1170,7 +1204,7 @@ Partial Class FR_CETAK_LABEL
         Me.TXTCARI.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TXTCARI.Location = New System.Drawing.Point(22, 56)
         Me.TXTCARI.Name = "TXTCARI"
-        Me.TXTCARI.Size = New System.Drawing.Size(915, 30)
+        Me.TXTCARI.Size = New System.Drawing.Size(740, 30)
         Me.TXTCARI.TabIndex = 64
         '
         'PEWAKTU
@@ -1287,4 +1321,6 @@ Partial Class FR_CETAK_LABEL
     Friend WithEvents HARGA5 As DataGridViewTextBoxColumn
     Friend WithEvents TGL_DISKON As DataGridViewTextBoxColumn
     Friend WithEvents DISKON As DataGridViewTextBoxColumn
+    Friend WithEvents BTNMASUKPAGE As Button
+    Friend WithEvents BTNKELUARALL As Button
 End Class

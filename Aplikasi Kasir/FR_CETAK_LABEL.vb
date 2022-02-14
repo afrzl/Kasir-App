@@ -198,15 +198,15 @@ Public Class FR_CETAK_LABEL
         TAMPIL_BARANG()
     End Sub
 
-    Sub MASUK_DATA()
+    Sub MASUK_DATA(IDPRODUK As String)
         Dim ADA_DATA As Boolean = False
 
-        If DGBARANG.Item(0, DGBARANG.CurrentRow.Index).Value = "" Then
+        If IDPRODUK = "" Then
             MsgBox("Tidak ada data yang dipilih!")
         Else
             For N = 0 To DGCETAK.Rows.Count - 1
                 Dim Kode As String = DGCETAK.Item("Kode", N).Value
-                If Kode = DGBARANG.Item(0, DGBARANG.CurrentRow.Index).Value Then
+                If Kode = IDPRODUK Then
                     ADA_DATA = True
                     Exit For
                 End If
@@ -228,7 +228,7 @@ Public Class FR_CETAK_LABEL
                     " Harga4," &
                     " End4," &
                     " Harga5" &
-                    " From tbl_barang WHERE Kode='" & DGBARANG.Item(0, DGBARANG.CurrentRow.Index).Value & "'"
+                    " From tbl_barang WHERE Kode='" & IDPRODUK & "'"
                 Dim CMD As SqlCommand
                 CMD = New SqlCommand(STR, CONN)
                 Dim RD As SqlDataReader
@@ -237,36 +237,36 @@ Public Class FR_CETAK_LABEL
                 If RD.HasRows Then
                     RD.Read()
                     DGCETAK.Rows.Add()
-                    DGCETAK.Rows(DGCETAK.Rows.Count - 1).Cells("KODE").Value = DGBARANG.Item(0, DGBARANG.CurrentRow.Index).Value
+                    DGCETAK.Rows(DGCETAK.Rows.Count - 1).Cells("KODE").Value = IDPRODUK
                     DGCETAK.Rows(DGCETAK.Rows.Count - 1).Cells("BARANG").Value = RD.Item("Barang")
                     DGCETAK.Rows(DGCETAK.Rows.Count - 1).Cells("SATUAN").Value = RD.Item("Satuan")
                     If RD.Item("End1") <> 0 Then
-                        DGCETAK.Rows(DGCETAK.Rows.Count - 1).Cells("OPSI1").Value = "0 - " & Format(RD.Item("End1"), "##0.##")
+                        DGCETAK.Rows(DGCETAK.Rows.Count - 1).Cells("OPSI1").Value = "<= " & Format(RD.Item("End1"), "##0.##")
                     End If
                     If RD.Item("Harga1") <> 0 Then
                         DGCETAK.Rows(DGCETAK.Rows.Count - 1).Cells("HARGA1").Value = Format(RD.Item("Harga1"), "##,##0")
                     End If
                     If RD.Item("End2") <> 0 Then
-                        DGCETAK.Rows(DGCETAK.Rows.Count - 1).Cells("OPSI2").Value = Format(RD.Item("End1"), "##0.##") & " - " & Format(RD.Item("End2"), "##0.##")
+                        DGCETAK.Rows(DGCETAK.Rows.Count - 1).Cells("OPSI2").Value = "<= " & Format(RD.Item("End2"), "##0.##")
                     ElseIf RD.Item("End2") = 0 And RD.Item("End1") <> 0 Then
-                        DGCETAK.Rows(DGCETAK.Rows.Count - 1).Cells("OPSI2").Value = " > " & Format(RD.Item("End1"), "##0.##")
+                        DGCETAK.Rows(DGCETAK.Rows.Count - 1).Cells("OPSI2").Value = "> " & Format(RD.Item("End1"), "##0.##")
                     End If
                     If RD.Item("Harga2") <> 0 Then
                         DGCETAK.Rows(DGCETAK.Rows.Count - 1).Cells("HARGA2").Value = Format(RD.Item("Harga2"), "##,##0")
                     End If
                     If RD.Item("End3") <> 0 Then
-                        DGCETAK.Rows(DGCETAK.Rows.Count - 1).Cells("OPSI3").Value = Format(RD.Item("End2"), "##0.##") & " - " & Format(RD.Item("End3"), "##0.##")
+                        DGCETAK.Rows(DGCETAK.Rows.Count - 1).Cells("OPSI3").Value = "<= " & Format(RD.Item("End3"), "##0.##")
                     ElseIf RD.Item("End3") = 0 And RD.Item("End2") <> 0 Then
-                        DGCETAK.Rows(DGCETAK.Rows.Count - 1).Cells("OPSI3").Value = " > " & Format(RD.Item("End2"), "##0.##")
+                        DGCETAK.Rows(DGCETAK.Rows.Count - 1).Cells("OPSI3").Value = "> " & Format(RD.Item("End2"), "##0.##")
                     End If
                     If RD.Item("Harga3") <> 0 Then
                         DGCETAK.Rows(DGCETAK.Rows.Count - 1).Cells("HARGA3").Value = Format(RD.Item("Harga3"), "##,##0")
                     End If
                     If RD.Item("End4") <> 0 Then
-                        DGCETAK.Rows(DGCETAK.Rows.Count - 1).Cells("OPSI4").Value = Format(RD.Item("End3"), "##0.##") & " - " & Format(RD.Item("End4"), "##0.##")
-                        DGCETAK.Rows(DGCETAK.Rows.Count - 1).Cells("OPSI5").Value = " > " & Format(RD.Item("End4"), "##0.##")
+                        DGCETAK.Rows(DGCETAK.Rows.Count - 1).Cells("OPSI4").Value = "<= " & Format(RD.Item("End4"), "##0.##")
+                        DGCETAK.Rows(DGCETAK.Rows.Count - 1).Cells("OPSI5").Value = "> " & Format(RD.Item("End4"), "##0.##")
                     ElseIf RD.Item("End4") = 0 And RD.Item("End3") <> 0 Then
-                        DGCETAK.Rows(DGCETAK.Rows.Count - 1).Cells("OPSI4").Value = " > " & Format(RD.Item("End3"), "##0.##")
+                        DGCETAK.Rows(DGCETAK.Rows.Count - 1).Cells("OPSI4").Value = "> " & Format(RD.Item("End3"), "##0.##")
                     End If
                     If RD.Item("Harga4") <> 0 Then
                         DGCETAK.Rows(DGCETAK.Rows.Count - 1).Cells("HARGA4").Value = Format(RD.Item("Harga4"), "##,##0")
@@ -293,7 +293,7 @@ Public Class FR_CETAK_LABEL
                         " Tgl_awal AS 'Tanggal Awal'," &
                         " Tgl_akhir AS 'Tanggal Akhir'" &
                         " FROM tbl_diskon" &
-                        " WHERE Kode='" & DGBARANG.Item(0, DGBARANG.CurrentRow.Index).Value & "'" &
+                        " WHERE Kode='" & IDPRODUK & "'" &
                         " AND Jenis = 'B'" &
                         " AND Tgl_awal <= '" & TGL_SKRG & "'" &
                         " And Tgl_akhir >= '" & TGL_SKRG & "'"
@@ -320,43 +320,56 @@ Public Class FR_CETAK_LABEL
     End Sub
 
     Private Sub BTNMASUKDG_Click(sender As Object, e As EventArgs) Handles BTNMASUKDG.Click
-        MASUK_DATA()
+        MASUK_DATA(DGBARANG.Item(0, DGBARANG.CurrentRow.Index).Value)
     End Sub
 
     Private Sub BTNKELUARDG_Click(sender As Object, e As EventArgs) Handles BTNKELUARDG.Click
-        Dim BARIS_DATA As Integer = 0
         For N = 0 To DGCETAK.Rows.Count - 1
             Dim Kode As String = DGCETAK.Item("KODE", N).Value
             If Kode = DGCETAK.Item(0, DGCETAK.CurrentRow.Index).Value Then
-                BARIS_DATA = N
+                DGCETAK.Rows.RemoveAt(N)
                 Exit For
             End If
         Next
-        DGCETAK.Rows.RemoveAt(BARIS_DATA)
     End Sub
 
     Private Sub BTNPRINT_Click(sender As Object, e As EventArgs) Handles BTNPRINT.Click
-        Dim DT As New DataTable
-        With DT
-            .Columns.Add("Kode")
-            .Columns.Add("Nama Barang")
-            .Columns.Add("Satuan")
-            .Columns.Add("Opsi1")
-            .Columns.Add("Harga1")
-            .Columns.Add("Opsi2")
-            .Columns.Add("Harga2")
-            .Columns.Add("Opsi3")
-            .Columns.Add("Harga3")
-            .Columns.Add("Opsi4")
-            .Columns.Add("Harga4")
-            .Columns.Add("Opsi5")
-            .Columns.Add("Harga5")
-            .Columns.Add("Tanggal Diskon")
-            .Columns.Add("Diskon")
-        End With
-        For Each EROW As DataGridViewRow In DGCETAK.Rows
-            If EROW.Cells(3).Value <> "" And EROW.Cells(5).Value <> "" And EROW.Cells(7).Value <> "" And EROW.Cells(9).Value <> "" And EROW.Cells(11).Value <> "" Then
-                If EROW.Cells(13).Value <> "" Then
+        If DGCETAK.RowCount > 0 Then
+
+            Dim DT As New DataTable
+            With DT
+                .Columns.Add("Kode")
+                .Columns.Add("Nama Barang")
+                .Columns.Add("Satuan")
+                .Columns.Add("Opsi1")
+                .Columns.Add("Harga1")
+                .Columns.Add("Opsi2")
+                .Columns.Add("Harga2")
+                .Columns.Add("Opsi3")
+                .Columns.Add("Harga3")
+                .Columns.Add("Opsi4")
+                .Columns.Add("Harga4")
+                .Columns.Add("Opsi5")
+                .Columns.Add("Harga5")
+                .Columns.Add("Tanggal Diskon")
+                .Columns.Add("Diskon")
+            End With
+            For Each EROW As DataGridViewRow In DGCETAK.Rows
+                If EROW.Cells(3).Value <> "" And EROW.Cells(5).Value <> "" And EROW.Cells(7).Value <> "" And EROW.Cells(9).Value <> "" And EROW.Cells(11).Value <> "" Then
+                    DT.Rows.Add(EROW.Cells(0).Value,
+                        EROW.Cells(1).Value,
+                        EROW.Cells(2).Value,
+                        EROW.Cells(3).Value,
+                        EROW.Cells(4).Value,
+                        EROW.Cells(5).Value,
+                        EROW.Cells(6).Value,
+                        EROW.Cells(7).Value,
+                        EROW.Cells(8).Value,
+                        EROW.Cells(9).Value,
+                        EROW.Cells(10).Value,
+                        EROW.Cells(11).Value,
+                        EROW.Cells(12).Value)
+                ElseIf EROW.Cells(3).Value <> "" And EROW.Cells(5).Value <> "" And EROW.Cells(7).Value <> "" And EROW.Cells(9).Value <> "" And EROW.Cells(11).Value = "" Then
                     DT.Rows.Add(EROW.Cells(0).Value,
                             EROW.Cells(1).Value,
                             EROW.Cells(2).Value,
@@ -368,11 +381,9 @@ Public Class FR_CETAK_LABEL
                             EROW.Cells(8).Value,
                             EROW.Cells(9).Value,
                             EROW.Cells(10).Value,
-                            EROW.Cells(11).Value,
-                            EROW.Cells(12).Value,
-                            "Disc. " & EROW.Cells(13).Value,
-                            EROW.Cells(14).Value)
-                Else
+                            "-1",
+                            "-1")
+                ElseIf EROW.Cells(3).Value <> "" And EROW.Cells(5).Value <> "" And EROW.Cells(7).Value <> "" And EROW.Cells(9).Value = "" And EROW.Cells(11).Value = "" Then
                     DT.Rows.Add(EROW.Cells(0).Value,
                             EROW.Cells(1).Value,
                             EROW.Cells(2).Value,
@@ -382,13 +393,11 @@ Public Class FR_CETAK_LABEL
                             EROW.Cells(6).Value,
                             EROW.Cells(7).Value,
                             EROW.Cells(8).Value,
-                            EROW.Cells(9).Value,
-                            EROW.Cells(10).Value,
-                            EROW.Cells(11).Value,
-                            EROW.Cells(12).Value)
-                End If
-            ElseIf EROW.Cells(3).Value <> "" And EROW.Cells(5).Value <> "" And EROW.Cells(7).Value <> "" And EROW.Cells(9).Value <> "" And EROW.Cells(11).Value = "" Then
-                If EROW.Cells(13).Value <> "" Then
+                            "-1",
+                            "-1",
+                            "-1",
+                            "-1")
+                ElseIf EROW.Cells(3).Value <> "" And EROW.Cells(5).Value <> "" And EROW.Cells(7).Value = "" And EROW.Cells(9).Value = "" And EROW.Cells(11).Value = "" Then
                     DT.Rows.Add(EROW.Cells(0).Value,
                             EROW.Cells(1).Value,
                             EROW.Cells(2).Value,
@@ -396,133 +405,75 @@ Public Class FR_CETAK_LABEL
                             EROW.Cells(4).Value,
                             EROW.Cells(5).Value,
                             EROW.Cells(6).Value,
-                            EROW.Cells(7).Value,
-                            EROW.Cells(8).Value,
-                            EROW.Cells(9).Value,
-                            EROW.Cells(10).Value,
-                            "Disc. " & EROW.Cells(13).Value,
-                            EROW.Cells(14).Value)
-                Else
+                            "-1",
+                            "-1",
+                            "-1",
+                            "-1",
+                            "-1",
+                            "-1")
+                ElseIf EROW.Cells(3).Value <> "" And EROW.Cells(5).Value = "" And EROW.Cells(7).Value = "" And EROW.Cells(9).Value = "" And EROW.Cells(11).Value = "" Then
                     DT.Rows.Add(EROW.Cells(0).Value,
                             EROW.Cells(1).Value,
                             EROW.Cells(2).Value,
                             EROW.Cells(3).Value,
                             EROW.Cells(4).Value,
-                            EROW.Cells(5).Value,
-                            EROW.Cells(6).Value,
-                            EROW.Cells(7).Value,
-                            EROW.Cells(8).Value,
-                            EROW.Cells(9).Value,
-                            EROW.Cells(10).Value)
+                            "-1",
+                            "-1",
+                            "-1",
+                            "-1",
+                            "-1",
+                            "-1",
+                            "-1",
+                            "-1")
+                ElseIf EROW.Cells(3).Value = "" And EROW.Cells(5).Value = "" And EROW.Cells(7).Value = "" And EROW.Cells(9).Value = "" And EROW.Cells(11).Value = "" Then
+                    DT.Rows.Add(EROW.Cells(0).Value,
+                            EROW.Cells(1).Value,
+                            EROW.Cells(2).Value,
+                            EROW.Cells(3).Value,
+                            EROW.Cells(4).Value,
+                            "-1",
+                            "-1",
+                            "-1",
+                            "-1",
+                            "-1",
+                            "-1",
+                            "-1",
+                            "-1")
                 End If
-            ElseIf EROW.Cells(3).Value <> "" And EROW.Cells(5).Value <> "" And EROW.Cells(7).Value <> "" And EROW.Cells(9).Value = "" And EROW.Cells(11).Value = "" Then
-                If EROW.Cells(13).Value <> "" Then
-                    DT.Rows.Add(EROW.Cells(0).Value,
-                            EROW.Cells(1).Value,
-                            EROW.Cells(2).Value,
-                            EROW.Cells(3).Value,
-                            EROW.Cells(4).Value,
-                            EROW.Cells(5).Value,
-                            EROW.Cells(6).Value,
-                            EROW.Cells(7).Value,
-                            EROW.Cells(8).Value,
-                            "Disc. " & EROW.Cells(13).Value,
-                            EROW.Cells(14).Value)
-                Else
-                    DT.Rows.Add(EROW.Cells(0).Value,
-                            EROW.Cells(1).Value,
-                            EROW.Cells(2).Value,
-                            EROW.Cells(3).Value,
-                            EROW.Cells(4).Value,
-                            EROW.Cells(5).Value,
-                            EROW.Cells(6).Value,
-                            EROW.Cells(7).Value,
-                            EROW.Cells(8).Value)
-                End If
-            ElseIf EROW.Cells(3).Value <> "" And EROW.Cells(5).Value <> "" And EROW.Cells(7).Value = "" And EROW.Cells(9).Value = "" And EROW.Cells(11).Value = "" Then
-                If EROW.Cells(13).Value <> "" Then
-                    DT.Rows.Add(EROW.Cells(0).Value,
-                            EROW.Cells(1).Value,
-                            EROW.Cells(2).Value,
-                            EROW.Cells(3).Value,
-                            EROW.Cells(4).Value,
-                            EROW.Cells(5).Value,
-                            EROW.Cells(6).Value,
-                            "Disc. " & EROW.Cells(13).Value,
-                            EROW.Cells(14).Value)
-                Else
-                    DT.Rows.Add(EROW.Cells(0).Value,
-                            EROW.Cells(1).Value,
-                            EROW.Cells(2).Value,
-                            EROW.Cells(3).Value,
-                            EROW.Cells(4).Value,
-                            EROW.Cells(5).Value,
-                            EROW.Cells(6).Value)
-                End If
-            ElseIf EROW.Cells(3).Value <> "" And EROW.Cells(5).Value = "" And EROW.Cells(7).Value = "" And EROW.Cells(9).Value = "" And EROW.Cells(11).Value = "" Then
-                If EROW.Cells(13).Value <> "" Then
-                    DT.Rows.Add(EROW.Cells(0).Value,
-                            EROW.Cells(1).Value,
-                            EROW.Cells(2).Value,
-                            EROW.Cells(3).Value,
-                            EROW.Cells(4).Value,
-                            "Disc. " & EROW.Cells(13).Value,
-                            EROW.Cells(14).Value)
-                Else
-                    DT.Rows.Add(EROW.Cells(0).Value,
-                            EROW.Cells(1).Value,
-                            EROW.Cells(2).Value,
-                            EROW.Cells(3).Value,
-                            EROW.Cells(4).Value)
-                End If
-            ElseIf EROW.Cells(3).Value = "" And EROW.Cells(5).Value = "" And EROW.Cells(7).Value = "" And EROW.Cells(9).Value = "" And EROW.Cells(11).Value = "" Then
-                If EROW.Cells(13).Value <> "" Then
-                    DT.Rows.Add(EROW.Cells(0).Value,
-                            EROW.Cells(1).Value,
-                            EROW.Cells(2).Value,
-                            EROW.Cells(3).Value,
-                            EROW.Cells(4).Value,
-                            "Disc. " & EROW.Cells(13).Value,
-                            EROW.Cells(14).Value)
-                Else
-                    DT.Rows.Add(EROW.Cells(0).Value,
-                            EROW.Cells(1).Value,
-                            EROW.Cells(2).Value,
-                            EROW.Cells(3).Value,
-                            EROW.Cells(4).Value)
-                End If
+            Next
+
+            Dim printDialog1 As New PrintDialog
+            Dim printDocument1 As New System.Drawing.Printing.PrintDocument
+            'Open the PrintDialog
+            printDialog1.Document = printDocument1
+
+            Dim dr As DialogResult = printDialog1.ShowDialog()
+
+            'Here's where you can catch them aborting the print..
+
+            If dr = System.Windows.Forms.DialogResult.OK Then
+                'Get the Copy times
+                Dim nCopies As Integer = printDocument1.PrinterSettings.Copies
+                'Get the number of Start Page
+                Dim sPage As Integer = printDocument1.PrinterSettings.FromPage
+                'Get the number of End page
+                Dim ePage As Integer = printDocument1.PrinterSettings.ToPage
+                'Get the printer name
+                Dim PrinterName As String = printDocument1.PrinterSettings.PrinterName
+
+                Dim RPT As New RPT_CETAKLABEL
+                Try
+                    With RPT
+                        .SetDataSource(DT)
+                        .PrintOptions.PrinterName = PrinterName
+                        .PrintToPrinter(nCopies, False, sPage, ePage)
+                    End With
+                Catch ex As Exception
+                    MessageBox.Show(ex.ToString())
+                End Try
             End If
-        Next
-
-        Dim printDialog1 As New PrintDialog
-        Dim printDocument1 As New System.Drawing.Printing.PrintDocument
-        'Open the PrintDialog
-        printDialog1.Document = printDocument1
-
-        Dim dr As DialogResult = printDialog1.ShowDialog()
-
-        'Here's where you can catch them aborting the print..
-
-        If dr = System.Windows.Forms.DialogResult.OK Then
-            'Get the Copy times
-            Dim nCopies As Integer = printDocument1.PrinterSettings.Copies
-            'Get the number of Start Page
-            Dim sPage As Integer = printDocument1.PrinterSettings.FromPage
-            'Get the number of End page
-            Dim ePage As Integer = printDocument1.PrinterSettings.ToPage
-            'Get the printer name
-            Dim PrinterName As String = printDocument1.PrinterSettings.PrinterName
-
-            Dim RPT As New RPT_CETAKLABEL
-            Try
-                With RPT
-                    .SetDataSource(DT)
-                    .PrintOptions.PrinterName = PrinterName
-                    .PrintToPrinter(nCopies, False, sPage, ePage)
-                End With
-            Catch ex As Exception
-                MessageBox.Show(ex.ToString())
-            End Try
+        Else
+            MsgBox("Tabel cetak kosong!")
         End If
     End Sub
 
@@ -738,7 +689,7 @@ Public Class FR_CETAK_LABEL
     Private Sub DGBARANG_KeyDown(sender As Object, e As KeyEventArgs) Handles DGBARANG.KeyDown
         If (e.KeyCode = Keys.Enter) Then
             e.Handled = True
-            MASUK_DATA()
+            MASUK_DATA(DGBARANG.Item(0, DGBARANG.CurrentRow.Index).Value)
         End If
     End Sub
 
@@ -750,5 +701,18 @@ Public Class FR_CETAK_LABEL
 
     Private Sub TXTCARI_TextChanged(sender As Object, e As EventArgs) Handles TXTCARI.TextChanged
         TAMPIL_BARANG()
+    End Sub
+
+    Private Sub BTNMASUKPAGE_Click(sender As Object, e As EventArgs) Handles BTNMASUKPAGE.Click
+        For N = 0 To DGBARANG.Rows.Count - 1
+            Dim Kode As String = DGBARANG.Item(0, N).Value
+            MASUK_DATA(Kode)
+        Next
+    End Sub
+
+    Private Sub BTNKELUARALL_Click(sender As Object, e As EventArgs) Handles BTNKELUARALL.Click
+        For N = 0 To DGCETAK.Rows.Count - 1
+            DGCETAK.Rows.RemoveAt(0)
+        Next
     End Sub
 End Class

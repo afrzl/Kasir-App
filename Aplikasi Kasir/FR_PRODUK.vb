@@ -1,5 +1,7 @@
 ﻿Imports System.Data.SqlClient
 Imports System.Drawing.Printing
+Imports BarcodeLib
+
 Public Class FR_PRODUK
     Private Sub PEWAKTU_Tick(sender As Object, e As EventArgs) Handles PEWAKTU.Tick
         LBTGL.Text = Format(Date.Now, "dd MMMM yyyy HH:mm:ss")
@@ -452,14 +454,17 @@ Public Class FR_PRODUK
         End If
     End Sub
 
-    Dim WIDTH_BARCODE As Integer = 170
-    Dim HEIGHT_BARCODE As Integer = 56
+    Dim WIDTH_BARCODE As Integer = 121
+    Dim HEIGHT_BARCODE As Integer = 40
+    Dim WIDTH_LABEL As Integer = 140
+    Dim HEIGHT_LABEL As Integer = 84
+    ReadOnly FONT_KODE As New Font("Segoe UI", 5, FontStyle.Regular)
     Dim PPD As New PrintDialog
 
     Private Sub BTNCETAK_Click(sender As Object, e As EventArgs) Handles BTNCETAK.Click
         PPD.Document = PRINTBARCODE
         PPD.PrinterSettings = PRINTBARCODE.PrinterSettings
-        PRINTBARCODE.DefaultPageSettings.PaperSize = New PaperSize("A4", 595, 841)
+        PRINTBARCODE.DefaultPageSettings.PaperSize = New PaperSize("Custom", 430, 200)
         PPD.AllowSomePages = True
 
         If PPD.ShowDialog = DialogResult.OK Then
@@ -469,16 +474,20 @@ Public Class FR_PRODUK
     End Sub
 
     Private Sub PRINTBARCODE_PrintPage(sender As Object, e As PrintPageEventArgs) Handles PRINTBARCODE.PrintPage
-        Dim X As Integer = 30
+        Dim X As Integer = 2
         Dim Y As Integer = 10
+        Dim textCenter As New StringFormat
+        textCenter.Alignment = StringAlignment.Center
 
-        For i As Integer = 1 To 16
-            X = 50
-            For j As Integer = 1 To 4
-                e.Graphics.DrawImage(PBBARCODE.Image, X, Y, WIDTH_BARCODE, HEIGHT_BARCODE)
-                X = X + WIDTH_BARCODE + 10
-            Next
-            Y = Y + HEIGHT_BARCODE + 10
+        Dim barcode As Barcode = New Barcode()
+        Dim foreColor As Color = Color.Black
+        Dim backColor As Color = Color.Transparent
+        Dim image As Image = barcode.Encode(TYPE.CODE128, TXTKODE.Text, foreColor, backColor, WIDTH_BARCODE, HEIGHT_BARCODE)
+        Dim MyBitmap As New Bitmap(image)
+        For j As Integer = 0 To 2
+            e.Graphics.DrawImage(MyBitmap, X, Y, WIDTH_BARCODE, HEIGHT_BARCODE)
+            e.Graphics.DrawString(TXTKODE.Text, FONT_KODE, Brushes.Black, ((j * WIDTH_LABEL) + WIDTH_LABEL / 2) - 3, Y + HEIGHT_BARCODE, textCenter)
+            X += WIDTH_LABEL + 3
         Next
     End Sub
 
@@ -570,10 +579,6 @@ Public Class FR_PRODUK
             BTNUBAH.Visible = True
             BTNCETAK.Visible = True
             CBSATUAN.Enabled = False
-
-            Dim GENERATE As New MessagingToolkit.Barcode.BarcodeEncoder
-            PBBARCODE.Image = New Bitmap(GENERATE.Encode(MessagingToolkit.Barcode.BarcodeFormat.Code128A, TXTKODE.Text))
-            PBBARCODE.SizeMode = PictureBoxSizeMode.StretchImage
         Else
             RD.Close()
             TXTNAMA.Clear()

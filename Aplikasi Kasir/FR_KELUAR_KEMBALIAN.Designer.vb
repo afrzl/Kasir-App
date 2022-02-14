@@ -27,12 +27,17 @@ Partial Class FR_KELUAR_KEMBALIAN
         Me.BTNTUTUP = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.LBKEMBALI = New System.Windows.Forms.Label()
+        Me.PRINTNOTA = New System.Drawing.Printing.PrintDocument()
+        Me.ID_TRANSAKSI = New System.Windows.Forms.Label()
+        Me.BTN_CETAKNOTA = New System.Windows.Forms.Button()
         Me.PNCONTENT.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
         '
         'PNCONTENT
         '
+        Me.PNCONTENT.Controls.Add(Me.BTN_CETAKNOTA)
+        Me.PNCONTENT.Controls.Add(Me.ID_TRANSAKSI)
         Me.PNCONTENT.Controls.Add(Me.BTNTUTUP)
         Me.PNCONTENT.Controls.Add(Me.GroupBox2)
         Me.PNCONTENT.Dock = System.Windows.Forms.DockStyle.Fill
@@ -81,6 +86,34 @@ Partial Class FR_KELUAR_KEMBALIAN
         Me.LBKEMBALI.Text = "0"
         Me.LBKEMBALI.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
+        'PRINTNOTA
+        '
+        '
+        'ID_TRANSAKSI
+        '
+        Me.ID_TRANSAKSI.AutoSize = True
+        Me.ID_TRANSAKSI.Location = New System.Drawing.Point(119, 194)
+        Me.ID_TRANSAKSI.Name = "ID_TRANSAKSI"
+        Me.ID_TRANSAKSI.Size = New System.Drawing.Size(51, 17)
+        Me.ID_TRANSAKSI.TabIndex = 4
+        Me.ID_TRANSAKSI.Text = "Label1"
+        Me.ID_TRANSAKSI.Visible = False
+        '
+        'BTN_CETAKNOTA
+        '
+        Me.BTN_CETAKNOTA.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BTN_CETAKNOTA.BackColor = System.Drawing.Color.Crimson
+        Me.BTN_CETAKNOTA.FlatAppearance.BorderSize = 0
+        Me.BTN_CETAKNOTA.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTN_CETAKNOTA.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTN_CETAKNOTA.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BTN_CETAKNOTA.Location = New System.Drawing.Point(746, 147)
+        Me.BTN_CETAKNOTA.Name = "BTN_CETAKNOTA"
+        Me.BTN_CETAKNOTA.Size = New System.Drawing.Size(168, 45)
+        Me.BTN_CETAKNOTA.TabIndex = 5
+        Me.BTN_CETAKNOTA.Text = "Cetak Nota"
+        Me.BTN_CETAKNOTA.UseVisualStyleBackColor = False
+        '
         'FR_KELUAR_KEMBALIAN
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -93,6 +126,7 @@ Partial Class FR_KELUAR_KEMBALIAN
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "MENU BARANG KELUAR"
         Me.PNCONTENT.ResumeLayout(False)
+        Me.PNCONTENT.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
         Me.ResumeLayout(False)
 
@@ -101,4 +135,7 @@ Partial Class FR_KELUAR_KEMBALIAN
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents LBKEMBALI As Label
     Friend WithEvents BTNTUTUP As Button
+    Friend WithEvents PRINTNOTA As Printing.PrintDocument
+    Friend WithEvents ID_TRANSAKSI As Label
+    Friend WithEvents BTN_CETAKNOTA As Button
 End Class

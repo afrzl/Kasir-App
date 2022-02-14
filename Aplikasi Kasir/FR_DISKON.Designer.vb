@@ -32,6 +32,7 @@ Partial Class FR_DISKON
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.HapusToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.BTNCETAK = New System.Windows.Forms.Button()
         Me.CBTAMPIL = New System.Windows.Forms.ComboBox()
         Me.BTNNEXT = New System.Windows.Forms.Button()
         Me.BTNPREV = New System.Windows.Forms.Button()
@@ -49,7 +50,6 @@ Partial Class FR_DISKON
         Me.Label10 = New System.Windows.Forms.Label()
         Me.PNCONTENT = New System.Windows.Forms.Panel()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.TXTMIN = New System.Windows.Forms.TextBox()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.CBJENIS = New System.Windows.Forms.ComboBox()
         Me.Label11 = New System.Windows.Forms.Label()
@@ -59,6 +59,7 @@ Partial Class FR_DISKON
         Me.TXTTGLAKHIR = New System.Windows.Forms.DateTimePicker()
         Me.TXTTGLAWAL = New System.Windows.Forms.DateTimePicker()
         Me.Label9 = New System.Windows.Forms.Label()
+        Me.TXTMIN = New System.Windows.Forms.TextBox()
         Me.PNTOP = New System.Windows.Forms.Panel()
         Me.LBTGL = New System.Windows.Forms.Label()
         Me.PNCONTROL = New System.Windows.Forms.Panel()
@@ -162,6 +163,7 @@ Partial Class FR_DISKON
         '
         'Panel3
         '
+        Me.Panel3.Controls.Add(Me.BTNCETAK)
         Me.Panel3.Controls.Add(Me.CBTAMPIL)
         Me.Panel3.Controls.Add(Me.BTNNEXT)
         Me.Panel3.Controls.Add(Me.BTNPREV)
@@ -171,6 +173,21 @@ Partial Class FR_DISKON
         Me.Panel3.Size = New System.Drawing.Size(579, 61)
         Me.Panel3.TabIndex = 21
         '
+        'BTNCETAK
+        '
+        Me.BTNCETAK.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BTNCETAK.BackColor = System.Drawing.Color.DarkGreen
+        Me.BTNCETAK.FlatAppearance.BorderSize = 0
+        Me.BTNCETAK.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNCETAK.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNCETAK.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BTNCETAK.Location = New System.Drawing.Point(327, 13)
+        Me.BTNCETAK.Name = "BTNCETAK"
+        Me.BTNCETAK.Size = New System.Drawing.Size(123, 30)
+        Me.BTNCETAK.TabIndex = 21
+        Me.BTNCETAK.Text = "Cetak"
+        Me.BTNCETAK.UseVisualStyleBackColor = False
+        '
         'CBTAMPIL
         '
         Me.CBTAMPIL.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
@@ -179,9 +196,9 @@ Partial Class FR_DISKON
         Me.CBTAMPIL.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.CBTAMPIL.FormattingEnabled = True
         Me.CBTAMPIL.Items.AddRange(New Object() {"Semua", "Berlalu", "Sekarang", "Akan Datang"})
-        Me.CBTAMPIL.Location = New System.Drawing.Point(15, 15)
+        Me.CBTAMPIL.Location = New System.Drawing.Point(15, 13)
         Me.CBTAMPIL.Name = "CBTAMPIL"
-        Me.CBTAMPIL.Size = New System.Drawing.Size(435, 31)
+        Me.CBTAMPIL.Size = New System.Drawing.Size(306, 31)
         Me.CBTAMPIL.TabIndex = 20
         '
         'BTNNEXT
@@ -411,15 +428,6 @@ Partial Class FR_DISKON
         Me.Panel2.Size = New System.Drawing.Size(517, 728)
         Me.Panel2.TabIndex = 20
         '
-        'TXTMIN
-        '
-        Me.TXTMIN.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TXTMIN.Location = New System.Drawing.Point(151, 61)
-        Me.TXTMIN.Name = "TXTMIN"
-        Me.TXTMIN.Size = New System.Drawing.Size(343, 30)
-        Me.TXTMIN.TabIndex = 26
-        Me.TXTMIN.Visible = False
-        '
         'Label12
         '
         Me.Label12.AutoSize = True
@@ -508,6 +516,15 @@ Partial Class FR_DISKON
         Me.Label9.TabIndex = 3
         Me.Label9.Text = "Awal Diskon"
         Me.Label9.Visible = False
+        '
+        'TXTMIN
+        '
+        Me.TXTMIN.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TXTMIN.Location = New System.Drawing.Point(151, 61)
+        Me.TXTMIN.Name = "TXTMIN"
+        Me.TXTMIN.Size = New System.Drawing.Size(343, 30)
+        Me.TXTMIN.TabIndex = 26
+        Me.TXTMIN.Visible = False
         '
         'PNTOP
         '
@@ -999,4 +1016,5 @@ Partial Class FR_DISKON
     Friend WithEvents BTNKELUAR As Button
     Friend WithEvents BTNLAPORAN As Button
     Friend WithEvents BTNLABELADMIN As Button
+    Friend WithEvents BTNCETAK As Button
 End Class

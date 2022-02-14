@@ -38,7 +38,6 @@ Partial Class FR_PRODUK
         Me.LBLUSER = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.PNCONTENT = New System.Windows.Forms.Panel()
-        Me.PBBARCODE = New System.Windows.Forms.PictureBox()
         Me.BTNCETAK = New System.Windows.Forms.Button()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.Label17 = New System.Windows.Forms.Label()
@@ -98,7 +97,6 @@ Partial Class FR_PRODUK
         Me.PNCONTROL.SuspendLayout()
         Me.PNTOP.SuspendLayout()
         Me.PNCONTENT.SuspendLayout()
-        CType(Me.PBBARCODE, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DGTAMPIL, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ContextMenuStrip1.SuspendLayout()
         Me.PNLEFT.SuspendLayout()
@@ -210,7 +208,6 @@ Partial Class FR_PRODUK
         '
         'PNCONTENT
         '
-        Me.PNCONTENT.Controls.Add(Me.PBBARCODE)
         Me.PNCONTENT.Controls.Add(Me.BTNCETAK)
         Me.PNCONTENT.Controls.Add(Me.Label19)
         Me.PNCONTENT.Controls.Add(Me.Label17)
@@ -251,15 +248,6 @@ Partial Class FR_PRODUK
         Me.PNCONTENT.Name = "PNCONTENT"
         Me.PNCONTENT.Size = New System.Drawing.Size(1096, 768)
         Me.PNCONTENT.TabIndex = 18
-        '
-        'PBBARCODE
-        '
-        Me.PBBARCODE.Location = New System.Drawing.Point(432, 157)
-        Me.PBBARCODE.Name = "PBBARCODE"
-        Me.PBBARCODE.Size = New System.Drawing.Size(132, 59)
-        Me.PBBARCODE.TabIndex = 70
-        Me.PBBARCODE.TabStop = False
-        Me.PBBARCODE.Visible = False
         '
         'BTNCETAK
         '
@@ -589,6 +577,7 @@ Partial Class FR_PRODUK
         '
         'CBSATUAN
         '
+        Me.CBSATUAN.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CBSATUAN.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CBSATUAN.FormattingEnabled = True
         Me.CBSATUAN.Items.AddRange(New Object() {"Pcs", "Kg", "Pack", "Renteng", "Liter", "Dus"})
@@ -990,7 +979,6 @@ Partial Class FR_PRODUK
         Me.PNTOP.PerformLayout()
         Me.PNCONTENT.ResumeLayout(False)
         Me.PNCONTENT.PerformLayout()
-        CType(Me.PBBARCODE, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DGTAMPIL, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ContextMenuStrip1.ResumeLayout(False)
         Me.PNLEFT.ResumeLayout(False)
@@ -1053,7 +1041,6 @@ Partial Class FR_PRODUK
     Friend WithEvents Label15 As Label
     Friend WithEvents BTNCETAK As Button
     Friend WithEvents PRINTBARCODE As Printing.PrintDocument
-    Friend WithEvents PBBARCODE As PictureBox
     Friend WithEvents PNADMIN As Panel
     Friend WithEvents Label1 As Label
     Friend WithEvents Label14 As Label

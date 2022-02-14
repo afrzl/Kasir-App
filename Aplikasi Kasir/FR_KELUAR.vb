@@ -390,6 +390,7 @@ Public Class FR_KELUAR
                 INPUT_DB()
                 PRINT_NOTA()
                 FR_KELUAR_KEMBALIAN.LBKEMBALI.Text = Format(CInt(TXTKEMBALIAN.Text), "##,##0")
+                FR_KELUAR_KEMBALIAN.ID_TRANSAKSI.Text = ID_TRANSAKSI
                 FR_KELUAR_KEMBALIAN.Show()
                 FR_KELUAR_KEMBALIAN.BTNTUTUP.Select()
                 Me.Enabled = False
