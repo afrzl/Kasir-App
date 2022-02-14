@@ -1259,4 +1259,8 @@ Public Class FR_REPORT
     Private Sub BTNRETURN_Click(sender As Object, e As EventArgs) Handles BTNRETURN.Click
         BUKA_FORM(FR_RETURN)
     End Sub
+
+    Private Sub BTNBARCODEOPS_Click(sender As Object, e As EventArgs) Handles BTNBARCODEOPS.Click
+        BUKA_FORM(FR_CETAKBARCODE)
+    End Sub
 End Class

@@ -715,4 +715,8 @@ Public Class FR_CETAK_LABEL
             DGCETAK.Rows.RemoveAt(0)
         Next
     End Sub
+
+    Private Sub BTNBARCODEOPS_Click(sender As Object, e As EventArgs) Handles BTNBARCODEOPS.Click
+        BUKA_FORM(FR_CETAKBARCODE)
+    End Sub
 End Class

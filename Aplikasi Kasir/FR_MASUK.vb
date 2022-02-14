@@ -936,4 +936,8 @@ Public Class FR_MASUK
             e.Handled = True
         End If
     End Sub
+
+    Private Sub BTNBARCODEOPS_Click(sender As Object, e As EventArgs) Handles BTNBARCODEOPS.Click
+        BUKA_FORM(FR_CETAKBARCODE)
+    End Sub
 End Class

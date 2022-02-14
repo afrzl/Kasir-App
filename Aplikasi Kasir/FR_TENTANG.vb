@@ -521,4 +521,8 @@ Public Class FR_TENTANG
     Private Sub BTNLAPORANKASIR_Click(sender As Object, e As EventArgs) Handles BTNLAPORANKASIR.Click
         BUKA_FORM(FR_REPORT)
     End Sub
+
+    Private Sub BTNBARCODEOPS_Click(sender As Object, e As EventArgs) Handles BTNBARCODEOPS.Click
+        BUKA_FORM(FR_CETAKBARCODE)
+    End Sub
 End Class
