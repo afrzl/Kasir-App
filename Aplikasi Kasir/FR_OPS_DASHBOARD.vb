@@ -10,14 +10,15 @@ Public Class FR_OPS_DASHBOARD
     End Sub
 
     Private Sub FR_MENU_Load(sender As Object, e As EventArgs) Handles Me.Load
-        If CEK_EXPIRED() = True Then
-            MsgBox("Terdapat barang yang akan expired. Silahkan cek di menu barang rusak!")
-        End If
-
         LBTGL.Text = Format(Date.Now, "dd MMMM yyyy HH:mm:ss")
         PEWAKTU.Enabled = True
 
         LBLUSER.Text = NAMA_LOGIN
+
+        If CEK_EXPIRED() = True Then
+            MsgBox("Terdapat barang yang akan expired. Silahkan cek di menu barang rusak!")
+        End If
+
         TAMPIL()
     End Sub
 
@@ -68,6 +69,7 @@ Public Class FR_OPS_DASHBOARD
             " (SELECT COALESCE(SUM(Stok),0) FROM tbl_transaksi_child WHERE RTRIM(tbl_transaksi_child.Kode) = RTRIM(tbl_barang.Kode) AND (LEFT(Id_trans,1)='M' or LEFT(Id_trans,1)='R')) AS Stok," &
             " RTRIM(tbl_barang.Satuan) AS 'Satuan'" &
             " FROM tbl_barang WHERE Barang Like '%" & TXTCARISTOK.Text & "%'" &
+            " OR Kode = '" & TXTCARISTOK.Text & "'" &
             " AND (SELECT COALESCE(SUM(Stok),0) FROM tbl_transaksi_child WHERE RTRIM(tbl_transaksi_child.Kode) = RTRIM(tbl_barang.Kode) AND (LEFT(Id_trans,1)='M' or LEFT(Id_trans,1)='R')) != 0"
 
         Dim DA As SqlDataAdapter
@@ -193,5 +195,9 @@ Public Class FR_OPS_DASHBOARD
 
     Private Sub BTNBARCODEOPS_Click(sender As Object, e As EventArgs) Handles BTNBARCODEOPS.Click
         BUKA_FORM(FR_CETAKBARCODE)
+    End Sub
+
+    Private Sub TXTCARISTOK_TextChanged_1(sender As Object, e As EventArgs) Handles TXTCARISTOK.TextChanged
+        TAMPIL()
     End Sub
 End Class

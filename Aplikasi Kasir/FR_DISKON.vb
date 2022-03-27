@@ -50,7 +50,7 @@ Public Class FR_DISKON
                 " tbl_diskon.Min_transaksi AS 'Minimal Transaksi'," &
                 " tbl_diskon.Tgl_awal as 'Tanggal Awal'," &
                 " tbl_diskon.Tgl_akhir AS 'Tanggal Akhir'," &
-                " RTRIM(tbl_diskon.Diskon) AS 'Diskon (%)'" &
+                " tbl_diskon.Diskon AS 'Diskon (%)'" &
                 " FROM tbl_diskon" &
                 " LEFT OUTER JOIN tbl_barang ON tbl_diskon.Kode = tbl_barang.Kode" &
                 " ORDER BY tbl_diskon.Tgl_awal ASC"
@@ -62,7 +62,7 @@ Public Class FR_DISKON
                 " tbl_diskon.Min_transaksi AS 'Minimal Transaksi'," &
                 " tbl_diskon.Tgl_awal as 'Tanggal Awal'," &
                 " tbl_diskon.Tgl_akhir AS 'Tanggal Akhir'," &
-                " RTRIM(tbl_diskon.Diskon) AS 'Diskon (%)'" &
+                " tbl_diskon.Diskon AS 'Diskon (%)'" &
                 " FROM tbl_diskon" &
                 " LEFT OUTER JOIN tbl_barang ON tbl_diskon.Kode = tbl_barang.Kode" &
                 " WHERE Tgl_akhir < '" & TGL_SKRG & "'" &
@@ -75,7 +75,7 @@ Public Class FR_DISKON
                 " tbl_diskon.Min_transaksi AS 'Minimal Transaksi'," &
                 " tbl_diskon.Tgl_awal as 'Tanggal Awal'," &
                 " tbl_diskon.Tgl_akhir AS 'Tanggal Akhir'," &
-                " RTRIM(tbl_diskon.Diskon) AS 'Diskon (%)'" &
+                " tbl_diskon.Diskon AS 'Diskon (%)'" &
                 " FROM tbl_diskon" &
                 " LEFT OUTER JOIN tbl_barang ON tbl_diskon.Kode = tbl_barang.Kode" &
                 " WHERE Tgl_awal <= '" & TGL_SKRG & "' AND Tgl_akhir >= '" & TGL_SKRG & "'" &
@@ -88,7 +88,7 @@ Public Class FR_DISKON
                 " tbl_diskon.Min_transaksi AS 'Minimal Transaksi'," &
                 " tbl_diskon.Tgl_awal as 'Tanggal Awal'," &
                 " tbl_diskon.Tgl_akhir AS 'Tanggal Akhir'," &
-                " RTRIM(tbl_diskon.Diskon) AS 'Diskon (%)'" &
+                " tbl_diskon.Diskon AS 'Diskon (%)'" &
                 " FROM tbl_diskon" &
                 " LEFT OUTER JOIN tbl_barang ON tbl_diskon.Kode = tbl_barang.Kode" &
                 " WHERE Tgl_awal > '" & TGL_SKRG & "'" &
@@ -101,7 +101,7 @@ Public Class FR_DISKON
                 " tbl_diskon.Min_transaksi AS 'Minimal Transaksi'," &
                 " tbl_diskon.Tgl_awal as 'Tanggal Awal'," &
                 " tbl_diskon.Tgl_akhir AS 'Tanggal Akhir'," &
-                " RTRIM(tbl_diskon.Diskon) AS 'Diskon (%)'" &
+                " tbl_diskon.Diskon AS 'Diskon (%)'" &
                 " FROM tbl_diskon" &
                 " LEFT OUTER JOIN tbl_barang ON tbl_diskon.Kode = tbl_barang.Kode" &
                 " ORDER BY tbl_diskon.Tgl_awal ASC"
@@ -114,6 +114,8 @@ Public Class FR_DISKON
 
 
         DGTAMPIL.Columns(0).Visible = False
+
+
         DGTAMPIL.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
         DGTAMPIL.Columns(2).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
         DGTAMPIL.Columns(3).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
@@ -126,8 +128,9 @@ Public Class FR_DISKON
         DGTAMPIL.Columns(5).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         DGTAMPIL.Columns(6).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         DGTAMPIL.Columns(7).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-        DGTAMPIL.Columns(7).DefaultCellStyle.Format = "##%"
+
         DGTAMPIL.Columns(4).DefaultCellStyle.Format = "Rp ###,##"
+        DGTAMPIL.Columns(7).DefaultCellStyle.Format = "##0.##"
 
         For N = 0 To DGTAMPIL.Rows.Count - 1
             If DGTAMPIL.Rows(N).Cells(1).Value = "A" Then
@@ -286,7 +289,7 @@ Public Class FR_DISKON
     End Sub
 
     Private Sub TXTDISKON_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTDISKON.KeyPress
-        If Not ((e.KeyChar >= "0" And e.KeyChar <= "9") Or e.KeyChar = vbBack) Then
+        If Not ((e.KeyChar >= "0" And e.KeyChar <= "9") Or e.KeyChar = vbBack Or e.KeyChar = ",") Then
             e.Handled = True
         End If
         If e.KeyChar = Chr(13) Then
@@ -391,21 +394,36 @@ Public Class FR_DISKON
                 MsgBox("Data tidak lengkap!")
                 TXTKODE.Select()
             Else
-                Dim STR As String = "INSERT INTO tbl_diskon (Jenis, Kode, Diskon, Tgl_awal, Tgl_akhir)" &
-                " VALUES(" &
-                " 'B'," &
-                " '" & TXTKODE.Text & "'," &
-                " '" & CInt(TXTDISKON.Text) & "'," &
-                " '" & Format(TXTTGLAWAL.Value, "MM/dd/yyyy") & "'," &
-                " '" & Format(TXTTGLAKHIR.Value, "MM/dd/yyyy") & "'" &
-                " )"
+                Dim STR As String = "SELECT Id FROM tbl_diskon" &
+                " WHERE Kode='" & TXTKODE.Text & "'" &
+                " AND Jenis = 'B'" &
+                " AND ((Tgl_awal <= '" & Format(TXTTGLAWAL.Value, "yyyy-MM-dd") & "' AND Tgl_akhir >= '" & Format(TXTTGLAKHIR.Value, "yyyy-MM-dd") & "')" &
+                " OR (Tgl_awal <= '" & Format(TXTTGLAKHIR.Value, "yyyy-MM-dd") & "' AND Tgl_akhir >= '" & Format(TXTTGLAKHIR.Value, "yyyy-MM-dd") & "')" &
+                " OR (Tgl_awal <= '" & Format(TXTTGLAWAL.Value, "yyyy-MM-dd") & "' AND Tgl_awal >= '" & Format(TXTTGLAWAL.Value, "yyyy-MM-dd") & "'))"
                 Dim CMD As New SqlCommand(STR, CONN)
-                CMD.ExecuteNonQuery()
-                MsgBox("Data tersimpan")
-                TXTKODE.Clear()
-                TXTDISKON.Clear()
-                TXTKODE.Select()
-                TAMPIL()
+                Dim RD As SqlDataReader
+                RD = CMD.ExecuteReader
+                If RD.HasRows Then
+                    MsgBox("Data diskon sudah ada! Silahkan pilih barang/tanggal lain!")
+                    RD.Close()
+                Else
+                    RD.Close()
+                    STR = "INSERT INTO tbl_diskon (Jenis, Kode, Diskon, Tgl_awal, Tgl_akhir)" &
+                            " VALUES(" &
+                            " 'B'," &
+                            " '" & TXTKODE.Text & "'," &
+                            " " & TXTDISKON.Text.ToString.Replace(",", ".") & "," &
+                            " '" & Format(TXTTGLAWAL.Value, "MM/dd/yyyy") & "'," &
+                            " '" & Format(TXTTGLAKHIR.Value, "MM/dd/yyyy") & "'" &
+                            " )"
+                    CMD = New SqlCommand(STR, CONN)
+                    CMD.ExecuteNonQuery()
+                    MsgBox("Data tersimpan")
+                    TXTKODE.Clear()
+                    TXTDISKON.Clear()
+                    TXTKODE.Select()
+                    TAMPIL()
+                End If
             End If
         ElseIf CBJENIS.SelectedIndex = 1 Then
             If TXTMIN.Text = "" Or TXTTGLAWAL.Text = "" Or TXTTGLAKHIR.Text = "" Or TXTDISKON.Text = "" Then
@@ -416,7 +434,7 @@ Public Class FR_DISKON
                 " VALUES(" &
                 " 'A'," &
                 " '" & TXTMIN.Text & "'," &
-                " '" & TXTDISKON.Text & "'," &
+                " " & TXTDISKON.Text.ToString.Replace(",", ".") & "," &
                 " '" & Format(TXTTGLAWAL.Value, "MM/dd/yyyy") & "'," &
                 " '" & Format(TXTTGLAKHIR.Value, "MM/dd/yyyy") & "'" &
                 " )"
@@ -511,47 +529,51 @@ Public Class FR_DISKON
     End Sub
 
     Private Sub BTNCETAK_Click(sender As Object, e As EventArgs) Handles BTNCETAK.Click
-        Dim DT As New DataTable
-        With DT
-            .Columns.Add("Kode")
-            .Columns.Add("Nama Barang")
-            .Columns.Add("Tanggal")
-            .Columns.Add("Diskon")
-        End With
-        DT.Rows.Add(DGTAMPIL.CurrentRow.Cells("Kode Barang").Value,
+        If DGTAMPIL.Rows.Count > 0 Then
+            Dim DT As New DataTable
+            With DT
+                .Columns.Add("Kode")
+                .Columns.Add("Nama Barang")
+                .Columns.Add("Tanggal")
+                .Columns.Add("Diskon")
+            End With
+            DT.Rows.Add(DGTAMPIL.CurrentRow.Cells("Kode Barang").Value,
                     DGTAMPIL.CurrentRow.Cells("Nama Barang").Value,
                     DGTAMPIL.CurrentRow.Cells("Tanggal Awal").Value & " - " & DGTAMPIL.CurrentRow.Cells("Tanggal Akhir").Value,
                             DGTAMPIL.CurrentRow.Cells("Diskon (%)").Value)
 
-        Dim printDialog1 As New PrintDialog
-        Dim printDocument1 As New System.Drawing.Printing.PrintDocument
-        'Open the PrintDialog
-        printDialog1.Document = printDocument1
+            Dim printDialog1 As New PrintDialog
+            Dim printDocument1 As New System.Drawing.Printing.PrintDocument
+            'Open the PrintDialog
+            printDialog1.Document = printDocument1
 
-        Dim dr As DialogResult = printDialog1.ShowDialog()
+            Dim dr As DialogResult = printDialog1.ShowDialog()
 
-        'Here's where you can catch them aborting the print..
+            'Here's where you can catch them aborting the print..
 
-        If dr = System.Windows.Forms.DialogResult.OK Then
-            'Get the Copy times
-            Dim nCopies As Integer = printDocument1.PrinterSettings.Copies
-            'Get the number of Start Page
-            Dim sPage As Integer = printDocument1.PrinterSettings.FromPage
-            'Get the number of End page
-            Dim ePage As Integer = printDocument1.PrinterSettings.ToPage
-            'Get the printer name
-            Dim PrinterName As String = printDocument1.PrinterSettings.PrinterName
+            If dr = System.Windows.Forms.DialogResult.OK Then
+                'Get the Copy times
+                Dim nCopies As Integer = printDocument1.PrinterSettings.Copies
+                'Get the number of Start Page
+                Dim sPage As Integer = printDocument1.PrinterSettings.FromPage
+                'Get the number of End page
+                Dim ePage As Integer = printDocument1.PrinterSettings.ToPage
+                'Get the printer name
+                Dim PrinterName As String = printDocument1.PrinterSettings.PrinterName
 
-            Dim RPT As New RPT_CETAKDISKON
-            Try
-                With RPT
-                    .SetDataSource(DT)
-                    .PrintOptions.PrinterName = PrinterName
-                    .PrintToPrinter(nCopies, False, sPage, ePage)
-                End With
-            Catch ex As Exception
-                MessageBox.Show(ex.ToString())
-            End Try
+                Dim RPT As New RPT_CETAKDISKON
+                Try
+                    With RPT
+                        .SetDataSource(DT)
+                        .PrintOptions.PrinterName = PrinterName
+                        .PrintToPrinter(nCopies, False, sPage, ePage)
+                    End With
+                Catch ex As Exception
+                    MessageBox.Show(ex.ToString())
+                End Try
+            End If
+        Else
+            MsgBox("Data diskon kosong!")
         End If
     End Sub
 End Class

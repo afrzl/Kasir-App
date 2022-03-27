@@ -181,11 +181,16 @@ Public Class FR_RUSAK
         If TBL.Rows.Count = 0 Then
             MsgBox("Transaksi tidak ditemukan")
             TXTID.Clear()
+            CBKODE.DataSource = Nothing
+            CBKODE.SelectedIndex = -1
+            TXTHARGA.Text = ""
+            TXTSTOK.Text = ""
             TXTID.Select()
         Else
             CBKODE.DataSource = TBL
             CBKODE.DisplayMember = "Barang"
             CBKODE.ValueMember = "Id"
+            CBKODE.SelectedIndex = 0
             CBKODE.Select()
         End If
     End Sub
@@ -524,19 +529,13 @@ Public Class FR_RUSAK
         On Error Resume Next
         TXTID.Text = DGEXPIRED.Item(1, e.RowIndex).Value
 
+        DATA_TRANSAKSI()
+
         DGEXPIRED.Columns(0).Visible = True
         CBKODE.SelectedValue = DGEXPIRED.Item(0, e.RowIndex).Value
         DGEXPIRED.Columns(0).Visible = False
         CARI_HARGA()
         TXTQTY.Text = TXTSTOK.Text
-    End Sub
-
-    Private Sub TXTID_TextChanged(sender As Object, e As EventArgs) Handles TXTID.TextChanged
-        If TXTID.Text <> "" Then
-            DATA_TRANSAKSI()
-            CBKODE.SelectedIndex = 0
-            CARI_HARGA()
-        End If
     End Sub
 
     Private Sub CBKODE_SelectedValueChanged(sender As Object, e As EventArgs) Handles CBKODE.SelectedValueChanged
@@ -583,5 +582,12 @@ Public Class FR_RUSAK
 
     Private Sub BTNBARCODEOPS_Click(sender As Object, e As EventArgs) Handles BTNBARCODEOPS.Click
         BUKA_FORM(FR_CETAKBARCODE)
+    End Sub
+
+    Private Sub TXTID_Leave(sender As Object, e As EventArgs) Handles TXTID.Leave
+        If TXTID.Text <> "" Then
+            DATA_TRANSAKSI()
+            CARI_HARGA()
+        End If
     End Sub
 End Class

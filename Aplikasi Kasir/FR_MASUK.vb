@@ -73,7 +73,9 @@ Public Class FR_MASUK
                     " Harga AS 'Harga Partai'," &
                     " Stok AS 'Stok Sisa'" &
                     " FROM tbl_transaksi_child WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M' AND" &
-                    " (SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) Like '%" & TXTCARI.Text & "%'" &
+                    " ((SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) Like '%" & TXTCARI.Text & "%'" &
+                    " OR RTRIM(Kode) = '" & TXTCARI.Text & "'" &
+                    " OR RTRIM(Id_trans) = '" & TXTCARI.Text & "')" &
                     " ORDER BY Id ASC"
                 ElseIf CBTAMPIL.SelectedIndex = 1 Then
                     STR = "SELECT Id, RTRIM(Id_trans) AS 'ID Transaksi'," &
@@ -84,7 +86,9 @@ Public Class FR_MASUK
                     " Harga AS 'Harga Partai'," &
                     " Stok AS 'Stok Sisa'" &
                     " FROM tbl_transaksi_child WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M' AND" &
-                    " (SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) Like '%" & TXTCARI.Text & "%'" &
+                    " ((SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) Like '%" & TXTCARI.Text & "%'" &
+                    " OR RTRIM(Kode) = '" & TXTCARI.Text & "'" &
+                    " OR RTRIM(Id_trans) = '" & TXTCARI.Text & "')" &
                     " AND Stok != 0" &
                     " ORDER BY Id ASC"
                 ElseIf CBTAMPIL.SelectedIndex = 2 Then
@@ -96,7 +100,9 @@ Public Class FR_MASUK
                     " Harga AS 'Harga Partai'," &
                     " Stok AS 'Stok Sisa'" &
                     " FROM tbl_transaksi_child WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M' AND" &
-                    " (SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) Like '%" & TXTCARI.Text & "%'" &
+                    " ((SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) Like '%" & TXTCARI.Text & "%'" &
+                    " OR RTRIM(Kode) = '" & TXTCARI.Text & "'" &
+                    " OR RTRIM(Id_trans) = '" & TXTCARI.Text & "')" &
                     " AND Stok = 0" &
                     " ORDER BY Id ASC"
                 Else
@@ -108,7 +114,9 @@ Public Class FR_MASUK
                     " Harga AS 'Harga Partai'," &
                     " Stok AS 'Stok Sisa'" &
                     " FROM tbl_transaksi_child WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M' AND" &
-                    " (SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) Like '%" & TXTCARI.Text & "%'" &
+                    " ((SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) Like '%" & TXTCARI.Text & "%'" &
+                    " OR RTRIM(Kode) = '" & TXTCARI.Text & "'" &
+                    " OR RTRIM(Id_trans) = '" & TXTCARI.Text & "')" &
                     " ORDER BY Id ASC"
                 End If
             Case 2
@@ -121,8 +129,10 @@ Public Class FR_MASUK
                     " Harga AS 'Harga Partai'," &
                     " Stok AS 'Stok Sisa'" &
                     " FROM tbl_transaksi_child WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M' AND" &
-                    " (SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) Like '%" & TXTCARI.Text & "%'" &
-                    " AND (SELECT Id_kasir FROM tbl_transaksi_parent WHERE tbl_transaksi_parent.Id_trans = tbl_transaksi_child.Id_trans) = '" & My.Settings.ID_ACCOUNT & "'" &
+                    " (SELECT Id_kasir FROM tbl_transaksi_parent WHERE tbl_transaksi_parent.Id_trans = tbl_transaksi_child.Id_trans) = '" & My.Settings.ID_ACCOUNT & "'" &
+                    " AND ((SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) Like '%" & TXTCARI.Text & "%'" &
+                    " OR RTRIM(Kode) = '" & TXTCARI.Text & "'" &
+                    " OR RTRIM(Id_trans) = '" & TXTCARI.Text & "')" &
                     " ORDER BY Id ASC"
                 ElseIf CBTAMPIL.SelectedIndex = 1 Then
                     STR = "SELECT Id, RTRIM(Id_trans) AS 'ID Transaksi'," &
@@ -132,10 +142,12 @@ Public Class FR_MASUK
                     " Jumlah as 'Stok Masuk'," &
                     " Harga AS 'Harga Partai'," &
                     " Stok AS 'Stok Sisa'" &
-                    " FROM tbl_transaksi_child WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M' AND" &
-                    " (SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) Like '%" & TXTCARI.Text & "%'" &
+                    " FROM tbl_transaksi_child WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M'" &
                     " AND Stok != 0" &
                     " AND (SELECT Id_kasir FROM tbl_transaksi_parent WHERE tbl_transaksi_parent.Id_trans = tbl_transaksi_child.Id_trans) = '" & My.Settings.ID_ACCOUNT & "'" &
+                    " AND ((SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) Like '%" & TXTCARI.Text & "%'" &
+                    " OR RTRIM(Kode) = '" & TXTCARI.Text & "'" &
+                    " OR RTRIM(Id_trans) = '" & TXTCARI.Text & "')" &
                     " ORDER BY Id ASC"
                 ElseIf CBTAMPIL.SelectedIndex = 2 Then
                     STR = "SELECT Id, RTRIM(Id_trans) AS 'ID Transaksi'," &
@@ -145,10 +157,12 @@ Public Class FR_MASUK
                     " Jumlah as 'Stok Masuk'," &
                     " Harga AS 'Harga Partai'," &
                     " Stok AS 'Stok Sisa'" &
-                    " FROM tbl_transaksi_child WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M' AND" &
-                    " (SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) Like '%" & TXTCARI.Text & "%'" &
+                    " FROM tbl_transaksi_child WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M'" &
                     " AND Stok = 0" &
                     " AND (SELECT Id_kasir FROM tbl_transaksi_parent WHERE tbl_transaksi_parent.Id_trans = tbl_transaksi_child.Id_trans) = '" & My.Settings.ID_ACCOUNT & "'" &
+                    " AND ((SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) Like '%" & TXTCARI.Text & "%'" &
+                    " OR RTRIM(Kode) = '" & TXTCARI.Text & "'" &
+                    " OR RTRIM(Id_trans) = '" & TXTCARI.Text & "')" &
                     " ORDER BY Id ASC"
                 Else
                     STR = "SELECT Id, RTRIM(Id_trans) AS 'ID Transaksi'," &
@@ -158,9 +172,11 @@ Public Class FR_MASUK
                     " Jumlah as 'Stok Masuk'," &
                     " Harga AS 'Harga Partai'," &
                     " Stok AS 'Stok Sisa'" &
-                    " FROM tbl_transaksi_child WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M' AND" &
-                    " (SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) Like '%" & TXTCARI.Text & "%'" &
+                    " FROM tbl_transaksi_child WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M'" &
                     " AND (SELECT Id_kasir FROM tbl_transaksi_parent WHERE tbl_transaksi_parent.Id_trans = tbl_transaksi_child.Id_trans) = '" & My.Settings.ID_ACCOUNT & "'" &
+                    " AND ((SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) Like '%" & TXTCARI.Text & "%'" &
+                    " OR RTRIM(Kode) = '" & TXTCARI.Text & "'" &
+                    " OR RTRIM(Id_trans) = '" & TXTCARI.Text & "')" &
                     " ORDER BY Id ASC"
                 End If
         End Select
@@ -542,7 +558,6 @@ Public Class FR_MASUK
     Private Sub BTNSTOK_Click(sender As Object, e As EventArgs) Handles BTNSTOK.Click
         INPUT_DB()
         PRINT_NOTA()
-        MsgBox("Data pembelian sukses disimpan. Stok barang ditambah")
         DGTAMPIL.Rows.Clear()
         TOTAL_HARGA()
     End Sub
@@ -571,23 +586,23 @@ Public Class FR_MASUK
 
         For Each EROW As DataGridViewRow In DGTAMPIL.Rows
             Dim KODE_PRODUK As String = EROW.Cells("Kode").Value
-            Dim JUMLAH_PRODUK As Double = EROW.Cells("QTY").Value.ToString.Replace(",", ".")
+            Dim JUMLAH_PRODUK As Double = Convert.ToDouble(EROW.Cells("QTY").Value)
             Dim HARGA_PRODUK As Integer = EROW.Cells("Harga").Value
             If EROW.Cells("EXPIRED").Value = "-" Then
                 STR = "INSERT INTO tbl_transaksi_child (Id_trans, Kode, Jumlah, Harga, Stok) VALUES" &
                     " ('" & ID_TRANSAKSI & "'," &
                     " '" & KODE_PRODUK & "'," &
-                    " " & JUMLAH_PRODUK & "," &
+                    " " & JUMLAH_PRODUK.ToString.Replace(",", ".") & "," &
                     " '" & HARGA_PRODUK & "'," &
-                    " '" & JUMLAH_PRODUK & "')"
+                    " '" & JUMLAH_PRODUK.ToString.Replace(",", ".") & "')"
             Else
                 Dim TGL_EXP As String = Format(Convert.ToDateTime(EROW.Cells("EXPIRED").Value), "yyyy-MM-dd")
                 STR = "INSERT INTO tbl_transaksi_child (Id_trans, Kode, Jumlah, Harga, Stok, Tgl_exp) VALUES" &
                         " ('" & ID_TRANSAKSI & "'," &
                         " '" & KODE_PRODUK & "'," &
-                        " " & JUMLAH_PRODUK & "," &
+                        " " & JUMLAH_PRODUK.ToString.Replace(",", ".") & "," &
                         " '" & HARGA_PRODUK & "'," &
-                        " '" & JUMLAH_PRODUK & "'," &
+                        " '" & JUMLAH_PRODUK.ToString.Replace(",", ".") & "'," &
                         " '" & TGL_EXP & "')"
             End If
             CMD = New SqlCommand(STR, CONN)
@@ -631,6 +646,8 @@ Public Class FR_MASUK
         Dim WIDTH As Single = 150
         Dim HEIGHT As Single = 75
         Dim JARAK As Single = (lebarKertas - WIDTH) / 2
+
+        totalBaris = 0
 
         Dim IMAGE As Image = Image.FromStream(IMAGESTREAM)
         e.Graphics.DrawImage(IMAGE, JARAK, BarisYangSama(), WIDTH, HEIGHT)
@@ -888,8 +905,8 @@ Public Class FR_MASUK
     End Sub
 
     Private Sub TXTJUMLAH_Leave(sender As Object, e As EventArgs) Handles TXTJUMLAH.Leave
-        Dim QTY As Integer
-        Int32.TryParse(TXTJUMLAH.Text, QTY)
+        Dim QTY As Double
+        QTY = Convert.ToDouble(TXTJUMLAH.Text)
         If TXTJUMLAH.Text <> "" And QTY = 0 Then
             MsgBox("QTY harus lebih dari 0")
             TXTJUMLAH.Clear()

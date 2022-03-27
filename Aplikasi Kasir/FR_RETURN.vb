@@ -116,11 +116,15 @@ Public Class FR_RETURN
         If TBL.Rows.Count = 0 Then
             MsgBox("Transaksi tidak ditemukan")
             TXTID.Clear()
+            CBKODE.DataSource = Nothing
+            CBKODE.SelectedIndex = -1
+            TXTHARGA.Text = ""
             TXTID.Select()
         Else
             CBKODE.DataSource = TBL
             CBKODE.DisplayMember = "Barang"
             CBKODE.ValueMember = "Kode"
+            CBKODE.SelectedIndex = 0
             CBKODE.Select()
         End If
     End Sub
@@ -400,7 +404,6 @@ Public Class FR_RETURN
     Private Sub TXTID_Leave(sender As Object, e As EventArgs) Handles TXTID.Leave
         If TXTID.Text <> "" Then
             DATA_TRANSAKSI()
-            CBKODE.SelectedIndex = 0
             CARI_HARGA()
         End If
     End Sub

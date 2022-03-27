@@ -102,15 +102,15 @@ Public Class FR_KELUAR
             DGTAMPIL.Rows(BARIS_DATA).Cells("Qty").Value = DGTAMPIL.Rows(BARIS_DATA).Cells("Qty").Value + Convert.ToDouble(TXTQTY.Text)
             Dim JUMLAH_QTY As Double = DGTAMPIL.Rows(BARIS_DATA).Cells("Qty").Value
             DGTAMPIL.Rows(BARIS_DATA).Cells("Harga").Value = CARI_HARGA(JUMLAH_QTY)
-            DGTAMPIL.Rows(BARIS_DATA).Cells("Diskon").Value = (CInt(TXTDISKON.Text) / 100 * DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Harga").Value) * DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Qty").Value
-            DGTAMPIL.Rows(BARIS_DATA).Cells("Total").Value = (DGTAMPIL.Rows(BARIS_DATA).Cells("Qty").Value * DGTAMPIL.Rows(BARIS_DATA).Cells("Harga").Value) - DGTAMPIL.Rows(BARIS_DATA).Cells("Diskon").Value
+            DGTAMPIL.Rows(BARIS_DATA).Cells("Diskon").Value = CInt((TXTDISKON.Text / 100 * DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Harga").Value) * DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Qty").Value)
+            DGTAMPIL.Rows(BARIS_DATA).Cells("Total").Value = CInt((DGTAMPIL.Rows(BARIS_DATA).Cells("Qty").Value * DGTAMPIL.Rows(BARIS_DATA).Cells("Harga").Value) - DGTAMPIL.Rows(BARIS_DATA).Cells("Diskon").Value)
         Else
             DGTAMPIL.Rows.Add()
             DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Kode").Value = TXTKODE.Text
             DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Barang").Value = TXTBARANG.Text
             DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Satuan").Value = TXTSATUAN.Text
             DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Harga").Value = CARI_HARGA(TXTQTY.Text)
-            DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Diskon").Value = CInt(TXTDISKON.Text) / 100 * DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Harga").Value
+            DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Diskon").Value = CInt(TXTDISKON.Text / 100 * DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Harga").Value)
             DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Qty").Value = TXTQTY.Text
             DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Total").Value = TXTTOTAL.Text
         End If
@@ -357,15 +357,15 @@ Public Class FR_KELUAR
 
     Sub HITUNGDISKON_RUPIAH()
         Dim SUBTOTAL As Integer = 0
-        Dim DISKON As Integer = 0
+        Dim DISKON As Double = 0
         If Not TXTSUBTOTAL.Text = "" Then
             SUBTOTAL = CInt(TXTSUBTOTAL.Text)
         End If
         If Not TXTDISKON_PERSEN.Text = "" Then
-            DISKON = CInt(TXTDISKON_PERSEN.Text)
+            DISKON = TXTDISKON_PERSEN.Text
         End If
 
-        TXTDISKON_RUPIAH.Text = SUBTOTAL * DISKON / 100
+        TXTDISKON_RUPIAH.Text = CInt(SUBTOTAL * DISKON / 100)
         TXTTOTALHARGA.Text = SUBTOTAL - CInt(TXTDISKON_RUPIAH.Text)
         LBTOTAL.Text = Format(CInt(TXTTOTALHARGA.Text), "##,##0")
     End Sub
@@ -417,7 +417,7 @@ Public Class FR_KELUAR
         RD = CMD.ExecuteReader()
         If RD.HasRows Then
             RD.Read()
-            TXTDISKON_PERSEN.Text = RD.Item("Diskon")
+            TXTDISKON_PERSEN.Text = Format(RD.Item("Diskon"), "##0.##")
             RD.Close()
         Else
             TXTDISKON_PERSEN.Text = 0
@@ -548,7 +548,7 @@ Public Class FR_KELUAR
         End If
         TXTHARGA.Text = CARI_HARGA(JUMLAH_QTY)
         HARGA = CLng(TXTHARGA.Text)
-        TXTTOTAL.Text = HARGA * JUMLAH_QTY * (100 - CInt(TXTDISKON.Text)) / 100
+        TXTTOTAL.Text = CInt(HARGA * JUMLAH_QTY * (100 - TXTDISKON.Text) / 100)
     End Sub
 
     Private Sub TXTKODE_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTKODE.KeyPress
@@ -614,7 +614,7 @@ Public Class FR_KELUAR
             RD = CMD.ExecuteReader
             If RD.HasRows Then
                 RD.Read()
-                TXTDISKON.Text = RD.Item("Diskon")
+                TXTDISKON.Text = Format(RD.Item("Diskon"), "##0.##")
                 RD.Close()
             Else
                 TXTDISKON.Text = 0
@@ -631,9 +631,9 @@ Public Class FR_KELUAR
         CARI_DATA()
         Dim HARGA As Integer = 0
         Dim JUMLAH_QTY As Integer = 0
-        Dim DISKON As Integer = 0
+        Dim DISKON As Double = 0
         If Not TXTDISKON.Text = "" Then
-            DISKON = CInt(TXTDISKON.Text)
+            DISKON = TXTDISKON.Text
         End If
         If Not TXTQTY.Text = "" Then
             JUMLAH_QTY = CInt(TXTQTY.Text)
@@ -642,7 +642,7 @@ Public Class FR_KELUAR
         If Not TXTHARGA.Text = "" Then
             HARGA = CInt(TXTHARGA.Text)
         End If
-        TXTTOTAL.Text = HARGA * JUMLAH_QTY * (100 - DISKON) / 100
+        TXTTOTAL.Text = CInt(HARGA * JUMLAH_QTY * (100 - DISKON) / 100)
     End Sub
 
     Private Sub TXTKODE_KeyDown(sender As Object, e As KeyEventArgs) Handles TXTKODE.KeyDown
@@ -700,6 +700,8 @@ Public Class FR_KELUAR
         Dim WIDTH As Single = 150
         Dim HEIGHT As Single = 75
         Dim JARAK As Single = (lebarKertas - WIDTH) / 2
+
+        totalBaris = 0
 
         Dim IMAGE As Image = Image.FromStream(IMAGESTREAM)
         e.Graphics.DrawImage(IMAGE, JARAK, BarisYangSama(), WIDTH, HEIGHT)

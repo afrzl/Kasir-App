@@ -29,6 +29,7 @@ Partial Class FR_OPS_DASHBOARD
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FR_OPS_DASHBOARD))
         Me.PNLEFT = New System.Windows.Forms.Panel()
         Me.PNOPS = New System.Windows.Forms.Panel()
+        Me.BTNBARCODEOPS = New System.Windows.Forms.Button()
         Me.BTNMASUKOPS = New System.Windows.Forms.Button()
         Me.Label23 = New System.Windows.Forms.Label()
         Me.BTNKELUAROPS = New System.Windows.Forms.Button()
@@ -70,7 +71,6 @@ Partial Class FR_OPS_DASHBOARD
         Me.Button8 = New System.Windows.Forms.Button()
         Me.Button9 = New System.Windows.Forms.Button()
         Me.PEWAKTU = New System.Windows.Forms.Timer(Me.components)
-        Me.BTNBARCODEOPS = New System.Windows.Forms.Button()
         Me.PNLEFT.SuspendLayout()
         Me.PNOPS.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -114,6 +114,24 @@ Partial Class FR_OPS_DASHBOARD
         Me.PNOPS.Name = "PNOPS"
         Me.PNOPS.Size = New System.Drawing.Size(270, 541)
         Me.PNOPS.TabIndex = 59
+        '
+        'BTNBARCODEOPS
+        '
+        Me.BTNBARCODEOPS.FlatAppearance.BorderSize = 0
+        Me.BTNBARCODEOPS.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNBARCODEOPS.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNBARCODEOPS.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BTNBARCODEOPS.Image = Global.Aplikasi_Kasir.My.Resources.Resources.transaksi
+        Me.BTNBARCODEOPS.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.BTNBARCODEOPS.Location = New System.Drawing.Point(0, 126)
+        Me.BTNBARCODEOPS.Name = "BTNBARCODEOPS"
+        Me.BTNBARCODEOPS.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
+        Me.BTNBARCODEOPS.Size = New System.Drawing.Size(270, 35)
+        Me.BTNBARCODEOPS.TabIndex = 58
+        Me.BTNBARCODEOPS.Text = "     Cetak Barcode"
+        Me.BTNBARCODEOPS.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.BTNBARCODEOPS.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.BTNBARCODEOPS.UseVisualStyleBackColor = True
         '
         'BTNMASUKOPS
         '
@@ -699,24 +717,6 @@ Partial Class FR_OPS_DASHBOARD
         '
         'PEWAKTU
         '
-        '
-        'BTNBARCODEOPS
-        '
-        Me.BTNBARCODEOPS.FlatAppearance.BorderSize = 0
-        Me.BTNBARCODEOPS.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BTNBARCODEOPS.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BTNBARCODEOPS.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.BTNBARCODEOPS.Image = Global.Aplikasi_Kasir.My.Resources.Resources.transaksi
-        Me.BTNBARCODEOPS.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNBARCODEOPS.Location = New System.Drawing.Point(0, 126)
-        Me.BTNBARCODEOPS.Name = "BTNBARCODEOPS"
-        Me.BTNBARCODEOPS.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
-        Me.BTNBARCODEOPS.Size = New System.Drawing.Size(270, 35)
-        Me.BTNBARCODEOPS.TabIndex = 58
-        Me.BTNBARCODEOPS.Text = "     Cetak Barcode"
-        Me.BTNBARCODEOPS.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNBARCODEOPS.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.BTNBARCODEOPS.UseVisualStyleBackColor = True
         '
         'FR_OPS_DASHBOARD
         '

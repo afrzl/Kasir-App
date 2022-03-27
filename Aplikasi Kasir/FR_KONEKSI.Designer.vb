@@ -119,9 +119,9 @@ Partial Class FR_KONEKSI
         Me.BTNCONNECT.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.BTNCONNECT.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BTNCONNECT.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.BTNCONNECT.Location = New System.Drawing.Point(511, 254)
+        Me.BTNCONNECT.Location = New System.Drawing.Point(485, 254)
         Me.BTNCONNECT.Name = "BTNCONNECT"
-        Me.BTNCONNECT.Size = New System.Drawing.Size(125, 35)
+        Me.BTNCONNECT.Size = New System.Drawing.Size(151, 35)
         Me.BTNCONNECT.TabIndex = 8
         Me.BTNCONNECT.Text = "CONNECT"
         Me.BTNCONNECT.UseVisualStyleBackColor = False

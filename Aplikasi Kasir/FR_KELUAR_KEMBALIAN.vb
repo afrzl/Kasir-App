@@ -73,6 +73,8 @@ Public Class FR_KELUAR_KEMBALIAN
         Dim HEIGHT As Single = 75
         Dim JARAK As Single = (lebarKertas - WIDTH) / 2
 
+        totalBaris = 0
+
         Dim IMAGE As Image = Image.FromStream(IMAGESTREAM)
         Dim MyBitmap As New Bitmap(IMAGE)
         e.Graphics.DrawImage(MyBitmap, JARAK, BarisYangSama(), WIDTH, HEIGHT)

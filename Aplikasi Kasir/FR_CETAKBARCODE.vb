@@ -77,6 +77,7 @@ Public Class FR_CETAKBARCODE
             " RTRIM(Satuan) AS 'Satuan'," &
             " Harga1 AS 'Harga Satuan' FROM tbl_barang" &
             " WHERE Barang LIKE '%" & TXTCARI.Text & "%'" &
+            " OR Kode = '" & TXTCARI.Text & "'" &
             " ORDER BY 'Nama Barang' ASC"
 
         Dim DA As SqlDataAdapter
@@ -129,7 +130,7 @@ Public Class FR_CETAKBARCODE
         TAMPIL_BARANG()
     End Sub
 
-    Dim WIDTH_BARCODE As Integer = 121
+    Dim WIDTH_BARCODE As Integer = 125
     Dim HEIGHT_BARCODE As Integer = 40
     Dim WIDTH_LABEL As Integer = 140
     Dim HEIGHT_LABEL As Integer = 84
@@ -139,6 +140,7 @@ Public Class FR_CETAKBARCODE
     Private Sub BTNCETAK_Click(sender As Object, e As EventArgs) Handles BTNCETAK.Click
         PPD.Document = PRINTBARCODE
         PPD.PrinterSettings = PRINTBARCODE.PrinterSettings
+        PPD.PrinterSettings.PrinterName = "ZDesigner ZD220-203dpi ZPL"
         PRINTBARCODE.DefaultPageSettings.PaperSize = New PaperSize("Custom", 430, 200)
         PPD.AllowSomePages = True
 

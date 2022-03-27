@@ -126,6 +126,7 @@ Public Class FR_CETAK_LABEL
             " RTRIM(Satuan) AS 'Satuan'," &
             " Harga1 AS 'Harga Satuan' FROM tbl_barang" &
             " WHERE Barang LIKE '%" & TXTCARI.Text & "%'" &
+            " OR Kode = '" & TXTCARI.Text & "'" &
             " ORDER BY 'Nama Barang' ASC"
 
         Dim DA As SqlDataAdapter
@@ -444,6 +445,7 @@ Public Class FR_CETAK_LABEL
 
             Dim printDialog1 As New PrintDialog
             Dim printDocument1 As New System.Drawing.Printing.PrintDocument
+            printDocument1.PrinterSettings.PrinterName = "ZDesigner ZD220-203dpi ZPL"
             'Open the PrintDialog
             printDialog1.Document = printDocument1
 
@@ -644,6 +646,7 @@ Public Class FR_CETAK_LABEL
         Dim printDialog1 As New PrintDialog
         Dim printDocument1 As New System.Drawing.Printing.PrintDocument
         'Open the PrintDialog
+        printDocument1.PrinterSettings.PrinterName = "ZDesigner ZD220-203dpi ZPL"
         printDialog1.Document = printDocument1
 
         Dim dr As DialogResult = printDialog1.ShowDialog()
