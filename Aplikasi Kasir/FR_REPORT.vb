@@ -49,6 +49,7 @@ Public Class FR_REPORT
                     .Items.Add("Stok")
                     .Items.Add("Transaksi Masuk")
                     .Items.Add("Transaksi Keluar")
+                    .Items.Add("Penjualan")
                     .Items.Add("Penjualan Harian")
                     .Items.Add("Penjualan Barang")
                     .Items.Add("Grafik Penjualan Harian")
@@ -126,7 +127,7 @@ Public Class FR_REPORT
                         STR = "SELECT Kode AS 'Kode Barang'," &
                     " Barang AS 'Nama Barang'," &
                     " Satuan AS 'Satuan'," &
-                    " (SELECT COALESCE(SUM(Jumlah), 0) FROM tbl_transaksi_child WHERE LEFT(tbl_transaksi_child.Id_trans, 1) = 'M' or LEFT(tbl_transaksi_child.Id_trans, 1) = 'R') AND tbl_transaksi_child.Kode = tbl_barang.Kode) AS 'Barang Masuk'," &
+                    " (SELECT COALESCE(SUM(Jumlah), 0) FROM tbl_transaksi_child WHERE (LEFT(tbl_transaksi_child.Id_trans, 1) = 'M' or LEFT(tbl_transaksi_child.Id_trans, 1) = 'R') AND tbl_transaksi_child.Kode = tbl_barang.Kode) AS 'Barang Masuk'," &
                     " (SELECT COALESCE(SUM(Jumlah), 0) FROM tbl_transaksi_child WHERE (LEFT(tbl_transaksi_child.Id_trans, 1) = 'K' or LEFT(tbl_transaksi_child.Id_trans, 1) = 'C') AND tbl_transaksi_child.Kode = tbl_barang.Kode) AS 'Barang Keluar'" &
                     " FROM tbl_barang" &
                     " ORDER BY 'Nama Barang' ASC"
@@ -145,8 +146,8 @@ Public Class FR_REPORT
                     " tbl_transaksi_child.Stok AS 'Sisa Stok'" &
                     " From tbl_transaksi_child inner Join tbl_transaksi_parent On tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans" &
                     " Where (Left(tbl_transaksi_child.Id_trans, 1) = 'M' OR Left(tbl_transaksi_child.Id_trans, 1) = 'R')" &
-                    " And tbl_transaksi_parent.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd 00:00:00") & "'" &
-                    " And tbl_transaksi_parent.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd 23:59:59") & "'" &
+                    " And tbl_transaksi_parent.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & " 00:00:00'" &
+                    " And tbl_transaksi_parent.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd") & " 23:59:59'" &
                     " ORDER BY tbl_transaksi_child.Id ASC"
                     Case 3
                         STR = "SELECT RTRIM(tbl_transaksi_child.Id_trans) AS 'ID Transaksi'," &
@@ -171,10 +172,24 @@ Public Class FR_REPORT
                     " (SELECT COALESCE(SUM(tbl_transaksi_child.Harga_akhir), 0) - COALESCE(SUM(tbl_transaksi_child.Harga_beli), 0) FROM tbl_transaksi_child WHERE tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans) - tbl_transaksi_parent.Diskon AS 'Laba'" &
                     " From tbl_transaksi_child inner Join tbl_transaksi_parent On tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans" &
                     " Where (Left(tbl_transaksi_child.Id_trans, 1) = 'K' OR Left(tbl_transaksi_child.Id_trans, 1) = 'C')" &
-                    " And tbl_transaksi_parent.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd 00:00:00") & "'" &
-                    " And tbl_transaksi_parent.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd 23:59:59") & "'" &
+                    " And tbl_transaksi_parent.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & " 00:00:00'" &
+                    " And tbl_transaksi_parent.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd") & " 23:59:59'" &
                     " ORDER BY tbl_transaksi_child.Id ASC"
                     Case 4
+                        STR = "SELECT Id_trans AS 'ID Transaksi'," &
+                                " Kode AS 'Kode Barang'," &
+                                " (SELECT Barang FROM tbl_barang WHERE tbl_barang.Kode = tbl_transaksi_child.Kode) AS 'Nama Barang'," &
+                                " (SELECT Tgl FROM tbl_transaksi_parent WHERE tbl_transaksi_parent.Id_trans = tbl_transaksi_child.Id_trans) AS 'Tanggal', " &
+                                " Jumlah AS 'Jumlah Item'," &
+                                " Harga_beli AS 'Harga Beli'," &
+                                " Harga / Jumlah AS 'Harga Jual'," &
+                                " Diskon AS 'Diskon'" &
+                                " FROM tbl_transaksi_child" &
+                                " WHERE (LEFT(Id_trans, 1) = 'K' or LEFT(Id_trans, 1) = 'C')" &
+                                " AND (SELECT Tgl FROM tbl_transaksi_parent WHERE tbl_transaksi_parent.Id_trans = tbl_transaksi_child.Id_trans) >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & " 00:00:00'" &
+                                " AND (SELECT Tgl FROM tbl_transaksi_parent WHERE tbl_transaksi_parent.Id_trans = tbl_transaksi_child.Id_trans) <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd") & " 23:59:59'" &
+                                " ORDER BY ID ASC"
+                    Case 5
                         STR = "SELECT Id_trans AS 'ID Transaksi'," &
                                 " Tgl AS 'Tanggal', " &
                                 " Jumlah_item AS 'Jumlah Item'," &
@@ -182,69 +197,69 @@ Public Class FR_REPORT
                                 " Harga_total AS 'Harga Jual'" &
                                 " FROM tbl_transaksi_parent" &
                                 " WHERE (Jenis = 'K' or Jenis = 'C')" &
-                                " AND Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd 00:00:00") & "'" &
-                                " AND Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd 23:59:59") & "'"
-                    Case 5
+                                " AND Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & " 00:00:00'" &
+                                " AND Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd") & " 23:59:59'"
+                    Case 6
                         STR = "SELECT Id_trans AS 'ID Transaksi'," &
                                 " Kode AS 'Kode Barang'," &
                                 " (SELECT Barang FROM tbl_barang WHERE tbl_barang.Kode = tbl_transaksi_child.Kode) AS 'Nama Barang'," &
                                 " (SELECT Tgl FROM tbl_transaksi_parent WHERE tbl_transaksi_parent.Id_trans = tbl_transaksi_child.Id_trans) AS 'Tanggal', " &
                                 " Jumlah AS 'Jumlah Item'," &
                                 " Harga_beli AS 'Harga Beli'," &
-                                " Harga_akhir AS 'Harga Jual'," &
-                                " (SELECT Diskon FROM tbl_transaksi_parent WHERE tbl_transaksi_parent.Id_trans = tbl_transaksi_child.Id_trans) AS 'Diskon'" &
+                                " Harga AS 'Harga Jual'," &
+                                " Diskon AS 'Diskon'" &
                                 " FROM tbl_transaksi_child" &
                                 " WHERE (LEFT(Id_trans, 1) = 'K' or LEFT(Id_trans, 1) = 'C')" &
-                                " AND (SELECT Tgl FROM tbl_transaksi_parent WHERE tbl_transaksi_parent.Id_trans = tbl_transaksi_child.Id_trans) >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd 00:00:00") & "'" &
-                                " AND (SELECT Tgl FROM tbl_transaksi_parent WHERE tbl_transaksi_parent.Id_trans = tbl_transaksi_child.Id_trans) <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd 23:59:59") & "'" &
+                                " AND (SELECT Tgl FROM tbl_transaksi_parent WHERE tbl_transaksi_parent.Id_trans = tbl_transaksi_child.Id_trans) >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & " 00:00:00'" &
+                                " AND (SELECT Tgl FROM tbl_transaksi_parent WHERE tbl_transaksi_parent.Id_trans = tbl_transaksi_child.Id_trans) <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd") & " 23:59:59'" &
                                 " ORDER BY ID ASC"
-                    Case 6
+                    Case 7
                         STR = "SELECT" &
                     " tbl_transaksi_parent.Tgl AS 'Tanggal'," &
                     " tbl_transaksi_parent.Jumlah_item AS 'Jumlah_item'" &
                     " From tbl_transaksi_child inner Join tbl_transaksi_parent On tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans" &
                     " Where (Left(tbl_transaksi_child.Id_trans, 1) = 'K' OR Left(tbl_transaksi_child.Id_trans, 1) = 'C')" &
-                    " And tbl_transaksi_parent.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd 00:00:00") & "'" &
-                    " And tbl_transaksi_parent.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd 23:59:59") & "'" &
+                    " And tbl_transaksi_parent.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & " 00:00:00'" &
+                    " And tbl_transaksi_parent.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd") & " 23:59:59'" &
                     " ORDER BY tbl_transaksi_child.Id ASC"
-                    Case 7
+                    Case 8
                         Dim LASTDAYOFMONTH = DateTime.DaysInMonth(TXTTGLAKHIR.Value.ToString("yyyy"), TXTTGLAKHIR.Value.ToString("MM"))
                         STR = "SELECT" &
                     " tbl_transaksi_parent.Tgl AS 'Tanggal'," &
                     " tbl_transaksi_parent.Jumlah_item AS 'Jumlah_item'" &
                     " From tbl_transaksi_child inner Join tbl_transaksi_parent On tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans" &
                     " Where (Left(tbl_transaksi_child.Id_trans, 1) = 'K' OR Left(tbl_transaksi_child.Id_trans, 1) = 'C')" &
-                    " And tbl_transaksi_parent.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd 00:00:00") & "'" &
-                    " And tbl_transaksi_parent.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-" & LASTDAYOFMONTH & " 23:59:59") & "'" &
+                    " And tbl_transaksi_parent.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM") & "-01 00:00:00'" &
+                    " And tbl_transaksi_parent.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-" & LASTDAYOFMONTH) & " 23:59:59'" &
                     " ORDER BY tbl_transaksi_child.Id ASC"
-                    Case 8
+                    Case 9
                         STR = "SELECT " &
                    " tbl_transaksi_child.Kode AS 'Kode Barang'," &
                    " (SELECT Barang FROM tbl_barang WHERE tbl_barang.Kode = tbl_transaksi_child.Kode) AS 'Nama Barang'," &
                    " tbl_transaksi_child.Jumlah AS 'Jumlah_item'" &
                    " From tbl_transaksi_child inner Join tbl_transaksi_parent On tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans" &
                    " Where (Left(tbl_transaksi_child.Id_trans, 1) = 'K' OR Left(tbl_transaksi_child.Id_trans, 1) = 'C')" &
-                   " And tbl_transaksi_parent.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd 00:00:00") & "'" &
-                   " And tbl_transaksi_parent.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd 23:59:59") & "'" &
+                   " And tbl_transaksi_parent.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & " 00:00:00'" &
+                   " And tbl_transaksi_parent.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd") & " 23:59:59'" &
                    " ORDER BY tbl_transaksi_child.Id ASC"
-                    Case 9
+                    Case 10
                         STR = "SELECT " &
                     " tbl_transaksi_parent.Tgl AS 'Tanggal'," &
                     " (SELECT COALESCE(SUM(tbl_transaksi_child.Harga_akhir), 0) - COALESCE(SUM(tbl_transaksi_child.Harga_beli), 0) FROM tbl_transaksi_child WHERE tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans) - tbl_transaksi_parent.Diskon AS 'Laba'" &
                     " From tbl_transaksi_child inner Join tbl_transaksi_parent On tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans" &
                     " Where (Left(tbl_transaksi_child.Id_trans, 1) = 'K' OR Left(tbl_transaksi_child.Id_trans, 1) = 'C')" &
-                    " And tbl_transaksi_parent.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd 00:00:00") & "'" &
-                    " And tbl_transaksi_parent.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd 23:59:59") & "'" &
+                    " And tbl_transaksi_parent.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & " 00:00:00'" &
+                    " And tbl_transaksi_parent.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd") & " 23:59:59'" &
                     " ORDER BY tbl_transaksi_child.Id ASC"
-                    Case 10
+                    Case 11
                         Dim LASTDAYOFMONTH = DateTime.DaysInMonth(TXTTGLAKHIR.Value.ToString("yyyy"), TXTTGLAKHIR.Value.ToString("MM"))
                         STR = "SELECT " &
                     " tbl_transaksi_parent.Tgl AS 'Tanggal'," &
                     " (SELECT COALESCE(SUM(tbl_transaksi_child.Harga_akhir), 0) - COALESCE(SUM(tbl_transaksi_child.Harga_beli), 0) FROM tbl_transaksi_child WHERE tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans) - tbl_transaksi_parent.Diskon AS 'Laba'" &
                     " From tbl_transaksi_child inner Join tbl_transaksi_parent On tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans" &
                     " Where (Left(tbl_transaksi_child.Id_trans, 1) = 'K' OR Left(tbl_transaksi_child.Id_trans, 1) = 'C')" &
-                    " And tbl_transaksi_parent.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-01 00:00:00") & "'" &
-                    " And tbl_transaksi_parent.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-" & LASTDAYOFMONTH & " 23:59:59") & "'" &
+                    " And tbl_transaksi_parent.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-01") & " 00:00:00'" &
+                    " And tbl_transaksi_parent.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-" & LASTDAYOFMONTH) & " 23:59:59" & "'" &
                     " ORDER BY tbl_transaksi_child.Id ASC"
                 End Select
             Case 2
@@ -290,8 +305,8 @@ Public Class FR_REPORT
                     " tbl_transaksi_child.Stok AS 'Sisa Stok'" &
                     " From tbl_transaksi_child inner Join tbl_transaksi_parent On tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans" &
                     " Where (Left(tbl_transaksi_child.Id_trans, 1) = 'M' OR Left(tbl_transaksi_child.Id_trans, 1) = 'R')" &
-                    " And tbl_transaksi_parent.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd 00:00:00") & "'" &
-                    " And tbl_transaksi_parent.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd 23:59:59") & "'" &
+                    " And tbl_transaksi_parent.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & " 00:00:00'" &
+                    " And tbl_transaksi_parent.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd") & " 23:59:59'" &
                     " AND tbl_transaksi_parent.Id_kasir = '" & My.Settings.ID_ACCOUNT & "'" &
                     " ORDER BY tbl_transaksi_child.Id ASC"
                     Case 3
@@ -315,8 +330,8 @@ Public Class FR_REPORT
                     " tbl_transaksi_parent.Harga_kembali AS 'Kembalian'" &
                     " From tbl_transaksi_child inner Join tbl_transaksi_parent On tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans" &
                     " Where (Left(tbl_transaksi_child.Id_trans, 1) = 'K' OR Left(tbl_transaksi_child.Id_trans, 1) = 'C')" &
-                    " And tbl_transaksi_parent.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd 00:00:00") & "'" &
-                    " And tbl_transaksi_parent.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd 23:59:59") & "'" &
+                    " And tbl_transaksi_parent.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & " 00:00:00'" &
+                    " And tbl_transaksi_parent.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd") & " 23:59:59'" &
                     " AND tbl_transaksi_parent.Id_kasir = '" & My.Settings.ID_ACCOUNT & "'" &
                     " ORDER BY tbl_transaksi_child.Id ASC"
                 End Select
@@ -351,8 +366,8 @@ Public Class FR_REPORT
                     " tbl_transaksi_parent.Harga_kembali AS 'Kembalian'" &
                     " From tbl_transaksi_child inner Join tbl_transaksi_parent On tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans" &
                     " Where (Left(tbl_transaksi_child.Id_trans, 1) = 'K' OR Left(tbl_transaksi_child.Id_trans, 1) = 'C')" &
-                    " And tbl_transaksi_parent.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd 00:00:00") & "'" &
-                    " And tbl_transaksi_parent.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd 23:59:59") & "'" &
+                    " And tbl_transaksi_parent.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & " 00:00:00'" &
+                    " And tbl_transaksi_parent.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd") & " 23:59:59'" &
                     " AND tbl_transaksi_parent.Id_kasir = '" & My.Settings.ID_ACCOUNT & "'" &
                     " ORDER BY tbl_transaksi_child.Id ASC"
                 End Select
@@ -555,25 +570,13 @@ Public Class FR_REPORT
                                     TBL.Rows(N - 1).Item(15) = 0
                                 End If
                             Next
-                        Case 5
+                        Case 6
                             For N = 1 To TBL.Rows.Count - 1
                                 If TBL.Rows(N).Item(0) = TBL.Rows(N - 1).Item(0) Then
                                     'TBL.Rows(N).Item(6) = 0
                                     TBL.Rows(N).Item(7) = 0
                                 End If
                             Next
-                        Case 6
-                            For N = 1 To TBL.Rows.Count - 1
-                                If TBL.Rows(N).Item(0) = TBL.Rows(N - 1).Item(0) Then
-                                    TBL.Rows(N).Item(1) = 0
-                                    For J = N To TBL.Rows.Count - 1
-                                        If TBL.Rows(J).Item(0) = TBL.Rows(J - 1).Item(0) Then
-                                            TBL.Rows(J).Item(1) = 0
-                                        End If
-                                    Next
-                                End If
-                            Next
-                            TOTALITEM = Convert.ToDouble(TBL.Compute("SUM(Jumlah_item)", ""))
                         Case 7
                             For N = 1 To TBL.Rows.Count - 1
                                 If TBL.Rows(N).Item(0) = TBL.Rows(N - 1).Item(0) Then
@@ -586,7 +589,19 @@ Public Class FR_REPORT
                                 End If
                             Next
                             TOTALITEM = Convert.ToDouble(TBL.Compute("SUM(Jumlah_item)", ""))
-                        Case 9
+                        Case 8
+                            For N = 1 To TBL.Rows.Count - 1
+                                If TBL.Rows(N).Item(0) = TBL.Rows(N - 1).Item(0) Then
+                                    TBL.Rows(N).Item(1) = 0
+                                    For J = N To TBL.Rows.Count - 1
+                                        If TBL.Rows(J).Item(0) = TBL.Rows(J - 1).Item(0) Then
+                                            TBL.Rows(J).Item(1) = 0
+                                        End If
+                                    Next
+                                End If
+                            Next
+                            TOTALITEM = Convert.ToDouble(TBL.Compute("SUM(Jumlah_item)", ""))
+                        Case 10
                             For N = 1 To TBL.Rows.Count - 1
                                 If TBL.Rows(N).Item(0) = TBL.Rows(N - 1).Item(0) Then
                                     TBL.Rows(N).Item(1) = 0
@@ -598,7 +613,7 @@ Public Class FR_REPORT
                                 End If
                             Next
                             TOTALLABA = Convert.ToDouble(TBL.Compute("SUM(Laba)", ""))
-                        Case 10
+                        Case 11
                             For N = 1 To TBL.Rows.Count - 1
                                 If TBL.Rows(N).Item(0) = TBL.Rows(N - 1).Item(0) Then
                                     TBL.Rows(N).Item(1) = 0
@@ -918,7 +933,7 @@ Public Class FR_REPORT
                             CRV.ReportSource = RPT
                         Case 4
                             CRV.Refresh()
-                            Dim RPT As New RPT_PENJUALAN_HARIAN
+                            Dim RPT As New RPT_PENJUALAN_BARANG
                             With RPT
                                 .SetDataSource(TBL)
                                 .SetParameterValue("tgl_mulai", TXTTGLAWAL.Value.ToString("dd MMMM yyyy"))
@@ -930,7 +945,7 @@ Public Class FR_REPORT
                             CRV.ReportSource = RPT
                         Case 5
                             CRV.Refresh()
-                            Dim RPT As New RPT_PENJUALAN_BARANG
+                            Dim RPT As New RPT_PENJUALAN_HARIAN
                             With RPT
                                 .SetDataSource(TBL)
                                 .SetParameterValue("tgl_mulai", TXTTGLAWAL.Value.ToString("dd MMMM yyyy"))
@@ -941,6 +956,18 @@ Public Class FR_REPORT
                             BTNEXPORT.Visible = True
                             CRV.ReportSource = RPT
                         Case 6
+                            CRV.Refresh()
+                            Dim RPT As New RPT_PENJUALAN_BARANG_B
+                            With RPT
+                                .SetDataSource(TBL)
+                                .SetParameterValue("tgl_mulai", TXTTGLAWAL.Value.ToString("dd MMMM yyyy"))
+                                .SetParameterValue("tgl_akhir", TXTTGLAKHIR.Value.ToString("dd MMMM yyyy"))
+                            End With
+
+                            BTNCETAK.Visible = True
+                            BTNEXPORT.Visible = True
+                            CRV.ReportSource = RPT
+                        Case 7
                             CRV.Refresh()
                             Dim RPT As New RPT_GRAFIK_PENJUALAN_HARIAN
                             With RPT
@@ -953,7 +980,7 @@ Public Class FR_REPORT
                             BTNCETAK.Visible = True
                             BTNEXPORT.Visible = True
                             CRV.ReportSource = RPT
-                        Case 7
+                        Case 8
                             CRV.Refresh()
                             Dim RPT As New RPT_GRAFIK_PENJUALAN_BULANAN
                             With RPT
@@ -966,7 +993,7 @@ Public Class FR_REPORT
                             BTNCETAK.Visible = True
                             BTNEXPORT.Visible = True
                             CRV.ReportSource = RPT
-                        Case 8
+                        Case 9
                             CRV.Refresh()
                             Dim RPT As New RPT_GRAFIK_PENJUALAN_BARANG_HARIAN
                             With RPT
@@ -979,7 +1006,7 @@ Public Class FR_REPORT
                             BTNCETAK.Visible = True
                             BTNEXPORT.Visible = True
                             CRV.ReportSource = RPT
-                        Case 9
+                        Case 10
                             CRV.Refresh()
                             Dim RPT As New RPT_GRAFIK_LABA_HARIAN
                             With RPT
@@ -992,7 +1019,7 @@ Public Class FR_REPORT
                             BTNCETAK.Visible = True
                             BTNEXPORT.Visible = True
                             CRV.ReportSource = RPT
-                        Case 10
+                        Case 11
                             CRV.Refresh()
                             Dim RPT As New RPT_GRAFIK_LABA_BULANAN
                             With RPT
@@ -1150,12 +1177,14 @@ Public Class FR_REPORT
                     Case 6
                         KONDISI_TANGGAL()
                     Case 7
-                        KONDISI_BULAN()
-                    Case 8
                         KONDISI_TANGGAL()
+                    Case 8
+                        KONDISI_BULAN()
                     Case 9
                         KONDISI_TANGGAL()
                     Case 10
+                        KONDISI_TANGGAL()
+                    Case 11
                         KONDISI_BULAN()
                 End Select
             Case 2

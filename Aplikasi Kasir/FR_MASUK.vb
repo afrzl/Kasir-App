@@ -76,7 +76,8 @@ Public Class FR_MASUK
                     " ((SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) Like '%" & TXTCARI.Text & "%'" &
                     " OR RTRIM(Kode) = '" & TXTCARI.Text & "'" &
                     " OR RTRIM(Id_trans) = '" & TXTCARI.Text & "')" &
-                    " ORDER BY Id ASC"
+                    " ORDER BY Id ASC" &
+                    " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
                 ElseIf CBTAMPIL.SelectedIndex = 1 Then
                     STR = "SELECT Id, RTRIM(Id_trans) AS 'ID Transaksi'," &
                     " RTRIM(Kode) AS 'Kode Barang'," &
@@ -90,7 +91,8 @@ Public Class FR_MASUK
                     " OR RTRIM(Kode) = '" & TXTCARI.Text & "'" &
                     " OR RTRIM(Id_trans) = '" & TXTCARI.Text & "')" &
                     " AND Stok != 0" &
-                    " ORDER BY Id ASC"
+                    " ORDER BY Id ASC" &
+                    " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
                 ElseIf CBTAMPIL.SelectedIndex = 2 Then
                     STR = "SELECT Id, RTRIM(Id_trans) AS 'ID Transaksi'," &
                     " RTRIM(Kode) AS 'Kode Barang'," &
@@ -104,7 +106,8 @@ Public Class FR_MASUK
                     " OR RTRIM(Kode) = '" & TXTCARI.Text & "'" &
                     " OR RTRIM(Id_trans) = '" & TXTCARI.Text & "')" &
                     " AND Stok = 0" &
-                    " ORDER BY Id ASC"
+                    " ORDER BY Id ASC" &
+                    " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
                 Else
                     STR = "SELECT Id, RTRIM(Id_trans) AS 'ID Transaksi'," &
                     " RTRIM(Kode) AS 'Kode Barang'," &
@@ -117,7 +120,8 @@ Public Class FR_MASUK
                     " ((SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) Like '%" & TXTCARI.Text & "%'" &
                     " OR RTRIM(Kode) = '" & TXTCARI.Text & "'" &
                     " OR RTRIM(Id_trans) = '" & TXTCARI.Text & "')" &
-                    " ORDER BY Id ASC"
+                    " ORDER BY Id ASC" &
+                    " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
                 End If
             Case 2
                 If CBTAMPIL.SelectedIndex = 0 Then
@@ -133,7 +137,8 @@ Public Class FR_MASUK
                     " AND ((SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) Like '%" & TXTCARI.Text & "%'" &
                     " OR RTRIM(Kode) = '" & TXTCARI.Text & "'" &
                     " OR RTRIM(Id_trans) = '" & TXTCARI.Text & "')" &
-                    " ORDER BY Id ASC"
+                    " ORDER BY Id ASC" &
+                    " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
                 ElseIf CBTAMPIL.SelectedIndex = 1 Then
                     STR = "SELECT Id, RTRIM(Id_trans) AS 'ID Transaksi'," &
                     " RTRIM(Kode) AS 'Kode Barang'," &
@@ -148,7 +153,8 @@ Public Class FR_MASUK
                     " AND ((SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) Like '%" & TXTCARI.Text & "%'" &
                     " OR RTRIM(Kode) = '" & TXTCARI.Text & "'" &
                     " OR RTRIM(Id_trans) = '" & TXTCARI.Text & "')" &
-                    " ORDER BY Id ASC"
+                    " ORDER BY Id ASC" &
+                    " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
                 ElseIf CBTAMPIL.SelectedIndex = 2 Then
                     STR = "SELECT Id, RTRIM(Id_trans) AS 'ID Transaksi'," &
                     " RTRIM(Kode) AS 'Kode Barang'," &
@@ -163,7 +169,8 @@ Public Class FR_MASUK
                     " AND ((SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) Like '%" & TXTCARI.Text & "%'" &
                     " OR RTRIM(Kode) = '" & TXTCARI.Text & "'" &
                     " OR RTRIM(Id_trans) = '" & TXTCARI.Text & "')" &
-                    " ORDER BY Id ASC"
+                    " ORDER BY Id ASC" &
+                    " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
                 Else
                     STR = "SELECT Id, RTRIM(Id_trans) AS 'ID Transaksi'," &
                     " RTRIM(Kode) AS 'Kode Barang'," &
@@ -177,13 +184,14 @@ Public Class FR_MASUK
                     " AND ((SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) Like '%" & TXTCARI.Text & "%'" &
                     " OR RTRIM(Kode) = '" & TXTCARI.Text & "'" &
                     " OR RTRIM(Id_trans) = '" & TXTCARI.Text & "')" &
-                    " ORDER BY Id ASC"
+                    " ORDER BY Id ASC" &
+                    " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
                 End If
         End Select
         Dim DA As SqlDataAdapter
         Dim TBL As New DataSet
         DA = New SqlDataAdapter(STR, CONN)
-        DA.Fill(TBL, START_RECORD, TAMPIL_RECORD, 0)
+        DA.Fill(TBL)
         DGHISTORY.DataSource = TBL.Tables(0)
 
         DGHISTORY.Columns(0).Visible = False
@@ -212,14 +220,78 @@ Public Class FR_MASUK
         DA = New SqlDataAdapter(STR, CONN)
         DA.Fill(TBL_DATA)
 
-        TOTAL_RECORD = TBL_DATA.Rows.Count
+        Select Case ROLE
+            Case 1
+                If CBTAMPIL.SelectedIndex = 0 Then
+                    STR = "SELECT COUNT(*)" &
+                            " FROM tbl_transaksi_child WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M' AND" &
+                            " ((SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) Like '%" & TXTCARI.Text & "%'" &
+                            " OR RTRIM(Kode) = '" & TXTCARI.Text & "'" &
+                            " OR RTRIM(Id_trans) = '" & TXTCARI.Text & "')"
+                ElseIf CBTAMPIL.SelectedIndex = 1 Then
+                    STR = "SELECT COUNT(*)" &
+                            " FROM tbl_transaksi_child WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M' AND" &
+                            " ((SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) Like '%" & TXTCARI.Text & "%'" &
+                            " OR RTRIM(Kode) = '" & TXTCARI.Text & "'" &
+                            " OR RTRIM(Id_trans) = '" & TXTCARI.Text & "')" &
+                            " AND Stok != 0"
+                ElseIf CBTAMPIL.SelectedIndex = 2 Then
+                    STR = "SELECT COUNT(*)" &
+                            " FROM tbl_transaksi_child WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M' AND" &
+                            " ((SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) Like '%" & TXTCARI.Text & "%'" &
+                            " OR RTRIM(Kode) = '" & TXTCARI.Text & "'" &
+                            " OR RTRIM(Id_trans) = '" & TXTCARI.Text & "')" &
+                            " AND Stok = 0"
+                Else
+                    STR = "SELECT COUNT(*)" &
+                            " FROM tbl_transaksi_child WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M' AND" &
+                            " ((SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) Like '%" & TXTCARI.Text & "%'" &
+                            " OR RTRIM(Kode) = '" & TXTCARI.Text & "'" &
+                            " OR RTRIM(Id_trans) = '" & TXTCARI.Text & "')"
+                End If
+            Case 2
+                If CBTAMPIL.SelectedIndex = 0 Then
+                    STR = "SELECT COUNT(*)" &
+                            " FROM tbl_transaksi_child WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M' AND" &
+                            " (SELECT Id_kasir FROM tbl_transaksi_parent WHERE tbl_transaksi_parent.Id_trans = tbl_transaksi_child.Id_trans) = '" & My.Settings.ID_ACCOUNT & "'" &
+                            " AND ((SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) Like '%" & TXTCARI.Text & "%'" &
+                            " OR RTRIM(Kode) = '" & TXTCARI.Text & "'" &
+                            " OR RTRIM(Id_trans) = '" & TXTCARI.Text & "')"
+                ElseIf CBTAMPIL.SelectedIndex = 1 Then
+                    STR = "SELECT COUNT(*)" &
+                            " FROM tbl_transaksi_child WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M'" &
+                            " AND Stok != 0" &
+                            " AND (SELECT Id_kasir FROM tbl_transaksi_parent WHERE tbl_transaksi_parent.Id_trans = tbl_transaksi_child.Id_trans) = '" & My.Settings.ID_ACCOUNT & "'" &
+                            " AND ((SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) Like '%" & TXTCARI.Text & "%'" &
+                            " OR RTRIM(Kode) = '" & TXTCARI.Text & "'" &
+                            " OR RTRIM(Id_trans) = '" & TXTCARI.Text & "')"
+                ElseIf CBTAMPIL.SelectedIndex = 2 Then
+                    STR = "SELECT COUNT(*)" &
+                            " FROM tbl_transaksi_child WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M'" &
+                            " AND Stok = 0" &
+                            " AND (SELECT Id_kasir FROM tbl_transaksi_parent WHERE tbl_transaksi_parent.Id_trans = tbl_transaksi_child.Id_trans) = '" & My.Settings.ID_ACCOUNT & "'" &
+                            " AND ((SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) Like '%" & TXTCARI.Text & "%'" &
+                            " OR RTRIM(Kode) = '" & TXTCARI.Text & "'" &
+                            " OR RTRIM(Id_trans) = '" & TXTCARI.Text & "')"
+                Else
+                    STR = "SELECT COUNT(*)" &
+                            " FROM tbl_transaksi_child WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M'" &
+                            " AND (SELECT Id_kasir FROM tbl_transaksi_parent WHERE tbl_transaksi_parent.Id_trans = tbl_transaksi_child.Id_trans) = '" & My.Settings.ID_ACCOUNT & "'" &
+                            " AND ((SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) Like '%" & TXTCARI.Text & "%'" &
+                            " OR RTRIM(Kode) = '" & TXTCARI.Text & "'" &
+                            " OR RTRIM(Id_trans) = '" & TXTCARI.Text & "')"
+                End If
+        End Select
+
+        Dim CMD As New SqlCommand(STR, CONN)
+        TOTAL_RECORD = Convert.ToInt16(CMD.ExecuteScalar())
 
         If TOTAL_RECORD = 0 Then
             BTNPREV.Enabled = False
             BTNNEXT.Enabled = False
         ElseIf START_RECORD = 0 Then
             BTNPREV.Enabled = False
-        ElseIf TOTAL_RECORD <= TAMPIL_RECORD Then
+        ElseIf TOTAL_RECORD <= START_RECORD Then
             BTNNEXT.Enabled = False
         ElseIf TOTAL_RECORD - START_RECORD <= TAMPIL_RECORD Then
             BTNNEXT.Enabled = False
@@ -473,11 +545,6 @@ Public Class FR_MASUK
             PNCARI.Visible = False
             DGCARI.DataSource = Nothing
         End If
-    End Sub
-
-    Private Sub TXTCARI_TextChanged(sender As Object, e As EventArgs) Handles TXTCARI.TextChanged
-        START_RECORD = 0
-        TAMPIL()
     End Sub
 
     Private Sub DGCARI_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGCARI.CellDoubleClick
@@ -906,7 +973,9 @@ Public Class FR_MASUK
 
     Private Sub TXTJUMLAH_Leave(sender As Object, e As EventArgs) Handles TXTJUMLAH.Leave
         Dim QTY As Double
-        QTY = Convert.ToDouble(TXTJUMLAH.Text)
+        If TXTJUMLAH.Text <> 0 Then
+            QTY = Convert.ToDouble(TXTJUMLAH.Text)
+        End If
         If TXTJUMLAH.Text <> "" And QTY = 0 Then
             MsgBox("QTY harus lebih dari 0")
             TXTJUMLAH.Clear()
@@ -951,10 +1020,18 @@ Public Class FR_MASUK
     Private Sub TXTCARI_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTCARI.KeyPress
         If e.KeyChar = "'" Then
             e.Handled = True
+        ElseIf e.KeyChar = Chr(13) Then
+            START_RECORD = 0
+            TAMPIL()
         End If
     End Sub
 
     Private Sub BTNBARCODEOPS_Click(sender As Object, e As EventArgs) Handles BTNBARCODEOPS.Click
         BUKA_FORM(FR_CETAKBARCODE)
+    End Sub
+
+    Private Sub TXTCARI_Leave(sender As Object, e As EventArgs) Handles TXTCARI.Leave
+        START_RECORD = 0
+        TAMPIL()
     End Sub
 End Class

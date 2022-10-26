@@ -50,6 +50,9 @@ Partial Class FR_DISKON
         Me.Label10 = New System.Windows.Forms.Label()
         Me.PNCONTENT = New System.Windows.Forms.Panel()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.LBHARGA = New System.Windows.Forms.Label()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.TXTDISKON_RUPIAH = New System.Windows.Forms.TextBox()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.CBJENIS = New System.Windows.Forms.ComboBox()
         Me.Label11 = New System.Windows.Forms.Label()
@@ -338,7 +341,7 @@ Partial Class FR_DISKON
         Me.BTNSIMPAN.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.BTNSIMPAN.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BTNSIMPAN.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.BTNSIMPAN.Location = New System.Drawing.Point(151, 316)
+        Me.BTNSIMPAN.Location = New System.Drawing.Point(151, 357)
         Me.BTNSIMPAN.Name = "BTNSIMPAN"
         Me.BTNSIMPAN.Size = New System.Drawing.Size(189, 51)
         Me.BTNSIMPAN.TabIndex = 5
@@ -381,7 +384,7 @@ Partial Class FR_DISKON
         '
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(10, 230)
+        Me.Label10.Location = New System.Drawing.Point(10, 271)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(105, 23)
         Me.Label10.TabIndex = 4
@@ -402,6 +405,9 @@ Partial Class FR_DISKON
         '
         'Panel2
         '
+        Me.Panel2.Controls.Add(Me.LBHARGA)
+        Me.Panel2.Controls.Add(Me.Label16)
+        Me.Panel2.Controls.Add(Me.TXTDISKON_RUPIAH)
         Me.Panel2.Controls.Add(Me.Label12)
         Me.Panel2.Controls.Add(Me.CBJENIS)
         Me.Panel2.Controls.Add(Me.Label11)
@@ -427,6 +433,37 @@ Partial Class FR_DISKON
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(517, 728)
         Me.Panel2.TabIndex = 20
+        '
+        'LBHARGA
+        '
+        Me.LBHARGA.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBHARGA.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBHARGA.Location = New System.Drawing.Point(151, 186)
+        Me.LBHARGA.Name = "LBHARGA"
+        Me.LBHARGA.Size = New System.Drawing.Size(343, 26)
+        Me.LBHARGA.TabIndex = 29
+        Me.LBHARGA.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.LBHARGA.Visible = False
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label16.Location = New System.Drawing.Point(10, 189)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(131, 23)
+        Me.Label16.TabIndex = 28
+        Me.Label16.Text = "Harga Terendah"
+        Me.Label16.Visible = False
+        '
+        'TXTDISKON_RUPIAH
+        '
+        Me.TXTDISKON_RUPIAH.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TXTDISKON_RUPIAH.Location = New System.Drawing.Point(280, 312)
+        Me.TXTDISKON_RUPIAH.Name = "TXTDISKON_RUPIAH"
+        Me.TXTDISKON_RUPIAH.Size = New System.Drawing.Size(214, 30)
+        Me.TXTDISKON_RUPIAH.TabIndex = 27
+        Me.TXTDISKON_RUPIAH.Visible = False
         '
         'Label12
         '
@@ -463,17 +500,17 @@ Partial Class FR_DISKON
         '
         Me.Label14.AutoSize = True
         Me.Label14.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label14.Location = New System.Drawing.Point(213, 275)
+        Me.Label14.Location = New System.Drawing.Point(213, 316)
         Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(24, 23)
+        Me.Label14.Size = New System.Drawing.Size(61, 23)
         Me.Label14.TabIndex = 22
-        Me.Label14.Text = "%"
+        Me.Label14.Text = "% / Rp"
         Me.Label14.Visible = False
         '
         'TXTDISKON
         '
         Me.TXTDISKON.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TXTDISKON.Location = New System.Drawing.Point(151, 271)
+        Me.TXTDISKON.Location = New System.Drawing.Point(151, 312)
         Me.TXTDISKON.Name = "TXTDISKON"
         Me.TXTDISKON.Size = New System.Drawing.Size(56, 30)
         Me.TXTDISKON.TabIndex = 20
@@ -483,7 +520,7 @@ Partial Class FR_DISKON
         '
         Me.Label13.AutoSize = True
         Me.Label13.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label13.Location = New System.Drawing.Point(10, 274)
+        Me.Label13.Location = New System.Drawing.Point(10, 315)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(61, 23)
         Me.Label13.TabIndex = 21
@@ -492,7 +529,7 @@ Partial Class FR_DISKON
         '
         'TXTTGLAKHIR
         '
-        Me.TXTTGLAKHIR.Location = New System.Drawing.Point(151, 226)
+        Me.TXTTGLAKHIR.Location = New System.Drawing.Point(151, 267)
         Me.TXTTGLAKHIR.Name = "TXTTGLAKHIR"
         Me.TXTTGLAKHIR.Size = New System.Drawing.Size(343, 30)
         Me.TXTTGLAKHIR.TabIndex = 19
@@ -500,7 +537,7 @@ Partial Class FR_DISKON
         '
         'TXTTGLAWAL
         '
-        Me.TXTTGLAWAL.Location = New System.Drawing.Point(151, 184)
+        Me.TXTTGLAWAL.Location = New System.Drawing.Point(151, 225)
         Me.TXTTGLAWAL.Name = "TXTTGLAWAL"
         Me.TXTTGLAWAL.Size = New System.Drawing.Size(343, 30)
         Me.TXTTGLAWAL.TabIndex = 18
@@ -510,7 +547,7 @@ Partial Class FR_DISKON
         '
         Me.Label9.AutoSize = True
         Me.Label9.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(10, 187)
+        Me.Label9.Location = New System.Drawing.Point(10, 228)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(102, 23)
         Me.Label9.TabIndex = 3
@@ -1017,4 +1054,7 @@ Partial Class FR_DISKON
     Friend WithEvents BTNLAPORAN As Button
     Friend WithEvents BTNLABELADMIN As Button
     Friend WithEvents BTNCETAK As Button
+    Friend WithEvents TXTDISKON_RUPIAH As TextBox
+    Friend WithEvents LBHARGA As Label
+    Friend WithEvents Label16 As Label
 End Class

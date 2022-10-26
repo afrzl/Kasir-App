@@ -52,12 +52,13 @@ Public Class FR_MENU
             " FROM tbl_barang WHERE Barang Like '%" & TXTCARISTOK.Text & "%'" &
             " OR Kode = '" & TXTCARISTOK.Text & "'" &
             " AND (SELECT COALESCE(SUM(Stok),0) FROM tbl_transaksi_child WHERE RTRIM(tbl_transaksi_child.Kode) = RTRIM(tbl_barang.Kode) AND (LEFT(Id_trans,1)='M' or LEFT(Id_trans,1)='R')) != 0" &
-            " ORDER BY 'Nama Barang' ASC"
+            " ORDER BY 'Nama Barang' ASC" &
+            " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
 
         Dim DA As SqlDataAdapter
         Dim TBL As New DataSet
         DA = New SqlDataAdapter(STR, CONN)
-        DA.Fill(TBL, START_RECORD, TAMPIL_RECORD, 0)
+        DA.Fill(TBL)
         DGSTOK.DataSource = TBL.Tables(0)
 
         DGSTOK.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
@@ -77,14 +78,19 @@ Public Class FR_MENU
         DA = New SqlDataAdapter(STR, CONN)
         DA.Fill(TBL_DATA)
 
-        TOTAL_RECORD = TBL_DATA.Rows.Count
+        STR = "SELECT COUNT(*) FROM tbl_barang WHERE Barang Like '%" & TXTCARISTOK.Text & "%'" &
+            " OR Kode = '" & TXTCARISTOK.Text & "'" &
+            " AND (SELECT COALESCE(SUM(Stok),0) FROM tbl_transaksi_child WHERE RTRIM(tbl_transaksi_child.Kode) = RTRIM(tbl_barang.Kode) AND (LEFT(Id_trans,1)='M' or LEFT(Id_trans,1)='R')) != 0"
+        Dim CMD As New SqlCommand(STR, CONN)
+
+        TOTAL_RECORD = Convert.ToInt16(CMD.ExecuteScalar())
 
         If TOTAL_RECORD = 0 Then
             BTNPREV.Enabled = False
             BTNNEXT.Enabled = False
         ElseIf START_RECORD = 0 Then
             BTNPREV.Enabled = False
-        ElseIf TOTAL_RECORD <= TAMPIL_RECORD Then
+        ElseIf TOTAL_RECORD <= START_RECORD Then
             BTNNEXT.Enabled = False
         ElseIf TOTAL_RECORD - START_RECORD <= TAMPIL_RECORD Then
             BTNNEXT.Enabled = False
@@ -105,12 +111,13 @@ Public Class FR_MENU
     End Sub
 
     Private Sub TXTCARISTOK_TextChanged(sender As Object, e As EventArgs) Handles TXTCARISTOK.TextChanged
+        START_RECORD = 0
         TAMPIL()
     End Sub
 
     Private Function CEK_EXPIRED() As Boolean
         Dim STR As String = "SELECT * FROM tbl_transaksi_child WHERE LEFT(Id_trans, 1) = 'M'" &
-            " AND Tgl_exp <= DATEADD(day,+7, GETDATE())" &
+            " AND Tgl_exp <= DATEADD(day,+14, GETDATE())" &
             " AND Stok != 0"
         Dim CMD As SqlCommand
         CMD = New SqlCommand(STR, CONN)
@@ -132,30 +139,52 @@ Public Class FR_MENU
     End Sub
 
     Sub TAMPIL_DATA()
-        Dim TGLAWAL = Format(Date.Now, "yyyy-MM-dd 00:00:00")
-        Dim TGLAKHIR = Format(Date.Now, "yyyy-MM-dd 23:59:59")
+        Dim TGLAWAL = Format(Date.Now, "yyyy-MM-dd")
+        TGLAWAL = TGLAWAL & " 00:00:00"
+        Dim TGLAKHIR = Format(Date.Now, "yyyy-MM-dd")
+        TGLAKHIR = TGLAKHIR & " 23:59:59"
 
         Dim STR As String
         Dim CMD As SqlCommand
         STR = "SELECT COUNT(*) FROM tbl_karyawan"
         CMD = New SqlCommand(STR, CONN)
-        LBKASIR.Text = Convert.ToInt16(CMD.ExecuteScalar())
+        LBKASIR.Text = Convert.ToUInt64(CMD.ExecuteScalar())
 
         STR = "SELECT COUNT(*) FROM tbl_barang"
         CMD = New SqlCommand(STR, CONN)
-        LBBARANG.Text = Convert.ToInt16(CMD.ExecuteScalar())
+        LBBARANG.Text = Convert.ToUInt64(CMD.ExecuteScalar())
 
         STR = "SELECT COUNT(*) FROM tbl_transaksi_parent WHERE Jenis='M'"
         CMD = New SqlCommand(STR, CONN)
-        LBMASUK.Text = Convert.ToInt16(CMD.ExecuteScalar())
+        LBMASUK.Text = Convert.ToUInt64(CMD.ExecuteScalar())
 
         STR = "SELECT COUNT(*) FROM tbl_transaksi_parent WHERE Jenis='K'"
         CMD = New SqlCommand(STR, CONN)
-        LBKELUAR.Text = Convert.ToInt16(CMD.ExecuteScalar())
+        LBKELUAR.Text = Convert.ToUInt64(CMD.ExecuteScalar())
 
-        STR = "SELECT COUNT(*) FROM tbl_transaksi_parent WHERE Jenis='K' AND (Tgl >= '" & TGLAWAL & "' AND Tgl <= '" & TGLAKHIR & "')"
+        STR = "SELECT COUNT(*) as Count FROM tbl_transaksi_parent WHERE Jenis='K' AND (Tgl >= '" & TGLAWAL & "' AND Tgl <= '2022-10-22 00:00:00')"
         CMD = New SqlCommand(STR, CONN)
-        LBKELUARHARI.Text = Convert.ToInt16(CMD.ExecuteScalar())
+        LBKELUARHARI.Text = Convert.ToUInt64(CMD.ExecuteScalar())
+        'CMD = New SqlCommand(STR, CONN)
+
+        'Dim RD As SqlDataReader
+        'RD = CMD.ExecuteReader
+        'RD.Read()
+        'If RD.HasRows Then
+        '    LBKELUARHARI.Text = RD.Item("Counting")
+        '    RD.Close()
+        'Else
+        '    RD.Close()
+        'End If
+        'RD.Close()
+
+
+        ''Dim DA As SqlDataAdapter
+        ''Dim TBL As New DataTable
+        ''DA = New SqlDataAdapter(STR, CONN)
+        ''DA.Fill(TBL)
+
+        ''LBKELUARHARI.Text = TBL.Rows.Count()
     End Sub
 
     Private Sub TXTCARISTOK_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTCARISTOK.KeyPress

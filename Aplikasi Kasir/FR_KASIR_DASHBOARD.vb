@@ -60,12 +60,14 @@ Public Class FR_KASIR_DASHBOARD
             " RTRIM(tbl_barang.Satuan) AS 'Satuan'" &
             " FROM tbl_barang WHERE Barang Like '%" & TXTCARISTOK.Text & "%'" &
             " OR Kode = '" & TXTCARISTOK.Text & "'" &
-            " AND (SELECT COALESCE(SUM(Stok),0) FROM tbl_transaksi_child WHERE RTRIM(tbl_transaksi_child.Kode) = RTRIM(tbl_barang.Kode) AND (LEFT(Id_trans,1)='M' or LEFT(Id_trans,1)='R')) != 0"
+            " AND (SELECT COALESCE(SUM(Stok),0) FROM tbl_transaksi_child WHERE RTRIM(tbl_transaksi_child.Kode) = RTRIM(tbl_barang.Kode) AND (LEFT(Id_trans,1)='M' or LEFT(Id_trans,1)='R')) != 0" &
+            " ORDER BY 'Nama Barang' ASC" &
+            " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
 
         Dim DA As SqlDataAdapter
         Dim TBL As New DataSet
         DA = New SqlDataAdapter(STR, CONN)
-        DA.Fill(TBL, START_RECORD, TAMPIL_RECORD, 0)
+        DA.Fill(TBL)
         DGSTOK.DataSource = TBL.Tables(0)
 
         DGSTOK.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
@@ -85,14 +87,19 @@ Public Class FR_KASIR_DASHBOARD
         DA = New SqlDataAdapter(STR, CONN)
         DA.Fill(TBL_DATA)
 
-        TOTAL_RECORD = TBL_DATA.Rows.Count
+        STR = "SELECT COUNT(*) FROM tbl_barang WHERE Barang Like '%" & TXTCARISTOK.Text & "%'" &
+            " OR Kode = '" & TXTCARISTOK.Text & "'" &
+            " AND (SELECT COALESCE(SUM(Stok),0) FROM tbl_transaksi_child WHERE RTRIM(tbl_transaksi_child.Kode) = RTRIM(tbl_barang.Kode) AND (LEFT(Id_trans,1)='M' or LEFT(Id_trans,1)='R')) != 0"
+        Dim CMD As New SqlCommand(STR, CONN)
+
+        TOTAL_RECORD = Convert.ToInt16(CMD.ExecuteScalar())
 
         If TOTAL_RECORD = 0 Then
             BTNPREV.Enabled = False
             BTNNEXT.Enabled = False
         ElseIf START_RECORD = 0 Then
             BTNPREV.Enabled = False
-        ElseIf TOTAL_RECORD <= TAMPIL_RECORD Then
+        ElseIf TOTAL_RECORD <= START_RECORD Then
             BTNNEXT.Enabled = False
         ElseIf TOTAL_RECORD - START_RECORD <= TAMPIL_RECORD Then
             BTNNEXT.Enabled = False
@@ -167,5 +174,10 @@ Public Class FR_KASIR_DASHBOARD
         If e.KeyChar = "'" Then
             e.Handled = True
         End If
+    End Sub
+
+    Private Sub TXTCARISTOK_TextChanged_1(sender As Object, e As EventArgs) Handles TXTCARISTOK.TextChanged
+        START_RECORD = 0
+        TAMPIL()
     End Sub
 End Class

@@ -254,7 +254,7 @@ Partial Class FR_KELUAR
         '
         Me.LBTOTAL.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.LBTOTAL.Font = New System.Drawing.Font("DS-Digital", 49.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBTOTAL.Font = New System.Drawing.Font("Microsoft Sans Serif", 49.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LBTOTAL.Location = New System.Drawing.Point(6, 24)
         Me.LBTOTAL.Name = "LBTOTAL"
         Me.LBTOTAL.Size = New System.Drawing.Size(905, 92)
@@ -595,10 +595,10 @@ Partial Class FR_KELUAR
         'TXTKEMBALIAN
         '
         Me.TXTKEMBALIAN.Enabled = False
-        Me.TXTKEMBALIAN.Font = New System.Drawing.Font("DS-Digital", 24.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TXTKEMBALIAN.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TXTKEMBALIAN.Location = New System.Drawing.Point(164, 100)
         Me.TXTKEMBALIAN.Name = "TXTKEMBALIAN"
-        Me.TXTKEMBALIAN.Size = New System.Drawing.Size(286, 47)
+        Me.TXTKEMBALIAN.Size = New System.Drawing.Size(286, 53)
         Me.TXTKEMBALIAN.TabIndex = 13
         Me.TXTKEMBALIAN.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -615,10 +615,10 @@ Partial Class FR_KELUAR
         'TXTBAYAR
         '
         Me.TXTBAYAR.Enabled = False
-        Me.TXTBAYAR.Font = New System.Drawing.Font("DS-Digital", 24.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TXTBAYAR.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TXTBAYAR.Location = New System.Drawing.Point(164, 39)
         Me.TXTBAYAR.Name = "TXTBAYAR"
-        Me.TXTBAYAR.Size = New System.Drawing.Size(286, 47)
+        Me.TXTBAYAR.Size = New System.Drawing.Size(286, 53)
         Me.TXTBAYAR.TabIndex = 11
         Me.TXTBAYAR.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '

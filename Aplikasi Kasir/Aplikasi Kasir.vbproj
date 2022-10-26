@@ -46,6 +46,8 @@
     <DocumentationFile>Aplikasi Kasir.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
     <Prefer32Bit>false</Prefer32Bit>
+    <WarningsAsErrors>
+    </WarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -57,6 +59,8 @@
     <DocumentationFile>Aplikasi Kasir.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
     <Prefer32Bit>false</Prefer32Bit>
+    <WarningsAsErrors>
+    </WarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup>
     <OptionExplicit>On</OptionExplicit>
@@ -81,6 +85,9 @@
   </PropertyGroup>
   <PropertyGroup>
     <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>icon kasirapp.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AxShockwaveFlashObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
@@ -411,6 +418,12 @@
       <DependentUpon>RPT_PENJUALAN_BARANG.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="RPT_PENJUALAN_BARANG_B.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RPT_PENJUALAN_BARANG_B.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="RPT_PENJUALAN_HARIAN.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -538,6 +551,10 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RPT_PENJUALAN_BARANG.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="RPT_PENJUALAN_BARANG_B.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RPT_PENJUALAN_BARANG_B.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="RPT_PENJUALAN_HARIAN.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RPT_PENJUALAN_HARIAN.vb</LastGenOutput>
@@ -593,6 +610,7 @@
     <None Include="Resources\tentang.png" />
     <None Include="Resources\logout.png" />
     <None Include="Resources\avatar50px.png" />
+    <Content Include="icon kasirapp.ico" />
     <Content Include="Scripts\fontawesome\all.js" />
     <Content Include="Scripts\fontawesome\all.min.js" />
     <Content Include="Scripts\fontawesome\brands.js" />

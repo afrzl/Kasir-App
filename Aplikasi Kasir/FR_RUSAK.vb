@@ -45,7 +45,7 @@ Public Class FR_RUSAK
             " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_parent.Id_trans = tbl_transaksi_child.Id_trans" &
             " WHERE LEFT(tbl_transaksi_child.Id_trans, 1) = 'M' AND" &
             " tbl_transaksi_child.Stok != 0 AND" &
-            " tbl_transaksi_child.Tgl_exp <= DATEADD(day,+7, GETDATE())"
+            " tbl_transaksi_child.Tgl_exp <= DATEADD(day,+14, GETDATE())"
 
         Dim DA As SqlDataAdapter
         DA = New SqlDataAdapter(STR, CONN)

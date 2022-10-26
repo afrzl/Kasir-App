@@ -45,6 +45,7 @@ Partial Class FR_MASUK
         Me.Label4 = New System.Windows.Forms.Label()
         Me.PNLEFT = New System.Windows.Forms.Panel()
         Me.PNOPS = New System.Windows.Forms.Panel()
+        Me.BTNBARCODEOPS = New System.Windows.Forms.Button()
         Me.Label23 = New System.Windows.Forms.Label()
         Me.BTNKELUAROPS = New System.Windows.Forms.Button()
         Me.BTNLAPORANOPS = New System.Windows.Forms.Button()
@@ -125,7 +126,6 @@ Partial Class FR_MASUK
         Me.ALAMATTOKO = New System.Windows.Forms.RichTextBox()
         Me.LBTOTAL = New System.Windows.Forms.Label()
         Me.PRINTNOTA = New System.Drawing.Printing.PrintDocument()
-        Me.BTNBARCODEOPS = New System.Windows.Forms.Button()
         Me.PNCONTROL.SuspendLayout()
         Me.PNTOP.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -307,6 +307,24 @@ Partial Class FR_MASUK
         Me.PNOPS.Name = "PNOPS"
         Me.PNOPS.Size = New System.Drawing.Size(270, 541)
         Me.PNOPS.TabIndex = 61
+        '
+        'BTNBARCODEOPS
+        '
+        Me.BTNBARCODEOPS.FlatAppearance.BorderSize = 0
+        Me.BTNBARCODEOPS.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNBARCODEOPS.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNBARCODEOPS.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BTNBARCODEOPS.Image = Global.Aplikasi_Kasir.My.Resources.Resources.transaksi
+        Me.BTNBARCODEOPS.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.BTNBARCODEOPS.Location = New System.Drawing.Point(0, 126)
+        Me.BTNBARCODEOPS.Name = "BTNBARCODEOPS"
+        Me.BTNBARCODEOPS.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
+        Me.BTNBARCODEOPS.Size = New System.Drawing.Size(270, 35)
+        Me.BTNBARCODEOPS.TabIndex = 58
+        Me.BTNBARCODEOPS.Text = "     Cetak Barcode"
+        Me.BTNBARCODEOPS.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.BTNBARCODEOPS.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.BTNBARCODEOPS.UseVisualStyleBackColor = True
         '
         'Label23
         '
@@ -1414,7 +1432,7 @@ Partial Class FR_MASUK
         '
         Me.LBTOTAL.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.LBTOTAL.Font = New System.Drawing.Font("DS-Digital", 49.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBTOTAL.Font = New System.Drawing.Font("Microsoft Sans Serif", 49.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LBTOTAL.Location = New System.Drawing.Point(6, 24)
         Me.LBTOTAL.Name = "LBTOTAL"
         Me.LBTOTAL.Size = New System.Drawing.Size(572, 92)
@@ -1424,24 +1442,6 @@ Partial Class FR_MASUK
         '
         'PRINTNOTA
         '
-        '
-        'BTNBARCODEOPS
-        '
-        Me.BTNBARCODEOPS.FlatAppearance.BorderSize = 0
-        Me.BTNBARCODEOPS.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BTNBARCODEOPS.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BTNBARCODEOPS.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.BTNBARCODEOPS.Image = Global.Aplikasi_Kasir.My.Resources.Resources.transaksi
-        Me.BTNBARCODEOPS.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNBARCODEOPS.Location = New System.Drawing.Point(0, 126)
-        Me.BTNBARCODEOPS.Name = "BTNBARCODEOPS"
-        Me.BTNBARCODEOPS.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
-        Me.BTNBARCODEOPS.Size = New System.Drawing.Size(270, 35)
-        Me.BTNBARCODEOPS.TabIndex = 58
-        Me.BTNBARCODEOPS.Text = "     Cetak Barcode"
-        Me.BTNBARCODEOPS.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNBARCODEOPS.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.BTNBARCODEOPS.UseVisualStyleBackColor = True
         '
         'FR_MASUK
         '

@@ -44,27 +44,8 @@ C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi 
 C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Debug\CrystalDecisions.ReportAppServer.CubeDefModel.dll
 C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Debug\CrystalDecisions.ReportAppServer.CommonObjectModel.dll
 C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Debug\CrystalDecisions.ReportAppServer.ObjectFactory.dll
-C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Debug\Syncfusion.DataSource.WinForms.dll
 C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Debug\stdole.dll
 C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Debug\CrystalDecisions.ReportAppServer.CommonControls.dll
-C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Debug\Syncfusion.Core.WinForms.xml
-C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Debug\Syncfusion.Data.WinForms.xml
-C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Debug\Syncfusion.Grid.Base.xml
-C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Debug\Syncfusion.Grid.Grouping.Windows.xml
-C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Debug\Syncfusion.Grid.Windows.xml
-C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Debug\Syncfusion.GridCommon.WinForms.xml
-C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Debug\Syncfusion.Grouping.Base.xml
-C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Debug\Syncfusion.SfDataGrid.WinForms.xml
-C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Debug\Syncfusion.SfInput.WinForms.xml
-C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Debug\Syncfusion.SfListView.WinForms.xml
-C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Debug\Syncfusion.Shared.Base.xml
-C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Debug\Syncfusion.Shared.Windows.xml
-C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Debug\Syncfusion.SpellChecker.Base.xml
-C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Debug\Syncfusion.Tools.Base.xml
-C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Debug\Syncfusion.Tools.Windows.xml
-C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Debug\Syncfusion.DataSource.WinForms.xml
-C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Debug\Syncfusion.Grid.Grouping.Windows.XmlSerializers.dll
-C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Debug\Syncfusion.Grid.Windows.XmlSerializers.dll
 C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\obj\Debug\Aplikasi Kasir.exe.manifest
 C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\obj\Debug\Aplikasi Kasir.application
 C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\obj\Debug\Aplikasi Kasir.vbproj.CopyComplete

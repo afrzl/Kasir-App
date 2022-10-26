@@ -807,7 +807,7 @@ Partial Class FR_REPORT
         Me.CRV.ShowPrintButton = False
         Me.CRV.ShowRefreshButton = False
         Me.CRV.ShowTextSearchButton = False
-        Me.CRV.Size = New System.Drawing.Size(1062, 635)
+        Me.CRV.Size = New System.Drawing.Size(1062, 649)
         Me.CRV.TabIndex = 65
         Me.CRV.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None
         '

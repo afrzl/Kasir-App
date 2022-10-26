@@ -32,12 +32,13 @@ Public Class FR_KELUAR_TAMPIL
                     " Harga5" &
                     " FROM tbl_barang WHERE Barang Like '%" & TXTCARI.Text & "%'" &
                     " OR Kode = '" & TXTCARI.Text & "'" &
-                    " ORDER BY 'Barang' ASC"
+                    " ORDER BY 'Barang' ASC" &
+                    " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
 
         Dim DA As SqlDataAdapter
         Dim TBL As New DataSet
         DA = New SqlDataAdapter(STR, CONN)
-        DA.Fill(TBL, START_RECORD, TAMPIL_RECORD, 0)
+        DA.Fill(TBL)
 
         For Each EROW As DataRow In TBL.Tables(0).Rows
             DGCARI.Rows.Add()
@@ -127,14 +128,18 @@ Public Class FR_KELUAR_TAMPIL
         DA = New SqlDataAdapter(STR, CONN)
         DA.Fill(TBL_DATA)
 
-        TOTAL_RECORD = TBL_DATA.Rows.Count
+        STR = "SELECT COUNT(*) FROM tbl_barang WHERE Barang Like '%" & TXTCARI.Text & "%'" &
+                    " OR Kode = '" & TXTCARI.Text & "'"
+        Dim CMD As New SqlCommand(STR, CONN)
+
+        TOTAL_RECORD = Convert.ToInt16(CMD.ExecuteScalar())
 
         If TOTAL_RECORD = 0 Then
             BTNPREV.Enabled = False
             BTNNEXT.Enabled = False
         ElseIf START_RECORD = 0 Then
             BTNPREV.Enabled = False
-        ElseIf TOTAL_RECORD <= TAMPIL_RECORD Then
+        ElseIf TOTAL_RECORD <= START_RECORD Then
             BTNNEXT.Enabled = False
         ElseIf TOTAL_RECORD - START_RECORD <= TAMPIL_RECORD Then
             BTNNEXT.Enabled = False
@@ -168,6 +173,7 @@ Public Class FR_KELUAR_TAMPIL
     End Sub
 
     Private Sub TXTCARI_TextChanged(sender As Object, e As EventArgs) Handles TXTCARI.TextChanged
+        START_RECORD = 0
         TAMPIL()
     End Sub
 
@@ -179,6 +185,8 @@ Public Class FR_KELUAR_TAMPIL
             FR_KELUAR.TXTKODE.Select()
             FR_KELUAR.Enabled = True
             Me.Close()
+        ElseIf (e.KeyCode = Keys.F1) Then
+            TXTCARI.Select()
         End If
     End Sub
 

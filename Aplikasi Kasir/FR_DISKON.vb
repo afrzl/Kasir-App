@@ -50,7 +50,8 @@ Public Class FR_DISKON
                 " tbl_diskon.Min_transaksi AS 'Minimal Transaksi'," &
                 " tbl_diskon.Tgl_awal as 'Tanggal Awal'," &
                 " tbl_diskon.Tgl_akhir AS 'Tanggal Akhir'," &
-                " tbl_diskon.Diskon AS 'Diskon (%)'" &
+                " tbl_diskon.Jenis_nominal AS 'Jenis Nominal'," &
+                " tbl_diskon.Diskon AS 'Diskon'" &
                 " FROM tbl_diskon" &
                 " LEFT OUTER JOIN tbl_barang ON tbl_diskon.Kode = tbl_barang.Kode" &
                 " ORDER BY tbl_diskon.Tgl_awal ASC"
@@ -62,7 +63,8 @@ Public Class FR_DISKON
                 " tbl_diskon.Min_transaksi AS 'Minimal Transaksi'," &
                 " tbl_diskon.Tgl_awal as 'Tanggal Awal'," &
                 " tbl_diskon.Tgl_akhir AS 'Tanggal Akhir'," &
-                " tbl_diskon.Diskon AS 'Diskon (%)'" &
+                " tbl_diskon.Jenis_nominal AS 'Jenis Nominal'," &
+                " tbl_diskon.Diskon AS 'Diskon'" &
                 " FROM tbl_diskon" &
                 " LEFT OUTER JOIN tbl_barang ON tbl_diskon.Kode = tbl_barang.Kode" &
                 " WHERE Tgl_akhir < '" & TGL_SKRG & "'" &
@@ -75,7 +77,8 @@ Public Class FR_DISKON
                 " tbl_diskon.Min_transaksi AS 'Minimal Transaksi'," &
                 " tbl_diskon.Tgl_awal as 'Tanggal Awal'," &
                 " tbl_diskon.Tgl_akhir AS 'Tanggal Akhir'," &
-                " tbl_diskon.Diskon AS 'Diskon (%)'" &
+                " tbl_diskon.Jenis_nominal AS 'Jenis Nominal'," &
+                " tbl_diskon.Diskon AS 'Diskon'" &
                 " FROM tbl_diskon" &
                 " LEFT OUTER JOIN tbl_barang ON tbl_diskon.Kode = tbl_barang.Kode" &
                 " WHERE Tgl_awal <= '" & TGL_SKRG & "' AND Tgl_akhir >= '" & TGL_SKRG & "'" &
@@ -88,7 +91,8 @@ Public Class FR_DISKON
                 " tbl_diskon.Min_transaksi AS 'Minimal Transaksi'," &
                 " tbl_diskon.Tgl_awal as 'Tanggal Awal'," &
                 " tbl_diskon.Tgl_akhir AS 'Tanggal Akhir'," &
-                " tbl_diskon.Diskon AS 'Diskon (%)'" &
+                " tbl_diskon.Jenis_nominal AS 'Jenis Nominal'," &
+                " tbl_diskon.Diskon AS 'Diskon'" &
                 " FROM tbl_diskon" &
                 " LEFT OUTER JOIN tbl_barang ON tbl_diskon.Kode = tbl_barang.Kode" &
                 " WHERE Tgl_awal > '" & TGL_SKRG & "'" &
@@ -101,7 +105,8 @@ Public Class FR_DISKON
                 " tbl_diskon.Min_transaksi AS 'Minimal Transaksi'," &
                 " tbl_diskon.Tgl_awal as 'Tanggal Awal'," &
                 " tbl_diskon.Tgl_akhir AS 'Tanggal Akhir'," &
-                " tbl_diskon.Diskon AS 'Diskon (%)'" &
+                " tbl_diskon.Jenis_nominal AS 'Jenis Nominal'," &
+                " tbl_diskon.Diskon AS 'Diskon'" &
                 " FROM tbl_diskon" &
                 " LEFT OUTER JOIN tbl_barang ON tbl_diskon.Kode = tbl_barang.Kode" &
                 " ORDER BY tbl_diskon.Tgl_awal ASC"
@@ -123,20 +128,27 @@ Public Class FR_DISKON
         DGTAMPIL.Columns(5).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
         DGTAMPIL.Columns(6).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
         DGTAMPIL.Columns(7).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+        DGTAMPIL.Columns(8).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
 
         DGTAMPIL.Columns(4).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DGTAMPIL.Columns(5).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         DGTAMPIL.Columns(6).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-        DGTAMPIL.Columns(7).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DGTAMPIL.Columns(8).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
 
         DGTAMPIL.Columns(4).DefaultCellStyle.Format = "Rp ###,##"
-        DGTAMPIL.Columns(7).DefaultCellStyle.Format = "##0.##"
+        DGTAMPIL.Columns(8).DefaultCellStyle.Format = "##0.##"
 
         For N = 0 To DGTAMPIL.Rows.Count - 1
             If DGTAMPIL.Rows(N).Cells(1).Value = "A" Then
                 DGTAMPIL.Rows(N).Cells(1).Value = "Semua"
             Else
                 DGTAMPIL.Rows(N).Cells(1).Value = "Produk"
+            End If
+
+            If DGTAMPIL.Rows(N).Cells(7).Value = "R" Then
+                DGTAMPIL.Rows(N).Cells(7).Value = "Rupiah"
+            Else
+                DGTAMPIL.Rows(N).Cells(7).Value = "Persen"
             End If
         Next
 
@@ -206,7 +218,7 @@ Public Class FR_DISKON
     End Sub
 
     Private Sub TXTKODE_TextChanged(sender As Object, e As EventArgs) Handles TXTKODE.TextChanged
-        Dim STR As String = "SELECT Barang, Satuan FROM tbl_barang WHERE RTRIM(Kode)='" & TXTKODE.Text & "'"
+        Dim STR As String = "SELECT Barang, Satuan, Harga1, Harga2, Harga3, Harga4, Harga5, End1, End2, End3, End4 FROM tbl_barang WHERE RTRIM(Kode)='" & TXTKODE.Text & "'"
         Dim CMD As SqlCommand
         CMD = New SqlCommand(STR, CONN)
         Dim RD As SqlDataReader
@@ -215,11 +227,32 @@ Public Class FR_DISKON
             RD.Read()
             LBBARANG.Text = RD.Item("Barang").ToString.Trim
             LBSATUAN.Text = RD.Item("Satuan").ToString.Trim
+
+            Dim HARGA_TERENDAH As Integer = 0
+            If RD.Item("End4") <> 0 Then
+                HARGA_TERENDAH = RD.Item("Harga5")
+            Else
+                If RD.Item("End3") <> 0 Then
+                    HARGA_TERENDAH = RD.Item("Harga4")
+                Else
+                    If RD.Item("End2") <> 0 Then
+                        HARGA_TERENDAH = RD.Item("Harga3")
+                    Else
+                        If RD.Item("End1") <> 0 Then
+                            HARGA_TERENDAH = RD.Item("Harga2")
+                        Else
+                            HARGA_TERENDAH = RD.Item("Harga1")
+                        End If
+                    End If
+                End If
+            End If
+            LBHARGA.Text = HARGA_TERENDAH
             RD.Close()
         Else
             RD.Close()
             LBBARANG.Text = ""
             LBSATUAN.Text = ""
+            LBHARGA.Text = ""
         End If
         RD.Close()
     End Sub
@@ -293,7 +326,7 @@ Public Class FR_DISKON
             e.Handled = True
         End If
         If e.KeyChar = Chr(13) Then
-            BTNSIMPAN.Select()
+            TXTDISKON_RUPIAH.Select()
         End If
     End Sub
 
@@ -301,6 +334,9 @@ Public Class FR_DISKON
         Dim DISKON As Integer = 0
         If TXTDISKON.Text <> "" Then
             DISKON = CInt(TXTDISKON.Text)
+            TXTDISKON_RUPIAH.Text = ""
+        Else
+            DISKON = 0
         End If
 
         If DISKON > 100 Then
@@ -334,6 +370,7 @@ Public Class FR_DISKON
     Sub KONDISI_AWAL()
         Label5.Visible = False
         Label6.Visible = False
+        Label16.Visible = False
         Label7.Visible = False
         Label9.Visible = False
         Label10.Visible = False
@@ -342,15 +379,18 @@ Public Class FR_DISKON
         TXTKODE.Visible = False
         LBBARANG.Visible = False
         LBSATUAN.Visible = False
-        LBSATUAN.Visible = False
+        LBHARGA.Visible = False
         TXTTGLAWAL.Visible = False
         TXTTGLAKHIR.Visible = False
         TXTDISKON.Visible = False
+        TXTDISKON_RUPIAH.Visible = False
         BTNSIMPAN.Visible = False
         BTNCARI.Visible = False
         Label12.Visible = False
         TXTMIN.Visible = False
         PNCARI.Visible = False
+        TXTDISKON.Clear()
+        TXTDISKON_RUPIAH.Clear()
     End Sub
 
     Private Sub CBJENIS_TextChanged(sender As Object, e As EventArgs) Handles CBJENIS.TextChanged
@@ -359,6 +399,7 @@ Public Class FR_DISKON
                 KONDISI_AWAL()
                 Label5.Visible = True
                 Label6.Visible = True
+                Label16.Visible = True
                 Label7.Visible = True
                 Label13.Visible = True
                 Label14.Visible = True
@@ -369,8 +410,9 @@ Public Class FR_DISKON
                 TXTKODE.Visible = True
                 LBBARANG.Visible = True
                 LBSATUAN.Visible = True
-                LBSATUAN.Visible = True
+                LBHARGA.Visible = True
                 TXTDISKON.Visible = True
+                TXTDISKON_RUPIAH.Visible = True
                 BTNSIMPAN.Visible = True
                 BTNCARI.Visible = True
             Case 1
@@ -384,13 +426,14 @@ Public Class FR_DISKON
                 Label13.Visible = True
                 Label14.Visible = True
                 TXTDISKON.Visible = True
+                TXTDISKON_RUPIAH.Visible = True
                 BTNSIMPAN.Visible = True
         End Select
     End Sub
 
     Private Sub BTNSIMPAN_Click(sender As Object, e As EventArgs) Handles BTNSIMPAN.Click
         If CBJENIS.SelectedIndex = 0 Then
-            If TXTKODE.Text = "" Or LBBARANG.Text = "" Or TXTTGLAWAL.Text = "" Or TXTTGLAKHIR.Text = "" Or TXTDISKON.Text = "" Then
+            If TXTKODE.Text = "" Or LBBARANG.Text = "" Or TXTTGLAWAL.Text = "" Or TXTTGLAKHIR.Text = "" Or (TXTDISKON.Text = "" And TXTDISKON_RUPIAH.Text = "") Then
                 MsgBox("Data tidak lengkap!")
                 TXTKODE.Select()
             Else
@@ -399,7 +442,8 @@ Public Class FR_DISKON
                 " AND Jenis = 'B'" &
                 " AND ((Tgl_awal <= '" & Format(TXTTGLAWAL.Value, "yyyy-MM-dd") & "' AND Tgl_akhir >= '" & Format(TXTTGLAKHIR.Value, "yyyy-MM-dd") & "')" &
                 " OR (Tgl_awal <= '" & Format(TXTTGLAKHIR.Value, "yyyy-MM-dd") & "' AND Tgl_akhir >= '" & Format(TXTTGLAKHIR.Value, "yyyy-MM-dd") & "')" &
-                " OR (Tgl_awal <= '" & Format(TXTTGLAWAL.Value, "yyyy-MM-dd") & "' AND Tgl_awal >= '" & Format(TXTTGLAWAL.Value, "yyyy-MM-dd") & "'))"
+                " OR (Tgl_awal <= '" & Format(TXTTGLAWAL.Value, "yyyy-MM-dd") & "' AND Tgl_awal >= '" & Format(TXTTGLAWAL.Value, "yyyy-MM-dd") & "')" &
+                " OR (Tgl_awal >= '" & Format(TXTTGLAWAL.Value, "yyyy-MM-dd") & "' AND Tgl_akhir <= '" & Format(TXTTGLAKHIR.Value, "yyyy-MM-dd") & "'))"
                 Dim CMD As New SqlCommand(STR, CONN)
                 Dim RD As SqlDataReader
                 RD = CMD.ExecuteReader
@@ -408,36 +452,64 @@ Public Class FR_DISKON
                     RD.Close()
                 Else
                     RD.Close()
-                    STR = "INSERT INTO tbl_diskon (Jenis, Kode, Diskon, Tgl_awal, Tgl_akhir)" &
+                    If TXTDISKON.Text = "" Then
+                        STR = "INSERT INTO tbl_diskon (Jenis, Kode, Jenis_nominal, Diskon, Tgl_awal, Tgl_akhir)" &
                             " VALUES(" &
                             " 'B'," &
                             " '" & TXTKODE.Text & "'," &
+                            " 'R'," &
+                            " " & TXTDISKON_RUPIAH.Text.ToString.Replace(",", ".") & "," &
+                            " '" & Format(TXTTGLAWAL.Value, "MM/dd/yyyy") & "'," &
+                            " '" & Format(TXTTGLAKHIR.Value, "MM/dd/yyyy") & "'" &
+                            " )"
+                    Else
+                        STR = "INSERT INTO tbl_diskon (Jenis, Kode, Jenis_nominal, Diskon, Tgl_awal, Tgl_akhir)" &
+                            " VALUES(" &
+                            " 'B'," &
+                            " '" & TXTKODE.Text & "'," &
+                            " 'P'," &
                             " " & TXTDISKON.Text.ToString.Replace(",", ".") & "," &
                             " '" & Format(TXTTGLAWAL.Value, "MM/dd/yyyy") & "'," &
                             " '" & Format(TXTTGLAKHIR.Value, "MM/dd/yyyy") & "'" &
                             " )"
+                    End If
                     CMD = New SqlCommand(STR, CONN)
                     CMD.ExecuteNonQuery()
                     MsgBox("Data tersimpan")
                     TXTKODE.Clear()
                     TXTDISKON.Clear()
+                    TXTDISKON_RUPIAH.Clear()
                     TXTKODE.Select()
                     TAMPIL()
                 End If
             End If
         ElseIf CBJENIS.SelectedIndex = 1 Then
-            If TXTMIN.Text = "" Or TXTTGLAWAL.Text = "" Or TXTTGLAKHIR.Text = "" Or TXTDISKON.Text = "" Then
+            If TXTMIN.Text = "" Or TXTTGLAWAL.Text = "" Or TXTTGLAKHIR.Text = "" Or (TXTDISKON.Text = "" And TXTDISKON_RUPIAH.Text = "") Then
                 MsgBox("Data tidak lengkap!")
                 TXTKODE.Select()
             Else
-                Dim STR As String = "INSERT INTO tbl_diskon (Jenis, Min_transaksi, Diskon, Tgl_awal, Tgl_akhir)" &
-                " VALUES(" &
-                " 'A'," &
-                " '" & TXTMIN.Text & "'," &
-                " " & TXTDISKON.Text.ToString.Replace(",", ".") & "," &
-                " '" & Format(TXTTGLAWAL.Value, "MM/dd/yyyy") & "'," &
-                " '" & Format(TXTTGLAKHIR.Value, "MM/dd/yyyy") & "'" &
-                " )"
+                Dim STR As String
+                If TXTDISKON.Text = "" Then
+                    STR = "INSERT INTO tbl_diskon (Jenis, Min_transaksi, Jenis_nominal, Diskon, Tgl_awal, Tgl_akhir)" &
+                        " VALUES(" &
+                        " 'A'," &
+                        " '" & TXTMIN.Text & "'," &
+                        " 'R'," &
+                        " " & TXTDISKON_RUPIAH.Text.ToString.Replace(",", ".") & "," &
+                        " '" & Format(TXTTGLAWAL.Value, "MM/dd/yyyy") & "'," &
+                        " '" & Format(TXTTGLAKHIR.Value, "MM/dd/yyyy") & "'" &
+                        " )"
+                Else
+                    STR = "INSERT INTO tbl_diskon (Jenis, Min_transaksi, Jenis_nominal, Diskon, Tgl_awal, Tgl_akhir)" &
+                        " VALUES(" &
+                        " 'A'," &
+                        " '" & TXTMIN.Text & "'," &
+                        " 'P'," &
+                        " " & TXTDISKON.Text.ToString.Replace(",", ".") & "," &
+                        " '" & Format(TXTTGLAWAL.Value, "MM/dd/yyyy") & "'," &
+                        " '" & Format(TXTTGLAKHIR.Value, "MM/dd/yyyy") & "'" &
+                        " )"
+                End If
                 Dim CMD As New SqlCommand(STR, CONN)
                 CMD.ExecuteNonQuery()
                 MsgBox("Data tersimpan")
@@ -574,6 +646,53 @@ Public Class FR_DISKON
             End If
         Else
             MsgBox("Data diskon kosong!")
+        End If
+    End Sub
+
+    Private Sub TXTDISKON_RUPIAH_TextChanged(sender As Object, e As EventArgs) Handles TXTDISKON_RUPIAH.TextChanged
+        Dim DISKON As Integer = 0
+        If TXTDISKON_RUPIAH.Text <> "" Then
+            DISKON = CInt(TXTDISKON_RUPIAH.Text)
+            TXTDISKON.Clear()
+        Else
+            DISKON = 0
+        End If
+
+        If CBJENIS.SelectedIndex = 0 Then
+            Dim HARGA_TERENDAH As Integer = 0
+            If LBHARGA.Text <> "" Then
+                HARGA_TERENDAH = CInt(LBHARGA.Text)
+            Else
+                HARGA_TERENDAH = 0
+            End If
+
+            If DISKON > HARGA_TERENDAH Then
+                MsgBox("Diskon melebihi harga terendah")
+                TXTDISKON_RUPIAH.Clear()
+                TXTDISKON_RUPIAH.Select()
+            End If
+        Else
+            Dim MIN_TRANS As Integer = 0
+            If TXTMIN.Text <> "" Then
+                MIN_TRANS = CInt(TXTMIN.Text)
+            Else
+                MIN_TRANS = 0
+            End If
+
+            If DISKON > MIN_TRANS Then
+                MsgBox("Diskon melebihi minimal transaksi")
+                TXTDISKON_RUPIAH.Clear()
+                TXTDISKON_RUPIAH.Select()
+            End If
+        End If
+    End Sub
+
+    Private Sub TXTDISKON_RUPIAH_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTDISKON_RUPIAH.KeyPress
+        If Not ((e.KeyChar >= "0" And e.KeyChar <= "9") Or e.KeyChar = vbBack Or e.KeyChar = ",") Then
+            e.Handled = True
+        End If
+        If e.KeyChar = Chr(13) Then
+            BTNSIMPAN.Select()
         End If
     End Sub
 End Class

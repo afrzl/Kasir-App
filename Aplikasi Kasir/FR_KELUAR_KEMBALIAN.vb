@@ -40,7 +40,7 @@ Public Class FR_KELUAR_KEMBALIAN
     '=================================================================================
     'KERTAS 
     ReadOnly lebarKertas As Integer = 304 'Ukuran Kertas 78 mm
-    ReadOnly tinggiKertas As Integer = 304
+    ReadOnly tinggiKertas As Integer = 400
     ReadOnly marginLeft As Integer = 20
     ReadOnly marginRight As Integer = 20
     ReadOnly jarakBaris As Integer = 20
@@ -141,9 +141,15 @@ Public Class FR_KELUAR_KEMBALIAN
         PRINTNOTA.OriginAtMargins = False
         PRINTNOTA.PrinterSettings = ps
         PRINTNOTA.PrinterSettings.PrinterName = PRINTER_NOTA
-        PRINTNOTA.DefaultPageSettings.PaperSize = New PaperSize("Custom", lebarKertas, tinggiKertas + BarisBaru(FR_KELUAR.DGTAMPIL.Rows.Count))
+        Dim total
+        total = tinggiKertas + (BarisBaru(FR_KELUAR.DGTAMPIL.Rows.Count * 2))
+        PRINTNOTA.DefaultPageSettings.PaperSize = New PaperSize("Custom", lebarKertas, total)
+
         PRINTNOTA.DefaultPageSettings.Landscape = False
         PRINTNOTA.DocumentName = "Stroke"
+        'Dim PPD As New PrintPreviewDialog
+        'PPD.Document = PRINTNOTA
+        'PPD.ShowDialog()
         PRINTNOTA.Print()
     End Sub
 
