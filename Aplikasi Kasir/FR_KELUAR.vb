@@ -125,6 +125,8 @@ Public Class FR_KELUAR
 
         TOTAL_HARGA()
         CARI_KEMBALIAN()
+        DGTAMPIL.FirstDisplayedScrollingRowIndex = DGTAMPIL.RowCount - 1
+        DGTAMPIL.ClearSelection()
         DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Selected = True
     End Sub
 
