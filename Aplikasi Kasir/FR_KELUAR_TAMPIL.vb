@@ -7,7 +7,7 @@ Public Class FR_KELUAR_TAMPIL
     End Sub
 
     Dim START_RECORD As Integer = 0
-    Dim TAMPIL_RECORD As Integer = 15
+    Dim TAMPIL_RECORD As Integer = 10
 
     Sub TAMPIL()
         If START_RECORD = 0 Then
@@ -17,10 +17,10 @@ Public Class FR_KELUAR_TAMPIL
         DGCARI.Rows.Clear()
 
         Dim STR As String
-        STR = "SELECT RTRIM(Kode) as Kode," &
+        STR = "SELECT RTRIM(tbl_barang.Kode) as Kode," &
                     " RTRIM(Barang) as Barang," &
                     " RTRIM(Satuan) as Satuan," &
-                    " (SELECT COALESCE(SUM(Stok),0) FROM tbl_transaksi_child WHERE RTRIM(tbl_transaksi_child.Kode) = RTRIM(tbl_barang.Kode) AND (LEFT(Id_trans,1)='M' or LEFT(Id_trans,1)='R')) AS Stok," &
+                    " (tbl_stok.Stok) AS Stok," &
                     " Harga1," &
                     " End1," &
                     " Harga2," &
@@ -30,8 +30,11 @@ Public Class FR_KELUAR_TAMPIL
                     " Harga4," &
                     " End4," &
                     " Harga5" &
-                    " FROM tbl_barang WHERE Barang Like '%" & TXTCARI.Text & "%'" &
-                    " OR Kode = '" & TXTCARI.Text & "'" &
+                    " FROM tbl_barang" &
+                    " INNER JOIN tbl_stok ON tbl_barang.Kode = tbl_stok.Kode" &
+                    " WHERE Barang" &
+                    " Like '%" & TXTCARI.Text & "%'" &
+                    " OR tbl_barang.Kode = '" & TXTCARI.Text & "'" &
                     " ORDER BY 'Barang' ASC" &
                     " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
 
@@ -123,30 +126,33 @@ Public Class FR_KELUAR_TAMPIL
         BTNPREV.Enabled = True
         BTNNEXT.Enabled = True
 
-        Dim TOTAL_RECORD As Integer = 0
-        Dim TBL_DATA As New DataTable
-        DA = New SqlDataAdapter(STR, CONN)
-        DA.Fill(TBL_DATA)
+        'Dim TOTAL_RECORD As Integer = 0
+        'Dim TBL_DATA As New DataTable
+        'DA = New SqlDataAdapter(STR, CONN)
+        'DA.Fill(TBL_DATA)
 
-        STR = "SELECT COUNT(*) FROM tbl_barang WHERE Barang Like '%" & TXTCARI.Text & "%'" &
-                    " OR Kode = '" & TXTCARI.Text & "'"
-        Dim CMD As New SqlCommand(STR, CONN)
+        'STR = "SELECT COUNT(*) FROM tbl_barang WHERE Barang Like '%" & TXTCARI.Text & "%'" &
+        '            " OR Kode = '" & TXTCARI.Text & "'"
+        'Dim CMD As New SqlCommand(STR, CONN)
 
-        TOTAL_RECORD = Convert.ToInt16(CMD.ExecuteScalar())
+        'TOTAL_RECORD = Convert.ToUInt64(CMD.ExecuteScalar())
 
-        If TOTAL_RECORD = 0 Then
+        'If TOTAL_RECORD = 0 Then
+        '    BTNPREV.Enabled = False
+        '    BTNNEXT.Enabled = False
+        If START_RECORD = 0 Then
             BTNPREV.Enabled = False
-            BTNNEXT.Enabled = False
-        ElseIf START_RECORD = 0 Then
-            BTNPREV.Enabled = False
-        ElseIf TOTAL_RECORD <= START_RECORD Then
-            BTNNEXT.Enabled = False
-        ElseIf TOTAL_RECORD - START_RECORD <= TAMPIL_RECORD Then
-            BTNNEXT.Enabled = False
         Else
             BTNPREV.Enabled = True
-            BTNNEXT.Enabled = True
         End If
+        'ElseIf TOTAL_RECORD <= START_RECORD Then
+        '    BTNNEXT.Enabled = False
+        'ElseIf TOTAL_RECORD - START_RECORD <= TAMPIL_RECORD Then
+        '    BTNNEXT.Enabled = False
+        'Else
+        '    BTNPREV.Enabled = True
+        '    BTNNEXT.Enabled = True
+        'End If
     End Sub
     Private Sub BTNNEXT_Click(sender As Object, e As EventArgs) Handles BTNNEXT.Click
         START_RECORD = START_RECORD + TAMPIL_RECORD

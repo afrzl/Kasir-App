@@ -47,11 +47,11 @@ Public Class FR_MENU
     Sub TAMPIL()
         Dim STR As String = "SELECT RTRIM(Kode) AS Kode," &
             " RTRIM(Barang) As 'Nama Barang'," &
-            " (SELECT COALESCE(SUM(Stok),0) FROM tbl_transaksi_child WHERE RTRIM(tbl_transaksi_child.Kode) = RTRIM(tbl_barang.Kode) AND (LEFT(Id_trans,1)='M' or LEFT(Id_trans,1)='R')) AS Stok," &
+            " (SELECT Stok FROM tbl_stok WHERE tbl_stok.Kode = tbl_barang.Kode) AS Stok," &
             " RTRIM(tbl_barang.Satuan) AS 'Satuan'" &
             " FROM tbl_barang WHERE Barang Like '%" & TXTCARISTOK.Text & "%'" &
             " OR Kode = '" & TXTCARISTOK.Text & "'" &
-            " AND (SELECT COALESCE(SUM(Stok),0) FROM tbl_transaksi_child WHERE RTRIM(tbl_transaksi_child.Kode) = RTRIM(tbl_barang.Kode) AND (LEFT(Id_trans,1)='M' or LEFT(Id_trans,1)='R')) != 0" &
+            " AND (SELECT Stok FROM tbl_stok WHERE tbl_stok.Kode = tbl_barang.Kode) != 0" &
             " ORDER BY 'Nama Barang' ASC" &
             " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
 
@@ -78,12 +78,12 @@ Public Class FR_MENU
         DA = New SqlDataAdapter(STR, CONN)
         DA.Fill(TBL_DATA)
 
-        STR = "SELECT COUNT(*) FROM tbl_barang WHERE Barang Like '%" & TXTCARISTOK.Text & "%'" &
+        STR = "SELECT COUNT(Kode) FROM tbl_barang WHERE Barang Like '%" & TXTCARISTOK.Text & "%'" &
             " OR Kode = '" & TXTCARISTOK.Text & "'" &
-            " AND (SELECT COALESCE(SUM(Stok),0) FROM tbl_transaksi_child WHERE RTRIM(tbl_transaksi_child.Kode) = RTRIM(tbl_barang.Kode) AND (LEFT(Id_trans,1)='M' or LEFT(Id_trans,1)='R')) != 0"
+            " AND (SELECT Stok FROM tbl_stok WHERE tbl_stok.Kode = tbl_barang.Kode) != 0"
         Dim CMD As New SqlCommand(STR, CONN)
 
-        TOTAL_RECORD = Convert.ToInt16(CMD.ExecuteScalar())
+        TOTAL_RECORD = Convert.ToUInt64(CMD.ExecuteScalar())
 
         If TOTAL_RECORD = 0 Then
             BTNPREV.Enabled = False

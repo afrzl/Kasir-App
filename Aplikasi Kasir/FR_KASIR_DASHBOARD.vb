@@ -56,11 +56,11 @@ Public Class FR_KASIR_DASHBOARD
     Sub TAMPIL()
         Dim STR As String = "SELECT RTRIM(Kode) AS Kode," &
             " RTRIM(Barang) As 'Nama Barang'," &
-            " (SELECT COALESCE(SUM(Stok),0) FROM tbl_transaksi_child WHERE RTRIM(tbl_transaksi_child.Kode) = RTRIM(tbl_barang.Kode) AND (LEFT(Id_trans,1)='M' or LEFT(Id_trans,1)='R')) AS Stok," &
+            " (SELECT Stok FROM tbl_stok WHERE tbl_stok.Kode = tbl_barang.Kode) AS Stok," &
             " RTRIM(tbl_barang.Satuan) AS 'Satuan'" &
             " FROM tbl_barang WHERE Barang Like '%" & TXTCARISTOK.Text & "%'" &
             " OR Kode = '" & TXTCARISTOK.Text & "'" &
-            " AND (SELECT COALESCE(SUM(Stok),0) FROM tbl_transaksi_child WHERE RTRIM(tbl_transaksi_child.Kode) = RTRIM(tbl_barang.Kode) AND (LEFT(Id_trans,1)='M' or LEFT(Id_trans,1)='R')) != 0" &
+            " AND (SELECT Stok FROM tbl_stok WHERE tbl_stok.Kode = tbl_barang.Kode) != 0" &
             " ORDER BY 'Nama Barang' ASC" &
             " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
 
@@ -89,10 +89,10 @@ Public Class FR_KASIR_DASHBOARD
 
         STR = "SELECT COUNT(*) FROM tbl_barang WHERE Barang Like '%" & TXTCARISTOK.Text & "%'" &
             " OR Kode = '" & TXTCARISTOK.Text & "'" &
-            " AND (SELECT COALESCE(SUM(Stok),0) FROM tbl_transaksi_child WHERE RTRIM(tbl_transaksi_child.Kode) = RTRIM(tbl_barang.Kode) AND (LEFT(Id_trans,1)='M' or LEFT(Id_trans,1)='R')) != 0"
+            " AND (SELECT Stok FROM tbl_stok WHERE tbl_stok.Kode = tbl_barang.Kode) != 0"
         Dim CMD As New SqlCommand(STR, CONN)
 
-        TOTAL_RECORD = Convert.ToInt16(CMD.ExecuteScalar())
+        TOTAL_RECORD = Convert.ToUInt64(CMD.ExecuteScalar())
 
         If TOTAL_RECORD = 0 Then
             BTNPREV.Enabled = False
@@ -129,21 +129,21 @@ Public Class FR_KASIR_DASHBOARD
     End Sub
 
     Sub TAMPIL_DATA()
-        Dim TGLAWAL = Format(Date.Now, "yyyy-MM-dd 00:00:00")
-        Dim TGLAKHIR = Format(Date.Now, "yyyy-MM-dd 23:59:59")
+        Dim TGLAWAL = Format(Date.Now, "yyyy-MM-dd") & " 00:00:00"
+        Dim TGLAKHIR = Format(Date.Now, "yyyy-MM-dd") & " 23:59:59"
 
         Dim STR As String
         Dim CMD As SqlCommand
 
         STR = "SELECT COUNT(*) FROM tbl_transaksi_parent WHERE Jenis='K' AND Id_kasir = '" & My.Settings.ID_ACCOUNT & "'"
         CMD = New SqlCommand(STR, CONN)
-        LBKELUAR.Text = Convert.ToInt16(CMD.ExecuteScalar())
+        LBKELUAR.Text = Convert.ToUInt64(CMD.ExecuteScalar())
 
         STR = "SELECT COUNT(*) FROM tbl_transaksi_parent WHERE Jenis='K'" &
             " And (Tgl >= '" & TGLAWAL & "' AND Tgl <= '" & TGLAKHIR & "')" &
             " AND Id_kasir = '" & My.Settings.ID_ACCOUNT & "'"
         CMD = New SqlCommand(STR, CONN)
-        LBKELUARHARI.Text = Convert.ToInt16(CMD.ExecuteScalar())
+        LBKELUARHARI.Text = Convert.ToUInt64(CMD.ExecuteScalar())
     End Sub
 
     Private Sub BTNRETURN_Click(sender As Object, e As EventArgs)

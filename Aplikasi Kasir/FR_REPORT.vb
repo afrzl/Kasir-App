@@ -118,19 +118,20 @@ Public Class FR_REPORT
                         " tbl_barang.Harga4," &
                         " tbl_barang.End4," &
                         " tbl_barang.Harga5," &
-                        " (SELECT Tgl_awal FROM tbl_diskon WHERE tbl_diskon.Kode = tbl_barang.Kode AND tbl_diskon.Tgl_awal <= '" & TGL_SKRG & "' AND tbl_diskon.Tgl_akhir >= '" & TGL_SKRG & "') as 'Tgl_awal'," &
-                        " (SELECT Tgl_akhir FROM tbl_diskon WHERE tbl_diskon.Kode = tbl_barang.Kode AND tbl_diskon.Tgl_awal <= '" & TGL_SKRG & "' AND tbl_diskon.Tgl_akhir >= '" & TGL_SKRG & "') as 'Tgl_akhir'," &
-                        " (SELECT Diskon FROM tbl_diskon WHERE tbl_diskon.Kode = tbl_barang.Kode AND tbl_diskon.Tgl_awal <= '" & TGL_SKRG & "' AND tbl_diskon.Tgl_akhir >= '" & TGL_SKRG & "') as 'Diskon'" &
+                        " (tbl_diskon.Tgl_awal) as 'Tgl_awal'," &
+                        " (tbl_diskon.Tgl_akhir) as 'Tgl_akhir'," &
+                        " (tbl_diskon.Diskon) as 'Diskon'" &
                         " FROM tbl_barang" &
+                        " LEFT JOIN tbl_diskon ON (tbl_barang.Kode = tbl_diskon.Kode AND tbl_diskon.Tgl_awal <= '" & TGL_SKRG & "' AND tbl_diskon.Tgl_akhir >= '" & TGL_SKRG & "')" &
                         " ORDER BY tbl_barang.Barang ASC"
                     Case 1
-                        STR = "SELECT Kode AS 'Kode Barang'," &
-                    " Barang AS 'Nama Barang'," &
-                    " Satuan AS 'Satuan'," &
-                    " (SELECT COALESCE(SUM(Jumlah), 0) FROM tbl_transaksi_child WHERE (LEFT(tbl_transaksi_child.Id_trans, 1) = 'M' or LEFT(tbl_transaksi_child.Id_trans, 1) = 'R') AND tbl_transaksi_child.Kode = tbl_barang.Kode) AS 'Barang Masuk'," &
-                    " (SELECT COALESCE(SUM(Jumlah), 0) FROM tbl_transaksi_child WHERE (LEFT(tbl_transaksi_child.Id_trans, 1) = 'K' or LEFT(tbl_transaksi_child.Id_trans, 1) = 'C') AND tbl_transaksi_child.Kode = tbl_barang.Kode) AS 'Barang Keluar'" &
-                    " FROM tbl_barang" &
-                    " ORDER BY 'Nama Barang' ASC"
+                            STR = "SELECT Kode AS 'Kode Barang'," &
+                        " Barang AS 'Nama Barang'," &
+                        " Satuan AS 'Satuan'," &
+                        " (SELECT COALESCE(SUM(Jumlah), 0) FROM tbl_transaksi_child WHERE (LEFT(tbl_transaksi_child.Id_trans, 1) = 'M' or LEFT(tbl_transaksi_child.Id_trans, 1) = 'R') AND tbl_transaksi_child.Kode = tbl_barang.Kode) AS 'Barang Masuk'," &
+                        " (SELECT COALESCE(SUM(Jumlah), 0) FROM tbl_transaksi_child WHERE (LEFT(tbl_transaksi_child.Id_trans, 1) = 'K' or LEFT(tbl_transaksi_child.Id_trans, 1) = 'C') AND tbl_transaksi_child.Kode = tbl_barang.Kode) AS 'Barang Keluar'" &
+                        " FROM tbl_barang" &
+                        " ORDER BY 'Nama Barang' ASC"
                     Case 2
                         STR = "SELECT RTRIM(tbl_transaksi_child.Id_trans) AS 'ID Transaksi'," &
                     " RTRIM(tbl_transaksi_parent.Jenis) AS 'Jenis'," &
@@ -139,12 +140,13 @@ Public Class FR_REPORT
                     " RTRIM(tbl_transaksi_parent.Person) AS 'Supplier'," &
                     " tbl_transaksi_child.Jumlah AS 'Jumlah_item'," &
                     " RTRIM(tbl_transaksi_child.Kode) As 'Kode Barang'," &
-                    " RTRIM((SELECT Barang FROM tbl_barang WHERE Kode = tbl_transaksi_child.Kode)) AS 'Nama Barang'," &
+                    " RTRIM(tbl_barang.Barang) AS 'Nama Barang'," &
                     " tbl_transaksi_child.Harga  AS 'Harga QTY'," &
                     " tbl_transaksi_child.Jumlah AS 'Stok Masuk'," &
                     " (tbl_transaksi_child.Harga * tbl_transaksi_child.Jumlah) AS 'Harga'," &
                     " tbl_transaksi_child.Stok AS 'Sisa Stok'" &
                     " From tbl_transaksi_child inner Join tbl_transaksi_parent On tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans" &
+                    " LEFT JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
                     " Where (Left(tbl_transaksi_child.Id_trans, 1) = 'M' OR Left(tbl_transaksi_child.Id_trans, 1) = 'R')" &
                     " And tbl_transaksi_parent.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & " 00:00:00'" &
                     " And tbl_transaksi_parent.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd") & " 23:59:59'" &
@@ -157,7 +159,7 @@ Public Class FR_REPORT
                     " RTRIM(tbl_transaksi_parent.Person) AS 'Pembeli'," &
                     " tbl_transaksi_parent.Jumlah_item AS 'Jumlah_item'," &
                     " RTRIM(tbl_transaksi_child.Kode) As 'Kode Barang'," &
-                    " RTRIM((SELECT Barang FROM tbl_barang WHERE Kode = tbl_transaksi_child.Kode)) AS 'Nama Barang'," &
+                    " RTRIM(tbl_barang.Barang) AS 'Nama Barang'," &
                     " (tbl_transaksi_child.Harga / tbl_transaksi_child.Jumlah)  AS 'Harga QTY'," &
                     " tbl_transaksi_child.Jumlah AS 'QTY'," &
                     " tbl_transaksi_child.Harga  AS 'Harga Jual'," &
@@ -171,24 +173,27 @@ Public Class FR_REPORT
                     " (tbl_transaksi_child.Harga_akhir - tbl_transaksi_child.Harga_beli) AS 'Laba Item'," &
                     " (SELECT COALESCE(SUM(tbl_transaksi_child.Harga_akhir), 0) - COALESCE(SUM(tbl_transaksi_child.Harga_beli), 0) FROM tbl_transaksi_child WHERE tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans) - tbl_transaksi_parent.Diskon AS 'Laba'" &
                     " From tbl_transaksi_child inner Join tbl_transaksi_parent On tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans" &
+                    " LEFT JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
                     " Where (Left(tbl_transaksi_child.Id_trans, 1) = 'K' OR Left(tbl_transaksi_child.Id_trans, 1) = 'C')" &
                     " And tbl_transaksi_parent.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & " 00:00:00'" &
                     " And tbl_transaksi_parent.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd") & " 23:59:59'" &
                     " ORDER BY tbl_transaksi_child.Id ASC"
                     Case 4
-                        STR = "SELECT Id_trans AS 'ID Transaksi'," &
-                                " Kode AS 'Kode Barang'," &
-                                " (SELECT Barang FROM tbl_barang WHERE tbl_barang.Kode = tbl_transaksi_child.Kode) AS 'Nama Barang'," &
-                                " (SELECT Tgl FROM tbl_transaksi_parent WHERE tbl_transaksi_parent.Id_trans = tbl_transaksi_child.Id_trans) AS 'Tanggal', " &
-                                " Jumlah AS 'Jumlah Item'," &
-                                " Harga_beli AS 'Harga Beli'," &
-                                " Harga / Jumlah AS 'Harga Jual'," &
-                                " Diskon AS 'Diskon'" &
+                        STR = "SELECT tbl_transaksi_child.Id_trans AS 'ID Transaksi'," &
+                                " tbl_transaksi_child.Kode AS 'Kode Barang'," &
+                                " (tbl_barang.Barang) AS 'Nama Barang'," &
+                                " (tbl_transaksi_parent.Tgl) AS 'Tanggal', " &
+                                " tbl_transaksi_child.Jumlah AS 'Jumlah Item'," &
+                                " tbl_transaksi_child.Harga_beli AS 'Harga Beli'," &
+                                " tbl_transaksi_child.Harga / tbl_transaksi_child.Jumlah AS 'Harga Jual'," &
+                                " tbl_transaksi_child.Diskon AS 'Diskon'" &
                                 " FROM tbl_transaksi_child" &
-                                " WHERE (LEFT(Id_trans, 1) = 'K' or LEFT(Id_trans, 1) = 'C')" &
-                                " AND (SELECT Tgl FROM tbl_transaksi_parent WHERE tbl_transaksi_parent.Id_trans = tbl_transaksi_child.Id_trans) >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & " 00:00:00'" &
-                                " AND (SELECT Tgl FROM tbl_transaksi_parent WHERE tbl_transaksi_parent.Id_trans = tbl_transaksi_child.Id_trans) <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd") & " 23:59:59'" &
-                                " ORDER BY ID ASC"
+                                " LEFT JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans" &
+                                " LEFT JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
+                                " WHERE (LEFT(tbl_transaksi_child.Id_trans, 1) = 'K' or LEFT(tbl_transaksi_child.Id_trans, 1) = 'C')" &
+                                " AND (tbl_transaksi_parent.Tgl) >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & " 00:00:00'" &
+                                " AND (tbl_transaksi_parent.Tgl) <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd") & " 23:59:59'" &
+                                " ORDER BY tbl_transaksi_child.ID ASC"
                     Case 5
                         STR = "SELECT Id_trans AS 'ID Transaksi'," &
                                 " Tgl AS 'Tanggal', " &
@@ -200,19 +205,21 @@ Public Class FR_REPORT
                                 " AND Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & " 00:00:00'" &
                                 " AND Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd") & " 23:59:59'"
                     Case 6
-                        STR = "SELECT Id_trans AS 'ID Transaksi'," &
-                                " Kode AS 'Kode Barang'," &
-                                " (SELECT Barang FROM tbl_barang WHERE tbl_barang.Kode = tbl_transaksi_child.Kode) AS 'Nama Barang'," &
-                                " (SELECT Tgl FROM tbl_transaksi_parent WHERE tbl_transaksi_parent.Id_trans = tbl_transaksi_child.Id_trans) AS 'Tanggal', " &
-                                " Jumlah AS 'Jumlah Item'," &
-                                " Harga_beli AS 'Harga Beli'," &
-                                " Harga AS 'Harga Jual'," &
-                                " Diskon AS 'Diskon'" &
+                        STR = "SELECT tbl_transaksi_child.Id_trans AS 'ID Transaksi'," &
+                                " tbl_transaksi_child.Kode AS 'Kode Barang'," &
+                                " (tbl_barang.Barang) AS 'Nama Barang'," &
+                                " (tbl_transaksi_parent.Tgl) AS 'Tanggal', " &
+                                " tbl_transaksi_child.Jumlah AS 'Jumlah Item'," &
+                                " tbl_transaksi_child.Harga_beli AS 'Harga Beli'," &
+                                " tbl_transaksi_child.Harga AS 'Harga Jual'," &
+                                " tbl_transaksi_child.Diskon AS 'Diskon'" &
                                 " FROM tbl_transaksi_child" &
-                                " WHERE (LEFT(Id_trans, 1) = 'K' or LEFT(Id_trans, 1) = 'C')" &
-                                " AND (SELECT Tgl FROM tbl_transaksi_parent WHERE tbl_transaksi_parent.Id_trans = tbl_transaksi_child.Id_trans) >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & " 00:00:00'" &
-                                " AND (SELECT Tgl FROM tbl_transaksi_parent WHERE tbl_transaksi_parent.Id_trans = tbl_transaksi_child.Id_trans) <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd") & " 23:59:59'" &
-                                " ORDER BY ID ASC"
+                                " LEFT JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans" &
+                                " LEFT JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
+                                " WHERE (LEFT(tbl_transaksi_child.Id_trans, 1) = 'K' or LEFT(tbl_transaksi_child.Id_trans, 1) = 'C')" &
+                                " AND (tbl_transaksi_parent.Tgl) >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & " 00:00:00'" &
+                                " AND (tbl_transaksi_parent.Tgl) <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd") & " 23:59:59'" &
+                                " ORDER BY tbl_transaksi_child.ID ASC"
                     Case 7
                         STR = "SELECT" &
                     " tbl_transaksi_parent.Tgl AS 'Tanggal'," &
@@ -235,9 +242,10 @@ Public Class FR_REPORT
                     Case 9
                         STR = "SELECT " &
                    " tbl_transaksi_child.Kode AS 'Kode Barang'," &
-                   " (SELECT Barang FROM tbl_barang WHERE tbl_barang.Kode = tbl_transaksi_child.Kode) AS 'Nama Barang'," &
+                   " (tbl_barang.Barang) AS 'Nama Barang'," &
                    " tbl_transaksi_child.Jumlah AS 'Jumlah_item'" &
                    " From tbl_transaksi_child inner Join tbl_transaksi_parent On tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans" &
+                   " LEFT JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
                    " Where (Left(tbl_transaksi_child.Id_trans, 1) = 'K' OR Left(tbl_transaksi_child.Id_trans, 1) = 'C')" &
                    " And tbl_transaksi_parent.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & " 00:00:00'" &
                    " And tbl_transaksi_parent.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd") & " 23:59:59'" &
@@ -277,10 +285,11 @@ Public Class FR_REPORT
                         " tbl_barang.Harga4," &
                         " tbl_barang.End4," &
                         " tbl_barang.Harga5," &
-                        " (SELECT Tgl_awal FROM tbl_diskon WHERE tbl_diskon.Kode = tbl_barang.Kode AND tbl_diskon.Tgl_awal <= '" & TGL_SKRG & "' AND tbl_diskon.Tgl_akhir >= '" & TGL_SKRG & "') as 'Tgl_awal'," &
-                        " (SELECT Tgl_akhir FROM tbl_diskon WHERE tbl_diskon.Kode = tbl_barang.Kode AND tbl_diskon.Tgl_awal <= '" & TGL_SKRG & "' AND tbl_diskon.Tgl_akhir >= '" & TGL_SKRG & "') as 'Tgl_akhir'," &
-                        " (SELECT Diskon FROM tbl_diskon WHERE tbl_diskon.Kode = tbl_barang.Kode AND tbl_diskon.Tgl_awal <= '" & TGL_SKRG & "' AND tbl_diskon.Tgl_akhir >= '" & TGL_SKRG & "') as 'Diskon'" &
+                        " (tbl_diskon.Tgl_awal) as 'Tgl_awal'," &
+                        " (tbl_diskon.Tgl_akhir) as 'Tgl_akhir'," &
+                        " (tbl_diskon.Diskon) as 'Diskon'" &
                         " FROM tbl_barang" &
+                        " LEFT JOIN tbl_diskon ON (tbl_barang.Kode = tbl_diskon.Kode AND tbl_diskon.Tgl_awal <= '" & TGL_SKRG & "' AND tbl_diskon.Tgl_akhir >= '" & TGL_SKRG & "')" &
                         " ORDER BY tbl_barang.Barang ASC"
                     Case 1
                         STR = "SELECT Kode AS 'Kode Barang'," &

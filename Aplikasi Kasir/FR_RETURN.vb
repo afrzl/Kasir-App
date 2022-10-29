@@ -323,6 +323,10 @@ Public Class FR_RETURN
             CMD = New SqlCommand(STR, CONN)
             CMD.ExecuteNonQuery()
 
+            STR = "UPDATE tbl_stok SET Stok+=" & TXTQTY.Text.Replace(",", ".") & " WHERE Kode='" & CBKODE.SelectedValue & "'"
+            CMD = New SqlCommand(STR, CONN)
+            CMD.ExecuteNonQuery()
+
             MsgBox("Return berhasil disimpan! Stok " & CBKODE.Text & " ditambah.")
             TXTID.Clear()
             TXTQTY.Clear()

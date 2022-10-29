@@ -58,134 +58,263 @@ Public Class FR_MASUK
     End Sub
 
     Dim START_RECORD As Integer = 0
-    Dim TAMPIL_RECORD As Integer = 50
+    Dim TAMPIL_RECORD As Integer = 20
+    Dim TOTAL_RECORD As Integer = 0
 
     Sub TAMPIL()
         Dim STR As String
         Select Case ROLE
             Case 1
                 If CBTAMPIL.SelectedIndex = 0 Then
-                    STR = "SELECT Id, RTRIM(Id_trans) AS 'ID Transaksi'," &
-                    " RTRIM(Kode) AS 'Kode Barang'," &
-                    " (SELECT RTRIM(Barang) FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) AS 'Nama Barang'," &
-                    " RTRIM((SELECT Person FROM tbl_transaksi_parent WHERE RTRIM(tbl_transaksi_parent.Id_trans) = RTRIM(tbl_transaksi_child.Id_trans))) as 'Supplier'," &
-                    " Jumlah as 'Stok Masuk'," &
-                    " Harga AS 'Harga Partai'," &
-                    " Stok AS 'Stok Sisa'" &
-                    " FROM tbl_transaksi_child WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M' AND" &
-                    " ((SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) Like '%" & TXTCARI.Text & "%'" &
-                    " OR RTRIM(Kode) = '" & TXTCARI.Text & "'" &
-                    " OR RTRIM(Id_trans) = '" & TXTCARI.Text & "')" &
-                    " ORDER BY Id ASC" &
-                    " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
+                    If TXTCARI.Text = "" Then
+                        STR = "SELECT Id, RTRIM(Id_trans) AS 'ID Transaksi'," &
+                        " RTRIM(tbl_barang.Kode) AS 'Kode Barang'," &
+                        " RTRIM(tbl_barang.Barang) AS 'Nama Barang'," &
+                        " RTRIM((SELECT Person FROM tbl_transaksi_parent WHERE RTRIM(tbl_transaksi_parent.Id_trans) = RTRIM(tbl_transaksi_child.Id_trans))) as 'Supplier'," &
+                        " Jumlah as 'Stok Masuk'," &
+                        " Harga AS 'Harga Partai'," &
+                        " Stok AS 'Stok Sisa'" &
+                        " FROM tbl_transaksi_child" &
+                        " INNER JOIN tbl_barang ON tbl_transaksi_child.Kode=tbl_barang.Kode" &
+                        " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M'" &
+                        " ORDER BY Id ASC" &
+                        " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
+                    Else
+                        STR = "SELECT Id, RTRIM(Id_trans) AS 'ID Transaksi'," &
+                        " RTRIM(tbl_barang.Kode) AS 'Kode Barang'," &
+                        " RTRIM(tbl_barang.Barang) AS 'Nama Barang'," &
+                        " RTRIM((SELECT Person FROM tbl_transaksi_parent WHERE RTRIM(tbl_transaksi_parent.Id_trans) = RTRIM(tbl_transaksi_child.Id_trans))) as 'Supplier'," &
+                        " Jumlah as 'Stok Masuk'," &
+                        " Harga AS 'Harga Partai'," &
+                        " Stok AS 'Stok Sisa'" &
+                        " FROM tbl_transaksi_child INNER JOIN tbl_barang ON tbl_transaksi_child.Kode=tbl_barang.Kode" &
+                        " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M' AND" &
+                        " RTRIM(tbl_barang.Kode) = '" & TXTCARI.Text & "'" &
+                        " ORDER BY Id ASC" &
+                        " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
+                    End If
                 ElseIf CBTAMPIL.SelectedIndex = 1 Then
-                    STR = "SELECT Id, RTRIM(Id_trans) AS 'ID Transaksi'," &
-                    " RTRIM(Kode) AS 'Kode Barang'," &
-                    " (SELECT RTRIM(Barang) FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) AS 'Nama Barang'," &
-                    " RTRIM((SELECT Person FROM tbl_transaksi_parent WHERE RTRIM(tbl_transaksi_parent.Id_trans) = RTRIM(tbl_transaksi_child.Id_trans))) as 'Supplier'," &
-                    " Jumlah as 'Stok Masuk'," &
-                    " Harga AS 'Harga Partai'," &
-                    " Stok AS 'Stok Sisa'" &
-                    " FROM tbl_transaksi_child WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M' AND" &
-                    " ((SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) Like '%" & TXTCARI.Text & "%'" &
-                    " OR RTRIM(Kode) = '" & TXTCARI.Text & "'" &
-                    " OR RTRIM(Id_trans) = '" & TXTCARI.Text & "')" &
-                    " AND Stok != 0" &
-                    " ORDER BY Id ASC" &
-                    " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
+                    If TXTCARI.Text = "" Then
+                        STR = "SELECT Id, RTRIM(Id_trans) AS 'ID Transaksi'," &
+                            " RTRIM(tbl_barang.Kode) AS 'Kode Barang'," &
+                            " RTRIM(tbl_barang.Barang) AS 'Nama Barang'," &
+                            " RTRIM((SELECT Person FROM tbl_transaksi_parent WHERE RTRIM(tbl_transaksi_parent.Id_trans) = RTRIM(tbl_transaksi_child.Id_trans))) as 'Supplier'," &
+                            " Jumlah as 'Stok Masuk'," &
+                            " Harga AS 'Harga Partai'," &
+                            " Stok AS 'Stok Sisa'" &
+                            " FROM tbl_transaksi_child INNER JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
+                            " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M'" &
+                            " AND Stok != 0" &
+                            " ORDER BY Id ASC" &
+                            " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
+                    Else
+                        STR = "SELECT Id, RTRIM(Id_trans) AS 'ID Transaksi'," &
+                            " RTRIM(tbl_barang.Kode) AS 'Kode Barang'," &
+                            " RTRIM(tbl_barang.Barang) AS 'Nama Barang'," &
+                            " RTRIM((SELECT Person FROM tbl_transaksi_parent WHERE RTRIM(tbl_transaksi_parent.Id_trans) = RTRIM(tbl_transaksi_child.Id_trans))) as 'Supplier'," &
+                            " Jumlah as 'Stok Masuk'," &
+                            " Harga AS 'Harga Partai'," &
+                            " Stok AS 'Stok Sisa'" &
+                            " FROM tbl_transaksi_child INNER JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
+                            " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M' AND" &
+                            " RTRIM(tbl_barang.Kode) = '" & TXTCARI.Text & "'" &
+                            " AND Stok != 0" &
+                            " ORDER BY Id ASC" &
+                            " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
+                    End If
                 ElseIf CBTAMPIL.SelectedIndex = 2 Then
-                    STR = "SELECT Id, RTRIM(Id_trans) AS 'ID Transaksi'," &
-                    " RTRIM(Kode) AS 'Kode Barang'," &
-                    " (SELECT RTRIM(Barang) FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) AS 'Nama Barang'," &
-                    " RTRIM((SELECT Person FROM tbl_transaksi_parent WHERE RTRIM(tbl_transaksi_parent.Id_trans) = RTRIM(tbl_transaksi_child.Id_trans))) as 'Supplier'," &
-                    " Jumlah as 'Stok Masuk'," &
-                    " Harga AS 'Harga Partai'," &
-                    " Stok AS 'Stok Sisa'" &
-                    " FROM tbl_transaksi_child WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M' AND" &
-                    " ((SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) Like '%" & TXTCARI.Text & "%'" &
-                    " OR RTRIM(Kode) = '" & TXTCARI.Text & "'" &
-                    " OR RTRIM(Id_trans) = '" & TXTCARI.Text & "')" &
-                    " AND Stok = 0" &
-                    " ORDER BY Id ASC" &
-                    " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
+                    If TXTCARI.Text = "" Then
+                        STR = "SELECT Id, RTRIM(Id_trans) AS 'ID Transaksi'," &
+                            " RTRIM(tbl_barang.Kode) AS 'Kode Barang'," &
+                            " RTRIM(tbl_barang.Barang) AS 'Nama Barang'," &
+                            " RTRIM((SELECT Person FROM tbl_transaksi_parent WHERE RTRIM(tbl_transaksi_parent.Id_trans) = RTRIM(tbl_transaksi_child.Id_trans))) as 'Supplier'," &
+                            " Jumlah as 'Stok Masuk'," &
+                            " Harga AS 'Harga Partai'," &
+                            " Stok AS 'Stok Sisa'" &
+                            " FROM tbl_transaksi_child INNER JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
+                            " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M'" &
+                            " AND Stok = 0" &
+                            " ORDER BY Id ASC" &
+                            " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
+                    Else
+                        STR = "SELECT Id, RTRIM(Id_trans) AS 'ID Transaksi'," &
+                            " RTRIM(tbl_barang.Kode) AS 'Kode Barang'," &
+                            " RTRIM(tbl_barang.Barang) AS 'Nama Barang'," &
+                            " RTRIM((SELECT Person FROM tbl_transaksi_parent WHERE RTRIM(tbl_transaksi_parent.Id_trans) = RTRIM(tbl_transaksi_child.Id_trans))) as 'Supplier'," &
+                            " Jumlah as 'Stok Masuk'," &
+                            " Harga AS 'Harga Partai'," &
+                            " Stok AS 'Stok Sisa'" &
+                            " FROM tbl_transaksi_child INNER JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
+                            " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M' AND" &
+                            " RTRIM(Kode) = '" & TXTCARI.Text & "'" &
+                            " AND Stok = 0" &
+                            " ORDER BY Id ASC" &
+                            " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
+                    End If
                 Else
-                    STR = "SELECT Id, RTRIM(Id_trans) AS 'ID Transaksi'," &
-                    " RTRIM(Kode) AS 'Kode Barang'," &
-                    " (SELECT RTRIM(Barang) FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) AS 'Nama Barang'," &
-                    " RTRIM((SELECT Person FROM tbl_transaksi_parent WHERE RTRIM(tbl_transaksi_parent.Id_trans) = RTRIM(tbl_transaksi_child.Id_trans))) as 'Supplier'," &
-                    " Jumlah as 'Stok Masuk'," &
-                    " Harga AS 'Harga Partai'," &
-                    " Stok AS 'Stok Sisa'" &
-                    " FROM tbl_transaksi_child WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M' AND" &
-                    " ((SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) Like '%" & TXTCARI.Text & "%'" &
-                    " OR RTRIM(Kode) = '" & TXTCARI.Text & "'" &
-                    " OR RTRIM(Id_trans) = '" & TXTCARI.Text & "')" &
-                    " ORDER BY Id ASC" &
-                    " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
+                    If TXTCARI.Text = "" Then
+                        STR = "SELECT Id, RTRIM(Id_trans) AS 'ID Transaksi'," &
+                        " RTRIM(tbl_barang.Kode) AS 'Kode Barang'," &
+                        " RTRIM(tbl_barang.Barang) AS 'Nama Barang'," &
+                        " RTRIM((SELECT Person FROM tbl_transaksi_parent WHERE RTRIM(tbl_transaksi_parent.Id_trans) = RTRIM(tbl_transaksi_child.Id_trans))) as 'Supplier'," &
+                        " Jumlah as 'Stok Masuk'," &
+                        " Harga AS 'Harga Partai'," &
+                        " Stok AS 'Stok Sisa'" &
+                        " FROM tbl_transaksi_child INNER JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
+                        " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M'" &
+                        " ORDER BY Id ASC" &
+                        " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
+                    Else
+                        STR = "SELECT Id, RTRIM(Id_trans) AS 'ID Transaksi'," &
+                        " RTRIM(tbl_barang.Kode) AS 'Kode Barang'," &
+                        " RTRIM(tbl_barang.Barang) AS 'Nama Barang'," &
+                        " RTRIM((SELECT Person FROM tbl_transaksi_parent WHERE RTRIM(tbl_transaksi_parent.Id_trans) = RTRIM(tbl_transaksi_child.Id_trans))) as 'Supplier'," &
+                        " Jumlah as 'Stok Masuk'," &
+                        " Harga AS 'Harga Partai'," &
+                        " Stok AS 'Stok Sisa'" &
+                        " FROM tbl_transaksi_child INNER JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
+                        " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M' AND" &
+                        " RTRIM(Kode) = '" & TXTCARI.Text & "'" &
+                        " ORDER BY Id ASC" &
+                        " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
+                    End If
                 End If
             Case 2
                 If CBTAMPIL.SelectedIndex = 0 Then
-                    STR = "SELECT Id, RTRIM(Id_trans) AS 'ID Transaksi'," &
-                    " RTRIM(Kode) AS 'Kode Barang'," &
-                    " (SELECT RTRIM(Barang) FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) AS 'Nama Barang'," &
-                    " RTRIM((SELECT Person FROM tbl_transaksi_parent WHERE RTRIM(tbl_transaksi_parent.Id_trans) = RTRIM(tbl_transaksi_child.Id_trans))) as 'Supplier'," &
-                    " Jumlah as 'Stok Masuk'," &
-                    " Harga AS 'Harga Partai'," &
-                    " Stok AS 'Stok Sisa'" &
-                    " FROM tbl_transaksi_child WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M' AND" &
-                    " (SELECT Id_kasir FROM tbl_transaksi_parent WHERE tbl_transaksi_parent.Id_trans = tbl_transaksi_child.Id_trans) = '" & My.Settings.ID_ACCOUNT & "'" &
-                    " AND ((SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) Like '%" & TXTCARI.Text & "%'" &
-                    " OR RTRIM(Kode) = '" & TXTCARI.Text & "'" &
-                    " OR RTRIM(Id_trans) = '" & TXTCARI.Text & "')" &
-                    " ORDER BY Id ASC" &
-                    " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
+                    If TXTCARI.Text = "" Then
+                        STR = "SELECT tbl_transaksi_child.Id, RTRIM(tbl_transaksi_child.Id_trans) AS 'ID Transaksi'," &
+                            " RTRIM(tbl_barang.Kode) AS 'Kode Barang'," &
+                            " RTRIM(tbl_barang.Barang) AS 'Nama Barang'," &
+                            " RTRIM(tbl_transaksi_parent.Person) as 'Supplier'," &
+                            " Jumlah as 'Stok Masuk'," &
+                            " tbl_transaksi_child.Harga AS 'Harga Partai'," &
+                            " Stok AS 'Stok Sisa'" &
+                            " FROM tbl_transaksi_child INNER JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
+                            " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans=tbl_transaksi_parent.Id_trans" &
+                            " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M' AND" &
+                            " (tbl_transaksi_parent.Id_kasir) = '" & My.Settings.ID_ACCOUNT & "'" &
+                            " ORDER BY tbl_transaksi_child.Id ASC" &
+                            " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
+                    Else
+                        STR = "SELECT tbl_transaksi_child.Id," &
+                            " RTRIM(tbl_transaksi_child.Id_trans) AS 'ID Transaksi'," &
+                            " RTRIM(tbl_barang.Kode) AS 'Kode Barang'," &
+                            " RTRIM(tbl_barang.Barang) AS 'Nama Barang'," &
+                            " RTRIM(tbl_transaksi_parent.Person) as 'Supplier'," &
+                            " tbl_transaksi_child.Jumlah as 'Stok Masuk'," &
+                            " tbl_transaksi_child.Harga AS 'Harga Partai'," &
+                            " tbl_transaksi_child.Stok AS 'Stok Sisa'" &
+                            " FROM tbl_transaksi_child INNER JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
+                            " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans=tbl_transaksi_parent.Id_trans" &
+                            " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M' AND" &
+                            " tbl_transaksi_parent.Id_kasir = '" & My.Settings.ID_ACCOUNT & "'" &
+                            " AND RTRIM(tbl_barang.Kode) = '" & TXTCARI.Text & "'" &
+                            " ORDER BY tbl_transaksi_child.Id ASC" &
+                            " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
+                    End If
                 ElseIf CBTAMPIL.SelectedIndex = 1 Then
-                    STR = "SELECT Id, RTRIM(Id_trans) AS 'ID Transaksi'," &
-                    " RTRIM(Kode) AS 'Kode Barang'," &
-                    " (SELECT RTRIM(Barang) FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) AS 'Nama Barang'," &
-                    " RTRIM((SELECT Person FROM tbl_transaksi_parent WHERE RTRIM(tbl_transaksi_parent.Id_trans) = RTRIM(tbl_transaksi_child.Id_trans))) as 'Supplier'," &
-                    " Jumlah as 'Stok Masuk'," &
-                    " Harga AS 'Harga Partai'," &
-                    " Stok AS 'Stok Sisa'" &
-                    " FROM tbl_transaksi_child WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M'" &
-                    " AND Stok != 0" &
-                    " AND (SELECT Id_kasir FROM tbl_transaksi_parent WHERE tbl_transaksi_parent.Id_trans = tbl_transaksi_child.Id_trans) = '" & My.Settings.ID_ACCOUNT & "'" &
-                    " AND ((SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) Like '%" & TXTCARI.Text & "%'" &
-                    " OR RTRIM(Kode) = '" & TXTCARI.Text & "'" &
-                    " OR RTRIM(Id_trans) = '" & TXTCARI.Text & "')" &
-                    " ORDER BY Id ASC" &
-                    " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
+                    If TXTCARI.Text = "" Then
+                        STR = "SELECT tbl_transaksi_child.Id," &
+                            " RTRIM(tbl_transaksi_child.Id_trans) AS 'ID Transaksi'," &
+                            " RTRIM(tbl_barang.Kode) AS 'Kode Barang'," &
+                            " RTRIM(tbl_barang.Barang) AS 'Nama Barang'," &
+                            " RTRIM(tbl_transaksi_parent.Person) as 'Supplier'," &
+                            " tbl_transaksi_child.Jumlah as 'Stok Masuk'," &
+                            " tbl_transaksi_child.Harga AS 'Harga Partai'," &
+                            " tbl_transaksi_child.Stok AS 'Stok Sisa'" &
+                            " FROM tbl_transaksi_child INNER JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
+                            " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans=tbl_transaksi_parent.Id_trans" &
+                            " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M'" &
+                            " AND Stok != 0" &
+                            " AND (tbl_transaksi_parent.Id_kasir) = '" & My.Settings.ID_ACCOUNT & "'" &
+                            " ORDER BY tbl_transaksi_child.Id ASC" &
+                            " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
+                    Else
+                        STR = "SELECT tbl_transaksi_child.Id," &
+                            " RTRIM(tbl_transaksi_child.Id_trans) AS 'ID Transaksi'," &
+                            " RTRIM(tbl_barang.Kode) AS 'Kode Barang'," &
+                            " RTRIM(tbl_barang.Barang) AS 'Nama Barang'," &
+                            " RTRIM(tbl_transaksi_parent.Person) as 'Supplier'," &
+                            " tbl_transaksi_child.Jumlah as 'Stok Masuk'," &
+                            " tbl_transaksi_child.Harga AS 'Harga Partai'," &
+                            " tbl_transaksi_child.Stok AS 'Stok Sisa'" &
+                            " FROM tbl_transaksi_child INNER JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
+                            " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans=tbl_transaksi_parent.Id_trans" &
+                            " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M'" &
+                            " AND Stok != 0" &
+                            " AND (tbl_transaksi_parent.Id_kasir) = '" & My.Settings.ID_ACCOUNT & "'" &
+                            " AND RTRIM(tbl_barang.Kode) = '" & TXTCARI.Text & "'" &
+                            " ORDER BY tbl_transaksi_child.Id ASC" &
+                            " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
+                    End If
                 ElseIf CBTAMPIL.SelectedIndex = 2 Then
-                    STR = "SELECT Id, RTRIM(Id_trans) AS 'ID Transaksi'," &
-                    " RTRIM(Kode) AS 'Kode Barang'," &
-                    " (SELECT RTRIM(Barang) FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) AS 'Nama Barang'," &
-                    " RTRIM((SELECT Person FROM tbl_transaksi_parent WHERE RTRIM(tbl_transaksi_parent.Id_trans) = RTRIM(tbl_transaksi_child.Id_trans))) as 'Supplier'," &
-                    " Jumlah as 'Stok Masuk'," &
-                    " Harga AS 'Harga Partai'," &
-                    " Stok AS 'Stok Sisa'" &
-                    " FROM tbl_transaksi_child WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M'" &
-                    " AND Stok = 0" &
-                    " AND (SELECT Id_kasir FROM tbl_transaksi_parent WHERE tbl_transaksi_parent.Id_trans = tbl_transaksi_child.Id_trans) = '" & My.Settings.ID_ACCOUNT & "'" &
-                    " AND ((SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) Like '%" & TXTCARI.Text & "%'" &
-                    " OR RTRIM(Kode) = '" & TXTCARI.Text & "'" &
-                    " OR RTRIM(Id_trans) = '" & TXTCARI.Text & "')" &
-                    " ORDER BY Id ASC" &
-                    " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
+                    If TXTCARI.Text = "" Then
+                        STR = "SELECT tbl_transaksi_child.Id," &
+                                " RTRIM(tbl_transaksi_child.Id_trans) AS 'ID Transaksi'," &
+                                " RTRIM(tbl_barang.Kode) AS 'Kode Barang'," &
+                                " RTRIM(tbl_barang.Barang) AS 'Nama Barang'," &
+                                " RTRIM(tbl_transaksi_parent.Person) as 'Supplier'," &
+                                " tbl_transaksi_child.Jumlah as 'Stok Masuk'," &
+                                " tbl_transaksi_child.Harga AS 'Harga Partai'," &
+                                " tbl_transaksi_child.Stok AS 'Stok Sisa'" &
+                                " FROM tbl_transaksi_child INNER JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
+                                " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans=tbl_transaksi_parent.Id_trans" &
+                                " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M'" &
+                                " AND Stok = 0" &
+                                " AND (tbl_transaksi_parent.Id_kasir) = '" & My.Settings.ID_ACCOUNT & "'" &
+                                " ORDER BY tbl_transaksi_child.Id ASC" &
+                                " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
+                    Else
+                        STR = "SELECT tbl_transaksi_child.Id," &
+                                " RTRIM(tbl_transaksi_child.Id_trans) AS 'ID Transaksi'," &
+                                " RTRIM(tbl_barang.Kode) AS 'Kode Barang'," &
+                                " RTRIM(tbl_barang.Barang) AS 'Nama Barang'," &
+                                " RTRIM(tbl_transaksi_parent.Person) as 'Supplier'," &
+                                " tbl_transaksi_child.Jumlah as 'Stok Masuk'," &
+                                " tbl_transaksi_child.Harga AS 'Harga Partai'," &
+                                " tbl_transaksi_child.Stok AS 'Stok Sisa'" &
+                                " FROM tbl_transaksi_child INNER JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
+                                " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans=tbl_transaksi_parent.Id_trans" &
+                                " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M'" &
+                                " AND Stok = 0" &
+                                " AND (tbl_transaksi_parent.Id_kasir) = '" & My.Settings.ID_ACCOUNT & "'" &
+                                " AND RTRIM(tbl_barang.Kode) = '" & TXTCARI.Text & "'" &
+                                " ORDER BY tbl_transaksi_child.Id ASC" &
+                                " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
+                    End If
                 Else
-                    STR = "SELECT Id, RTRIM(Id_trans) AS 'ID Transaksi'," &
-                    " RTRIM(Kode) AS 'Kode Barang'," &
-                    " (SELECT RTRIM(Barang) FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) AS 'Nama Barang'," &
-                    " RTRIM((SELECT Person FROM tbl_transaksi_parent WHERE RTRIM(tbl_transaksi_parent.Id_trans) = RTRIM(tbl_transaksi_child.Id_trans))) as 'Supplier'," &
-                    " Jumlah as 'Stok Masuk'," &
-                    " Harga AS 'Harga Partai'," &
-                    " Stok AS 'Stok Sisa'" &
-                    " FROM tbl_transaksi_child WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M'" &
-                    " AND (SELECT Id_kasir FROM tbl_transaksi_parent WHERE tbl_transaksi_parent.Id_trans = tbl_transaksi_child.Id_trans) = '" & My.Settings.ID_ACCOUNT & "'" &
-                    " AND ((SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) Like '%" & TXTCARI.Text & "%'" &
-                    " OR RTRIM(Kode) = '" & TXTCARI.Text & "'" &
-                    " OR RTRIM(Id_trans) = '" & TXTCARI.Text & "')" &
-                    " ORDER BY Id ASC" &
-                    " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
+                    If TXTCARI.Text = "" Then
+                        STR = "SELECT tbl_transaksi_child.Id," &
+                            " RTRIM(tbl_transaksi_child.Id_trans) AS 'ID Transaksi'," &
+                            " RTRIM(tbl_barang.Kode) AS 'Kode Barang'," &
+                            " RTRIM(tbl_barang.Barang) AS 'Nama Barang'," &
+                            " RTRIM(tbl_transaksi_parent.Person) as 'Supplier'," &
+                            " tbl_transaksi_child.Jumlah as 'Stok Masuk'," &
+                            " tbl_transaksi_child.Harga AS 'Harga Partai'," &
+                            " tbl_transaksi_child.Stok AS 'Stok Sisa'" &
+                            " FROM tbl_transaksi_child INNER JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
+                            " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans=tbl_transaksi_parent.Id_trans" &
+                            " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M'" &
+                            " AND (tbl_transaksi_parent.Id_kasir) = '" & My.Settings.ID_ACCOUNT & "'" &
+                            " ORDER BY tbl_transaksi_child.Id ASC" &
+                            " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
+                    Else
+                        STR = "SELECT tbl_transaksi_child.Id," &
+                            " RTRIM(tbl_transaksi_child.Id_trans) AS 'ID Transaksi'," &
+                            " RTRIM(tbl_barang.Kode) AS 'Kode Barang'," &
+                            " RTRIM(tbl_barang.Barang) AS 'Nama Barang'," &
+                            " RTRIM(tbl_transaksi_parent.Person) as 'Supplier'," &
+                            " tbl_transaksi_child.Jumlah as 'Stok Masuk'," &
+                            " tbl_transaksi_child.Harga AS 'Harga Partai'," &
+                            " tbl_transaksi_child.Stok AS 'Stok Sisa'" &
+                            " FROM tbl_transaksi_child INNER JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
+                            " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans=tbl_transaksi_parent.Id_trans" &
+                            " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M'" &
+                            " AND (tbl_transaksi_parent.Id_kasir) = '" & My.Settings.ID_ACCOUNT & "'" &
+                            " AND RTRIM(tbl_barang.Kode) = '" & TXTCARI.Text & "'" &
+                            " ORDER BY tbl_transaksi_child.Id ASC" &
+                            " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
+                    End If
                 End If
         End Select
         Dim DA As SqlDataAdapter
@@ -215,90 +344,26 @@ Public Class FR_MASUK
         BTNPREV.Enabled = True
         BTNNEXT.Enabled = True
 
-        Dim TOTAL_RECORD As Integer = 0
-        Dim TBL_DATA As New DataTable
-        DA = New SqlDataAdapter(STR, CONN)
-        DA.Fill(TBL_DATA)
+        'Dim TBL_DATA As New DataTable
+        'DA = New SqlDataAdapter(STR, CONN)
+        'DA.Fill(TBL_DATA)
 
-        Select Case ROLE
-            Case 1
-                If CBTAMPIL.SelectedIndex = 0 Then
-                    STR = "SELECT COUNT(*)" &
-                            " FROM tbl_transaksi_child WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M' AND" &
-                            " ((SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) Like '%" & TXTCARI.Text & "%'" &
-                            " OR RTRIM(Kode) = '" & TXTCARI.Text & "'" &
-                            " OR RTRIM(Id_trans) = '" & TXTCARI.Text & "')"
-                ElseIf CBTAMPIL.SelectedIndex = 1 Then
-                    STR = "SELECT COUNT(*)" &
-                            " FROM tbl_transaksi_child WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M' AND" &
-                            " ((SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) Like '%" & TXTCARI.Text & "%'" &
-                            " OR RTRIM(Kode) = '" & TXTCARI.Text & "'" &
-                            " OR RTRIM(Id_trans) = '" & TXTCARI.Text & "')" &
-                            " AND Stok != 0"
-                ElseIf CBTAMPIL.SelectedIndex = 2 Then
-                    STR = "SELECT COUNT(*)" &
-                            " FROM tbl_transaksi_child WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M' AND" &
-                            " ((SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) Like '%" & TXTCARI.Text & "%'" &
-                            " OR RTRIM(Kode) = '" & TXTCARI.Text & "'" &
-                            " OR RTRIM(Id_trans) = '" & TXTCARI.Text & "')" &
-                            " AND Stok = 0"
-                Else
-                    STR = "SELECT COUNT(*)" &
-                            " FROM tbl_transaksi_child WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M' AND" &
-                            " ((SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) Like '%" & TXTCARI.Text & "%'" &
-                            " OR RTRIM(Kode) = '" & TXTCARI.Text & "'" &
-                            " OR RTRIM(Id_trans) = '" & TXTCARI.Text & "')"
-                End If
-            Case 2
-                If CBTAMPIL.SelectedIndex = 0 Then
-                    STR = "SELECT COUNT(*)" &
-                            " FROM tbl_transaksi_child WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M' AND" &
-                            " (SELECT Id_kasir FROM tbl_transaksi_parent WHERE tbl_transaksi_parent.Id_trans = tbl_transaksi_child.Id_trans) = '" & My.Settings.ID_ACCOUNT & "'" &
-                            " AND ((SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) Like '%" & TXTCARI.Text & "%'" &
-                            " OR RTRIM(Kode) = '" & TXTCARI.Text & "'" &
-                            " OR RTRIM(Id_trans) = '" & TXTCARI.Text & "')"
-                ElseIf CBTAMPIL.SelectedIndex = 1 Then
-                    STR = "SELECT COUNT(*)" &
-                            " FROM tbl_transaksi_child WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M'" &
-                            " AND Stok != 0" &
-                            " AND (SELECT Id_kasir FROM tbl_transaksi_parent WHERE tbl_transaksi_parent.Id_trans = tbl_transaksi_child.Id_trans) = '" & My.Settings.ID_ACCOUNT & "'" &
-                            " AND ((SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) Like '%" & TXTCARI.Text & "%'" &
-                            " OR RTRIM(Kode) = '" & TXTCARI.Text & "'" &
-                            " OR RTRIM(Id_trans) = '" & TXTCARI.Text & "')"
-                ElseIf CBTAMPIL.SelectedIndex = 2 Then
-                    STR = "SELECT COUNT(*)" &
-                            " FROM tbl_transaksi_child WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M'" &
-                            " AND Stok = 0" &
-                            " AND (SELECT Id_kasir FROM tbl_transaksi_parent WHERE tbl_transaksi_parent.Id_trans = tbl_transaksi_child.Id_trans) = '" & My.Settings.ID_ACCOUNT & "'" &
-                            " AND ((SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) Like '%" & TXTCARI.Text & "%'" &
-                            " OR RTRIM(Kode) = '" & TXTCARI.Text & "'" &
-                            " OR RTRIM(Id_trans) = '" & TXTCARI.Text & "')"
-                Else
-                    STR = "SELECT COUNT(*)" &
-                            " FROM tbl_transaksi_child WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M'" &
-                            " AND (SELECT Id_kasir FROM tbl_transaksi_parent WHERE tbl_transaksi_parent.Id_trans = tbl_transaksi_child.Id_trans) = '" & My.Settings.ID_ACCOUNT & "'" &
-                            " AND ((SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) Like '%" & TXTCARI.Text & "%'" &
-                            " OR RTRIM(Kode) = '" & TXTCARI.Text & "'" &
-                            " OR RTRIM(Id_trans) = '" & TXTCARI.Text & "')"
-                End If
-        End Select
-
-        Dim CMD As New SqlCommand(STR, CONN)
-        TOTAL_RECORD = Convert.ToInt16(CMD.ExecuteScalar())
-
-        If TOTAL_RECORD = 0 Then
+        'If TOTAL_RECORD = 0 Then
+        '    BTNPREV.Enabled = False
+        '    BTNNEXT.Enabled = False
+        If START_RECORD = 0 Then
             BTNPREV.Enabled = False
-            BTNNEXT.Enabled = False
-        ElseIf START_RECORD = 0 Then
-            BTNPREV.Enabled = False
-        ElseIf TOTAL_RECORD <= START_RECORD Then
-            BTNNEXT.Enabled = False
-        ElseIf TOTAL_RECORD - START_RECORD <= TAMPIL_RECORD Then
-            BTNNEXT.Enabled = False
         Else
             BTNPREV.Enabled = True
-            BTNNEXT.Enabled = True
         End If
+        'ElseIf TOTAL_RECORD <= START_RECORD Then
+        '    BTNNEXT.Enabled = False
+        'ElseIf TOTAL_RECORD - START_RECORD <= TAMPIL_RECORD Then
+        '    BTNNEXT.Enabled = False
+        'Else
+        '    BTNPREV.Enabled = True
+        '    BTNNEXT.Enabled = True
+        'End If
     End Sub
 
     Private Sub BTNNEXT_Click(sender As Object, e As EventArgs) Handles BTNNEXT.Click
@@ -517,6 +582,7 @@ Public Class FR_MASUK
                 CMD.ExecuteNonQuery()
             End If
             RD.Close()
+
             TAMPIL()
             MsgBox("Data transaksi berhasil dihapus")
         End If
@@ -674,6 +740,10 @@ Public Class FR_MASUK
             End If
             CMD = New SqlCommand(STR, CONN)
             CMD.ExecuteNonQuery()
+
+            STR = "UPDATE tbl_stok SET Stok+=" & JUMLAH_PRODUK.ToString.Replace(",", ".") & " WHERE Kode='" & KODE_PRODUK & "'"
+            CMD = New SqlCommand(STR, CONN)
+            CMD.ExecuteNonQuery()
         Next
     End Sub
 
@@ -771,6 +841,75 @@ Public Class FR_MASUK
         BTNHISTORY.Visible = False
         BTNTRANSAKSI.Visible = True
         CBTAMPIL.SelectedIndex = 1
+
+        'Dim str = ""
+
+        'Select Case ROLE
+        '    Case 1
+        '        If CBTAMPIL.SelectedIndex = 0 Then
+        '            Str = "SELECT COUNT(Id)" &
+        '                    " FROM tbl_transaksi_child WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M' AND" &
+        '                    " ((SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) Like '%" & TXTCARI.Text & "%'" &
+        '                    " OR RTRIM(Kode) = '" & TXTCARI.Text & "'" &
+        '                    " OR RTRIM(Id_trans) = '" & TXTCARI.Text & "')"
+        '        ElseIf CBTAMPIL.SelectedIndex = 1 Then
+        '            Str = "SELECT COUNT(Id)" &
+        '                    " FROM tbl_transaksi_child WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M' AND" &
+        '                    " ((SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) Like '%" & TXTCARI.Text & "%'" &
+        '                    " OR RTRIM(Kode) = '" & TXTCARI.Text & "'" &
+        '                    " OR RTRIM(Id_trans) = '" & TXTCARI.Text & "')" &
+        '                    " AND Stok != 0"
+        '        ElseIf CBTAMPIL.SelectedIndex = 2 Then
+        '            Str = "SELECT COUNT(Id)" &
+        '                    " FROM tbl_transaksi_child WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M' AND" &
+        '                    " ((SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) Like '%" & TXTCARI.Text & "%'" &
+        '                    " OR RTRIM(Kode) = '" & TXTCARI.Text & "'" &
+        '                    " OR RTRIM(Id_trans) = '" & TXTCARI.Text & "')" &
+        '                    " AND Stok = 0"
+        '        Else
+        '            Str = "SELECT COUNT(Id)" &
+        '                    " FROM tbl_transaksi_child WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M' AND" &
+        '                    " ((SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) Like '%" & TXTCARI.Text & "%'" &
+        '                    " OR RTRIM(Kode) = '" & TXTCARI.Text & "'" &
+        '                    " OR RTRIM(Id_trans) = '" & TXTCARI.Text & "')"
+        '        End If
+        '    Case 2
+        '        If CBTAMPIL.SelectedIndex = 0 Then
+        '            Str = "SELECT COUNT(*)" &
+        '                    " FROM tbl_transaksi_child WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M' AND" &
+        '                    " (SELECT Id_kasir FROM tbl_transaksi_parent WHERE tbl_transaksi_parent.Id_trans = tbl_transaksi_child.Id_trans) = '" & My.Settings.ID_ACCOUNT & "'" &
+        '                    " AND ((SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) Like '%" & TXTCARI.Text & "%'" &
+        '                    " OR RTRIM(Kode) = '" & TXTCARI.Text & "'" &
+        '                    " OR RTRIM(Id_trans) = '" & TXTCARI.Text & "')"
+        '        ElseIf CBTAMPIL.SelectedIndex = 1 Then
+        '            Str = "SELECT COUNT(*)" &
+        '                    " FROM tbl_transaksi_child WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M'" &
+        '                    " AND Stok != 0" &
+        '                    " AND (SELECT Id_kasir FROM tbl_transaksi_parent WHERE tbl_transaksi_parent.Id_trans = tbl_transaksi_child.Id_trans) = '" & My.Settings.ID_ACCOUNT & "'" &
+        '                    " AND ((SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) Like '%" & TXTCARI.Text & "%'" &
+        '                    " OR RTRIM(Kode) = '" & TXTCARI.Text & "'" &
+        '                    " OR RTRIM(Id_trans) = '" & TXTCARI.Text & "')"
+        '        ElseIf CBTAMPIL.SelectedIndex = 2 Then
+        '            Str = "SELECT COUNT(*)" &
+        '                    " FROM tbl_transaksi_child WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M'" &
+        '                    " AND Stok = 0" &
+        '                    " AND (SELECT Id_kasir FROM tbl_transaksi_parent WHERE tbl_transaksi_parent.Id_trans = tbl_transaksi_child.Id_trans) = '" & My.Settings.ID_ACCOUNT & "'" &
+        '                    " AND ((SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) Like '%" & TXTCARI.Text & "%'" &
+        '                    " OR RTRIM(Kode) = '" & TXTCARI.Text & "'" &
+        '                    " OR RTRIM(Id_trans) = '" & TXTCARI.Text & "')"
+        '        Else
+        '            Str = "SELECT COUNT(*)" &
+        '                    " FROM tbl_transaksi_child WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M'" &
+        '                    " AND (SELECT Id_kasir FROM tbl_transaksi_parent WHERE tbl_transaksi_parent.Id_trans = tbl_transaksi_child.Id_trans) = '" & My.Settings.ID_ACCOUNT & "'" &
+        '                    " AND ((SELECT Barang FROM tbl_barang WHERE RTRIM(Kode)=RTRIM(tbl_transaksi_child.Kode)) Like '%" & TXTCARI.Text & "%'" &
+        '                    " OR RTRIM(Kode) = '" & TXTCARI.Text & "'" &
+        '                    " OR RTRIM(Id_trans) = '" & TXTCARI.Text & "')"
+        '        End If
+        'End Select
+
+        'Dim CMD As New SqlCommand(Str, CONN)
+        'TOTAL_RECORD = Convert.ToUInt64(CMD.ExecuteScalar())
+
         TAMPIL()
     End Sub
 

@@ -135,7 +135,7 @@ Public Class FR_KELUAR
         Dim STR As String
 
         STR = "SELECT Kode, RTRIM(Barang) as Barang, RTRIM(Satuan) as Satuan," &
-                "(SELECT COALESCE(SUM(Stok),0) FROM tbl_transaksi_child WHERE Kode=tbl_barang.Kode And (LEFT(Id_trans,1)='M' or LEFT(Id_trans,1)='R' )) as Stok" &
+                "(SELECT Stok FROM tbl_stok WHERE tbl_stok.Kode = tbl_barang.Kode) as Stok" &
                 " From tbl_barang WHERE kode='" & Kode & "'"
         Dim CMD As SqlCommand
         CMD = New SqlCommand(STR, CONN)
@@ -261,7 +261,7 @@ Public Class FR_KELUAR
             " (Id_trans, Id_kasir, Tgl, Jenis, Person, Harga, Diskon, Jumlah_item, Harga_total, Harga_tunai, Harga_kembali)" &
             " VALUES('" & ID_TRANSAKSI & "'," &
             " '" & My.Settings.ID_ACCOUNT & "'," &
-            " '" & Format(Date.Now, "MM/dd/yyyy HH:mm:ss") & "'," &
+            " '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'," &
             " 'K'," &
             " '" & TXTPEMBELI.Text & "'," &
             " '" & SUBTOTAL & "'," &
@@ -291,6 +291,10 @@ Public Class FR_KELUAR
                     " '" & HARGA_PRODUK & "'," &
                     " '" & DISKON_PRODUK & "'," &
                     " '" & HARGA_AKHIR_PRODUK & "')"
+            CMD = New SqlCommand(STR, CONN)
+            CMD.ExecuteNonQuery()
+
+            STR = "UPDATE tbl_stok SET Stok-=" & JUMLAH_PRODUK.ToString.Replace(",", ".") & " WHERE Kode='" & KODE_PRODUK & "'"
             CMD = New SqlCommand(STR, CONN)
             CMD.ExecuteNonQuery()
         Next

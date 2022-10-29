@@ -228,7 +228,7 @@ Public Class FR_RUSAK
         If TXTID.Text = "" Or TXTQTY.Text = "" Then
             MsgBox("Data tidak lengkap!")
         ElseIf QTY > TXTSTOK.Text Then
-            MsgBox("QTY tidak boleh lebih dari stok masuk!")
+            MsgBox("QTY tidak boleh lebih dari stok tersedia!")
             TXTQTY.Text = ""
             TXTQTY.Select()
         Else
@@ -282,6 +282,10 @@ Public Class FR_RUSAK
 
             STR = "UPDATE tbl_transaksi_child SET Stok=" & TXTSTOKAKHIR.Text.Replace(",", ".") & " WHERE Id_trans='" & TXTID.Text & "'" &
                 " AND Id = '" & CBKODE.SelectedValue & "'"
+            CMD = New SqlCommand(STR, CONN)
+            CMD.ExecuteNonQuery()
+
+            STR = "UPDATE tbl_stok SET Stok-=" & TXTQTY.Text.Replace(",", ".") & " WHERE Kode='" & KODEBARANG & "'"
             CMD = New SqlCommand(STR, CONN)
             CMD.ExecuteNonQuery()
 
