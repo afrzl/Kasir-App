@@ -64,13 +64,13 @@ Public Class FR_OPS_DASHBOARD
     End Sub
 
     Sub TAMPIL()
-        Dim STR As String = "SELECT RTRIM(Kode) AS Kode," &
+        Dim STR As String = "SELECT RTRIM(tbl_barang.Kode) AS Kode," &
             " RTRIM(Barang) As 'Nama Barang'," &
-            " (SELECT Stok FROM tbl_stok WHERE tbl_stok.Kode = tbl_barang.Kode) AS Stok," &
+            " (tbl_stok.Stok) AS Stok," &
             " RTRIM(tbl_barang.Satuan) AS 'Satuan'" &
-            " FROM tbl_barang WHERE Barang Like '%" & TXTCARISTOK.Text & "%'" &
-            " OR Kode = '" & TXTCARISTOK.Text & "'" &
-            " AND (SELECT Stok FROM tbl_stok WHERE tbl_stok.Kode = tbl_barang.Kode) != 0" &
+            " FROM tbl_barang INNER JOIN tbl_stok ON tbl_barang.Kode = tbl_stok.Kode WHERE Barang Like '%" & TXTCARISTOK.Text & "%'" &
+            " OR tbl_barang.Kode = '" & TXTCARISTOK.Text & "'" &
+            " AND (tbl_stok.Stok) != 0" &
             " ORDER BY 'Nama Barang' ASC" &
             " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
 
