@@ -436,6 +436,12 @@
       <DependentUpon>RPT_STOK.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="struk.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>struk.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="FR_CETAKBARCODE.resx">
@@ -562,6 +568,10 @@
     <EmbeddedResource Include="RPT_STOK.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RPT_STOK.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="struk.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>struk.vb</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

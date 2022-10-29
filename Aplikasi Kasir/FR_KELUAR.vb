@@ -736,6 +736,8 @@ Public Class FR_KELUAR
     ReadOnly fontJudul As New Font("Segoe UI", 12, FontStyle.Bold)
     ReadOnly fontRegular As New Font("Segoe UI", 10, FontStyle.Regular)
     ReadOnly fontTotal As New Font("Segoe UI", 10, FontStyle.Bold)
+    Dim countBarang As Integer = 0
+    Dim pageNumber As Integer = 1
 
     Private Function BarisBaru(jumlah_baris)
         totalBaris += jumlah_baris
@@ -760,31 +762,49 @@ Public Class FR_KELUAR
 
         totalBaris = 0
 
-        Dim IMAGE As Image = Image.FromStream(IMAGESTREAM)
-        e.Graphics.DrawImage(IMAGE, JARAK, BarisYangSama(), WIDTH, HEIGHT)
+        If pageNumber = 1 Then
+            Dim IMAGE As Image = Image.FromStream(IMAGESTREAM)
+            e.Graphics.DrawImage(IMAGE, JARAK, BarisYangSama(), WIDTH, HEIGHT)
 
-        e.Graphics.DrawString(NAMA_TOKO, fontJudul, Brushes.Black, lebarKertas / 2, BarisBaru(HEIGHT / jarakBaris), textCenter)
-        e.Graphics.DrawString(ALAMATTOKO.Text, fontRegular, Brushes.Black, New Rectangle(20, BarisBaru(1), lebarKertas - 30, BarisYangSama), textCenter)
-        e.Graphics.DrawString(NO_TOKO, fontRegular, Brushes.Black, lebarKertas / 2, BarisBaru(1), textCenter)
-        BarisBaru(1)
-
-        e.Graphics.DrawString(LBTGL.Text, fontRegular, Brushes.Black, (lebarKertas - marginRight), BarisBaru(1), textRight)
-
-        e.Graphics.DrawString(ID_TRANSAKSI, fontRegular, Brushes.Black, (lebarKertas - marginRight), BarisBaru(1), textRight)
-        e.Graphics.DrawString("Kasir : " & TXTKASIR.Text, fontRegular, Brushes.Black, marginLeft, BarisYangSama, textLeft)
-
-        e.Graphics.DrawLine(Pens.Black, marginLeft, BarisBaru(1), (lebarKertas - marginRight), BarisYangSama)
-
-        For Each EROW As DataGridViewRow In DGTAMPIL.Rows
-            e.Graphics.DrawString(EROW.Cells("BARANG").Value, fontRegular, Brushes.Black, marginLeft, BarisYangSama, textLeft)
-            If CInt(EROW.Cells("DISKON").Value) = 0 Then
-                e.Graphics.DrawString(Convert.ToDouble(EROW.Cells("QTY").Value) & " " & EROW.Cells("SATUAN").Value & " x " & Format(CInt(EROW.Cells("HARGA").Value), "##,##0"), fontRegular, Brushes.Black, marginLeft, BarisBaru(1), textLeft)
-            Else
-                e.Graphics.DrawString(Convert.ToDouble(EROW.Cells("QTY").Value) & " " & EROW.Cells("SATUAN").Value & " x " & Format(CInt(EROW.Cells("HARGA").Value), "##,##0") & " (Disc. " & Format(CInt(EROW.Cells("DISKON").Value), "##,##0") & ")", fontRegular, Brushes.Black, marginLeft, BarisBaru(1), textLeft)
-            End If
-            e.Graphics.DrawString(Format(CInt(EROW.Cells("TOTAL").Value), "##,##0"), fontRegular, Brushes.Black, (lebarKertas - marginRight), BarisYangSama, textRight)
+            e.Graphics.DrawString(NAMA_TOKO, fontJudul, Brushes.Black, lebarKertas / 2, BarisBaru(HEIGHT / jarakBaris), textCenter)
+            e.Graphics.DrawString(ALAMATTOKO.Text, fontRegular, Brushes.Black, New Rectangle(20, BarisBaru(1), lebarKertas - 30, BarisYangSama), textCenter)
+            e.Graphics.DrawString(NO_TOKO, fontRegular, Brushes.Black, lebarKertas / 2, BarisBaru(1), textCenter)
             BarisBaru(1)
+
+            e.Graphics.DrawString(LBTGL.Text, fontRegular, Brushes.Black, (lebarKertas - marginRight), BarisBaru(1), textRight)
+
+            e.Graphics.DrawString(ID_TRANSAKSI, fontRegular, Brushes.Black, (lebarKertas - marginRight), BarisBaru(1), textRight)
+            e.Graphics.DrawString("Kasir : " & TXTKASIR.Text, fontRegular, Brushes.Black, marginLeft, BarisYangSama, textLeft)
+
+            e.Graphics.DrawLine(Pens.Black, marginLeft, BarisBaru(1), (lebarKertas - marginRight), BarisYangSama)
+        End If
+
+        For row As Integer = 0 To DGTAMPIL.Rows.Count - 1
+            If row >= countBarang And countBarang < DGTAMPIL.Rows.Count * 50 Then
+                e.Graphics.DrawString(DGTAMPIL.Rows(row).Cells("BARANG").Value, fontRegular, Brushes.Black, marginLeft, BarisYangSama, textLeft)
+                If CInt(DGTAMPIL.Rows(row).Cells("DISKON").Value) = 0 Then
+                    e.Graphics.DrawString(Convert.ToDouble(DGTAMPIL.Rows(row).Cells("QTY").Value) & " " & DGTAMPIL.Rows(row).Cells("SATUAN").Value & " x " & Format(CInt(DGTAMPIL.Rows(row).Cells("HARGA").Value), "##,##0"), fontRegular, Brushes.Black, marginLeft, BarisBaru(1), textLeft)
+                Else
+                    e.Graphics.DrawString(Convert.ToDouble(DGTAMPIL.Rows(row).Cells("QTY").Value) & " " & DGTAMPIL.Rows(row).Cells("SATUAN").Value & " x " & Format(CInt(DGTAMPIL.Rows(row).Cells("HARGA").Value), "##,##0") & " (Disc. " & Format(CInt(DGTAMPIL.Rows(row).Cells("DISKON").Value), "##,##0") & ")", fontRegular, Brushes.Black, marginLeft, BarisBaru(1), textLeft)
+                End If
+                e.Graphics.DrawString(Format(CInt(DGTAMPIL.Rows(row).Cells("TOTAL").Value), "##,##0"), fontRegular, Brushes.Black, (lebarKertas - marginRight), BarisYangSama, textRight)
+                BarisBaru(1)
+                countBarang += 1
+                If totalBaris = 52 Then
+                    e.HasMorePages = True
+                    pageNumber += 1
+                    totalBaris = 0
+                    Exit Sub
+                End If
+            End If
         Next
+
+        If totalBaris = 52 Then
+            e.HasMorePages = True
+            pageNumber += 1
+            totalBaris = 0
+            Exit Sub
+        End If
 
         e.Graphics.DrawLine(Pens.Black, marginLeft, BarisYangSama, (lebarKertas - marginRight), BarisYangSama)
         If CInt(TXTDISKON_RUPIAH.Text) = 0 Then
