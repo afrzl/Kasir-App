@@ -24,12 +24,12 @@ Partial Class FR_KELUAR_KEMBALIAN
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FR_KELUAR_KEMBALIAN))
         Me.PNCONTENT = New System.Windows.Forms.Panel()
+        Me.BTN_CETAKNOTA = New System.Windows.Forms.Button()
+        Me.ID_TRANSAKSI = New System.Windows.Forms.Label()
         Me.BTNTUTUP = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.LBKEMBALI = New System.Windows.Forms.Label()
         Me.PRINTNOTA = New System.Drawing.Printing.PrintDocument()
-        Me.ID_TRANSAKSI = New System.Windows.Forms.Label()
-        Me.BTN_CETAKNOTA = New System.Windows.Forms.Button()
         Me.PNCONTENT.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
@@ -45,6 +45,31 @@ Partial Class FR_KELUAR_KEMBALIAN
         Me.PNCONTENT.Name = "PNCONTENT"
         Me.PNCONTENT.Size = New System.Drawing.Size(923, 282)
         Me.PNCONTENT.TabIndex = 24
+        '
+        'BTN_CETAKNOTA
+        '
+        Me.BTN_CETAKNOTA.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BTN_CETAKNOTA.BackColor = System.Drawing.Color.Crimson
+        Me.BTN_CETAKNOTA.FlatAppearance.BorderSize = 0
+        Me.BTN_CETAKNOTA.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTN_CETAKNOTA.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTN_CETAKNOTA.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BTN_CETAKNOTA.Location = New System.Drawing.Point(746, 147)
+        Me.BTN_CETAKNOTA.Name = "BTN_CETAKNOTA"
+        Me.BTN_CETAKNOTA.Size = New System.Drawing.Size(168, 45)
+        Me.BTN_CETAKNOTA.TabIndex = 5
+        Me.BTN_CETAKNOTA.Text = "Cetak Nota"
+        Me.BTN_CETAKNOTA.UseVisualStyleBackColor = False
+        '
+        'ID_TRANSAKSI
+        '
+        Me.ID_TRANSAKSI.AutoSize = True
+        Me.ID_TRANSAKSI.Location = New System.Drawing.Point(119, 194)
+        Me.ID_TRANSAKSI.Name = "ID_TRANSAKSI"
+        Me.ID_TRANSAKSI.Size = New System.Drawing.Size(49, 16)
+        Me.ID_TRANSAKSI.TabIndex = 4
+        Me.ID_TRANSAKSI.Text = "Label1"
+        Me.ID_TRANSAKSI.Visible = False
         '
         'BTNTUTUP
         '
@@ -78,7 +103,7 @@ Partial Class FR_KELUAR_KEMBALIAN
         '
         Me.LBKEMBALI.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.LBKEMBALI.Font = New System.Drawing.Font("DS-Digital", 49.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBKEMBALI.Font = New System.Drawing.Font("Microsoft Sans Serif", 49.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LBKEMBALI.Location = New System.Drawing.Point(6, 24)
         Me.LBKEMBALI.Name = "LBKEMBALI"
         Me.LBKEMBALI.Size = New System.Drawing.Size(905, 92)
@@ -88,31 +113,6 @@ Partial Class FR_KELUAR_KEMBALIAN
         '
         'PRINTNOTA
         '
-        '
-        'ID_TRANSAKSI
-        '
-        Me.ID_TRANSAKSI.AutoSize = True
-        Me.ID_TRANSAKSI.Location = New System.Drawing.Point(119, 194)
-        Me.ID_TRANSAKSI.Name = "ID_TRANSAKSI"
-        Me.ID_TRANSAKSI.Size = New System.Drawing.Size(51, 17)
-        Me.ID_TRANSAKSI.TabIndex = 4
-        Me.ID_TRANSAKSI.Text = "Label1"
-        Me.ID_TRANSAKSI.Visible = False
-        '
-        'BTN_CETAKNOTA
-        '
-        Me.BTN_CETAKNOTA.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BTN_CETAKNOTA.BackColor = System.Drawing.Color.Crimson
-        Me.BTN_CETAKNOTA.FlatAppearance.BorderSize = 0
-        Me.BTN_CETAKNOTA.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BTN_CETAKNOTA.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BTN_CETAKNOTA.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.BTN_CETAKNOTA.Location = New System.Drawing.Point(746, 147)
-        Me.BTN_CETAKNOTA.Name = "BTN_CETAKNOTA"
-        Me.BTN_CETAKNOTA.Size = New System.Drawing.Size(168, 45)
-        Me.BTN_CETAKNOTA.TabIndex = 5
-        Me.BTN_CETAKNOTA.Text = "Cetak Nota"
-        Me.BTN_CETAKNOTA.UseVisualStyleBackColor = False
         '
         'FR_KELUAR_KEMBALIAN
         '

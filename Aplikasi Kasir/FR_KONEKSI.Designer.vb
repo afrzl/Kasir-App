@@ -42,7 +42,7 @@ Partial Class FR_KONEKSI
         Me.Label1.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.Label1.Location = New System.Drawing.Point(56, 60)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(79, 28)
+        Me.Label1.Size = New System.Drawing.Size(65, 21)
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "SERVER"
         '
@@ -53,7 +53,7 @@ Partial Class FR_KONEKSI
         Me.Label2.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.Label2.Location = New System.Drawing.Point(56, 103)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(59, 28)
+        Me.Label2.Size = New System.Drawing.Size(48, 21)
         Me.Label2.TabIndex = 1
         Me.Label2.Text = "USER"
         Me.Label2.TextAlign = System.Drawing.ContentAlignment.TopCenter
@@ -65,7 +65,7 @@ Partial Class FR_KONEKSI
         Me.Label3.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.Label3.Location = New System.Drawing.Point(56, 189)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(105, 28)
+        Me.Label3.Size = New System.Drawing.Size(83, 21)
         Me.Label3.TabIndex = 3
         Me.Label3.Text = "DATABASE"
         '
@@ -76,7 +76,7 @@ Partial Class FR_KONEKSI
         Me.Label4.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.Label4.Location = New System.Drawing.Point(56, 146)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(117, 28)
+        Me.Label4.Size = New System.Drawing.Size(94, 21)
         Me.Label4.TabIndex = 2
         Me.Label4.Text = "PASSWORD"
         '
@@ -85,7 +85,7 @@ Partial Class FR_KONEKSI
         Me.TXTSERVER.Font = New System.Drawing.Font("Segoe UI", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TXTSERVER.Location = New System.Drawing.Point(236, 59)
         Me.TXTSERVER.Name = "TXTSERVER"
-        Me.TXTSERVER.Size = New System.Drawing.Size(400, 31)
+        Me.TXTSERVER.Size = New System.Drawing.Size(400, 27)
         Me.TXTSERVER.TabIndex = 4
         '
         'TXTUSER
@@ -93,7 +93,7 @@ Partial Class FR_KONEKSI
         Me.TXTUSER.Font = New System.Drawing.Font("Segoe UI", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TXTUSER.Location = New System.Drawing.Point(236, 102)
         Me.TXTUSER.Name = "TXTUSER"
-        Me.TXTUSER.Size = New System.Drawing.Size(400, 31)
+        Me.TXTUSER.Size = New System.Drawing.Size(400, 27)
         Me.TXTUSER.TabIndex = 5
         '
         'TXTDATABASE
@@ -101,7 +101,7 @@ Partial Class FR_KONEKSI
         Me.TXTDATABASE.Font = New System.Drawing.Font("Segoe UI", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TXTDATABASE.Location = New System.Drawing.Point(236, 188)
         Me.TXTDATABASE.Name = "TXTDATABASE"
-        Me.TXTDATABASE.Size = New System.Drawing.Size(400, 31)
+        Me.TXTDATABASE.Size = New System.Drawing.Size(400, 27)
         Me.TXTDATABASE.TabIndex = 7
         '
         'TXTPASSWORD
@@ -109,7 +109,7 @@ Partial Class FR_KONEKSI
         Me.TXTPASSWORD.Font = New System.Drawing.Font("Segoe UI", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TXTPASSWORD.Location = New System.Drawing.Point(236, 145)
         Me.TXTPASSWORD.Name = "TXTPASSWORD"
-        Me.TXTPASSWORD.Size = New System.Drawing.Size(400, 31)
+        Me.TXTPASSWORD.Size = New System.Drawing.Size(400, 27)
         Me.TXTPASSWORD.TabIndex = 6
         '
         'BTNCONNECT

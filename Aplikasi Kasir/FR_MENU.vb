@@ -162,7 +162,7 @@ Public Class FR_MENU
         CMD = New SqlCommand(STR, CONN)
         LBKELUAR.Text = Convert.ToUInt64(CMD.ExecuteScalar())
 
-        STR = "SELECT COUNT(*) as Count FROM tbl_transaksi_parent WHERE Jenis='K' AND (Tgl >= '" & TGLAWAL & "' AND Tgl <= '2022-10-22 00:00:00')"
+        STR = "SELECT COUNT(*) as Count FROM tbl_transaksi_parent WHERE Jenis='K' AND (Tgl >= '" & TGLAWAL & "' AND Tgl <= '" & TGLAKHIR & "')"
         CMD = New SqlCommand(STR, CONN)
         LBKELUARHARI.Text = Convert.ToUInt64(CMD.ExecuteScalar())
         'CMD = New SqlCommand(STR, CONN)

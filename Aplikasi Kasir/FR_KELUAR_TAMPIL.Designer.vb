@@ -33,7 +33,6 @@ Partial Class FR_KELUAR_TAMPIL
         Me.BTNNEXT = New System.Windows.Forms.Button()
         Me.BTNPREV = New System.Windows.Forms.Button()
         Me.DGCARI = New System.Windows.Forms.DataGridView()
-        Me.TXTCARI = New System.Windows.Forms.TextBox()
         Me.KODE = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.BARANG = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.SATUAN = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -48,6 +47,7 @@ Partial Class FR_KELUAR_TAMPIL
         Me.HARGA4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.OPSI5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.HARGA5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TXTCARI = New System.Windows.Forms.TextBox()
         Me.PNTOP.SuspendLayout()
         Me.PNCONTROL.SuspendLayout()
         Me.PNCONTENT.SuspendLayout()
@@ -169,23 +169,13 @@ Partial Class FR_KELUAR_TAMPIL
         Me.DGCARI.Size = New System.Drawing.Size(1276, 456)
         Me.DGCARI.TabIndex = 65
         '
-        'TXTCARI
-        '
-        Me.TXTCARI.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TXTCARI.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TXTCARI.Location = New System.Drawing.Point(12, 6)
-        Me.TXTCARI.Name = "TXTCARI"
-        Me.TXTCARI.Size = New System.Drawing.Size(1164, 30)
-        Me.TXTCARI.TabIndex = 64
-        '
         'KODE
         '
         Me.KODE.HeaderText = "Kode"
         Me.KODE.MinimumWidth = 6
         Me.KODE.Name = "KODE"
         Me.KODE.ReadOnly = True
-        Me.KODE.Width = 78
+        Me.KODE.Width = 65
         '
         'BARANG
         '
@@ -193,7 +183,7 @@ Partial Class FR_KELUAR_TAMPIL
         Me.BARANG.MinimumWidth = 6
         Me.BARANG.Name = "BARANG"
         Me.BARANG.ReadOnly = True
-        Me.BARANG.Width = 144
+        Me.BARANG.Width = 117
         '
         'SATUAN
         '
@@ -201,7 +191,7 @@ Partial Class FR_KELUAR_TAMPIL
         Me.SATUAN.MinimumWidth = 6
         Me.SATUAN.Name = "SATUAN"
         Me.SATUAN.ReadOnly = True
-        Me.SATUAN.Width = 92
+        Me.SATUAN.Width = 76
         '
         'STOK
         '
@@ -209,7 +199,7 @@ Partial Class FR_KELUAR_TAMPIL
         Me.STOK.MinimumWidth = 6
         Me.STOK.Name = "STOK"
         Me.STOK.ReadOnly = True
-        Me.STOK.Width = 71
+        Me.STOK.Width = 61
         '
         'OPSI1
         '
@@ -217,7 +207,7 @@ Partial Class FR_KELUAR_TAMPIL
         Me.OPSI1.MinimumWidth = 6
         Me.OPSI1.Name = "OPSI1"
         Me.OPSI1.ReadOnly = True
-        Me.OPSI1.Width = 87
+        Me.OPSI1.Width = 74
         '
         'HARGA1
         '
@@ -225,7 +215,7 @@ Partial Class FR_KELUAR_TAMPIL
         Me.HARGA1.MinimumWidth = 6
         Me.HARGA1.Name = "HARGA1"
         Me.HARGA1.ReadOnly = True
-        Me.HARGA1.Width = 99
+        Me.HARGA1.Width = 83
         '
         'OPSI2
         '
@@ -233,7 +223,7 @@ Partial Class FR_KELUAR_TAMPIL
         Me.OPSI2.MinimumWidth = 6
         Me.OPSI2.Name = "OPSI2"
         Me.OPSI2.ReadOnly = True
-        Me.OPSI2.Width = 87
+        Me.OPSI2.Width = 74
         '
         'HARGA2
         '
@@ -241,7 +231,7 @@ Partial Class FR_KELUAR_TAMPIL
         Me.HARGA2.MinimumWidth = 6
         Me.HARGA2.Name = "HARGA2"
         Me.HARGA2.ReadOnly = True
-        Me.HARGA2.Width = 99
+        Me.HARGA2.Width = 83
         '
         'OPSI3
         '
@@ -249,7 +239,7 @@ Partial Class FR_KELUAR_TAMPIL
         Me.OPSI3.MinimumWidth = 6
         Me.OPSI3.Name = "OPSI3"
         Me.OPSI3.ReadOnly = True
-        Me.OPSI3.Width = 87
+        Me.OPSI3.Width = 74
         '
         'HARGA3
         '
@@ -257,7 +247,7 @@ Partial Class FR_KELUAR_TAMPIL
         Me.HARGA3.MinimumWidth = 6
         Me.HARGA3.Name = "HARGA3"
         Me.HARGA3.ReadOnly = True
-        Me.HARGA3.Width = 99
+        Me.HARGA3.Width = 83
         '
         'OPSI4
         '
@@ -265,7 +255,7 @@ Partial Class FR_KELUAR_TAMPIL
         Me.OPSI4.MinimumWidth = 6
         Me.OPSI4.Name = "OPSI4"
         Me.OPSI4.ReadOnly = True
-        Me.OPSI4.Width = 87
+        Me.OPSI4.Width = 74
         '
         'HARGA4
         '
@@ -273,7 +263,7 @@ Partial Class FR_KELUAR_TAMPIL
         Me.HARGA4.MinimumWidth = 6
         Me.HARGA4.Name = "HARGA4"
         Me.HARGA4.ReadOnly = True
-        Me.HARGA4.Width = 99
+        Me.HARGA4.Width = 83
         '
         'OPSI5
         '
@@ -281,7 +271,7 @@ Partial Class FR_KELUAR_TAMPIL
         Me.OPSI5.MinimumWidth = 6
         Me.OPSI5.Name = "OPSI5"
         Me.OPSI5.ReadOnly = True
-        Me.OPSI5.Width = 87
+        Me.OPSI5.Width = 74
         '
         'HARGA5
         '
@@ -289,11 +279,21 @@ Partial Class FR_KELUAR_TAMPIL
         Me.HARGA5.MinimumWidth = 6
         Me.HARGA5.Name = "HARGA5"
         Me.HARGA5.ReadOnly = True
-        Me.HARGA5.Width = 99
+        Me.HARGA5.Width = 83
+        '
+        'TXTCARI
+        '
+        Me.TXTCARI.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TXTCARI.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TXTCARI.Location = New System.Drawing.Point(12, 6)
+        Me.TXTCARI.Name = "TXTCARI"
+        Me.TXTCARI.Size = New System.Drawing.Size(1164, 26)
+        Me.TXTCARI.TabIndex = 64
         '
         'FR_KELUAR_TAMPIL
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 23.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 19.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1300, 550)
         Me.Controls.Add(Me.PNCONTENT)

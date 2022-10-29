@@ -93,15 +93,15 @@ Public Class FR_KELUAR_KEMBALIAN
 
         e.Graphics.DrawLine(Pens.Black, marginLeft, BarisBaru(1), (lebarKertas - marginRight), BarisYangSama)
 
-        For row As Integer = 0 To DGTAMPIL.Rows.Count - 1
-            If row >= countBarang And countBarang < DGTAMPIL.Rows.Count * 50 Then
-                e.Graphics.DrawString(DGTAMPIL.Rows(row).Cells("BARANG").Value, fontRegular, Brushes.Black, marginLeft, BarisYangSama, textLeft)
-                If CInt(DGTAMPIL.Rows(row).Cells("DISKON").Value) = 0 Then
-                    e.Graphics.DrawString(Convert.ToDouble(DGTAMPIL.Rows(row).Cells("QTY").Value) & " " & DGTAMPIL.Rows(row).Cells("SATUAN").Value & " x " & Format(CInt(DGTAMPIL.Rows(row).Cells("HARGA").Value), "##,##0"), fontRegular, Brushes.Black, marginLeft, BarisBaru(1), textLeft)
+        For row As Integer = 0 To FR_KELUAR.DGTAMPIL.Rows.Count - 1
+            If row >= countBarang And countBarang < FR_KELUAR.DGTAMPIL.Rows.Count * 50 Then
+                e.Graphics.DrawString(FR_KELUAR.DGTAMPIL.Rows(row).Cells("BARANG").Value, fontRegular, Brushes.Black, marginLeft, BarisYangSama, textLeft)
+                If CInt(FR_KELUAR.DGTAMPIL.Rows(row).Cells("DISKON").Value) = 0 Then
+                    e.Graphics.DrawString(Convert.ToDouble(FR_KELUAR.DGTAMPIL.Rows(row).Cells("QTY").Value) & " " & FR_KELUAR.DGTAMPIL.Rows(row).Cells("SATUAN").Value & " x " & Format(CInt(FR_KELUAR.DGTAMPIL.Rows(row).Cells("HARGA").Value), "##,##0"), fontRegular, Brushes.Black, marginLeft, BarisBaru(1), textLeft)
                 Else
-                    e.Graphics.DrawString(Convert.ToDouble(DGTAMPIL.Rows(row).Cells("QTY").Value) & " " & DGTAMPIL.Rows(row).Cells("SATUAN").Value & " x " & Format(CInt(DGTAMPIL.Rows(row).Cells("HARGA").Value), "##,##0") & " (Disc. " & Format(CInt(DGTAMPIL.Rows(row).Cells("DISKON").Value), "##,##0") & ")", fontRegular, Brushes.Black, marginLeft, BarisBaru(1), textLeft)
+                    e.Graphics.DrawString(Convert.ToDouble(FR_KELUAR.DGTAMPIL.Rows(row).Cells("QTY").Value) & " " & FR_KELUAR.DGTAMPIL.Rows(row).Cells("SATUAN").Value & " x " & Format(CInt(FR_KELUAR.DGTAMPIL.Rows(row).Cells("HARGA").Value), "##,##0") & " (Disc. " & Format(CInt(FR_KELUAR.DGTAMPIL.Rows(row).Cells("DISKON").Value), "##,##0") & ")", fontRegular, Brushes.Black, marginLeft, BarisBaru(1), textLeft)
                 End If
-                e.Graphics.DrawString(Format(CInt(DGTAMPIL.Rows(row).Cells("TOTAL").Value), "##,##0"), fontRegular, Brushes.Black, (lebarKertas - marginRight), BarisYangSama, textRight)
+                e.Graphics.DrawString(Format(CInt(FR_KELUAR.DGTAMPIL.Rows(row).Cells("TOTAL").Value), "##,##0"), fontRegular, Brushes.Black, (lebarKertas - marginRight), BarisYangSama, textRight)
                 BarisBaru(1)
                 countBarang += 1
                 If totalBaris = 52 Then
