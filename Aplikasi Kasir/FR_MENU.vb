@@ -2,7 +2,7 @@
 
 Public Class FR_MENU
     Dim START_RECORD As Integer = 0
-    Dim TAMPIL_RECORD As Integer = 15
+    Dim TAMPIL_RECORD As Integer = 10
 
     Sub BUKA_FORM(ByVal FR As Form)
         FR.Show()

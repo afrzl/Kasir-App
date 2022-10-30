@@ -3,7 +3,7 @@
 Public Class FR_KASIR_DASHBOARD
 
     Dim START_RECORD As Integer = 0
-    Dim TAMPIL_RECORD As Integer = 30
+    Dim TAMPIL_RECORD As Integer = 10
 
     Sub BUKA_FORM(ByVal FR As Form)
         FR.Show()
