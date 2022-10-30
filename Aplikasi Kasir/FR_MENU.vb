@@ -232,4 +232,8 @@ Public Class FR_MENU
     Private Sub BTNTENTANG_Click(sender As Object, e As EventArgs) Handles BTNTENTANG.Click
         BUKA_FORM(FR_TENTANG)
     End Sub
+
+    Private Sub BTNHISTORYPENJUALAN_Click(sender As Object, e As EventArgs) Handles BTNHISTORYPENJUALAN.Click
+        BUKA_FORM(FR_HISTORYPENJUALAN)
+    End Sub
 End Class

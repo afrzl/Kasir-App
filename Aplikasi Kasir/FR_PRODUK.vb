@@ -391,7 +391,7 @@ Public Class FR_PRODUK
     End Sub
 
     Private Sub BTNNEXT_Click(sender As Object, e As EventArgs) Handles BTNNEXT.Click
-        START_RECORD = START_RECORD + TAMPIL_RECORD
+        START_RECORD += TAMPIL_RECORD
         TAMPIL()
     End Sub
 
@@ -656,5 +656,9 @@ Public Class FR_PRODUK
         If e.KeyChar = "'" Then
             e.Handled = True
         End If
+    End Sub
+
+    Private Sub BTNHISTORYPENJUALAN_Click(sender As Object, e As EventArgs) Handles BTNHISTORYPENJUALAN.Click
+        BUKA_FORM(FR_HISTORYPENJUALAN)
     End Sub
 End Class

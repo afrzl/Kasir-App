@@ -525,4 +525,8 @@ Public Class FR_TENTANG
     Private Sub BTNBARCODEOPS_Click(sender As Object, e As EventArgs) Handles BTNBARCODEOPS.Click
         BUKA_FORM(FR_CETAKBARCODE)
     End Sub
+
+    Private Sub BTNHISTORYPENJUALAN_Click(sender As Object, e As EventArgs) Handles BTNHISTORYPENJUALAN.Click
+        BUKA_FORM(FR_HISTORYPENJUALAN)
+    End Sub
 End Class

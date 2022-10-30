@@ -780,7 +780,7 @@ Public Class FR_KELUAR
         End If
 
         For row As Integer = 0 To DGTAMPIL.Rows.Count - 1
-            If row >= countBarang And countBarang < DGTAMPIL.Rows.Count * 50 Then
+            If row >= countBarang And countBarang < DGTAMPIL.Rows.Count Then
                 e.Graphics.DrawString(DGTAMPIL.Rows(row).Cells("BARANG").Value, fontRegular, Brushes.Black, marginLeft, BarisYangSama, textLeft)
                 If CInt(DGTAMPIL.Rows(row).Cells("DISKON").Value) = 0 Then
                     e.Graphics.DrawString(Convert.ToDouble(DGTAMPIL.Rows(row).Cells("QTY").Value) & " " & DGTAMPIL.Rows(row).Cells("SATUAN").Value & " x " & Format(CInt(DGTAMPIL.Rows(row).Cells("HARGA").Value), "##,##0"), fontRegular, Brushes.Black, marginLeft, BarisBaru(1), textLeft)

@@ -695,4 +695,8 @@ Public Class FR_DISKON
             BTNSIMPAN.Select()
         End If
     End Sub
+
+    Private Sub BTNHISTORYPENJUALAN_Click(sender As Object, e As EventArgs) Handles BTNHISTORYPENJUALAN.Click
+        BUKA_FORM(FR_HISTORYPENJUALAN)
+    End Sub
 End Class

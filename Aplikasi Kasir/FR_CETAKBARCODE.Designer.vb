@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class FR_CETAKBARCODE
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class FR_CETAKBARCODE
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -89,7 +89,7 @@ Partial Class FR_CETAKBARCODE
         Me.BTNCETAK.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BTNCETAK.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.BTNCETAK.Location = New System.Drawing.Point(705, 527)
-        Me.BTNCETAK.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.BTNCETAK.Margin = New System.Windows.Forms.Padding(2)
         Me.BTNCETAK.Name = "BTNCETAK"
         Me.BTNCETAK.Size = New System.Drawing.Size(134, 31)
         Me.BTNCETAK.TabIndex = 74
@@ -102,7 +102,7 @@ Partial Class FR_CETAKBARCODE
         Me.PNCONTROL.Controls.Add(Me.BTNCLOSE)
         Me.PNCONTROL.Dock = System.Windows.Forms.DockStyle.Right
         Me.PNCONTROL.Location = New System.Drawing.Point(816, 0)
-        Me.PNCONTROL.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.PNCONTROL.Margin = New System.Windows.Forms.Padding(2)
         Me.PNCONTROL.Name = "PNCONTROL"
         Me.PNCONTROL.Size = New System.Drawing.Size(61, 32)
         Me.PNCONTROL.TabIndex = 0
@@ -113,7 +113,7 @@ Partial Class FR_CETAKBARCODE
         Me.BTNMINIMIZE.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.BTNMINIMIZE.Image = Global.Aplikasi_Kasir.My.Resources.Resources.minimize15px
         Me.BTNMINIMIZE.Location = New System.Drawing.Point(9, 8)
-        Me.BTNMINIMIZE.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.BTNMINIMIZE.Margin = New System.Windows.Forms.Padding(2)
         Me.BTNMINIMIZE.Name = "BTNMINIMIZE"
         Me.BTNMINIMIZE.Size = New System.Drawing.Size(14, 14)
         Me.BTNMINIMIZE.TabIndex = 2
@@ -125,7 +125,7 @@ Partial Class FR_CETAKBARCODE
         Me.BTNCLOSE.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.BTNCLOSE.Image = Global.Aplikasi_Kasir.My.Resources.Resources.close15px
         Me.BTNCLOSE.Location = New System.Drawing.Point(37, 8)
-        Me.BTNCLOSE.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.BTNCLOSE.Margin = New System.Windows.Forms.Padding(2)
         Me.BTNCLOSE.Name = "BTNCLOSE"
         Me.BTNCLOSE.Size = New System.Drawing.Size(14, 14)
         Me.BTNCLOSE.TabIndex = 0
@@ -136,7 +136,7 @@ Partial Class FR_CETAKBARCODE
         Me.Panel1.Controls.Add(Me.BTNLOGOUT)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.Panel1.Location = New System.Drawing.Point(0, 548)
-        Me.Panel1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(2)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(216, 51)
         Me.Panel1.TabIndex = 0
@@ -150,7 +150,7 @@ Partial Class FR_CETAKBARCODE
         Me.BTNLOGOUT.Image = Global.Aplikasi_Kasir.My.Resources.Resources.logout
         Me.BTNLOGOUT.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.BTNLOGOUT.Location = New System.Drawing.Point(2, 14)
-        Me.BTNLOGOUT.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.BTNLOGOUT.Margin = New System.Windows.Forms.Padding(2)
         Me.BTNLOGOUT.Name = "BTNLOGOUT"
         Me.BTNLOGOUT.Padding = New System.Windows.Forms.Padding(12, 0, 0, 0)
         Me.BTNLOGOUT.Size = New System.Drawing.Size(216, 28)
@@ -183,7 +183,7 @@ Partial Class FR_CETAKBARCODE
         Me.PNCONTENT.Controls.Add(Me.TXTCARI)
         Me.PNCONTENT.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PNCONTENT.Location = New System.Drawing.Point(216, 32)
-        Me.PNCONTENT.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.PNCONTENT.Margin = New System.Windows.Forms.Padding(2)
         Me.PNCONTENT.Name = "PNCONTENT"
         Me.PNCONTENT.Size = New System.Drawing.Size(877, 567)
         Me.PNCONTENT.TabIndex = 18
@@ -197,7 +197,7 @@ Partial Class FR_CETAKBARCODE
         Me.BTNNEXT.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BTNNEXT.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.BTNNEXT.Location = New System.Drawing.Point(799, 10)
-        Me.BTNNEXT.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.BTNNEXT.Margin = New System.Windows.Forms.Padding(2)
         Me.BTNNEXT.Name = "BTNNEXT"
         Me.BTNNEXT.Size = New System.Drawing.Size(40, 23)
         Me.BTNNEXT.TabIndex = 67
@@ -213,7 +213,7 @@ Partial Class FR_CETAKBARCODE
         Me.BTNPREV.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BTNPREV.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.BTNPREV.Location = New System.Drawing.Point(754, 10)
-        Me.BTNPREV.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.BTNPREV.Margin = New System.Windows.Forms.Padding(2)
         Me.BTNPREV.Name = "BTNPREV"
         Me.BTNPREV.Size = New System.Drawing.Size(40, 23)
         Me.BTNPREV.TabIndex = 66
@@ -241,7 +241,7 @@ Partial Class FR_CETAKBARCODE
         Me.DGBARANG.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.DGBARANG.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGBARANG.Location = New System.Drawing.Point(19, 39)
-        Me.DGBARANG.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.DGBARANG.Margin = New System.Windows.Forms.Padding(2)
         Me.DGBARANG.MultiSelect = False
         Me.DGBARANG.Name = "DGBARANG"
         Me.DGBARANG.ReadOnly = True
@@ -269,7 +269,7 @@ Partial Class FR_CETAKBARCODE
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TXTCARI.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TXTCARI.Location = New System.Drawing.Point(18, 10)
-        Me.TXTCARI.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.TXTCARI.Margin = New System.Windows.Forms.Padding(2)
         Me.TXTCARI.Name = "TXTCARI"
         Me.TXTCARI.Size = New System.Drawing.Size(733, 26)
         Me.TXTCARI.TabIndex = 64
@@ -281,7 +281,7 @@ Partial Class FR_CETAKBARCODE
         Me.PNTOP.Controls.Add(Me.PNCONTROL)
         Me.PNTOP.Dock = System.Windows.Forms.DockStyle.Top
         Me.PNTOP.Location = New System.Drawing.Point(216, 0)
-        Me.PNTOP.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.PNTOP.Margin = New System.Windows.Forms.Padding(2)
         Me.PNTOP.Name = "PNTOP"
         Me.PNTOP.Size = New System.Drawing.Size(877, 32)
         Me.PNTOP.TabIndex = 17
@@ -300,7 +300,7 @@ Partial Class FR_CETAKBARCODE
         Me.PNOPS.Controls.Add(Me.BTNLABELOPS)
         Me.PNOPS.Controls.Add(Me.BTNBARCODEOPS)
         Me.PNOPS.Location = New System.Drawing.Point(0, 90)
-        Me.PNOPS.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.PNOPS.Margin = New System.Windows.Forms.Padding(2)
         Me.PNOPS.Name = "PNOPS"
         Me.PNOPS.Size = New System.Drawing.Size(216, 433)
         Me.PNOPS.TabIndex = 58
@@ -314,7 +314,7 @@ Partial Class FR_CETAKBARCODE
         Me.BTNMASUKOPS.Image = Global.Aplikasi_Kasir.My.Resources.Resources.transaksi
         Me.BTNMASUKOPS.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.BTNMASUKOPS.Location = New System.Drawing.Point(0, 179)
-        Me.BTNMASUKOPS.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.BTNMASUKOPS.Margin = New System.Windows.Forms.Padding(2)
         Me.BTNMASUKOPS.Name = "BTNMASUKOPS"
         Me.BTNMASUKOPS.Padding = New System.Windows.Forms.Padding(12, 0, 0, 0)
         Me.BTNMASUKOPS.Size = New System.Drawing.Size(216, 28)
@@ -345,7 +345,7 @@ Partial Class FR_CETAKBARCODE
         Me.BTNKELUAROPS.Image = Global.Aplikasi_Kasir.My.Resources.Resources.transaksi
         Me.BTNKELUAROPS.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.BTNKELUAROPS.Location = New System.Drawing.Point(0, 218)
-        Me.BTNKELUAROPS.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.BTNKELUAROPS.Margin = New System.Windows.Forms.Padding(2)
         Me.BTNKELUAROPS.Name = "BTNKELUAROPS"
         Me.BTNKELUAROPS.Padding = New System.Windows.Forms.Padding(12, 0, 0, 0)
         Me.BTNKELUAROPS.Size = New System.Drawing.Size(216, 28)
@@ -364,7 +364,7 @@ Partial Class FR_CETAKBARCODE
         Me.BTNLAPORANOPS.Image = Global.Aplikasi_Kasir.My.Resources.Resources.laporan
         Me.BTNLAPORANOPS.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.BTNLAPORANOPS.Location = New System.Drawing.Point(0, 336)
-        Me.BTNLAPORANOPS.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.BTNLAPORANOPS.Margin = New System.Windows.Forms.Padding(2)
         Me.BTNLAPORANOPS.Name = "BTNLAPORANOPS"
         Me.BTNLAPORANOPS.Padding = New System.Windows.Forms.Padding(12, 0, 0, 0)
         Me.BTNLAPORANOPS.Size = New System.Drawing.Size(216, 28)
@@ -383,7 +383,7 @@ Partial Class FR_CETAKBARCODE
         Me.BTNDASHBOARDOPS.Image = Global.Aplikasi_Kasir.My.Resources.Resources.data_master
         Me.BTNDASHBOARDOPS.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.BTNDASHBOARDOPS.Location = New System.Drawing.Point(0, 62)
-        Me.BTNDASHBOARDOPS.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.BTNDASHBOARDOPS.Margin = New System.Windows.Forms.Padding(2)
         Me.BTNDASHBOARDOPS.Name = "BTNDASHBOARDOPS"
         Me.BTNDASHBOARDOPS.Padding = New System.Windows.Forms.Padding(12, 0, 0, 0)
         Me.BTNDASHBOARDOPS.Size = New System.Drawing.Size(216, 28)
@@ -411,7 +411,7 @@ Partial Class FR_CETAKBARCODE
         Me.BTNRETURNOPS.Image = Global.Aplikasi_Kasir.My.Resources.Resources.transaksi
         Me.BTNRETURNOPS.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.BTNRETURNOPS.Location = New System.Drawing.Point(0, 258)
-        Me.BTNRETURNOPS.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.BTNRETURNOPS.Margin = New System.Windows.Forms.Padding(2)
         Me.BTNRETURNOPS.Name = "BTNRETURNOPS"
         Me.BTNRETURNOPS.Padding = New System.Windows.Forms.Padding(12, 0, 0, 0)
         Me.BTNRETURNOPS.Size = New System.Drawing.Size(216, 28)
@@ -430,7 +430,7 @@ Partial Class FR_CETAKBARCODE
         Me.BTNRUSAKOPS.Image = Global.Aplikasi_Kasir.My.Resources.Resources.transaksi
         Me.BTNRUSAKOPS.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.BTNRUSAKOPS.Location = New System.Drawing.Point(0, 297)
-        Me.BTNRUSAKOPS.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.BTNRUSAKOPS.Margin = New System.Windows.Forms.Padding(2)
         Me.BTNRUSAKOPS.Name = "BTNRUSAKOPS"
         Me.BTNRUSAKOPS.Padding = New System.Windows.Forms.Padding(12, 0, 0, 0)
         Me.BTNRUSAKOPS.Size = New System.Drawing.Size(216, 28)
@@ -449,7 +449,7 @@ Partial Class FR_CETAKBARCODE
         Me.BTNTENTANGOPS.Image = Global.Aplikasi_Kasir.My.Resources.Resources.tentang
         Me.BTNTENTANGOPS.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.BTNTENTANGOPS.Location = New System.Drawing.Point(0, 375)
-        Me.BTNTENTANGOPS.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.BTNTENTANGOPS.Margin = New System.Windows.Forms.Padding(2)
         Me.BTNTENTANGOPS.Name = "BTNTENTANGOPS"
         Me.BTNTENTANGOPS.Padding = New System.Windows.Forms.Padding(12, 0, 0, 0)
         Me.BTNTENTANGOPS.Size = New System.Drawing.Size(216, 28)
@@ -468,7 +468,7 @@ Partial Class FR_CETAKBARCODE
         Me.BTNLABELOPS.Image = Global.Aplikasi_Kasir.My.Resources.Resources.transaksi
         Me.BTNLABELOPS.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.BTNLABELOPS.Location = New System.Drawing.Point(0, 140)
-        Me.BTNLABELOPS.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.BTNLABELOPS.Margin = New System.Windows.Forms.Padding(2)
         Me.BTNLABELOPS.Name = "BTNLABELOPS"
         Me.BTNLABELOPS.Padding = New System.Windows.Forms.Padding(12, 0, 0, 0)
         Me.BTNLABELOPS.Size = New System.Drawing.Size(216, 28)
@@ -487,7 +487,7 @@ Partial Class FR_CETAKBARCODE
         Me.BTNBARCODEOPS.Image = Global.Aplikasi_Kasir.My.Resources.Resources.transaksi
         Me.BTNBARCODEOPS.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.BTNBARCODEOPS.Location = New System.Drawing.Point(0, 101)
-        Me.BTNBARCODEOPS.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.BTNBARCODEOPS.Margin = New System.Windows.Forms.Padding(2)
         Me.BTNBARCODEOPS.Name = "BTNBARCODEOPS"
         Me.BTNBARCODEOPS.Padding = New System.Windows.Forms.Padding(12, 0, 0, 0)
         Me.BTNBARCODEOPS.Size = New System.Drawing.Size(216, 28)
@@ -533,7 +533,7 @@ Partial Class FR_CETAKBARCODE
         Me.PNLEFT.Controls.Add(Me.Button1)
         Me.PNLEFT.Dock = System.Windows.Forms.DockStyle.Left
         Me.PNLEFT.Location = New System.Drawing.Point(0, 0)
-        Me.PNLEFT.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.PNLEFT.Margin = New System.Windows.Forms.Padding(2)
         Me.PNLEFT.Name = "PNLEFT"
         Me.PNLEFT.Size = New System.Drawing.Size(216, 599)
         Me.PNLEFT.TabIndex = 16
@@ -557,7 +557,7 @@ Partial Class FR_CETAKBARCODE
         Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button1.Image = Global.Aplikasi_Kasir.My.Resources.Resources.avatar50px
         Me.Button1.Location = New System.Drawing.Point(10, 23)
-        Me.Button1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(2)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(64, 64)
         Me.Button1.TabIndex = 0

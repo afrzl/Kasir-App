@@ -806,7 +806,7 @@ Public Class FR_MASUK
         e.Graphics.DrawLine(Pens.Black, marginLeft, BarisBaru(1), (lebarKertas - marginRight), BarisYangSama)
 
         For row As Integer = 0 To DGTAMPIL.Rows.Count - 1
-            If row >= countBarang And countBarang < DGTAMPIL.Rows.Count * 50 Then
+            If row >= countBarang And countBarang < DGTAMPIL.Rows.Count Then
                 e.Graphics.DrawString(DGTAMPIL.Rows(row).Cells("BARANG").Value, fontRegular, Brushes.Black, marginLeft, BarisYangSama, textLeft)
                 e.Graphics.DrawString(Convert.ToDouble(DGTAMPIL.Rows(row).Cells("QTY").Value) & " " & DGTAMPIL.Rows(row).Cells("SATUAN").Value & " x " & Format(CInt(DGTAMPIL.Rows(row).Cells("HARGA").Value), "##,##0"), fontRegular, Brushes.Black, marginLeft, BarisBaru(1), textLeft)
                 e.Graphics.DrawString(Format(CInt(DGTAMPIL.Rows(row).Cells("TOTAL").Value), "##,##0"), fontRegular, Brushes.Black, (lebarKertas - marginRight), BarisYangSama, textRight)
@@ -1191,5 +1191,9 @@ Public Class FR_MASUK
     Private Sub TXTCARI_Leave(sender As Object, e As EventArgs) Handles TXTCARI.Leave
         START_RECORD = 0
         TAMPIL()
+    End Sub
+
+    Private Sub BTNHISTORYPENJUALAN_Click(sender As Object, e As EventArgs) Handles BTNHISTORYPENJUALAN.Click
+        BUKA_FORM(FR_HISTORYPENJUALAN)
     End Sub
 End Class

@@ -94,7 +94,7 @@ Public Class FR_KELUAR_KEMBALIAN
         e.Graphics.DrawLine(Pens.Black, marginLeft, BarisBaru(1), (lebarKertas - marginRight), BarisYangSama)
 
         For row As Integer = 0 To FR_KELUAR.DGTAMPIL.Rows.Count - 1
-            If row >= countBarang And countBarang < FR_KELUAR.DGTAMPIL.Rows.Count * 50 Then
+            If row >= countBarang And countBarang < FR_KELUAR.DGTAMPIL.Rows.Count Then
                 e.Graphics.DrawString(FR_KELUAR.DGTAMPIL.Rows(row).Cells("BARANG").Value, fontRegular, Brushes.Black, marginLeft, BarisYangSama, textLeft)
                 If CInt(FR_KELUAR.DGTAMPIL.Rows(row).Cells("DISKON").Value) = 0 Then
                     e.Graphics.DrawString(Convert.ToDouble(FR_KELUAR.DGTAMPIL.Rows(row).Cells("QTY").Value) & " " & FR_KELUAR.DGTAMPIL.Rows(row).Cells("SATUAN").Value & " x " & Format(CInt(FR_KELUAR.DGTAMPIL.Rows(row).Cells("HARGA").Value), "##,##0"), fontRegular, Brushes.Black, marginLeft, BarisBaru(1), textLeft)
