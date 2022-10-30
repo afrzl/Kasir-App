@@ -77,21 +77,23 @@ Public Class FR_KELUAR_KEMBALIAN
 
         totalBaris = 0
 
-        Dim IMAGE As Image = Image.FromStream(IMAGESTREAM)
-        Dim MyBitmap As New Bitmap(IMAGE)
-        e.Graphics.DrawImage(MyBitmap, JARAK, BarisYangSama(), WIDTH, HEIGHT)
+        If pageNumber = 1 Then
+            Dim IMAGE As Image = Image.FromStream(IMAGESTREAM)
+            Dim MyBitmap As New Bitmap(IMAGE)
+            e.Graphics.DrawImage(MyBitmap, JARAK, BarisYangSama(), WIDTH, HEIGHT)
 
-        e.Graphics.DrawString(NAMA_TOKO, fontJudul, Brushes.Black, lebarKertas / 2, BarisBaru(HEIGHT / jarakBaris), textCenter)
-        e.Graphics.DrawString(FR_KELUAR.ALAMATTOKO.Text, fontRegular, Brushes.Black, New Rectangle(20, BarisBaru(1), lebarKertas - 30, BarisYangSama), textCenter)
-        e.Graphics.DrawString(NO_TOKO, fontRegular, Brushes.Black, lebarKertas / 2, BarisBaru(1), textCenter)
-        BarisBaru(1)
+            e.Graphics.DrawString(NAMA_TOKO, fontJudul, Brushes.Black, lebarKertas / 2, BarisBaru(HEIGHT / jarakBaris), textCenter)
+            e.Graphics.DrawString(FR_KELUAR.ALAMATTOKO.Text, fontRegular, Brushes.Black, New Rectangle(20, BarisBaru(1), lebarKertas - 30, BarisYangSama), textCenter)
+            e.Graphics.DrawString(NO_TOKO, fontRegular, Brushes.Black, lebarKertas / 2, BarisBaru(1), textCenter)
+            BarisBaru(1)
 
-        e.Graphics.DrawString(FR_KELUAR.LBTGL.Text, fontRegular, Brushes.Black, (lebarKertas - marginRight), BarisBaru(1), textRight)
+            e.Graphics.DrawString(FR_KELUAR.LBTGL.Text, fontRegular, Brushes.Black, (lebarKertas - marginRight), BarisBaru(1), textRight)
 
-        e.Graphics.DrawString(ID_TRANSAKSI.Text, fontRegular, Brushes.Black, (lebarKertas - marginRight), BarisBaru(1), textRight)
-        e.Graphics.DrawString("Kasir : " & FR_KELUAR.TXTKASIR.Text, fontRegular, Brushes.Black, marginLeft, BarisYangSama, textLeft)
+            e.Graphics.DrawString(ID_TRANSAKSI.Text, fontRegular, Brushes.Black, (lebarKertas - marginRight), BarisBaru(1), textRight)
+            e.Graphics.DrawString("Kasir : " & FR_KELUAR.TXTKASIR.Text, fontRegular, Brushes.Black, marginLeft, BarisYangSama, textLeft)
 
-        e.Graphics.DrawLine(Pens.Black, marginLeft, BarisBaru(1), (lebarKertas - marginRight), BarisYangSama)
+            e.Graphics.DrawLine(Pens.Black, marginLeft, BarisBaru(1), (lebarKertas - marginRight), BarisYangSama)
+        End If
 
         For row As Integer = 0 To FR_KELUAR.DGTAMPIL.Rows.Count - 1
             If row >= countBarang And countBarang < FR_KELUAR.DGTAMPIL.Rows.Count Then
@@ -152,6 +154,8 @@ Public Class FR_KELUAR_KEMBALIAN
         e.Graphics.DrawString("TERIMA KASIH", fontRegular, Brushes.Black, lebarKertas / 2, BarisBaru(1), textCenter)
 
         BarisBaru(1)
+        pageNumber = 1
+        countBarang = 0
     End Sub
 
     Sub PRINT_NOTA()

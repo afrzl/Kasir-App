@@ -838,6 +838,9 @@ Public Class FR_KELUAR
         e.Graphics.DrawString("TERIMA KASIH", fontRegular, Brushes.Black, lebarKertas / 2, BarisBaru(1), textCenter)
 
         BarisBaru(1)
+
+        pageNumber = 1
+        countBarang = 0
     End Sub
 
     Sub PRINT_NOTA()

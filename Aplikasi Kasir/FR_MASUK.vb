@@ -932,22 +932,24 @@ Public Class FR_MASUK
 
         totalBaris = 0
 
-        Dim IMAGE As Image = Image.FromStream(IMAGESTREAM)
-        e.Graphics.DrawImage(IMAGE, JARAK, BarisYangSama(), WIDTH, HEIGHT)
+        If pageNumber = 1 Then
+            Dim IMAGE As Image = Image.FromStream(IMAGESTREAM)
+            e.Graphics.DrawImage(IMAGE, JARAK, BarisYangSama(), WIDTH, HEIGHT)
 
-        e.Graphics.DrawString(NAMA_TOKO, fontJudul, Brushes.Black, lebarKertas / 2, BarisBaru(HEIGHT / jarakBaris), textCenter)
-        e.Graphics.DrawString(ALAMATTOKO.Text, fontRegular, Brushes.Black, New Rectangle(20, BarisBaru(1), lebarKertas - 30, BarisYangSama), textCenter)
-        e.Graphics.DrawString(NO_TOKO, fontRegular, Brushes.Black, lebarKertas / 2, BarisBaru(1), textCenter)
-        BarisBaru(1)
+            e.Graphics.DrawString(NAMA_TOKO, fontJudul, Brushes.Black, lebarKertas / 2, BarisBaru(HEIGHT / jarakBaris), textCenter)
+            e.Graphics.DrawString(ALAMATTOKO.Text, fontRegular, Brushes.Black, New Rectangle(20, BarisBaru(1), lebarKertas - 30, BarisYangSama), textCenter)
+            e.Graphics.DrawString(NO_TOKO, fontRegular, Brushes.Black, lebarKertas / 2, BarisBaru(1), textCenter)
+            BarisBaru(1)
 
-        e.Graphics.DrawString("BARANG MASUK", fontRegular, Brushes.Black, lebarKertas / 2, BarisBaru(1), textCenter)
+            e.Graphics.DrawString("BARANG MASUK", fontRegular, Brushes.Black, lebarKertas / 2, BarisBaru(1), textCenter)
 
-        e.Graphics.DrawString(LBTGL.Text, fontRegular, Brushes.Black, (lebarKertas - marginRight), BarisBaru(1), textRight)
+            e.Graphics.DrawString(LBTGL.Text, fontRegular, Brushes.Black, (lebarKertas - marginRight), BarisBaru(1), textRight)
 
-        e.Graphics.DrawString(ID_TRANSAKSI, fontRegular, Brushes.Black, (lebarKertas - marginRight), BarisBaru(1), textRight)
-        e.Graphics.DrawString("Kasir : " & LBLUSER.Text, fontRegular, Brushes.Black, marginLeft, BarisYangSama, textLeft)
+            e.Graphics.DrawString(ID_TRANSAKSI, fontRegular, Brushes.Black, (lebarKertas - marginRight), BarisBaru(1), textRight)
+            e.Graphics.DrawString("Kasir : " & LBLUSER.Text, fontRegular, Brushes.Black, marginLeft, BarisYangSama, textLeft)
 
-        e.Graphics.DrawLine(Pens.Black, marginLeft, BarisBaru(1), (lebarKertas - marginRight), BarisYangSama)
+            e.Graphics.DrawLine(Pens.Black, marginLeft, BarisBaru(1), (lebarKertas - marginRight), BarisYangSama)
+        End If
 
         For row As Integer = 0 To DGTAMPIL.Rows.Count - 1
             If row >= countBarang And countBarang < DGTAMPIL.Rows.Count Then
@@ -985,6 +987,8 @@ Public Class FR_MASUK
         e.Graphics.DrawString("TERIMA KASIH", fontRegular, Brushes.Black, lebarKertas / 2, BarisBaru(1), textCenter)
 
         BarisBaru(1)
+        pageNumber = 1
+        countBarang = 0
     End Sub
 
     Sub PRINT_NOTA()

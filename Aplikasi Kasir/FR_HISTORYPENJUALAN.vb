@@ -21,7 +21,7 @@ Public Class FR_HISTORYPENJUALAN
             " FROM tbl_transaksi_parent" &
             " INNER JOIN tbl_karyawan ON tbl_transaksi_parent.Id_kasir = tbl_karyawan.Id" &
             " WHERE Left(tbl_transaksi_parent.Id_trans, 1) = 'K'" &
-            " AND Tgl >= DATEADD(day,-20, GETDATE())" &
+            " AND Tgl >= DATEADD(day,-7, GETDATE())" &
             " ORDER BY Tgl DESC" &
             " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
         Else
@@ -32,7 +32,7 @@ Public Class FR_HISTORYPENJUALAN
             " FROM tbl_transaksi_parent" &
             " INNER JOIN tbl_karyawan ON tbl_transaksi_parent.Id_kasir = tbl_karyawan.Id" &
             " WHERE Left(tbl_transaksi_parent.Id_trans, 1) = 'K'" &
-            " AND Tgl >= DATEADD(day,-20, GETDATE())" &
+            " AND Tgl >= DATEADD(day,-7, GETDATE())" &
             " AND tbl_transaksi_parent.Id_trans = '" & TXTCARI.Text & "'" &
             " ORDER BY Tgl DESC" &
             " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
@@ -212,21 +212,23 @@ Public Class FR_HISTORYPENJUALAN
 
         totalBaris = 0
 
-        Dim IMAGE As Image = Image.FromStream(IMAGESTREAM)
-        Dim MyBitmap As New Bitmap(IMAGE)
-        e.Graphics.DrawImage(MyBitmap, JARAK, BarisYangSama(), WIDTH, HEIGHT)
+        If pageNumber = 1 Then
+            Dim IMAGE As Image = Image.FromStream(IMAGESTREAM)
+            Dim MyBitmap As New Bitmap(IMAGE)
+            e.Graphics.DrawImage(MyBitmap, JARAK, BarisYangSama(), WIDTH, HEIGHT)
 
-        e.Graphics.DrawString(NAMA_TOKO, fontJudul, Brushes.Black, lebarKertas / 2, BarisBaru(HEIGHT / jarakBaris), textCenter)
-        e.Graphics.DrawString(ALAMAT_TOKO, fontRegular, Brushes.Black, New Rectangle(20, BarisBaru(1), lebarKertas - 30, BarisYangSama), textCenter)
-        e.Graphics.DrawString(NO_TOKO, fontRegular, Brushes.Black, lebarKertas / 2, BarisBaru(1), textCenter)
-        BarisBaru(1)
+            e.Graphics.DrawString(NAMA_TOKO, fontJudul, Brushes.Black, lebarKertas / 2, BarisBaru(HEIGHT / jarakBaris), textCenter)
+            e.Graphics.DrawString(ALAMAT_TOKO, fontRegular, Brushes.Black, New Rectangle(20, BarisBaru(1), lebarKertas - 30, BarisYangSama), textCenter)
+            e.Graphics.DrawString(NO_TOKO, fontRegular, Brushes.Black, lebarKertas / 2, BarisBaru(1), textCenter)
+            BarisBaru(1)
 
-        e.Graphics.DrawString(DGHISTORY.SelectedCells(2).Value, fontRegular, Brushes.Black, (lebarKertas - marginRight), BarisBaru(1), textRight)
+            e.Graphics.DrawString(DGHISTORY.SelectedCells(2).Value, fontRegular, Brushes.Black, (lebarKertas - marginRight), BarisBaru(1), textRight)
 
-        e.Graphics.DrawString(DGHISTORY.SelectedCells(0).Value, fontRegular, Brushes.Black, (lebarKertas - marginRight), BarisBaru(1), textRight)
-        e.Graphics.DrawString("Kasir : " & DGHISTORY.SelectedCells(1).Value, fontRegular, Brushes.Black, marginLeft, BarisYangSama, textLeft)
+            e.Graphics.DrawString(DGHISTORY.SelectedCells(0).Value, fontRegular, Brushes.Black, (lebarKertas - marginRight), BarisBaru(1), textRight)
+            e.Graphics.DrawString("Kasir : " & DGHISTORY.SelectedCells(1).Value, fontRegular, Brushes.Black, marginLeft, BarisYangSama, textLeft)
 
-        e.Graphics.DrawLine(Pens.Black, marginLeft, BarisBaru(1), (lebarKertas - marginRight), BarisYangSama)
+            e.Graphics.DrawLine(Pens.Black, marginLeft, BarisBaru(1), (lebarKertas - marginRight), BarisYangSama)
+        End If
 
         For row As Integer = 0 To transaksi.Tables(0).Rows.Count - 1
             If row >= countBarang And countBarang < transaksi.Tables(0).Rows.Count Then
@@ -287,6 +289,8 @@ Public Class FR_HISTORYPENJUALAN
         e.Graphics.DrawString("TERIMA KASIH", fontRegular, Brushes.Black, lebarKertas / 2, BarisBaru(1), textCenter)
 
         BarisBaru(1)
+        pageNumber = 1
+        countBarang = 0
     End Sub
 
     Sub PRINT_NOTA()
