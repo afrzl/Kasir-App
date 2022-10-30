@@ -584,8 +584,8 @@ Public Class FR_RUSAK
         End If
     End Sub
 
-    Private Sub BTNBARCODEOPS_Click(sender As Object, e As EventArgs) Handles BTNBARCODEOPS.Click
-        BUKA_FORM(FR_CETAKBARCODE)
+    Private Sub BTNBARCODEOPS_Click(sender As Object, e As EventArgs) Handles BTNPRODUKOPS.Click
+        BUKA_FORM(FR_PRODUK)
     End Sub
 
     Private Sub TXTID_Leave(sender As Object, e As EventArgs) Handles TXTID.Leave
@@ -596,6 +596,10 @@ Public Class FR_RUSAK
     End Sub
 
     Private Sub BTNHISTORYPENJUALAN_Click(sender As Object, e As EventArgs) Handles BTNHISTORYPENJUALAN.Click
+        BUKA_FORM(FR_HISTORYPENJUALAN)
+    End Sub
+
+    Private Sub BTNHISTORYOPS_Click(sender As Object, e As EventArgs) Handles BTNHISTORYOPS.Click
         BUKA_FORM(FR_HISTORYPENJUALAN)
     End Sub
 End Class

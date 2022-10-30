@@ -32,6 +32,7 @@ Partial Class FR_CETAK_LABEL
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FR_CETAK_LABEL))
         Me.PNLEFT = New System.Windows.Forms.Panel()
         Me.PNOPS = New System.Windows.Forms.Panel()
+        Me.BTNHISTORYOPS = New System.Windows.Forms.Button()
         Me.BTNMASUKOPS = New System.Windows.Forms.Button()
         Me.Label23 = New System.Windows.Forms.Label()
         Me.BTNKELUAROPS = New System.Windows.Forms.Button()
@@ -42,7 +43,7 @@ Partial Class FR_CETAK_LABEL
         Me.BTNRUSAKOPS = New System.Windows.Forms.Button()
         Me.BTNTENTANGOPS = New System.Windows.Forms.Button()
         Me.BTNLABELOPS = New System.Windows.Forms.Button()
-        Me.BTNBARCODEOPS = New System.Windows.Forms.Button()
+        Me.BTNBARANGOPS = New System.Windows.Forms.Button()
         Me.PNKASIR = New System.Windows.Forms.Panel()
         Me.Label21 = New System.Windows.Forms.Label()
         Me.Label22 = New System.Windows.Forms.Label()
@@ -52,11 +53,20 @@ Partial Class FR_CETAK_LABEL
         Me.BTNDASHBOARDKASIR = New System.Windows.Forms.Button()
         Me.BTNRETURNKASIR = New System.Windows.Forms.Button()
         Me.BTNLABELKASIR = New System.Windows.Forms.Button()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.BTNLOGOUT = New System.Windows.Forms.Button()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.LBLUSER = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.PNADMIN = New System.Windows.Forms.Panel()
+        Me.BTNHISTORYPENJUALAN = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.BTNRETURN = New System.Windows.Forms.Button()
         Me.BTNDASHBOARD = New System.Windows.Forms.Button()
+        Me.BTNRUSAK = New System.Windows.Forms.Button()
         Me.BTNKASIR = New System.Windows.Forms.Button()
         Me.BTNDISKON = New System.Windows.Forms.Button()
         Me.BTNBARANG = New System.Windows.Forms.Button()
@@ -65,13 +75,6 @@ Partial Class FR_CETAK_LABEL
         Me.BTNKELUAR = New System.Windows.Forms.Button()
         Me.BTNLAPORAN = New System.Windows.Forms.Button()
         Me.BTNLABELADMIN = New System.Windows.Forms.Button()
-        Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.BTNLOGOUT = New System.Windows.Forms.Button()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.LBLUSER = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.PNTOP = New System.Windows.Forms.Panel()
         Me.LBTGL = New System.Windows.Forms.Label()
         Me.PNCONTROL = New System.Windows.Forms.Panel()
@@ -107,13 +110,11 @@ Partial Class FR_CETAK_LABEL
         Me.TXTCARI = New System.Windows.Forms.TextBox()
         Me.PEWAKTU = New System.Windows.Forms.Timer(Me.components)
         Me.PRINTLABEL = New System.Drawing.Printing.PrintDocument()
-        Me.BTNRUSAK = New System.Windows.Forms.Button()
-        Me.BTNHISTORYPENJUALAN = New System.Windows.Forms.Button()
         Me.PNLEFT.SuspendLayout()
         Me.PNOPS.SuspendLayout()
         Me.PNKASIR.SuspendLayout()
-        Me.PNADMIN.SuspendLayout()
         Me.Panel1.SuspendLayout()
+        Me.PNADMIN.SuspendLayout()
         Me.PNTOP.SuspendLayout()
         Me.PNCONTROL.SuspendLayout()
         Me.PNCONTENT.SuspendLayout()
@@ -124,7 +125,6 @@ Partial Class FR_CETAK_LABEL
         'PNLEFT
         '
         Me.PNLEFT.BackColor = System.Drawing.Color.FromArgb(CType(CType(63, Byte), Integer), CType(CType(48, Byte), Integer), CType(CType(120, Byte), Integer))
-        Me.PNLEFT.Controls.Add(Me.PNADMIN)
         Me.PNLEFT.Controls.Add(Me.PNOPS)
         Me.PNLEFT.Controls.Add(Me.PNKASIR)
         Me.PNLEFT.Controls.Add(Me.Panel1)
@@ -133,15 +133,17 @@ Partial Class FR_CETAK_LABEL
         Me.PNLEFT.Controls.Add(Me.LBLUSER)
         Me.PNLEFT.Controls.Add(Me.Label2)
         Me.PNLEFT.Controls.Add(Me.Button1)
+        Me.PNLEFT.Controls.Add(Me.PNADMIN)
         Me.PNLEFT.Dock = System.Windows.Forms.DockStyle.Left
         Me.PNLEFT.Location = New System.Drawing.Point(0, 0)
         Me.PNLEFT.Margin = New System.Windows.Forms.Padding(2)
         Me.PNLEFT.Name = "PNLEFT"
-        Me.PNLEFT.Size = New System.Drawing.Size(216, 599)
+        Me.PNLEFT.Size = New System.Drawing.Size(216, 614)
         Me.PNLEFT.TabIndex = 13
         '
         'PNOPS
         '
+        Me.PNOPS.Controls.Add(Me.BTNHISTORYOPS)
         Me.PNOPS.Controls.Add(Me.BTNMASUKOPS)
         Me.PNOPS.Controls.Add(Me.Label23)
         Me.PNOPS.Controls.Add(Me.BTNKELUAROPS)
@@ -152,12 +154,31 @@ Partial Class FR_CETAK_LABEL
         Me.PNOPS.Controls.Add(Me.BTNRUSAKOPS)
         Me.PNOPS.Controls.Add(Me.BTNTENTANGOPS)
         Me.PNOPS.Controls.Add(Me.BTNLABELOPS)
-        Me.PNOPS.Controls.Add(Me.BTNBARCODEOPS)
+        Me.PNOPS.Controls.Add(Me.BTNBARANGOPS)
         Me.PNOPS.Location = New System.Drawing.Point(0, 90)
         Me.PNOPS.Margin = New System.Windows.Forms.Padding(2)
         Me.PNOPS.Name = "PNOPS"
-        Me.PNOPS.Size = New System.Drawing.Size(216, 433)
+        Me.PNOPS.Size = New System.Drawing.Size(216, 456)
         Me.PNOPS.TabIndex = 58
+        '
+        'BTNHISTORYOPS
+        '
+        Me.BTNHISTORYOPS.FlatAppearance.BorderSize = 0
+        Me.BTNHISTORYOPS.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNHISTORYOPS.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNHISTORYOPS.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BTNHISTORYOPS.Image = Global.Aplikasi_Kasir.My.Resources.Resources.transaksi
+        Me.BTNHISTORYOPS.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.BTNHISTORYOPS.Location = New System.Drawing.Point(0, 257)
+        Me.BTNHISTORYOPS.Margin = New System.Windows.Forms.Padding(2)
+        Me.BTNHISTORYOPS.Name = "BTNHISTORYOPS"
+        Me.BTNHISTORYOPS.Padding = New System.Windows.Forms.Padding(12, 0, 0, 0)
+        Me.BTNHISTORYOPS.Size = New System.Drawing.Size(216, 28)
+        Me.BTNHISTORYOPS.TabIndex = 60
+        Me.BTNHISTORYOPS.Text = "     History Penjualan"
+        Me.BTNHISTORYOPS.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.BTNHISTORYOPS.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.BTNHISTORYOPS.UseVisualStyleBackColor = True
         '
         'BTNMASUKOPS
         '
@@ -217,7 +238,7 @@ Partial Class FR_CETAK_LABEL
         Me.BTNLAPORANOPS.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.BTNLAPORANOPS.Image = Global.Aplikasi_Kasir.My.Resources.Resources.laporan
         Me.BTNLAPORANOPS.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNLAPORANOPS.Location = New System.Drawing.Point(0, 336)
+        Me.BTNLAPORANOPS.Location = New System.Drawing.Point(0, 374)
         Me.BTNLAPORANOPS.Margin = New System.Windows.Forms.Padding(2)
         Me.BTNLAPORANOPS.Name = "BTNLAPORANOPS"
         Me.BTNLAPORANOPS.Padding = New System.Windows.Forms.Padding(12, 0, 0, 0)
@@ -264,7 +285,7 @@ Partial Class FR_CETAK_LABEL
         Me.BTNRETURNOPS.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.BTNRETURNOPS.Image = Global.Aplikasi_Kasir.My.Resources.Resources.transaksi
         Me.BTNRETURNOPS.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNRETURNOPS.Location = New System.Drawing.Point(0, 258)
+        Me.BTNRETURNOPS.Location = New System.Drawing.Point(0, 296)
         Me.BTNRETURNOPS.Margin = New System.Windows.Forms.Padding(2)
         Me.BTNRETURNOPS.Name = "BTNRETURNOPS"
         Me.BTNRETURNOPS.Padding = New System.Windows.Forms.Padding(12, 0, 0, 0)
@@ -283,7 +304,7 @@ Partial Class FR_CETAK_LABEL
         Me.BTNRUSAKOPS.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.BTNRUSAKOPS.Image = Global.Aplikasi_Kasir.My.Resources.Resources.transaksi
         Me.BTNRUSAKOPS.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNRUSAKOPS.Location = New System.Drawing.Point(0, 297)
+        Me.BTNRUSAKOPS.Location = New System.Drawing.Point(0, 335)
         Me.BTNRUSAKOPS.Margin = New System.Windows.Forms.Padding(2)
         Me.BTNRUSAKOPS.Name = "BTNRUSAKOPS"
         Me.BTNRUSAKOPS.Padding = New System.Windows.Forms.Padding(12, 0, 0, 0)
@@ -302,7 +323,7 @@ Partial Class FR_CETAK_LABEL
         Me.BTNTENTANGOPS.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.BTNTENTANGOPS.Image = Global.Aplikasi_Kasir.My.Resources.Resources.tentang
         Me.BTNTENTANGOPS.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNTENTANGOPS.Location = New System.Drawing.Point(0, 375)
+        Me.BTNTENTANGOPS.Location = New System.Drawing.Point(0, 413)
         Me.BTNTENTANGOPS.Margin = New System.Windows.Forms.Padding(2)
         Me.BTNTENTANGOPS.Name = "BTNTENTANGOPS"
         Me.BTNTENTANGOPS.Padding = New System.Windows.Forms.Padding(12, 0, 0, 0)
@@ -332,24 +353,24 @@ Partial Class FR_CETAK_LABEL
         Me.BTNLABELOPS.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.BTNLABELOPS.UseVisualStyleBackColor = True
         '
-        'BTNBARCODEOPS
+        'BTNBARANGOPS
         '
-        Me.BTNBARCODEOPS.FlatAppearance.BorderSize = 0
-        Me.BTNBARCODEOPS.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BTNBARCODEOPS.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BTNBARCODEOPS.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.BTNBARCODEOPS.Image = Global.Aplikasi_Kasir.My.Resources.Resources.transaksi
-        Me.BTNBARCODEOPS.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNBARCODEOPS.Location = New System.Drawing.Point(0, 101)
-        Me.BTNBARCODEOPS.Margin = New System.Windows.Forms.Padding(2)
-        Me.BTNBARCODEOPS.Name = "BTNBARCODEOPS"
-        Me.BTNBARCODEOPS.Padding = New System.Windows.Forms.Padding(12, 0, 0, 0)
-        Me.BTNBARCODEOPS.Size = New System.Drawing.Size(216, 28)
-        Me.BTNBARCODEOPS.TabIndex = 58
-        Me.BTNBARCODEOPS.Text = "     Cetak Barcode"
-        Me.BTNBARCODEOPS.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNBARCODEOPS.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.BTNBARCODEOPS.UseVisualStyleBackColor = True
+        Me.BTNBARANGOPS.FlatAppearance.BorderSize = 0
+        Me.BTNBARANGOPS.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNBARANGOPS.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNBARANGOPS.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BTNBARANGOPS.Image = Global.Aplikasi_Kasir.My.Resources.Resources.data_master1
+        Me.BTNBARANGOPS.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.BTNBARANGOPS.Location = New System.Drawing.Point(0, 101)
+        Me.BTNBARANGOPS.Margin = New System.Windows.Forms.Padding(2)
+        Me.BTNBARANGOPS.Name = "BTNBARANGOPS"
+        Me.BTNBARANGOPS.Padding = New System.Windows.Forms.Padding(12, 0, 0, 0)
+        Me.BTNBARANGOPS.Size = New System.Drawing.Size(216, 28)
+        Me.BTNBARANGOPS.TabIndex = 58
+        Me.BTNBARANGOPS.Text = "     Data Barang"
+        Me.BTNBARANGOPS.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.BTNBARANGOPS.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.BTNBARANGOPS.UseVisualStyleBackColor = True
         '
         'PNKASIR
         '
@@ -502,6 +523,95 @@ Partial Class FR_CETAK_LABEL
         Me.BTNLABELKASIR.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.BTNLABELKASIR.UseVisualStyleBackColor = True
         '
+        'Panel1
+        '
+        Me.Panel1.Controls.Add(Me.BTNLOGOUT)
+        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Panel1.Location = New System.Drawing.Point(0, 563)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(2)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(216, 51)
+        Me.Panel1.TabIndex = 0
+        '
+        'BTNLOGOUT
+        '
+        Me.BTNLOGOUT.FlatAppearance.BorderSize = 0
+        Me.BTNLOGOUT.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNLOGOUT.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNLOGOUT.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BTNLOGOUT.Image = Global.Aplikasi_Kasir.My.Resources.Resources.logout
+        Me.BTNLOGOUT.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.BTNLOGOUT.Location = New System.Drawing.Point(2, 14)
+        Me.BTNLOGOUT.Margin = New System.Windows.Forms.Padding(2)
+        Me.BTNLOGOUT.Name = "BTNLOGOUT"
+        Me.BTNLOGOUT.Padding = New System.Windows.Forms.Padding(12, 0, 0, 0)
+        Me.BTNLOGOUT.Size = New System.Drawing.Size(216, 28)
+        Me.BTNLOGOUT.TabIndex = 14
+        Me.BTNLOGOUT.Text = "     Logout"
+        Me.BTNLOGOUT.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.BTNLOGOUT.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.BTNLOGOUT.UseVisualStyleBackColor = True
+        '
+        'Label4
+        '
+        Me.Label4.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.Label4.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.Label4.Location = New System.Drawing.Point(82, 64)
+        Me.Label4.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(120, 1)
+        Me.Label4.TabIndex = 17
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.Label3.Location = New System.Drawing.Point(78, 71)
+        Me.Label3.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(80, 15)
+        Me.Label3.TabIndex = 16
+        Me.Label3.Text = "Administrator"
+        '
+        'LBLUSER
+        '
+        Me.LBLUSER.AutoSize = True
+        Me.LBLUSER.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBLUSER.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.LBLUSER.Location = New System.Drawing.Point(78, 42)
+        Me.LBLUSER.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.LBLUSER.Name = "LBLUSER"
+        Me.LBLUSER.Size = New System.Drawing.Size(77, 19)
+        Me.LBLUSER.TabIndex = 15
+        Me.LBLUSER.Text = "Nama User"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.Label2.Location = New System.Drawing.Point(78, 23)
+        Me.Label2.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(92, 15)
+        Me.Label2.TabIndex = 14
+        Me.Label2.Text = "Selamat datang,"
+        '
+        'Button1
+        '
+        Me.Button1.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.Button1.FlatAppearance.BorderSize = 0
+        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button1.Image = Global.Aplikasi_Kasir.My.Resources.Resources.avatar50px
+        Me.Button1.Location = New System.Drawing.Point(10, 23)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(2)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(64, 64)
+        Me.Button1.TabIndex = 0
+        Me.Button1.UseVisualStyleBackColor = False
+        '
         'PNADMIN
         '
         Me.PNADMIN.Controls.Add(Me.BTNHISTORYPENJUALAN)
@@ -523,6 +633,25 @@ Partial Class FR_CETAK_LABEL
         Me.PNADMIN.Name = "PNADMIN"
         Me.PNADMIN.Size = New System.Drawing.Size(222, 499)
         Me.PNADMIN.TabIndex = 53
+        '
+        'BTNHISTORYPENJUALAN
+        '
+        Me.BTNHISTORYPENJUALAN.FlatAppearance.BorderSize = 0
+        Me.BTNHISTORYPENJUALAN.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNHISTORYPENJUALAN.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNHISTORYPENJUALAN.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BTNHISTORYPENJUALAN.Image = Global.Aplikasi_Kasir.My.Resources.Resources.transaksi
+        Me.BTNHISTORYPENJUALAN.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.BTNHISTORYPENJUALAN.Location = New System.Drawing.Point(0, 314)
+        Me.BTNHISTORYPENJUALAN.Margin = New System.Windows.Forms.Padding(2)
+        Me.BTNHISTORYPENJUALAN.Name = "BTNHISTORYPENJUALAN"
+        Me.BTNHISTORYPENJUALAN.Padding = New System.Windows.Forms.Padding(12, 0, 0, 0)
+        Me.BTNHISTORYPENJUALAN.Size = New System.Drawing.Size(216, 27)
+        Me.BTNHISTORYPENJUALAN.TabIndex = 54
+        Me.BTNHISTORYPENJUALAN.Text = "     History Penjualan"
+        Me.BTNHISTORYPENJUALAN.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.BTNHISTORYPENJUALAN.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.BTNHISTORYPENJUALAN.UseVisualStyleBackColor = True
         '
         'Label1
         '
@@ -582,6 +711,25 @@ Partial Class FR_CETAK_LABEL
         Me.BTNDASHBOARD.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.BTNDASHBOARD.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.BTNDASHBOARD.UseVisualStyleBackColor = True
+        '
+        'BTNRUSAK
+        '
+        Me.BTNRUSAK.FlatAppearance.BorderSize = 0
+        Me.BTNRUSAK.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNRUSAK.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNRUSAK.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BTNRUSAK.Image = Global.Aplikasi_Kasir.My.Resources.Resources.transaksi
+        Me.BTNRUSAK.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.BTNRUSAK.Location = New System.Drawing.Point(0, 434)
+        Me.BTNRUSAK.Margin = New System.Windows.Forms.Padding(2)
+        Me.BTNRUSAK.Name = "BTNRUSAK"
+        Me.BTNRUSAK.Padding = New System.Windows.Forms.Padding(12, 0, 0, 0)
+        Me.BTNRUSAK.Size = New System.Drawing.Size(216, 27)
+        Me.BTNRUSAK.TabIndex = 51
+        Me.BTNRUSAK.Text = "     Barang Rusak"
+        Me.BTNRUSAK.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.BTNRUSAK.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.BTNRUSAK.UseVisualStyleBackColor = True
         '
         'BTNKASIR
         '
@@ -735,95 +883,6 @@ Partial Class FR_CETAK_LABEL
         Me.BTNLABELADMIN.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.BTNLABELADMIN.UseVisualStyleBackColor = True
         '
-        'Panel1
-        '
-        Me.Panel1.Controls.Add(Me.BTNLOGOUT)
-        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel1.Location = New System.Drawing.Point(0, 548)
-        Me.Panel1.Margin = New System.Windows.Forms.Padding(2)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(216, 51)
-        Me.Panel1.TabIndex = 0
-        '
-        'BTNLOGOUT
-        '
-        Me.BTNLOGOUT.FlatAppearance.BorderSize = 0
-        Me.BTNLOGOUT.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BTNLOGOUT.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BTNLOGOUT.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.BTNLOGOUT.Image = Global.Aplikasi_Kasir.My.Resources.Resources.logout
-        Me.BTNLOGOUT.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNLOGOUT.Location = New System.Drawing.Point(2, 14)
-        Me.BTNLOGOUT.Margin = New System.Windows.Forms.Padding(2)
-        Me.BTNLOGOUT.Name = "BTNLOGOUT"
-        Me.BTNLOGOUT.Padding = New System.Windows.Forms.Padding(12, 0, 0, 0)
-        Me.BTNLOGOUT.Size = New System.Drawing.Size(216, 28)
-        Me.BTNLOGOUT.TabIndex = 14
-        Me.BTNLOGOUT.Text = "     Logout"
-        Me.BTNLOGOUT.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNLOGOUT.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.BTNLOGOUT.UseVisualStyleBackColor = True
-        '
-        'Label4
-        '
-        Me.Label4.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.Label4.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.Label4.Location = New System.Drawing.Point(82, 64)
-        Me.Label4.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(120, 1)
-        Me.Label4.TabIndex = 17
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.Label3.Location = New System.Drawing.Point(78, 71)
-        Me.Label3.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(80, 15)
-        Me.Label3.TabIndex = 16
-        Me.Label3.Text = "Administrator"
-        '
-        'LBLUSER
-        '
-        Me.LBLUSER.AutoSize = True
-        Me.LBLUSER.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LBLUSER.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.LBLUSER.Location = New System.Drawing.Point(78, 42)
-        Me.LBLUSER.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.LBLUSER.Name = "LBLUSER"
-        Me.LBLUSER.Size = New System.Drawing.Size(77, 19)
-        Me.LBLUSER.TabIndex = 15
-        Me.LBLUSER.Text = "Nama User"
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.Label2.Location = New System.Drawing.Point(78, 23)
-        Me.Label2.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(92, 15)
-        Me.Label2.TabIndex = 14
-        Me.Label2.Text = "Selamat datang,"
-        '
-        'Button1
-        '
-        Me.Button1.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.Button1.FlatAppearance.BorderSize = 0
-        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button1.Image = Global.Aplikasi_Kasir.My.Resources.Resources.avatar50px
-        Me.Button1.Location = New System.Drawing.Point(10, 23)
-        Me.Button1.Margin = New System.Windows.Forms.Padding(2)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(64, 64)
-        Me.Button1.TabIndex = 0
-        Me.Button1.UseVisualStyleBackColor = False
-        '
         'PNTOP
         '
         Me.PNTOP.BackColor = System.Drawing.Color.Silver
@@ -903,7 +962,7 @@ Partial Class FR_CETAK_LABEL
         Me.PNCONTENT.Location = New System.Drawing.Point(216, 32)
         Me.PNCONTENT.Margin = New System.Windows.Forms.Padding(2)
         Me.PNCONTENT.Name = "PNCONTENT"
-        Me.PNCONTENT.Size = New System.Drawing.Size(877, 567)
+        Me.PNCONTENT.Size = New System.Drawing.Size(877, 582)
         Me.PNCONTENT.TabIndex = 15
         '
         'BTNKELUARALL
@@ -914,7 +973,7 @@ Partial Class FR_CETAK_LABEL
         Me.BTNKELUARALL.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.BTNKELUARALL.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BTNKELUARALL.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.BTNKELUARALL.Location = New System.Drawing.Point(689, 528)
+        Me.BTNKELUARALL.Location = New System.Drawing.Point(689, 543)
         Me.BTNKELUARALL.Margin = New System.Windows.Forms.Padding(2)
         Me.BTNKELUARALL.Name = "BTNKELUARALL"
         Me.BTNKELUARALL.Size = New System.Drawing.Size(149, 31)
@@ -1040,7 +1099,7 @@ Partial Class FR_CETAK_LABEL
         Me.DGCETAK.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.DGCETAK.RowTemplate.Height = 30
         Me.DGCETAK.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DGCETAK.Size = New System.Drawing.Size(820, 160)
+        Me.DGCETAK.Size = New System.Drawing.Size(820, 175)
         Me.DGCETAK.TabIndex = 69
         '
         'KODE
@@ -1274,49 +1333,11 @@ Partial Class FR_CETAK_LABEL
         'PEWAKTU
         '
         '
-        'BTNRUSAK
-        '
-        Me.BTNRUSAK.FlatAppearance.BorderSize = 0
-        Me.BTNRUSAK.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BTNRUSAK.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BTNRUSAK.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.BTNRUSAK.Image = Global.Aplikasi_Kasir.My.Resources.Resources.transaksi
-        Me.BTNRUSAK.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNRUSAK.Location = New System.Drawing.Point(0, 434)
-        Me.BTNRUSAK.Margin = New System.Windows.Forms.Padding(2)
-        Me.BTNRUSAK.Name = "BTNRUSAK"
-        Me.BTNRUSAK.Padding = New System.Windows.Forms.Padding(12, 0, 0, 0)
-        Me.BTNRUSAK.Size = New System.Drawing.Size(216, 27)
-        Me.BTNRUSAK.TabIndex = 51
-        Me.BTNRUSAK.Text = "     Barang Rusak"
-        Me.BTNRUSAK.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNRUSAK.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.BTNRUSAK.UseVisualStyleBackColor = True
-        '
-        'BTNHISTORYPENJUALAN
-        '
-        Me.BTNHISTORYPENJUALAN.FlatAppearance.BorderSize = 0
-        Me.BTNHISTORYPENJUALAN.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BTNHISTORYPENJUALAN.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BTNHISTORYPENJUALAN.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.BTNHISTORYPENJUALAN.Image = Global.Aplikasi_Kasir.My.Resources.Resources.transaksi
-        Me.BTNHISTORYPENJUALAN.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNHISTORYPENJUALAN.Location = New System.Drawing.Point(0, 314)
-        Me.BTNHISTORYPENJUALAN.Margin = New System.Windows.Forms.Padding(2)
-        Me.BTNHISTORYPENJUALAN.Name = "BTNHISTORYPENJUALAN"
-        Me.BTNHISTORYPENJUALAN.Padding = New System.Windows.Forms.Padding(12, 0, 0, 0)
-        Me.BTNHISTORYPENJUALAN.Size = New System.Drawing.Size(216, 27)
-        Me.BTNHISTORYPENJUALAN.TabIndex = 54
-        Me.BTNHISTORYPENJUALAN.Text = "     History Penjualan"
-        Me.BTNHISTORYPENJUALAN.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNHISTORYPENJUALAN.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.BTNHISTORYPENJUALAN.UseVisualStyleBackColor = True
-        '
         'FR_CETAK_LABEL
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.ClientSize = New System.Drawing.Size(1093, 599)
+        Me.ClientSize = New System.Drawing.Size(1093, 614)
         Me.Controls.Add(Me.PNCONTENT)
         Me.Controls.Add(Me.PNTOP)
         Me.Controls.Add(Me.PNLEFT)
@@ -1333,9 +1354,9 @@ Partial Class FR_CETAK_LABEL
         Me.PNOPS.PerformLayout()
         Me.PNKASIR.ResumeLayout(False)
         Me.PNKASIR.PerformLayout()
+        Me.Panel1.ResumeLayout(False)
         Me.PNADMIN.ResumeLayout(False)
         Me.PNADMIN.PerformLayout()
-        Me.Panel1.ResumeLayout(False)
         Me.PNTOP.ResumeLayout(False)
         Me.PNTOP.PerformLayout()
         Me.PNCONTROL.ResumeLayout(False)
@@ -1423,7 +1444,8 @@ Partial Class FR_CETAK_LABEL
     Friend WithEvents DISKON As DataGridViewTextBoxColumn
     Friend WithEvents BTNMASUKPAGE As Button
     Friend WithEvents BTNKELUARALL As Button
-    Friend WithEvents BTNBARCODEOPS As Button
+    Friend WithEvents BTNBARANGOPS As Button
     Friend WithEvents BTNRUSAK As Button
     Friend WithEvents BTNHISTORYPENJUALAN As Button
+    Friend WithEvents BTNHISTORYOPS As Button
 End Class

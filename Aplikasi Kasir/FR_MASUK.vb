@@ -1184,8 +1184,8 @@ Public Class FR_MASUK
         End If
     End Sub
 
-    Private Sub BTNBARCODEOPS_Click(sender As Object, e As EventArgs) Handles BTNBARCODEOPS.Click
-        BUKA_FORM(FR_CETAKBARCODE)
+    Private Sub BTNBARCODEOPS_Click(sender As Object, e As EventArgs) Handles BTNBARANGOPS.Click
+        BUKA_FORM(FR_PRODUK)
     End Sub
 
     Private Sub TXTCARI_Leave(sender As Object, e As EventArgs) Handles TXTCARI.Leave
@@ -1194,6 +1194,10 @@ Public Class FR_MASUK
     End Sub
 
     Private Sub BTNHISTORYPENJUALAN_Click(sender As Object, e As EventArgs) Handles BTNHISTORYPENJUALAN.Click
+        BUKA_FORM(FR_HISTORYPENJUALAN)
+    End Sub
+
+    Private Sub BTNHISTORYOPS_Click(sender As Object, e As EventArgs) Handles BTNHISTORYOPS.Click
         BUKA_FORM(FR_HISTORYPENJUALAN)
     End Sub
 End Class

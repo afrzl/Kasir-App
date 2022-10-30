@@ -200,12 +200,16 @@ Public Class FR_OPS_DASHBOARD
         End If
     End Sub
 
-    Private Sub BTNBARCODEOPS_Click(sender As Object, e As EventArgs) Handles BTNBARCODEOPS.Click
-        BUKA_FORM(FR_CETAKBARCODE)
+    Private Sub BTNBARCODEOPS_Click(sender As Object, e As EventArgs) Handles BTNBARANGOPS.Click
+        BUKA_FORM(FR_PRODUK)
     End Sub
 
     Private Sub TXTCARISTOK_TextChanged_1(sender As Object, e As EventArgs) Handles TXTCARISTOK.TextChanged
         START_RECORD = 0
         TAMPIL()
+    End Sub
+
+    Private Sub BTNHISTORYOPS_Click(sender As Object, e As EventArgs) Handles BTNHISTORYOPS.Click
+        BUKA_FORM(FR_HISTORYPENJUALAN)
     End Sub
 End Class
