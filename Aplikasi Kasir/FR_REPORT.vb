@@ -78,6 +78,7 @@ Public Class FR_REPORT
                 CBJENIS.Items.Clear()
                 With CBJENIS
                     .Items.Add("Stok")
+                    .Items.Add("Transaksi Masuk")
                     .Items.Add("Transaksi Keluar")
                 End With
         End Select
@@ -305,7 +306,7 @@ Public Class FR_REPORT
                     " tbl_transaksi_parent.Tgl AS 'Tanggal'," &
                     " RTRIM((SELECT Nama FROM tbl_karyawan WHERE Id = tbl_transaksi_parent.Id_kasir)) AS 'Kasir'," &
                     " RTRIM(tbl_transaksi_parent.Person) AS 'Supplier'," &
-                    " tbl_transaksi_child.Jumlah_item AS 'Jumlah_item'," &
+                    " tbl_transaksi_child.Jumlah AS 'Jumlah_item'," &
                     " RTRIM(tbl_transaksi_child.Kode) As 'Kode Barang'," &
                     " RTRIM((SELECT Barang FROM tbl_barang WHERE Kode = tbl_transaksi_child.Kode)) AS 'Nama Barang'," &
                     " tbl_transaksi_child.Harga  AS 'Harga QTY'," &
@@ -355,6 +356,25 @@ Public Class FR_REPORT
                     " FROM tbl_barang" &
                     " ORDER BY 'Nama Barang' ASC"
                     Case 1
+                        STR = "SELECT RTRIM(tbl_transaksi_child.Id_trans) AS 'ID Transaksi'," &
+                    " RTRIM(tbl_transaksi_parent.Jenis) AS 'Jenis'," &
+                    " tbl_transaksi_parent.Tgl AS 'Tanggal'," &
+                    " RTRIM((SELECT Nama FROM tbl_karyawan WHERE Id = tbl_transaksi_parent.Id_kasir)) AS 'Kasir'," &
+                    " RTRIM(tbl_transaksi_parent.Person) AS 'Supplier'," &
+                    " tbl_transaksi_child.Jumlah AS 'Jumlah_item'," &
+                    " RTRIM(tbl_transaksi_child.Kode) As 'Kode Barang'," &
+                    " RTRIM((SELECT Barang FROM tbl_barang WHERE Kode = tbl_transaksi_child.Kode)) AS 'Nama Barang'," &
+                    " tbl_transaksi_child.Harga  AS 'Harga QTY'," &
+                    " tbl_transaksi_child.Jumlah AS 'Stok Masuk'," &
+                    " (tbl_transaksi_child.Harga * tbl_transaksi_child.Jumlah) AS 'Harga'," &
+                    " tbl_transaksi_child.Stok AS 'Sisa Stok'" &
+                    " From tbl_transaksi_child inner Join tbl_transaksi_parent On tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans" &
+                    " Where (Left(tbl_transaksi_child.Id_trans, 1) = 'M' OR Left(tbl_transaksi_child.Id_trans, 1) = 'R')" &
+                    " And tbl_transaksi_parent.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & " 00:00:00'" &
+                    " And tbl_transaksi_parent.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd") & " 23:59:59'" &
+                    " AND tbl_transaksi_parent.Id_kasir = '" & My.Settings.ID_ACCOUNT & "'" &
+                    " ORDER BY tbl_transaksi_child.Id ASC"
+                    Case 2
                         STR = "SELECT RTRIM(tbl_transaksi_child.Id_trans) AS 'ID Transaksi'," &
                     " RTRIM(tbl_transaksi_parent.Jenis) AS 'Jenis'," &
                     " tbl_transaksi_parent.Tgl AS 'Tanggal'," &
@@ -803,12 +823,12 @@ Public Class FR_REPORT
                         Case 2
                             TOTALITEM = Convert.ToDouble(TBL.Compute("SUM(Jumlah_item)", ""))
                             TOTALPEMBELIAN = Convert.ToDouble(TBL.Compute("SUM(Harga)", ""))
-                            For N = 1 To TBL.Rows.Count - 1
-                                If TBL.Rows(N).Item(0) = TBL.Rows(N - 1).Item(0) Then
-                                    TOTALPEMBELIAN -= TBL.Rows(N - 1).Item(12)
-                                    TOTALITEM -= TBL.Rows(N - 1).Item(5)
-                                End If
-                            Next
+                            'For N = 1 To TBL.Rows.Count - 1
+                            '    If TBL.Rows(N).Item(0) = TBL.Rows(N - 1).Item(0) Then
+                            '        TOTALPEMBELIAN -= TBL.Rows(N - 1).Item(12)
+                            '        TOTALITEM -= TBL.Rows(N - 1).Item(5)
+                            '    End If
+                            'Next
                         Case 3
                             TOTALITEM = Convert.ToDouble(TBL.Compute("SUM(Jumlah_item)", ""))
                             For N = 1 To TBL.Rows.Count - 1
@@ -821,6 +841,15 @@ Public Class FR_REPORT
                 Case 3
                     Select Case CBJENIS.SelectedIndex
                         Case 1
+                            TOTALITEM = Convert.ToDouble(TBL.Compute("SUM(Jumlah_item)", ""))
+                            TOTALPEMBELIAN = Convert.ToDouble(TBL.Compute("SUM(Harga)", ""))
+                            'For N = 1 To TBL.Rows.Count - 1
+                            '    If TBL.Rows(N).Item(0) = TBL.Rows(N - 1).Item(0) Then
+                            '        TOTALPEMBELIAN -= TBL.Rows(N - 1).Item(12)
+                            '        TOTALITEM -= TBL.Rows(N - 1).Item(5)
+                            '    End If
+                            'Next
+                        Case 2
                             TOTALITEM = Convert.ToDouble(TBL.Compute("SUM(Jumlah_item)", ""))
                             For N = 1 To TBL.Rows.Count - 1
                                 If TBL.Rows(N).Item(0) = TBL.Rows(N - 1).Item(0) Then
@@ -1110,6 +1139,20 @@ Public Class FR_REPORT
                             CRV.ReportSource = RPT
                         Case 1
                             CRV.Refresh()
+                            Dim RPT As New RPT_MASUK_OPS
+                            With RPT
+                                .SetDataSource(TBL)
+                                .SetParameterValue("total_item", TOTALITEM)
+                                .SetParameterValue("total_beli", TOTALPEMBELIAN)
+                                .SetParameterValue("tgl_mulai", TXTTGLAWAL.Value.ToString("dd MMMM yyyy"))
+                                .SetParameterValue("tgl_akhir", TXTTGLAKHIR.Value.ToString("dd MMMM yyyy"))
+                            End With
+
+                            BTNCETAK.Visible = True
+                            BTNEXPORT.Visible = True
+                            CRV.ReportSource = RPT
+                        Case 2
+                            CRV.Refresh()
                             Dim RPT As New RPT_KELUAR_KASIR
                             With RPT
                                 .SetDataSource(TBL)
@@ -1224,6 +1267,8 @@ Public Class FR_REPORT
                         TXTTGLAKHIR.Visible = False
                         BTNTAMPIL.Visible = True
                     Case 1
+                        KONDISI_TANGGAL()
+                    Case 2
                         KONDISI_TANGGAL()
                 End Select
         End Select
