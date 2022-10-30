@@ -139,6 +139,10 @@ Public Class FR_KASIR_DASHBOARD
         CMD = New SqlCommand(STR, CONN)
         LBKELUAR.Text = Convert.ToUInt64(CMD.ExecuteScalar())
 
+        STR = "SELECT COUNT(*) FROM tbl_transaksi_parent WHERE Jenis='M' AND Id_kasir = '" & My.Settings.ID_ACCOUNT & "'"
+        CMD = New SqlCommand(STR, CONN)
+        LBMASUK.Text = Convert.ToUInt64(CMD.ExecuteScalar())
+
         STR = "SELECT COUNT(*) FROM tbl_transaksi_parent WHERE Jenis='K'" &
             " And (Tgl >= '" & TGLAWAL & "' AND Tgl <= '" & TGLAKHIR & "')" &
             " AND Id_kasir = '" & My.Settings.ID_ACCOUNT & "'"
@@ -179,5 +183,13 @@ Public Class FR_KASIR_DASHBOARD
     Private Sub TXTCARISTOK_TextChanged_1(sender As Object, e As EventArgs) Handles TXTCARISTOK.TextChanged
         START_RECORD = 0
         TAMPIL()
+    End Sub
+
+    Private Sub BTNHISTORYPENJUALANKASIR_Click(sender As Object, e As EventArgs) Handles BTNHISTORYPENJUALANKASIR.Click
+        BUKA_FORM(FR_HISTORYPENJUALAN)
+    End Sub
+
+    Private Sub BTNMASUKKASIR_Click(sender As Object, e As EventArgs) Handles BTNMASUKKASIR.Click
+        BUKA_FORM(FR_MASUK)
     End Sub
 End Class

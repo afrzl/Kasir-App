@@ -42,11 +42,18 @@ Public Class FR_MASUK
             Case 1
                 PNADMIN.Visible = True
                 PNOPS.Visible = False
+                PNKASIR.Visible = False
                 Label3.Text = "Administrator"
             Case 2
                 PNADMIN.Visible = False
                 PNOPS.Visible = True
+                PNKASIR.Visible = False
                 Label3.Text = "Operator"
+            Case 3
+                PNADMIN.Visible = False
+                PNOPS.Visible = False
+                PNKASIR.Visible = True
+                Label3.Text = "Kasir"
         End Select
 
         LBTGL.Text = Format(Date.Now, "dd MMMM yyyy HH:mm:ss")
@@ -180,6 +187,143 @@ Public Class FR_MASUK
                     End If
                 End If
             Case 2
+                If CBTAMPIL.SelectedIndex = 0 Then
+                    If TXTCARI.Text = "" Then
+                        STR = "SELECT tbl_transaksi_child.Id, RTRIM(tbl_transaksi_child.Id_trans) AS 'ID Transaksi'," &
+                            " RTRIM(tbl_barang.Kode) AS 'Kode Barang'," &
+                            " RTRIM(tbl_barang.Barang) AS 'Nama Barang'," &
+                            " RTRIM(tbl_transaksi_parent.Person) as 'Supplier'," &
+                            " Jumlah as 'Stok Masuk'," &
+                            " tbl_transaksi_child.Harga AS 'Harga Partai'," &
+                            " Stok AS 'Stok Sisa'" &
+                            " FROM tbl_transaksi_child INNER JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
+                            " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans=tbl_transaksi_parent.Id_trans" &
+                            " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M' AND" &
+                            " (tbl_transaksi_parent.Id_kasir) = '" & My.Settings.ID_ACCOUNT & "'" &
+                            " ORDER BY tbl_transaksi_child.Id ASC" &
+                            " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
+                    Else
+                        STR = "SELECT tbl_transaksi_child.Id," &
+                            " RTRIM(tbl_transaksi_child.Id_trans) AS 'ID Transaksi'," &
+                            " RTRIM(tbl_barang.Kode) AS 'Kode Barang'," &
+                            " RTRIM(tbl_barang.Barang) AS 'Nama Barang'," &
+                            " RTRIM(tbl_transaksi_parent.Person) as 'Supplier'," &
+                            " tbl_transaksi_child.Jumlah as 'Stok Masuk'," &
+                            " tbl_transaksi_child.Harga AS 'Harga Partai'," &
+                            " tbl_transaksi_child.Stok AS 'Stok Sisa'" &
+                            " FROM tbl_transaksi_child INNER JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
+                            " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans=tbl_transaksi_parent.Id_trans" &
+                            " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M' AND" &
+                            " tbl_transaksi_parent.Id_kasir = '" & My.Settings.ID_ACCOUNT & "'" &
+                            " AND RTRIM(tbl_barang.Kode) = '" & TXTCARI.Text & "'" &
+                            " ORDER BY tbl_transaksi_child.Id ASC" &
+                            " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
+                    End If
+                ElseIf CBTAMPIL.SelectedIndex = 1 Then
+                    If TXTCARI.Text = "" Then
+                        STR = "SELECT tbl_transaksi_child.Id," &
+                            " RTRIM(tbl_transaksi_child.Id_trans) AS 'ID Transaksi'," &
+                            " RTRIM(tbl_barang.Kode) AS 'Kode Barang'," &
+                            " RTRIM(tbl_barang.Barang) AS 'Nama Barang'," &
+                            " RTRIM(tbl_transaksi_parent.Person) as 'Supplier'," &
+                            " tbl_transaksi_child.Jumlah as 'Stok Masuk'," &
+                            " tbl_transaksi_child.Harga AS 'Harga Partai'," &
+                            " tbl_transaksi_child.Stok AS 'Stok Sisa'" &
+                            " FROM tbl_transaksi_child INNER JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
+                            " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans=tbl_transaksi_parent.Id_trans" &
+                            " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M'" &
+                            " AND Stok != 0" &
+                            " AND (tbl_transaksi_parent.Id_kasir) = '" & My.Settings.ID_ACCOUNT & "'" &
+                            " ORDER BY tbl_transaksi_child.Id ASC" &
+                            " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
+                    Else
+                        STR = "SELECT tbl_transaksi_child.Id," &
+                            " RTRIM(tbl_transaksi_child.Id_trans) AS 'ID Transaksi'," &
+                            " RTRIM(tbl_barang.Kode) AS 'Kode Barang'," &
+                            " RTRIM(tbl_barang.Barang) AS 'Nama Barang'," &
+                            " RTRIM(tbl_transaksi_parent.Person) as 'Supplier'," &
+                            " tbl_transaksi_child.Jumlah as 'Stok Masuk'," &
+                            " tbl_transaksi_child.Harga AS 'Harga Partai'," &
+                            " tbl_transaksi_child.Stok AS 'Stok Sisa'" &
+                            " FROM tbl_transaksi_child INNER JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
+                            " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans=tbl_transaksi_parent.Id_trans" &
+                            " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M'" &
+                            " AND Stok != 0" &
+                            " AND (tbl_transaksi_parent.Id_kasir) = '" & My.Settings.ID_ACCOUNT & "'" &
+                            " AND RTRIM(tbl_barang.Kode) = '" & TXTCARI.Text & "'" &
+                            " ORDER BY tbl_transaksi_child.Id ASC" &
+                            " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
+                    End If
+                ElseIf CBTAMPIL.SelectedIndex = 2 Then
+                    If TXTCARI.Text = "" Then
+                        STR = "SELECT tbl_transaksi_child.Id," &
+                                " RTRIM(tbl_transaksi_child.Id_trans) AS 'ID Transaksi'," &
+                                " RTRIM(tbl_barang.Kode) AS 'Kode Barang'," &
+                                " RTRIM(tbl_barang.Barang) AS 'Nama Barang'," &
+                                " RTRIM(tbl_transaksi_parent.Person) as 'Supplier'," &
+                                " tbl_transaksi_child.Jumlah as 'Stok Masuk'," &
+                                " tbl_transaksi_child.Harga AS 'Harga Partai'," &
+                                " tbl_transaksi_child.Stok AS 'Stok Sisa'" &
+                                " FROM tbl_transaksi_child INNER JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
+                                " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans=tbl_transaksi_parent.Id_trans" &
+                                " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M'" &
+                                " AND Stok = 0" &
+                                " AND (tbl_transaksi_parent.Id_kasir) = '" & My.Settings.ID_ACCOUNT & "'" &
+                                " ORDER BY tbl_transaksi_child.Id ASC" &
+                                " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
+                    Else
+                        STR = "SELECT tbl_transaksi_child.Id," &
+                                " RTRIM(tbl_transaksi_child.Id_trans) AS 'ID Transaksi'," &
+                                " RTRIM(tbl_barang.Kode) AS 'Kode Barang'," &
+                                " RTRIM(tbl_barang.Barang) AS 'Nama Barang'," &
+                                " RTRIM(tbl_transaksi_parent.Person) as 'Supplier'," &
+                                " tbl_transaksi_child.Jumlah as 'Stok Masuk'," &
+                                " tbl_transaksi_child.Harga AS 'Harga Partai'," &
+                                " tbl_transaksi_child.Stok AS 'Stok Sisa'" &
+                                " FROM tbl_transaksi_child INNER JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
+                                " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans=tbl_transaksi_parent.Id_trans" &
+                                " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M'" &
+                                " AND Stok = 0" &
+                                " AND (tbl_transaksi_parent.Id_kasir) = '" & My.Settings.ID_ACCOUNT & "'" &
+                                " AND RTRIM(tbl_barang.Kode) = '" & TXTCARI.Text & "'" &
+                                " ORDER BY tbl_transaksi_child.Id ASC" &
+                                " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
+                    End If
+                Else
+                    If TXTCARI.Text = "" Then
+                        STR = "SELECT tbl_transaksi_child.Id," &
+                            " RTRIM(tbl_transaksi_child.Id_trans) AS 'ID Transaksi'," &
+                            " RTRIM(tbl_barang.Kode) AS 'Kode Barang'," &
+                            " RTRIM(tbl_barang.Barang) AS 'Nama Barang'," &
+                            " RTRIM(tbl_transaksi_parent.Person) as 'Supplier'," &
+                            " tbl_transaksi_child.Jumlah as 'Stok Masuk'," &
+                            " tbl_transaksi_child.Harga AS 'Harga Partai'," &
+                            " tbl_transaksi_child.Stok AS 'Stok Sisa'" &
+                            " FROM tbl_transaksi_child INNER JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
+                            " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans=tbl_transaksi_parent.Id_trans" &
+                            " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M'" &
+                            " AND (tbl_transaksi_parent.Id_kasir) = '" & My.Settings.ID_ACCOUNT & "'" &
+                            " ORDER BY tbl_transaksi_child.Id ASC" &
+                            " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
+                    Else
+                        STR = "SELECT tbl_transaksi_child.Id," &
+                            " RTRIM(tbl_transaksi_child.Id_trans) AS 'ID Transaksi'," &
+                            " RTRIM(tbl_barang.Kode) AS 'Kode Barang'," &
+                            " RTRIM(tbl_barang.Barang) AS 'Nama Barang'," &
+                            " RTRIM(tbl_transaksi_parent.Person) as 'Supplier'," &
+                            " tbl_transaksi_child.Jumlah as 'Stok Masuk'," &
+                            " tbl_transaksi_child.Harga AS 'Harga Partai'," &
+                            " tbl_transaksi_child.Stok AS 'Stok Sisa'" &
+                            " FROM tbl_transaksi_child INNER JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
+                            " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans=tbl_transaksi_parent.Id_trans" &
+                            " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M'" &
+                            " AND (tbl_transaksi_parent.Id_kasir) = '" & My.Settings.ID_ACCOUNT & "'" &
+                            " AND RTRIM(tbl_barang.Kode) = '" & TXTCARI.Text & "'" &
+                            " ORDER BY tbl_transaksi_child.Id ASC" &
+                            " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
+                    End If
+                End If
+            Case 3
                 If CBTAMPIL.SelectedIndex = 0 Then
                     If TXTCARI.Text = "" Then
                         STR = "SELECT tbl_transaksi_child.Id, RTRIM(tbl_transaksi_child.Id_trans) AS 'ID Transaksi'," &
@@ -1199,5 +1343,33 @@ Public Class FR_MASUK
 
     Private Sub BTNHISTORYOPS_Click(sender As Object, e As EventArgs) Handles BTNHISTORYOPS.Click
         BUKA_FORM(FR_HISTORYPENJUALAN)
+    End Sub
+
+    Private Sub BTNDASHBOARDKASIR_Click(sender As Object, e As EventArgs) Handles BTNDASHBOARDKASIR.Click
+        BUKA_FORM(FR_KASIR_DASHBOARD)
+    End Sub
+
+    Private Sub BTNLABELKASIR_Click(sender As Object, e As EventArgs) Handles BTNLABELKASIR.Click
+        BUKA_FORM(FR_CETAK_LABEL)
+    End Sub
+
+    Private Sub BTNKELUARKASIR_Click(sender As Object, e As EventArgs) Handles BTNKELUARKASIR.Click
+        BUKA_FORM(FR_KELUAR)
+    End Sub
+
+    Private Sub BTNHISTORYPENJUALANKASIR_Click(sender As Object, e As EventArgs) Handles BTNHISTORYPENJUALANKASIR.Click
+        BUKA_FORM(FR_HISTORYPENJUALAN)
+    End Sub
+
+    Private Sub BTNRETURNKASIR_Click(sender As Object, e As EventArgs) Handles BTNRETURNKASIR.Click
+        BUKA_FORM(FR_RETURN)
+    End Sub
+
+    Private Sub BTNLAPORANKASIR_Click(sender As Object, e As EventArgs) Handles BTNLAPORANKASIR.Click
+        BUKA_FORM(FR_REPORT)
+    End Sub
+
+    Private Sub BTNSETTINGKASIR_Click(sender As Object, e As EventArgs) Handles BTNSETTINGKASIR.Click
+        BUKA_FORM(FR_TENTANG)
     End Sub
 End Class
