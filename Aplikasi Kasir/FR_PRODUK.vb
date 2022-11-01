@@ -239,9 +239,16 @@ Public Class FR_PRODUK
                         END4.ToString.Replace(",", ".") & "," &
                         "'" & TXTHARGA5.Text &
                    "')"
+                    CMD = New SqlCommand(STR, CONN)
+                    CMD.ExecuteNonQuery()
+
+                    STR = "INSERT INTO tbl_stok VALUES (" &
+                        "'" & TXTKODE.Text & "'," &
+                        "0" &
+                   ")"
+                    CMD = New SqlCommand(STR, CONN)
+                    CMD.ExecuteNonQuery()
                 End If
-                CMD = New SqlCommand(STR, CONN)
-                CMD.ExecuteNonQuery()
                 MsgBox("Data produk berhasil disimpan.")
                 TXTKODE.Clear()
                 TXTKODE.Enabled = True
@@ -261,6 +268,10 @@ Public Class FR_PRODUK
             DGTAMPIL.Item(0, DGTAMPIL.CurrentRow.Index).Value & "'"
         If MsgBox("Apakah anda yakin akan menghapus produk ini?", vbYesNo) = vbYes Then
             Dim CMD As New SqlCommand(STR, CONN)
+            CMD.ExecuteNonQuery()
+            STR = "DELETE FROM tbl_stok WHERE RTRIM(Kode)='" &
+            DGTAMPIL.Item(0, DGTAMPIL.CurrentRow.Index).Value & "'"
+            CMD = New SqlCommand(STR, CONN)
             CMD.ExecuteNonQuery()
             TAMPIL()
         End If
