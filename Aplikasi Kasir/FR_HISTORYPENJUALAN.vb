@@ -8,7 +8,7 @@ Public Class FR_HISTORYPENJUALAN
 
     Sub BUKA_FORM(ByVal FR As Form)
         FR.Show()
-        Me.Hide()
+        Me.Close()
     End Sub
 
     Sub TAMPIL()

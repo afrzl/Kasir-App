@@ -187,7 +187,8 @@ Public Class FR_REPORT
                                 " tbl_transaksi_child.Jumlah AS 'Jumlah Item'," &
                                 " tbl_transaksi_child.Harga_beli AS 'Harga Beli'," &
                                 " tbl_transaksi_child.Harga / tbl_transaksi_child.Jumlah AS 'Harga Jual'," &
-                                " tbl_transaksi_child.Diskon AS 'Diskon'" &
+                                " tbl_transaksi_child.Diskon AS 'Diskon'," &
+                                " tbl_transaksi_parent.Diskon AS 'Diskon Trans'" &
                                 " FROM tbl_transaksi_child" &
                                 " LEFT JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans" &
                                 " LEFT JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
@@ -212,8 +213,8 @@ Public Class FR_REPORT
                                 " (tbl_transaksi_parent.Tgl) AS 'Tanggal', " &
                                 " tbl_transaksi_child.Jumlah AS 'Jumlah Item'," &
                                 " tbl_transaksi_child.Harga_beli AS 'Harga Beli'," &
-                                " tbl_transaksi_child.Harga AS 'Harga Jual'," &
-                                " tbl_transaksi_child.Diskon AS 'Diskon'" &
+                                " tbl_transaksi_child.Harga_akhir AS 'Harga Jual'," &
+                                " tbl_transaksi_parent.Diskon AS 'Diskon'" &
                                 " FROM tbl_transaksi_child" &
                                 " LEFT JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans" &
                                 " LEFT JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
@@ -599,11 +600,17 @@ Public Class FR_REPORT
                                     TBL.Rows(N - 1).Item(15) = 0
                                 End If
                             Next
+                        Case 4
+                            For N = 1 To TBL.Rows.Count - 1
+                                If TBL.Rows(N).Item(0) = TBL.Rows(N - 1).Item(0) Then
+                                    TBL.Rows(N - 1).Item(8) = 0
+                                End If
+                            Next
                         Case 6
                             For N = 1 To TBL.Rows.Count - 1
                                 If TBL.Rows(N).Item(0) = TBL.Rows(N - 1).Item(0) Then
                                     'TBL.Rows(N).Item(6) = 0
-                                    TBL.Rows(N).Item(7) = 0
+                                    TBL.Rows(N - 1).Item(7) = 0
                                 End If
                             Next
                         Case 7

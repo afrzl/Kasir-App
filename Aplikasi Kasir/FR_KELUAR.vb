@@ -577,24 +577,31 @@ Public Class FR_KELUAR
     End Sub
 
     Private Sub TXTQTY_TextChanged(sender As Object, e As EventArgs) Handles TXTQTY.TextChanged
-        Dim HARGA As Long = 0
-        If Not TXTHARGA.Text = "" Then
+        If Not (TXTKODE.Text = "") Then
+            Dim HARGA As Long = 0
+            If Not TXTHARGA.Text = "" Then
+                HARGA = CLng(TXTHARGA.Text)
+            End If
+            Dim JUMLAH_QTY As Double = 0
+            If TXTQTY.Text = "," Then
+                TXTQTY.Text = "0,"
+            End If
+            If Not TXTQTY.Text = "" Then
+                JUMLAH_QTY = Convert.ToDouble(TXTQTY.Text)
+            End If
+            TXTHARGA.Text = CARI_HARGA(JUMLAH_QTY)
             HARGA = CLng(TXTHARGA.Text)
+            If Label6.Text = "%" Then
+                TXTTOTAL.Text = CInt(HARGA * JUMLAH_QTY * (100 - TXTDISKON.Text) / 100)
+            ElseIf Label6.Text = "Rp" Then
+                TXTTOTAL.Text = CInt((HARGA * JUMLAH_QTY) - (TXTDISKON.Text * JUMLAH_QTY))
+            End If
+        Else
+            MsgBox("Kode barang kosong!")
+            TXTQTY.Text = ""
+            TXTKODE.Select()
         End If
-        Dim JUMLAH_QTY As Double = 0
-        If TXTQTY.Text = "," Then
-            TXTQTY.Text = "0,"
-        End If
-        If Not TXTQTY.Text = "" Then
-            JUMLAH_QTY = Convert.ToDouble(TXTQTY.Text)
-        End If
-        TXTHARGA.Text = CARI_HARGA(JUMLAH_QTY)
-        HARGA = CLng(TXTHARGA.Text)
-        If Label6.Text = "%" Then
-            TXTTOTAL.Text = CInt(HARGA * JUMLAH_QTY * (100 - TXTDISKON.Text) / 100)
-        ElseIf Label6.Text = "Rp" Then
-            TXTTOTAL.Text = CInt((HARGA * JUMLAH_QTY) - (TXTDISKON.Text * JUMLAH_QTY))
-        End If
+
     End Sub
 
     Private Sub TXTKODE_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTKODE.KeyPress

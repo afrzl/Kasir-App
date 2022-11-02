@@ -96,7 +96,8 @@ Public Class FR_MASUK
                         " Stok AS 'Stok Sisa'" &
                         " FROM tbl_transaksi_child INNER JOIN tbl_barang ON tbl_transaksi_child.Kode=tbl_barang.Kode" &
                         " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M' AND" &
-                        " RTRIM(tbl_barang.Kode) = '" & TXTCARI.Text & "'" &
+                        " (RTRIM(tbl_barang.Kode) = '" & TXTCARI.Text & "' OR" &
+                        " RTRIM(tbl_barang.Barang) LIKE '%" & TXTCARI.Text & "%')" &
                         " ORDER BY Id DESC" &
                         " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
                     End If
@@ -124,7 +125,8 @@ Public Class FR_MASUK
                             " Stok AS 'Stok Sisa'" &
                             " FROM tbl_transaksi_child INNER JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
                             " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M' AND" &
-                            " RTRIM(tbl_barang.Kode) = '" & TXTCARI.Text & "'" &
+                            " (RTRIM(tbl_barang.Kode) = '" & TXTCARI.Text & "' OR" &
+                            " RTRIM(tbl_barang.Barang) LIKE '%" & TXTCARI.Text & "%')" &
                             " AND Stok != 0" &
                             " ORDER BY Id DESC" &
                             " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
@@ -153,7 +155,8 @@ Public Class FR_MASUK
                             " Stok AS 'Stok Sisa'" &
                             " FROM tbl_transaksi_child INNER JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
                             " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M' AND" &
-                            " RTRIM(Kode) = '" & TXTCARI.Text & "'" &
+                            " (RTRIM(tbl_barang.Kode) = '" & TXTCARI.Text & "' OR" &
+                            " RTRIM(tbl_barang.Barang) LIKE '%" & TXTCARI.Text & "%')" &
                             " AND Stok = 0" &
                             " ORDER BY Id DESC" &
                             " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
@@ -181,7 +184,8 @@ Public Class FR_MASUK
                         " Stok AS 'Stok Sisa'" &
                         " FROM tbl_transaksi_child INNER JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
                         " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M' AND" &
-                        " RTRIM(Kode) = '" & TXTCARI.Text & "'" &
+                        " (RTRIM(tbl_barang.Kode) = '" & TXTCARI.Text & "' OR" &
+                        " RTRIM(tbl_barang.Barang) LIKE '%" & TXTCARI.Text & "%')" &
                         " ORDER BY Id DESC" &
                         " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
                     End If
@@ -214,8 +218,9 @@ Public Class FR_MASUK
                             " FROM tbl_transaksi_child INNER JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
                             " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans=tbl_transaksi_parent.Id_trans" &
                             " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M' AND" &
-                            " tbl_transaksi_parent.Id_kasir = '" & My.Settings.ID_ACCOUNT & "'" &
-                            " AND RTRIM(tbl_barang.Kode) = '" & TXTCARI.Text & "'" &
+                            " tbl_transaksi_parent.Id_kasir = '" & My.Settings.ID_ACCOUNT & "' AND" &
+                            " (RTRIM(tbl_barang.Kode) = '" & TXTCARI.Text & "' OR" &
+                            " RTRIM(tbl_barang.Barang) LIKE '%" & TXTCARI.Text & "%')" &
                             " ORDER BY tbl_transaksi_child.Id DESC" &
                             " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
                     End If
@@ -249,8 +254,9 @@ Public Class FR_MASUK
                             " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans=tbl_transaksi_parent.Id_trans" &
                             " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M'" &
                             " AND Stok != 0" &
-                            " AND (tbl_transaksi_parent.Id_kasir) = '" & My.Settings.ID_ACCOUNT & "'" &
-                            " AND RTRIM(tbl_barang.Kode) = '" & TXTCARI.Text & "'" &
+                            " AND (tbl_transaksi_parent.Id_kasir) = '" & My.Settings.ID_ACCOUNT & "' AND" &
+                            " (RTRIM(tbl_barang.Kode) = '" & TXTCARI.Text & "' OR" &
+                            " RTRIM(tbl_barang.Barang) LIKE '%" & TXTCARI.Text & "%')" &
                             " ORDER BY tbl_transaksi_child.Id DESC" &
                             " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
                     End If
@@ -284,8 +290,9 @@ Public Class FR_MASUK
                                 " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans=tbl_transaksi_parent.Id_trans" &
                                 " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M'" &
                                 " AND Stok = 0" &
-                                " AND (tbl_transaksi_parent.Id_kasir) = '" & My.Settings.ID_ACCOUNT & "'" &
-                                " AND RTRIM(tbl_barang.Kode) = '" & TXTCARI.Text & "'" &
+                                " AND (tbl_transaksi_parent.Id_kasir) = '" & My.Settings.ID_ACCOUNT & "' AND" &
+                                " (RTRIM(tbl_barang.Kode) = '" & TXTCARI.Text & "' OR" &
+                                " RTRIM(tbl_barang.Barang) LIKE '%" & TXTCARI.Text & "%')" &
                                 " ORDER BY tbl_transaksi_child.Id DESC" &
                                 " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
                     End If
@@ -317,8 +324,9 @@ Public Class FR_MASUK
                             " FROM tbl_transaksi_child INNER JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
                             " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans=tbl_transaksi_parent.Id_trans" &
                             " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M'" &
-                            " AND (tbl_transaksi_parent.Id_kasir) = '" & My.Settings.ID_ACCOUNT & "'" &
-                            " AND RTRIM(tbl_barang.Kode) = '" & TXTCARI.Text & "'" &
+                            " AND (tbl_transaksi_parent.Id_kasir) = '" & My.Settings.ID_ACCOUNT & "' AND" &
+                            " (RTRIM(tbl_barang.Kode) = '" & TXTCARI.Text & "' OR" &
+                            " RTRIM(tbl_barang.Barang) LIKE '%" & TXTCARI.Text & "%')" &
                             " ORDER BY tbl_transaksi_child.Id DESC" &
                             " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
                     End If
@@ -351,8 +359,9 @@ Public Class FR_MASUK
                             " FROM tbl_transaksi_child INNER JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
                             " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans=tbl_transaksi_parent.Id_trans" &
                             " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M' AND" &
-                            " tbl_transaksi_parent.Id_kasir = '" & My.Settings.ID_ACCOUNT & "'" &
-                            " AND RTRIM(tbl_barang.Kode) = '" & TXTCARI.Text & "'" &
+                            " tbl_transaksi_parent.Id_kasir = '" & My.Settings.ID_ACCOUNT & "' AND" &
+                            " (RTRIM(tbl_barang.Kode) = '" & TXTCARI.Text & "' OR" &
+                            " RTRIM(tbl_barang.Barang) LIKE '%" & TXTCARI.Text & "%')" &
                             " ORDER BY tbl_transaksi_child.Id DESC" &
                             " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
                     End If
@@ -386,8 +395,9 @@ Public Class FR_MASUK
                             " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans=tbl_transaksi_parent.Id_trans" &
                             " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M'" &
                             " AND Stok != 0" &
-                            " AND (tbl_transaksi_parent.Id_kasir) = '" & My.Settings.ID_ACCOUNT & "'" &
-                            " AND RTRIM(tbl_barang.Kode) = '" & TXTCARI.Text & "'" &
+                            " AND (tbl_transaksi_parent.Id_kasir) = '" & My.Settings.ID_ACCOUNT & "' AND" &
+                            " (RTRIM(tbl_barang.Kode) = '" & TXTCARI.Text & "' OR" &
+                            " RTRIM(tbl_barang.Barang) LIKE '%" & TXTCARI.Text & "%')" &
                             " ORDER BY tbl_transaksi_child.Id DESC" &
                             " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
                     End If
@@ -421,8 +431,9 @@ Public Class FR_MASUK
                                 " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans=tbl_transaksi_parent.Id_trans" &
                                 " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M'" &
                                 " AND Stok = 0" &
-                                " AND (tbl_transaksi_parent.Id_kasir) = '" & My.Settings.ID_ACCOUNT & "'" &
-                                " AND RTRIM(tbl_barang.Kode) = '" & TXTCARI.Text & "'" &
+                                " AND (tbl_transaksi_parent.Id_kasir) = '" & My.Settings.ID_ACCOUNT & "' AND" &
+                                " (RTRIM(tbl_barang.Kode) = '" & TXTCARI.Text & "' OR" &
+                                " RTRIM(tbl_barang.Barang) LIKE '%" & TXTCARI.Text & "%')" &
                                 " ORDER BY tbl_transaksi_child.Id DESC" &
                                 " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
                     End If
@@ -454,8 +465,9 @@ Public Class FR_MASUK
                             " FROM tbl_transaksi_child INNER JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
                             " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans=tbl_transaksi_parent.Id_trans" &
                             " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M'" &
-                            " AND (tbl_transaksi_parent.Id_kasir) = '" & My.Settings.ID_ACCOUNT & "'" &
-                            " AND RTRIM(tbl_barang.Kode) = '" & TXTCARI.Text & "'" &
+                            " AND (tbl_transaksi_parent.Id_kasir) = '" & My.Settings.ID_ACCOUNT & "' AND" &
+                            " (RTRIM(tbl_barang.Kode) = '" & TXTCARI.Text & "' OR" &
+                            " RTRIM(tbl_barang.Barang) LIKE '%" & TXTCARI.Text & "%')" &
                             " ORDER BY tbl_transaksi_child.Id DESC" &
                             " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
                     End If
@@ -1280,8 +1292,8 @@ Public Class FR_MASUK
     End Sub
 
     Private Sub TXTJUMLAH_Leave(sender As Object, e As EventArgs) Handles TXTJUMLAH.Leave
-        Dim QTY As Double
-        If TXTJUMLAH.Text <> 0 Then
+        Dim QTY As Double = 0
+        If TXTJUMLAH.Text <> "" Then
             QTY = Convert.ToDouble(TXTJUMLAH.Text)
         End If
         If TXTJUMLAH.Text <> "" And QTY = 0 Then
@@ -1377,5 +1389,13 @@ Public Class FR_MASUK
 
     Private Sub BTNSETTINGKASIR_Click(sender As Object, e As EventArgs) Handles BTNSETTINGKASIR.Click
         BUKA_FORM(FR_TENTANG)
+    End Sub
+
+    Private Sub TXTJUMLAH_TextChanged(sender As Object, e As EventArgs) Handles TXTJUMLAH.TextChanged
+        If TXTKODE.Text = "" Then
+            MsgBox("Kode barang kosong!")
+            TXTJUMLAH.Text = ""
+            TXTKODE.Select()
+        End If
     End Sub
 End Class
