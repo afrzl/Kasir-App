@@ -84,7 +84,7 @@ Public Class FR_MASUK
                         " FROM tbl_transaksi_child" &
                         " INNER JOIN tbl_barang ON tbl_transaksi_child.Kode=tbl_barang.Kode" &
                         " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M'" &
-                        " ORDER BY Id ASC" &
+                        " ORDER BY Id DESC" &
                         " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
                     Else
                         STR = "SELECT Id, RTRIM(Id_trans) AS 'ID Transaksi'," &
@@ -97,7 +97,7 @@ Public Class FR_MASUK
                         " FROM tbl_transaksi_child INNER JOIN tbl_barang ON tbl_transaksi_child.Kode=tbl_barang.Kode" &
                         " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M' AND" &
                         " RTRIM(tbl_barang.Kode) = '" & TXTCARI.Text & "'" &
-                        " ORDER BY Id ASC" &
+                        " ORDER BY Id DESC" &
                         " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
                     End If
                 ElseIf CBTAMPIL.SelectedIndex = 1 Then
@@ -112,7 +112,7 @@ Public Class FR_MASUK
                             " FROM tbl_transaksi_child INNER JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
                             " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M'" &
                             " AND Stok != 0" &
-                            " ORDER BY Id ASC" &
+                            " ORDER BY Id DESC" &
                             " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
                     Else
                         STR = "SELECT Id, RTRIM(Id_trans) AS 'ID Transaksi'," &
@@ -126,7 +126,7 @@ Public Class FR_MASUK
                             " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M' AND" &
                             " RTRIM(tbl_barang.Kode) = '" & TXTCARI.Text & "'" &
                             " AND Stok != 0" &
-                            " ORDER BY Id ASC" &
+                            " ORDER BY Id DESC" &
                             " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
                     End If
                 ElseIf CBTAMPIL.SelectedIndex = 2 Then
@@ -141,7 +141,7 @@ Public Class FR_MASUK
                             " FROM tbl_transaksi_child INNER JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
                             " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M'" &
                             " AND Stok = 0" &
-                            " ORDER BY Id ASC" &
+                            " ORDER BY Id DESC" &
                             " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
                     Else
                         STR = "SELECT Id, RTRIM(Id_trans) AS 'ID Transaksi'," &
@@ -155,7 +155,7 @@ Public Class FR_MASUK
                             " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M' AND" &
                             " RTRIM(Kode) = '" & TXTCARI.Text & "'" &
                             " AND Stok = 0" &
-                            " ORDER BY Id ASC" &
+                            " ORDER BY Id DESC" &
                             " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
                     End If
                 Else
@@ -169,7 +169,7 @@ Public Class FR_MASUK
                         " Stok AS 'Stok Sisa'" &
                         " FROM tbl_transaksi_child INNER JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
                         " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M'" &
-                        " ORDER BY Id ASC" &
+                        " ORDER BY Id DESC" &
                         " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
                     Else
                         STR = "SELECT Id, RTRIM(Id_trans) AS 'ID Transaksi'," &
@@ -182,7 +182,7 @@ Public Class FR_MASUK
                         " FROM tbl_transaksi_child INNER JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
                         " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M' AND" &
                         " RTRIM(Kode) = '" & TXTCARI.Text & "'" &
-                        " ORDER BY Id ASC" &
+                        " ORDER BY Id DESC" &
                         " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
                     End If
                 End If
@@ -200,7 +200,7 @@ Public Class FR_MASUK
                             " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans=tbl_transaksi_parent.Id_trans" &
                             " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M' AND" &
                             " (tbl_transaksi_parent.Id_kasir) = '" & My.Settings.ID_ACCOUNT & "'" &
-                            " ORDER BY tbl_transaksi_child.Id ASC" &
+                            " ORDER BY tbl_transaksi_child.Id DESC" &
                             " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
                     Else
                         STR = "SELECT tbl_transaksi_child.Id," &
@@ -216,7 +216,7 @@ Public Class FR_MASUK
                             " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M' AND" &
                             " tbl_transaksi_parent.Id_kasir = '" & My.Settings.ID_ACCOUNT & "'" &
                             " AND RTRIM(tbl_barang.Kode) = '" & TXTCARI.Text & "'" &
-                            " ORDER BY tbl_transaksi_child.Id ASC" &
+                            " ORDER BY tbl_transaksi_child.Id DESC" &
                             " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
                     End If
                 ElseIf CBTAMPIL.SelectedIndex = 1 Then
@@ -234,7 +234,7 @@ Public Class FR_MASUK
                             " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M'" &
                             " AND Stok != 0" &
                             " AND (tbl_transaksi_parent.Id_kasir) = '" & My.Settings.ID_ACCOUNT & "'" &
-                            " ORDER BY tbl_transaksi_child.Id ASC" &
+                            " ORDER BY tbl_transaksi_child.Id DESC" &
                             " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
                     Else
                         STR = "SELECT tbl_transaksi_child.Id," &
@@ -251,7 +251,7 @@ Public Class FR_MASUK
                             " AND Stok != 0" &
                             " AND (tbl_transaksi_parent.Id_kasir) = '" & My.Settings.ID_ACCOUNT & "'" &
                             " AND RTRIM(tbl_barang.Kode) = '" & TXTCARI.Text & "'" &
-                            " ORDER BY tbl_transaksi_child.Id ASC" &
+                            " ORDER BY tbl_transaksi_child.Id DESC" &
                             " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
                     End If
                 ElseIf CBTAMPIL.SelectedIndex = 2 Then
@@ -269,7 +269,7 @@ Public Class FR_MASUK
                                 " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M'" &
                                 " AND Stok = 0" &
                                 " AND (tbl_transaksi_parent.Id_kasir) = '" & My.Settings.ID_ACCOUNT & "'" &
-                                " ORDER BY tbl_transaksi_child.Id ASC" &
+                                " ORDER BY tbl_transaksi_child.Id DESC" &
                                 " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
                     Else
                         STR = "SELECT tbl_transaksi_child.Id," &
@@ -286,7 +286,7 @@ Public Class FR_MASUK
                                 " AND Stok = 0" &
                                 " AND (tbl_transaksi_parent.Id_kasir) = '" & My.Settings.ID_ACCOUNT & "'" &
                                 " AND RTRIM(tbl_barang.Kode) = '" & TXTCARI.Text & "'" &
-                                " ORDER BY tbl_transaksi_child.Id ASC" &
+                                " ORDER BY tbl_transaksi_child.Id DESC" &
                                 " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
                     End If
                 Else
@@ -303,7 +303,7 @@ Public Class FR_MASUK
                             " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans=tbl_transaksi_parent.Id_trans" &
                             " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M'" &
                             " AND (tbl_transaksi_parent.Id_kasir) = '" & My.Settings.ID_ACCOUNT & "'" &
-                            " ORDER BY tbl_transaksi_child.Id ASC" &
+                            " ORDER BY tbl_transaksi_child.Id DESC" &
                             " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
                     Else
                         STR = "SELECT tbl_transaksi_child.Id," &
@@ -319,7 +319,7 @@ Public Class FR_MASUK
                             " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M'" &
                             " AND (tbl_transaksi_parent.Id_kasir) = '" & My.Settings.ID_ACCOUNT & "'" &
                             " AND RTRIM(tbl_barang.Kode) = '" & TXTCARI.Text & "'" &
-                            " ORDER BY tbl_transaksi_child.Id ASC" &
+                            " ORDER BY tbl_transaksi_child.Id DESC" &
                             " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
                     End If
                 End If
@@ -337,7 +337,7 @@ Public Class FR_MASUK
                             " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans=tbl_transaksi_parent.Id_trans" &
                             " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M' AND" &
                             " (tbl_transaksi_parent.Id_kasir) = '" & My.Settings.ID_ACCOUNT & "'" &
-                            " ORDER BY tbl_transaksi_child.Id ASC" &
+                            " ORDER BY tbl_transaksi_child.Id DESC" &
                             " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
                     Else
                         STR = "SELECT tbl_transaksi_child.Id," &
@@ -353,7 +353,7 @@ Public Class FR_MASUK
                             " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M' AND" &
                             " tbl_transaksi_parent.Id_kasir = '" & My.Settings.ID_ACCOUNT & "'" &
                             " AND RTRIM(tbl_barang.Kode) = '" & TXTCARI.Text & "'" &
-                            " ORDER BY tbl_transaksi_child.Id ASC" &
+                            " ORDER BY tbl_transaksi_child.Id DESC" &
                             " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
                     End If
                 ElseIf CBTAMPIL.SelectedIndex = 1 Then
@@ -371,7 +371,7 @@ Public Class FR_MASUK
                             " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M'" &
                             " AND Stok != 0" &
                             " AND (tbl_transaksi_parent.Id_kasir) = '" & My.Settings.ID_ACCOUNT & "'" &
-                            " ORDER BY tbl_transaksi_child.Id ASC" &
+                            " ORDER BY tbl_transaksi_child.Id DESC" &
                             " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
                     Else
                         STR = "SELECT tbl_transaksi_child.Id," &
@@ -388,7 +388,7 @@ Public Class FR_MASUK
                             " AND Stok != 0" &
                             " AND (tbl_transaksi_parent.Id_kasir) = '" & My.Settings.ID_ACCOUNT & "'" &
                             " AND RTRIM(tbl_barang.Kode) = '" & TXTCARI.Text & "'" &
-                            " ORDER BY tbl_transaksi_child.Id ASC" &
+                            " ORDER BY tbl_transaksi_child.Id DESC" &
                             " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
                     End If
                 ElseIf CBTAMPIL.SelectedIndex = 2 Then
@@ -406,7 +406,7 @@ Public Class FR_MASUK
                                 " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M'" &
                                 " AND Stok = 0" &
                                 " AND (tbl_transaksi_parent.Id_kasir) = '" & My.Settings.ID_ACCOUNT & "'" &
-                                " ORDER BY tbl_transaksi_child.Id ASC" &
+                                " ORDER BY tbl_transaksi_child.Id DESC" &
                                 " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
                     Else
                         STR = "SELECT tbl_transaksi_child.Id," &
@@ -423,7 +423,7 @@ Public Class FR_MASUK
                                 " AND Stok = 0" &
                                 " AND (tbl_transaksi_parent.Id_kasir) = '" & My.Settings.ID_ACCOUNT & "'" &
                                 " AND RTRIM(tbl_barang.Kode) = '" & TXTCARI.Text & "'" &
-                                " ORDER BY tbl_transaksi_child.Id ASC" &
+                                " ORDER BY tbl_transaksi_child.Id DESC" &
                                 " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
                     End If
                 Else
@@ -440,7 +440,7 @@ Public Class FR_MASUK
                             " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans=tbl_transaksi_parent.Id_trans" &
                             " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M'" &
                             " AND (tbl_transaksi_parent.Id_kasir) = '" & My.Settings.ID_ACCOUNT & "'" &
-                            " ORDER BY tbl_transaksi_child.Id ASC" &
+                            " ORDER BY tbl_transaksi_child.Id DESC" &
                             " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
                     Else
                         STR = "SELECT tbl_transaksi_child.Id," &
@@ -456,7 +456,7 @@ Public Class FR_MASUK
                             " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M'" &
                             " AND (tbl_transaksi_parent.Id_kasir) = '" & My.Settings.ID_ACCOUNT & "'" &
                             " AND RTRIM(tbl_barang.Kode) = '" & TXTCARI.Text & "'" &
-                            " ORDER BY tbl_transaksi_child.Id ASC" &
+                            " ORDER BY tbl_transaksi_child.Id DESC" &
                             " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
                     End If
                 End If
@@ -714,6 +714,8 @@ Public Class FR_MASUK
             Dim IDX As String = DGHISTORY.Item(0, DGHISTORY.CurrentRow.Index).Value
             Dim IDTrans As String = DGHISTORY.Item(1, DGHISTORY.CurrentRow.Index).Value
             Dim CMD As New SqlCommand("DELETE FROM tbl_transaksi_child WHERE Id='" & IDX & "'", CONN)
+            CMD.ExecuteNonQuery()
+            CMD = New SqlCommand("UPDATE tbl_stok SET Stok-=" & DGHISTORY.Item(7, DGHISTORY.CurrentRow.Index).Value.ToString.Replace(",", ".") & " WHERE Kode='" & DGHISTORY.Item(2, DGHISTORY.CurrentRow.Index).Value & "'", CONN)
             CMD.ExecuteNonQuery()
 
             Dim STR As String = "SELECT * FROM tbl_transaksi_child WHERE RTRIM(Id_trans)='" & IDTrans & "'"
