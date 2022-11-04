@@ -223,6 +223,8 @@ Public Class FR_PRODUK
                     "End4=" & END4.ToString.Replace(",", ".") & "," &
                     "Harga5='" & TXTHARGA5.Text & "'" &
                     "WHERE Kode='" & TXTKODE.Text & "'"
+                    CMD = New SqlCommand(STR, CONN)
+                    CMD.ExecuteNonQuery()
                 Else
                     RD.Close()
                     STR = "INSERT INTO tbl_barang VALUES (" &

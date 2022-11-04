@@ -394,14 +394,34 @@ Public Class FR_RETURN
         If MsgBox("Apakah anda yakin akan menghapus data transaksi?", vbYesNo) = vbYes Then
             Dim IDX As String = DGTAMPIL.Item(0, DGTAMPIL.CurrentRow.Index).Value
             Dim NAMA_BARANG As String = DGTAMPIL.Item(2, DGTAMPIL.CurrentRow.Index).Value.ToString.Trim
+            Dim STOK As Double
 
-            Dim CMD As New SqlCommand("DELETE FROM tbl_transaksi_child WHERE Id_trans='" & IDX & "'", CONN)
+            Dim Str As String = "SELECT Stok AS Stok" &
+                " FROM tbl_transaksi_child" &
+                " WHERE RTRIM(Id_trans) = '" & IDX & "'"
+            Dim CMD As New SqlCommand(Str, CONN)
+            Dim RD As SqlDataReader
+            RD = CMD.ExecuteReader
+            If RD.HasRows Then
+                RD.Read()
+                TXTQTY.Text = RD.Item("Stok")
+                RD.Close()
+            Else
+                RD.Close()
+            End If
+            RD.Close()
+
+            CMD = New SqlCommand("DELETE FROM tbl_transaksi_child WHERE Id_trans='" & IDX & "'", CONN)
             CMD.ExecuteNonQuery()
 
             CMD = New SqlCommand("DELETE FROM tbl_transaksi_parent WHERE Id_trans='" & IDX & "'", CONN)
             CMD.ExecuteNonQuery()
+
+            CMD = New SqlCommand("UPDATE tbl_stok SET Stok-=" & TXTQTY.Text.Replace(",", ".") & " WHERE Kode='" & DGTAMPIL.Item(1, DGTAMPIL.CurrentRow.Index).Value & "'", CONN)
+            CMD.ExecuteNonQuery()
             TAMPIL()
-            MsgBox("Data barang rusak berhasil dihapus, dan stok barang " & NAMA_BARANG & " ditambah.")
+            MsgBox("Data barang return berhasil dihapus, dan stok barang " & NAMA_BARANG & " berkurang.")
+            TXTQTY.Text = ""
         End If
     End Sub
 

@@ -1390,12 +1390,4 @@ Public Class FR_MASUK
     Private Sub BTNSETTINGKASIR_Click(sender As Object, e As EventArgs) Handles BTNSETTINGKASIR.Click
         BUKA_FORM(FR_TENTANG)
     End Sub
-
-    Private Sub TXTJUMLAH_TextChanged(sender As Object, e As EventArgs) Handles TXTJUMLAH.TextChanged
-        If TXTKODE.Text = "" Then
-            MsgBox("Kode barang kosong!")
-            TXTJUMLAH.Text = ""
-            TXTKODE.Select()
-        End If
-    End Sub
 End Class

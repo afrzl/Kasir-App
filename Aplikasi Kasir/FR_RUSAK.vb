@@ -350,20 +350,33 @@ Public Class FR_RUSAK
             Dim ID_AWAL As Integer = DGTAMPIL.Item(0, DGTAMPIL.CurrentRow.Index).Value
             DGTAMPIL.Columns(0).Visible = False
 
-            Dim CMD As New SqlCommand("DELETE FROM tbl_transaksi_parent WHERE Id_trans='" & IDTRANS & "'", CONN)
-            CMD.ExecuteNonQuery()
-
-            CMD = New SqlCommand("DELETE FROM tbl_transaksi_child WHERE Id_trans='" & IDTRANS & "'", CONN)
-            CMD.ExecuteNonQuery()
-
             Dim ID_MASUK As String = "M" + Mid(IDTRANS, 2, 9)
             Dim STOK_AWAL As Double
 
-            Dim STR As String = "SELECT Stok AS Stok, " &
+            Dim str As String
+
+            str = "SELECT Jumlah AS Jumlah" &
+                " FROM tbl_transaksi_child" &
+                " WHERE RTRIM(Id_trans) = '" & IDTRANS & "'"
+            Dim CMD As New SqlCommand(str, CONN)
+            Dim RD As SqlDataReader
+            RD = CMD.ExecuteReader
+            If RD.HasRows Then
+                RD.Read()
+                TXTQTY.Text = RD.Item("Jumlah")
+                RD.Close()
+            Else
+                RD.Close()
+            End If
+            RD.Close()
+
+            CMD = New SqlCommand("UPDATE tbl_stok SET Stok+=" & TXTQTY.Text.Replace(",", ".") & " WHERE Kode='" & KODE_BARANG & "'", CONN)
+            CMD.ExecuteNonQuery()
+
+            str = "SELECT Stok AS Stok, " &
                 " (SELECT Barang FROM tbl_barang WHERE RTRIM(tbl_barang.Kode) = RTRIM(tbl_transaksi_child.Kode)) AS Nama" &
                 " FROM tbl_transaksi_child WHERE Id='" & ID_AWAL & "'"
             CMD = New SqlCommand(STR, CONN)
-            Dim RD As SqlDataReader
             RD = CMD.ExecuteReader
             If RD.HasRows Then
                 RD.Read()
@@ -382,8 +395,16 @@ Public Class FR_RUSAK
             CMD = New SqlCommand(STR, CONN)
             CMD.ExecuteNonQuery()
 
+
+            CMD = New SqlCommand("DELETE FROM tbl_transaksi_parent WHERE Id_trans='" & IDTRANS & "'", CONN)
+            CMD.ExecuteNonQuery()
+
+            CMD = New SqlCommand("DELETE FROM tbl_transaksi_child WHERE Id_trans='" & IDTRANS & "'", CONN)
+            CMD.ExecuteNonQuery()
+
             TAMPIL()
             TAMPIL_EXPIRED()
+            TXTQTY.Text = ""
             MsgBox("Data barang rusak berhasil dihapus, dan stok barang " & NAMA_BARANG & " ditambah.")
         End If
     End Sub
