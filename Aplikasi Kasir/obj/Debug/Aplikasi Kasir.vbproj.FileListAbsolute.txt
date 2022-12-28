@@ -74,3 +74,4 @@ C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi 
 C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Debug\System.ValueTuple.xml
 C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\obj\Debug\Aplikasi_Kasir.FR_CETAKBARCODE.resources
 C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\obj\Debug\Aplikasi_Kasir.FR_HISTORYPENJUALAN.resources
+C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\obj\Debug\Aplikasi Kasir.vbproj.AssemblyReference.cache

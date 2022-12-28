@@ -530,6 +530,7 @@ Public Class FR_KELUAR
                     Next
                     DGTAMPIL.Rows.RemoveAt(BARIS_DATA)
                     TOTAL_HARGA()
+                    CARI_KEMBALIAN()
                     TXTKODE.Enabled = True
                     BTNCARI.Visible = True
                     BTNCANCEL.Visible = False
