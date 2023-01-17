@@ -92,11 +92,17 @@ Public Class FR_TENTANG
         LBALAMATTOKO.Text = ALAMAT_TOKO
         LBNOTOKO.Text = NO_TOKO
         LBPRINTER_NOTA.Text = PRINTER_NOTA
+        If CUSTOMER_DISPLAY Then
+            LB_CUSTOMER_DISPLAY.Text = "Ya"
+        Else
+            LB_CUSTOMER_DISPLAY.Text = "Tidak"
+        End If
 
         TXTNAMATOKO.Text = LBNAMATOKO.Text
         TXTALAMATTOKO.Text = LBALAMATTOKO.Text
         TXTNOTOKO.Text = LBNOTOKO.Text
         TXTPRINTER_NOTA.Text = LBPRINTER_NOTA.Text
+        TXT_CUSTOMER_DISPLAY.Text = LB_CUSTOMER_DISPLAY.Text
     End Sub
 
     Sub TAMPIL_TOKO()
@@ -109,6 +115,7 @@ Public Class FR_TENTANG
         TXTNAMATOKO.Text = LBNAMATOKO.Text
         TXTALAMATTOKO.Text = LBALAMATTOKO.Text
         TXTNOTOKO.Text = LBNOTOKO.Text
+        TXT_CUSTOMER_DISPLAY.Text = LB_CUSTOMER_DISPLAY.Text
     End Sub
 
     Private Sub BTNSIMPAN_Click(sender As Object, e As EventArgs) Handles BTNSIMPAN.Click
@@ -230,10 +237,12 @@ Public Class FR_TENTANG
         LBNAMATOKO.Visible = True
         LBALAMATTOKO.Visible = True
         LBNOTOKO.Visible = True
+        LB_CUSTOMER_DISPLAY.Visible = True
 
         TXTNAMATOKO.Visible = False
         TXTALAMATTOKO.Visible = False
         TXTNOTOKO.Visible = False
+        TXT_CUSTOMER_DISPLAY.Visible = False
 
         BTNUBAHTOKO.Visible = True
         BTNSIMPANTOKO.Visible = False
@@ -251,10 +260,12 @@ Public Class FR_TENTANG
         LBNAMATOKO.Visible = False
         LBALAMATTOKO.Visible = False
         LBNOTOKO.Visible = False
+        LB_CUSTOMER_DISPLAY.Visible = False
 
         TXTNAMATOKO.Visible = True
         TXTALAMATTOKO.Visible = True
         TXTNOTOKO.Visible = True
+        TXT_CUSTOMER_DISPLAY.Visible = True
 
         BTNUBAHTOKO.Visible = False
         BTNSIMPANTOKO.Visible = True
@@ -381,7 +392,11 @@ Public Class FR_TENTANG
             MsgBox("Data tidak lengkap!")
         Else
             If MsgBox("Apakah anda yakin akan mengubah data toko?", vbYesNo) = vbYes Then
-                MASUK_REGISTRY(TXTNAMATOKO.Text, TXTALAMATTOKO.Text, TXTNOTOKO.Text, TXTPRINTER_NOTA.Text, IMGBYTE)
+                Dim CUSTOMERDISPLAY As Boolean = 0
+                If TXT_CUSTOMER_DISPLAY.Text = "Ya" Then
+                    CUSTOMERDISPLAY = 1
+                End If
+                MASUK_REGISTRY(TXTNAMATOKO.Text, TXTALAMATTOKO.Text, TXTNOTOKO.Text, TXTPRINTER_NOTA.Text, IMGBYTE, CUSTOMERDISPLAY)
                 KONDISI_AWAL_TOKO()
                 TAMPIL()
             End If

@@ -128,6 +128,54 @@ Public Class FR_KELUAR
         DGTAMPIL.FirstDisplayedScrollingRowIndex = DGTAMPIL.RowCount - 1
         DGTAMPIL.ClearSelection()
         DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Selected = True
+
+        DUPLICATE_DGV()
+        FR_KELUAR_CUSTOMER.DGTAMPIL.FirstDisplayedScrollingRowIndex = DGTAMPIL.RowCount - 1
+        FR_KELUAR_CUSTOMER.DGTAMPIL.ClearSelection()
+        FR_KELUAR_CUSTOMER.DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Selected = True
+    End Sub
+
+    Sub DUPLICATE_DGV()
+        'References to source and target grid.
+
+        Dim sourceGrid As DataGridView = Me.DGTAMPIL
+        Dim targetGrid As DataGridView = FR_KELUAR_CUSTOMER.DGTAMPIL
+
+        'Copy all rows and cells.
+
+        Dim targetRows = New List(Of DataGridViewRow)
+
+        For Each sourceRow As DataGridViewRow In sourceGrid.Rows
+
+            If (Not sourceRow.IsNewRow) Then
+
+                Dim targetRow = CType(sourceRow.Clone(), DataGridViewRow)
+
+                'The Clone method do not copy the cell values so we must do this manually.
+                'See: https://msdn.microsoft.com/en-us/library/system.windows.forms.datagridviewrow.clone(v=vs.110).aspx
+
+                For Each cell As DataGridViewCell In sourceRow.Cells
+                    targetRow.Cells(cell.ColumnIndex).Value = cell.Value
+                Next
+
+                targetRows.Add(targetRow)
+
+            End If
+
+        Next
+
+        'Clear target columns and then clone all source columns.
+
+        targetGrid.Columns.Clear()
+
+        For Each column As DataGridViewColumn In sourceGrid.Columns
+            targetGrid.Columns.Add(CType(column.Clone(), DataGridViewColumn))
+        Next
+
+        'It's recommended to use the AddRange method (if available)
+        'when adding multiple items to a collection.
+
+        targetGrid.Rows.AddRange(targetRows.ToArray())
     End Sub
 
     Private Function CARI_STOK(ByVal Kode As String) As Double
@@ -241,6 +289,14 @@ Public Class FR_KELUAR
         PEWAKTU.Enabled = True
 
         ALAMATTOKO.Text = ALAMAT_TOKO
+
+        If CUSTOMER_DISPLAY Then
+            Dim screen As Screen
+            screen = Screen.AllScreens(1)
+            FR_KELUAR_CUSTOMER.StartPosition = FormStartPosition.Manual
+            FR_KELUAR_CUSTOMER.Location = screen.Bounds.Location + New Point(100, 100)
+            FR_KELUAR_CUSTOMER.Show()
+        End If
     End Sub
 
     Dim ID_TRANSAKSI As String
@@ -379,12 +435,16 @@ Public Class FR_KELUAR
         ElseIf ROLE = 3 Then
             FR = New FR_KASIR_DASHBOARD
         End If
+        If CUSTOMER_DISPLAY Then
+            FR_KELUAR_CUSTOMER.Close()
+        End If
         FR.Show()
         Me.Close()
     End Sub
 
     Private Sub TXTDISKON_PERSEN_TextChanged(sender As Object, e As EventArgs) Handles TXTDISKON_PERSEN.TextChanged
         HITUNGDISKON_RUPIAH()
+        FR_KELUAR_CUSTOMER.TXTDISKON_PERSEN.Text = TXTDISKON_PERSEN.Text
     End Sub
 
     Sub HITUNGDISKON_RUPIAH()
@@ -420,6 +480,7 @@ Public Class FR_KELUAR
 
     Private Sub TXTBAYAR_TextChanged(sender As Object, e As EventArgs) Handles TXTBAYAR.TextChanged
         CARI_KEMBALIAN()
+        FR_KELUAR_CUSTOMER.TXTBAYAR.Text = TXTBAYAR.Text
     End Sub
 
     Private Sub TXTBAYAR_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTBAYAR.KeyPress
@@ -430,6 +491,7 @@ Public Class FR_KELUAR
                 FR_KELUAR_KEMBALIAN.LBKEMBALI.Text = Format(CInt(TXTKEMBALIAN.Text), "##,##0")
                 FR_KELUAR_KEMBALIAN.ID_TRANSAKSI.Text = ID_TRANSAKSI
                 FR_KELUAR_KEMBALIAN.Show()
+
                 FR_KELUAR_KEMBALIAN.BTNTUTUP.Select()
                 Me.Enabled = False
             Else
@@ -470,6 +532,7 @@ Public Class FR_KELUAR
     Private Sub TXTSUBTOTAL_TextChanged(sender As Object, e As EventArgs) Handles TXTSUBTOTAL.TextChanged
         CARI_DISKON()
         HITUNGDISKON_RUPIAH()
+        FR_KELUAR_CUSTOMER.TXTSUBTOTAL.Text = TXTSUBTOTAL.Text
     End Sub
 
     Private Sub TXTQTY_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTQTY.KeyPress
@@ -529,6 +592,7 @@ Public Class FR_KELUAR
                         End If
                     Next
                     DGTAMPIL.Rows.RemoveAt(BARIS_DATA)
+                    DUPLICATE_DGV()
                     TOTAL_HARGA()
                     CARI_KEMBALIAN()
                     TXTKODE.Enabled = True
@@ -886,6 +950,7 @@ Public Class FR_KELUAR
 
     Private Sub TXTTOTALHARGA_TextChanged(sender As Object, e As EventArgs) Handles TXTTOTALHARGA.TextChanged
         LBTOTAL.Text = Format(CInt(TXTTOTALHARGA.Text), "##,##0")
+        FR_KELUAR_CUSTOMER.TXTTOTALHARGA.Text = TXTTOTALHARGA.Text
     End Sub
 
     Private Sub BTNINPUT_Click(sender As Object, e As EventArgs) Handles BTNINPUT.Click
@@ -940,6 +1005,7 @@ Public Class FR_KELUAR
                     End If
                 Next
                 DGTAMPIL.Rows.RemoveAt(BARIS_DATA)
+                DUPLICATE_DGV()
                 TOTAL_HARGA()
                 TXTKODE.Enabled = True
                 BTNCARI.Visible = True
@@ -990,5 +1056,29 @@ Public Class FR_KELUAR
         If e.KeyChar = "'" Then
             e.Handled = True
         End If
+    End Sub
+
+    Private Sub LBTOTAL_TextChanged(sender As Object, e As EventArgs) Handles LBTOTAL.TextChanged
+        FR_KELUAR_CUSTOMER.LBTOTAL.Text = LBTOTAL.Text
+    End Sub
+
+    Private Sub DGTAMPIL_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles DGTAMPIL.CellValueChanged
+
+    End Sub
+
+    Private Sub TXTDISKON_RUPIAH_TextChanged(sender As Object, e As EventArgs) Handles TXTDISKON_RUPIAH.TextChanged
+        FR_KELUAR_CUSTOMER.TXTDISKON_RUPIAH.Text = TXTDISKON_RUPIAH.Text
+    End Sub
+
+    Private Sub TXTKEMBALIAN_TextChanged(sender As Object, e As EventArgs) Handles TXTKEMBALIAN.TextChanged
+        FR_KELUAR_CUSTOMER.TXTKEMBALIAN.Text = TXTKEMBALIAN.Text
+    End Sub
+
+    Private Sub DGTAMPIL_RowsRemoved(sender As Object, e As DataGridViewRowsRemovedEventArgs) Handles DGTAMPIL.RowsRemoved
+        DUPLICATE_DGV()
+    End Sub
+
+    Private Sub TXTPEMBELI_TextChanged(sender As Object, e As EventArgs) Handles TXTPEMBELI.TextChanged
+        FR_KELUAR_CUSTOMER.TXTPEMBELI.Text = TXTPEMBELI.Text
     End Sub
 End Class

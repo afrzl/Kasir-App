@@ -17,5 +17,8 @@
     <Setting Name="ID_ACCOUNT" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="SECOND_MONITOR" Type="System.Byte" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

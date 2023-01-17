@@ -16,6 +16,9 @@ Public Class FR_KELUAR_KEMBALIAN
             .Enabled = True
         End With
         Me.Close()
+        FR_KELUAR_CUSTOMER.GroupBox2.ForeColor = Color.Black
+        FR_KELUAR_CUSTOMER.GroupBox2.Text = "Total Harga"
+        FR_KELUAR_CUSTOMER.LBTOTAL.ForeColor = Color.Black
     End Sub
 
     Private Sub FR_KELUAR_KEMBALIAN_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
@@ -33,6 +36,9 @@ Public Class FR_KELUAR_KEMBALIAN
                     .Enabled = True
                 End With
                 Me.Close()
+                FR_KELUAR_CUSTOMER.GroupBox2.ForeColor = Color.Black
+                FR_KELUAR_CUSTOMER.LBTOTAL.ForeColor = Color.Black
+                FR_KELUAR_CUSTOMER.GroupBox2.Text = "Total Harga"
         End Select
     End Sub
 
@@ -178,5 +184,13 @@ Public Class FR_KELUAR_KEMBALIAN
     Private Sub BTN_CETAKNOTA_Click(sender As Object, e As EventArgs) Handles BTN_CETAKNOTA.Click
         PRINT_NOTA()
         BTNTUTUP.Select()
+    End Sub
+
+    Private Sub FR_KELUAR_KEMBALIAN_Load(sender As Object, e As EventArgs) Handles Me.Load
+        FR_KELUAR_CUSTOMER.GroupBox2.ForeColor = Color.Crimson
+        FR_KELUAR_CUSTOMER.LBTOTAL.ForeColor = Color.Crimson
+        FR_KELUAR_CUSTOMER.GroupBox2.Text = "Kembalian"
+        FR_KELUAR_CUSTOMER.LBTOTAL.Text = LBKEMBALI.Text
+
     End Sub
 End Class

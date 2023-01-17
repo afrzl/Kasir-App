@@ -9,14 +9,16 @@ Module KONEKSI
     Public ALAMAT_TOKO As String
     Public NO_TOKO As String
     Public PRINTER_NOTA As String
+    Public CUSTOMER_DISPLAY As Boolean
     Public URL_LOGO As String
 
-    Public Sub MASUK_REGISTRY(ByVal TOKO As String, ByVal ALAMAT As String, ByVal NO As String, ByVal PRINTER As String, ByVal URLLOGO As Byte())
+    Public Sub MASUK_REGISTRY(ByVal TOKO As String, ByVal ALAMAT As String, ByVal NO As String, ByVal PRINTER As String, ByVal URLLOGO As Byte(), ByVal CUSTOMERDISPLAY As Boolean)
         With My.Computer.Registry
             .SetValue("HKEY_CURRENT_USER\Software\Aplikasi Kasir", "Nama_toko", TOKO)
             .SetValue("HKEY_CURRENT_USER\Software\Aplikasi Kasir", "Alamat_toko", ALAMAT)
             .SetValue("HKEY_CURRENT_USER\Software\Aplikasi Kasir", "No_toko", NO)
             .SetValue("HKEY_CURRENT_USER\Software\Aplikasi Kasir", "Printer_nota", PRINTER)
+            .SetValue("HKEY_CURRENT_USER\Software\Aplikasi Kasir", "Customer_display", CUSTOMERDISPLAY)
             .SetValue("HKEY_CURRENT_USER\Software\Aplikasi Kasir", "Url_logo", Convert.ToBase64String(URLLOGO))
         End With
 
@@ -28,6 +30,7 @@ Module KONEKSI
         ALAMAT_TOKO = My.Computer.Registry.GetValue(“HKEY_CURRENT_USER\Software\Aplikasi Kasir”, “Alamat_toko”, Nothing)
         NO_TOKO = My.Computer.Registry.GetValue(“HKEY_CURRENT_USER\Software\Aplikasi Kasir”, “No_toko”, Nothing)
         PRINTER_NOTA = My.Computer.Registry.GetValue(“HKEY_CURRENT_USER\Software\Aplikasi Kasir”, “Printer_nota”, Nothing)
+        CUSTOMER_DISPLAY = My.Computer.Registry.GetValue(“HKEY_CURRENT_USER\Software\Aplikasi Kasir”, “Customer_display”, Nothing)
         URL_LOGO = My.Computer.Registry.GetValue(“HKEY_CURRENT_USER\Software\Aplikasi Kasir”, “Url_logo”, Nothing)
     End Sub
 

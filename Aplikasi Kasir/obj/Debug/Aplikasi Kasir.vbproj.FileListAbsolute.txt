@@ -76,3 +76,4 @@ C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi 
 C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\obj\Debug\Aplikasi_Kasir.FR_HISTORYPENJUALAN.resources
 C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\obj\Debug\Aplikasi Kasir.vbproj.AssemblyReference.cache
 C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\obj\Debug\Aplikasi_Kasir.FR_MASUK_TOTAL.resources
+C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\obj\Debug\Aplikasi_Kasir.FR_KELUAR_CUSTOMER.resources
