@@ -1582,6 +1582,7 @@ Partial Class FR_MASUK
         Me.BTNSTOK.TabIndex = 5
         Me.BTNSTOK.Text = "Tambah Stok"
         Me.BTNSTOK.UseVisualStyleBackColor = False
+        Me.BTNSTOK.Visible = False
         '
         'TXTSATUAN
         '

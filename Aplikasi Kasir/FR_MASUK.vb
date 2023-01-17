@@ -848,9 +848,15 @@ Public Class FR_MASUK
 
     Private Sub BTNSTOK_Click(sender As Object, e As EventArgs) Handles BTNSTOK.Click
         INPUT_DB()
-        PRINT_NOTA()
-        DGTAMPIL.Rows.Clear()
-        TOTAL_HARGA()
+        'PRINT_NOTA()
+        'DGTAMPIL.Rows.Clear()
+        'TOTAL_HARGA()
+
+        FR_MASUK_TOTAL.LBKEMBALI.Text = Format(CInt(LBTOTAL.Text), "##,##0")
+        FR_MASUK_TOTAL.ID_TRANSAKSI.Text = ID_TRANSAKSI
+        FR_MASUK_TOTAL.Show()
+        FR_MASUK_TOTAL.BTNTUTUP.Select()
+        Me.Enabled = False
     End Sub
 
     Sub INPUT_DB()
@@ -1096,7 +1102,9 @@ Public Class FR_MASUK
 
     Private Sub BTNTRANSAKSI_Click(sender As Object, e As EventArgs) Handles BTNTRANSAKSI.Click
         PNHISTORY.Visible = False
-        BTNSTOK.Visible = True
+        If DGTAMPIL.RowCount > 0 Then
+            BTNSTOK.Visible = True
+        End If
         BTNTRANSAKSI.Visible = False
         BTNHISTORY.Visible = True
     End Sub

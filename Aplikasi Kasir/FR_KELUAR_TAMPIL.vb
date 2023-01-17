@@ -34,7 +34,7 @@ Public Class FR_KELUAR_TAMPIL
                     " INNER JOIN tbl_stok ON tbl_barang.Kode = tbl_stok.Kode" &
                     " WHERE Barang" &
                     " Like '%" & TXTCARI.Text & "%'" &
-                    " OR tbl_barang.Kode = '" & TXTCARI.Text & "'" &
+                    " OR tbl_barang.Kode Like '%" & TXTCARI.Text & "%'" &
                     " ORDER BY 'Barang' ASC" &
                     " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
 
