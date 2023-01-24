@@ -3,6 +3,9 @@ Imports System.Drawing.Printing
 Imports System.IO
 
 Public Class FR_KELUAR
+
+    Dim persentase_point As Integer = 10
+
     Private Sub PEWAKTU_Tick(sender As Object, e As EventArgs) Handles PEWAKTU.Tick
         LBTGL.Text = Format(Date.Now, "dd MMMM yyyy HH:mm:ss")
     End Sub
@@ -98,9 +101,11 @@ Public Class FR_KELUAR
             End If
         Next
 
+
         If ADA_DATA = True Then
-            DGTAMPIL.Rows(BARIS_DATA).Cells("Qty").Value = DGTAMPIL.Rows(BARIS_DATA).Cells("Qty").Value + Convert.ToDouble(TXTQTY.Text)
             Dim JUMLAH_QTY As Double = DGTAMPIL.Rows(BARIS_DATA).Cells("Qty").Value
+
+            DGTAMPIL.Rows(BARIS_DATA).Cells("Qty").Value = DGTAMPIL.Rows(BARIS_DATA).Cells("Qty").Value + Convert.ToDouble(TXTQTY.Text)
             DGTAMPIL.Rows(BARIS_DATA).Cells("Harga").Value = CARI_HARGA(JUMLAH_QTY)
             If Label6.Text = "%" Then
                 DGTAMPIL.Rows(BARIS_DATA).Cells("Diskon").Value = CInt((TXTDISKON.Text / 100 * DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Harga").Value) * DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Qty").Value)
@@ -108,6 +113,10 @@ Public Class FR_KELUAR
                 DGTAMPIL.Rows(BARIS_DATA).Cells("Diskon").Value = CInt(TXTDISKON.Text * DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Qty").Value)
             End If
             DGTAMPIL.Rows(BARIS_DATA).Cells("Total").Value = CInt((DGTAMPIL.Rows(BARIS_DATA).Cells("Qty").Value * DGTAMPIL.Rows(BARIS_DATA).Cells("Harga").Value) - DGTAMPIL.Rows(BARIS_DATA).Cells("Diskon").Value)
+
+            FR_KELUAR_CUSTOMER.LBL_LASTITEM_NAME.Text = TXTBARANG.Text
+            FR_KELUAR_CUSTOMER.LBL_LASTITEM_QTY.Text = DGTAMPIL.Rows(BARIS_DATA).Cells("Qty").Value & " x " & DGTAMPIL.Rows(BARIS_DATA).Cells("Harga").Value
+            FR_KELUAR_CUSTOMER.LBL_LASTITEM_TOTAL.Text = DGTAMPIL.Rows(BARIS_DATA).Cells("Total").Value
         Else
             DGTAMPIL.Rows.Add()
             DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Kode").Value = TXTKODE.Text
@@ -121,6 +130,11 @@ Public Class FR_KELUAR
             End If
             DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Qty").Value = TXTQTY.Text
             DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Total").Value = TXTTOTAL.Text
+
+            FR_KELUAR_CUSTOMER.LBL_LASTITEM_NAME.Text = TXTBARANG.Text
+            FR_KELUAR_CUSTOMER.LBL_LASTITEM_QTY.Text = DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Qty").Value & " x " & DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Harga").Value
+            FR_KELUAR_CUSTOMER.LBL_LASTITEM_TOTAL.Text = DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Total").Value
+
         End If
 
         TOTAL_HARGA()
@@ -246,6 +260,8 @@ Public Class FR_KELUAR
                     BTNCARI.Visible = False
                     TXTQTY.Select()
                 End If
+            Case Keys.F9
+                PENDING_FORM()
         End Select
     End Sub
 
@@ -285,17 +301,27 @@ Public Class FR_KELUAR
         TXTKASIR.Text = NAMA_LOGIN
         TXTPEMBELI.Text = "USER"
         LBTGL.Text = Format(Date.Now, "dd MMMM yyyy HH:mm:ss")
+        CB_TYPE_PEMBELI.SelectedIndex = 0
 
         PEWAKTU.Enabled = True
 
         ALAMATTOKO.Text = ALAMAT_TOKO
 
         If CUSTOMER_DISPLAY Then
-            Dim screen As Screen
-            screen = Screen.AllScreens(1)
-            FR_KELUAR_CUSTOMER.StartPosition = FormStartPosition.Manual
-            FR_KELUAR_CUSTOMER.Location = screen.Bounds.Location + New Point(100, 100)
-            FR_KELUAR_CUSTOMER.Show()
+            Dim all_screen = Screen.AllScreens
+            Dim count_screen = 0
+            For Each screen In all_screen
+                count_screen += 1
+            Next
+
+            If count_screen > 1 Then
+                FR_KELUAR_CUSTOMER.StartPosition = FormStartPosition.Manual
+                FR_KELUAR_CUSTOMER.Location = all_screen(1).Bounds.Location + New Point(100, 100)
+                FR_KELUAR_CUSTOMER.Show()
+            Else
+                REG_CUSTOMER_DISPLAY(0)
+                MsgBox("Customer display tidak terdeteksi!")
+            End If
         End If
     End Sub
 
@@ -430,7 +456,7 @@ Public Class FR_KELUAR
         Dim FR As Form
         If ROLE = 1 Then
             FR = New FR_MENU
-        ElseIf role = 2 Then
+        ElseIf ROLE = 2 Then
             FR = New FR_OPS_DASHBOARD
         ElseIf ROLE = 3 Then
             FR = New FR_KASIR_DASHBOARD
@@ -483,10 +509,22 @@ Public Class FR_KELUAR
         FR_KELUAR_CUSTOMER.TXTBAYAR.Text = TXTBAYAR.Text
     End Sub
 
+    Sub INPUT_MEMBER()
+        If ID_pembeli <> "" Then
+            Dim Points As Integer = TXTTOTALHARGA.Text * (persentase_point / 100)
+            Dim STR As String = "UPDATE tbl_member SET Points+=" & Points & " WHERE Id='" & ID_pembeli & "'"
+            Dim CMD As New SqlCommand(STR, CONN)
+            CMD.ExecuteNonQuery()
+        End If
+    End Sub
+
     Private Sub TXTBAYAR_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTBAYAR.KeyPress
         If e.KeyChar = Chr(13) Then
             If TXTKEMBALIAN.Text >= "0" Then
                 INPUT_DB()
+                If CB_TYPE_PEMBELI.SelectedIndex = 1 And TXTPEMBELI.Enabled = False Then
+                    INPUT_MEMBER()
+                End If
                 PRINT_NOTA()
                 FR_KELUAR_KEMBALIAN.LBKEMBALI.Text = Format(CInt(TXTKEMBALIAN.Text), "##,##0")
                 FR_KELUAR_KEMBALIAN.ID_TRANSAKSI.Text = ID_TRANSAKSI
@@ -671,6 +709,7 @@ Public Class FR_KELUAR
 
     Private Sub TXTKODE_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTKODE.KeyPress
         If e.KeyChar = Chr(13) Then
+            e.Handled = True
             Dim STR As String = "SELECT Barang" &
                                 " From tbl_barang WHERE kode='" & TXTKODE.Text & "'"
             Dim CMD As SqlCommand
@@ -1053,8 +1092,18 @@ Public Class FR_KELUAR
     End Sub
 
     Private Sub TXTPEMBELI_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTPEMBELI.KeyPress
-        If e.KeyChar = "'" Then
-            e.Handled = True
+        If e.KeyChar = Chr(13) Then
+            TXTKODE.Select()
+        End If
+
+        If CB_TYPE_PEMBELI.SelectedIndex = 0 Then
+            If e.KeyChar = "'" Then
+                e.Handled = True
+            End If
+        Else
+            If Not ((e.KeyChar >= "0" And e.KeyChar <= "9") Or e.KeyChar = vbBack) Then
+                e.Handled = True
+            End If
         End If
     End Sub
 
@@ -1080,5 +1129,67 @@ Public Class FR_KELUAR
 
     Private Sub TXTPEMBELI_TextChanged(sender As Object, e As EventArgs) Handles TXTPEMBELI.TextChanged
         FR_KELUAR_CUSTOMER.TXTPEMBELI.Text = TXTPEMBELI.Text
+    End Sub
+
+    Dim ID_pembeli As String
+    Dim Points_pembeli As Decimal
+
+    Sub Cari_member()
+        ID_pembeli = TXTPEMBELI.Text
+        Dim STR As String = "SELECT Nama, Points FROM tbl_member" &
+            " WHERE RTRIM(Id)='" & TXTPEMBELI.Text & "'"
+        Dim CMD As New SqlCommand(STR, CONN)
+        Dim RD As SqlDataReader
+        RD = CMD.ExecuteReader
+        If RD.HasRows Then
+            RD.Read()
+            TXTPEMBELI.Text = RD.Item("Nama").ToString.Trim
+            Points_pembeli = RD.Item("Points")
+            TXTPEMBELI.Enabled = False
+            TXTKODE.Focus()
+            RD.Close()
+        Else
+            RD.Close()
+            ID_pembeli = ""
+            Points_pembeli = 0
+            TXTPEMBELI.Enabled = True
+            MsgBox("Data member tidak ditemukan!")
+            TXTPEMBELI.Clear()
+            TXTPEMBELI.Focus()
+        End If
+        RD.Close()
+    End Sub
+
+    Private Sub CB_TYPE_PEMBELI_TextChanged(sender As Object, e As EventArgs) Handles CB_TYPE_PEMBELI.TextChanged
+        TXTPEMBELI.Enabled = True
+        If CB_TYPE_PEMBELI.SelectedIndex = 0 Then
+            TXTPEMBELI.Text = "User"
+        Else
+            TXTPEMBELI.Clear()
+            TXTPEMBELI.Focus()
+        End If
+    End Sub
+
+    Private Sub TXTPEMBELI_Validated(sender As Object, e As EventArgs) Handles TXTPEMBELI.Validated
+        If CB_TYPE_PEMBELI.SelectedIndex = 1 And TXTPEMBELI.Text <> "" Then
+            Cari_member()
+        End If
+    End Sub
+
+    Sub PENDING_FORM()
+        Dim FR As Form
+        If ROLE = 1 Then
+            FR = New FR_MENU
+        ElseIf ROLE = 2 Then
+            FR = New FR_OPS_DASHBOARD
+        ElseIf ROLE = 3 Then
+            FR = New FR_KASIR_DASHBOARD
+        End If
+        FR.Show()
+        Me.Hide()
+    End Sub
+
+    Private Sub BTN_PENDING_Click(sender As Object, e As EventArgs) Handles BTN_PENDING.Click
+        PENDING_FORM()
     End Sub
 End Class

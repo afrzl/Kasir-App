@@ -25,6 +25,14 @@ Module KONEKSI
         AMBIL_DATA_REGISTRY()
     End Sub
 
+    Public Sub REG_CUSTOMER_DISPLAY(ByVal CUSTOMERDISPLAY As Boolean)
+        With My.Computer.Registry
+            .SetValue("HKEY_CURRENT_USER\Software\Aplikasi Kasir", "Customer_display", CUSTOMERDISPLAY)
+        End With
+
+        AMBIL_DATA_REGISTRY()
+    End Sub
+
     Public Sub AMBIL_DATA_REGISTRY()
         NAMA_TOKO = My.Computer.Registry.GetValue(“HKEY_CURRENT_USER\Software\Aplikasi Kasir”, “Nama_toko”, Nothing)
         ALAMAT_TOKO = My.Computer.Registry.GetValue(“HKEY_CURRENT_USER\Software\Aplikasi Kasir”, “Alamat_toko”, Nothing)
@@ -36,7 +44,7 @@ Module KONEKSI
 
     Public Sub KONEKAN()
         'SERVER=NAMA SERVER;USER ID=USERID;PASSWORD=PASSWORD;DATABASE=DATABASE;'
-        Dim STR As String = "SERVER=" & My.Settings.SERVER & ";USER ID=" & My.Settings.USER & ";PASSWORD=" & My.Settings.PASSWORD & ";DATABASE=" & My.Settings.DATABASE & ";"
+        Dim STR As String = "SERVER=" & My.Settings.SERVER & ";USER ID=" & My.Settings.USER & ";PASSWORD=" & My.Settings.PASSWORD & ";DATABASE=" & My.Settings.DATABASE & ";MultipleActiveResultSets=True;"
         Try
             CONN = New SqlConnection(STR)
             If CONN.State = ConnectionState.Closed Then

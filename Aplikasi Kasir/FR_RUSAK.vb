@@ -169,7 +169,8 @@ Public Class FR_RUSAK
 
     Sub DATA_TRANSAKSI()
         Dim STR As String = "SELECT Id, RTRIM(Kode) AS Kode," &
-           " (SELECT RTRIM(Barang) FROM tbl_barang WHERE RTRIM(Kode) = RTRIM(tbl_transaksi_child.Kode)) AS Barang" &
+           " (SELECT RTRIM(Barang) FROM tbl_barang WHERE RTRIM(Kode) = RTRIM(tbl_transaksi_child.Kode)) AS Barang," &
+           " Tgl_exp as Tgl_exp" &
            " FROM tbl_transaksi_child" &
            " WHERE Id_trans = '" & TXTID.Text & "'" &
            " AND (SELECT COALESCE(SUM(Stok), 0) FROM tbl_transaksi_child WHERE tbl_transaksi_child.Id_trans = tbl_transaksi_child.Id_trans) > 0"
@@ -221,39 +222,40 @@ Public Class FR_RUSAK
     End Function
 
     Private Sub BTNSIMPAN_Click(sender As Object, e As EventArgs) Handles BTNSIMPAN.Click
-        Dim QTY As Double = 0
-        If TXTQTY.Text <> "" Then
-            QTY = Convert.ToDouble(TXTQTY.Text)
-        End If
-        If TXTID.Text = "" Or TXTQTY.Text = "" Then
-            MsgBox("Data tidak lengkap!")
-        ElseIf QTY > TXTSTOK.Text Then
-            MsgBox("QTY tidak boleh lebih dari stok tersedia!")
-            TXTQTY.Text = ""
-            TXTQTY.Select()
-        Else
-            Dim ID_TRANS As String = "C" + Mid(TXTID.Text, 2) + CARI_ID(Mid(TXTID.Text, 2))
-            Dim SUPPLIER As String = ""
+        If CB_JENISTRANS.SelectedIndex = 0 Then
+            Dim QTY As Double = 0
+            If TXTQTY.Text <> "" Then
+                QTY = Convert.ToDouble(TXTQTY.Text)
+            End If
+            If TXTID.Text = "" Or TXTQTY.Text = "" Then
+                MsgBox("Data tidak lengkap!")
+            ElseIf QTY > TXTSTOK.Text Then
+                MsgBox("QTY tidak boleh lebih dari stok tersedia!")
+                TXTQTY.Text = ""
+                TXTQTY.Select()
+            Else
+                Dim ID_TRANS As String = "C" + Mid(TXTID.Text, 2) + CARI_ID(Mid(TXTID.Text, 2))
+                Dim SUPPLIER As String = ""
 
-            Dim STR As String
-            Dim CMD As SqlCommand
+                Dim STR As String
+                Dim CMD As SqlCommand
 
-            STR = "SELECT RTRIM(Person) AS Supplier " &
+                STR = "SELECT RTRIM(Person) AS Supplier " &
                 " FROM tbl_transaksi_parent" &
                 " WHERE RTRIM(Id_trans) = '" & TXTID.Text & "'"
-            CMD = New SqlCommand(STR, CONN)
-            Dim RD As SqlDataReader
-            RD = CMD.ExecuteReader
-            If RD.HasRows Then
-                RD.Read()
-                SUPPLIER = RD.Item("Supplier")
+                CMD = New SqlCommand(STR, CONN)
+                Dim RD As SqlDataReader
+                RD = CMD.ExecuteReader
+                If RD.HasRows Then
+                    RD.Read()
+                    SUPPLIER = RD.Item("Supplier")
+                    RD.Close()
+                Else
+                    RD.Close()
+                End If
                 RD.Close()
-            Else
-                RD.Close()
-            End If
-            RD.Close()
 
-            STR = "INSERT INTO tbl_transaksi_parent" &
+                STR = "INSERT INTO tbl_transaksi_parent" &
                 " (Id_trans, Id_kasir, Tgl, Jenis, Person, Harga, Diskon, Jumlah_item, Harga_total)" &
                 " VALUES('" & ID_TRANS & "'," &
                 " '" & My.Settings.ID_ACCOUNT & "'," &
@@ -264,10 +266,10 @@ Public Class FR_RUSAK
                 " 0," &
                 " " & TXTQTY.Text.Replace(",", ".") & "," &
                 " 0)"
-            CMD = New SqlCommand(STR, CONN)
-            CMD.ExecuteNonQuery()
+                CMD = New SqlCommand(STR, CONN)
+                CMD.ExecuteNonQuery()
 
-            STR = "INSERT INTO tbl_transaksi_child (Id_trans, Id_awal, Kode, Jumlah, Harga_beli, Harga, Harga_akhir) VALUES" &
+                STR = "INSERT INTO tbl_transaksi_child (Id_trans, Id_awal, Kode, Jumlah, Harga_beli, Harga, Harga_akhir) VALUES" &
                         " ('" & ID_TRANS & "'," &
                         " '" & CBKODE.SelectedValue & "'," &
                         " '" & KODEBARANG & "'," &
@@ -275,30 +277,50 @@ Public Class FR_RUSAK
                         " '" & CInt(TXTHARGA.Text) * QTY & "'," &
                         " 0," &
                         " 0)"
-            CMD = New SqlCommand(STR, CONN)
-            CMD.ExecuteNonQuery()
+                CMD = New SqlCommand(STR, CONN)
+                CMD.ExecuteNonQuery()
 
-            TXTSTOKAKHIR.Text = Convert.ToDouble(TXTSTOK.Text) - QTY
+                TXTSTOKAKHIR.Text = Convert.ToDouble(TXTSTOK.Text) - QTY
 
-            STR = "UPDATE tbl_transaksi_child SET Stok=" & TXTSTOKAKHIR.Text.Replace(",", ".") & " WHERE Id_trans='" & TXTID.Text & "'" &
+                STR = "UPDATE tbl_transaksi_child SET Stok=" & TXTSTOKAKHIR.Text.Replace(",", ".") & " WHERE Id_trans='" & TXTID.Text & "'" &
                 " AND Id = '" & CBKODE.SelectedValue & "'"
-            CMD = New SqlCommand(STR, CONN)
+                CMD = New SqlCommand(STR, CONN)
+                CMD.ExecuteNonQuery()
+
+                STR = "UPDATE tbl_stok SET Stok-=" & TXTQTY.Text.Replace(",", ".") & " WHERE Kode='" & KODEBARANG & "'"
+                CMD = New SqlCommand(STR, CONN)
+                CMD.ExecuteNonQuery()
+
+                MsgBox("Barang rusak berhasil ditambah! Stok barang " & CBKODE.Text & " berkurang.")
+            End If
+        ElseIf CB_JENISTRANS.SelectedIndex = 1 Then
+            Dim TGL_EXP As String = Format(Convert.ToDateTime(DTEXP.Value), "yyyy-MM-dd")
+            Dim STR As String = "UPDATE tbl_transaksi_child SET Tgl_exp='" & TGL_EXP & "'" &
+                " WHERE Id_trans='" & TXTID.Text & "'" &
+                " AND Id = '" & CBKODE.SelectedValue & "'"
+            Dim CMD As New SqlCommand(STR, CONN)
+            CMD.ExecuteNonQuery()
+            MsgBox("Expired barang " & CBKODE.Text & " berhasil diperbarui menjadi tanggal " & Format(Convert.ToDateTime(DTEXP.Value), "dd-MM-yyyy"))
+
+        ElseIf CB_JENISTRANS.SelectedIndex = 2 Then
+            Dim STR As String = "UPDATE tbl_transaksi_child SET Tgl_exp = NULL" &
+                " WHERE Id_trans='" & TXTID.Text & "'" &
+                " AND Id = '" & CBKODE.SelectedValue & "'"
+            Dim CMD As New SqlCommand(STR, CONN)
             CMD.ExecuteNonQuery()
 
-            STR = "UPDATE tbl_stok SET Stok-=" & TXTQTY.Text.Replace(",", ".") & " WHERE Kode='" & KODEBARANG & "'"
-            CMD = New SqlCommand(STR, CONN)
-            CMD.ExecuteNonQuery()
-
-            MsgBox("Barang rusak berhasil ditambah! Stok barang " & CBKODE.Text & " berkurang.")
-            TXTID.Clear()
-            TXTQTY.Clear()
-            TXTHARGA.Clear()
-            TXTSTOK.Text = 0
-            CBKODE.SelectedIndex = -1
-            TAMPIL()
-            TAMPIL_EXPIRED()
-            TXTID.Select()
+            MsgBox("Expired barang " & CBKODE.Text & " berhasil dihapus.")
         End If
+        TXTID.Clear()
+        TXTQTY.Clear()
+        TXTHARGA.Clear()
+        CB_JENISTRANS.Items.Clear()
+        CB_JENISTRANS.Items.Add("Hapus Produk")
+        TXTSTOK.Text = 0
+        CBKODE.SelectedIndex = -1
+        TAMPIL()
+        TAMPIL_EXPIRED()
+        TXTID.Select()
     End Sub
 
     Private Sub TXTQTY_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTQTY.KeyPress
@@ -307,7 +329,7 @@ Public Class FR_RUSAK
         End If
 
         If e.KeyChar = Chr(13) Then
-            BTNSIMPAN.Select()
+            CB_JENISTRANS.Select()
         End If
     End Sub
 
@@ -445,6 +467,7 @@ Public Class FR_RUSAK
         RD.Close()
 
         STR = "SELECT Harga AS 'Harga'," _
+                            & "Tgl_exp AS 'Tgl_exp'," _
                             & "(COALESCE(Stok, 0)) AS 'Stok'" _
                             & " FROM tbl_transaksi_child WHERE Id='" _
                             & CBKODE.SelectedValue _
@@ -459,8 +482,22 @@ Public Class FR_RUSAK
             TXTHARGA.Text = CInt(RD.Item("Harga"))
             If RD.Item("Stok") <> 0 Then
                 TXTSTOK.Text = Format(RD.Item("Stok"), "##0.##")
+                TXTQTY.Text = TXTSTOK.Text
+                If IsDBNull(RD.Item("Tgl_exp")) Then
+                    CB_JENISTRANS.Items.Clear()
+                    CB_JENISTRANS.Items.Add("Hapus Produk")
+
+                Else
+                    CB_JENISTRANS.Items.Clear()
+                    CB_JENISTRANS.Items.Add("Hapus Produk")
+                    CB_JENISTRANS.Items.Add("Perpanjang Expired")
+                    CB_JENISTRANS.Items.Add("Hapus Expired")
+
+                    DTEXP.Value = RD.Item("Tgl_exp")
+                End If
+                CB_JENISTRANS.SelectedIndex = 0
             Else
-                TXTSTOK.Text = 0
+                    TXTSTOK.Text = 0
             End If
             RD.Close()
         Else
@@ -622,5 +659,58 @@ Public Class FR_RUSAK
 
     Private Sub BTNHISTORYOPS_Click(sender As Object, e As EventArgs) Handles BTNHISTORYOPS.Click
         BUKA_FORM(FR_HISTORYPENJUALAN)
+    End Sub
+
+    Private Sub CB_JENISTRANS_TextChanged(sender As Object, e As EventArgs) Handles CB_JENISTRANS.TextChanged
+        On Error Resume Next
+
+        If CB_JENISTRANS.SelectedIndex = 1 Then
+            Label13.Visible = True
+            DTEXP.Visible = True
+        Else
+            Label13.Visible = False
+            DTEXP.Visible = False
+        End If
+    End Sub
+
+    Private Sub CB_JENISTRANS_SelectedValueChanged(sender As Object, e As EventArgs) Handles CB_JENISTRANS.SelectedValueChanged
+        On Error Resume Next
+
+        If CB_JENISTRANS.SelectedIndex = 0 Then
+            Label13.Visible = False
+            DTEXP.Visible = False
+            TXTQTY.Enabled = True
+        ElseIf CB_JENISTRANS.SelectedIndex = 1 Then
+            Label13.Visible = True
+            DTEXP.Visible = True
+            TXTQTY.Enabled = False
+        ElseIf CB_JENISTRANS.SelectedIndex = 2 Then
+            Label13.Visible = False
+            DTEXP.Visible = False
+            TXTQTY.Enabled = False
+        End If
+    End Sub
+
+    Private Sub DTEXP_Leave(sender As Object, e As EventArgs) Handles DTEXP.Leave
+        If DTEXP.Value <= Date.Now Then
+            MsgBox("Barang masuk tidak boleh expired")
+            DTEXP.Select()
+        End If
+    End Sub
+
+    Private Sub CB_JENISTRANS_KeyPress(sender As Object, e As KeyPressEventArgs) Handles CB_JENISTRANS.KeyPress
+        If e.KeyChar = Chr(13) Then
+            If CB_JENISTRANS.SelectedIndex = 1 Then
+                DTEXP.Select()
+            Else
+                BTNSIMPAN.Select()
+            End If
+        End If
+    End Sub
+
+    Private Sub DTEXP_KeyPress(sender As Object, e As KeyPressEventArgs) Handles DTEXP.KeyPress
+        If e.KeyChar = Chr(13) Then
+            BTNSIMPAN.Select()
+        End If
     End Sub
 End Class

@@ -62,6 +62,10 @@ Partial Class FR_KELUAR_CUSTOMER
         Me.TXTKEMBALIAN = New System.Windows.Forms.TextBox()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.TXTBAYAR = New System.Windows.Forms.TextBox()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.LBL_LASTITEM_NAME = New System.Windows.Forms.Label()
+        Me.LBL_LASTITEM_QTY = New System.Windows.Forms.Label()
+        Me.LBL_LASTITEM_TOTAL = New System.Windows.Forms.Label()
         CType(Me.DGTAMPIL, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PNATAS.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -71,6 +75,7 @@ Partial Class FR_KELUAR_CUSTOMER
         Me.PNBAWAH.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'PEWAKTU
@@ -160,7 +165,7 @@ Partial Class FR_KELUAR_CUSTOMER
         DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.DGTAMPIL.DefaultCellStyle = DataGridViewCellStyle2
-        Me.DGTAMPIL.Location = New System.Drawing.Point(0, 171)
+        Me.DGTAMPIL.Location = New System.Drawing.Point(0, 265)
         Me.DGTAMPIL.Margin = New System.Windows.Forms.Padding(2)
         Me.DGTAMPIL.MultiSelect = False
         Me.DGTAMPIL.Name = "DGTAMPIL"
@@ -171,7 +176,7 @@ Partial Class FR_KELUAR_CUSTOMER
         Me.DGTAMPIL.RowsDefaultCellStyle = DataGridViewCellStyle3
         Me.DGTAMPIL.RowTemplate.Height = 30
         Me.DGTAMPIL.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DGTAMPIL.Size = New System.Drawing.Size(1366, 403)
+        Me.DGTAMPIL.Size = New System.Drawing.Size(1366, 309)
         Me.DGTAMPIL.TabIndex = 5
         '
         'LBTOTAL
@@ -200,6 +205,7 @@ Partial Class FR_KELUAR_CUSTOMER
         '
         'Panel1
         '
+        Me.Panel1.Controls.Add(Me.GroupBox1)
         Me.Panel1.Controls.Add(Me.GroupBox4)
         Me.Panel1.Controls.Add(Me.PNTOP)
         Me.Panel1.Controls.Add(Me.GroupBox2)
@@ -487,6 +493,62 @@ Partial Class FR_KELUAR_CUSTOMER
         Me.TXTBAYAR.TabIndex = 11
         Me.TXTBAYAR.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
+        'GroupBox1
+        '
+        Me.GroupBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox1.Controls.Add(Me.LBL_LASTITEM_TOTAL)
+        Me.GroupBox1.Controls.Add(Me.LBL_LASTITEM_QTY)
+        Me.GroupBox1.Controls.Add(Me.LBL_LASTITEM_NAME)
+        Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GroupBox1.ForeColor = System.Drawing.Color.Black
+        Me.GroupBox1.Location = New System.Drawing.Point(12, 169)
+        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(2)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(2)
+        Me.GroupBox1.Size = New System.Drawing.Size(1352, 92)
+        Me.GroupBox1.TabIndex = 22
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Last Item"
+        '
+        'LBL_LASTITEM_NAME
+        '
+        Me.LBL_LASTITEM_NAME.BackColor = System.Drawing.SystemColors.Control
+        Me.LBL_LASTITEM_NAME.Font = New System.Drawing.Font("Segoe UI", 28.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBL_LASTITEM_NAME.ForeColor = System.Drawing.Color.Black
+        Me.LBL_LASTITEM_NAME.Location = New System.Drawing.Point(6, 23)
+        Me.LBL_LASTITEM_NAME.Margin = New System.Windows.Forms.Padding(0, 0, 2, 0)
+        Me.LBL_LASTITEM_NAME.Name = "LBL_LASTITEM_NAME"
+        Me.LBL_LASTITEM_NAME.Size = New System.Drawing.Size(620, 71)
+        Me.LBL_LASTITEM_NAME.TabIndex = 0
+        Me.LBL_LASTITEM_NAME.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'LBL_LASTITEM_QTY
+        '
+        Me.LBL_LASTITEM_QTY.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.LBL_LASTITEM_QTY.BackColor = System.Drawing.SystemColors.Control
+        Me.LBL_LASTITEM_QTY.Font = New System.Drawing.Font("Segoe UI", 28.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBL_LASTITEM_QTY.ForeColor = System.Drawing.Color.Black
+        Me.LBL_LASTITEM_QTY.Location = New System.Drawing.Point(628, 23)
+        Me.LBL_LASTITEM_QTY.Margin = New System.Windows.Forms.Padding(0, 0, 2, 0)
+        Me.LBL_LASTITEM_QTY.Name = "LBL_LASTITEM_QTY"
+        Me.LBL_LASTITEM_QTY.Size = New System.Drawing.Size(383, 71)
+        Me.LBL_LASTITEM_QTY.TabIndex = 1
+        Me.LBL_LASTITEM_QTY.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'LBL_LASTITEM_TOTAL
+        '
+        Me.LBL_LASTITEM_TOTAL.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.LBL_LASTITEM_TOTAL.BackColor = System.Drawing.SystemColors.Control
+        Me.LBL_LASTITEM_TOTAL.Font = New System.Drawing.Font("Segoe UI", 28.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBL_LASTITEM_TOTAL.ForeColor = System.Drawing.Color.Black
+        Me.LBL_LASTITEM_TOTAL.Location = New System.Drawing.Point(1013, 23)
+        Me.LBL_LASTITEM_TOTAL.Margin = New System.Windows.Forms.Padding(0, 0, 2, 0)
+        Me.LBL_LASTITEM_TOTAL.Name = "LBL_LASTITEM_TOTAL"
+        Me.LBL_LASTITEM_TOTAL.Size = New System.Drawing.Size(331, 71)
+        Me.LBL_LASTITEM_TOTAL.TabIndex = 2
+        Me.LBL_LASTITEM_TOTAL.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
         'FR_KELUAR_CUSTOMER
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(120.0!, 120.0!)
@@ -515,6 +577,7 @@ Partial Class FR_KELUAR_CUSTOMER
         Me.GroupBox6.PerformLayout()
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
+        Me.GroupBox1.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -553,4 +616,8 @@ Partial Class FR_KELUAR_CUSTOMER
     Friend WithEvents TXTKEMBALIAN As TextBox
     Friend WithEvents Label13 As Label
     Friend WithEvents TXTBAYAR As TextBox
+    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents LBL_LASTITEM_NAME As Label
+    Friend WithEvents LBL_LASTITEM_TOTAL As Label
+    Friend WithEvents LBL_LASTITEM_QTY As Label
 End Class

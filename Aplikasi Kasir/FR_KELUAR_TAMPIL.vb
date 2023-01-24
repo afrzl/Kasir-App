@@ -198,6 +198,7 @@ Public Class FR_KELUAR_TAMPIL
 
     Private Sub TXTCARI_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTCARI.KeyPress
         If e.KeyChar = Chr(13) Then
+            e.Handled = True
             DGCARI.Select()
         End If
 

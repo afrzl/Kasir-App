@@ -30,6 +30,7 @@ Partial Class FR_KELUAR
         Me.PNATAS = New System.Windows.Forms.Panel()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.CB_TYPE_PEMBELI = New System.Windows.Forms.ComboBox()
         Me.TXTKASIR = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
@@ -62,6 +63,7 @@ Partial Class FR_KELUAR
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.PNBAWAH = New System.Windows.Forms.Panel()
+        Me.BTN_PENDING = New System.Windows.Forms.Button()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.TXTTOTALHARGA = New System.Windows.Forms.TextBox()
@@ -124,6 +126,7 @@ Partial Class FR_KELUAR
         '
         'GroupBox4
         '
+        Me.GroupBox4.Controls.Add(Me.CB_TYPE_PEMBELI)
         Me.GroupBox4.Controls.Add(Me.TXTKASIR)
         Me.GroupBox4.Controls.Add(Me.Label8)
         Me.GroupBox4.Controls.Add(Me.Label9)
@@ -136,6 +139,18 @@ Partial Class FR_KELUAR
         Me.GroupBox4.Size = New System.Drawing.Size(419, 119)
         Me.GroupBox4.TabIndex = 21
         Me.GroupBox4.TabStop = False
+        '
+        'CB_TYPE_PEMBELI
+        '
+        Me.CB_TYPE_PEMBELI.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CB_TYPE_PEMBELI.FlatStyle = System.Windows.Forms.FlatStyle.System
+        Me.CB_TYPE_PEMBELI.Font = New System.Drawing.Font("Segoe UI", 10.8!)
+        Me.CB_TYPE_PEMBELI.FormattingEnabled = True
+        Me.CB_TYPE_PEMBELI.Items.AddRange(New Object() {"Umum", "Member"})
+        Me.CB_TYPE_PEMBELI.Location = New System.Drawing.Point(98, 63)
+        Me.CB_TYPE_PEMBELI.Name = "CB_TYPE_PEMBELI"
+        Me.CB_TYPE_PEMBELI.Size = New System.Drawing.Size(119, 33)
+        Me.CB_TYPE_PEMBELI.TabIndex = 11
         '
         'TXTKASIR
         '
@@ -172,10 +187,10 @@ Partial Class FR_KELUAR
         'TXTPEMBELI
         '
         Me.TXTPEMBELI.Font = New System.Drawing.Font("Segoe UI", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TXTPEMBELI.Location = New System.Drawing.Point(98, 64)
+        Me.TXTPEMBELI.Location = New System.Drawing.Point(222, 64)
         Me.TXTPEMBELI.Margin = New System.Windows.Forms.Padding(2)
         Me.TXTPEMBELI.Name = "TXTPEMBELI"
-        Me.TXTPEMBELI.Size = New System.Drawing.Size(286, 31)
+        Me.TXTPEMBELI.Size = New System.Drawing.Size(162, 31)
         Me.TXTPEMBELI.TabIndex = 9
         '
         'PNTOP
@@ -498,6 +513,7 @@ Partial Class FR_KELUAR
         '
         'PNBAWAH
         '
+        Me.PNBAWAH.Controls.Add(Me.BTN_PENDING)
         Me.PNBAWAH.Controls.Add(Me.GroupBox6)
         Me.PNBAWAH.Controls.Add(Me.GroupBox5)
         Me.PNBAWAH.Dock = System.Windows.Forms.DockStyle.Bottom
@@ -506,6 +522,22 @@ Partial Class FR_KELUAR
         Me.PNBAWAH.Name = "PNBAWAH"
         Me.PNBAWAH.Size = New System.Drawing.Size(1366, 194)
         Me.PNBAWAH.TabIndex = 1
+        '
+        'BTN_PENDING
+        '
+        Me.BTN_PENDING.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.BTN_PENDING.BackColor = System.Drawing.Color.Navy
+        Me.BTN_PENDING.FlatAppearance.BorderSize = 0
+        Me.BTN_PENDING.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTN_PENDING.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTN_PENDING.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BTN_PENDING.Location = New System.Drawing.Point(11, 134)
+        Me.BTN_PENDING.Margin = New System.Windows.Forms.Padding(2)
+        Me.BTN_PENDING.Name = "BTN_PENDING"
+        Me.BTN_PENDING.Size = New System.Drawing.Size(124, 49)
+        Me.BTN_PENDING.TabIndex = 17
+        Me.BTN_PENDING.Text = "Pending (F9)"
+        Me.BTN_PENDING.UseVisualStyleBackColor = False
         '
         'GroupBox6
         '
@@ -875,4 +907,6 @@ Partial Class FR_KELUAR
     Friend WithEvents BTNCANCEL As Button
     Friend WithEvents ALAMATTOKO As RichTextBox
     Friend WithEvents BTNINPUT As Button
+    Friend WithEvents CB_TYPE_PEMBELI As ComboBox
+    Friend WithEvents BTN_PENDING As Button
 End Class
