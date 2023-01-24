@@ -62,7 +62,7 @@ Partial Class FR_KELUAR_CUSTOMER_KEMBALIAN
         Me.LABEL_3.Name = "LABEL_3"
         Me.LABEL_3.Size = New System.Drawing.Size(1025, 63)
         Me.LABEL_3.TabIndex = 2
-        Me.LABEL_3.Text = "Silahkan pastikan lagi kembalian anda sebesar Rp"
+        Me.LABEL_3.Text = "Silahkan pastikan lagi kembalian anda sebesar"
         Me.LABEL_3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'LBL_KEMBALIAN

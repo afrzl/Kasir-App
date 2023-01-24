@@ -39,43 +39,43 @@ Partial Class FR_KELUAR_CUSTOMER
         Me.LBTOTAL = New System.Windows.Forms.Label()
         Me.PNATAS = New System.Windows.Forms.Panel()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.LBL_LASTITEM_TOTAL = New System.Windows.Forms.Label()
+        Me.LBL_LASTITEM_QTY = New System.Windows.Forms.Label()
+        Me.LBL_LASTITEM_NAME = New System.Windows.Forms.Label()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
-        Me.TXTKASIR = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.TXTPEMBELI = New System.Windows.Forms.TextBox()
         Me.PNTOP = New System.Windows.Forms.Panel()
         Me.LBTGL = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.PNBAWAH = New System.Windows.Forms.Panel()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
         Me.Label18 = New System.Windows.Forms.Label()
-        Me.TXTTOTALHARGA = New System.Windows.Forms.TextBox()
-        Me.TXTDISKON_RUPIAH = New System.Windows.Forms.TextBox()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
-        Me.TXTDISKON_PERSEN = New System.Windows.Forms.TextBox()
         Me.Label15 = New System.Windows.Forms.Label()
-        Me.TXTSUBTOTAL = New System.Windows.Forms.TextBox()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.Label14 = New System.Windows.Forms.Label()
-        Me.TXTKEMBALIAN = New System.Windows.Forms.TextBox()
         Me.Label13 = New System.Windows.Forms.Label()
-        Me.TXTBAYAR = New System.Windows.Forms.TextBox()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.LBL_LASTITEM_NAME = New System.Windows.Forms.Label()
-        Me.LBL_LASTITEM_QTY = New System.Windows.Forms.Label()
-        Me.LBL_LASTITEM_TOTAL = New System.Windows.Forms.Label()
+        Me.TXTSUBTOTAL = New System.Windows.Forms.Label()
+        Me.TXTDISKON_PERSEN = New System.Windows.Forms.Label()
+        Me.TXTDISKON_RUPIAH = New System.Windows.Forms.Label()
+        Me.TXTTOTALHARGA = New System.Windows.Forms.Label()
+        Me.TXTBAYAR = New System.Windows.Forms.Label()
+        Me.TXTKEMBALIAN = New System.Windows.Forms.Label()
+        Me.TXTKASIR = New System.Windows.Forms.Label()
+        Me.TXTPEMBELI = New System.Windows.Forms.Label()
         CType(Me.DGTAMPIL, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PNATAS.SuspendLayout()
         Me.Panel1.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.PNTOP.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.PNBAWAH.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'PEWAKTU
@@ -216,12 +216,68 @@ Partial Class FR_KELUAR_CUSTOMER
         Me.Panel1.Size = New System.Drawing.Size(1366, 322)
         Me.Panel1.TabIndex = 3
         '
+        'GroupBox1
+        '
+        Me.GroupBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox1.Controls.Add(Me.LBL_LASTITEM_TOTAL)
+        Me.GroupBox1.Controls.Add(Me.LBL_LASTITEM_QTY)
+        Me.GroupBox1.Controls.Add(Me.LBL_LASTITEM_NAME)
+        Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GroupBox1.ForeColor = System.Drawing.Color.Black
+        Me.GroupBox1.Location = New System.Drawing.Point(12, 169)
+        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(2)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(2)
+        Me.GroupBox1.Size = New System.Drawing.Size(1352, 92)
+        Me.GroupBox1.TabIndex = 22
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Last Item"
+        '
+        'LBL_LASTITEM_TOTAL
+        '
+        Me.LBL_LASTITEM_TOTAL.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.LBL_LASTITEM_TOTAL.BackColor = System.Drawing.SystemColors.Control
+        Me.LBL_LASTITEM_TOTAL.Font = New System.Drawing.Font("Segoe UI", 28.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBL_LASTITEM_TOTAL.ForeColor = System.Drawing.Color.Black
+        Me.LBL_LASTITEM_TOTAL.Location = New System.Drawing.Point(1013, 23)
+        Me.LBL_LASTITEM_TOTAL.Margin = New System.Windows.Forms.Padding(0, 0, 2, 0)
+        Me.LBL_LASTITEM_TOTAL.Name = "LBL_LASTITEM_TOTAL"
+        Me.LBL_LASTITEM_TOTAL.Size = New System.Drawing.Size(331, 71)
+        Me.LBL_LASTITEM_TOTAL.TabIndex = 2
+        Me.LBL_LASTITEM_TOTAL.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'LBL_LASTITEM_QTY
+        '
+        Me.LBL_LASTITEM_QTY.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.LBL_LASTITEM_QTY.BackColor = System.Drawing.SystemColors.Control
+        Me.LBL_LASTITEM_QTY.Font = New System.Drawing.Font("Segoe UI", 28.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBL_LASTITEM_QTY.ForeColor = System.Drawing.Color.Black
+        Me.LBL_LASTITEM_QTY.Location = New System.Drawing.Point(628, 23)
+        Me.LBL_LASTITEM_QTY.Margin = New System.Windows.Forms.Padding(0, 0, 2, 0)
+        Me.LBL_LASTITEM_QTY.Name = "LBL_LASTITEM_QTY"
+        Me.LBL_LASTITEM_QTY.Size = New System.Drawing.Size(383, 71)
+        Me.LBL_LASTITEM_QTY.TabIndex = 1
+        Me.LBL_LASTITEM_QTY.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'LBL_LASTITEM_NAME
+        '
+        Me.LBL_LASTITEM_NAME.BackColor = System.Drawing.SystemColors.Control
+        Me.LBL_LASTITEM_NAME.Font = New System.Drawing.Font("Segoe UI", 28.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBL_LASTITEM_NAME.ForeColor = System.Drawing.Color.Black
+        Me.LBL_LASTITEM_NAME.Location = New System.Drawing.Point(6, 23)
+        Me.LBL_LASTITEM_NAME.Margin = New System.Windows.Forms.Padding(0, 0, 2, 0)
+        Me.LBL_LASTITEM_NAME.Name = "LBL_LASTITEM_NAME"
+        Me.LBL_LASTITEM_NAME.Size = New System.Drawing.Size(620, 71)
+        Me.LBL_LASTITEM_NAME.TabIndex = 0
+        Me.LBL_LASTITEM_NAME.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
         'GroupBox4
         '
+        Me.GroupBox4.Controls.Add(Me.TXTPEMBELI)
         Me.GroupBox4.Controls.Add(Me.TXTKASIR)
         Me.GroupBox4.Controls.Add(Me.Label8)
         Me.GroupBox4.Controls.Add(Me.Label9)
-        Me.GroupBox4.Controls.Add(Me.TXTPEMBELI)
         Me.GroupBox4.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox4.Location = New System.Drawing.Point(12, 46)
         Me.GroupBox4.Margin = New System.Windows.Forms.Padding(2)
@@ -231,46 +287,27 @@ Partial Class FR_KELUAR_CUSTOMER
         Me.GroupBox4.TabIndex = 21
         Me.GroupBox4.TabStop = False
         '
-        'TXTKASIR
-        '
-        Me.TXTKASIR.Font = New System.Drawing.Font("Segoe UI", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TXTKASIR.Location = New System.Drawing.Point(98, 24)
-        Me.TXTKASIR.Margin = New System.Windows.Forms.Padding(2)
-        Me.TXTKASIR.Name = "TXTKASIR"
-        Me.TXTKASIR.ReadOnly = True
-        Me.TXTKASIR.Size = New System.Drawing.Size(286, 31)
-        Me.TXTKASIR.TabIndex = 8
-        '
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(5, 28)
+        Me.Label8.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.Location = New System.Drawing.Point(5, 27)
         Me.Label8.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(46, 23)
+        Me.Label8.Size = New System.Drawing.Size(54, 28)
         Me.Label8.TabIndex = 8
         Me.Label8.Text = "Kasir"
         '
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(5, 68)
+        Me.Label9.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label9.Location = New System.Drawing.Point(5, 71)
         Me.Label9.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(70, 23)
+        Me.Label9.Size = New System.Drawing.Size(81, 28)
         Me.Label9.TabIndex = 10
         Me.Label9.Text = "Pembeli"
-        '
-        'TXTPEMBELI
-        '
-        Me.TXTPEMBELI.Font = New System.Drawing.Font("Segoe UI", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TXTPEMBELI.Location = New System.Drawing.Point(98, 64)
-        Me.TXTPEMBELI.Margin = New System.Windows.Forms.Padding(2)
-        Me.TXTPEMBELI.Name = "TXTPEMBELI"
-        Me.TXTPEMBELI.Size = New System.Drawing.Size(286, 31)
-        Me.TXTPEMBELI.TabIndex = 9
         '
         'PNTOP
         '
@@ -327,14 +364,14 @@ Partial Class FR_KELUAR_CUSTOMER
         'GroupBox6
         '
         Me.GroupBox6.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.GroupBox6.Controls.Add(Me.Label18)
         Me.GroupBox6.Controls.Add(Me.TXTTOTALHARGA)
         Me.GroupBox6.Controls.Add(Me.TXTDISKON_RUPIAH)
+        Me.GroupBox6.Controls.Add(Me.TXTDISKON_PERSEN)
+        Me.GroupBox6.Controls.Add(Me.TXTSUBTOTAL)
+        Me.GroupBox6.Controls.Add(Me.Label18)
         Me.GroupBox6.Controls.Add(Me.Label17)
         Me.GroupBox6.Controls.Add(Me.Label16)
-        Me.GroupBox6.Controls.Add(Me.TXTDISKON_PERSEN)
         Me.GroupBox6.Controls.Add(Me.Label15)
-        Me.GroupBox6.Controls.Add(Me.TXTSUBTOTAL)
         Me.GroupBox6.Location = New System.Drawing.Point(416, 8)
         Me.GroupBox6.Margin = New System.Windows.Forms.Padding(2)
         Me.GroupBox6.Name = "GroupBox6"
@@ -346,100 +383,55 @@ Partial Class FR_KELUAR_CUSTOMER
         'Label18
         '
         Me.Label18.AutoSize = True
-        Me.Label18.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label18.Location = New System.Drawing.Point(35, 128)
+        Me.Label18.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label18.Location = New System.Drawing.Point(35, 122)
         Me.Label18.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(97, 23)
+        Me.Label18.Size = New System.Drawing.Size(112, 28)
         Me.Label18.TabIndex = 18
         Me.Label18.Text = "Total Harga"
-        '
-        'TXTTOTALHARGA
-        '
-        Me.TXTTOTALHARGA.Enabled = False
-        Me.TXTTOTALHARGA.Font = New System.Drawing.Font("Segoe UI", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TXTTOTALHARGA.Location = New System.Drawing.Point(174, 122)
-        Me.TXTTOTALHARGA.Margin = New System.Windows.Forms.Padding(2)
-        Me.TXTTOTALHARGA.Name = "TXTTOTALHARGA"
-        Me.TXTTOTALHARGA.Size = New System.Drawing.Size(262, 31)
-        Me.TXTTOTALHARGA.TabIndex = 17
-        Me.TXTTOTALHARGA.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'TXTDISKON_RUPIAH
-        '
-        Me.TXTDISKON_RUPIAH.Enabled = False
-        Me.TXTDISKON_RUPIAH.Font = New System.Drawing.Font("Segoe UI", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TXTDISKON_RUPIAH.Location = New System.Drawing.Point(280, 78)
-        Me.TXTDISKON_RUPIAH.Margin = New System.Windows.Forms.Padding(2)
-        Me.TXTDISKON_RUPIAH.Name = "TXTDISKON_RUPIAH"
-        Me.TXTDISKON_RUPIAH.Size = New System.Drawing.Size(156, 31)
-        Me.TXTDISKON_RUPIAH.TabIndex = 16
-        Me.TXTDISKON_RUPIAH.Text = "0"
-        Me.TXTDISKON_RUPIAH.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label17
         '
         Me.Label17.AutoSize = True
-        Me.Label17.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label17.Location = New System.Drawing.Point(231, 81)
+        Me.Label17.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label17.Location = New System.Drawing.Point(231, 74)
         Me.Label17.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(51, 23)
+        Me.Label17.Size = New System.Drawing.Size(57, 28)
         Me.Label17.TabIndex = 15
         Me.Label17.Text = "%  = "
+        Me.Label17.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'Label16
         '
         Me.Label16.AutoSize = True
-        Me.Label16.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label16.Location = New System.Drawing.Point(35, 81)
+        Me.Label16.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label16.Location = New System.Drawing.Point(35, 74)
         Me.Label16.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(61, 23)
+        Me.Label16.Size = New System.Drawing.Size(72, 28)
         Me.Label16.TabIndex = 14
         Me.Label16.Text = "Diskon"
-        '
-        'TXTDISKON_PERSEN
-        '
-        Me.TXTDISKON_PERSEN.Enabled = False
-        Me.TXTDISKON_PERSEN.Font = New System.Drawing.Font("Segoe UI", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TXTDISKON_PERSEN.Location = New System.Drawing.Point(174, 78)
-        Me.TXTDISKON_PERSEN.Margin = New System.Windows.Forms.Padding(2)
-        Me.TXTDISKON_PERSEN.Name = "TXTDISKON_PERSEN"
-        Me.TXTDISKON_PERSEN.Size = New System.Drawing.Size(52, 31)
-        Me.TXTDISKON_PERSEN.TabIndex = 13
-        Me.TXTDISKON_PERSEN.Text = "0"
-        Me.TXTDISKON_PERSEN.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label15
         '
         Me.Label15.AutoSize = True
-        Me.Label15.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label15.Location = New System.Drawing.Point(35, 35)
+        Me.Label15.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label15.Location = New System.Drawing.Point(35, 26)
         Me.Label15.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(80, 23)
+        Me.Label15.Size = New System.Drawing.Size(93, 28)
         Me.Label15.TabIndex = 12
         Me.Label15.Text = "Sub Total"
-        '
-        'TXTSUBTOTAL
-        '
-        Me.TXTSUBTOTAL.Enabled = False
-        Me.TXTSUBTOTAL.Font = New System.Drawing.Font("Segoe UI", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TXTSUBTOTAL.Location = New System.Drawing.Point(174, 31)
-        Me.TXTSUBTOTAL.Margin = New System.Windows.Forms.Padding(2)
-        Me.TXTSUBTOTAL.Name = "TXTSUBTOTAL"
-        Me.TXTSUBTOTAL.Size = New System.Drawing.Size(262, 31)
-        Me.TXTSUBTOTAL.TabIndex = 11
-        Me.TXTSUBTOTAL.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'GroupBox5
         '
         Me.GroupBox5.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.GroupBox5.Controls.Add(Me.Label14)
         Me.GroupBox5.Controls.Add(Me.TXTKEMBALIAN)
-        Me.GroupBox5.Controls.Add(Me.Label13)
         Me.GroupBox5.Controls.Add(Me.TXTBAYAR)
+        Me.GroupBox5.Controls.Add(Me.Label14)
+        Me.GroupBox5.Controls.Add(Me.Label13)
         Me.GroupBox5.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox5.Location = New System.Drawing.Point(886, 4)
         Me.GroupBox5.Margin = New System.Windows.Forms.Padding(2)
@@ -453,101 +445,103 @@ Partial Class FR_KELUAR_CUSTOMER
         '
         Me.Label14.AutoSize = True
         Me.Label14.Font = New System.Drawing.Font("Segoe UI", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label14.Location = New System.Drawing.Point(16, 108)
+        Me.Label14.Location = New System.Drawing.Point(16, 107)
         Me.Label14.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(127, 32)
         Me.Label14.TabIndex = 14
         Me.Label14.Text = "Kembalian"
         '
-        'TXTKEMBALIAN
-        '
-        Me.TXTKEMBALIAN.Enabled = False
-        Me.TXTKEMBALIAN.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TXTKEMBALIAN.Location = New System.Drawing.Point(164, 100)
-        Me.TXTKEMBALIAN.Margin = New System.Windows.Forms.Padding(2)
-        Me.TXTKEMBALIAN.Name = "TXTKEMBALIAN"
-        Me.TXTKEMBALIAN.Size = New System.Drawing.Size(286, 53)
-        Me.TXTKEMBALIAN.TabIndex = 13
-        Me.TXTKEMBALIAN.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
         'Label13
         '
         Me.Label13.AutoSize = True
         Me.Label13.Font = New System.Drawing.Font("Segoe UI", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label13.Location = New System.Drawing.Point(16, 46)
+        Me.Label13.Location = New System.Drawing.Point(16, 45)
         Me.Label13.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(73, 32)
         Me.Label13.TabIndex = 12
         Me.Label13.Text = "Bayar"
         '
+        'TXTSUBTOTAL
+        '
+        Me.TXTSUBTOTAL.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TXTSUBTOTAL.Location = New System.Drawing.Point(165, 23)
+        Me.TXTSUBTOTAL.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.TXTSUBTOTAL.Name = "TXTSUBTOTAL"
+        Me.TXTSUBTOTAL.Size = New System.Drawing.Size(288, 35)
+        Me.TXTSUBTOTAL.TabIndex = 19
+        Me.TXTSUBTOTAL.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'TXTDISKON_PERSEN
+        '
+        Me.TXTDISKON_PERSEN.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TXTDISKON_PERSEN.Location = New System.Drawing.Point(165, 71)
+        Me.TXTDISKON_PERSEN.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.TXTDISKON_PERSEN.Name = "TXTDISKON_PERSEN"
+        Me.TXTDISKON_PERSEN.Size = New System.Drawing.Size(57, 35)
+        Me.TXTDISKON_PERSEN.TabIndex = 20
+        Me.TXTDISKON_PERSEN.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'TXTDISKON_RUPIAH
+        '
+        Me.TXTDISKON_RUPIAH.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TXTDISKON_RUPIAH.Location = New System.Drawing.Point(292, 71)
+        Me.TXTDISKON_RUPIAH.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.TXTDISKON_RUPIAH.Name = "TXTDISKON_RUPIAH"
+        Me.TXTDISKON_RUPIAH.Size = New System.Drawing.Size(161, 35)
+        Me.TXTDISKON_RUPIAH.TabIndex = 21
+        Me.TXTDISKON_RUPIAH.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'TXTTOTALHARGA
+        '
+        Me.TXTTOTALHARGA.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TXTTOTALHARGA.Location = New System.Drawing.Point(165, 119)
+        Me.TXTTOTALHARGA.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.TXTTOTALHARGA.Name = "TXTTOTALHARGA"
+        Me.TXTTOTALHARGA.Size = New System.Drawing.Size(288, 35)
+        Me.TXTTOTALHARGA.TabIndex = 22
+        Me.TXTTOTALHARGA.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
         'TXTBAYAR
         '
-        Me.TXTBAYAR.Enabled = False
-        Me.TXTBAYAR.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TXTBAYAR.Location = New System.Drawing.Point(164, 39)
-        Me.TXTBAYAR.Margin = New System.Windows.Forms.Padding(2)
+        Me.TXTBAYAR.Font = New System.Drawing.Font("Segoe UI", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TXTBAYAR.Location = New System.Drawing.Point(162, 35)
+        Me.TXTBAYAR.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.TXTBAYAR.Name = "TXTBAYAR"
-        Me.TXTBAYAR.Size = New System.Drawing.Size(286, 53)
-        Me.TXTBAYAR.TabIndex = 11
-        Me.TXTBAYAR.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.TXTBAYAR.Size = New System.Drawing.Size(288, 53)
+        Me.TXTBAYAR.TabIndex = 23
+        Me.TXTBAYAR.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'GroupBox1
+        'TXTKEMBALIAN
         '
-        Me.GroupBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.GroupBox1.Controls.Add(Me.LBL_LASTITEM_TOTAL)
-        Me.GroupBox1.Controls.Add(Me.LBL_LASTITEM_QTY)
-        Me.GroupBox1.Controls.Add(Me.LBL_LASTITEM_NAME)
-        Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox1.ForeColor = System.Drawing.Color.Black
-        Me.GroupBox1.Location = New System.Drawing.Point(12, 169)
-        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(2)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(2)
-        Me.GroupBox1.Size = New System.Drawing.Size(1352, 92)
-        Me.GroupBox1.TabIndex = 22
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Last Item"
+        Me.TXTKEMBALIAN.Font = New System.Drawing.Font("Segoe UI", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TXTKEMBALIAN.Location = New System.Drawing.Point(162, 97)
+        Me.TXTKEMBALIAN.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.TXTKEMBALIAN.Name = "TXTKEMBALIAN"
+        Me.TXTKEMBALIAN.Size = New System.Drawing.Size(288, 53)
+        Me.TXTKEMBALIAN.TabIndex = 24
+        Me.TXTKEMBALIAN.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'LBL_LASTITEM_NAME
+        'TXTKASIR
         '
-        Me.LBL_LASTITEM_NAME.BackColor = System.Drawing.SystemColors.Control
-        Me.LBL_LASTITEM_NAME.Font = New System.Drawing.Font("Segoe UI", 28.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LBL_LASTITEM_NAME.ForeColor = System.Drawing.Color.Black
-        Me.LBL_LASTITEM_NAME.Location = New System.Drawing.Point(6, 23)
-        Me.LBL_LASTITEM_NAME.Margin = New System.Windows.Forms.Padding(0, 0, 2, 0)
-        Me.LBL_LASTITEM_NAME.Name = "LBL_LASTITEM_NAME"
-        Me.LBL_LASTITEM_NAME.Size = New System.Drawing.Size(620, 71)
-        Me.LBL_LASTITEM_NAME.TabIndex = 0
-        Me.LBL_LASTITEM_NAME.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.TXTKASIR.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TXTKASIR.Location = New System.Drawing.Point(96, 24)
+        Me.TXTKASIR.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.TXTKASIR.Name = "TXTKASIR"
+        Me.TXTKASIR.Size = New System.Drawing.Size(288, 35)
+        Me.TXTKASIR.TabIndex = 23
+        Me.TXTKASIR.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'LBL_LASTITEM_QTY
+        'TXTPEMBELI
         '
-        Me.LBL_LASTITEM_QTY.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.LBL_LASTITEM_QTY.BackColor = System.Drawing.SystemColors.Control
-        Me.LBL_LASTITEM_QTY.Font = New System.Drawing.Font("Segoe UI", 28.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LBL_LASTITEM_QTY.ForeColor = System.Drawing.Color.Black
-        Me.LBL_LASTITEM_QTY.Location = New System.Drawing.Point(628, 23)
-        Me.LBL_LASTITEM_QTY.Margin = New System.Windows.Forms.Padding(0, 0, 2, 0)
-        Me.LBL_LASTITEM_QTY.Name = "LBL_LASTITEM_QTY"
-        Me.LBL_LASTITEM_QTY.Size = New System.Drawing.Size(383, 71)
-        Me.LBL_LASTITEM_QTY.TabIndex = 1
-        Me.LBL_LASTITEM_QTY.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'LBL_LASTITEM_TOTAL
-        '
-        Me.LBL_LASTITEM_TOTAL.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.LBL_LASTITEM_TOTAL.BackColor = System.Drawing.SystemColors.Control
-        Me.LBL_LASTITEM_TOTAL.Font = New System.Drawing.Font("Segoe UI", 28.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LBL_LASTITEM_TOTAL.ForeColor = System.Drawing.Color.Black
-        Me.LBL_LASTITEM_TOTAL.Location = New System.Drawing.Point(1013, 23)
-        Me.LBL_LASTITEM_TOTAL.Margin = New System.Windows.Forms.Padding(0, 0, 2, 0)
-        Me.LBL_LASTITEM_TOTAL.Name = "LBL_LASTITEM_TOTAL"
-        Me.LBL_LASTITEM_TOTAL.Size = New System.Drawing.Size(331, 71)
-        Me.LBL_LASTITEM_TOTAL.TabIndex = 2
-        Me.LBL_LASTITEM_TOTAL.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.TXTPEMBELI.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TXTPEMBELI.Location = New System.Drawing.Point(96, 68)
+        Me.TXTPEMBELI.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.TXTPEMBELI.Name = "TXTPEMBELI"
+        Me.TXTPEMBELI.Size = New System.Drawing.Size(288, 35)
+        Me.TXTPEMBELI.TabIndex = 24
+        Me.TXTPEMBELI.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'FR_KELUAR_CUSTOMER
         '
@@ -567,6 +561,7 @@ Partial Class FR_KELUAR_CUSTOMER
         CType(Me.DGTAMPIL, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PNATAS.ResumeLayout(False)
         Me.Panel1.ResumeLayout(False)
+        Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox4.ResumeLayout(False)
         Me.GroupBox4.PerformLayout()
         Me.PNTOP.ResumeLayout(False)
@@ -577,7 +572,6 @@ Partial Class FR_KELUAR_CUSTOMER
         Me.GroupBox6.PerformLayout()
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
-        Me.GroupBox1.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -594,30 +588,30 @@ Partial Class FR_KELUAR_CUSTOMER
     Friend WithEvents PNATAS As Panel
     Friend WithEvents Panel1 As Panel
     Friend WithEvents GroupBox4 As GroupBox
-    Friend WithEvents TXTKASIR As TextBox
     Friend WithEvents Label8 As Label
     Friend WithEvents Label9 As Label
-    Friend WithEvents TXTPEMBELI As TextBox
     Friend WithEvents PNTOP As Panel
     Friend WithEvents LBTGL As Label
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents PNBAWAH As Panel
     Friend WithEvents GroupBox6 As GroupBox
     Friend WithEvents Label18 As Label
-    Friend WithEvents TXTTOTALHARGA As TextBox
-    Friend WithEvents TXTDISKON_RUPIAH As TextBox
     Friend WithEvents Label17 As Label
     Friend WithEvents Label16 As Label
-    Friend WithEvents TXTDISKON_PERSEN As TextBox
     Friend WithEvents Label15 As Label
-    Friend WithEvents TXTSUBTOTAL As TextBox
     Friend WithEvents GroupBox5 As GroupBox
     Friend WithEvents Label14 As Label
-    Friend WithEvents TXTKEMBALIAN As TextBox
     Friend WithEvents Label13 As Label
-    Friend WithEvents TXTBAYAR As TextBox
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents LBL_LASTITEM_NAME As Label
     Friend WithEvents LBL_LASTITEM_TOTAL As Label
     Friend WithEvents LBL_LASTITEM_QTY As Label
+    Friend WithEvents TXTTOTALHARGA As Label
+    Friend WithEvents TXTDISKON_RUPIAH As Label
+    Friend WithEvents TXTDISKON_PERSEN As Label
+    Friend WithEvents TXTSUBTOTAL As Label
+    Friend WithEvents TXTKEMBALIAN As Label
+    Friend WithEvents TXTBAYAR As Label
+    Friend WithEvents TXTPEMBELI As Label
+    Friend WithEvents TXTKASIR As Label
 End Class

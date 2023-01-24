@@ -339,7 +339,9 @@ Public Class FR_KELUAR
             JUMLAH_ITEM += Convert.ToDouble(EROW.Cells("QTY").Value)
         Next
 
-        Dim STR As String = "INSERT INTO tbl_transaksi_parent" &
+        Dim STR As String
+        If TXTPEMBELI.Enabled = True Then
+            STR = "INSERT INTO tbl_transaksi_parent" &
             " (Id_trans, Id_kasir, Tgl, Jenis, Person, Harga, Diskon, Jumlah_item, Harga_total, Harga_tunai, Harga_kembali)" &
             " VALUES('" & ID_TRANSAKSI & "'," &
             " '" & My.Settings.ID_ACCOUNT & "'," &
@@ -352,6 +354,22 @@ Public Class FR_KELUAR
             " '" & HARGA_AKHIR & "'," &
             " '" & BAYAR & "'," &
             " '" & KEMBALIAN & "')"
+        Else
+            STR = "INSERT INTO tbl_transaksi_parent" &
+            " (Id_trans, Id_kasir, Tgl, Jenis, Id_member, Person, Harga, Diskon, Jumlah_item, Harga_total, Harga_tunai, Harga_kembali)" &
+            " VALUES('" & ID_TRANSAKSI & "'," &
+            " '" & My.Settings.ID_ACCOUNT & "'," &
+            " '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'," &
+            " 'K'," &
+            " '" & ID_pembeli & "'," &
+            " '" & TXTPEMBELI.Text & "'," &
+            " '" & SUBTOTAL & "'," &
+            " '" & DISKON & "'," &
+            " " & JUMLAH_ITEM.ToString.Replace(",", ".") & "," &
+            " '" & HARGA_AKHIR & "'," &
+            " '" & BAYAR & "'," &
+            " '" & KEMBALIAN & "')"
+        End If
         Dim CMD As New SqlCommand(STR, CONN)
         CMD.ExecuteNonQuery()
 
