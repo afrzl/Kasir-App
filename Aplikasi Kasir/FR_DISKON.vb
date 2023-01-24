@@ -540,16 +540,20 @@ Public Class FR_DISKON
         End If
     End Sub
 
-    Private Sub BTNDASHBOARD_Click(sender As Object, e As EventArgs) Handles BTNDASHBOARD.Click
-        BUKA_FORM(FR_MENU)
+    Private Sub BTNLABELADMIN_Click(sender As Object, e As EventArgs) Handles BTNLABELADMIN.Click
+        BUKA_FORM(FR_CETAK_LABEL)
+    End Sub
+
+    Private Sub BTNKASIR_Click(sender As Object, e As EventArgs) Handles BTNKASIR.Click
+        BUKA_FORM(FR_KASIR)
     End Sub
 
     Private Sub BTNBARANG_Click(sender As Object, e As EventArgs) Handles BTNBARANG.Click
         BUKA_FORM(FR_PRODUK)
     End Sub
 
-    Private Sub BTNLABELADMIN_Click(sender As Object, e As EventArgs) Handles BTNLABELADMIN.Click
-        BUKA_FORM(FR_CETAK_LABEL)
+    Private Sub BTNDASHBOARD_Click(sender As Object, e As EventArgs) Handles BTNDASHBOARD.Click
+        BUKA_FORM(FR_MENU)
     End Sub
 
     Private Sub BTNMASUK_Click(sender As Object, e As EventArgs) Handles BTNMASUK.Click
@@ -576,8 +580,16 @@ Public Class FR_DISKON
         BUKA_FORM(FR_TENTANG)
     End Sub
 
-    Private Sub BTNKASIR_Click(sender As Object, e As EventArgs) Handles BTNKASIR.Click
-        BUKA_FORM(FR_KASIR)
+    Private Sub BTNHISTORYPENJUALAN_Click(sender As Object, e As EventArgs) Handles BTNHISTORYPENJUALAN.Click
+        BUKA_FORM(FR_HISTORYPENJUALAN)
+    End Sub
+
+    Private Sub BTNMEMBER_ADMIN_Click(sender As Object, e As EventArgs) Handles BTNMEMBER_ADMIN.Click
+        BUKA_FORM(FR_MEMBER)
+    End Sub
+
+    Private Sub BTNVOUCHER_ADMIN_Click(sender As Object, e As EventArgs) Handles BTNVOUCHER_ADMIN.Click
+        BUKA_FORM(FR_VOUCHER)
     End Sub
 
     Private Sub DGCARI_KeyDown(sender As Object, e As KeyEventArgs) Handles DGCARI.KeyDown
@@ -694,9 +706,5 @@ Public Class FR_DISKON
         If e.KeyChar = Chr(13) Then
             BTNSIMPAN.Select()
         End If
-    End Sub
-
-    Private Sub BTNHISTORYPENJUALAN_Click(sender As Object, e As EventArgs) Handles BTNHISTORYPENJUALAN.Click
-        BUKA_FORM(FR_HISTORYPENJUALAN)
     End Sub
 End Class

@@ -1157,20 +1157,24 @@ Public Class FR_MASUK
         End If
     End Sub
 
-    Private Sub BTNDASHBOARD_Click(sender As Object, e As EventArgs) Handles BTNDASHBOARD.Click
-        BUKA_FORM(FR_MENU)
+    Private Sub BTNLABELADMIN_Click(sender As Object, e As EventArgs) Handles BTNLABELADMIN.Click
+        BUKA_FORM(FR_CETAK_LABEL)
+    End Sub
+
+    Private Sub BTNKASIR_Click(sender As Object, e As EventArgs) Handles BTNKASIR.Click
+        BUKA_FORM(FR_KASIR)
     End Sub
 
     Private Sub BTNBARANG_Click(sender As Object, e As EventArgs) Handles BTNBARANG.Click
         BUKA_FORM(FR_PRODUK)
     End Sub
 
-    Private Sub BTNLABELADMIN_Click(sender As Object, e As EventArgs) Handles BTNLABELADMIN.Click
-        BUKA_FORM(FR_CETAK_LABEL)
-    End Sub
-
     Private Sub BTNDISKON_Click(sender As Object, e As EventArgs) Handles BTNDISKON.Click
         BUKA_FORM(FR_DISKON)
+    End Sub
+
+    Private Sub BTNDASHBOARD_Click(sender As Object, e As EventArgs) Handles BTNDASHBOARD.Click
+        BUKA_FORM(FR_MENU)
     End Sub
 
     Private Sub BTNKELUAR_Click(sender As Object, e As EventArgs) Handles BTNKELUAR.Click
@@ -1193,16 +1197,44 @@ Public Class FR_MASUK
         BUKA_FORM(FR_TENTANG)
     End Sub
 
-    Private Sub BTNKASIR_Click(sender As Object, e As EventArgs) Handles BTNKASIR.Click
-        BUKA_FORM(FR_KASIR)
+    Private Sub BTNHISTORYPENJUALAN_Click(sender As Object, e As EventArgs) Handles BTNHISTORYPENJUALAN.Click
+        BUKA_FORM(FR_HISTORYPENJUALAN)
+    End Sub
+
+    Private Sub BTNMEMBER_ADMIN_Click(sender As Object, e As EventArgs) Handles BTNMEMBER_ADMIN.Click
+        BUKA_FORM(FR_MEMBER)
+    End Sub
+
+    Private Sub BTNVOUCHER_ADMIN_Click(sender As Object, e As EventArgs) Handles BTNVOUCHER_ADMIN.Click
+        BUKA_FORM(FR_VOUCHER)
+    End Sub
+
+    Private Sub BTNDASHBOARDOPS_Click(sender As Object, e As EventArgs) Handles BTNDASHBOARDOPS.Click
+        BUKA_FORM(FR_OPS_DASHBOARD)
+    End Sub
+
+    Private Sub BTNBARANGOPS_Click(sender As Object, e As EventArgs) Handles BTNBARANGOPS.Click
+        BUKA_FORM(FR_PRODUK)
+    End Sub
+
+    Private Sub BTNHISTORYOPS_Click(sender As Object, e As EventArgs) Handles BTNHISTORYOPS.Click
+        BUKA_FORM(FR_HISTORYPENJUALAN)
+    End Sub
+
+    Private Sub BTNKELUAROPS_Click(sender As Object, e As EventArgs) Handles BTNKELUAROPS.Click
+        BUKA_FORM(FR_KELUAR)
     End Sub
 
     Private Sub BTNLABELOPS_Click(sender As Object, e As EventArgs) Handles BTNLABELOPS.Click
         BUKA_FORM(FR_CETAK_LABEL)
     End Sub
 
-    Private Sub BTNKELUAROPS_Click(sender As Object, e As EventArgs) Handles BTNKELUAROPS.Click
-        BUKA_FORM(FR_KELUAR)
+    Private Sub BTNLAPORANOPS_Click(sender As Object, e As EventArgs) Handles BTNLAPORANOPS.Click
+        BUKA_FORM(FR_REPORT)
+    End Sub
+
+    Private Sub BTNMEMBER_OPS_Click(sender As Object, e As EventArgs) Handles BTNMEMBER_OPS.Click
+        BUKA_FORM(FR_MEMBER)
     End Sub
 
     Private Sub BTNRETURNOPS_Click(sender As Object, e As EventArgs) Handles BTNRETURNOPS.Click
@@ -1213,16 +1245,12 @@ Public Class FR_MASUK
         BUKA_FORM(FR_RUSAK)
     End Sub
 
-    Private Sub BTNLAPORANOPS_Click(sender As Object, e As EventArgs) Handles BTNLAPORANOPS.Click
-        BUKA_FORM(FR_REPORT)
-    End Sub
-
     Private Sub BTNTENTANGOPS_Click(sender As Object, e As EventArgs) Handles BTNTENTANGOPS.Click
         BUKA_FORM(FR_TENTANG)
     End Sub
 
-    Private Sub BTNDASHBOARDOPS_Click(sender As Object, e As EventArgs) Handles BTNDASHBOARDOPS.Click
-        BUKA_FORM(FR_OPS_DASHBOARD)
+    Private Sub BTNVOUCHER_OPS_Click(sender As Object, e As EventArgs) Handles BTNVOUCHER_OPS.Click
+        BUKA_FORM(FR_VOUCHER)
     End Sub
 
     Private Sub CBJENISEXP_KeyPress(sender As Object, e As KeyPressEventArgs) Handles CBJENISEXP.KeyPress
@@ -1354,29 +1382,25 @@ Public Class FR_MASUK
         End If
     End Sub
 
-    Private Sub BTNBARCODEOPS_Click(sender As Object, e As EventArgs) Handles BTNBARANGOPS.Click
-        BUKA_FORM(FR_PRODUK)
-    End Sub
-
     Private Sub TXTCARI_Leave(sender As Object, e As EventArgs) Handles TXTCARI.Leave
         START_RECORD = 0
         TAMPIL()
-    End Sub
-
-    Private Sub BTNHISTORYPENJUALAN_Click(sender As Object, e As EventArgs) Handles BTNHISTORYPENJUALAN.Click
-        BUKA_FORM(FR_HISTORYPENJUALAN)
-    End Sub
-
-    Private Sub BTNHISTORYOPS_Click(sender As Object, e As EventArgs) Handles BTNHISTORYOPS.Click
-        BUKA_FORM(FR_HISTORYPENJUALAN)
     End Sub
 
     Private Sub BTNDASHBOARDKASIR_Click(sender As Object, e As EventArgs) Handles BTNDASHBOARDKASIR.Click
         BUKA_FORM(FR_KASIR_DASHBOARD)
     End Sub
 
+    Private Sub BTNVOUCHER_KASIR_Click(sender As Object, e As EventArgs) Handles BTNVOUCHER_KASIR.Click
+        BUKA_FORM(FR_VOUCHER)
+    End Sub
+
     Private Sub BTNLABELKASIR_Click(sender As Object, e As EventArgs) Handles BTNLABELKASIR.Click
         BUKA_FORM(FR_CETAK_LABEL)
+    End Sub
+
+    Private Sub BTNMEMBER_KASIR_Click(sender As Object, e As EventArgs) Handles BTNMEMBER_KASIR.Click
+        BUKA_FORM(FR_MEMBER)
     End Sub
 
     Private Sub BTNKELUARKASIR_Click(sender As Object, e As EventArgs) Handles BTNKELUARKASIR.Click

@@ -236,4 +236,12 @@ Public Class FR_MENU
     Private Sub BTNHISTORYPENJUALAN_Click(sender As Object, e As EventArgs) Handles BTNHISTORYPENJUALAN.Click
         BUKA_FORM(FR_HISTORYPENJUALAN)
     End Sub
+
+    Private Sub BTNMEMBER_ADMIN_Click(sender As Object, e As EventArgs) Handles BTNMEMBER_ADMIN.Click
+        BUKA_FORM(FR_MEMBER)
+    End Sub
+
+    Private Sub BTNVOUCHER_ADMIN_Click(sender As Object, e As EventArgs) Handles BTNVOUCHER_ADMIN.Click
+        BUKA_FORM(FR_VOUCHER)
+    End Sub
 End Class

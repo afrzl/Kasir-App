@@ -248,6 +248,18 @@
     <Compile Include="FR_MASUK_TOTAL.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FR_MEMBER.Designer.vb">
+      <DependentUpon>FR_MEMBER.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FR_MEMBER.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FR_MEMBER_ACTION.Designer.vb">
+      <DependentUpon>FR_MEMBER_ACTION.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FR_MEMBER_ACTION.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FR_OPS_DASHBOARD.Designer.vb">
       <DependentUpon>FR_OPS_DASHBOARD.vb</DependentUpon>
     </Compile>
@@ -343,6 +355,12 @@
       <DependentUpon>FR_KASIR_DASHBOARD.vb</DependentUpon>
     </Compile>
     <Compile Include="FR_KASIR_DASHBOARD.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FR_VOUCHER.Designer.vb">
+      <DependentUpon>FR_VOUCHER.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FR_VOUCHER.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="KONEKSI.vb" />
@@ -488,6 +506,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FR_MASUK_TOTAL.resx">
       <DependentUpon>FR_MASUK_TOTAL.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FR_MEMBER.resx">
+      <DependentUpon>FR_MEMBER.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FR_MEMBER_ACTION.resx">
+      <DependentUpon>FR_MEMBER_ACTION.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FR_OPS_DASHBOARD.resx">
       <DependentUpon>FR_OPS_DASHBOARD.vb</DependentUpon>

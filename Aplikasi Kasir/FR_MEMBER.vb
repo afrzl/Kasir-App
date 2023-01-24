@@ -1,0 +1,270 @@
+﻿Imports System.Data.SqlClient
+
+Public Class FR_MEMBER
+    Private Sub PEWAKTU_Tick(sender As Object, e As EventArgs) Handles PEWAKTU.Tick
+        LBTGL.Text = Format(Date.Now, "dd MMMM yyyy HH:mm:ss")
+    End Sub
+
+    Sub BUKA_FORM(ByVal FR As Form)
+        FR.Show()
+        Me.Close()
+    End Sub
+
+    Private Sub FR_MEMBER_Load(sender As Object, e As EventArgs) Handles Me.Load
+        Select Case ROLE
+            Case 1
+                PNADMIN.Visible = True
+                PNOPS.Visible = False
+                PNKASIR.Visible = False
+                Label3.Text = "Administrator"
+            Case 2
+                PNADMIN.Visible = False
+                PNOPS.Visible = True
+                PNKASIR.Visible = False
+                Label3.Text = "Operator"
+            Case 3
+                PNADMIN.Visible = False
+                PNOPS.Visible = False
+                PNKASIR.Visible = True
+                Label3.Text = "Kasir"
+        End Select
+
+        If DGTAMPIL.RowCount > 0 Then
+
+        End If
+        TAMPIL()
+
+        LBTGL.Text = Format(Date.Now, "dd MMMM yyyy HH:mm:ss")
+        PEWAKTU.Enabled = True
+        LBLUSER.Text = NAMA_LOGIN
+    End Sub
+
+    Private Sub BTNCLOSE_Click(sender As Object, e As EventArgs) Handles BTNCLOSE.Click
+        BUKA_FORM(FR_MENU)
+    End Sub
+
+    Private Sub BTNMINIMIZE_Click(sender As Object, e As EventArgs) Handles BTNMINIMIZE.Click
+        Me.WindowState = FormWindowState.Minimized
+    End Sub
+
+    Private Sub BTNLOGOUT_Click(sender As Object, e As EventArgs) Handles BTNLOGOUT.Click
+        If MsgBox("Apakah anda yakin akan logout?", vbYesNo) = vbYes Then
+            Dim FR As New FR_LOGIN
+            My.Settings.ID_ACCOUNT = 0
+            FR.Show()
+            Me.Close()
+        End If
+    End Sub
+
+    Private Sub BTNDASHBOARD_Click(sender As Object, e As EventArgs) Handles BTNDASHBOARD.Click
+        BUKA_FORM(FR_MENU)
+    End Sub
+
+    Private Sub BTNKASIR_Click(sender As Object, e As EventArgs) Handles BTNKASIR.Click
+        BUKA_FORM(FR_KASIR)
+    End Sub
+
+    Private Sub BTNBARANG_Click(sender As Object, e As EventArgs) Handles BTNBARANG.Click
+        BUKA_FORM(FR_PRODUK)
+    End Sub
+
+    Private Sub BTNVOUCHER_ADMIN_Click(sender As Object, e As EventArgs) Handles BTNVOUCHER_ADMIN.Click
+        BUKA_FORM(FR_VOUCHER)
+    End Sub
+
+    Private Sub BTNLABELADMIN_Click(sender As Object, e As EventArgs) Handles BTNLABELADMIN.Click
+        BUKA_FORM(FR_CETAK_LABEL)
+    End Sub
+
+    Private Sub BTNDISKON_Click(sender As Object, e As EventArgs) Handles BTNDISKON.Click
+        BUKA_FORM(FR_DISKON)
+    End Sub
+
+    Private Sub BTNMASUK_Click(sender As Object, e As EventArgs) Handles BTNMASUK.Click
+        BUKA_FORM(FR_MASUK)
+    End Sub
+
+    Private Sub BTNKELUAR_Click(sender As Object, e As EventArgs) Handles BTNKELUAR.Click
+        BUKA_FORM(FR_KELUAR)
+    End Sub
+
+    Private Sub BTNHISTORYPENJUALAN_Click(sender As Object, e As EventArgs) Handles BTNHISTORYPENJUALAN.Click
+        BUKA_FORM(FR_HISTORYPENJUALAN)
+    End Sub
+
+    Private Sub BTNLAPORAN_Click(sender As Object, e As EventArgs) Handles BTNLAPORAN.Click
+        BUKA_FORM(FR_REPORT)
+    End Sub
+
+    Private Sub BTNRUSAK_Click(sender As Object, e As EventArgs) Handles BTNRUSAK.Click
+        BUKA_FORM(FR_RUSAK)
+    End Sub
+
+    Private Sub BTNRETURN_Click(sender As Object, e As EventArgs) Handles BTNRETURN.Click
+        BUKA_FORM(FR_RETURN)
+    End Sub
+
+    Private Sub BTNTENTANG_Click(sender As Object, e As EventArgs) Handles BTNTENTANG.Click
+        BUKA_FORM(FR_TENTANG)
+    End Sub
+
+    Private Sub BTNDASHBOARDOPS_Click(sender As Object, e As EventArgs) Handles BTNDASHBOARDOPS.Click
+        BUKA_FORM(FR_OPS_DASHBOARD)
+    End Sub
+
+    Private Sub BTNBARANGOPS_Click(sender As Object, e As EventArgs) Handles BTNBARANGOPS.Click
+        BUKA_FORM(FR_PRODUK)
+    End Sub
+
+    Private Sub BTNHISTORYOPS_Click(sender As Object, e As EventArgs) Handles BTNHISTORYOPS.Click
+        BUKA_FORM(FR_HISTORYPENJUALAN)
+    End Sub
+
+    Private Sub BTNKELUAROPS_Click(sender As Object, e As EventArgs) Handles BTNKELUAROPS.Click
+        BUKA_FORM(FR_KELUAR)
+    End Sub
+
+    Private Sub BTNLABELOPS_Click(sender As Object, e As EventArgs) Handles BTNLABELOPS.Click
+        BUKA_FORM(FR_CETAK_LABEL)
+    End Sub
+
+    Private Sub BTNLAPORANOPS_Click(sender As Object, e As EventArgs) Handles BTNLAPORANOPS.Click
+        BUKA_FORM(FR_REPORT)
+    End Sub
+
+    Private Sub BTNMASUKOPS_Click(sender As Object, e As EventArgs) Handles BTNMASUKOPS.Click
+        BUKA_FORM(FR_MASUK)
+    End Sub
+
+    Private Sub BTNRETURNOPS_Click(sender As Object, e As EventArgs) Handles BTNRETURNOPS.Click
+        BUKA_FORM(FR_RETURN)
+    End Sub
+
+    Private Sub BTNRUSAKOPS_Click(sender As Object, e As EventArgs) Handles BTNRUSAKOPS.Click
+        BUKA_FORM(FR_RUSAK)
+    End Sub
+
+    Private Sub BTNTENTANGOPS_Click(sender As Object, e As EventArgs) Handles BTNTENTANGOPS.Click
+        BUKA_FORM(FR_TENTANG)
+    End Sub
+
+    Private Sub BTNVOUCHER_OPS_Click(sender As Object, e As EventArgs) Handles BTNVOUCHER_OPS.Click
+        BUKA_FORM(FR_VOUCHER)
+    End Sub
+
+    Private Sub BTNDASHBOARDKASIR_Click(sender As Object, e As EventArgs) Handles BTNDASHBOARDKASIR.Click
+        BUKA_FORM(FR_KASIR_DASHBOARD)
+    End Sub
+
+    Private Sub BTNVOUCHER_KASIR_Click(sender As Object, e As EventArgs) Handles BTNVOUCHER_KASIR.Click
+        BUKA_FORM(FR_VOUCHER)
+    End Sub
+
+    Private Sub BTNLABELKASIR_Click(sender As Object, e As EventArgs) Handles BTNLABELKASIR.Click
+        BUKA_FORM(FR_CETAK_LABEL)
+    End Sub
+
+    Private Sub BTNMASUKKASIR_Click(sender As Object, e As EventArgs) Handles BTNMASUKKASIR.Click
+        BUKA_FORM(FR_MASUK)
+    End Sub
+
+    Private Sub BTNKELUARKASIR_Click(sender As Object, e As EventArgs) Handles BTNKELUARKASIR.Click
+        BUKA_FORM(FR_KELUAR)
+    End Sub
+
+    Private Sub BTNHISTORYPENJUALANKASIR_Click(sender As Object, e As EventArgs) Handles BTNHISTORYPENJUALANKASIR.Click
+        BUKA_FORM(FR_HISTORYPENJUALAN)
+    End Sub
+
+    Private Sub BTNRETURNKASIR_Click(sender As Object, e As EventArgs) Handles BTNRETURNKASIR.Click
+        BUKA_FORM(FR_RETURN)
+    End Sub
+
+    Private Sub BTNLAPORANKASIR_Click(sender As Object, e As EventArgs) Handles BTNLAPORANKASIR.Click
+        BUKA_FORM(FR_REPORT)
+    End Sub
+
+    Private Sub BTNSETTINGKASIR_Click(sender As Object, e As EventArgs) Handles BTNSETTINGKASIR.Click
+        BUKA_FORM(FR_TENTANG)
+    End Sub
+
+    Sub TAMPIL()
+        DGTAMPIL.Columns.Clear()
+        Dim STR As String = "SELECT Id as ID," &
+            "RTRIM(Nama) AS 'Nama Lengkap'," &
+            "RTRIM(Alamat) AS 'Alamat'," &
+            "RTRIM(No_hp) AS 'No HP'," &
+            "RTRIM(JK) AS 'JK'," &
+            "Points," &
+            "Created_at AS 'Tanggal Pembuatan'" &
+            "FROM tbl_member " &
+            "WHERE Nama Like '%" & TXTCARI.Text & "%' " &
+            "OR Id = '" & TXTCARI.Text & "'"
+        Dim DA As SqlDataAdapter
+        DA = New SqlDataAdapter(STR, CONN)
+        Dim TBL As New DataTable
+        DA.Fill(TBL)
+        DGTAMPIL.DataSource = TBL
+
+        DGTAMPIL.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+        DGTAMPIL.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+        DGTAMPIL.Columns(2).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+        DGTAMPIL.Columns(3).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+        DGTAMPIL.Columns(4).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+        DGTAMPIL.Columns(5).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+        DGTAMPIL.Columns(6).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+
+        DGTAMPIL.Columns(5).DefaultCellStyle.Format = "###,#0"
+
+        For N = 0 To DGTAMPIL.Rows.Count - 1
+            If DGTAMPIL.Rows(N).Cells(4).Value = "L" Then
+                DGTAMPIL.Rows(N).Cells(4).Value = "Laki-laki"
+            Else
+                DGTAMPIL.Rows(N).Cells(4).Value = "Perempuan"
+            End If
+        Next
+
+        Dim columnButton As New DataGridViewButtonColumn
+
+        With columnButton
+            .Text = "Edit"
+            .HeaderText = "Action"
+            .UseColumnTextForButtonValue = True
+            .FlatStyle = FlatStyle.Flat
+            .DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            .DefaultCellStyle.ForeColor = Color.Navy
+            .Width = 100
+        End With
+        DGTAMPIL.Columns.Add(columnButton)
+        DGTAMPIL.Columns(6).Width = 50
+    End Sub
+
+    Private Sub TXTCARI_TextChanged(sender As Object, e As EventArgs) Handles TXTCARI.TextChanged
+        TAMPIL()
+    End Sub
+
+    Private Sub BTNSIMPAN_Click(sender As Object, e As EventArgs) Handles BTNSIMPAN.Click
+        With FR_MEMBER_ACTION
+            .Show()
+            .TXTID.Enabled = True
+            .TXTID.Select()
+        End With
+        Me.Enabled = False
+    End Sub
+
+    Private Sub DGTAMPIL_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGTAMPIL.CellClick
+        On Error Resume Next
+
+        If DGTAMPIL.Columns(e.ColumnIndex).HeaderText = "Action" Then
+            Me.Enabled = False
+
+            With FR_MEMBER_ACTION
+                .Show()
+                .TXTID.Text = DGTAMPIL.Item("Id", e.RowIndex).Value
+                .TXTID.Enabled = False
+                .TXTNAMA.Select()
+                .CARI_DATA()
+            End With
+        End If
+    End Sub
+End Class

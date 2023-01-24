@@ -166,16 +166,32 @@ Public Class FR_OPS_DASHBOARD
         LBKELUARHARI.Text = Convert.ToUInt64(CMD.ExecuteScalar())
     End Sub
 
-    Private Sub BTNLABELOPS_Click(sender As Object, e As EventArgs) Handles BTNLABELOPS.Click
-        BUKA_FORM(FR_CETAK_LABEL)
+    Private Sub BTNMEMBER_OPS_Click(sender As Object, e As EventArgs) Handles BTNMEMBER_OPS.Click
+        BUKA_FORM(FR_MEMBER)
     End Sub
 
-    Private Sub BTNMASUKOPS_Click(sender As Object, e As EventArgs) Handles BTNMASUKOPS.Click
-        BUKA_FORM(FR_MASUK)
+    Private Sub BTNBARANGOPS_Click(sender As Object, e As EventArgs) Handles BTNBARANGOPS.Click
+        BUKA_FORM(FR_PRODUK)
+    End Sub
+
+    Private Sub BTNHISTORYOPS_Click(sender As Object, e As EventArgs) Handles BTNHISTORYOPS.Click
+        BUKA_FORM(FR_HISTORYPENJUALAN)
     End Sub
 
     Private Sub BTNKELUAROPS_Click(sender As Object, e As EventArgs) Handles BTNKELUAROPS.Click
         BUKA_FORM(FR_KELUAR)
+    End Sub
+
+    Private Sub BTNLABELOPS_Click(sender As Object, e As EventArgs) Handles BTNLABELOPS.Click
+        BUKA_FORM(FR_CETAK_LABEL)
+    End Sub
+
+    Private Sub BTNLAPORANOPS_Click(sender As Object, e As EventArgs) Handles BTNLAPORANOPS.Click
+        BUKA_FORM(FR_REPORT)
+    End Sub
+
+    Private Sub BTNMASUKOPS_Click(sender As Object, e As EventArgs) Handles BTNMASUKOPS.Click
+        BUKA_FORM(FR_MASUK)
     End Sub
 
     Private Sub BTNRETURNOPS_Click(sender As Object, e As EventArgs) Handles BTNRETURNOPS.Click
@@ -186,12 +202,12 @@ Public Class FR_OPS_DASHBOARD
         BUKA_FORM(FR_RUSAK)
     End Sub
 
-    Private Sub BTNLAPORANOPS_Click(sender As Object, e As EventArgs) Handles BTNLAPORANOPS.Click
-        BUKA_FORM(FR_REPORT)
-    End Sub
-
     Private Sub BTNTENTANGOPS_Click(sender As Object, e As EventArgs) Handles BTNTENTANGOPS.Click
         BUKA_FORM(FR_TENTANG)
+    End Sub
+
+    Private Sub BTNVOUCHER_OPS_Click(sender As Object, e As EventArgs) Handles BTNVOUCHER_OPS.Click
+        BUKA_FORM(FR_VOUCHER)
     End Sub
 
     Private Sub TXTCARISTOK_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTCARISTOK.KeyPress
@@ -200,16 +216,12 @@ Public Class FR_OPS_DASHBOARD
         End If
     End Sub
 
-    Private Sub BTNBARCODEOPS_Click(sender As Object, e As EventArgs) Handles BTNBARANGOPS.Click
+    Private Sub BTNBARCODEOPS_Click(sender As Object, e As EventArgs)
         BUKA_FORM(FR_PRODUK)
     End Sub
 
     Private Sub TXTCARISTOK_TextChanged_1(sender As Object, e As EventArgs) Handles TXTCARISTOK.TextChanged
         START_RECORD = 0
         TAMPIL()
-    End Sub
-
-    Private Sub BTNHISTORYOPS_Click(sender As Object, e As EventArgs) Handles BTNHISTORYOPS.Click
-        BUKA_FORM(FR_HISTORYPENJUALAN)
     End Sub
 End Class

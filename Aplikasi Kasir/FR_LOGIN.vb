@@ -82,6 +82,7 @@ Public Class FR_LOGIN
 
     Private Sub TXTUSER_KeyPress(sender As Object, e As KeyPressEventArgs)
         If e.KeyChar = Chr(13) Then
+            e.Handled = True
             TXTPASSWORD.Select()
         End If
         If Not ((e.KeyChar >= "0" And e.KeyChar <= "9") Or e.KeyChar = vbBack) Then
@@ -90,8 +91,9 @@ Public Class FR_LOGIN
     End Sub
 
 
-    Private Sub TXTID_KeyPress_1(sender As Object, e As KeyPressEventArgs) Handles TXTID.KeyPress
+    Private Sub TXTID_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTID.KeyPress
         If e.KeyChar = Chr(13) Then
+            e.Handled = True
             TXTPASSWORD.Select()
         End If
         If Not ((e.KeyChar >= "0" And e.KeyChar <= "9") Or e.KeyChar = vbBack) Then
@@ -101,6 +103,7 @@ Public Class FR_LOGIN
 
     Private Sub TXTPASSWORD_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTPASSWORD.KeyPress
         If e.KeyChar = Chr(13) Then
+            e.Handled = True
             BTNLOGIN.Select()
         End If
         If e.KeyChar = "'" Then

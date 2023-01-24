@@ -72,9 +72,9 @@ Partial Class FR_RUSAK
         Me.LBLUSER = New System.Windows.Forms.Label()
         Me.PNLEFT = New System.Windows.Forms.Panel()
         Me.PNOPS = New System.Windows.Forms.Panel()
+        Me.BTNVOUCHER_OPS = New System.Windows.Forms.Button()
         Me.BTNHISTORYOPS = New System.Windows.Forms.Button()
-        Me.BTNPRODUKOPS = New System.Windows.Forms.Button()
-        Me.BTNMASUKOPS = New System.Windows.Forms.Button()
+        Me.BTNBARANGOPS = New System.Windows.Forms.Button()
         Me.Label23 = New System.Windows.Forms.Label()
         Me.BTNKELUAROPS = New System.Windows.Forms.Button()
         Me.BTNLAPORANOPS = New System.Windows.Forms.Button()
@@ -84,11 +84,14 @@ Partial Class FR_RUSAK
         Me.BTNTENTANGOPS = New System.Windows.Forms.Button()
         Me.BTNLABELOPS = New System.Windows.Forms.Button()
         Me.BTNDASHBOARDOPS = New System.Windows.Forms.Button()
+        Me.BTNMASUKOPS = New System.Windows.Forms.Button()
+        Me.BTNMEMBER_OPS = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.BTNLOGOUT = New System.Windows.Forms.Button()
         Me.PNADMIN = New System.Windows.Forms.Panel()
+        Me.BTNVOUCHER_ADMIN = New System.Windows.Forms.Button()
         Me.BTNHISTORYPENJUALAN = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
@@ -103,6 +106,7 @@ Partial Class FR_RUSAK
         Me.BTNKELUAR = New System.Windows.Forms.Button()
         Me.BTNLAPORAN = New System.Windows.Forms.Button()
         Me.BTNLABELADMIN = New System.Windows.Forms.Button()
+        Me.BTNMEMBER_ADMIN = New System.Windows.Forms.Button()
         Me.PNCONTENT.SuspendLayout()
         CType(Me.DGEXPIRED, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DGTAMPIL, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -660,7 +664,6 @@ Partial Class FR_RUSAK
         'PNLEFT
         '
         Me.PNLEFT.BackColor = System.Drawing.Color.FromArgb(CType(CType(63, Byte), Integer), CType(CType(48, Byte), Integer), CType(CType(120, Byte), Integer))
-        Me.PNLEFT.Controls.Add(Me.PNOPS)
         Me.PNLEFT.Controls.Add(Me.Label4)
         Me.PNLEFT.Controls.Add(Me.Label3)
         Me.PNLEFT.Controls.Add(Me.LBLUSER)
@@ -668,6 +671,7 @@ Partial Class FR_RUSAK
         Me.PNLEFT.Controls.Add(Me.Button1)
         Me.PNLEFT.Controls.Add(Me.Panel1)
         Me.PNLEFT.Controls.Add(Me.PNADMIN)
+        Me.PNLEFT.Controls.Add(Me.PNOPS)
         Me.PNLEFT.Dock = System.Windows.Forms.DockStyle.Left
         Me.PNLEFT.Location = New System.Drawing.Point(0, 0)
         Me.PNLEFT.Margin = New System.Windows.Forms.Padding(2)
@@ -677,9 +681,9 @@ Partial Class FR_RUSAK
         '
         'PNOPS
         '
+        Me.PNOPS.Controls.Add(Me.BTNVOUCHER_OPS)
         Me.PNOPS.Controls.Add(Me.BTNHISTORYOPS)
-        Me.PNOPS.Controls.Add(Me.BTNPRODUKOPS)
-        Me.PNOPS.Controls.Add(Me.BTNMASUKOPS)
+        Me.PNOPS.Controls.Add(Me.BTNBARANGOPS)
         Me.PNOPS.Controls.Add(Me.Label23)
         Me.PNOPS.Controls.Add(Me.BTNKELUAROPS)
         Me.PNOPS.Controls.Add(Me.BTNLAPORANOPS)
@@ -689,11 +693,32 @@ Partial Class FR_RUSAK
         Me.PNOPS.Controls.Add(Me.BTNTENTANGOPS)
         Me.PNOPS.Controls.Add(Me.BTNLABELOPS)
         Me.PNOPS.Controls.Add(Me.BTNDASHBOARDOPS)
-        Me.PNOPS.Location = New System.Drawing.Point(0, 112)
+        Me.PNOPS.Controls.Add(Me.BTNMASUKOPS)
+        Me.PNOPS.Controls.Add(Me.BTNMEMBER_OPS)
+        Me.PNOPS.Location = New System.Drawing.Point(0, 145)
         Me.PNOPS.Margin = New System.Windows.Forms.Padding(2)
         Me.PNOPS.Name = "PNOPS"
-        Me.PNOPS.Size = New System.Drawing.Size(270, 570)
-        Me.PNOPS.TabIndex = 60
+        Me.PNOPS.Size = New System.Drawing.Size(270, 650)
+        Me.PNOPS.TabIndex = 63
+        '
+        'BTNVOUCHER_OPS
+        '
+        Me.BTNVOUCHER_OPS.FlatAppearance.BorderSize = 0
+        Me.BTNVOUCHER_OPS.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNVOUCHER_OPS.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNVOUCHER_OPS.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BTNVOUCHER_OPS.Image = Global.Aplikasi_Kasir.My.Resources.Resources.data_master1
+        Me.BTNVOUCHER_OPS.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.BTNVOUCHER_OPS.Location = New System.Drawing.Point(0, 192)
+        Me.BTNVOUCHER_OPS.Margin = New System.Windows.Forms.Padding(2)
+        Me.BTNVOUCHER_OPS.Name = "BTNVOUCHER_OPS"
+        Me.BTNVOUCHER_OPS.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
+        Me.BTNVOUCHER_OPS.Size = New System.Drawing.Size(270, 35)
+        Me.BTNVOUCHER_OPS.TabIndex = 62
+        Me.BTNVOUCHER_OPS.Text = "     Data Voucher"
+        Me.BTNVOUCHER_OPS.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.BTNVOUCHER_OPS.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.BTNVOUCHER_OPS.UseVisualStyleBackColor = True
         '
         'BTNHISTORYOPS
         '
@@ -703,7 +728,7 @@ Partial Class FR_RUSAK
         Me.BTNHISTORYOPS.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.BTNHISTORYOPS.Image = Global.Aplikasi_Kasir.My.Resources.Resources.transaksi
         Me.BTNHISTORYOPS.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNHISTORYOPS.Location = New System.Drawing.Point(0, 321)
+        Me.BTNHISTORYOPS.Location = New System.Drawing.Point(0, 392)
         Me.BTNHISTORYOPS.Margin = New System.Windows.Forms.Padding(2)
         Me.BTNHISTORYOPS.Name = "BTNHISTORYOPS"
         Me.BTNHISTORYOPS.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
@@ -714,50 +739,31 @@ Partial Class FR_RUSAK
         Me.BTNHISTORYOPS.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.BTNHISTORYOPS.UseVisualStyleBackColor = True
         '
-        'BTNPRODUKOPS
+        'BTNBARANGOPS
         '
-        Me.BTNPRODUKOPS.FlatAppearance.BorderSize = 0
-        Me.BTNPRODUKOPS.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BTNPRODUKOPS.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BTNPRODUKOPS.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.BTNPRODUKOPS.Image = Global.Aplikasi_Kasir.My.Resources.Resources.data_master1
-        Me.BTNPRODUKOPS.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNPRODUKOPS.Location = New System.Drawing.Point(0, 126)
-        Me.BTNPRODUKOPS.Margin = New System.Windows.Forms.Padding(2)
-        Me.BTNPRODUKOPS.Name = "BTNPRODUKOPS"
-        Me.BTNPRODUKOPS.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
-        Me.BTNPRODUKOPS.Size = New System.Drawing.Size(270, 35)
-        Me.BTNPRODUKOPS.TabIndex = 58
-        Me.BTNPRODUKOPS.Text = "     Data Produk"
-        Me.BTNPRODUKOPS.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNPRODUKOPS.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.BTNPRODUKOPS.UseVisualStyleBackColor = True
-        '
-        'BTNMASUKOPS
-        '
-        Me.BTNMASUKOPS.FlatAppearance.BorderSize = 0
-        Me.BTNMASUKOPS.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BTNMASUKOPS.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BTNMASUKOPS.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.BTNMASUKOPS.Image = Global.Aplikasi_Kasir.My.Resources.Resources.transaksi
-        Me.BTNMASUKOPS.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNMASUKOPS.Location = New System.Drawing.Point(0, 224)
-        Me.BTNMASUKOPS.Margin = New System.Windows.Forms.Padding(2)
-        Me.BTNMASUKOPS.Name = "BTNMASUKOPS"
-        Me.BTNMASUKOPS.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
-        Me.BTNMASUKOPS.Size = New System.Drawing.Size(270, 35)
-        Me.BTNMASUKOPS.TabIndex = 54
-        Me.BTNMASUKOPS.Text = "     Barang Masuk"
-        Me.BTNMASUKOPS.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNMASUKOPS.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.BTNMASUKOPS.UseVisualStyleBackColor = True
+        Me.BTNBARANGOPS.FlatAppearance.BorderSize = 0
+        Me.BTNBARANGOPS.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNBARANGOPS.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNBARANGOPS.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BTNBARANGOPS.Image = Global.Aplikasi_Kasir.My.Resources.Resources.data_master1
+        Me.BTNBARANGOPS.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.BTNBARANGOPS.Location = New System.Drawing.Point(0, 92)
+        Me.BTNBARANGOPS.Margin = New System.Windows.Forms.Padding(2)
+        Me.BTNBARANGOPS.Name = "BTNBARANGOPS"
+        Me.BTNBARANGOPS.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
+        Me.BTNBARANGOPS.Size = New System.Drawing.Size(270, 35)
+        Me.BTNBARANGOPS.TabIndex = 58
+        Me.BTNBARANGOPS.Text = "     Data Barang"
+        Me.BTNBARANGOPS.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.BTNBARANGOPS.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.BTNBARANGOPS.UseVisualStyleBackColor = True
         '
         'Label23
         '
         Me.Label23.AutoSize = True
         Me.Label23.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label23.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.Label23.Location = New System.Drawing.Point(8, 34)
+        Me.Label23.Location = New System.Drawing.Point(8, 2)
         Me.Label23.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label23.Name = "Label23"
         Me.Label23.Size = New System.Drawing.Size(125, 28)
@@ -772,7 +778,7 @@ Partial Class FR_RUSAK
         Me.BTNKELUAROPS.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.BTNKELUAROPS.Image = Global.Aplikasi_Kasir.My.Resources.Resources.transaksi
         Me.BTNKELUAROPS.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNKELUAROPS.Location = New System.Drawing.Point(0, 272)
+        Me.BTNKELUAROPS.Location = New System.Drawing.Point(0, 342)
         Me.BTNKELUAROPS.Margin = New System.Windows.Forms.Padding(2)
         Me.BTNKELUAROPS.Name = "BTNKELUAROPS"
         Me.BTNKELUAROPS.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
@@ -791,7 +797,7 @@ Partial Class FR_RUSAK
         Me.BTNLAPORANOPS.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.BTNLAPORANOPS.Image = Global.Aplikasi_Kasir.My.Resources.Resources.laporan
         Me.BTNLAPORANOPS.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNLAPORANOPS.Location = New System.Drawing.Point(0, 468)
+        Me.BTNLAPORANOPS.Location = New System.Drawing.Point(0, 542)
         Me.BTNLAPORANOPS.Margin = New System.Windows.Forms.Padding(2)
         Me.BTNLAPORANOPS.Name = "BTNLAPORANOPS"
         Me.BTNLAPORANOPS.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
@@ -805,7 +811,7 @@ Partial Class FR_RUSAK
         'Label24
         '
         Me.Label24.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.Label24.Location = New System.Drawing.Point(0, 424)
+        Me.Label24.Location = New System.Drawing.Point(0, 497)
         Me.Label24.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label24.Name = "Label24"
         Me.Label24.Size = New System.Drawing.Size(5, 25)
@@ -819,7 +825,7 @@ Partial Class FR_RUSAK
         Me.BTNRETURNOPS.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.BTNRETURNOPS.Image = Global.Aplikasi_Kasir.My.Resources.Resources.transaksi
         Me.BTNRETURNOPS.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNRETURNOPS.Location = New System.Drawing.Point(0, 370)
+        Me.BTNRETURNOPS.Location = New System.Drawing.Point(0, 442)
         Me.BTNRETURNOPS.Margin = New System.Windows.Forms.Padding(2)
         Me.BTNRETURNOPS.Name = "BTNRETURNOPS"
         Me.BTNRETURNOPS.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
@@ -838,7 +844,7 @@ Partial Class FR_RUSAK
         Me.BTNRUSAKOPS.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.BTNRUSAKOPS.Image = Global.Aplikasi_Kasir.My.Resources.Resources.transaksi
         Me.BTNRUSAKOPS.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNRUSAKOPS.Location = New System.Drawing.Point(0, 419)
+        Me.BTNRUSAKOPS.Location = New System.Drawing.Point(0, 492)
         Me.BTNRUSAKOPS.Margin = New System.Windows.Forms.Padding(2)
         Me.BTNRUSAKOPS.Name = "BTNRUSAKOPS"
         Me.BTNRUSAKOPS.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
@@ -857,7 +863,7 @@ Partial Class FR_RUSAK
         Me.BTNTENTANGOPS.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.BTNTENTANGOPS.Image = Global.Aplikasi_Kasir.My.Resources.Resources.tentang
         Me.BTNTENTANGOPS.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNTENTANGOPS.Location = New System.Drawing.Point(0, 516)
+        Me.BTNTENTANGOPS.Location = New System.Drawing.Point(0, 592)
         Me.BTNTENTANGOPS.Margin = New System.Windows.Forms.Padding(2)
         Me.BTNTENTANGOPS.Name = "BTNTENTANGOPS"
         Me.BTNTENTANGOPS.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
@@ -876,7 +882,7 @@ Partial Class FR_RUSAK
         Me.BTNLABELOPS.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.BTNLABELOPS.Image = Global.Aplikasi_Kasir.My.Resources.Resources.transaksi
         Me.BTNLABELOPS.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNLABELOPS.Location = New System.Drawing.Point(0, 175)
+        Me.BTNLABELOPS.Location = New System.Drawing.Point(0, 242)
         Me.BTNLABELOPS.Margin = New System.Windows.Forms.Padding(2)
         Me.BTNLABELOPS.Name = "BTNLABELOPS"
         Me.BTNLABELOPS.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
@@ -895,7 +901,7 @@ Partial Class FR_RUSAK
         Me.BTNDASHBOARDOPS.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.BTNDASHBOARDOPS.Image = Global.Aplikasi_Kasir.My.Resources.Resources.data_master
         Me.BTNDASHBOARDOPS.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNDASHBOARDOPS.Location = New System.Drawing.Point(0, 78)
+        Me.BTNDASHBOARDOPS.Location = New System.Drawing.Point(0, 42)
         Me.BTNDASHBOARDOPS.Margin = New System.Windows.Forms.Padding(2)
         Me.BTNDASHBOARDOPS.Name = "BTNDASHBOARDOPS"
         Me.BTNDASHBOARDOPS.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
@@ -905,6 +911,44 @@ Partial Class FR_RUSAK
         Me.BTNDASHBOARDOPS.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.BTNDASHBOARDOPS.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.BTNDASHBOARDOPS.UseVisualStyleBackColor = True
+        '
+        'BTNMASUKOPS
+        '
+        Me.BTNMASUKOPS.FlatAppearance.BorderSize = 0
+        Me.BTNMASUKOPS.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNMASUKOPS.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNMASUKOPS.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BTNMASUKOPS.Image = Global.Aplikasi_Kasir.My.Resources.Resources.transaksi
+        Me.BTNMASUKOPS.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.BTNMASUKOPS.Location = New System.Drawing.Point(0, 292)
+        Me.BTNMASUKOPS.Margin = New System.Windows.Forms.Padding(2)
+        Me.BTNMASUKOPS.Name = "BTNMASUKOPS"
+        Me.BTNMASUKOPS.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
+        Me.BTNMASUKOPS.Size = New System.Drawing.Size(270, 35)
+        Me.BTNMASUKOPS.TabIndex = 54
+        Me.BTNMASUKOPS.Text = "     Barang Masuk"
+        Me.BTNMASUKOPS.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.BTNMASUKOPS.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.BTNMASUKOPS.UseVisualStyleBackColor = True
+        '
+        'BTNMEMBER_OPS
+        '
+        Me.BTNMEMBER_OPS.FlatAppearance.BorderSize = 0
+        Me.BTNMEMBER_OPS.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNMEMBER_OPS.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNMEMBER_OPS.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BTNMEMBER_OPS.Image = Global.Aplikasi_Kasir.My.Resources.Resources.data_master1
+        Me.BTNMEMBER_OPS.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.BTNMEMBER_OPS.Location = New System.Drawing.Point(0, 142)
+        Me.BTNMEMBER_OPS.Margin = New System.Windows.Forms.Padding(2)
+        Me.BTNMEMBER_OPS.Name = "BTNMEMBER_OPS"
+        Me.BTNMEMBER_OPS.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
+        Me.BTNMEMBER_OPS.Size = New System.Drawing.Size(270, 35)
+        Me.BTNMEMBER_OPS.TabIndex = 61
+        Me.BTNMEMBER_OPS.Text = "     Data Member"
+        Me.BTNMEMBER_OPS.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.BTNMEMBER_OPS.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.BTNMEMBER_OPS.UseVisualStyleBackColor = True
         '
         'Label2
         '
@@ -962,6 +1006,7 @@ Partial Class FR_RUSAK
         '
         'PNADMIN
         '
+        Me.PNADMIN.Controls.Add(Me.BTNVOUCHER_ADMIN)
         Me.PNADMIN.Controls.Add(Me.BTNHISTORYPENJUALAN)
         Me.PNADMIN.Controls.Add(Me.Label1)
         Me.PNADMIN.Controls.Add(Me.Label6)
@@ -976,11 +1021,31 @@ Partial Class FR_RUSAK
         Me.PNADMIN.Controls.Add(Me.BTNKELUAR)
         Me.PNADMIN.Controls.Add(Me.BTNLAPORAN)
         Me.PNADMIN.Controls.Add(Me.BTNLABELADMIN)
+        Me.PNADMIN.Controls.Add(Me.BTNMEMBER_ADMIN)
         Me.PNADMIN.Location = New System.Drawing.Point(0, 145)
         Me.PNADMIN.Margin = New System.Windows.Forms.Padding(2)
         Me.PNADMIN.Name = "PNADMIN"
-        Me.PNADMIN.Size = New System.Drawing.Size(278, 662)
-        Me.PNADMIN.TabIndex = 58
+        Me.PNADMIN.Size = New System.Drawing.Size(278, 875)
+        Me.PNADMIN.TabIndex = 62
+        '
+        'BTNVOUCHER_ADMIN
+        '
+        Me.BTNVOUCHER_ADMIN.FlatAppearance.BorderSize = 0
+        Me.BTNVOUCHER_ADMIN.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNVOUCHER_ADMIN.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNVOUCHER_ADMIN.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BTNVOUCHER_ADMIN.Image = Global.Aplikasi_Kasir.My.Resources.Resources.data_master
+        Me.BTNVOUCHER_ADMIN.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.BTNVOUCHER_ADMIN.Location = New System.Drawing.Point(0, 242)
+        Me.BTNVOUCHER_ADMIN.Margin = New System.Windows.Forms.Padding(2)
+        Me.BTNVOUCHER_ADMIN.Name = "BTNVOUCHER_ADMIN"
+        Me.BTNVOUCHER_ADMIN.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
+        Me.BTNVOUCHER_ADMIN.Size = New System.Drawing.Size(270, 34)
+        Me.BTNVOUCHER_ADMIN.TabIndex = 56
+        Me.BTNVOUCHER_ADMIN.Text = "     Data Voucher"
+        Me.BTNVOUCHER_ADMIN.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.BTNVOUCHER_ADMIN.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.BTNVOUCHER_ADMIN.UseVisualStyleBackColor = True
         '
         'BTNHISTORYPENJUALAN
         '
@@ -990,7 +1055,7 @@ Partial Class FR_RUSAK
         Me.BTNHISTORYPENJUALAN.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.BTNHISTORYPENJUALAN.Image = Global.Aplikasi_Kasir.My.Resources.Resources.transaksi
         Me.BTNHISTORYPENJUALAN.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNHISTORYPENJUALAN.Location = New System.Drawing.Point(0, 392)
+        Me.BTNHISTORYPENJUALAN.Location = New System.Drawing.Point(0, 492)
         Me.BTNHISTORYPENJUALAN.Margin = New System.Windows.Forms.Padding(2)
         Me.BTNHISTORYPENJUALAN.Name = "BTNHISTORYPENJUALAN"
         Me.BTNHISTORYPENJUALAN.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
@@ -1004,7 +1069,7 @@ Partial Class FR_RUSAK
         'Label1
         '
         Me.Label1.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.Label1.Location = New System.Drawing.Point(0, 548)
+        Me.Label1.Location = New System.Drawing.Point(0, 647)
         Me.Label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(4, 24)
@@ -1030,7 +1095,7 @@ Partial Class FR_RUSAK
         Me.BTNRETURN.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.BTNRETURN.Image = Global.Aplikasi_Kasir.My.Resources.Resources.transaksi
         Me.BTNRETURN.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNRETURN.Location = New System.Drawing.Point(0, 492)
+        Me.BTNRETURN.Location = New System.Drawing.Point(0, 592)
         Me.BTNRETURN.Margin = New System.Windows.Forms.Padding(2)
         Me.BTNRETURN.Name = "BTNRETURN"
         Me.BTNRETURN.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
@@ -1068,7 +1133,7 @@ Partial Class FR_RUSAK
         Me.BTNRUSAK.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.BTNRUSAK.Image = Global.Aplikasi_Kasir.My.Resources.Resources.transaksi
         Me.BTNRUSAK.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNRUSAK.Location = New System.Drawing.Point(0, 542)
+        Me.BTNRUSAK.Location = New System.Drawing.Point(0, 642)
         Me.BTNRUSAK.Margin = New System.Windows.Forms.Padding(2)
         Me.BTNRUSAK.Name = "BTNRUSAK"
         Me.BTNRUSAK.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
@@ -1106,7 +1171,7 @@ Partial Class FR_RUSAK
         Me.BTNDISKON.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.BTNDISKON.Image = Global.Aplikasi_Kasir.My.Resources.Resources.transaksi
         Me.BTNDISKON.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNDISKON.Location = New System.Drawing.Point(0, 242)
+        Me.BTNDISKON.Location = New System.Drawing.Point(0, 342)
         Me.BTNDISKON.Margin = New System.Windows.Forms.Padding(2)
         Me.BTNDISKON.Name = "BTNDISKON"
         Me.BTNDISKON.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
@@ -1144,7 +1209,7 @@ Partial Class FR_RUSAK
         Me.BTNMASUK.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.BTNMASUK.Image = Global.Aplikasi_Kasir.My.Resources.Resources.transaksi
         Me.BTNMASUK.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNMASUK.Location = New System.Drawing.Point(0, 292)
+        Me.BTNMASUK.Location = New System.Drawing.Point(0, 392)
         Me.BTNMASUK.Margin = New System.Windows.Forms.Padding(2)
         Me.BTNMASUK.Name = "BTNMASUK"
         Me.BTNMASUK.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
@@ -1163,7 +1228,7 @@ Partial Class FR_RUSAK
         Me.BTNTENTANG.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.BTNTENTANG.Image = Global.Aplikasi_Kasir.My.Resources.Resources.tentang
         Me.BTNTENTANG.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNTENTANG.Location = New System.Drawing.Point(0, 592)
+        Me.BTNTENTANG.Location = New System.Drawing.Point(0, 692)
         Me.BTNTENTANG.Margin = New System.Windows.Forms.Padding(2)
         Me.BTNTENTANG.Name = "BTNTENTANG"
         Me.BTNTENTANG.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
@@ -1182,7 +1247,7 @@ Partial Class FR_RUSAK
         Me.BTNKELUAR.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.BTNKELUAR.Image = Global.Aplikasi_Kasir.My.Resources.Resources.transaksi
         Me.BTNKELUAR.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNKELUAR.Location = New System.Drawing.Point(0, 342)
+        Me.BTNKELUAR.Location = New System.Drawing.Point(0, 442)
         Me.BTNKELUAR.Margin = New System.Windows.Forms.Padding(2)
         Me.BTNKELUAR.Name = "BTNKELUAR"
         Me.BTNKELUAR.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
@@ -1201,7 +1266,7 @@ Partial Class FR_RUSAK
         Me.BTNLAPORAN.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.BTNLAPORAN.Image = Global.Aplikasi_Kasir.My.Resources.Resources.laporan
         Me.BTNLAPORAN.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNLAPORAN.Location = New System.Drawing.Point(0, 442)
+        Me.BTNLAPORAN.Location = New System.Drawing.Point(0, 542)
         Me.BTNLAPORAN.Margin = New System.Windows.Forms.Padding(2)
         Me.BTNLAPORAN.Name = "BTNLAPORAN"
         Me.BTNLAPORAN.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
@@ -1220,7 +1285,7 @@ Partial Class FR_RUSAK
         Me.BTNLABELADMIN.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.BTNLABELADMIN.Image = Global.Aplikasi_Kasir.My.Resources.Resources.transaksi
         Me.BTNLABELADMIN.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNLABELADMIN.Location = New System.Drawing.Point(0, 192)
+        Me.BTNLABELADMIN.Location = New System.Drawing.Point(0, 292)
         Me.BTNLABELADMIN.Margin = New System.Windows.Forms.Padding(2)
         Me.BTNLABELADMIN.Name = "BTNLABELADMIN"
         Me.BTNLABELADMIN.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
@@ -1230,6 +1295,25 @@ Partial Class FR_RUSAK
         Me.BTNLABELADMIN.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.BTNLABELADMIN.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.BTNLABELADMIN.UseVisualStyleBackColor = True
+        '
+        'BTNMEMBER_ADMIN
+        '
+        Me.BTNMEMBER_ADMIN.FlatAppearance.BorderSize = 0
+        Me.BTNMEMBER_ADMIN.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNMEMBER_ADMIN.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNMEMBER_ADMIN.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BTNMEMBER_ADMIN.Image = Global.Aplikasi_Kasir.My.Resources.Resources.data_master
+        Me.BTNMEMBER_ADMIN.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.BTNMEMBER_ADMIN.Location = New System.Drawing.Point(0, 192)
+        Me.BTNMEMBER_ADMIN.Margin = New System.Windows.Forms.Padding(2)
+        Me.BTNMEMBER_ADMIN.Name = "BTNMEMBER_ADMIN"
+        Me.BTNMEMBER_ADMIN.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
+        Me.BTNMEMBER_ADMIN.Size = New System.Drawing.Size(270, 34)
+        Me.BTNMEMBER_ADMIN.TabIndex = 55
+        Me.BTNMEMBER_ADMIN.Text = "     Data Member"
+        Me.BTNMEMBER_ADMIN.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.BTNMEMBER_ADMIN.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.BTNMEMBER_ADMIN.UseVisualStyleBackColor = True
         '
         'FR_RUSAK
         '
@@ -1308,7 +1392,15 @@ Partial Class FR_RUSAK
     Friend WithEvents BTNLOGOUT As Button
     Friend WithEvents CBKODE As ComboBox
     Friend WithEvents TXTSTOKAKHIR As TextBox
+    Friend WithEvents Label11 As Label
+    Friend WithEvents DGEXPIRED As DataGridView
+    Friend WithEvents CB_JENISTRANS As ComboBox
+    Friend WithEvents Label12 As Label
+    Friend WithEvents Label13 As Label
+    Friend WithEvents DTEXP As DateTimePicker
     Friend WithEvents PNADMIN As Panel
+    Friend WithEvents BTNVOUCHER_ADMIN As Button
+    Friend WithEvents BTNHISTORYPENJUALAN As Button
     Friend WithEvents Label1 As Label
     Friend WithEvents Label6 As Label
     Friend WithEvents BTNRETURN As Button
@@ -1322,8 +1414,11 @@ Partial Class FR_RUSAK
     Friend WithEvents BTNKELUAR As Button
     Friend WithEvents BTNLAPORAN As Button
     Friend WithEvents BTNLABELADMIN As Button
+    Friend WithEvents BTNMEMBER_ADMIN As Button
     Friend WithEvents PNOPS As Panel
-    Friend WithEvents BTNMASUKOPS As Button
+    Friend WithEvents BTNVOUCHER_OPS As Button
+    Friend WithEvents BTNHISTORYOPS As Button
+    Friend WithEvents BTNBARANGOPS As Button
     Friend WithEvents Label23 As Label
     Friend WithEvents BTNKELUAROPS As Button
     Friend WithEvents BTNLAPORANOPS As Button
@@ -1333,13 +1428,6 @@ Partial Class FR_RUSAK
     Friend WithEvents BTNTENTANGOPS As Button
     Friend WithEvents BTNLABELOPS As Button
     Friend WithEvents BTNDASHBOARDOPS As Button
-    Friend WithEvents Label11 As Label
-    Friend WithEvents DGEXPIRED As DataGridView
-    Friend WithEvents BTNPRODUKOPS As Button
-    Friend WithEvents BTNHISTORYPENJUALAN As Button
-    Friend WithEvents BTNHISTORYOPS As Button
-    Friend WithEvents CB_JENISTRANS As ComboBox
-    Friend WithEvents Label12 As Label
-    Friend WithEvents Label13 As Label
-    Friend WithEvents DTEXP As DateTimePicker
+    Friend WithEvents BTNMASUKOPS As Button
+    Friend WithEvents BTNMEMBER_OPS As Button
 End Class
