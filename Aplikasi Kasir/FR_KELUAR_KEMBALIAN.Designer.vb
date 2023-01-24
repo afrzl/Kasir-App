@@ -54,7 +54,7 @@ Partial Class FR_KELUAR_KEMBALIAN
         Me.BTN_CETAKNOTA.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.BTN_CETAKNOTA.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BTN_CETAKNOTA.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.BTN_CETAKNOTA.Location = New System.Drawing.Point(746, 147)
+        Me.BTN_CETAKNOTA.Location = New System.Drawing.Point(746, 166)
         Me.BTN_CETAKNOTA.Name = "BTN_CETAKNOTA"
         Me.BTN_CETAKNOTA.Size = New System.Drawing.Size(168, 45)
         Me.BTN_CETAKNOTA.TabIndex = 5
@@ -66,7 +66,7 @@ Partial Class FR_KELUAR_KEMBALIAN
         Me.ID_TRANSAKSI.AutoSize = True
         Me.ID_TRANSAKSI.Location = New System.Drawing.Point(119, 194)
         Me.ID_TRANSAKSI.Name = "ID_TRANSAKSI"
-        Me.ID_TRANSAKSI.Size = New System.Drawing.Size(49, 16)
+        Me.ID_TRANSAKSI.Size = New System.Drawing.Size(51, 17)
         Me.ID_TRANSAKSI.TabIndex = 4
         Me.ID_TRANSAKSI.Text = "Label1"
         Me.ID_TRANSAKSI.Visible = False
@@ -78,7 +78,7 @@ Partial Class FR_KELUAR_KEMBALIAN
         Me.BTNTUTUP.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.BTNTUTUP.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BTNTUTUP.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.BTNTUTUP.Location = New System.Drawing.Point(322, 147)
+        Me.BTNTUTUP.Location = New System.Drawing.Point(322, 167)
         Me.BTNTUTUP.Name = "BTNTUTUP"
         Me.BTNTUTUP.Size = New System.Drawing.Size(273, 103)
         Me.BTNTUTUP.TabIndex = 3
@@ -106,7 +106,7 @@ Partial Class FR_KELUAR_KEMBALIAN
         Me.LBKEMBALI.Font = New System.Drawing.Font("Microsoft Sans Serif", 49.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LBKEMBALI.Location = New System.Drawing.Point(6, 24)
         Me.LBKEMBALI.Name = "LBKEMBALI"
-        Me.LBKEMBALI.Size = New System.Drawing.Size(905, 92)
+        Me.LBKEMBALI.Size = New System.Drawing.Size(905, 110)
         Me.LBKEMBALI.TabIndex = 0
         Me.LBKEMBALI.Text = "0"
         Me.LBKEMBALI.TextAlign = System.Drawing.ContentAlignment.MiddleRight

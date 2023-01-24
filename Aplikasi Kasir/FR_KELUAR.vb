@@ -526,9 +526,19 @@ Public Class FR_KELUAR
                     INPUT_MEMBER()
                 End If
                 PRINT_NOTA()
+
+                If CUSTOMER_DISPLAY Then
+                    Dim layar = Screen.AllScreens(1)
+                    FR_KELUAR_CUSTOMER_KEMBALIAN.LBL_KEMBALIAN.Text = Format(CInt(TXTKEMBALIAN.Text), "##,##0")
+                    FR_KELUAR_CUSTOMER_KEMBALIAN.StartPosition = FormStartPosition.Manual
+                    FR_KELUAR_CUSTOMER_KEMBALIAN.Location = layar.Bounds.Location + New Point(500, 500)
+                    FR_KELUAR_CUSTOMER_KEMBALIAN.Show()
+                End If
+
                 FR_KELUAR_KEMBALIAN.LBKEMBALI.Text = Format(CInt(TXTKEMBALIAN.Text), "##,##0")
                 FR_KELUAR_KEMBALIAN.ID_TRANSAKSI.Text = ID_TRANSAKSI
                 FR_KELUAR_KEMBALIAN.Show()
+
 
                 FR_KELUAR_KEMBALIAN.BTNTUTUP.Select()
                 Me.Enabled = False

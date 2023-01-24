@@ -16,6 +16,7 @@ Public Class FR_KELUAR_KEMBALIAN
             .Enabled = True
         End With
         Me.Close()
+        FR_KELUAR_CUSTOMER_KEMBALIAN.Close()
         FR_KELUAR_CUSTOMER.GroupBox2.ForeColor = Color.Black
         FR_KELUAR_CUSTOMER.GroupBox2.Text = "Total Harga"
         FR_KELUAR_CUSTOMER.LBTOTAL.ForeColor = Color.Black
@@ -36,6 +37,7 @@ Public Class FR_KELUAR_KEMBALIAN
                     .Enabled = True
                 End With
                 Me.Close()
+                FR_KELUAR_CUSTOMER_KEMBALIAN.Close()
                 FR_KELUAR_CUSTOMER.GroupBox2.ForeColor = Color.Black
                 FR_KELUAR_CUSTOMER.LBTOTAL.ForeColor = Color.Black
                 FR_KELUAR_CUSTOMER.GroupBox2.Text = "Total Harga"
