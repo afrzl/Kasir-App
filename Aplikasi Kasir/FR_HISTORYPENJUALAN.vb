@@ -339,7 +339,7 @@ Public Class FR_HISTORYPENJUALAN
             " tbl_transaksi_parent.Harga_kembali AS 'Kembali'" &
             " FROM tbl_transaksi_child" &
             " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans" &
-            " INNER JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
+            " LEFT JOIN tbl_barang ON tbl_barang.Kode = tbl_transaksi_child.Kode" &
             " WHERE tbl_transaksi_child.Id_trans = '" & DGHISTORY.SelectedCells(0).Value & "'"
 
         transaksi.Clear()

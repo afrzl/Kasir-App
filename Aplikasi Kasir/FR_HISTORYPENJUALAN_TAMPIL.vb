@@ -63,7 +63,7 @@ Public Class FR_HISTORYPENJUALAN_TAMPIL
             " tbl_transaksi_child.Diskon AS 'Diskon'," &
             " tbl_transaksi_child.Harga_akhir AS 'Harga Akhir'" &
             " FROM tbl_transaksi_child" &
-            " INNER JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
+            " LEFT JOIN tbl_barang ON tbl_barang.Kode = tbl_transaksi_child.Kode" &
             " WHERE tbl_transaksi_child.Id_trans = '" & ID_TRANS & "'" &
             " ORDER BY tbl_transaksi_child.Id ASC"
 
@@ -87,6 +87,30 @@ Public Class FR_HISTORYPENJUALAN_TAMPIL
 
         DGHISTORY.Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         DGHISTORY.Columns(3).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+        DGHISTORY.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        For i = 0 To DGHISTORY.Columns.Count - 1
+            DGHISTORY.Columns.Item(i).SortMode = DataGridViewColumnSortMode.NotSortable
+        Next i
+
+        For i As Integer = 0 To DGHISTORY.Rows.Count - 1
+            If IsDBNull(DGHISTORY.Item(1, i).Value) Then
+                STR = "SELECT" &
+                    " RTRIM(tbl_data_voucher.Nama) AS 'Nama'" &
+                    " FROM tbl_transaksi_voucher" &
+                    " INNER JOIN tbl_data_voucher ON tbl_data_voucher.Id = tbl_transaksi_voucher.Id_data" &
+                    " WHERE tbl_transaksi_voucher.Kode = '" & DGHISTORY.Item(0, i).Value & "'"
+                CMD = New SqlCommand(STR, CONN)
+                RD = CMD.ExecuteReader
+                If RD.HasRows Then
+                    RD.Read()
+                    DGHISTORY.Item(1, i).Value = RD.Item("Nama")
+                    RD.Close()
+                Else
+                    RD.Close()
+                End If
+            End If
+        Next
     End Sub
 
     Private Sub DGHISTORY_SelectionChanged(sender As Object, e As EventArgs) Handles DGHISTORY.SelectionChanged

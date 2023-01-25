@@ -233,7 +233,7 @@ Public Class FR_KELUAR
 
         TXTSUBTOTAL.Text = TOT_HARGA
 
-        If Not LBTOTAL.Text = 0 Then
+        If DGTAMPIL.Rows.Count > 0 Then
             TXTBAYAR.Enabled = True
         Else
             TXTBAYAR.Enabled = False
@@ -381,7 +381,9 @@ Public Class FR_KELUAR
             Dim HARGA_AKHIR_PRODUK As Integer = HARGA_PRODUK - DISKON_PRODUK
             Dim HARGA_BELI_PRODUK As Integer = 0
 
-            HARGA_BELI_PRODUK = CARI_HARGA_BELI(KODE_PRODUK, JUMLAH_PRODUK)
+            If HARGA_AKHIR_PRODUK > 0 Then
+                HARGA_BELI_PRODUK = CARI_HARGA_BELI(KODE_PRODUK, JUMLAH_PRODUK)
+            End If
 
             STR = "INSERT INTO tbl_transaksi_child (Id_trans, Kode, Jumlah, Harga_beli, Harga, Diskon, Harga_akhir) VALUES" &
                     " ('" & ID_TRANSAKSI & "'," &
@@ -397,6 +399,12 @@ Public Class FR_KELUAR
             STR = "UPDATE tbl_stok SET Stok-=" & JUMLAH_PRODUK.ToString.Replace(",", ".") & " WHERE Kode='" & KODE_PRODUK & "'"
             CMD = New SqlCommand(STR, CONN)
             CMD.ExecuteNonQuery()
+
+            If HARGA_PRODUK <= 0 Then
+                STR = "UPDATE tbl_transaksi_voucher SET Updated_at ='" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "' WHERE Kode='" & KODE_PRODUK & "'"
+                CMD = New SqlCommand(STR, CONN)
+                CMD.ExecuteNonQuery()
+            End If
         Next
         TXTDISKON_RUPIAH.Text = "0"
         TXTDISKON_PERSEN.Text = "0"
@@ -439,6 +447,8 @@ Public Class FR_KELUAR
                     CMD = New SqlCommand(STR, CONN)
                     CMD.ExecuteNonQuery()
                 End If
+                RD.Close()
+            Else
                 RD.Close()
             End If
             RD.Close()
@@ -596,8 +606,12 @@ Public Class FR_KELUAR
     End Sub
 
     Private Sub TXTSUBTOTAL_TextChanged(sender As Object, e As EventArgs) Handles TXTSUBTOTAL.TextChanged
-        CARI_DISKON()
-        HITUNGDISKON_RUPIAH()
+        If TXTSUBTOTAL.Text < 0 Then
+            TXTSUBTOTAL.Text = 0
+        Else
+            CARI_DISKON()
+            HITUNGDISKON_RUPIAH()
+        End If
         FR_KELUAR_CUSTOMER.TXTSUBTOTAL.Text = TXTSUBTOTAL.Text
     End Sub
 
@@ -1137,6 +1151,9 @@ Public Class FR_KELUAR
 
     Private Sub LBTOTAL_TextChanged(sender As Object, e As EventArgs) Handles LBTOTAL.TextChanged
         FR_KELUAR_CUSTOMER.LBTOTAL.Text = LBTOTAL.Text
+        If LBTOTAL.Text < 0 Then
+            LBTOTAL.Text = 0
+        End If
     End Sub
 
     Private Sub DGTAMPIL_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles DGTAMPIL.CellValueChanged
@@ -1219,5 +1236,86 @@ Public Class FR_KELUAR
 
     Private Sub BTN_PENDING_Click(sender As Object, e As EventArgs) Handles BTN_PENDING.Click
         PENDING_FORM()
+    End Sub
+
+    Private Sub TXTVOUCHER_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTVOUCHER.KeyPress
+        If e.KeyChar = Chr(13) Then
+            INPUT_VOUCHER()
+        End If
+    End Sub
+
+    Sub INPUT_VOUCHER()
+        Dim STR As String = "SELECT tbl_transaksi_voucher.Id AS 'Id'," &
+            " RTRIM(tbl_data_voucher.Nama) AS 'Nama'," &
+            " RTRIM(tbl_transaksi_voucher.Kode) AS 'Kode'," &
+            " tbl_data_voucher.Harga_jual AS 'Harga'," &
+            " tbl_transaksi_voucher.Updated_at AS 'Updated_at'" &
+            " FROM tbl_transaksi_voucher" &
+            " INNER JOIN tbl_data_voucher ON tbl_transaksi_voucher.Id_data = tbl_data_voucher.Id" &
+            " WHERE RTRIM(Kode)='" & TXTVOUCHER.Text & "'"
+        Dim CMD As New SqlCommand(STR, CONN)
+        Dim RD As SqlDataReader
+        RD = CMD.ExecuteReader
+        If RD.HasRows Then
+            RD.Read()
+            If IsDBNull(RD.Item("Updated_at")) Then
+                Dim ADA_DATA As Boolean = False
+
+                For N = 0 To DGTAMPIL.Rows.Count - 1
+                    Dim Kode As String = DGTAMPIL.Item("Kode", N).Value
+                    If Kode = TXTVOUCHER.Text Then
+                        ADA_DATA = True
+                        Exit For
+                    End If
+                Next
+                If ADA_DATA Then
+                    MsgBox("Voucher telah digunakan!")
+                    TXTVOUCHER.Clear()
+                    TXTVOUCHER.Select()
+                Else
+
+                    DGTAMPIL.Rows.Add()
+                    DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Kode").Value = RD.Item("Kode")
+                    DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Barang").Value = RD.Item("Nama")
+                    If IsDBNull(RD.Item("Harga")) Then
+                        DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Harga").Value = 0
+                    Else
+                        DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Harga").Value = Format(RD.Item("Harga"), "###") * -1
+                    End If
+                    DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Diskon").Value = 0
+                    DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Qty").Value = 1
+                    DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Total").Value = DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Harga").Value
+
+                    FR_KELUAR_CUSTOMER.LBL_LASTITEM_NAME.Text = RD.Item("Nama")
+                    FR_KELUAR_CUSTOMER.LBL_LASTITEM_QTY.Text = DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Qty").Value & " x " & DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Harga").Value
+                    FR_KELUAR_CUSTOMER.LBL_LASTITEM_TOTAL.Text = DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Total").Value
+
+                    TOTAL_HARGA()
+                    CARI_KEMBALIAN()
+                    DGTAMPIL.FirstDisplayedScrollingRowIndex = DGTAMPIL.RowCount - 1
+                    DGTAMPIL.ClearSelection()
+                    DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Selected = True
+
+                    DUPLICATE_DGV()
+                    FR_KELUAR_CUSTOMER.DGTAMPIL.FirstDisplayedScrollingRowIndex = DGTAMPIL.RowCount - 1
+                    FR_KELUAR_CUSTOMER.DGTAMPIL.ClearSelection()
+                    FR_KELUAR_CUSTOMER.DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Selected = True
+
+                    TXTVOUCHER.Clear()
+                    TXTKODE.Select()
+                End If
+            Else
+                MsgBox("Voucher telah digunakan!")
+                TXTKODE.Clear()
+                TXTKODE.Select()
+            End If
+            RD.Close()
+        Else
+            RD.Close()
+            MsgBox("Voucher tidak ditemukan!")
+            TXTVOUCHER.Clear()
+            TXTVOUCHER.Select()
+        End If
+        RD.Close()
     End Sub
 End Class

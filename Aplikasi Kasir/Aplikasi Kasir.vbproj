@@ -236,10 +236,10 @@
     <Compile Include="FR_HISTORYPENJUALAN_TAMPIL.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FR_KELUAR_ACTION.Designer.vb">
-      <DependentUpon>FR_KELUAR_ACTION.vb</DependentUpon>
+    <Compile Include="FR_PRODUK_ACTION.Designer.vb">
+      <DependentUpon>FR_PRODUK_ACTION.vb</DependentUpon>
     </Compile>
-    <Compile Include="FR_KELUAR_ACTION.vb">
+    <Compile Include="FR_PRODUK_ACTION.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FR_KELUAR_CUSTOMER.Designer.vb">
@@ -373,6 +373,24 @@
       <DependentUpon>FR_VOUCHER.vb</DependentUpon>
     </Compile>
     <Compile Include="FR_VOUCHER.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FR_VOUCHER_ACTION.Designer.vb">
+      <DependentUpon>FR_VOUCHER_ACTION.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FR_VOUCHER_ACTION.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FR_VOUCHER_DATA.Designer.vb">
+      <DependentUpon>FR_VOUCHER_DATA.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FR_VOUCHER_DATA.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FR_VOUCHER_DATA_ACTION.Designer.vb">
+      <DependentUpon>FR_VOUCHER_DATA_ACTION.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FR_VOUCHER_DATA_ACTION.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="KONEKSI.vb" />
@@ -513,8 +531,8 @@
     <EmbeddedResource Include="FR_HISTORYPENJUALAN_TAMPIL.resx">
       <DependentUpon>FR_HISTORYPENJUALAN_TAMPIL.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FR_KELUAR_ACTION.resx">
-      <DependentUpon>FR_KELUAR_ACTION.vb</DependentUpon>
+    <EmbeddedResource Include="FR_PRODUK_ACTION.resx">
+      <DependentUpon>FR_PRODUK_ACTION.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FR_KELUAR_CUSTOMER.resx">
       <DependentUpon>FR_KELUAR_CUSTOMER.vb</DependentUpon>
@@ -575,6 +593,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FR_TENTANG.resx">
       <DependentUpon>FR_TENTANG.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FR_VOUCHER.resx">
+      <DependentUpon>FR_VOUCHER.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FR_VOUCHER_ACTION.resx">
+      <DependentUpon>FR_VOUCHER_ACTION.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FR_VOUCHER_DATA.resx">
+      <DependentUpon>FR_VOUCHER_DATA.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FR_VOUCHER_DATA_ACTION.resx">
+      <DependentUpon>FR_VOUCHER_DATA_ACTION.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\licenses.licx" />
     <EmbeddedResource Include="My Project\Resources.resx">

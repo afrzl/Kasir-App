@@ -168,7 +168,7 @@ Public Class FR_PRODUK
             If DGTAMPIL.Columns(e.ColumnIndex).HeaderText = "Edit" Then
                 Me.Enabled = False
 
-                With FR_KELUAR_ACTION
+                With FR_PRODUK_ACTION
                     .Show()
                     .Label1.Text = "EDIT PRODUK"
                     .TXTKODE.Text = DGTAMPIL.Item(0, e.RowIndex).Value
@@ -380,7 +380,7 @@ Public Class FR_PRODUK
 
     Private Sub BTNTAMBAH_Click(sender As Object, e As EventArgs) Handles BTNTAMBAH.Click
         Me.Enabled = False
-        With FR_KELUAR_ACTION
+        With FR_PRODUK_ACTION
             .Show()
             .Label1.Text = "TAMBAH PRODUK"
             .TXTKODE.Enabled = True
