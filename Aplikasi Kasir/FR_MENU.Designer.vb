@@ -95,13 +95,13 @@ Partial Class FR_MENU
         'PNLEFT
         '
         Me.PNLEFT.BackColor = System.Drawing.Color.FromArgb(CType(CType(63, Byte), Integer), CType(CType(48, Byte), Integer), CType(CType(120, Byte), Integer))
-        Me.PNLEFT.Controls.Add(Me.PNADMIN)
+        Me.PNLEFT.Controls.Add(Me.Panel1)
         Me.PNLEFT.Controls.Add(Me.Label4)
         Me.PNLEFT.Controls.Add(Me.Label3)
         Me.PNLEFT.Controls.Add(Me.LBLUSER)
         Me.PNLEFT.Controls.Add(Me.Label2)
         Me.PNLEFT.Controls.Add(Me.Button1)
-        Me.PNLEFT.Controls.Add(Me.Panel1)
+        Me.PNLEFT.Controls.Add(Me.PNADMIN)
         Me.PNLEFT.Dock = System.Windows.Forms.DockStyle.Left
         Me.PNLEFT.Location = New System.Drawing.Point(0, 0)
         Me.PNLEFT.Margin = New System.Windows.Forms.Padding(2)

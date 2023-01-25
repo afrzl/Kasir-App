@@ -230,6 +230,12 @@
     <Compile Include="FR_HISTORYPENJUALAN.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FR_HISTORYPENJUALAN_TAMPIL.Designer.vb">
+      <DependentUpon>FR_HISTORYPENJUALAN_TAMPIL.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FR_HISTORYPENJUALAN_TAMPIL.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FR_KELUAR_CUSTOMER.Designer.vb">
       <DependentUpon>FR_KELUAR_CUSTOMER.vb</DependentUpon>
     </Compile>
@@ -497,6 +503,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FR_HISTORYPENJUALAN.resx">
       <DependentUpon>FR_HISTORYPENJUALAN.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FR_HISTORYPENJUALAN_TAMPIL.resx">
+      <DependentUpon>FR_HISTORYPENJUALAN_TAMPIL.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FR_KELUAR_CUSTOMER.resx">
       <DependentUpon>FR_KELUAR_CUSTOMER.vb</DependentUpon>

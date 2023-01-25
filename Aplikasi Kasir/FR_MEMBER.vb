@@ -5,6 +5,10 @@ Public Class FR_MEMBER
         LBTGL.Text = Format(Date.Now, "dd MMMM yyyy HH:mm:ss")
     End Sub
 
+    Dim CMD As SqlCommand
+    Dim RD As SqlDataReader
+    Dim STR As String
+
     Sub BUKA_FORM(ByVal FR As Form)
         FR.Show()
         Me.Close()
@@ -224,19 +228,34 @@ Public Class FR_MEMBER
             End If
         Next
 
-        Dim columnButton As New DataGridViewButtonColumn
+        Dim Column_edit As New DataGridViewButtonColumn
 
-        With columnButton
+        With Column_edit
             .Text = "Edit"
-            .HeaderText = "Action"
+            .HeaderText = "Edit"
             .UseColumnTextForButtonValue = True
             .FlatStyle = FlatStyle.Flat
             .DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-            .DefaultCellStyle.ForeColor = Color.Navy
+            .CellTemplate.Style.BackColor = Color.Navy
+            .CellTemplate.Style.ForeColor = Color.WhiteSmoke
             .Width = 100
         End With
-        DGTAMPIL.Columns.Add(columnButton)
+        DGTAMPIL.Columns.Add(Column_edit)
         DGTAMPIL.Columns(6).Width = 50
+
+        Dim Column_delete = New DataGridViewButtonColumn
+        With Column_delete
+            .Text = "Delete"
+            .HeaderText = "Delete"
+            .UseColumnTextForButtonValue = True
+            .FlatStyle = FlatStyle.Flat
+            .DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            .CellTemplate.Style.BackColor = Color.Crimson
+            .CellTemplate.Style.ForeColor = Color.WhiteSmoke
+            .Width = 100
+        End With
+        DGTAMPIL.Columns.Add(Column_delete)
+        DGTAMPIL.Columns(7).Width = 50
     End Sub
 
     Private Sub TXTCARI_TextChanged(sender As Object, e As EventArgs) Handles TXTCARI.TextChanged
@@ -255,7 +274,7 @@ Public Class FR_MEMBER
     Private Sub DGTAMPIL_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGTAMPIL.CellClick
         On Error Resume Next
 
-        If DGTAMPIL.Columns(e.ColumnIndex).HeaderText = "Action" Then
+        If DGTAMPIL.Columns(e.ColumnIndex).HeaderText = "Edit" Then
             Me.Enabled = False
 
             With FR_MEMBER_ACTION
@@ -265,6 +284,19 @@ Public Class FR_MEMBER
                 .TXTNAMA.Select()
                 .CARI_DATA()
             End With
+        ElseIf DGTAMPIL.Columns(e.ColumnIndex).HeaderText = "Delete" Then
+            If MsgBox("Apakah anda yakin akan menghapus member?", vbYesNo) = vbYes Then
+                STR = "DELETE tbl_member " &
+                    " WHERE Id='" & DGTAMPIL.Item("Id", e.RowIndex).Value & "'"
+                CMD = New SqlCommand(Str, CONN)
+                CMD.ExecuteNonQuery()
+                MsgBox("Data member berhasil dihapus!")
+                TAMPIL()
+            End If
         End If
+    End Sub
+
+    Private Sub DGTAMPIL_SelectionChanged(sender As Object, e As EventArgs) Handles DGTAMPIL.SelectionChanged
+        DGTAMPIL.ClearSelection()
     End Sub
 End Class

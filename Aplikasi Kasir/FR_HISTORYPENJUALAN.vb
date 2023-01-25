@@ -58,6 +58,12 @@ Public Class FR_HISTORYPENJUALAN
         Else
             BTNPREV.Enabled = True
         End If
+
+        If DGHISTORY.RowCount > 0 Then
+            BTNNEXT.Enabled = True
+        Else
+            BTNNEXT.Enabled = False
+        End If
     End Sub
 
     Private Sub FR_HISTORYPENJUALAN_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -341,7 +347,12 @@ Public Class FR_HISTORYPENJUALAN
         DA = New SqlDataAdapter(STR, CONN)
         DA.Fill(transaksi)
 
-        PRINT_NOTA()
+        With FR_HISTORYPENJUALAN_TAMPIL
+            .LBL_IDTRANS.Text = DGHISTORY.SelectedCells(0).Value
+            .Show()
+        End With
+        Me.Enabled = False
+        'PRINT_NOTA()
     End Sub
 
     Private Sub TXTCARI_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTCARI.KeyPress
