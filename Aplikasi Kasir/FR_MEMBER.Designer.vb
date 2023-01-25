@@ -146,14 +146,14 @@ Partial Class FR_MEMBER
         '
         Me.DGTAMPIL.AllowUserToAddRows = False
         Me.DGTAMPIL.AllowUserToDeleteRows = False
-        Me.DGTAMPIL.AllowUserToResizeColumns = False
         Me.DGTAMPIL.AllowUserToResizeRows = False
         Me.DGTAMPIL.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DGTAMPIL.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
+        Me.DGTAMPIL.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
         DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ControlLight
         DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
         DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
@@ -161,6 +161,7 @@ Partial Class FR_MEMBER
         DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.DGTAMPIL.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.DGTAMPIL.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DGTAMPIL.EnableHeadersVisualStyles = False
         Me.DGTAMPIL.Location = New System.Drawing.Point(10, 106)
         Me.DGTAMPIL.Margin = New System.Windows.Forms.Padding(2)
         Me.DGTAMPIL.MultiSelect = False

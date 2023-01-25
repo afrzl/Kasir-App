@@ -228,34 +228,43 @@ Public Class FR_MEMBER
             End If
         Next
 
-        Dim Column_edit As New DataGridViewButtonColumn
+        If ROLE = 1 Or ROLE = 2 Then
+            Dim Column_edit As New DataGridViewButtonColumn
 
-        With Column_edit
-            .Text = "Edit"
-            .HeaderText = "Edit"
-            .UseColumnTextForButtonValue = True
-            .FlatStyle = FlatStyle.Flat
-            .DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-            .CellTemplate.Style.BackColor = Color.Navy
-            .CellTemplate.Style.ForeColor = Color.WhiteSmoke
-            .Width = 100
-        End With
-        DGTAMPIL.Columns.Add(Column_edit)
-        DGTAMPIL.Columns(6).Width = 50
+            With Column_edit
+                .Text = "Edit"
+                .HeaderText = "Edit"
+                .UseColumnTextForButtonValue = True
+                .FlatStyle = FlatStyle.Flat
+                .DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+                .CellTemplate.Style.BackColor = Color.Navy
+                .CellTemplate.Style.ForeColor = Color.WhiteSmoke
+                .Width = 100
+            End With
+            DGTAMPIL.Columns.Add(Column_edit)
+            DGTAMPIL.Columns(6).Width = 50
 
-        Dim Column_delete = New DataGridViewButtonColumn
-        With Column_delete
-            .Text = "Delete"
-            .HeaderText = "Delete"
-            .UseColumnTextForButtonValue = True
-            .FlatStyle = FlatStyle.Flat
-            .DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-            .CellTemplate.Style.BackColor = Color.Crimson
-            .CellTemplate.Style.ForeColor = Color.WhiteSmoke
-            .Width = 100
-        End With
-        DGTAMPIL.Columns.Add(Column_delete)
-        DGTAMPIL.Columns(7).Width = 50
+            Dim Column_delete = New DataGridViewButtonColumn
+            With Column_delete
+                .Text = "Delete"
+                .HeaderText = "Delete"
+                .UseColumnTextForButtonValue = True
+                .FlatStyle = FlatStyle.Flat
+                .DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+                .CellTemplate.Style.BackColor = Color.Crimson
+                .CellTemplate.Style.ForeColor = Color.WhiteSmoke
+                .Width = 100
+            End With
+            DGTAMPIL.Columns.Add(Column_delete)
+            DGTAMPIL.Columns(7).Width = 50
+
+        End If
+        DGTAMPIL.ColumnHeadersHeight = 35
+        DGTAMPIL.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing
+        DGTAMPIL.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        For i = 0 To DGTAMPIL.Columns.Count - 1
+            DGTAMPIL.Columns.Item(i).SortMode = DataGridViewColumnSortMode.NotSortable
+        Next i
     End Sub
 
     Private Sub TXTCARI_TextChanged(sender As Object, e As EventArgs) Handles TXTCARI.TextChanged
@@ -265,6 +274,7 @@ Public Class FR_MEMBER
     Private Sub BTNSIMPAN_Click(sender As Object, e As EventArgs) Handles BTNSIMPAN.Click
         With FR_MEMBER_ACTION
             .Show()
+            .Label1.Text = "TAMBAH MEMBER"
             .TXTID.Enabled = True
             .TXTID.Select()
         End With
@@ -274,24 +284,29 @@ Public Class FR_MEMBER
     Private Sub DGTAMPIL_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGTAMPIL.CellClick
         On Error Resume Next
 
-        If DGTAMPIL.Columns(e.ColumnIndex).HeaderText = "Edit" Then
-            Me.Enabled = False
+        If e.RowIndex >= 0 Then
+            If ROLE = 1 Or ROLE = 2 Then
+                If DGTAMPIL.Columns(e.ColumnIndex).HeaderText = "Edit" Then
+                    Me.Enabled = False
 
-            With FR_MEMBER_ACTION
-                .Show()
-                .TXTID.Text = DGTAMPIL.Item("Id", e.RowIndex).Value
-                .TXTID.Enabled = False
-                .TXTNAMA.Select()
-                .CARI_DATA()
-            End With
-        ElseIf DGTAMPIL.Columns(e.ColumnIndex).HeaderText = "Delete" Then
-            If MsgBox("Apakah anda yakin akan menghapus member?", vbYesNo) = vbYes Then
-                STR = "DELETE tbl_member " &
-                    " WHERE Id='" & DGTAMPIL.Item("Id", e.RowIndex).Value & "'"
-                CMD = New SqlCommand(Str, CONN)
-                CMD.ExecuteNonQuery()
-                MsgBox("Data member berhasil dihapus!")
-                TAMPIL()
+                    With FR_MEMBER_ACTION
+                        .Show()
+                        .Label1.Text = "EDIT MEMBER"
+                        .TXTID.Text = DGTAMPIL.Item("Id", e.RowIndex).Value
+                        .TXTID.Enabled = False
+                        .TXTNAMA.Select()
+                        .CARI_DATA()
+                    End With
+                ElseIf DGTAMPIL.Columns(e.ColumnIndex).HeaderText = "Delete" Then
+                    If MsgBox("Apakah anda yakin akan menghapus member?", vbYesNo) = vbYes Then
+                        STR = "DELETE tbl_member " &
+                            " WHERE Id='" & DGTAMPIL.Item("Id", e.RowIndex).Value & "'"
+                        CMD = New SqlCommand(STR, CONN)
+                        CMD.ExecuteNonQuery()
+                        MsgBox("Data member berhasil dihapus!")
+                        TAMPIL()
+                    End If
+                End If
             End If
         End If
     End Sub

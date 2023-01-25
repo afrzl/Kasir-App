@@ -29,6 +29,13 @@ Partial Class FR_MENU
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FR_MENU))
         Me.PEWAKTU = New System.Windows.Forms.Timer(Me.components)
         Me.PNLEFT = New System.Windows.Forms.Panel()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.BTNLOGOUT = New System.Windows.Forms.Button()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.LBLUSER = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.PNADMIN = New System.Windows.Forms.Panel()
         Me.BTNVOUCHER_ADMIN = New System.Windows.Forms.Button()
         Me.BTNHISTORYPENJUALAN = New System.Windows.Forms.Button()
@@ -46,13 +53,6 @@ Partial Class FR_MENU
         Me.BTNLAPORAN = New System.Windows.Forms.Button()
         Me.BTNLABELADMIN = New System.Windows.Forms.Button()
         Me.BTNMEMBER_ADMIN = New System.Windows.Forms.Button()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.LBLUSER = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.BTNLOGOUT = New System.Windows.Forms.Button()
         Me.PNTOP = New System.Windows.Forms.Panel()
         Me.LBTGL = New System.Windows.Forms.Label()
         Me.PNCONTROL = New System.Windows.Forms.Panel()
@@ -80,8 +80,8 @@ Partial Class FR_MENU
         Me.DGSTOK = New System.Windows.Forms.DataGridView()
         Me.TXTCARISTOK = New System.Windows.Forms.TextBox()
         Me.PNLEFT.SuspendLayout()
-        Me.PNADMIN.SuspendLayout()
         Me.Panel1.SuspendLayout()
+        Me.PNADMIN.SuspendLayout()
         Me.PNTOP.SuspendLayout()
         Me.PNCONTROL.SuspendLayout()
         Me.PNCONTENT.SuspendLayout()
@@ -108,6 +108,95 @@ Partial Class FR_MENU
         Me.PNLEFT.Name = "PNLEFT"
         Me.PNLEFT.Size = New System.Drawing.Size(270, 768)
         Me.PNLEFT.TabIndex = 9
+        '
+        'Panel1
+        '
+        Me.Panel1.Controls.Add(Me.BTNLOGOUT)
+        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Panel1.Location = New System.Drawing.Point(0, 704)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(2)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(270, 64)
+        Me.Panel1.TabIndex = 0
+        '
+        'BTNLOGOUT
+        '
+        Me.BTNLOGOUT.FlatAppearance.BorderSize = 0
+        Me.BTNLOGOUT.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNLOGOUT.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNLOGOUT.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BTNLOGOUT.Image = Global.Aplikasi_Kasir.My.Resources.Resources.logout
+        Me.BTNLOGOUT.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.BTNLOGOUT.Location = New System.Drawing.Point(2, 18)
+        Me.BTNLOGOUT.Margin = New System.Windows.Forms.Padding(2)
+        Me.BTNLOGOUT.Name = "BTNLOGOUT"
+        Me.BTNLOGOUT.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
+        Me.BTNLOGOUT.Size = New System.Drawing.Size(270, 35)
+        Me.BTNLOGOUT.TabIndex = 14
+        Me.BTNLOGOUT.Text = "     Logout"
+        Me.BTNLOGOUT.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.BTNLOGOUT.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.BTNLOGOUT.UseVisualStyleBackColor = True
+        '
+        'Label4
+        '
+        Me.Label4.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.Label4.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.Label4.Location = New System.Drawing.Point(102, 80)
+        Me.Label4.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(150, 1)
+        Me.Label4.TabIndex = 17
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.Label3.Location = New System.Drawing.Point(98, 89)
+        Me.Label3.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(100, 20)
+        Me.Label3.TabIndex = 16
+        Me.Label3.Text = "Administrator"
+        '
+        'LBLUSER
+        '
+        Me.LBLUSER.AutoSize = True
+        Me.LBLUSER.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBLUSER.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.LBLUSER.Location = New System.Drawing.Point(98, 52)
+        Me.LBLUSER.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.LBLUSER.Name = "LBLUSER"
+        Me.LBLUSER.Size = New System.Drawing.Size(95, 23)
+        Me.LBLUSER.TabIndex = 15
+        Me.LBLUSER.Text = "Nama User"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.Label2.Location = New System.Drawing.Point(98, 29)
+        Me.Label2.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(117, 20)
+        Me.Label2.TabIndex = 14
+        Me.Label2.Text = "Selamat datang,"
+        '
+        'Button1
+        '
+        Me.Button1.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.Button1.FlatAppearance.BorderSize = 0
+        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button1.Image = Global.Aplikasi_Kasir.My.Resources.Resources.avatar50px
+        Me.Button1.Location = New System.Drawing.Point(12, 29)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(2)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(80, 80)
+        Me.Button1.TabIndex = 0
+        Me.Button1.UseVisualStyleBackColor = False
         '
         'PNADMIN
         '
@@ -420,95 +509,6 @@ Partial Class FR_MENU
         Me.BTNMEMBER_ADMIN.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.BTNMEMBER_ADMIN.UseVisualStyleBackColor = True
         '
-        'Label4
-        '
-        Me.Label4.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.Label4.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.Label4.Location = New System.Drawing.Point(102, 80)
-        Me.Label4.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(150, 1)
-        Me.Label4.TabIndex = 17
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.Label3.Location = New System.Drawing.Point(98, 89)
-        Me.Label3.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(100, 20)
-        Me.Label3.TabIndex = 16
-        Me.Label3.Text = "Administrator"
-        '
-        'LBLUSER
-        '
-        Me.LBLUSER.AutoSize = True
-        Me.LBLUSER.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LBLUSER.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.LBLUSER.Location = New System.Drawing.Point(98, 52)
-        Me.LBLUSER.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.LBLUSER.Name = "LBLUSER"
-        Me.LBLUSER.Size = New System.Drawing.Size(95, 23)
-        Me.LBLUSER.TabIndex = 15
-        Me.LBLUSER.Text = "Nama User"
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.Label2.Location = New System.Drawing.Point(98, 29)
-        Me.Label2.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(117, 20)
-        Me.Label2.TabIndex = 14
-        Me.Label2.Text = "Selamat datang,"
-        '
-        'Button1
-        '
-        Me.Button1.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.Button1.FlatAppearance.BorderSize = 0
-        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button1.Image = Global.Aplikasi_Kasir.My.Resources.Resources.avatar50px
-        Me.Button1.Location = New System.Drawing.Point(12, 29)
-        Me.Button1.Margin = New System.Windows.Forms.Padding(2)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(80, 80)
-        Me.Button1.TabIndex = 0
-        Me.Button1.UseVisualStyleBackColor = False
-        '
-        'Panel1
-        '
-        Me.Panel1.Controls.Add(Me.BTNLOGOUT)
-        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel1.Location = New System.Drawing.Point(0, 704)
-        Me.Panel1.Margin = New System.Windows.Forms.Padding(2)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(270, 64)
-        Me.Panel1.TabIndex = 0
-        '
-        'BTNLOGOUT
-        '
-        Me.BTNLOGOUT.FlatAppearance.BorderSize = 0
-        Me.BTNLOGOUT.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BTNLOGOUT.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BTNLOGOUT.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.BTNLOGOUT.Image = Global.Aplikasi_Kasir.My.Resources.Resources.logout
-        Me.BTNLOGOUT.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNLOGOUT.Location = New System.Drawing.Point(2, 18)
-        Me.BTNLOGOUT.Margin = New System.Windows.Forms.Padding(2)
-        Me.BTNLOGOUT.Name = "BTNLOGOUT"
-        Me.BTNLOGOUT.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
-        Me.BTNLOGOUT.Size = New System.Drawing.Size(270, 35)
-        Me.BTNLOGOUT.TabIndex = 14
-        Me.BTNLOGOUT.Text = "     Logout"
-        Me.BTNLOGOUT.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BTNLOGOUT.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.BTNLOGOUT.UseVisualStyleBackColor = True
-        '
         'PNTOP
         '
         Me.PNTOP.BackColor = System.Drawing.Color.Silver
@@ -812,18 +812,19 @@ Partial Class FR_MENU
         '
         'GroupBox1
         '
-        Me.GroupBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.GroupBox1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox1.Controls.Add(Me.BTNNEXT)
         Me.GroupBox1.Controls.Add(Me.BTNPREV)
         Me.GroupBox1.Controls.Add(Me.DGSTOK)
         Me.GroupBox1.Controls.Add(Me.TXTCARISTOK)
-        Me.GroupBox1.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox1.Location = New System.Drawing.Point(10, 305)
+        Me.GroupBox1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GroupBox1.Location = New System.Drawing.Point(10, 397)
         Me.GroupBox1.Margin = New System.Windows.Forms.Padding(2)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Padding = New System.Windows.Forms.Padding(2)
-        Me.GroupBox1.Size = New System.Drawing.Size(1074, 411)
+        Me.GroupBox1.Size = New System.Drawing.Size(1074, 319)
         Me.GroupBox1.TabIndex = 19
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Stok Barang Tersedia"
@@ -834,12 +835,12 @@ Partial Class FR_MENU
         Me.BTNNEXT.BackColor = System.Drawing.Color.DarkBlue
         Me.BTNNEXT.FlatAppearance.BorderSize = 0
         Me.BTNNEXT.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BTNNEXT.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNNEXT.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BTNNEXT.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.BTNNEXT.Location = New System.Drawing.Point(1018, 40)
         Me.BTNNEXT.Margin = New System.Windows.Forms.Padding(2)
         Me.BTNNEXT.Name = "BTNNEXT"
-        Me.BTNNEXT.Size = New System.Drawing.Size(50, 29)
+        Me.BTNNEXT.Size = New System.Drawing.Size(50, 40)
         Me.BTNNEXT.TabIndex = 21
         Me.BTNNEXT.Text = ">"
         Me.BTNNEXT.UseVisualStyleBackColor = False
@@ -850,12 +851,12 @@ Partial Class FR_MENU
         Me.BTNPREV.BackColor = System.Drawing.Color.DarkBlue
         Me.BTNPREV.FlatAppearance.BorderSize = 0
         Me.BTNPREV.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BTNPREV.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNPREV.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BTNPREV.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.BTNPREV.Location = New System.Drawing.Point(962, 40)
         Me.BTNPREV.Margin = New System.Windows.Forms.Padding(2)
         Me.BTNPREV.Name = "BTNPREV"
-        Me.BTNPREV.Size = New System.Drawing.Size(50, 29)
+        Me.BTNPREV.Size = New System.Drawing.Size(50, 40)
         Me.BTNPREV.TabIndex = 20
         Me.BTNPREV.Text = "<"
         Me.BTNPREV.UseVisualStyleBackColor = False
@@ -871,7 +872,7 @@ Partial Class FR_MENU
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
         DataGridViewCellStyle1.NullValue = "-"
         DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
@@ -879,14 +880,14 @@ Partial Class FR_MENU
         DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.DGSTOK.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.DGSTOK.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DGSTOK.Location = New System.Drawing.Point(22, 75)
+        Me.DGSTOK.Location = New System.Drawing.Point(22, 92)
         Me.DGSTOK.Margin = New System.Windows.Forms.Padding(2)
         Me.DGSTOK.MultiSelect = False
         Me.DGSTOK.Name = "DGSTOK"
         Me.DGSTOK.ReadOnly = True
         DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText
         DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
         DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
@@ -902,18 +903,18 @@ Partial Class FR_MENU
         Me.DGSTOK.ShowCellErrors = False
         Me.DGSTOK.ShowEditingIcon = False
         Me.DGSTOK.ShowRowErrors = False
-        Me.DGSTOK.Size = New System.Drawing.Size(1046, 330)
+        Me.DGSTOK.Size = New System.Drawing.Size(1046, 221)
         Me.DGSTOK.TabIndex = 67
         '
         'TXTCARISTOK
         '
         Me.TXTCARISTOK.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TXTCARISTOK.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TXTCARISTOK.Font = New System.Drawing.Font("Segoe UI", 15.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TXTCARISTOK.Location = New System.Drawing.Point(22, 39)
         Me.TXTCARISTOK.Margin = New System.Windows.Forms.Padding(2)
         Me.TXTCARISTOK.Name = "TXTCARISTOK"
-        Me.TXTCARISTOK.Size = New System.Drawing.Size(934, 30)
+        Me.TXTCARISTOK.Size = New System.Drawing.Size(934, 41)
         Me.TXTCARISTOK.TabIndex = 66
         '
         'FR_MENU
@@ -935,9 +936,9 @@ Partial Class FR_MENU
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.PNLEFT.ResumeLayout(False)
         Me.PNLEFT.PerformLayout()
+        Me.Panel1.ResumeLayout(False)
         Me.PNADMIN.ResumeLayout(False)
         Me.PNADMIN.PerformLayout()
-        Me.Panel1.ResumeLayout(False)
         Me.PNTOP.ResumeLayout(False)
         Me.PNTOP.PerformLayout()
         Me.PNCONTROL.ResumeLayout(False)

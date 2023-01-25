@@ -624,7 +624,7 @@ Public Class FR_DISKON
             DT.Rows.Add(DGTAMPIL.CurrentRow.Cells("Kode Barang").Value,
                     DGTAMPIL.CurrentRow.Cells("Nama Barang").Value,
                     DGTAMPIL.CurrentRow.Cells("Tanggal Awal").Value & " - " & DGTAMPIL.CurrentRow.Cells("Tanggal Akhir").Value,
-                            DGTAMPIL.CurrentRow.Cells("Diskon (%)").Value)
+                            DGTAMPIL.CurrentRow.Cells("Diskon").Value)
 
             Dim printDialog1 As New PrintDialog
             Dim printDocument1 As New System.Drawing.Printing.PrintDocument

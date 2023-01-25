@@ -7,7 +7,7 @@ Public Class FR_KELUAR_TAMPIL
     End Sub
 
     Dim START_RECORD As Integer = 0
-    Dim TAMPIL_RECORD As Integer = 10
+    Dim TAMPIL_RECORD As Integer = 14
 
     Sub TAMPIL()
         If START_RECORD = 0 Then

@@ -3,7 +3,6 @@ C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi 
 C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Release\Aplikasi Kasir.pdb
 C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Release\Aplikasi Kasir.xml
 C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Release\AxShockwaveFlashObjects.dll
-C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Release\Bunifu.Licensing.dll
 C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Release\Bunifu.UI.WinForms.BunifuButton.dll
 C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Release\Bunifu.UI.WinForms.BunifuTextBox.dll
 C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Release\Bunifu_UI_v1.5.3.dll
@@ -12,22 +11,6 @@ C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi 
 C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Release\CrystalDecisions.Shared.dll
 C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Release\CrystalDecisions.Windows.Forms.dll
 C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Release\FontAwesome.Sharp.dll
-C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Release\MessagingToolkit.Barcode.dll
-C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Release\Syncfusion.Core.WinForms.dll
-C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Release\Syncfusion.Data.WinForms.dll
-C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Release\Syncfusion.Grid.Base.dll
-C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Release\Syncfusion.Grid.Grouping.Windows.dll
-C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Release\Syncfusion.Grid.Windows.dll
-C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Release\Syncfusion.GridCommon.WinForms.dll
-C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Release\Syncfusion.Grouping.Base.dll
-C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Release\Syncfusion.SfDataGrid.WinForms.dll
-C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Release\Syncfusion.SfInput.WinForms.dll
-C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Release\Syncfusion.SfListView.WinForms.dll
-C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Release\Syncfusion.Shared.Base.dll
-C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Release\Syncfusion.Shared.Windows.dll
-C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Release\Syncfusion.SpellChecker.Base.dll
-C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Release\Syncfusion.Tools.Base.dll
-C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Release\Syncfusion.Tools.Windows.dll
 C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Release\ShockwaveFlashObjects.dll
 C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Release\CrystalDecisions.ReportAppServer.DataDefModel.dll
 C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Release\CrystalDecisions.ReportAppServer.ClientDoc.dll
@@ -61,7 +44,6 @@ C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi 
 C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Release\Syncfusion.DataSource.WinForms.xml
 C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Release\Syncfusion.Grid.Grouping.Windows.XmlSerializers.dll
 C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Release\Syncfusion.Grid.Windows.XmlSerializers.dll
-C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\obj\Release\Aplikasi Kasir.vbprojAssemblyReference.cache
 C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\obj\Release\Aplikasi_Kasir.FR_OPS_DASHBOARD.resources
 C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\obj\Release\Aplikasi_Kasir.FR_DISKON.resources
 C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\obj\Release\Aplikasi_Kasir.FR_KASIR.resources
@@ -73,15 +55,12 @@ C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi 
 C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\obj\Release\Aplikasi_Kasir.FR_MASUK.resources
 C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\obj\Release\Aplikasi_Kasir.FR_MENU.resources
 C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\obj\Release\Aplikasi_Kasir.FR_LOGIN.resources
-C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\obj\Release\Aplikasi_Kasir.FR_PREVIEW.resources
 C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\obj\Release\Aplikasi_Kasir.FR_PRODUK.resources
 C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\obj\Release\Aplikasi_Kasir.FR_REPORT.resources
 C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\obj\Release\Aplikasi_Kasir.FR_RETURN.resources
 C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\obj\Release\Aplikasi_Kasir.FR_RUSAK.resources
 C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\obj\Release\Aplikasi_Kasir.FR_TENTANG.resources
 C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\obj\Release\Aplikasi_Kasir.Resources.resources
-C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\obj\Release\Aplikasi_Kasir.nitip.resources
-C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\obj\Release\Aplikasi_Kasir.template.resources
 C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\obj\Release\Aplikasi Kasir.vbproj.GenerateResource.cache
 C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\obj\Release\Aplikasi Kasir.exe.licenses
 C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\obj\Release\Aplikasi Kasir.vbproj.CoreCompileInputs.cache
@@ -89,3 +68,37 @@ C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi 
 C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\obj\Release\Aplikasi Kasir.exe
 C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\obj\Release\Aplikasi Kasir.xml
 C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\obj\Release\Aplikasi Kasir.pdb
+C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Release\Aplikasi Kasir.exe.manifest
+C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Release\Aplikasi Kasir.application
+C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Release\BarcodeStandard.dll
+C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Release\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Release\System.Buffers.dll
+C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Release\System.Drawing.Common.dll
+C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Release\System.Memory.dll
+C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Release\System.Numerics.Vectors.dll
+C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Release\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Release\System.Text.Encodings.Web.dll
+C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Release\System.Text.Json.dll
+C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Release\System.Threading.Tasks.Extensions.dll
+C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Release\System.ValueTuple.dll
+C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Release\Microsoft.Bcl.AsyncInterfaces.xml
+C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Release\System.Buffers.xml
+C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Release\System.Memory.xml
+C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Release\System.Numerics.Vectors.xml
+C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Release\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Release\System.Text.Encodings.Web.xml
+C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Release\System.Text.Json.xml
+C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Release\System.Threading.Tasks.Extensions.xml
+C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Release\System.ValueTuple.xml
+C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\obj\Release\Aplikasi Kasir.vbproj.AssemblyReference.cache
+C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\obj\Release\Aplikasi_Kasir.FR_CETAKBARCODE.resources
+C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\obj\Release\Aplikasi_Kasir.FR_CETAK_LABEL.resources
+C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\obj\Release\Aplikasi_Kasir.FR_HISTORYPENJUALAN.resources
+C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\obj\Release\Aplikasi_Kasir.FR_HISTORYPENJUALAN_TAMPIL.resources
+C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\obj\Release\Aplikasi_Kasir.FR_KELUAR_CUSTOMER.resources
+C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\obj\Release\Aplikasi_Kasir.FR_KELUAR_CUSTOMER_KEMBALIAN.resources
+C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\obj\Release\Aplikasi_Kasir.FR_MASUK_TOTAL.resources
+C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\obj\Release\Aplikasi_Kasir.FR_MEMBER.resources
+C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\obj\Release\Aplikasi_Kasir.FR_MEMBER_ACTION.resources
+C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\obj\Release\Aplikasi Kasir.exe.manifest
+C:\Users\muham\OneDrive - student.uns.ac.id\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\obj\Release\Aplikasi Kasir.application
