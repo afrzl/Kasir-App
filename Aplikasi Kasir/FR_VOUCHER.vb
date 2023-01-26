@@ -22,21 +22,25 @@ Public Class FR_VOUCHER
                 PNOPS.Visible = False
                 PNKASIR.Visible = False
                 Label3.Text = "Administrator"
+
+                BTNDATA.Visible = True
             Case 2
                 PNADMIN.Visible = False
                 PNOPS.Visible = True
                 PNKASIR.Visible = False
                 Label3.Text = "Operator"
+
+                BTNDATA.Visible = False
+                TXTCARI.Size = New Size(954, 41)
             Case 3
                 PNADMIN.Visible = False
                 PNOPS.Visible = False
                 PNKASIR.Visible = True
                 Label3.Text = "Kasir"
+
+                BTNDATA.Visible = False
+                TXTCARI.Size = New Size(954, 41)
         End Select
-
-        If DGTAMPIL.RowCount > 0 Then
-
-        End If
         TAMPIL()
 
         LBTGL.Text = Format(Date.Now, "dd MMMM yyyy HH:mm:ss")
@@ -195,8 +199,7 @@ Public Class FR_VOUCHER
 
     Sub TAMPIL()
         DGTAMPIL.Columns.Clear()
-        If ROLE = 1 Then
-            STR = "SELECT" &
+        STR = "SELECT" &
                     " RTRIM(tbl_data_voucher.Jenis) AS 'Jenis Voucher'," &
                     " RTRIM(tbl_data_voucher.Nama) AS 'Nama Voucher'," &
                     " RTRIM(tbl_karyawan.Nama) AS 'Nama Kasir'," &
@@ -221,15 +224,14 @@ Public Class FR_VOUCHER
             DGTAMPIL.Columns(2).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
             DGTAMPIL.Columns(3).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
             DGTAMPIL.Columns(4).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-            DGTAMPIL.Columns(5).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+        DGTAMPIL.Columns(5).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
 
-            DGTAMPIL.ColumnHeadersHeight = 35
+        DGTAMPIL.ColumnHeadersHeight = 35
             DGTAMPIL.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing
             DGTAMPIL.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-            For i = 0 To DGTAMPIL.Columns.Count - 1
-                DGTAMPIL.Columns.Item(i).SortMode = DataGridViewColumnSortMode.NotSortable
-            Next i
-        End If
+        For i = 0 To DGTAMPIL.Columns.Count - 1
+            DGTAMPIL.Columns.Item(i).SortMode = DataGridViewColumnSortMode.NotSortable
+        Next i
     End Sub
 
     Private Sub BTNSIMPAN_Click(sender As Object, e As EventArgs) Handles BTNSIMPAN.Click
@@ -250,5 +252,14 @@ Public Class FR_VOUCHER
             .Show()
             .TXTCARI.Select()
         End With
+    End Sub
+
+    Private Sub DGTAMPIL_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs) Handles DGTAMPIL.CellFormatting
+        If ROLE <> 1 Then
+            If e.ColumnIndex = 4 Then
+                Dim kode As String = e.Value.ToString.Remove(3, 7) & "********"
+                e.Value = kode
+            End If
+        End If
     End Sub
 End Class

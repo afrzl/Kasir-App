@@ -65,10 +65,12 @@ Public Class FR_MASUK
     End Sub
 
     Dim START_RECORD As Integer = 0
-    Dim TAMPIL_RECORD As Integer = 20
+    Dim TAMPIL_RECORD As Integer = 18
     Dim TOTAL_RECORD As Integer = 0
 
     Sub TAMPIL()
+        DGHISTORY.Columns.Clear()
+
         Dim STR As String
         Select Case ROLE
             Case 1
@@ -497,6 +499,20 @@ Public Class FR_MASUK
         DGHISTORY.Columns(5).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DGHISTORY.Columns(6).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
 
+        Dim Column_delete = New DataGridViewButtonColumn
+        With Column_delete
+            .Text = "Delete"
+            .HeaderText = "Delete"
+            .UseColumnTextForButtonValue = True
+            .FlatStyle = FlatStyle.Flat
+            .DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            .CellTemplate.Style.BackColor = Color.Crimson
+            .CellTemplate.Style.ForeColor = Color.WhiteSmoke
+            .Width = 100
+        End With
+        DGHISTORY.Columns.Add(Column_delete)
+        DGHISTORY.Columns(8).Width = 50
+
         BTNPREV.Enabled = True
         BTNNEXT.Enabled = True
 
@@ -507,6 +523,13 @@ Public Class FR_MASUK
         'If TOTAL_RECORD = 0 Then
         '    BTNPREV.Enabled = False
         '    BTNNEXT.Enabled = False
+
+        If DGHISTORY.Rows.Count > 0 Then
+            BTNNEXT.Enabled = True
+        Else
+            BTNNEXT.Enabled = False
+        End If
+
         If START_RECORD = 0 Then
             BTNPREV.Enabled = False
         Else
@@ -720,7 +743,7 @@ Public Class FR_MASUK
         BUKA_FORM(FR_PRODUK)
     End Sub
 
-    Private Sub HapusToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HapusToolStripMenuItem.Click
+    Private Sub HapusToolStripMenuItem_Click(sender As Object, e As EventArgs) 
         If MsgBox("Apakah anda yakin akan menghapus data transaksi?", vbYesNo) = vbYes Then
             DGHISTORY.Columns(0).Visible = False
             Dim IDX As String = DGHISTORY.Item(0, DGHISTORY.CurrentRow.Index).Value
@@ -1421,5 +1444,41 @@ Public Class FR_MASUK
 
     Private Sub BTNSETTINGKASIR_Click(sender As Object, e As EventArgs) Handles BTNSETTINGKASIR.Click
         BUKA_FORM(FR_TENTANG)
+    End Sub
+
+    Private Sub DGHISTORY_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGHISTORY.CellClick
+        On Error Resume Next
+
+        If e.RowIndex >= 0 Then
+            If DGTAMPIL.Columns(e.ColumnIndex).HeaderText = "Delete" Then
+                If MsgBox("Apakah anda yakin akan menghapus data transaksi?", vbYesNo) = vbYes Then
+                    DGHISTORY.Columns(0).Visible = False
+                    Dim IDX As String = DGHISTORY.Item(0, DGHISTORY.CurrentRow.Index).Value
+                    Dim IDTrans As String = DGHISTORY.Item(1, DGHISTORY.CurrentRow.Index).Value
+                    Dim CMD As New SqlCommand("DELETE FROM tbl_transaksi_child WHERE Id='" & IDX & "'", CONN)
+                    CMD.ExecuteNonQuery()
+                    CMD = New SqlCommand("UPDATE tbl_stok SET Stok-=" & DGHISTORY.Item(7, DGHISTORY.CurrentRow.Index).Value.ToString.Replace(",", ".") & " WHERE Kode='" & DGHISTORY.Item(2, DGHISTORY.CurrentRow.Index).Value & "'", CONN)
+                    CMD.ExecuteNonQuery()
+
+                    Dim STR As String = "SELECT * FROM tbl_transaksi_child WHERE RTRIM(Id_trans)='" & IDTrans & "'"
+                    CMD = New SqlCommand(STR, CONN)
+                    Dim RD As SqlDataReader
+                    RD = CMD.ExecuteReader
+                    If Not RD.HasRows Then
+                        RD.Close()
+                        CMD = New SqlCommand("DELETE FROM tbl_transaksi_parent WHERE Id_trans='" & IDTrans & "'", CONN)
+                        CMD.ExecuteNonQuery()
+                    End If
+                    RD.Close()
+
+                    TAMPIL()
+                    MsgBox("Data transaksi berhasil dihapus")
+                End If
+            End If
+        End If
+    End Sub
+
+    Private Sub DGHISTORY_SelectionChanged(sender As Object, e As EventArgs) Handles DGHISTORY.SelectionChanged
+        DGHISTORY.ClearSelection()
     End Sub
 End Class

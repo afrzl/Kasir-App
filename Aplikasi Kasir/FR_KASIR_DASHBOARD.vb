@@ -143,7 +143,7 @@ Public Class FR_KASIR_DASHBOARD
         TAMPIL()
     End Sub
 
-    Private Sub TXTCARISTOK_TextChanged(sender As Object, e As EventArgs)
+    Private Sub TXTCARISTOK_TextChanged(sender As Object, e As EventArgs) Handles TXTCARISTOK.TextChanged
         TAMPIL()
     End Sub
 

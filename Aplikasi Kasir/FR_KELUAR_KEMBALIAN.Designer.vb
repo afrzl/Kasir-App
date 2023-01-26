@@ -103,10 +103,10 @@ Partial Class FR_KELUAR_KEMBALIAN
         '
         Me.LBKEMBALI.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.LBKEMBALI.Font = New System.Drawing.Font("Microsoft Sans Serif", 49.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LBKEMBALI.Location = New System.Drawing.Point(6, 24)
+        Me.LBKEMBALI.Font = New System.Drawing.Font("Segoe UI", 49.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBKEMBALI.Location = New System.Drawing.Point(110, 24)
         Me.LBKEMBALI.Name = "LBKEMBALI"
-        Me.LBKEMBALI.Size = New System.Drawing.Size(905, 110)
+        Me.LBKEMBALI.Size = New System.Drawing.Size(801, 110)
         Me.LBKEMBALI.TabIndex = 0
         Me.LBKEMBALI.Text = "0"
         Me.LBKEMBALI.TextAlign = System.Drawing.ContentAlignment.MiddleRight

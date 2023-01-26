@@ -12,6 +12,7 @@ Public Class FR_HISTORYPENJUALAN
     End Sub
 
     Sub TAMPIL()
+        DGHISTORY.Columns.Clear()
         Dim STR As String = ""
         If TXTCARI.Text = "" Then
             STR = "SELECT" &
@@ -49,6 +50,19 @@ Public Class FR_HISTORYPENJUALAN
         DGHISTORY.Columns(2).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
 
         DGHISTORY.Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+        Dim Column_cetak = New DataGridViewButtonColumn
+        With Column_cetak
+            .Text = "Tampil"
+            .HeaderText = "Tampil"
+            .UseColumnTextForButtonValue = True
+            .FlatStyle = FlatStyle.Flat
+            .DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            .CellTemplate.Style.BackColor = Color.DarkGreen
+            .CellTemplate.Style.ForeColor = Color.WhiteSmoke
+            .Width = 100
+        End With
+        DGHISTORY.Columns.Add(Column_cetak)
 
         BTNPREV.Enabled = True
         BTNNEXT.Enabled = True
@@ -324,37 +338,6 @@ Public Class FR_HISTORYPENJUALAN
         PRINTNOTA.Print()
     End Sub
 
-    Private Sub BTNPRINT_Click(sender As Object, e As EventArgs) Handles BTNPRINT.Click
-        Dim STR As String = "SELECT" &
-            " RTRIM(tbl_barang.Barang) AS 'Barang'," &
-            " RTRIM(tbl_barang.Satuan) AS 'Satuan'," &
-            " tbl_transaksi_child.Jumlah AS 'Jumlah'," &
-            " tbl_transaksi_child.Harga/tbl_transaksi_child.Jumlah AS 'Harga Awal'," &
-            " tbl_transaksi_child.Harga_akhir AS 'Harga Akhir'," &
-            " tbl_transaksi_child.Diskon AS 'Diskon Barang'," &
-            " tbl_transaksi_parent.Harga AS 'Harga Trans'," &
-            " tbl_transaksi_parent.Harga_total AS 'Harga Total'," &
-            " tbl_transaksi_parent.Diskon AS 'Diskon Trans'," &
-            " tbl_transaksi_parent.Harga_tunai AS 'Bayar'," &
-            " tbl_transaksi_parent.Harga_kembali AS 'Kembali'" &
-            " FROM tbl_transaksi_child" &
-            " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans" &
-            " LEFT JOIN tbl_barang ON tbl_barang.Kode = tbl_transaksi_child.Kode" &
-            " WHERE tbl_transaksi_child.Id_trans = '" & DGHISTORY.SelectedCells(0).Value & "'"
-
-        transaksi.Clear()
-        Dim DA As SqlDataAdapter
-        DA = New SqlDataAdapter(STR, CONN)
-        DA.Fill(transaksi)
-
-        With FR_HISTORYPENJUALAN_TAMPIL
-            .LBL_IDTRANS.Text = DGHISTORY.SelectedCells(0).Value
-            .Show()
-        End With
-        Me.Enabled = False
-        'PRINT_NOTA()
-    End Sub
-
     Private Sub TXTCARI_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTCARI.KeyPress
         If e.KeyChar = "'" Then
             e.Handled = True
@@ -447,5 +430,47 @@ Public Class FR_HISTORYPENJUALAN
 
     Private Sub BTNSETTINGKASIR_Click(sender As Object, e As EventArgs) Handles BTNSETTINGKASIR.Click
         BUKA_FORM(FR_TENTANG)
+    End Sub
+
+    Private Sub DGHISTORY_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGHISTORY.CellClick
+        On Error Resume Next
+        Dim STR As String
+        Dim CMD As SqlCommand
+
+        If e.RowIndex >= 0 Then
+            If DGHISTORY.Columns(e.ColumnIndex).HeaderText = "Tampil" Then
+                STR = "SELECT" &
+            " RTRIM(tbl_barang.Barang) AS 'Barang'," &
+            " RTRIM(tbl_barang.Satuan) AS 'Satuan'," &
+            " tbl_transaksi_child.Jumlah AS 'Jumlah'," &
+            " tbl_transaksi_child.Harga/tbl_transaksi_child.Jumlah AS 'Harga Awal'," &
+            " tbl_transaksi_child.Harga_akhir AS 'Harga Akhir'," &
+            " tbl_transaksi_child.Diskon AS 'Diskon Barang'," &
+            " tbl_transaksi_parent.Harga AS 'Harga Trans'," &
+            " tbl_transaksi_parent.Harga_total AS 'Harga Total'," &
+            " tbl_transaksi_parent.Diskon AS 'Diskon Trans'," &
+            " tbl_transaksi_parent.Harga_tunai AS 'Bayar'," &
+            " tbl_transaksi_parent.Harga_kembali AS 'Kembali'" &
+            " FROM tbl_transaksi_child" &
+            " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans" &
+            " LEFT JOIN tbl_barang ON tbl_barang.Kode = tbl_transaksi_child.Kode" &
+            " WHERE tbl_transaksi_child.Id_trans = '" & DGHISTORY.Item(0, e.RowIndex).Value & "'"
+
+                transaksi.Clear()
+                Dim DA As SqlDataAdapter
+                DA = New SqlDataAdapter(STR, CONN)
+                DA.Fill(transaksi)
+
+                With FR_HISTORYPENJUALAN_TAMPIL
+                    .LBL_IDTRANS.Text = DGHISTORY.Item(0, e.RowIndex).Value
+                    .Show()
+                End With
+                Me.Enabled = False
+            End If
+        End If
+    End Sub
+
+    Private Sub DGHISTORY_SelectionChanged(sender As Object, e As EventArgs) Handles DGHISTORY.SelectionChanged
+        DGHISTORY.ClearSelection()
     End Sub
 End Class

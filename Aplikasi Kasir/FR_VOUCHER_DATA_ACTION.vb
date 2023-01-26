@@ -138,12 +138,20 @@ Public Class FR_VOUCHER_DATA_ACTION
                 BTNSIMPAN.Select()
             End If
         End If
+
+        If Not ((e.KeyChar >= "0" And e.KeyChar <= "9") Or e.KeyChar = vbBack) Then
+            e.Handled = True
+        End If
     End Sub
 
     Private Sub TXTHARGA_JUAL_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTHARGA_JUAL.KeyPress
         If e.KeyChar = Chr(13) Then
             e.Handled = True
             BTNSIMPAN.Select()
+        End If
+
+        If Not ((e.KeyChar >= "0" And e.KeyChar <= "9") Or e.KeyChar = vbBack) Then
+            e.Handled = True
         End If
     End Sub
 End Class

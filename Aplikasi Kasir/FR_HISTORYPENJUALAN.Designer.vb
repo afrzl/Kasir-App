@@ -26,6 +26,7 @@ Partial Class FR_HISTORYPENJUALAN
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FR_HISTORYPENJUALAN))
         Me.PNLEFT = New System.Windows.Forms.Panel()
         Me.Panel1 = New System.Windows.Forms.Panel()
@@ -89,7 +90,6 @@ Partial Class FR_HISTORYPENJUALAN
         Me.PNCONTENT = New System.Windows.Forms.Panel()
         Me.DGHISTORY = New System.Windows.Forms.DataGridView()
         Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.BTNPRINT = New System.Windows.Forms.Button()
         Me.BTNNEXT = New System.Windows.Forms.Button()
         Me.BTNPREV = New System.Windows.Forms.Button()
         Me.TXTCARI = New System.Windows.Forms.TextBox()
@@ -1120,27 +1120,35 @@ Partial Class FR_HISTORYPENJUALAN
         DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.DGHISTORY.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
-        Me.DGHISTORY.ColumnHeadersHeight = 30
+        Me.DGHISTORY.ColumnHeadersHeight = 32
         Me.DGHISTORY.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DGHISTORY.DefaultCellStyle = DataGridViewCellStyle2
         Me.DGHISTORY.Location = New System.Drawing.Point(29, 66)
         Me.DGHISTORY.Margin = New System.Windows.Forms.Padding(2)
         Me.DGHISTORY.MultiSelect = False
         Me.DGHISTORY.Name = "DGHISTORY"
         Me.DGHISTORY.ReadOnly = True
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DGHISTORY.RowHeadersDefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DGHISTORY.RowHeadersDefaultCellStyle = DataGridViewCellStyle3
         Me.DGHISTORY.RowHeadersVisible = False
         Me.DGHISTORY.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DGHISTORY.RowsDefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.DGHISTORY.RowsDefaultCellStyle = DataGridViewCellStyle4
         Me.DGHISTORY.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DGHISTORY.RowTemplate.Height = 30
+        Me.DGHISTORY.RowTemplate.Height = 31
         Me.DGHISTORY.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DGHISTORY.ShowCellErrors = False
         Me.DGHISTORY.ShowCellToolTips = False
@@ -1151,7 +1159,6 @@ Partial Class FR_HISTORYPENJUALAN
         '
         'Panel3
         '
-        Me.Panel3.Controls.Add(Me.BTNPRINT)
         Me.Panel3.Controls.Add(Me.BTNNEXT)
         Me.Panel3.Controls.Add(Me.BTNPREV)
         Me.Panel3.Controls.Add(Me.TXTCARI)
@@ -1162,22 +1169,6 @@ Partial Class FR_HISTORYPENJUALAN
         Me.Panel3.Size = New System.Drawing.Size(1096, 61)
         Me.Panel3.TabIndex = 22
         '
-        'BTNPRINT
-        '
-        Me.BTNPRINT.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BTNPRINT.BackColor = System.Drawing.Color.DarkGreen
-        Me.BTNPRINT.FlatAppearance.BorderSize = 0
-        Me.BTNPRINT.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BTNPRINT.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BTNPRINT.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.BTNPRINT.Location = New System.Drawing.Point(849, 5)
-        Me.BTNPRINT.Margin = New System.Windows.Forms.Padding(2)
-        Me.BTNPRINT.Name = "BTNPRINT"
-        Me.BTNPRINT.Size = New System.Drawing.Size(122, 45)
-        Me.BTNPRINT.TabIndex = 20
-        Me.BTNPRINT.Text = "TAMPIL"
-        Me.BTNPRINT.UseVisualStyleBackColor = False
-        '
         'BTNNEXT
         '
         Me.BTNNEXT.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -1186,7 +1177,7 @@ Partial Class FR_HISTORYPENJUALAN
         Me.BTNNEXT.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.BTNNEXT.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BTNNEXT.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.BTNNEXT.Location = New System.Drawing.Point(1031, 5)
+        Me.BTNNEXT.Location = New System.Drawing.Point(1031, 7)
         Me.BTNNEXT.Margin = New System.Windows.Forms.Padding(2)
         Me.BTNNEXT.Name = "BTNNEXT"
         Me.BTNNEXT.Size = New System.Drawing.Size(50, 45)
@@ -1202,7 +1193,7 @@ Partial Class FR_HISTORYPENJUALAN
         Me.BTNPREV.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.BTNPREV.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BTNPREV.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.BTNPREV.Location = New System.Drawing.Point(976, 5)
+        Me.BTNPREV.Location = New System.Drawing.Point(976, 7)
         Me.BTNPREV.Margin = New System.Windows.Forms.Padding(2)
         Me.BTNPREV.Name = "BTNPREV"
         Me.BTNPREV.Size = New System.Drawing.Size(50, 45)
@@ -1216,10 +1207,10 @@ Partial Class FR_HISTORYPENJUALAN
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TXTCARI.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.TXTCARI.Font = New System.Drawing.Font("Segoe UI", 16.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TXTCARI.Location = New System.Drawing.Point(29, 5)
+        Me.TXTCARI.Location = New System.Drawing.Point(29, 7)
         Me.TXTCARI.Margin = New System.Windows.Forms.Padding(2)
         Me.TXTCARI.Name = "TXTCARI"
-        Me.TXTCARI.Size = New System.Drawing.Size(814, 45)
+        Me.TXTCARI.Size = New System.Drawing.Size(943, 45)
         Me.TXTCARI.TabIndex = 9
         '
         'PRINTNOTA
@@ -1280,7 +1271,6 @@ Partial Class FR_HISTORYPENJUALAN
     Friend WithEvents BTNPREV As Button
     Friend WithEvents TXTCARI As TextBox
     Friend WithEvents DGHISTORY As DataGridView
-    Friend WithEvents BTNPRINT As Button
     Friend WithEvents PRINTNOTA As Printing.PrintDocument
     Friend WithEvents PNADMIN As Panel
     Friend WithEvents BTNVOUCHER_ADMIN As Button

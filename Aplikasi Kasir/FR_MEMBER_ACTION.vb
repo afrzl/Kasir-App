@@ -11,6 +11,10 @@ Public Class FR_MEMBER_ACTION
             e.Handled = True
             TXTNAMA.Select()
         End If
+
+        If Not ((e.KeyChar >= "0" And e.KeyChar <= "9") Or e.KeyChar = vbBack) Then
+            e.Handled = True
+        End If
     End Sub
 
     Private Sub TXTNAMA_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTNAMA.KeyPress
@@ -31,6 +35,10 @@ Public Class FR_MEMBER_ACTION
         If e.KeyChar = Chr(13) Then
             e.Handled = True
             TXTJK.Select()
+        End If
+
+        If Not ((e.KeyChar >= "0" And e.KeyChar <= "9") Or e.KeyChar = vbBack) Then
+            e.Handled = True
         End If
     End Sub
 
