@@ -580,4 +580,12 @@ Public Class FR_TENTANG
     Private Sub BTNMEMBER_KASIR_Click(sender As Object, e As EventArgs) Handles BTNMEMBER_KASIR.Click
         BUKA_FORM(FR_MEMBER)
     End Sub
+
+    Private Sub BTN_BACKRESDB_Click(sender As Object, e As EventArgs) Handles BTN_BACKRESDB.Click
+        Me.Enabled = False
+        With FR_TENTANG_BACKRESDB
+            .Show()
+            .CB_ACTION.Select()
+        End With
+    End Sub
 End Class

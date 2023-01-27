@@ -369,6 +369,12 @@
     <Compile Include="FR_KASIR_DASHBOARD.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FR_TENTANG_BACKRESDB.Designer.vb">
+      <DependentUpon>FR_TENTANG_BACKRESDB.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FR_TENTANG_BACKRESDB.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FR_VOUCHER.Designer.vb">
       <DependentUpon>FR_VOUCHER.vb</DependentUpon>
     </Compile>
@@ -593,6 +599,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FR_TENTANG.resx">
       <DependentUpon>FR_TENTANG.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FR_TENTANG_BACKRESDB.resx">
+      <DependentUpon>FR_TENTANG_BACKRESDB.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FR_VOUCHER.resx">
       <DependentUpon>FR_VOUCHER.vb</DependentUpon>
