@@ -236,6 +236,12 @@
     <Compile Include="FR_HISTORYPENJUALAN_TAMPIL.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FR_MASUK_HISTORY.Designer.vb">
+      <DependentUpon>FR_MASUK_HISTORY.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FR_MASUK_HISTORY.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FR_PRODUK_ACTION.Designer.vb">
       <DependentUpon>FR_PRODUK_ACTION.vb</DependentUpon>
     </Compile>
@@ -536,6 +542,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FR_HISTORYPENJUALAN_TAMPIL.resx">
       <DependentUpon>FR_HISTORYPENJUALAN_TAMPIL.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FR_MASUK_HISTORY.resx">
+      <DependentUpon>FR_MASUK_HISTORY.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FR_PRODUK_ACTION.resx">
       <DependentUpon>FR_PRODUK_ACTION.vb</DependentUpon>
