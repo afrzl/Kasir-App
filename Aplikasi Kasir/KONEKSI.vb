@@ -12,6 +12,8 @@ Module KONEKSI
     Public CUSTOMER_DISPLAY As Boolean
     Public URL_LOGO As String
 
+    Public VERSI As String = "V3.1"
+
     Public Sub MASUK_REGISTRY(ByVal TOKO As String, ByVal ALAMAT As String, ByVal NO As String, ByVal PRINTER As String, ByVal URLLOGO As Byte(), ByVal CUSTOMERDISPLAY As Boolean)
         With My.Computer.Registry
             .SetValue("HKEY_CURRENT_USER\Software\Aplikasi Kasir", "Nama_toko", TOKO)

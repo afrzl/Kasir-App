@@ -293,7 +293,8 @@ Public Class FR_PRODUK_ACTION
                     "End3=" & END3.ToString.Replace(",", ".") & "," &
                     "Harga4='" & TXTHARGA4.Text & "'," &
                     "End4=" & END4.ToString.Replace(",", ".") & "," &
-                    "Harga5='" & TXTHARGA5.Text & "'" &
+                    "Harga5='" & TXTHARGA5.Text & "'," &
+                    "Modified_at='" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
                     "WHERE Kode='" & TXTKODE.Text & "'"
                     CMD = New SqlCommand(STR, CONN)
                     CMD.ExecuteNonQuery()
@@ -314,27 +315,33 @@ Public Class FR_PRODUK_ACTION
                         TXTKODE.Select()
                     Else
                         RD.Close()
-                        STR = "INSERT INTO tbl_barang VALUES (" &
-                        "'" & TXTKODE.Text & "'," &
-                        "'" & TXTNAMA.Text & "'," &
-                        "'" & CBSATUAN.Text & "'," &
-                        "'" & TXTHARGA1.Text & "'," &
-                        END1.ToString.Replace(",", ".") & "," &
-                        "'" & TXTHARGA2.Text & "'," &
-                        END2.ToString.Replace(",", ".") & "," &
-                        "'" & TXTHARGA3.Text & "'," &
-                        END3.ToString.Replace(",", ".") & "," &
-                        "'" & TXTHARGA4.Text & "'," &
-                        END4.ToString.Replace(",", ".") & "," &
-                        "'" & TXTHARGA5.Text &
-                   "')"
+                        STR = "INSERT INTO tbl_barang" &
+                            " (Kode, Barang, Satuan, Harga1, End1, Harga2, End2, Harga3, End3, Harga4, End4, Harga5, Created_at)" &
+                            " VALUES (" &
+                            "'" & TXTKODE.Text & "'," &
+                            "'" & TXTNAMA.Text & "'," &
+                            "'" & CBSATUAN.Text & "'," &
+                            "'" & TXTHARGA1.Text & "'," &
+                            END1.ToString.Replace(",", ".") & "," &
+                            "'" & TXTHARGA2.Text & "'," &
+                            END2.ToString.Replace(",", ".") & "," &
+                            "'" & TXTHARGA3.Text & "'," &
+                            END3.ToString.Replace(",", ".") & "," &
+                            "'" & TXTHARGA4.Text & "'," &
+                            END4.ToString.Replace(",", ".") & "," &
+                            "'" & TXTHARGA5.Text & "'," &
+                            "'" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
+                            ")"
                         CMD = New SqlCommand(STR, CONN)
                         CMD.ExecuteNonQuery()
 
-                        STR = "INSERT INTO tbl_stok VALUES (" &
+                        STR = "INSERT INTO tbl_stok" &
+                            " (Kode, Stok, Created_at)" &
+                            " VALUES (" &
                             "'" & TXTKODE.Text & "'," &
-                            "0" &
-                       ")"
+                            "0, " &
+                            "'" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
+                            ")"
                         CMD = New SqlCommand(STR, CONN)
                         CMD.ExecuteNonQuery()
                         MsgBox("Data produk berhasil disimpan.")

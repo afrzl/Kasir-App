@@ -314,16 +314,19 @@ Public Class FR_RETURN
             CMD = New SqlCommand(STR, CONN)
             CMD.ExecuteNonQuery()
 
-            STR = "INSERT INTO tbl_transaksi_child (Id_trans, Kode, Jumlah, Harga, Stok) VALUES" &
+            STR = "INSERT INTO tbl_transaksi_child (Id_trans, Kode, Jumlah, Harga, Stok, Created_at) VALUES" &
                         " ('" & ID_TRANS & "'," &
                         " '" & CBKODE.SelectedValue & "'," &
                         " " & TXTQTY.Text.Replace(",", ".") & "," &
                         " '" & TXTHARGA.Text & "'," &
-                        " " & TXTQTY.Text.Replace(",", ".") & ")"
+                        " " & TXTQTY.Text.Replace(",", ".") & "," &
+                        " '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "')"
             CMD = New SqlCommand(STR, CONN)
             CMD.ExecuteNonQuery()
 
-            STR = "UPDATE tbl_stok SET Stok+=" & TXTQTY.Text.Replace(",", ".") & " WHERE Kode='" & CBKODE.SelectedValue & "'"
+            STR = "UPDATE tbl_stok SET Stok+=" & TXTQTY.Text.Replace(",", ".") & ", " &
+                " Modified_at = '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
+                " WHERE Kode='" & CBKODE.SelectedValue & "'"
             CMD = New SqlCommand(STR, CONN)
             CMD.ExecuteNonQuery()
 
@@ -417,7 +420,9 @@ Public Class FR_RETURN
             CMD = New SqlCommand("DELETE FROM tbl_transaksi_parent WHERE Id_trans='" & IDX & "'", CONN)
             CMD.ExecuteNonQuery()
 
-            CMD = New SqlCommand("UPDATE tbl_stok SET Stok-=" & TXTQTY.Text.Replace(",", ".") & " WHERE Kode='" & DGTAMPIL.Item(1, DGTAMPIL.CurrentRow.Index).Value & "'", CONN)
+            CMD = New SqlCommand("UPDATE tbl_stok SET Stok-=" & TXTQTY.Text.Replace(",", ".") & ", " &
+                                 " Modified_at = '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
+                                 " WHERE Kode='" & DGTAMPIL.Item(1, DGTAMPIL.CurrentRow.Index).Value & "'", CONN)
             CMD.ExecuteNonQuery()
             TAMPIL()
             MsgBox("Data barang return berhasil dihapus, dan stok barang " & NAMA_BARANG & " berkurang.")

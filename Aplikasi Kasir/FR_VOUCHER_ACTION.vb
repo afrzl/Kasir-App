@@ -109,7 +109,8 @@ Public Class FR_VOUCHER_ACTION
                 MsgBox("Point member tidak cukup!")
                 TXTID_MEMBER.Select()
             Else
-                STR = "UPDATE tbl_member SET Points-='" & LBL_HARGA.Text.Remove(0, 2) & "'" &
+                STR = "UPDATE tbl_member SET Points-='" & LBL_HARGA.Text.Remove(0, 2) & "', " &
+                    " Modified_at = '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
                     " WHERE Id='" & TXTID_MEMBER.Text & "'"
                 CMD = New SqlCommand(STR, CONN)
                 CMD.ExecuteNonQuery()

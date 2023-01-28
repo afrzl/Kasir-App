@@ -36,6 +36,7 @@ Partial Class FR_TENTANG_BACKRESDB
         Me.BTNCLOSE = New System.Windows.Forms.Button()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
+        Me.Label3 = New System.Windows.Forms.Label()
         Me.PNCONTENT.SuspendLayout()
         Me.PNTOP.SuspendLayout()
         Me.PNCONTROL.SuspendLayout()
@@ -50,17 +51,18 @@ Partial Class FR_TENTANG_BACKRESDB
         Me.PNCONTENT.Controls.Add(Me.BTNSIMPAN)
         Me.PNCONTENT.Controls.Add(Me.CB_ACTION)
         Me.PNCONTENT.Controls.Add(Me.LBID)
+        Me.PNCONTENT.Controls.Add(Me.Label3)
         Me.PNCONTENT.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PNCONTENT.Location = New System.Drawing.Point(0, 40)
         Me.PNCONTENT.Margin = New System.Windows.Forms.Padding(2)
         Me.PNCONTENT.Name = "PNCONTENT"
-        Me.PNCONTENT.Size = New System.Drawing.Size(616, 303)
+        Me.PNCONTENT.Size = New System.Drawing.Size(625, 393)
         Me.PNCONTENT.TabIndex = 25
         '
         'TXTFILE
         '
         Me.TXTFILE.Font = New System.Drawing.Font("Segoe UI", 15.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TXTFILE.Location = New System.Drawing.Point(182, 133)
+        Me.TXTFILE.Location = New System.Drawing.Point(182, 187)
         Me.TXTFILE.Margin = New System.Windows.Forms.Padding(2)
         Me.TXTFILE.Multiline = True
         Me.TXTFILE.Name = "TXTFILE"
@@ -72,7 +74,7 @@ Partial Class FR_TENTANG_BACKRESDB
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(11, 141)
+        Me.Label2.Location = New System.Drawing.Point(11, 195)
         Me.Label2.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(72, 28)
@@ -87,7 +89,7 @@ Partial Class FR_TENTANG_BACKRESDB
         Me.BTN_LOCATION.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.BTN_LOCATION.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BTN_LOCATION.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.BTN_LOCATION.Location = New System.Drawing.Point(422, 133)
+        Me.BTN_LOCATION.Location = New System.Drawing.Point(422, 187)
         Me.BTN_LOCATION.Margin = New System.Windows.Forms.Padding(2)
         Me.BTN_LOCATION.Name = "BTN_LOCATION"
         Me.BTN_LOCATION.Size = New System.Drawing.Size(119, 41)
@@ -104,7 +106,7 @@ Partial Class FR_TENTANG_BACKRESDB
         Me.Label1.Location = New System.Drawing.Point(16, 9)
         Me.Label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(579, 45)
+        Me.Label1.Size = New System.Drawing.Size(588, 45)
         Me.Label1.TabIndex = 64
         Me.Label1.Text = "BACKUP DAN RESTORE DB"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -116,7 +118,7 @@ Partial Class FR_TENTANG_BACKRESDB
         Me.BTNSIMPAN.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.BTNSIMPAN.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BTNSIMPAN.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.BTNSIMPAN.Location = New System.Drawing.Point(182, 198)
+        Me.BTNSIMPAN.Location = New System.Drawing.Point(182, 252)
         Me.BTNSIMPAN.Margin = New System.Windows.Forms.Padding(2)
         Me.BTNSIMPAN.Name = "BTNSIMPAN"
         Me.BTNSIMPAN.Size = New System.Drawing.Size(145, 50)
@@ -154,14 +156,14 @@ Partial Class FR_TENTANG_BACKRESDB
         Me.PNTOP.Dock = System.Windows.Forms.DockStyle.Top
         Me.PNTOP.Location = New System.Drawing.Point(0, 0)
         Me.PNTOP.Name = "PNTOP"
-        Me.PNTOP.Size = New System.Drawing.Size(616, 40)
+        Me.PNTOP.Size = New System.Drawing.Size(625, 40)
         Me.PNTOP.TabIndex = 24
         '
         'PNCONTROL
         '
         Me.PNCONTROL.Controls.Add(Me.BTNCLOSE)
         Me.PNCONTROL.Dock = System.Windows.Forms.DockStyle.Right
-        Me.PNCONTROL.Location = New System.Drawing.Point(569, 0)
+        Me.PNCONTROL.Location = New System.Drawing.Point(578, 0)
         Me.PNCONTROL.Name = "PNCONTROL"
         Me.PNCONTROL.Size = New System.Drawing.Size(47, 40)
         Me.PNCONTROL.TabIndex = 0
@@ -181,11 +183,24 @@ Partial Class FR_TENTANG_BACKRESDB
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         '
+        'Label3
+        '
+        Me.Label3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Label3.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.ForeColor = System.Drawing.Color.Crimson
+        Me.Label3.Location = New System.Drawing.Point(177, 122)
+        Me.Label3.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(364, 63)
+        Me.Label3.TabIndex = 72
+        Me.Label3.Text = "Hanya gunakan DB backup dengan versi aplikasi yang sama."
+        Me.Label3.Visible = False
+        '
         'FR_TENTANG_BACKRESDB
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(120.0!, 120.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.ClientSize = New System.Drawing.Size(616, 343)
+        Me.ClientSize = New System.Drawing.Size(625, 433)
         Me.Controls.Add(Me.PNCONTENT)
         Me.Controls.Add(Me.PNTOP)
         Me.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -216,4 +231,5 @@ Partial Class FR_TENTANG_BACKRESDB
     Friend WithEvents OpenFileDialog1 As OpenFileDialog
     Friend WithEvents Label2 As Label
     Friend WithEvents TXTFILE As TextBox
+    Friend WithEvents Label3 As Label
 End Class

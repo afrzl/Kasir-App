@@ -130,10 +130,10 @@ Public Class FR_KASIR
             Dim STR As String
             Dim CMD As SqlCommand
             If TXTID.Text = "" Then
-                STR = "INSERT INTO tbl_karyawan VALUES ('" & ID & "','" &
+                STR = "INSERT INTO tbl_karyawan (Id, Nama, Password, Role, Alamat, Tgl_lahir, JK, No_hp, Created_at) VALUES ('" & ID & "','" &
                     TXTNAMA.Text & "', '" & TXTPASSWORD.Text & "', '" & role & "', '" & TXTALAMAT.Text & "', '" &
                     Format(TXTTGL.Value, "MM/dd/yyyy") & "', '" & jk & "', '" &
-                    TXTNOHP.Text & "')"
+                    TXTNOHP.Text & "', '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "')"
             Else
                 STR = "SELECT * FROM tbl_karyawan WHERE Id='" & TXTID.Text & "'"
                 CMD = New SqlCommand(STR, CONN)
@@ -149,13 +149,14 @@ Public Class FR_KASIR
                         "',Tgl_lahir='" & Format(TXTTGL.Value, "MM/dd/yyyy") &
                         "',JK='" & jk &
                         "',No_hp='" & TXTNOHP.Text &
+                        "',Modified_at='" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") &
                         "' WHERE Id='" & TXTID.Text & "'"
                 Else
                     RD.Close()
-                    STR = "INSERT INTO tbl_karyawan VALUES ('" & ID & "','" &
+                    STR = "INSERT INTO tbl_karyawan (Id, Nama, Password, Role, Alamat, Tgl_lahir, JK, No_hp, Created_at) VALUES ('" & ID & "','" &
                         TXTNAMA.Text & "', '" & TXTPASSWORD.Text & "', '" & role & "', '" & TXTALAMAT.Text & "', '" &
                         Format(TXTTGL.Value, "MM/dd/yyyy") & "', '" & jk & "', '" &
-                        TXTNOHP.Text & "')"
+                        TXTNOHP.Text & "', '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "')"
                 End If
             End If
             CMD = New SqlCommand(STR, CONN)

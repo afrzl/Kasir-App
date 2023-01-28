@@ -269,25 +269,30 @@ Public Class FR_RUSAK
                 CMD = New SqlCommand(STR, CONN)
                 CMD.ExecuteNonQuery()
 
-                STR = "INSERT INTO tbl_transaksi_child (Id_trans, Id_awal, Kode, Jumlah, Harga_beli, Harga, Harga_akhir) VALUES" &
+                STR = "INSERT INTO tbl_transaksi_child (Id_trans, Id_awal, Kode, Jumlah, Harga_beli, Harga, Harga_akhir, Created_at) VALUES" &
                         " ('" & ID_TRANS & "'," &
                         " '" & CBKODE.SelectedValue & "'," &
                         " '" & KODEBARANG & "'," &
                         " " & TXTQTY.Text.Replace(",", ".") & "," &
                         " '" & CInt(TXTHARGA.Text) * QTY & "'," &
                         " 0," &
-                        " 0)"
+                        " 0," &
+                        " '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "')"
                 CMD = New SqlCommand(STR, CONN)
                 CMD.ExecuteNonQuery()
 
                 TXTSTOKAKHIR.Text = Convert.ToDouble(TXTSTOK.Text) - QTY
 
-                STR = "UPDATE tbl_transaksi_child SET Stok=" & TXTSTOKAKHIR.Text.Replace(",", ".") & " WHERE Id_trans='" & TXTID.Text & "'" &
-                " AND Id = '" & CBKODE.SelectedValue & "'"
+                STR = "UPDATE tbl_transaksi_child SET Stok=" & TXTSTOKAKHIR.Text.Replace(",", ".") & ", " &
+                    " Modified_at = '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
+                    " WHERE Id_trans='" & TXTID.Text & "'" &
+                    " AND Id = '" & CBKODE.SelectedValue & "'"
                 CMD = New SqlCommand(STR, CONN)
                 CMD.ExecuteNonQuery()
 
-                STR = "UPDATE tbl_stok SET Stok-=" & TXTQTY.Text.Replace(",", ".") & " WHERE Kode='" & KODEBARANG & "'"
+                STR = "UPDATE tbl_stok SET Stok-=" & TXTQTY.Text.Replace(",", ".") & ", " &
+                    " Modified_at = '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
+                    " WHERE Kode='" & KODEBARANG & "'"
                 CMD = New SqlCommand(STR, CONN)
                 CMD.ExecuteNonQuery()
 
@@ -295,7 +300,8 @@ Public Class FR_RUSAK
             End If
         ElseIf CB_JENISTRANS.SelectedIndex = 1 Then
             Dim TGL_EXP As String = Format(Convert.ToDateTime(DTEXP.Value), "yyyy-MM-dd")
-            Dim STR As String = "UPDATE tbl_transaksi_child SET Tgl_exp='" & TGL_EXP & "'" &
+            Dim STR As String = "UPDATE tbl_transaksi_child SET Tgl_exp='" & TGL_EXP & "'," &
+                " Modified_at = '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
                 " WHERE Id_trans='" & TXTID.Text & "'" &
                 " AND Id = '" & CBKODE.SelectedValue & "'"
             Dim CMD As New SqlCommand(STR, CONN)
@@ -303,7 +309,8 @@ Public Class FR_RUSAK
             MsgBox("Expired barang " & CBKODE.Text & " berhasil diperbarui menjadi tanggal " & Format(Convert.ToDateTime(DTEXP.Value), "dd-MM-yyyy"))
 
         ElseIf CB_JENISTRANS.SelectedIndex = 2 Then
-            Dim STR As String = "UPDATE tbl_transaksi_child SET Tgl_exp = NULL" &
+            Dim STR As String = "UPDATE tbl_transaksi_child SET Tgl_exp = NULL," &
+                " Modified_at = '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
                 " WHERE Id_trans='" & TXTID.Text & "'" &
                 " AND Id = '" & CBKODE.SelectedValue & "'"
             Dim CMD As New SqlCommand(STR, CONN)
@@ -392,7 +399,9 @@ Public Class FR_RUSAK
             End If
             RD.Close()
 
-            CMD = New SqlCommand("UPDATE tbl_stok SET Stok+=" & TXTQTY.Text.Replace(",", ".") & " WHERE Kode='" & KODE_BARANG & "'", CONN)
+            CMD = New SqlCommand("UPDATE tbl_stok SET Stok+=" & TXTQTY.Text.Replace(",", ".") & ", " &
+                                 " Modified_at = '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
+                                 " WHERE Kode='" & KODE_BARANG & "'", CONN)
             CMD.ExecuteNonQuery()
 
             str = "SELECT Stok AS Stok, " &
@@ -413,7 +422,9 @@ Public Class FR_RUSAK
 
             TXTSTOKAKHIR.Text = STOK_AWAL + DGTAMPIL.Item(8, DGTAMPIL.CurrentRow.Index).Value
 
-            STR = "UPDATE tbl_transaksi_child SET Stok=" & TXTSTOKAKHIR.Text.Replace(",", ".") & " WHERE Id='" & ID_AWAL & "'"
+            str = "UPDATE tbl_transaksi_child SET Stok=" & TXTSTOKAKHIR.Text.Replace(",", ".") & ", " &
+                " Modified_at = '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
+                " WHERE Id='" & ID_AWAL & "'"
             CMD = New SqlCommand(STR, CONN)
             CMD.ExecuteNonQuery()
 

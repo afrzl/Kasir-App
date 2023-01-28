@@ -42,11 +42,12 @@ Public Class FR_VOUCHER_DATA_ACTION
                     TXTHARGA_JUAL.Select()
                 Else
                     If LBL_ID.Text = "" Then
-                        STR = "INSERT INTO tbl_data_voucher (Jenis, Nama, Harga, Harga_jual) VALUES (" &
+                        STR = "INSERT INTO tbl_data_voucher (Jenis, Nama, Harga, Harga_jual, Created_at) VALUES (" &
                             "'" & CB_JENIS.Text & "'," &
                             "'" & TXTNAMA.Text & "'," &
                             "'" & TXTHARGA.Text & "'," &
-                            "'" & TXTHARGA_JUAL.Text & "'" &
+                            "'" & TXTHARGA_JUAL.Text & "'," &
+                            "'" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
                             ")"
                         CMD = New SqlCommand(STR, CONN)
                         CMD.ExecuteNonQuery()
@@ -57,7 +58,8 @@ Public Class FR_VOUCHER_DATA_ACTION
                             " Jenis = '" & CB_JENIS.Text & "'," &
                             " Nama = '" & TXTNAMA.Text & "'," &
                             " Harga = '" & TXTHARGA.Text & "'," &
-                            " Harga_jual = '" & TXTHARGA_JUAL.Text & "'" &
+                            " Harga_jual = '" & TXTHARGA_JUAL.Text & "'," &
+                            " Modified_at = '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
                             " WHERE Id = '" & LBL_ID.Text & "'"
                         CMD = New SqlCommand(STR, CONN)
                         CMD.ExecuteNonQuery()
@@ -68,10 +70,11 @@ Public Class FR_VOUCHER_DATA_ACTION
                 End If
             Else
                 If LBL_ID.Text = "" Then
-                    STR = "INSERT INTO tbl_data_voucher (Jenis, Nama, Harga) VALUES (" &
+                    STR = "INSERT INTO tbl_data_voucher (Jenis, Nama, Harga, Created_at) VALUES (" &
                             "'" & CB_JENIS.Text & "'," &
                             "'" & TXTNAMA.Text & "'," &
-                            "'" & TXTHARGA.Text & "'" &
+                            "'" & TXTHARGA.Text & "'," &
+                            "'" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
                             ")"
                     CMD = New SqlCommand(STR, CONN)
                     CMD.ExecuteNonQuery()
@@ -82,7 +85,8 @@ Public Class FR_VOUCHER_DATA_ACTION
                             " Jenis = '" & CB_JENIS.Text & "'," &
                             " Nama = '" & TXTNAMA.Text & "'," &
                             " Harga = '" & TXTHARGA.Text & "'," &
-                            " Harga_jual = NULL" &
+                            " Harga_jual = NULL," &
+                            " Modified_at = '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
                             " WHERE Id = '" & LBL_ID.Text & "'"
                     CMD = New SqlCommand(STR, CONN)
                     CMD.ExecuteNonQuery()

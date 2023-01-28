@@ -453,24 +453,26 @@ Public Class FR_DISKON
                 Else
                     RD.Close()
                     If TXTDISKON.Text = "" Then
-                        STR = "INSERT INTO tbl_diskon (Jenis, Kode, Jenis_nominal, Diskon, Tgl_awal, Tgl_akhir)" &
+                        STR = "INSERT INTO tbl_diskon (Jenis, Kode, Jenis_nominal, Diskon, Tgl_awal, Tgl_akhir, Created_at)" &
                             " VALUES(" &
                             " 'B'," &
                             " '" & TXTKODE.Text & "'," &
                             " 'R'," &
                             " " & TXTDISKON_RUPIAH.Text.ToString.Replace(",", ".") & "," &
                             " '" & Format(TXTTGLAWAL.Value, "MM/dd/yyyy") & "'," &
-                            " '" & Format(TXTTGLAKHIR.Value, "MM/dd/yyyy") & "'" &
+                            " '" & Format(TXTTGLAKHIR.Value, "MM/dd/yyyy") & "'," &
+                            " '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
                             " )"
                     Else
-                        STR = "INSERT INTO tbl_diskon (Jenis, Kode, Jenis_nominal, Diskon, Tgl_awal, Tgl_akhir)" &
+                        STR = "INSERT INTO tbl_diskon (Jenis, Kode, Jenis_nominal, Diskon, Tgl_awal, Tgl_akhir, Created_at)" &
                             " VALUES(" &
                             " 'B'," &
                             " '" & TXTKODE.Text & "'," &
                             " 'P'," &
                             " " & TXTDISKON.Text.ToString.Replace(",", ".") & "," &
                             " '" & Format(TXTTGLAWAL.Value, "MM/dd/yyyy") & "'," &
-                            " '" & Format(TXTTGLAKHIR.Value, "MM/dd/yyyy") & "'" &
+                            " '" & Format(TXTTGLAKHIR.Value, "MM/dd/yyyy") & "'," &
+                            " '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
                             " )"
                     End If
                     CMD = New SqlCommand(STR, CONN)
@@ -490,24 +492,26 @@ Public Class FR_DISKON
             Else
                 Dim STR As String
                 If TXTDISKON.Text = "" Then
-                    STR = "INSERT INTO tbl_diskon (Jenis, Min_transaksi, Jenis_nominal, Diskon, Tgl_awal, Tgl_akhir)" &
+                    STR = "INSERT INTO tbl_diskon (Jenis, Min_transaksi, Jenis_nominal, Diskon, Tgl_awal, Tgl_akhir, Created_at)" &
                         " VALUES(" &
                         " 'A'," &
                         " '" & TXTMIN.Text & "'," &
                         " 'R'," &
                         " " & TXTDISKON_RUPIAH.Text.ToString.Replace(",", ".") & "," &
                         " '" & Format(TXTTGLAWAL.Value, "MM/dd/yyyy") & "'," &
-                        " '" & Format(TXTTGLAKHIR.Value, "MM/dd/yyyy") & "'" &
+                        " '" & Format(TXTTGLAKHIR.Value, "MM/dd/yyyy") & "'," &
+                        " '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
                         " )"
                 Else
-                    STR = "INSERT INTO tbl_diskon (Jenis, Min_transaksi, Jenis_nominal, Diskon, Tgl_awal, Tgl_akhir)" &
+                    STR = "INSERT INTO tbl_diskon (Jenis, Min_transaksi, Jenis_nominal, Diskon, Tgl_awal, Tgl_akhir, Created_at)" &
                         " VALUES(" &
                         " 'A'," &
                         " '" & TXTMIN.Text & "'," &
                         " 'P'," &
                         " " & TXTDISKON.Text.ToString.Replace(",", ".") & "," &
                         " '" & Format(TXTTGLAWAL.Value, "MM/dd/yyyy") & "'," &
-                        " '" & Format(TXTTGLAKHIR.Value, "MM/dd/yyyy") & "'" &
+                        " '" & Format(TXTTGLAKHIR.Value, "MM/dd/yyyy") & "'," &
+                        " '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
                         " )"
                 End If
                 Dim CMD As New SqlCommand(STR, CONN)

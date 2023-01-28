@@ -750,7 +750,9 @@ Public Class FR_MASUK
             Dim IDTrans As String = DGHISTORY.Item(1, DGHISTORY.CurrentRow.Index).Value
             Dim CMD As New SqlCommand("DELETE FROM tbl_transaksi_child WHERE Id='" & IDX & "'", CONN)
             CMD.ExecuteNonQuery()
-            CMD = New SqlCommand("UPDATE tbl_stok SET Stok-=" & DGHISTORY.Item(7, DGHISTORY.CurrentRow.Index).Value.ToString.Replace(",", ".") & " WHERE Kode='" & DGHISTORY.Item(2, DGHISTORY.CurrentRow.Index).Value & "'", CONN)
+            CMD = New SqlCommand("UPDATE tbl_stok SET Stok-=" & DGHISTORY.Item(7, DGHISTORY.CurrentRow.Index).Value.ToString.Replace(",", ".") & ", " &
+                                 " Modified_at = '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
+                                 " WHERE Kode='" & DGHISTORY.Item(2, DGHISTORY.CurrentRow.Index).Value & "'", CONN)
             CMD.ExecuteNonQuery()
 
             Dim STR As String = "SELECT * FROM tbl_transaksi_child WHERE RTRIM(Id_trans)='" & IDTrans & "'"
@@ -909,26 +911,30 @@ Public Class FR_MASUK
             Dim JUMLAH_PRODUK As Double = Convert.ToDouble(EROW.Cells("QTY").Value)
             Dim HARGA_PRODUK As Integer = EROW.Cells("Harga").Value
             If EROW.Cells("EXPIRED").Value = "-" Then
-                STR = "INSERT INTO tbl_transaksi_child (Id_trans, Kode, Jumlah, Harga, Stok) VALUES" &
+                STR = "INSERT INTO tbl_transaksi_child (Id_trans, Kode, Jumlah, Harga, Stok, Created_at) VALUES" &
                     " ('" & ID_TRANSAKSI & "'," &
                     " '" & KODE_PRODUK & "'," &
                     " " & JUMLAH_PRODUK.ToString.Replace(",", ".") & "," &
                     " '" & HARGA_PRODUK & "'," &
-                    " '" & JUMLAH_PRODUK.ToString.Replace(",", ".") & "')"
+                    " '" & JUMLAH_PRODUK.ToString.Replace(",", ".") & "'," &
+                    " '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "')"
             Else
                 Dim TGL_EXP As String = Format(Convert.ToDateTime(EROW.Cells("EXPIRED").Value), "yyyy-MM-dd")
-                STR = "INSERT INTO tbl_transaksi_child (Id_trans, Kode, Jumlah, Harga, Stok, Tgl_exp) VALUES" &
+                STR = "INSERT INTO tbl_transaksi_child (Id_trans, Kode, Jumlah, Harga, Stok, Tgl_exp, Created_at) VALUES" &
                         " ('" & ID_TRANSAKSI & "'," &
                         " '" & KODE_PRODUK & "'," &
                         " " & JUMLAH_PRODUK.ToString.Replace(",", ".") & "," &
                         " '" & HARGA_PRODUK & "'," &
                         " '" & JUMLAH_PRODUK.ToString.Replace(",", ".") & "'," &
-                        " '" & TGL_EXP & "')"
+                        " '" & TGL_EXP & "'," &
+                        " '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "')"
             End If
             CMD = New SqlCommand(STR, CONN)
             CMD.ExecuteNonQuery()
 
-            STR = "UPDATE tbl_stok SET Stok+=" & JUMLAH_PRODUK.ToString.Replace(",", ".") & " WHERE Kode='" & KODE_PRODUK & "'"
+            STR = "UPDATE tbl_stok SET Stok+=" & JUMLAH_PRODUK.ToString.Replace(",", ".") & ", " &
+                " Modified_at = '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
+                " WHERE Kode='" & KODE_PRODUK & "'"
             CMD = New SqlCommand(STR, CONN)
             CMD.ExecuteNonQuery()
         Next
@@ -1457,7 +1463,9 @@ Public Class FR_MASUK
                     Dim IDTrans As String = DGHISTORY.Item(1, DGHISTORY.CurrentRow.Index).Value
                     Dim CMD As New SqlCommand("DELETE FROM tbl_transaksi_child WHERE Id='" & IDX & "'", CONN)
                     CMD.ExecuteNonQuery()
-                    CMD = New SqlCommand("UPDATE tbl_stok SET Stok-=" & DGHISTORY.Item(7, DGHISTORY.CurrentRow.Index).Value.ToString.Replace(",", ".") & " WHERE Kode='" & DGHISTORY.Item(2, DGHISTORY.CurrentRow.Index).Value & "'", CONN)
+                    CMD = New SqlCommand("UPDATE tbl_stok SET Stok-=" & DGHISTORY.Item(7, DGHISTORY.CurrentRow.Index).Value.ToString.Replace(",", ".") & ", " &
+                                         " Modified_at = '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
+                                         " WHERE Kode='" & DGHISTORY.Item(2, DGHISTORY.CurrentRow.Index).Value & "'", CONN)
                     CMD.ExecuteNonQuery()
 
                     Dim STR As String = "SELECT * FROM tbl_transaksi_child WHERE RTRIM(Id_trans)='" & IDTrans & "'"

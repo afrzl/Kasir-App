@@ -13,6 +13,8 @@ Public Class FR_TENTANG
     End Sub
 
     Private Sub FR_TENTANG_Load(sender As Object, e As EventArgs) Handles Me.Load
+        Label25.Text = VERSI
+
         Select Case ROLE
             Case 1
                 GBTOKO.Visible = True
@@ -144,7 +146,9 @@ Public Class FR_TENTANG
             MsgBox("Password Lama Salah!")
             TXTPWLAMA.Select()
         Else
-            STR = "UPDATE tbl_karyawan SET Password='" & TXTPWBARU1.Text & "' WHERE Id='" & My.Settings.ID_ACCOUNT & "'"
+            STR = "UPDATE tbl_karyawan SET Password='" & TXTPWBARU1.Text & "', " &
+                " Modified_at = '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
+                " WHERE Id='" & My.Settings.ID_ACCOUNT & "'"
             CMD = New SqlCommand(STR, CONN)
             CMD.ExecuteNonQuery()
 
@@ -351,6 +355,7 @@ Public Class FR_TENTANG
                     "',Tgl_lahir='" & Format(TXTTGL.Value, "MM/dd/yyyy") &
                     "',JK='" & jk &
                     "',No_hp='" & TXTNO.Text &
+                    "',Modified_at='" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") &
                     "' WHERE Id='" & TXTID.Text & "'"
             Else
                 RD.Close()

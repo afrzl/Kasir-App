@@ -385,18 +385,21 @@ Public Class FR_KELUAR
                 HARGA_BELI_PRODUK = CARI_HARGA_BELI(KODE_PRODUK, JUMLAH_PRODUK)
             End If
 
-            STR = "INSERT INTO tbl_transaksi_child (Id_trans, Kode, Jumlah, Harga_beli, Harga, Diskon, Harga_akhir) VALUES" &
+            STR = "INSERT INTO tbl_transaksi_child (Id_trans, Kode, Jumlah, Harga_beli, Harga, Diskon, Harga_akhir, Created_at) VALUES" &
                     " ('" & ID_TRANSAKSI & "'," &
                     " '" & KODE_PRODUK & "'," &
                     " " & JUMLAH_PRODUK.ToString.Replace(",", ".") & "," &
                     " '" & HARGA_BELI_PRODUK & "'," &
                     " '" & HARGA_PRODUK & "'," &
                     " '" & DISKON_PRODUK & "'," &
-                    " '" & HARGA_AKHIR_PRODUK & "')"
+                    " '" & HARGA_AKHIR_PRODUK & "', " &
+                    " '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "')"
             CMD = New SqlCommand(STR, CONN)
             CMD.ExecuteNonQuery()
 
-            STR = "UPDATE tbl_stok SET Stok-=" & JUMLAH_PRODUK.ToString.Replace(",", ".") & " WHERE Kode='" & KODE_PRODUK & "'"
+            STR = "UPDATE tbl_stok SET Stok-=" & JUMLAH_PRODUK.ToString.Replace(",", ".") & "," &
+                " Modified_at = '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
+                " WHERE Kode='" & KODE_PRODUK & "'"
             CMD = New SqlCommand(STR, CONN)
             CMD.ExecuteNonQuery()
 
@@ -435,7 +438,9 @@ Public Class FR_KELUAR
                     QUANTITY -= STOKTERSEDIA
                     HARGA_BELI += RD.Item("Harga") * STOKTERSEDIA
                     RD.Close()
-                    STR = "UPDATE tbl_transaksi_child SET Stok='" & STOK_AKHIR & "' WHERE Id='" & ID & "'"
+                    STR = "UPDATE tbl_transaksi_child SET Stok='" & STOK_AKHIR & "'," &
+                        " Modified_at = '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
+                        " WHERE Id='" & ID & "'"
                     CMD = New SqlCommand(STR, CONN)
                     CMD.ExecuteNonQuery()
                 Else
@@ -443,7 +448,9 @@ Public Class FR_KELUAR
                     HARGA_BELI += (RD.Item("Harga") * QUANTITY)
                     QUANTITY = 0
                     RD.Close()
-                    STR = "UPDATE tbl_transaksi_child SET Stok=" & STOK_AKHIR.ToString.Replace(",", ".") & " WHERE Id='" & ID & "'"
+                    STR = "UPDATE tbl_transaksi_child SET Stok=" & STOK_AKHIR.ToString.Replace(",", ".") & "," &
+                        " Modified_at = '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
+                        " WHERE Id='" & ID & "'"
                     CMD = New SqlCommand(STR, CONN)
                     CMD.ExecuteNonQuery()
                 End If
@@ -540,7 +547,9 @@ Public Class FR_KELUAR
     Sub INPUT_MEMBER()
         If ID_pembeli <> "" Then
             Dim Points As Integer = TXTTOTALHARGA.Text * (persentase_point / 100)
-            Dim STR As String = "UPDATE tbl_member SET Points+=" & Points & " WHERE Id='" & ID_pembeli & "'"
+            Dim STR As String = "UPDATE tbl_member SET Points+=" & Points & ", " &
+                " Modified_at = '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
+                " WHERE Id='" & ID_pembeli & "'"
             Dim CMD As New SqlCommand(STR, CONN)
             CMD.ExecuteNonQuery()
         End If
@@ -1280,7 +1289,11 @@ Public Class FR_KELUAR
                     If IsDBNull(RD.Item("Harga")) Then
                         DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Harga").Value = 0
                     Else
-                        DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Harga").Value = Format(RD.Item("Harga"), "###") * -1
+                        If LBTOTAL.Text < RD.Item("Harga") Then
+                            DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Harga").Value = LBTOTAL.Text * -1
+                        Else
+                            DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Harga").Value = Format(RD.Item("Harga"), "###") * -1
+                        End If
                     End If
                     DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Diskon").Value = 0
                     DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Qty").Value = 1

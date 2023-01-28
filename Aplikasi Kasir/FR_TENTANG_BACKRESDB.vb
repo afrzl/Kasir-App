@@ -19,7 +19,7 @@ Public Class FR_TENTANG_BACKRESDB
     Private Sub BTNSIMPAN_Click(sender As Object, e As EventArgs) Handles BTNSIMPAN.Click
         If CB_ACTION.SelectedIndex > 0 Then
             If CB_ACTION.SelectedIndex = 1 Then
-                SaveFileDialog1.FileName = "TOKO_KASIR.bak"
+                SaveFileDialog1.FileName = "DB TOKO_KASIR " & VERSI & " " & Format(Date.Now(), "yyyyMMddHHmmss") & ".bak"
                 If SaveFileDialog1.ShowDialog() = DialogResult.OK Then
                     CONN.Close()
                     con.Open()
@@ -68,6 +68,7 @@ Public Class FR_TENTANG_BACKRESDB
     End Sub
 
     Private Sub BTN_LOCATION_Click(sender As Object, e As EventArgs) Handles BTN_LOCATION.Click
+        OpenFileDialog1.Filter = "Backup Files (*.bak) |*.bak"
         If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
             TXTFILE.Text = OpenFileDialog1.FileName
         End If
@@ -75,6 +76,7 @@ Public Class FR_TENTANG_BACKRESDB
     End Sub
 
     Private Sub TXTNFILE_Click(sender As Object, e As EventArgs) Handles TXTFILE.Click
+        OpenFileDialog1.Filter = "Backup Files (*.bak) |*.bak"
         If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
             TXTFILE.Text = OpenFileDialog1.FileName
         End If
@@ -84,9 +86,11 @@ Public Class FR_TENTANG_BACKRESDB
     Private Sub CB_ACTION_SelectedValueChanged(sender As Object, e As EventArgs) Handles CB_ACTION.SelectedValueChanged
         If CB_ACTION.SelectedIndex = 2 Then
             Label2.Visible = True
+            Label3.Visible = True
             TXTFILE.Visible = True
             BTN_LOCATION.Visible = True
         Else
+            Label3.Visible = False
             Label2.Visible = False
             TXTFILE.Visible = False
             BTN_LOCATION.Visible = False

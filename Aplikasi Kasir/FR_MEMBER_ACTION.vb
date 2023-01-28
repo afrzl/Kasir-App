@@ -92,7 +92,8 @@ Public Class FR_MEMBER_ACTION
                 STR = "UPDATE tbl_member SET Nama='" & TXTNAMA.Text & "'," &
                     " Alamat='" & TXTALAMAT.Text & "'," &
                     " No_hp='" & TXTNOHP.Text & "'," &
-                    " JK='" & jk & "'" &
+                    " JK='" & jk & "'," &
+                    " Modified_at='" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
                     " WHERE Id='" & TXTID.Text & "'"
                 CMD = New SqlCommand(STR, CONN)
                 CMD.ExecuteNonQuery()
