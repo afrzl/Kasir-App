@@ -1172,7 +1172,7 @@ Partial Class FR_CETAK_LABEL
         Me.BTNPRINTALL.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.BTNPRINTALL.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BTNPRINTALL.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.BTNPRINTALL.Location = New System.Drawing.Point(131, 401)
+        Me.BTNPRINTALL.Location = New System.Drawing.Point(133, 401)
         Me.BTNPRINTALL.Margin = New System.Windows.Forms.Padding(2)
         Me.BTNPRINTALL.Name = "BTNPRINTALL"
         Me.BTNPRINTALL.Size = New System.Drawing.Size(201, 39)
@@ -1187,7 +1187,7 @@ Partial Class FR_CETAK_LABEL
         Me.BTNPRINT.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.BTNPRINT.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BTNPRINT.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.BTNPRINT.Location = New System.Drawing.Point(24, 401)
+        Me.BTNPRINT.Location = New System.Drawing.Point(26, 401)
         Me.BTNPRINT.Margin = New System.Windows.Forms.Padding(2)
         Me.BTNPRINT.Name = "BTNPRINT"
         Me.BTNPRINT.Size = New System.Drawing.Size(101, 39)
@@ -1203,7 +1203,7 @@ Partial Class FR_CETAK_LABEL
         Me.BTNKELUARDG.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.BTNKELUARDG.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BTNKELUARDG.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.BTNKELUARDG.Location = New System.Drawing.Point(861, 401)
+        Me.BTNKELUARDG.Location = New System.Drawing.Point(863, 401)
         Me.BTNKELUARDG.Margin = New System.Windows.Forms.Padding(2)
         Me.BTNKELUARDG.Name = "BTNKELUARDG"
         Me.BTNKELUARDG.Size = New System.Drawing.Size(91, 39)
@@ -1219,7 +1219,7 @@ Partial Class FR_CETAK_LABEL
         Me.BTNMASUKDG.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.BTNMASUKDG.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BTNMASUKDG.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.BTNMASUKDG.Location = New System.Drawing.Point(958, 401)
+        Me.BTNMASUKDG.Location = New System.Drawing.Point(960, 401)
         Me.BTNMASUKDG.Margin = New System.Windows.Forms.Padding(2)
         Me.BTNMASUKDG.Name = "BTNMASUKDG"
         Me.BTNMASUKDG.Size = New System.Drawing.Size(91, 39)
@@ -1237,8 +1237,9 @@ Partial Class FR_CETAK_LABEL
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DGCETAK.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
+        Me.DGCETAK.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
         DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ControlLight
         DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
         DataGridViewCellStyle1.NullValue = "-"
@@ -1246,9 +1247,11 @@ Partial Class FR_CETAK_LABEL
         DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.DGCETAK.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
-        Me.DGCETAK.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DGCETAK.ColumnHeadersHeight = 35
+        Me.DGCETAK.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
         Me.DGCETAK.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.KODE, Me.BARANG, Me.SATUAN, Me.OPSI1, Me.HARGA1, Me.OPSI2, Me.HARGA2, Me.OPSI3, Me.HARGA3, Me.OPSI4, Me.HARGA4, Me.OPSI5, Me.HARGA5, Me.TGL_DISKON, Me.DISKON})
-        Me.DGCETAK.Location = New System.Drawing.Point(22, 454)
+        Me.DGCETAK.EnableHeadersVisualStyles = False
+        Me.DGCETAK.Location = New System.Drawing.Point(24, 454)
         Me.DGCETAK.Margin = New System.Windows.Forms.Padding(2)
         Me.DGCETAK.Name = "DGCETAK"
         Me.DGCETAK.ReadOnly = True
@@ -1406,11 +1409,11 @@ Partial Class FR_CETAK_LABEL
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label5.Location = New System.Drawing.Point(20, 12)
         Me.Label5.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(119, 28)
+        Me.Label5.Size = New System.Drawing.Size(130, 28)
         Me.Label5.TabIndex = 68
         Me.Label5.Text = "Data Barang"
         '
@@ -1455,8 +1458,9 @@ Partial Class FR_CETAK_LABEL
         Me.DGBARANG.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DGBARANG.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
+        Me.DGBARANG.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
         DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.ControlLight
         DataGridViewCellStyle4.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText
         DataGridViewCellStyle4.NullValue = "-"
@@ -1464,7 +1468,9 @@ Partial Class FR_CETAK_LABEL
         DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.DGBARANG.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle4
-        Me.DGBARANG.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DGBARANG.ColumnHeadersHeight = 35
+        Me.DGBARANG.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
+        Me.DGBARANG.EnableHeadersVisualStyles = False
         Me.DGBARANG.Location = New System.Drawing.Point(24, 92)
         Me.DGBARANG.Margin = New System.Windows.Forms.Padding(2)
         Me.DGBARANG.MultiSelect = False
@@ -1485,7 +1491,7 @@ Partial Class FR_CETAK_LABEL
         Me.DGBARANG.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.DGBARANG.RowTemplate.Height = 30
         Me.DGBARANG.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DGBARANG.Size = New System.Drawing.Size(1025, 292)
+        Me.DGBARANG.Size = New System.Drawing.Size(1025, 305)
         Me.DGBARANG.TabIndex = 65
         '
         'TXTCARI

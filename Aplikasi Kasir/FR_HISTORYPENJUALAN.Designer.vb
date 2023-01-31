@@ -1112,15 +1112,16 @@ Partial Class FR_HISTORYPENJUALAN
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DGHISTORY.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
+        Me.DGHISTORY.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
         DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ControlLight
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
         DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
         DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.DGHISTORY.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
-        Me.DGHISTORY.ColumnHeadersHeight = 32
+        Me.DGHISTORY.ColumnHeadersHeight = 35
         Me.DGHISTORY.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
         DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
@@ -1130,6 +1131,7 @@ Partial Class FR_HISTORYPENJUALAN
         DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.DGHISTORY.DefaultCellStyle = DataGridViewCellStyle2
+        Me.DGHISTORY.EnableHeadersVisualStyles = False
         Me.DGHISTORY.Location = New System.Drawing.Point(29, 66)
         Me.DGHISTORY.Margin = New System.Windows.Forms.Padding(2)
         Me.DGHISTORY.MultiSelect = False
@@ -1154,7 +1156,7 @@ Partial Class FR_HISTORYPENJUALAN
         Me.DGHISTORY.ShowCellToolTips = False
         Me.DGHISTORY.ShowEditingIcon = False
         Me.DGHISTORY.ShowRowErrors = False
-        Me.DGHISTORY.Size = New System.Drawing.Size(1052, 626)
+        Me.DGHISTORY.Size = New System.Drawing.Size(1052, 637)
         Me.DGHISTORY.TabIndex = 23
         '
         'Panel3

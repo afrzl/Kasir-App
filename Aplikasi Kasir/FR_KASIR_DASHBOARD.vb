@@ -103,6 +103,8 @@ Public Class FR_KASIR_DASHBOARD
         DGSTOK.Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         DGSTOK.Columns(3).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
 
+        DGSTOK.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+
         BTNPREV.Enabled = True
         BTNNEXT.Enabled = True
 
@@ -183,5 +185,9 @@ Public Class FR_KASIR_DASHBOARD
     Private Sub TXTCARISTOK_TextChanged_1(sender As Object, e As EventArgs) Handles TXTCARISTOK.TextChanged
         START_RECORD = 0
         TAMPIL()
+    End Sub
+
+    Private Sub DGSTOK_SelectionChanged(sender As Object, e As EventArgs) Handles DGSTOK.SelectionChanged
+        DGSTOK.ClearSelection()
     End Sub
 End Class

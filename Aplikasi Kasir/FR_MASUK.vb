@@ -64,73 +64,6 @@ Public Class FR_MASUK
         TXTSUPPLIER.Select()
     End Sub
 
-    Dim START_RECORD_CARI As Integer = 0
-    Dim TAMPIL_RECORD_CARI As Integer = 5
-
-    Sub CARI_BARANG()
-        Dim STR As String = "SELECT RTRIM(Kode) AS Kode,RTRIM(Barang) AS Barang" &
-            " FROM tbl_barang WHERE Barang Like '%" & TXTCARI_BARANG.Text & "%'" &
-            " ORDER BY Barang ASC"
-        Dim DA As SqlDataAdapter
-        Dim TBL As New DataSet
-        DA = New SqlDataAdapter(STR, CONN)
-        DA.Fill(TBL, START_RECORD_CARI, TAMPIL_RECORD_CARI, 0)
-        DGCARI.DataSource = TBL.Tables(0)
-
-        DGCARI.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-        DGCARI.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-
-        BTNPREVCARI.Enabled = True
-        BTNNEXTCARI.Enabled = True
-
-        Dim TOTAL_RECORD As Integer = 0
-        Dim TBL_DATA As New DataTable
-        DA = New SqlDataAdapter(STR, CONN)
-        DA.Fill(TBL_DATA)
-
-        TOTAL_RECORD = TBL_DATA.Rows.Count
-
-        If TOTAL_RECORD = 0 Then
-            BTNPREVCARI.Enabled = False
-            BTNNEXTCARI.Enabled = False
-        ElseIf START_RECORD_CARI = 0 Then
-            BTNPREVCARI.Enabled = False
-        ElseIf TOTAL_RECORD <= TAMPIL_RECORD_CARI Then
-            BTNNEXTCARI.Enabled = False
-        ElseIf TOTAL_RECORD - START_RECORD_CARI <= TAMPIL_RECORD_CARI Then
-            BTNNEXTCARI.Enabled = False
-        Else
-            BTNPREVCARI.Enabled = True
-            BTNNEXTCARI.Enabled = True
-        End If
-    End Sub
-
-    Private Sub BTNNEXTCARI_Click(sender As Object, e As EventArgs) Handles BTNNEXTCARI.Click
-        START_RECORD_CARI = START_RECORD_CARI + TAMPIL_RECORD_CARI
-        CARI_BARANG()
-    End Sub
-
-    Private Sub BTNPREVCARI_Click(sender As Object, e As EventArgs) Handles BTNPREVCARI.Click
-        START_RECORD_CARI = START_RECORD_CARI - TAMPIL_RECORD_CARI
-        CARI_BARANG()
-    End Sub
-
-    Sub TAMPIL_PNCARI()
-        If PNCARI.Visible = False Then
-            PNCARI.Visible = True
-            BTNCARI.Text = "Tutup (F1)"
-            TXTCARI_BARANG.Clear()
-            DGCARI.DataSource = Nothing
-            TXTCARI_BARANG.Select()
-            CARI_BARANG()
-        Else
-            BTNCARI.Text = "Cari (F1)"
-            PNCARI.Visible = False
-            DGCARI.DataSource = Nothing
-            TXTKODE.Select()
-        End If
-    End Sub
-
     Private Function AUTOID() As String
         Dim ID_AWAL As String = Format(Date.Now, "yyMMdd")
         Dim STR As String = "SELECT TOP 1 (Id_trans) AS Id_trans FROM tbl_transaksi_parent WHERE LEFT(Id_trans,1)='M' ORDER BY Id DESC"
@@ -241,58 +174,15 @@ Public Class FR_MASUK
     End Sub
 
     Private Sub BTNCARI_Click(sender As Object, e As EventArgs) Handles BTNCARI.Click
-        TAMPIL_PNCARI()
-    End Sub
-
-    Private Sub TXTCARI_BARANG_TextChanged(sender As Object, e As EventArgs) Handles TXTCARI_BARANG.TextChanged
-        CARI_BARANG()
+        With FR_KELUAR_TAMPIL
+            .Show()
+            .LB_TITLE.Text = "FR_MASUK"
+        End With
+        Me.Enabled = False
     End Sub
 
     Private Sub BTNTAMBAH_Click(sender As Object, e As EventArgs)
         BUKA_FORM(FR_PRODUK)
-    End Sub
-
-    Private Sub TXTKODE_KeyDown(sender As Object, e As KeyEventArgs) Handles TXTKODE.KeyDown
-        Select Case e.KeyCode
-            Case Keys.F1
-                TAMPIL_PNCARI()
-        End Select
-    End Sub
-
-    Private Sub TXTCARI_BARANG_KeyDown(sender As Object, e As KeyEventArgs) Handles TXTCARI_BARANG.KeyDown
-        Select Case e.KeyCode
-            Case Keys.F1
-                TAMPIL_PNCARI()
-        End Select
-    End Sub
-
-    Private Sub DGCARI_PreviewKeyDown(sender As Object, e As PreviewKeyDownEventArgs)
-        If (e.KeyCode = Keys.Enter) Then
-            On Error Resume Next
-            TXTKODE.Text = DGCARI.Item(0, DGCARI.CurrentRow.Index).Value
-            BTNCARI.Text = "Cari (F1)"
-            TXTJUMLAH.Select()
-            PNCARI.Visible = False
-            DGCARI.DataSource = Nothing
-        End If
-    End Sub
-
-    Private Sub DGCARI_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGCARI.CellDoubleClick
-        On Error Resume Next
-        TXTKODE.Text = DGCARI.Item(0, e.RowIndex).Value
-        BTNCARI.Text = "Cari (F1)"
-        TXTKODE.Select()
-        PNCARI.Visible = False
-        DGCARI.DataSource = Nothing
-    End Sub
-
-    Private Sub TXTCARI_BARANG_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTCARI_BARANG.KeyPress
-        If e.KeyChar = Chr(13) Then
-            DGCARI.Select()
-        End If
-        If e.KeyChar = "'" Then
-            e.Handled = True
-        End If
     End Sub
 
     Private Sub DGTAMPIL_CellMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles DGTAMPIL.CellMouseClick
@@ -787,18 +677,6 @@ Public Class FR_MASUK
         End If
     End Sub
 
-    Private Sub DGCARI_KeyDown(sender As Object, e As KeyEventArgs) Handles DGCARI.KeyDown
-        If (e.KeyCode = Keys.Enter) Then
-            e.Handled = True
-            DGCARI.CurrentCell = DGCARI.Rows(DGCARI.CurrentRow.Index).Cells(0)
-            TXTKODE.Text = DGCARI.SelectedCells(0).Value
-            BTNCARI.Text = "Cari (F1)"
-            TXTKODE.Select()
-            PNCARI.Visible = False
-            DGCARI.DataSource = Nothing
-        End If
-    End Sub
-
     Private Sub BTNDASHBOARDKASIR_Click(sender As Object, e As EventArgs) Handles BTNDASHBOARDKASIR.Click
         BUKA_FORM(FR_KASIR_DASHBOARD)
     End Sub
@@ -833,5 +711,16 @@ Public Class FR_MASUK
 
     Private Sub BTNSETTINGKASIR_Click(sender As Object, e As EventArgs) Handles BTNSETTINGKASIR.Click
         BUKA_FORM(FR_TENTANG)
+    End Sub
+
+    Private Sub TXTKODE_KeyDown(sender As Object, e As KeyEventArgs) Handles TXTKODE.KeyDown
+        Select Case e.KeyCode
+            Case Keys.F1
+                With FR_KELUAR_TAMPIL
+                    .Show()
+                    .LB_TITLE.Text = "FR_MASUK"
+                End With
+                Me.Enabled = False
+        End Select
     End Sub
 End Class

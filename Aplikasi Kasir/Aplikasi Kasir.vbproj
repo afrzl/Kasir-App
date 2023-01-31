@@ -236,6 +236,12 @@
     <Compile Include="FR_HISTORYPENJUALAN_TAMPIL.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FR_KASIR_ACTION.Designer.vb">
+      <DependentUpon>FR_KASIR_ACTION.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FR_KASIR_ACTION.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FR_MASUK_HISTORY.Designer.vb">
       <DependentUpon>FR_MASUK_HISTORY.vb</DependentUpon>
     </Compile>
@@ -355,6 +361,12 @@
       <DependentUpon>FR_RETURN.vb</DependentUpon>
     </Compile>
     <Compile Include="FR_RETURN.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FR_RETURN_LIST.Designer.vb">
+      <DependentUpon>FR_RETURN_LIST.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FR_RETURN_LIST.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FR_RUSAK.Designer.vb">
@@ -543,6 +555,9 @@
     <EmbeddedResource Include="FR_HISTORYPENJUALAN_TAMPIL.resx">
       <DependentUpon>FR_HISTORYPENJUALAN_TAMPIL.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FR_KASIR_ACTION.resx">
+      <DependentUpon>FR_KASIR_ACTION.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FR_MASUK_HISTORY.resx">
       <DependentUpon>FR_MASUK_HISTORY.vb</DependentUpon>
     </EmbeddedResource>
@@ -602,6 +617,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FR_RETURN.resx">
       <DependentUpon>FR_RETURN.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FR_RETURN_LIST.resx">
+      <DependentUpon>FR_RETURN_LIST.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FR_RUSAK.resx">
       <DependentUpon>FR_RUSAK.vb</DependentUpon>

@@ -299,11 +299,11 @@ Public Class FR_PRODUK_ACTION
                     CMD = New SqlCommand(STR, CONN)
                     CMD.ExecuteNonQuery()
                     MsgBox("Data produk berhasil diubah.")
-                    Me.Close()
                     With FR_PRODUK
                         .Enabled = True
                         .TAMPIL()
                     End With
+                    Me.Close()
                 Else
                     STR = "SELECT * FROM tbl_barang WHERE Kode='" & TXTKODE.Text & "'"
                     CMD = New SqlCommand(STR, CONN)
@@ -345,11 +345,11 @@ Public Class FR_PRODUK_ACTION
                         CMD = New SqlCommand(STR, CONN)
                         CMD.ExecuteNonQuery()
                         MsgBox("Data produk berhasil disimpan.")
-                        Me.Close()
                         With FR_PRODUK
                             .Enabled = True
                             .TAMPIL()
                         End With
+                        Me.Close()
                     End If
                     RD.Close()
                 End If
@@ -427,7 +427,7 @@ Public Class FR_PRODUK_ACTION
     End Sub
 
     Private Sub BTNCLOSE_Click(sender As Object, e As EventArgs) Handles BTNCLOSE.Click
+        FR_PRODUK.Enabled = True
         Me.Close()
-        FR_PRODUK.Enabled = TRUE
     End Sub
 End Class

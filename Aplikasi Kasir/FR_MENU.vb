@@ -98,6 +98,8 @@ Public Class FR_MENU
             BTNPREV.Enabled = True
             BTNNEXT.Enabled = True
         End If
+
+        DGSTOK.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
     End Sub
 
     Private Sub BTNNEXT_Click(sender As Object, e As EventArgs) Handles BTNNEXT.Click
@@ -243,5 +245,9 @@ Public Class FR_MENU
 
     Private Sub BTNVOUCHER_ADMIN_Click(sender As Object, e As EventArgs) Handles BTNVOUCHER_ADMIN.Click
         BUKA_FORM(FR_VOUCHER)
+    End Sub
+
+    Private Sub DGSTOK_SelectionChanged(sender As Object, e As EventArgs) Handles DGSTOK.SelectionChanged
+        DGSTOK.ClearSelection()
     End Sub
 End Class

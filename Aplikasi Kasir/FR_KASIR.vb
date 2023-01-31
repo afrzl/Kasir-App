@@ -10,7 +10,8 @@ Public Class FR_KASIR
     End Sub
 
     Sub TAMPIL()
-        Dim STR As String = "SELECT Id as ID,RTRIM(Nama) AS 'Nama Lengkap',RTRIM(Alamat) AS Alamat," &
+        DGTAMPIL.Columns.Clear()
+        Dim STR As String = "SELECT RTRIM(Id) as ID,RTRIM(Nama) AS 'Nama Lengkap',RTRIM(Alamat) AS Alamat," &
             " Tgl_lahir as 'Tanggal Lahir',JK as 'Jenis Kelamin',RTRIM(No_hp) AS 'Nomor HP', Role AS 'Hak Akses'" &
             " FROM tbl_karyawan WHERE Nama Like '%" & TXTCARI.Text & "%' AND ID != '" & My.Settings.ID_ACCOUNT & "'"
         Dim DA As SqlDataAdapter
@@ -27,6 +28,8 @@ Public Class FR_KASIR
         DGTAMPIL.Columns(5).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
         DGTAMPIL.Columns(6).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
 
+        DGTAMPIL.Columns("Tanggal Lahir").DefaultCellStyle.Format = "dd MMMM yyyy"
+
         For N = 0 To DGTAMPIL.Rows.Count - 1
             If DGTAMPIL.Rows(N).Cells(4).Value = "L" Then
                 DGTAMPIL.Rows(N).Cells(4).Value = "Laki-laki"
@@ -42,241 +45,119 @@ Public Class FR_KASIR
                 DGTAMPIL.Rows(N).Cells(6).Value = "Kasir"
             End If
         Next
-    End Sub
 
-    Private Function AUTOID() As String
-        Dim ID_AWAL As String = Format(TXTTGL.Value, "yyyyMMdd")
-        Dim STR As String = "SELECT TOP 1 Id FROM tbl_karyawan ORDER BY Auto_id DESC"
-        Dim CMD As SqlCommand
-        CMD = New SqlCommand(STR, CONN)
-        Dim RD As SqlDataReader
-        RD = CMD.ExecuteReader
-        If RD.HasRows() Then
-            RD.Read()
-            Dim ID As Integer = Mid(RD.Item("Id"), 9, 3) + 1
-            RD.Close()
-            AUTOID = ID_AWAL + Format(ID, "000")
-        Else
-            RD.Close()
-            AUTOID = ID_AWAL + Format(1, "000")
-        End If
-        RD.Close()
-    End Function
+        Dim Column_edit As New DataGridViewButtonColumn
+
+        With Column_edit
+            .Text = "Edit"
+            .HeaderText = "Edit"
+            .UseColumnTextForButtonValue = True
+            .FlatStyle = FlatStyle.Flat
+            .DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            .CellTemplate.Style.BackColor = Color.Navy
+            .CellTemplate.Style.ForeColor = Color.WhiteSmoke
+            .Width = 100
+        End With
+        DGTAMPIL.Columns.Add(Column_edit)
+
+        Dim Column_reset As New DataGridViewButtonColumn
+
+        With Column_reset
+            .Text = "Reset"
+            .HeaderText = "Reset"
+            .UseColumnTextForButtonValue = True
+            .FlatStyle = FlatStyle.Flat
+            .DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            .CellTemplate.Style.BackColor = Color.DarkGreen
+            .CellTemplate.Style.ForeColor = Color.WhiteSmoke
+            .Width = 100
+        End With
+        DGTAMPIL.Columns.Add(Column_reset)
+
+        Dim Column_delete = New DataGridViewButtonColumn
+        With Column_delete
+            .Text = "Delete"
+            .HeaderText = "Delete"
+            .UseColumnTextForButtonValue = True
+            .FlatStyle = FlatStyle.Flat
+            .DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            .CellTemplate.Style.BackColor = Color.Crimson
+            .CellTemplate.Style.ForeColor = Color.WhiteSmoke
+            .Width = 100
+        End With
+        DGTAMPIL.Columns.Add(Column_delete)
+
+        DGTAMPIL.ColumnHeadersHeight = 35
+        DGTAMPIL.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing
+        DGTAMPIL.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        For i = 0 To DGTAMPIL.Columns.Count - 1
+            DGTAMPIL.Columns.Item(i).SortMode = DataGridViewColumnSortMode.NotSortable
+        Next i
+    End Sub
 
     Private Sub TXTCARI_TextChanged(sender As Object, e As EventArgs) Handles TXTCARI.TextChanged
         TAMPIL()
     End Sub
 
-    Private Sub TXTID_TextChanged(sender As Object, e As EventArgs) Handles TXTID.TextChanged
-        Dim STR As String = "SELECT * FROM tbl_karyawan WHERE Id='" & TXTID.Text & "'"
-        Dim CMD As SqlCommand
-        CMD = New SqlCommand(STR, CONN)
-        Dim RD As SqlDataReader
-        RD = CMD.ExecuteReader
-        If RD.HasRows Then
-            RD.Read()
-            TXTNAMA.Text = RD.Item("Nama").ToString.Trim
-            TXTALAMAT.Text = RD.Item("Alamat").ToString.Trim
-            TXTTGL.Value = RD.Item("Tgl_lahir")
-            If RD.Item("JK") = "L" Then
-                TXTJK.Text = "Laki-laki"
-            ElseIf RD.Item("JK") = "P" Then
-                TXTJK.Text = "Perempuan"
-            End If
-            If RD.Item("Role") = 1 Then
-                CBROLE.Text = "Administrator"
-            ElseIf RD.Item("Role") = 2 Then
-                CBROLE.Text = "Operator"
-            ElseIf RD.Item("Role") = 3 Then
-                CBROLE.Text = "Kasir"
-            End If
-            TXTNOHP.Text = RD.Item("No_hp").ToString.Trim
-            RD.Close()
-            BTNDELETE.Visible = True
-        Else
-            RD.Close()
-            TXTNAMA.Clear()
-            TXTPASSWORD.Clear()
-            TXTALAMAT.Clear()
-            TXTNOHP.Clear()
-            TXTNAMA.Select()
-            BTNDELETE.Visible = False
-        End If
-        RD.Close()
-    End Sub
-
-    Private Sub BTNSIMPAN_Click(sender As Object, e As EventArgs) Handles BTNSIMPAN.Click
-        If TXTNAMA.Text = "" Or CBROLE.Text = "" Or TXTPASSWORD.Text = "" Then
-            MsgBox("Data tidak lengkap!")
-        Else
-            Dim jk As String = ""
-            If TXTJK.Text = "Laki-laki" Then
-                jk = "L"
-            ElseIf TXTJK.Text = "Perempuan" Then
-                jk = "P"
-            End If
-
-            Dim role As Integer
-            If CBROLE.SelectedIndex = 0 Then
-                role = 1
-            ElseIf CBROLE.SelectedIndex = 1 Then
-                role = 2
-            ElseIf CBROLE.SelectedIndex = 2 Then
-                role = 3
-            End If
-
-            Dim ID As String = AUTOID()
-
-            Dim STR As String
-            Dim CMD As SqlCommand
-            If TXTID.Text = "" Then
-                STR = "INSERT INTO tbl_karyawan (Id, Nama, Password, Role, Alamat, Tgl_lahir, JK, No_hp, Created_at) VALUES ('" & ID & "','" &
-                    TXTNAMA.Text & "', '" & TXTPASSWORD.Text & "', '" & role & "', '" & TXTALAMAT.Text & "', '" &
-                    Format(TXTTGL.Value, "MM/dd/yyyy") & "', '" & jk & "', '" &
-                    TXTNOHP.Text & "', '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "')"
-            Else
-                STR = "SELECT * FROM tbl_karyawan WHERE Id='" & TXTID.Text & "'"
-                CMD = New SqlCommand(STR, CONN)
-                Dim RD As SqlDataReader
-                RD = CMD.ExecuteReader
-                If RD.HasRows Then
-                    RD.Close()
-                    ID = TXTID.Text
-                    STR = "UPDATE tbl_karyawan SET Nama='" & TXTNAMA.Text &
-                        "',Password='" & TXTPASSWORD.Text &
-                        "',Role='" & role &
-                        "',Alamat='" & TXTALAMAT.Text &
-                        "',Tgl_lahir='" & Format(TXTTGL.Value, "MM/dd/yyyy") &
-                        "',JK='" & jk &
-                        "',No_hp='" & TXTNOHP.Text &
-                        "',Modified_at='" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") &
-                        "' WHERE Id='" & TXTID.Text & "'"
-                Else
-                    RD.Close()
-                    STR = "INSERT INTO tbl_karyawan (Id, Nama, Password, Role, Alamat, Tgl_lahir, JK, No_hp, Created_at) VALUES ('" & ID & "','" &
-                        TXTNAMA.Text & "', '" & TXTPASSWORD.Text & "', '" & role & "', '" & TXTALAMAT.Text & "', '" &
-                        Format(TXTTGL.Value, "MM/dd/yyyy") & "', '" & jk & "', '" &
-                        TXTNOHP.Text & "', '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "')"
-                End If
-            End If
-            CMD = New SqlCommand(STR, CONN)
-            CMD.ExecuteNonQuery()
-            MsgBox("Data berhasil disimpan dengan ID : " & ID)
-            KONDISI_AWAL()
-        End If
+    Private Sub BTNSIMPAN_Click(sender As Object, e As EventArgs) Handles BTNTAMBAH.Click
+        With FR_KASIR_ACTION
+            .Show()
+            .Label1.Text = "TAMBAH KASIR"
+            .TXTID.Enabled = False
+            .TXTNAMA.Select()
+        End With
+        Me.Enabled = False
     End Sub
 
     Private Sub DGTAMPIL_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGTAMPIL.CellClick
         On Error Resume Next
-        TXTID.Visible = True
-        LBID.Visible = True
-        TXTID.Text = DGTAMPIL.Item("Id", e.RowIndex).Value
-    End Sub
+        'TXTID.Visible = True
+        'LBID.Visible = True
+        'TXTID.Text = DGTAMPIL.Item("Id", e.RowIndex).Value
 
-    Private Sub BTNDELETE_Click(sender As Object, e As EventArgs) Handles BTNDELETE.Click
-        If TXTID.Text = "" Then
-            MsgBox("ID kosong!")
-        Else
-            If MsgBox("Apakah anda yakin akan menghapus karyawan?", vbYesNo) = vbYes Then
-                Dim STR As String = "DELETE FROM tbl_karyawan WHERE Id='" & TXTID.Text & "'"
-                Dim CMD As New SqlCommand(STR, CONN)
-                CMD.ExecuteNonQuery()
-                MsgBox("Data berhasil dihapus!")
-                TAMPIL()
-                TXTID.Text = ""
-                TXTID.Visible = False
-                LBID.Visible = False
-                TXTNAMA.Select()
+        Dim STR As String
+        Dim CMD As SqlCommand
+
+        If e.RowIndex >= 0 Then
+            If DGTAMPIL.Columns(e.ColumnIndex).HeaderText = "Edit" Then
+                Me.Enabled = False
+
+                With FR_KASIR_ACTION
+                    .Show()
+                    .Label1.Text = "EDIT KASIR"
+                    .TXTID.Text = DGTAMPIL.Item("Id", e.RowIndex).Value
+                    .TXTID.Visible = True
+                    .LBID.Visible = True
+                    .TXTNAMA.Select()
+                    .CARI_DATA()
+                End With
+            ElseIf DGTAMPIL.Columns(e.ColumnIndex).HeaderText = "Delete" Then
+                If MsgBox("Apakah anda yakin akan menghapus kasir?", vbYesNo) = vbYes Then
+                    STR = "DELETE tbl_karyawan " &
+                        " WHERE Id='" & DGTAMPIL.Item("Id", e.RowIndex).Value & "'"
+                    CMD = New SqlCommand(STR, CONN)
+                    CMD.ExecuteNonQuery()
+                    MsgBox("Data kasir berhasil dihapus!")
+                    TAMPIL()
+                End If
+            ElseIf DGTAMPIL.Columns(e.ColumnIndex).HeaderText = "Reset" Then
+                Dim message As String = "Apakah anda yakin akan mereset password akun " & DGTAMPIL.Item("Nama Lengkap", e.RowIndex).Value & " ke 123456?"
+                If MsgBox(message, vbYesNo) = vbYes Then
+                    STR = "UPDATE tbl_karyawan set Password = '123456', " &
+                        " Modified_at = '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
+                        " WHERE Id='" & DGTAMPIL.Item("Id", e.RowIndex).Value & "'"
+                    CMD = New SqlCommand(STR, CONN)
+                    CMD.ExecuteNonQuery()
+                    MsgBox("Password berhasil direset ke 123456!")
+                    TAMPIL()
+                End If
             End If
         End If
     End Sub
 
-    Sub KONDISI_AWAL()
-        TXTID.Visible = False
-        LBID.Visible = False
-        TXTID.Text = ""
-        TXTNAMA.Select()
-        TXTNAMA.Text = ""
-        TXTPASSWORD.Text = ""
-        TXTALAMAT.Text = ""
-        TXTNOHP.Text = ""
-        TXTTGL.Value = DateTime.Now
-        CBROLE.SelectedIndex = -1
-        TXTJK.SelectedIndex = -1
-        TXTID.Select()
-
-        TAMPIL()
-    End Sub
-
-    Private Sub BTNREFRESH_Click(sender As Object, e As EventArgs) Handles BTNREFRESH.Click
-        KONDISI_AWAL()
-    End Sub
-
-    Private Sub TXTNAMA_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTNAMA.KeyPress
-        If e.KeyChar = Chr(13) Then
-            TXTPASSWORD.Select()
-        End If
-
-        Dim KeyAscii As Short = Asc(e.KeyChar)
-        If (e.KeyChar Like "[A-Z, a-z]" _
-            OrElse e.KeyChar Like "[0-9]" _
-            OrElse KeyAscii = Keys.Back) Then
-            KeyAscii = 0
-        End If
-
-        e.Handled = CBool(KeyAscii)
-    End Sub
-
-    Private Sub TXTPASSWORD_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTPASSWORD.KeyPress
-        If e.KeyChar = Chr(13) Then
-            TXTALAMAT.Select()
-        End If
-
-        If e.KeyChar = "'" Then
-            e.Handled = True
-        End If
-    End Sub
-
-    Private Sub TXTALAMAT_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTALAMAT.KeyPress
-        If e.KeyChar = Chr(13) Then
-            TXTTGL.Select()
-        End If
-
-        If e.KeyChar = "'" Then
-            e.Handled = True
-        End If
-    End Sub
-
-    Private Sub TXTTGL_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTTGL.KeyPress
-        If e.KeyChar = Chr(13) Then
-            TXTJK.Select()
-        End If
-    End Sub
-
-    Private Sub TXTJK_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTJK.KeyPress
-        If e.KeyChar = Chr(13) Then
-            TXTNOHP.Select()
-        End If
-    End Sub
-
-    Private Sub TXTNOHP_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTNOHP.KeyPress
-        If e.KeyChar = Chr(13) Then
-            CBROLE.Select()
-        End If
-        If Not ((e.KeyChar >= "0" And e.KeyChar <= "9") Or e.KeyChar = vbBack) Then
-            e.Handled = True
-        End If
-    End Sub
-
-    Private Sub CBROLE_KeyPress(sender As Object, e As KeyPressEventArgs) Handles CBROLE.KeyPress
-        If e.KeyChar = Chr(13) Then
-            BTNSIMPAN.Select()
-        End If
-    End Sub
 
     Private Sub FR_KASIR_Load(sender As Object, e As EventArgs) Handles Me.Load
         TAMPIL()
-        TXTNAMA.Select()
 
         LBTGL.Text = Format(Date.Now, "dd MMMM yyyy HH:mm:ss")
         PEWAKTU.Enabled = True
@@ -351,5 +232,9 @@ Public Class FR_KASIR
 
     Private Sub BTNDASHBOARD_Click(sender As Object, e As EventArgs) Handles BTNDASHBOARD.Click
         BUKA_FORM(FR_MENU)
+    End Sub
+
+    Private Sub DGTAMPIL_SelectionChanged(sender As Object, e As EventArgs) Handles DGTAMPIL.SelectionChanged
+        DGTAMPIL.ClearSelection()
     End Sub
 End Class

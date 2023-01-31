@@ -38,6 +38,7 @@ Public Class FR_RETURN
     End Sub
 
     Sub TAMPIL()
+        DGTAMPIL.Columns.Clear()
         Dim STR As String
         Select Case ROLE
             Case 1
@@ -101,6 +102,21 @@ Public Class FR_RETURN
         DGTAMPIL.Columns(7).DefaultCellStyle.Format = "##0.##"
         DGTAMPIL.Columns(6).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DGTAMPIL.Columns(7).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+        DGTAMPIL.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+        Dim Column_delete = New DataGridViewButtonColumn
+        With Column_delete
+            .Text = "Delete"
+            .HeaderText = "Delete"
+            .UseColumnTextForButtonValue = True
+            .FlatStyle = FlatStyle.Flat
+            .DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            .CellTemplate.Style.BackColor = Color.Crimson
+            .CellTemplate.Style.ForeColor = Color.WhiteSmoke
+            .Width = 100
+        End With
+        DGTAMPIL.Columns.Add(Column_delete)
     End Sub
 
     Sub DATA_TRANSAKSI()
@@ -130,54 +146,17 @@ Public Class FR_RETURN
     End Sub
 
     Sub TAMPIL_PNCARI()
-        If PNCARI.Visible = False Then
-            PNCARI.Visible = True
-            BTNCARI.Text = "Tutup (F1)"
-            TXTCARI_TRANS.Clear()
-            DGCARI.DataSource = Nothing
-            TXTCARI_TRANS.Select()
-            CARI_TRANSAKSI()
-        Else
-            BTNCARI.Text = "Cari (F1)"
-            PNCARI.Visible = False
-            DGCARI.DataSource = Nothing
-            TXTID.Select()
-        End If
-    End Sub
-
-    Sub CARI_TRANSAKSI()
-        Dim STR As String
-        STR = "SELECT RTRIM(Id_trans) AS 'ID Transaksi'," &
-                      " Tgl AS 'Tanggal Transaksi'" &
-                      " FROM tbl_transaksi_parent WHERE LEFT(Id_trans, 1) = 'K'" &
-                      " AND Tgl >= DATEADD(day,-7, GETDATE())" &
-                      " AND Id_trans Like '%" & TXTCARI_TRANS.Text & "%'" &
-                      " ORDER BY Id DESC"
-
-        Dim DA As SqlDataAdapter
-        DA = New SqlDataAdapter(STR, CONN)
-        Dim TBL As New DataTable
-        DA.Fill(TBL)
-        DGCARI.DataSource = TBL
-        DGCARI.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-        DGCARI.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+        Me.Enabled = False
+        With FR_RETURN_LIST
+            .Show()
+            .LB_TITLE.Text = "FR_RETURN"
+            .TAMPIL()
+            .TXTCARI_TRANS.Select()
+        End With
     End Sub
 
     Private Sub BTNCARI_Click(sender As Object, e As EventArgs) Handles BTNCARI.Click
         TAMPIL_PNCARI()
-    End Sub
-
-    Private Sub TXTCARI_TRANS_TextChanged(sender As Object, e As EventArgs) Handles TXTCARI_TRANS.TextChanged
-        CARI_TRANSAKSI()
-    End Sub
-
-    Private Sub DGCARI_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGCARI.CellDoubleClick
-        On Error Resume Next
-        TXTID.Text = DGCARI.Item(0, e.RowIndex).Value
-        BTNCARI.Text = "Cari (F1)"
-        TXTID.Select()
-        PNCARI.Visible = False
-        DGCARI.DataSource = Nothing
     End Sub
 
     Dim JUMLAH As Double = 0
@@ -333,7 +312,7 @@ Public Class FR_RETURN
             MsgBox("Return berhasil disimpan! Stok " & CBKODE.Text & " ditambah.")
             TXTID.Clear()
             TXTQTY.Clear()
-            TXTHARGA.Clear()
+            TXTHARGA.Text = ""
             CBKODE.SelectedItem = -1
             TAMPIL()
             TXTID.Select()
@@ -344,30 +323,6 @@ Public Class FR_RETURN
         Select Case e.KeyCode
             Case Keys.F1
                 TAMPIL_PNCARI()
-        End Select
-    End Sub
-
-    Private Sub TXTCARI_TRANS_KeyDown(sender As Object, e As KeyEventArgs) Handles TXTCARI_TRANS.KeyDown
-        Select Case e.KeyCode
-            Case Keys.F1
-                TAMPIL_PNCARI()
-            Case Keys.Enter
-                DGCARI.Select()
-        End Select
-    End Sub
-
-    Private Sub DGCARI_KeyDown(sender As Object, e As KeyEventArgs) Handles DGCARI.KeyDown
-        Select Case e.KeyCode
-            Case Keys.F1
-                TAMPIL_PNCARI()
-            Case Keys.Enter
-                e.Handled = True
-                DGCARI.CurrentCell = DGCARI.Rows(DGCARI.CurrentRow.Index).Cells(0)
-                TXTID.Text = DGCARI.SelectedCells(0).Value
-                BTNCARI.Text = "Cari (F1)"
-                TXTID.Select()
-                PNCARI.Visible = False
-                DGCARI.DataSource = Nothing
         End Select
     End Sub
 
@@ -583,7 +538,7 @@ Public Class FR_RETURN
         BUKA_FORM(FR_TENTANG)
     End Sub
 
-    Private Sub TXTCARI_TRANS_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTCARI_TRANS.KeyPress
+    Private Sub TXTCARI_TRANS_KeyPress(sender As Object, e As KeyPressEventArgs)
         If e.KeyChar = "'" Then
             e.Handled = True
         End If
@@ -593,5 +548,51 @@ Public Class FR_RETURN
         If e.KeyChar = "'" Then
             e.Handled = True
         End If
+    End Sub
+
+    Private Sub DGTAMPIL_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGTAMPIL.CellClick
+        On Error Resume Next
+        If e.RowIndex >= 0 Then
+            If DGTAMPIL.Columns(e.ColumnIndex).HeaderText = "Delete" Then
+                If MsgBox("Apakah anda yakin akan menghapus data transaksi?", vbYesNo) = vbYes Then
+                    Dim IDX As String = DGTAMPIL.Item(0, DGTAMPIL.CurrentRow.Index).Value
+                    Dim NAMA_BARANG As String = DGTAMPIL.Item(2, DGTAMPIL.CurrentRow.Index).Value.ToString.Trim
+                    Dim STOK As Double
+
+                    Dim Str As String = "SELECT Stok AS Stok" &
+                " FROM tbl_transaksi_child" &
+                " WHERE RTRIM(Id_trans) = '" & IDX & "'"
+                    Dim CMD As New SqlCommand(Str, CONN)
+                    Dim RD As SqlDataReader
+                    RD = CMD.ExecuteReader
+                    If RD.HasRows Then
+                        RD.Read()
+                        TXTQTY.Text = RD.Item("Stok")
+                        RD.Close()
+                    Else
+                        RD.Close()
+                    End If
+                    RD.Close()
+
+                    CMD = New SqlCommand("DELETE FROM tbl_transaksi_child WHERE Id_trans='" & IDX & "'", CONN)
+                    CMD.ExecuteNonQuery()
+
+                    CMD = New SqlCommand("DELETE FROM tbl_transaksi_parent WHERE Id_trans='" & IDX & "'", CONN)
+                    CMD.ExecuteNonQuery()
+
+                    CMD = New SqlCommand("UPDATE tbl_stok SET Stok-=" & TXTQTY.Text.Replace(",", ".") & ", " &
+                                 " Modified_at = '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
+                                 " WHERE Kode='" & DGTAMPIL.Item(1, DGTAMPIL.CurrentRow.Index).Value & "'", CONN)
+                    CMD.ExecuteNonQuery()
+                    TAMPIL()
+                    MsgBox("Data barang return berhasil dihapus, dan stok barang " & NAMA_BARANG & " berkurang.")
+                    TXTQTY.Text = ""
+                End If
+            End If
+        End If
+    End Sub
+
+    Private Sub DGTAMPIL_SelectionChanged(sender As Object, e As EventArgs) Handles DGTAMPIL.SelectionChanged
+        DGTAMPIL.ClearSelection()
     End Sub
 End Class

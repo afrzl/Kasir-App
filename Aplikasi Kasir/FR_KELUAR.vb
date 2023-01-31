@@ -4,7 +4,7 @@ Imports System.IO
 
 Public Class FR_KELUAR
 
-    Dim persentase_point As Integer = 10
+    Dim persentase_point As Double = POINT_MEMBER
 
     Private Sub PEWAKTU_Tick(sender As Object, e As EventArgs) Handles PEWAKTU.Tick
         LBTGL.Text = Format(Date.Now, "dd MMMM yyyy HH:mm:ss")
@@ -103,9 +103,11 @@ Public Class FR_KELUAR
 
 
         If ADA_DATA = True Then
-            Dim JUMLAH_QTY As Double = DGTAMPIL.Rows(BARIS_DATA).Cells("Qty").Value
 
             DGTAMPIL.Rows(BARIS_DATA).Cells("Qty").Value = DGTAMPIL.Rows(BARIS_DATA).Cells("Qty").Value + Convert.ToDouble(TXTQTY.Text)
+
+            Dim JUMLAH_QTY As Double = DGTAMPIL.Rows(BARIS_DATA).Cells("Qty").Value
+
             DGTAMPIL.Rows(BARIS_DATA).Cells("Harga").Value = CARI_HARGA(JUMLAH_QTY)
             If Label6.Text = "%" Then
                 DGTAMPIL.Rows(BARIS_DATA).Cells("Diskon").Value = CInt((TXTDISKON.Text / 100 * DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Harga").Value) * DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Qty").Value)
@@ -279,23 +281,6 @@ Public Class FR_KELUAR
         End If
     End Sub
 
-    Private Sub DGTAMPIL_CellMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles DGTAMPIL.CellMouseClick
-        On Error Resume Next
-        If DGTAMPIL.Rows.Count > 0 Then
-            TXTKODE.Enabled = False
-            TXTQTY.Enabled = True
-
-            TXTKODE.Text = DGTAMPIL.Rows(e.RowIndex).Cells("Kode").Value
-            TXTHARGA.Text = DGTAMPIL.Rows(e.RowIndex).Cells("Harga").Value
-            TXTQTY.Text = DGTAMPIL.Rows(e.RowIndex).Cells("QTY").Value
-            TXTTOTAL.Text = DGTAMPIL.Rows(e.RowIndex).Cells("Total").Value
-
-            BTNCANCEL.Visible = True
-            BTNCARI.Visible = False
-            TXTQTY.Select()
-        End If
-    End Sub
-
     Private Sub FR_KELUAR_Load(sender As Object, e As EventArgs) Handles Me.Load
         TXTKODE.Select()
         TXTKASIR.Text = NAMA_LOGIN
@@ -306,6 +291,11 @@ Public Class FR_KELUAR
         PEWAKTU.Enabled = True
 
         ALAMATTOKO.Text = ALAMAT_TOKO
+
+        DGTAMPIL.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        For i = 0 To DGTAMPIL.Columns.Count - 1
+            DGTAMPIL.Columns.Item(i).SortMode = DataGridViewColumnSortMode.NotSortable
+        Next i
 
         If CUSTOMER_DISPLAY Then
             Dim all_screen = Screen.AllScreens
@@ -568,7 +558,7 @@ Public Class FR_KELUAR
                     Dim layar = Screen.AllScreens(1)
                     FR_KELUAR_CUSTOMER_KEMBALIAN.LBL_KEMBALIAN.Text = Format(CInt(TXTKEMBALIAN.Text), "##,##0")
                     FR_KELUAR_CUSTOMER_KEMBALIAN.StartPosition = FormStartPosition.Manual
-                    FR_KELUAR_CUSTOMER_KEMBALIAN.Location = layar.Bounds.Location + New Point(500, 500)
+                    FR_KELUAR_CUSTOMER_KEMBALIAN.Location = layar.Bounds.Location + New Point(300, 300)
                     FR_KELUAR_CUSTOMER_KEMBALIAN.Show()
                 End If
 
@@ -867,13 +857,19 @@ Public Class FR_KELUAR
     Private Sub TXTKODE_KeyDown(sender As Object, e As KeyEventArgs) Handles TXTKODE.KeyDown
         Select Case e.KeyCode
             Case Keys.F1
-                FR_KELUAR_TAMPIL.Show()
+                With FR_KELUAR_TAMPIL
+                    .Show()
+                    .LB_TITLE.Text = "FR_KELUAR"
+                End With
                 Me.Enabled = False
         End Select
     End Sub
 
     Private Sub BTNCARI_Click(sender As Object, e As EventArgs) Handles BTNCARI.Click
-        FR_KELUAR_TAMPIL.Show()
+        With FR_KELUAR_TAMPIL
+            .Show()
+            .LB_TITLE.Text = "FR_KELUAR"
+        End With
         Me.Enabled = False
     End Sub
 
@@ -1330,5 +1326,22 @@ Public Class FR_KELUAR
             TXTVOUCHER.Select()
         End If
         RD.Close()
+    End Sub
+
+    Private Sub DGTAMPIL_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGTAMPIL.CellClick
+        On Error Resume Next
+        If e.RowIndex >= 0 Then
+            TXTKODE.Enabled = False
+            TXTQTY.Enabled = True
+
+            TXTKODE.Text = DGTAMPIL.Rows(e.RowIndex).Cells("Kode").Value
+            TXTHARGA.Text = DGTAMPIL.Rows(e.RowIndex).Cells("Harga").Value
+            TXTQTY.Text = DGTAMPIL.Rows(e.RowIndex).Cells("QTY").Value
+            TXTTOTAL.Text = DGTAMPIL.Rows(e.RowIndex).Cells("Total").Value
+
+            BTNCANCEL.Visible = True
+            BTNCARI.Visible = False
+            TXTQTY.Select()
+        End If
     End Sub
 End Class

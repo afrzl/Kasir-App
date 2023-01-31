@@ -40,6 +40,8 @@ Public Class FR_DISKON
     Dim TAMPIL_RECORD As Integer = 30
 
     Sub TAMPIL()
+        DGTAMPIL.Columns.Clear()
+
         Dim TGL_SKRG As String = Format(Date.Now, "yyyy-MM-dd")
         Dim STR As String = ""
         If CBTAMPIL.Text = "Semua" Then
@@ -135,23 +137,55 @@ Public Class FR_DISKON
         DGTAMPIL.Columns(6).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         DGTAMPIL.Columns(8).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
 
-        DGTAMPIL.Columns(4).DefaultCellStyle.Format = "Rp ###,##"
-        DGTAMPIL.Columns(8).DefaultCellStyle.Format = "##0.##"
+        DGTAMPIL.Columns("Minimal Transaksi").DefaultCellStyle.Format = "Rp ###,##"
+        DGTAMPIL.Columns("Diskon").DefaultCellStyle.Format = "###,##.##"
 
         For N = 0 To DGTAMPIL.Rows.Count - 1
-            If DGTAMPIL.Rows(N).Cells(1).Value = "A" Then
-                DGTAMPIL.Rows(N).Cells(1).Value = "Semua"
+            If DGTAMPIL.Rows(N).Cells("Jenis").Value = "A" Then
+                DGTAMPIL.Rows(N).Cells("Jenis").Value = "Semua"
             Else
-                DGTAMPIL.Rows(N).Cells(1).Value = "Produk"
+                DGTAMPIL.Rows(N).Cells("Jenis").Value = "Produk"
             End If
 
-            If DGTAMPIL.Rows(N).Cells(7).Value = "R" Then
-                DGTAMPIL.Rows(N).Cells(7).Value = "Rupiah"
+            If DGTAMPIL.Rows(N).Cells("Jenis Nominal").Value = "R" Then
+                DGTAMPIL.Rows(N).Cells("Jenis Nominal").Value = "Rupiah"
             Else
-                DGTAMPIL.Rows(N).Cells(7).Value = "Persen"
+                DGTAMPIL.Rows(N).Cells("Jenis Nominal").Value = "Persen"
             End If
         Next
 
+        Dim Column_delete = New DataGridViewButtonColumn
+            With Column_delete
+                .Text = "Delete"
+                .HeaderText = "Delete"
+                .UseColumnTextForButtonValue = True
+                .FlatStyle = FlatStyle.Flat
+                .DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+                .CellTemplate.Style.BackColor = Color.Crimson
+                .CellTemplate.Style.ForeColor = Color.WhiteSmoke
+                .Width = 100
+            End With
+            DGTAMPIL.Columns.Add(Column_delete)
+
+            Dim Column_cetak As New DataGridViewButtonColumn
+            With Column_cetak
+                .Text = "Cetak"
+                .HeaderText = "Cetak"
+                .UseColumnTextForButtonValue = True
+                .FlatStyle = FlatStyle.Flat
+                .DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+                .CellTemplate.Style.BackColor = Color.DarkGreen
+                .CellTemplate.Style.ForeColor = Color.WhiteSmoke
+                .Width = 100
+            End With
+            DGTAMPIL.Columns.Add(Column_cetak)
+        DGTAMPIL.ColumnHeadersHeight = 35
+
+        DGTAMPIL.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing
+        DGTAMPIL.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        For i = 0 To DGTAMPIL.Columns.Count - 1
+            DGTAMPIL.Columns.Item(i).SortMode = DataGridViewColumnSortMode.NotSortable
+        Next i
 
         BTNPREV.Enabled = True
         BTNNEXT.Enabled = True
@@ -188,33 +222,12 @@ Public Class FR_DISKON
         TAMPIL()
     End Sub
 
-    Sub CARI_BARANG()
-        Dim STR As String = "SELECT RTRIM(Kode) AS Kode,RTRIM(Barang) AS Barang" &
-            " FROM tbl_barang WHERE Barang Like '%" & TXTCARI_BARANG.Text & "%'" &
-            " ORDER BY Barang ASC"
-        Dim DA As SqlDataAdapter
-        DA = New SqlDataAdapter(STR, CONN)
-        Dim TBL As New DataTable
-        DA.Fill(TBL)
-        DGCARI.DataSource = TBL
-        DGCARI.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-        DGCARI.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-    End Sub
-
     Sub TAMPIL_PNCARI()
-        If PNCARI.Visible = False Then
-            PNCARI.Visible = True
-            BTNCARI.Text = "Tutup (F1)"
-            TXTCARI_BARANG.Clear()
-            DGCARI.DataSource = Nothing
-            TXTCARI_BARANG.Select()
-            CARI_BARANG()
-        Else
-            BTNCARI.Text = "Cari (F1)"
-            PNCARI.Visible = False
-            DGCARI.DataSource = Nothing
-            TXTKODE.Select()
-        End If
+        With FR_KELUAR_TAMPIL
+            .Show()
+            .LB_TITLE.Text = "FR_DISKON"
+        End With
+        Me.Enabled = False
     End Sub
 
     Private Sub TXTKODE_TextChanged(sender As Object, e As EventArgs) Handles TXTKODE.TextChanged
@@ -267,22 +280,6 @@ Public Class FR_DISKON
         TAMPIL_PNCARI()
     End Sub
 
-    Private Sub TXTCARI_BARANG_TextChanged(sender As Object, e As EventArgs) Handles TXTCARI_BARANG.TextChanged
-        CARI_BARANG()
-    End Sub
-
-    Private Sub HapusToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HapusToolStripMenuItem.Click
-        If MsgBox("Apakah anda yakin akan menghapus data diskon?", vbYesNo) = vbYes Then
-            DGTAMPIL.Columns(0).Visible = True
-            Dim IDX As String = DGTAMPIL.CurrentRow.Cells("Id").Value
-            DGTAMPIL.Columns(0).Visible = False
-            Dim CMD As New SqlCommand("DELETE FROM tbl_diskon WHERE Id='" & IDX & "'", CONN)
-            CMD.ExecuteNonQuery()
-            TAMPIL()
-            MsgBox("Data transaksi berhasil dihapus")
-        End If
-    End Sub
-
     Private Sub TXTKODE_KeyDown(sender As Object, e As KeyEventArgs) Handles TXTKODE.KeyDown
         Select Case e.KeyCode
             Case Keys.F1
@@ -290,20 +287,11 @@ Public Class FR_DISKON
         End Select
     End Sub
 
-    Private Sub TXTCARI_BARANG_KeyDown(sender As Object, e As KeyEventArgs) Handles TXTCARI_BARANG.KeyDown
+    Private Sub TXTCARI_BARANG_KeyDown(sender As Object, e As KeyEventArgs)
         Select Case e.KeyCode
             Case Keys.F1
                 TAMPIL_PNCARI()
         End Select
-    End Sub
-
-    Private Sub DGCARI_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGCARI.CellDoubleClick
-        On Error Resume Next
-        TXTKODE.Text = DGCARI.Item(0, e.RowIndex).Value
-        BTNCARI.Text = "Cari (F1)"
-        PNCARI.Visible = False
-        DGCARI.DataSource = Nothing
-        TXTKODE.Select()
     End Sub
 
     Private Sub TXTTGLAKHIR_ValueChanged(sender As Object, e As EventArgs) Handles TXTTGLAKHIR.ValueChanged
@@ -358,15 +346,6 @@ Public Class FR_DISKON
         End If
     End Sub
 
-    Private Sub TXTCARI_BARANG_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTCARI_BARANG.KeyPress
-        If e.KeyChar = Chr(13) Then
-            DGCARI.Select()
-        End If
-        If e.KeyChar = "'" Then
-            e.Handled = True
-        End If
-    End Sub
-
     Sub KONDISI_AWAL()
         Label5.Visible = False
         Label6.Visible = False
@@ -388,7 +367,6 @@ Public Class FR_DISKON
         BTNCARI.Visible = False
         Label12.Visible = False
         TXTMIN.Visible = False
-        PNCARI.Visible = False
         TXTDISKON.Clear()
         TXTDISKON_RUPIAH.Clear()
     End Sub
@@ -596,72 +574,9 @@ Public Class FR_DISKON
         BUKA_FORM(FR_VOUCHER)
     End Sub
 
-    Private Sub DGCARI_KeyDown(sender As Object, e As KeyEventArgs) Handles DGCARI.KeyDown
-        On Error Resume Next
-        If (e.KeyCode = Keys.Enter) Then
-            e.Handled = True
-            DGCARI.CurrentCell = DGCARI.Rows(DGCARI.CurrentRow.Index).Cells(0)
-
-            TXTKODE.Text = DGCARI.SelectedCells(0).Value
-            BTNCARI.Text = "Cari (F1)"
-            PNCARI.Visible = False
-            DGCARI.DataSource = Nothing
-            TXTKODE.Select()
-        End If
-    End Sub
-
     Private Sub CBTAMPIL_KeyPress(sender As Object, e As KeyPressEventArgs) Handles CBTAMPIL.KeyPress
         If e.KeyChar = "'" Then
             e.Handled = True
-        End If
-    End Sub
-
-    Private Sub BTNCETAK_Click(sender As Object, e As EventArgs) Handles BTNCETAK.Click
-        If DGTAMPIL.Rows.Count > 0 Then
-            Dim DT As New DataTable
-            With DT
-                .Columns.Add("Kode")
-                .Columns.Add("Nama Barang")
-                .Columns.Add("Tanggal")
-                .Columns.Add("Diskon")
-            End With
-            DT.Rows.Add(DGTAMPIL.CurrentRow.Cells("Kode Barang").Value,
-                    DGTAMPIL.CurrentRow.Cells("Nama Barang").Value,
-                    DGTAMPIL.CurrentRow.Cells("Tanggal Awal").Value & " - " & DGTAMPIL.CurrentRow.Cells("Tanggal Akhir").Value,
-                            DGTAMPIL.CurrentRow.Cells("Diskon").Value)
-
-            Dim printDialog1 As New PrintDialog
-            Dim printDocument1 As New System.Drawing.Printing.PrintDocument
-            'Open the PrintDialog
-            printDialog1.Document = printDocument1
-
-            Dim dr As DialogResult = printDialog1.ShowDialog()
-
-            'Here's where you can catch them aborting the print..
-
-            If dr = System.Windows.Forms.DialogResult.OK Then
-                'Get the Copy times
-                Dim nCopies As Integer = printDocument1.PrinterSettings.Copies
-                'Get the number of Start Page
-                Dim sPage As Integer = printDocument1.PrinterSettings.FromPage
-                'Get the number of End page
-                Dim ePage As Integer = printDocument1.PrinterSettings.ToPage
-                'Get the printer name
-                Dim PrinterName As String = printDocument1.PrinterSettings.PrinterName
-
-                Dim RPT As New RPT_CETAKDISKON
-                Try
-                    With RPT
-                        .SetDataSource(DT)
-                        .PrintOptions.PrinterName = PrinterName
-                        .PrintToPrinter(nCopies, False, sPage, ePage)
-                    End With
-                Catch ex As Exception
-                    MessageBox.Show(ex.ToString())
-                End Try
-            End If
-        Else
-            MsgBox("Data diskon kosong!")
         End If
     End Sub
 
@@ -709,6 +624,72 @@ Public Class FR_DISKON
         End If
         If e.KeyChar = Chr(13) Then
             BTNSIMPAN.Select()
+        End If
+    End Sub
+
+    Private Sub DGTAMPIL_SelectionChanged(sender As Object, e As EventArgs) Handles DGTAMPIL.SelectionChanged
+        DGTAMPIL.ClearSelection()
+    End Sub
+
+    Private Sub DGTAMPIL_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGTAMPIL.CellClick
+        Dim STR As String
+        Dim CMD As SqlCommand
+
+        If e.RowIndex >= 0 Then
+            If DGTAMPIL.Columns(e.ColumnIndex).HeaderText = "Cetak" Then
+                Dim DT As New DataTable
+                With DT
+                    .Columns.Add("Kode")
+                    .Columns.Add("Nama Barang")
+                    .Columns.Add("Tanggal")
+                    .Columns.Add("Diskon")
+                End With
+                DT.Rows.Add(DGTAMPIL.CurrentRow.Cells("Kode Barang").Value,
+                    DGTAMPIL.CurrentRow.Cells("Nama Barang").Value,
+                    DGTAMPIL.CurrentRow.Cells("Tanggal Awal").Value & " - " & DGTAMPIL.CurrentRow.Cells("Tanggal Akhir").Value,
+                            DGTAMPIL.CurrentRow.Cells("Diskon").Value)
+
+                Dim printDialog1 As New PrintDialog
+                Dim printDocument1 As New System.Drawing.Printing.PrintDocument
+                'Open the PrintDialog
+                printDialog1.Document = printDocument1
+
+                Dim dr As DialogResult = printDialog1.ShowDialog()
+
+                'Here's where you can catch them aborting the print..
+
+                If dr = System.Windows.Forms.DialogResult.OK Then
+                    'Get the Copy times
+                    Dim nCopies As Integer = printDocument1.PrinterSettings.Copies
+                    'Get the number of Start Page
+                    Dim sPage As Integer = printDocument1.PrinterSettings.FromPage
+                    'Get the number of End page
+                    Dim ePage As Integer = printDocument1.PrinterSettings.ToPage
+                    'Get the printer name
+                    Dim PrinterName As String = printDocument1.PrinterSettings.PrinterName
+
+                    Dim RPT As New RPT_CETAKDISKON
+                    Try
+                        With RPT
+                            .SetDataSource(DT)
+                            .PrintOptions.PrinterName = PrinterName
+                            .PrintToPrinter(nCopies, False, sPage, ePage)
+                        End With
+                    Catch ex As Exception
+                        MessageBox.Show(ex.ToString())
+                    End Try
+                End If
+            ElseIf DGTAMPIL.Columns(e.ColumnIndex).HeaderText = "Delete" Then
+                If MsgBox("Apakah anda yakin akan menghapus data diskon?", vbYesNo) = vbYes Then
+                    DGTAMPIL.Columns(0).Visible = True
+                    Dim IDX As String = DGTAMPIL.CurrentRow.Cells("Id").Value
+                    DGTAMPIL.Columns(0).Visible = False
+                    CMD = New SqlCommand("DELETE FROM tbl_diskon WHERE Id='" & IDX & "'", CONN)
+                    CMD.ExecuteNonQuery()
+                    TAMPIL()
+                    MsgBox("Data transaksi berhasil dihapus")
+                End If
+            End If
         End If
     End Sub
 End Class

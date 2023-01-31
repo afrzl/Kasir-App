@@ -136,7 +136,7 @@ Public Class FR_VOUCHER_DATA_ACTION
     Private Sub TXTHARGA_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTHARGA.KeyPress
         If e.KeyChar = Chr(13) Then
             e.Handled = True
-            If CB_JENIS.SelectedIndex = 0 Then
+            If CB_JENIS.SelectedIndex = 1 Then
                 TXTHARGA_JUAL.Select()
             Else
                 BTNSIMPAN.Select()

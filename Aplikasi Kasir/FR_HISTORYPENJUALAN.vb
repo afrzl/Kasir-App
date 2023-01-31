@@ -64,6 +64,8 @@ Public Class FR_HISTORYPENJUALAN
         End With
         DGHISTORY.Columns.Add(Column_cetak)
 
+        DGHISTORY.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+
         BTNPREV.Enabled = True
         BTNNEXT.Enabled = True
 

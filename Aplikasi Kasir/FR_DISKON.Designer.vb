@@ -26,30 +26,12 @@ Partial Class FR_DISKON
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FR_DISKON))
         Me.DGTAMPIL = New System.Windows.Forms.DataGridView()
-        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.HapusToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.BTNCETAK = New System.Windows.Forms.Button()
         Me.CBTAMPIL = New System.Windows.Forms.ComboBox()
         Me.BTNNEXT = New System.Windows.Forms.Button()
         Me.BTNPREV = New System.Windows.Forms.Button()
-        Me.PNCARI = New System.Windows.Forms.Panel()
-        Me.DGCARI = New System.Windows.Forms.DataGridView()
-        Me.TXTCARI_BARANG = New System.Windows.Forms.TextBox()
-        Me.LBSATUAN = New System.Windows.Forms.Label()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.LBBARANG = New System.Windows.Forms.Label()
-        Me.BTNCARI = New System.Windows.Forms.Button()
-        Me.BTNSIMPAN = New System.Windows.Forms.Button()
-        Me.TXTKODE = New System.Windows.Forms.TextBox()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.Label10 = New System.Windows.Forms.Label()
         Me.PNCONTENT = New System.Windows.Forms.Panel()
-        Me.Panel2 = New System.Windows.Forms.Panel()
         Me.LBHARGA = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.TXTDISKON_RUPIAH = New System.Windows.Forms.TextBox()
@@ -57,17 +39,26 @@ Partial Class FR_DISKON
         Me.CBJENIS = New System.Windows.Forms.ComboBox()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
-        Me.TXTDISKON = New System.Windows.Forms.TextBox()
-        Me.Label13 = New System.Windows.Forms.Label()
-        Me.TXTTGLAKHIR = New System.Windows.Forms.DateTimePicker()
-        Me.TXTTGLAWAL = New System.Windows.Forms.DateTimePicker()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.TXTMIN = New System.Windows.Forms.TextBox()
         Me.PNTOP = New System.Windows.Forms.Panel()
         Me.LBTGL = New System.Windows.Forms.Label()
         Me.PNCONTROL = New System.Windows.Forms.Panel()
         Me.BTNMINIMIZE = New System.Windows.Forms.Button()
         Me.BTNCLOSE = New System.Windows.Forms.Button()
+        Me.TXTDISKON = New System.Windows.Forms.TextBox()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.TXTTGLAKHIR = New System.Windows.Forms.DateTimePicker()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.TXTTGLAWAL = New System.Windows.Forms.DateTimePicker()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.LBSATUAN = New System.Windows.Forms.Label()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.LBBARANG = New System.Windows.Forms.Label()
+        Me.TXTKODE = New System.Windows.Forms.TextBox()
+        Me.BTNCARI = New System.Windows.Forms.Button()
+        Me.BTNSIMPAN = New System.Windows.Forms.Button()
+        Me.TXTMIN = New System.Windows.Forms.TextBox()
         Me.PEWAKTU = New System.Windows.Forms.Timer(Me.components)
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.BTNLOGOUT = New System.Windows.Forms.Button()
@@ -95,12 +86,7 @@ Partial Class FR_DISKON
         Me.BTNLABELADMIN = New System.Windows.Forms.Button()
         Me.BTNMEMBER_ADMIN = New System.Windows.Forms.Button()
         CType(Me.DGTAMPIL, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.ContextMenuStrip1.SuspendLayout()
-        Me.Panel3.SuspendLayout()
-        Me.PNCARI.SuspendLayout()
-        CType(Me.DGCARI, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PNCONTENT.SuspendLayout()
-        Me.Panel2.SuspendLayout()
         Me.PNTOP.SuspendLayout()
         Me.PNCONTROL.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -118,8 +104,9 @@ Partial Class FR_DISKON
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DGTAMPIL.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
+        Me.DGTAMPIL.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
         DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ControlLight
         DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
         DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
@@ -128,8 +115,8 @@ Partial Class FR_DISKON
         Me.DGTAMPIL.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.DGTAMPIL.ColumnHeadersHeight = 30
         Me.DGTAMPIL.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
-        Me.DGTAMPIL.ContextMenuStrip = Me.ContextMenuStrip1
-        Me.DGTAMPIL.Location = New System.Drawing.Point(532, 98)
+        Me.DGTAMPIL.EnableHeadersVisualStyles = False
+        Me.DGTAMPIL.Location = New System.Drawing.Point(21, 520)
         Me.DGTAMPIL.Margin = New System.Windows.Forms.Padding(2)
         Me.DGTAMPIL.Name = "DGTAMPIL"
         Me.DGTAMPIL.ReadOnly = True
@@ -152,50 +139,8 @@ Partial Class FR_DISKON
         Me.DGTAMPIL.ShowCellToolTips = False
         Me.DGTAMPIL.ShowEditingIcon = False
         Me.DGTAMPIL.ShowRowErrors = False
-        Me.DGTAMPIL.Size = New System.Drawing.Size(552, 658)
+        Me.DGTAMPIL.Size = New System.Drawing.Size(1063, 239)
         Me.DGTAMPIL.TabIndex = 22
-        '
-        'ContextMenuStrip1
-        '
-        Me.ContextMenuStrip1.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.HapusToolStripMenuItem})
-        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(121, 28)
-        '
-        'HapusToolStripMenuItem
-        '
-        Me.HapusToolStripMenuItem.Name = "HapusToolStripMenuItem"
-        Me.HapusToolStripMenuItem.Size = New System.Drawing.Size(120, 24)
-        Me.HapusToolStripMenuItem.Text = "Hapus"
-        '
-        'Panel3
-        '
-        Me.Panel3.Controls.Add(Me.BTNCETAK)
-        Me.Panel3.Controls.Add(Me.CBTAMPIL)
-        Me.Panel3.Controls.Add(Me.BTNNEXT)
-        Me.Panel3.Controls.Add(Me.BTNPREV)
-        Me.Panel3.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Panel3.Location = New System.Drawing.Point(518, 40)
-        Me.Panel3.Margin = New System.Windows.Forms.Padding(2)
-        Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(578, 61)
-        Me.Panel3.TabIndex = 21
-        '
-        'BTNCETAK
-        '
-        Me.BTNCETAK.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BTNCETAK.BackColor = System.Drawing.Color.DarkGreen
-        Me.BTNCETAK.FlatAppearance.BorderSize = 0
-        Me.BTNCETAK.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BTNCETAK.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BTNCETAK.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.BTNCETAK.Location = New System.Drawing.Point(327, 7)
-        Me.BTNCETAK.Margin = New System.Windows.Forms.Padding(2)
-        Me.BTNCETAK.Name = "BTNCETAK"
-        Me.BTNCETAK.Size = New System.Drawing.Size(131, 43)
-        Me.BTNCETAK.TabIndex = 21
-        Me.BTNCETAK.Text = "Cetak"
-        Me.BTNCETAK.UseVisualStyleBackColor = False
         '
         'CBTAMPIL
         '
@@ -206,10 +151,10 @@ Partial Class FR_DISKON
         Me.CBTAMPIL.Font = New System.Drawing.Font("Segoe UI", 15.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CBTAMPIL.FormattingEnabled = True
         Me.CBTAMPIL.Items.AddRange(New Object() {"Semua", "Berlalu", "Sekarang", "Akan Datang"})
-        Me.CBTAMPIL.Location = New System.Drawing.Point(14, 7)
+        Me.CBTAMPIL.Location = New System.Drawing.Point(21, 473)
         Me.CBTAMPIL.Margin = New System.Windows.Forms.Padding(2)
         Me.CBTAMPIL.Name = "CBTAMPIL"
-        Me.CBTAMPIL.Size = New System.Drawing.Size(305, 43)
+        Me.CBTAMPIL.Size = New System.Drawing.Size(955, 43)
         Me.CBTAMPIL.TabIndex = 20
         '
         'BTNNEXT
@@ -220,7 +165,7 @@ Partial Class FR_DISKON
         Me.BTNNEXT.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.BTNNEXT.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BTNNEXT.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.BTNNEXT.Location = New System.Drawing.Point(516, 7)
+        Me.BTNNEXT.Location = New System.Drawing.Point(1034, 473)
         Me.BTNNEXT.Margin = New System.Windows.Forms.Padding(2)
         Me.BTNNEXT.Name = "BTNNEXT"
         Me.BTNNEXT.Size = New System.Drawing.Size(50, 43)
@@ -236,7 +181,7 @@ Partial Class FR_DISKON
         Me.BTNPREV.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.BTNPREV.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BTNPREV.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.BTNPREV.Location = New System.Drawing.Point(462, 7)
+        Me.BTNPREV.Location = New System.Drawing.Point(980, 473)
         Me.BTNPREV.Margin = New System.Windows.Forms.Padding(2)
         Me.BTNPREV.Name = "BTNPREV"
         Me.BTNPREV.Size = New System.Drawing.Size(50, 43)
@@ -244,181 +189,35 @@ Partial Class FR_DISKON
         Me.BTNPREV.Text = "<"
         Me.BTNPREV.UseVisualStyleBackColor = False
         '
-        'PNCARI
-        '
-        Me.PNCARI.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.PNCARI.Controls.Add(Me.DGCARI)
-        Me.PNCARI.Controls.Add(Me.TXTCARI_BARANG)
-        Me.PNCARI.Location = New System.Drawing.Point(2, 425)
-        Me.PNCARI.Margin = New System.Windows.Forms.Padding(2)
-        Me.PNCARI.Name = "PNCARI"
-        Me.PNCARI.Size = New System.Drawing.Size(518, 303)
-        Me.PNCARI.TabIndex = 15
-        Me.PNCARI.Visible = False
-        '
-        'DGCARI
-        '
-        Me.DGCARI.AllowUserToAddRows = False
-        Me.DGCARI.AllowUserToDeleteRows = False
-        Me.DGCARI.AllowUserToResizeColumns = False
-        Me.DGCARI.AllowUserToResizeRows = False
-        Me.DGCARI.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.DGCARI.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
-        Me.DGCARI.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DGCARI.ContextMenuStrip = Me.ContextMenuStrip1
-        Me.DGCARI.Location = New System.Drawing.Point(2, 40)
-        Me.DGCARI.Margin = New System.Windows.Forms.Padding(2)
-        Me.DGCARI.MultiSelect = False
-        Me.DGCARI.Name = "DGCARI"
-        Me.DGCARI.ReadOnly = True
-        Me.DGCARI.RowHeadersVisible = False
-        Me.DGCARI.RowHeadersWidth = 51
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DGCARI.RowsDefaultCellStyle = DataGridViewCellStyle4
-        Me.DGCARI.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DGCARI.RowTemplate.Height = 30
-        Me.DGCARI.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DGCARI.ShowCellErrors = False
-        Me.DGCARI.ShowCellToolTips = False
-        Me.DGCARI.ShowEditingIcon = False
-        Me.DGCARI.ShowRowErrors = False
-        Me.DGCARI.Size = New System.Drawing.Size(505, 252)
-        Me.DGCARI.TabIndex = 23
-        '
-        'TXTCARI_BARANG
-        '
-        Me.TXTCARI_BARANG.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TXTCARI_BARANG.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TXTCARI_BARANG.Location = New System.Drawing.Point(2, 2)
-        Me.TXTCARI_BARANG.Margin = New System.Windows.Forms.Padding(2)
-        Me.TXTCARI_BARANG.Name = "TXTCARI_BARANG"
-        Me.TXTCARI_BARANG.Size = New System.Drawing.Size(505, 34)
-        Me.TXTCARI_BARANG.TabIndex = 16
-        '
-        'LBSATUAN
-        '
-        Me.LBSATUAN.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBSATUAN.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LBSATUAN.Location = New System.Drawing.Point(163, 145)
-        Me.LBSATUAN.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.LBSATUAN.Name = "LBSATUAN"
-        Me.LBSATUAN.Size = New System.Drawing.Size(331, 26)
-        Me.LBSATUAN.TabIndex = 14
-        Me.LBSATUAN.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.LBSATUAN.Visible = False
-        '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(10, 148)
-        Me.Label7.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(72, 28)
-        Me.Label7.TabIndex = 13
-        Me.Label7.Text = "Satuan"
-        Me.Label7.Visible = False
-        '
-        'LBBARANG
-        '
-        Me.LBBARANG.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBBARANG.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LBBARANG.Location = New System.Drawing.Point(163, 104)
-        Me.LBBARANG.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.LBBARANG.Name = "LBBARANG"
-        Me.LBBARANG.Size = New System.Drawing.Size(331, 26)
-        Me.LBBARANG.TabIndex = 11
-        Me.LBBARANG.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.LBBARANG.Visible = False
-        '
-        'BTNCARI
-        '
-        Me.BTNCARI.BackColor = System.Drawing.Color.Navy
-        Me.BTNCARI.FlatAppearance.BorderSize = 0
-        Me.BTNCARI.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BTNCARI.Font = New System.Drawing.Font("Segoe UI", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BTNCARI.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.BTNCARI.Location = New System.Drawing.Point(372, 61)
-        Me.BTNCARI.Margin = New System.Windows.Forms.Padding(2)
-        Me.BTNCARI.Name = "BTNCARI"
-        Me.BTNCARI.Size = New System.Drawing.Size(122, 34)
-        Me.BTNCARI.TabIndex = 10
-        Me.BTNCARI.Text = "Cari (F1)"
-        Me.BTNCARI.UseVisualStyleBackColor = False
-        Me.BTNCARI.Visible = False
-        '
-        'BTNSIMPAN
-        '
-        Me.BTNSIMPAN.BackColor = System.Drawing.Color.DarkGreen
-        Me.BTNSIMPAN.FlatAppearance.BorderSize = 0
-        Me.BTNSIMPAN.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BTNSIMPAN.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BTNSIMPAN.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.BTNSIMPAN.Location = New System.Drawing.Point(151, 358)
-        Me.BTNSIMPAN.Margin = New System.Windows.Forms.Padding(2)
-        Me.BTNSIMPAN.Name = "BTNSIMPAN"
-        Me.BTNSIMPAN.Size = New System.Drawing.Size(189, 51)
-        Me.BTNSIMPAN.TabIndex = 5
-        Me.BTNSIMPAN.Text = "Simpan Diskon"
-        Me.BTNSIMPAN.UseVisualStyleBackColor = False
-        Me.BTNSIMPAN.Visible = False
-        '
-        'TXTKODE
-        '
-        Me.TXTKODE.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TXTKODE.Location = New System.Drawing.Point(163, 61)
-        Me.TXTKODE.Margin = New System.Windows.Forms.Padding(2)
-        Me.TXTKODE.Name = "TXTKODE"
-        Me.TXTKODE.Size = New System.Drawing.Size(202, 34)
-        Me.TXTKODE.TabIndex = 1
-        Me.TXTKODE.Visible = False
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(10, 64)
-        Me.Label5.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(124, 28)
-        Me.Label5.TabIndex = 0
-        Me.Label5.Text = "Kode Barang"
-        Me.Label5.Visible = False
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(10, 108)
-        Me.Label6.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(130, 28)
-        Me.Label6.TabIndex = 1
-        Me.Label6.Text = "Nama Barang"
-        Me.Label6.Visible = False
-        '
-        'Label10
-        '
-        Me.Label10.AutoSize = True
-        Me.Label10.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(10, 271)
-        Me.Label10.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(123, 28)
-        Me.Label10.TabIndex = 4
-        Me.Label10.Text = "Akhir Diskon"
-        Me.Label10.Visible = False
-        '
         'PNCONTENT
         '
+        Me.PNCONTENT.Controls.Add(Me.LBHARGA)
+        Me.PNCONTENT.Controls.Add(Me.Label16)
         Me.PNCONTENT.Controls.Add(Me.DGTAMPIL)
-        Me.PNCONTENT.Controls.Add(Me.Panel3)
-        Me.PNCONTENT.Controls.Add(Me.Panel2)
+        Me.PNCONTENT.Controls.Add(Me.TXTDISKON_RUPIAH)
+        Me.PNCONTENT.Controls.Add(Me.Label12)
+        Me.PNCONTENT.Controls.Add(Me.CBJENIS)
+        Me.PNCONTENT.Controls.Add(Me.CBTAMPIL)
+        Me.PNCONTENT.Controls.Add(Me.Label11)
+        Me.PNCONTENT.Controls.Add(Me.BTNNEXT)
+        Me.PNCONTENT.Controls.Add(Me.Label14)
         Me.PNCONTENT.Controls.Add(Me.PNTOP)
+        Me.PNCONTENT.Controls.Add(Me.TXTDISKON)
+        Me.PNCONTENT.Controls.Add(Me.BTNPREV)
+        Me.PNCONTENT.Controls.Add(Me.Label13)
+        Me.PNCONTENT.Controls.Add(Me.TXTTGLAKHIR)
+        Me.PNCONTENT.Controls.Add(Me.Label6)
+        Me.PNCONTENT.Controls.Add(Me.TXTTGLAWAL)
+        Me.PNCONTENT.Controls.Add(Me.Label10)
+        Me.PNCONTENT.Controls.Add(Me.LBSATUAN)
+        Me.PNCONTENT.Controls.Add(Me.Label9)
+        Me.PNCONTENT.Controls.Add(Me.Label7)
+        Me.PNCONTENT.Controls.Add(Me.Label5)
+        Me.PNCONTENT.Controls.Add(Me.LBBARANG)
+        Me.PNCONTENT.Controls.Add(Me.TXTKODE)
+        Me.PNCONTENT.Controls.Add(Me.BTNCARI)
+        Me.PNCONTENT.Controls.Add(Me.BTNSIMPAN)
+        Me.PNCONTENT.Controls.Add(Me.TXTMIN)
         Me.PNCONTENT.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PNCONTENT.Location = New System.Drawing.Point(270, 0)
         Me.PNCONTENT.Margin = New System.Windows.Forms.Padding(2)
@@ -426,46 +225,14 @@ Partial Class FR_DISKON
         Me.PNCONTENT.Size = New System.Drawing.Size(1096, 768)
         Me.PNCONTENT.TabIndex = 22
         '
-        'Panel2
-        '
-        Me.Panel2.Controls.Add(Me.LBHARGA)
-        Me.Panel2.Controls.Add(Me.Label16)
-        Me.Panel2.Controls.Add(Me.TXTDISKON_RUPIAH)
-        Me.Panel2.Controls.Add(Me.Label12)
-        Me.Panel2.Controls.Add(Me.CBJENIS)
-        Me.Panel2.Controls.Add(Me.Label11)
-        Me.Panel2.Controls.Add(Me.Label14)
-        Me.Panel2.Controls.Add(Me.TXTDISKON)
-        Me.Panel2.Controls.Add(Me.Label13)
-        Me.Panel2.Controls.Add(Me.TXTTGLAKHIR)
-        Me.Panel2.Controls.Add(Me.TXTTGLAWAL)
-        Me.Panel2.Controls.Add(Me.PNCARI)
-        Me.Panel2.Controls.Add(Me.LBSATUAN)
-        Me.Panel2.Controls.Add(Me.Label7)
-        Me.Panel2.Controls.Add(Me.LBBARANG)
-        Me.Panel2.Controls.Add(Me.BTNCARI)
-        Me.Panel2.Controls.Add(Me.BTNSIMPAN)
-        Me.Panel2.Controls.Add(Me.TXTKODE)
-        Me.Panel2.Controls.Add(Me.Label5)
-        Me.Panel2.Controls.Add(Me.Label9)
-        Me.Panel2.Controls.Add(Me.Label10)
-        Me.Panel2.Controls.Add(Me.Label6)
-        Me.Panel2.Controls.Add(Me.TXTMIN)
-        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Left
-        Me.Panel2.Location = New System.Drawing.Point(0, 40)
-        Me.Panel2.Margin = New System.Windows.Forms.Padding(2)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(518, 728)
-        Me.Panel2.TabIndex = 20
-        '
         'LBHARGA
         '
         Me.LBHARGA.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LBHARGA.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LBHARGA.Location = New System.Drawing.Point(163, 186)
+        Me.LBHARGA.Location = New System.Drawing.Point(169, 228)
         Me.LBHARGA.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.LBHARGA.Name = "LBHARGA"
-        Me.LBHARGA.Size = New System.Drawing.Size(331, 26)
+        Me.LBHARGA.Size = New System.Drawing.Size(459, 26)
         Me.LBHARGA.TabIndex = 29
         Me.LBHARGA.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.LBHARGA.Visible = False
@@ -474,7 +241,7 @@ Partial Class FR_DISKON
         '
         Me.Label16.AutoSize = True
         Me.Label16.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label16.Location = New System.Drawing.Point(10, 189)
+        Me.Label16.Location = New System.Drawing.Point(16, 231)
         Me.Label16.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(149, 28)
@@ -485,10 +252,10 @@ Partial Class FR_DISKON
         'TXTDISKON_RUPIAH
         '
         Me.TXTDISKON_RUPIAH.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TXTDISKON_RUPIAH.Location = New System.Drawing.Point(280, 312)
+        Me.TXTDISKON_RUPIAH.Location = New System.Drawing.Point(372, 355)
         Me.TXTDISKON_RUPIAH.Margin = New System.Windows.Forms.Padding(2)
         Me.TXTDISKON_RUPIAH.Name = "TXTDISKON_RUPIAH"
-        Me.TXTDISKON_RUPIAH.Size = New System.Drawing.Size(214, 34)
+        Me.TXTDISKON_RUPIAH.Size = New System.Drawing.Size(256, 34)
         Me.TXTDISKON_RUPIAH.TabIndex = 27
         Me.TXTDISKON_RUPIAH.Visible = False
         '
@@ -496,7 +263,7 @@ Partial Class FR_DISKON
         '
         Me.Label12.AutoSize = True
         Me.Label12.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label12.Location = New System.Drawing.Point(10, 65)
+        Me.Label12.Location = New System.Drawing.Point(16, 107)
         Me.Label12.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(145, 28)
@@ -510,17 +277,17 @@ Partial Class FR_DISKON
         Me.CBJENIS.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CBJENIS.FormattingEnabled = True
         Me.CBJENIS.Items.AddRange(New Object() {"Diskon Barang", "Diskon Transaksi"})
-        Me.CBJENIS.Location = New System.Drawing.Point(163, 19)
+        Me.CBJENIS.Location = New System.Drawing.Point(169, 61)
         Me.CBJENIS.Margin = New System.Windows.Forms.Padding(2)
         Me.CBJENIS.Name = "CBJENIS"
-        Me.CBJENIS.Size = New System.Drawing.Size(331, 36)
+        Me.CBJENIS.Size = New System.Drawing.Size(459, 36)
         Me.CBJENIS.TabIndex = 24
         '
         'Label11
         '
         Me.Label11.AutoSize = True
         Me.Label11.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label11.Location = New System.Drawing.Point(10, 22)
+        Me.Label11.Location = New System.Drawing.Point(16, 64)
         Me.Label11.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(118, 28)
@@ -531,77 +298,13 @@ Partial Class FR_DISKON
         '
         Me.Label14.AutoSize = True
         Me.Label14.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label14.Location = New System.Drawing.Point(212, 316)
+        Me.Label14.Location = New System.Drawing.Point(298, 357)
         Me.Label14.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(70, 28)
         Me.Label14.TabIndex = 22
         Me.Label14.Text = "% / Rp"
         Me.Label14.Visible = False
-        '
-        'TXTDISKON
-        '
-        Me.TXTDISKON.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TXTDISKON.Location = New System.Drawing.Point(163, 312)
-        Me.TXTDISKON.Margin = New System.Windows.Forms.Padding(2)
-        Me.TXTDISKON.Name = "TXTDISKON"
-        Me.TXTDISKON.Size = New System.Drawing.Size(44, 34)
-        Me.TXTDISKON.TabIndex = 20
-        Me.TXTDISKON.Visible = False
-        '
-        'Label13
-        '
-        Me.Label13.AutoSize = True
-        Me.Label13.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label13.Location = New System.Drawing.Point(10, 315)
-        Me.Label13.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(72, 28)
-        Me.Label13.TabIndex = 21
-        Me.Label13.Text = "Diskon"
-        Me.Label13.Visible = False
-        '
-        'TXTTGLAKHIR
-        '
-        Me.TXTTGLAKHIR.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TXTTGLAKHIR.Location = New System.Drawing.Point(163, 268)
-        Me.TXTTGLAKHIR.Margin = New System.Windows.Forms.Padding(2)
-        Me.TXTTGLAKHIR.Name = "TXTTGLAKHIR"
-        Me.TXTTGLAKHIR.Size = New System.Drawing.Size(331, 34)
-        Me.TXTTGLAKHIR.TabIndex = 19
-        Me.TXTTGLAKHIR.Visible = False
-        '
-        'TXTTGLAWAL
-        '
-        Me.TXTTGLAWAL.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TXTTGLAWAL.Location = New System.Drawing.Point(163, 225)
-        Me.TXTTGLAWAL.Margin = New System.Windows.Forms.Padding(2)
-        Me.TXTTGLAWAL.Name = "TXTTGLAWAL"
-        Me.TXTTGLAWAL.Size = New System.Drawing.Size(331, 34)
-        Me.TXTTGLAWAL.TabIndex = 18
-        Me.TXTTGLAWAL.Visible = False
-        '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(10, 228)
-        Me.Label9.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(119, 28)
-        Me.Label9.TabIndex = 3
-        Me.Label9.Text = "Awal Diskon"
-        Me.Label9.Visible = False
-        '
-        'TXTMIN
-        '
-        Me.TXTMIN.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TXTMIN.Location = New System.Drawing.Point(163, 61)
-        Me.TXTMIN.Margin = New System.Windows.Forms.Padding(2)
-        Me.TXTMIN.Name = "TXTMIN"
-        Me.TXTMIN.Size = New System.Drawing.Size(331, 34)
-        Me.TXTMIN.TabIndex = 26
-        Me.TXTMIN.Visible = False
         '
         'PNTOP
         '
@@ -663,6 +366,184 @@ Partial Class FR_DISKON
         Me.BTNCLOSE.Size = New System.Drawing.Size(18, 18)
         Me.BTNCLOSE.TabIndex = 0
         Me.BTNCLOSE.UseVisualStyleBackColor = True
+        '
+        'TXTDISKON
+        '
+        Me.TXTDISKON.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TXTDISKON.Location = New System.Drawing.Point(169, 354)
+        Me.TXTDISKON.Margin = New System.Windows.Forms.Padding(2)
+        Me.TXTDISKON.Name = "TXTDISKON"
+        Me.TXTDISKON.Size = New System.Drawing.Size(125, 34)
+        Me.TXTDISKON.TabIndex = 20
+        Me.TXTDISKON.Visible = False
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label13.Location = New System.Drawing.Point(16, 357)
+        Me.Label13.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(72, 28)
+        Me.Label13.TabIndex = 21
+        Me.Label13.Text = "Diskon"
+        Me.Label13.Visible = False
+        '
+        'TXTTGLAKHIR
+        '
+        Me.TXTTGLAKHIR.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TXTTGLAKHIR.Location = New System.Drawing.Point(169, 310)
+        Me.TXTTGLAKHIR.Margin = New System.Windows.Forms.Padding(2)
+        Me.TXTTGLAKHIR.Name = "TXTTGLAKHIR"
+        Me.TXTTGLAKHIR.Size = New System.Drawing.Size(459, 34)
+        Me.TXTTGLAKHIR.TabIndex = 19
+        Me.TXTTGLAKHIR.Visible = False
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.Location = New System.Drawing.Point(16, 150)
+        Me.Label6.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(130, 28)
+        Me.Label6.TabIndex = 1
+        Me.Label6.Text = "Nama Barang"
+        Me.Label6.Visible = False
+        '
+        'TXTTGLAWAL
+        '
+        Me.TXTTGLAWAL.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TXTTGLAWAL.Location = New System.Drawing.Point(169, 267)
+        Me.TXTTGLAWAL.Margin = New System.Windows.Forms.Padding(2)
+        Me.TXTTGLAWAL.Name = "TXTTGLAWAL"
+        Me.TXTTGLAWAL.Size = New System.Drawing.Size(459, 34)
+        Me.TXTTGLAWAL.TabIndex = 18
+        Me.TXTTGLAWAL.Visible = False
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label10.Location = New System.Drawing.Point(16, 313)
+        Me.Label10.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(123, 28)
+        Me.Label10.TabIndex = 4
+        Me.Label10.Text = "Akhir Diskon"
+        Me.Label10.Visible = False
+        '
+        'LBSATUAN
+        '
+        Me.LBSATUAN.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBSATUAN.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBSATUAN.Location = New System.Drawing.Point(169, 187)
+        Me.LBSATUAN.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.LBSATUAN.Name = "LBSATUAN"
+        Me.LBSATUAN.Size = New System.Drawing.Size(459, 26)
+        Me.LBSATUAN.TabIndex = 14
+        Me.LBSATUAN.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.LBSATUAN.Visible = False
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label9.Location = New System.Drawing.Point(16, 270)
+        Me.Label9.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(119, 28)
+        Me.Label9.TabIndex = 3
+        Me.Label9.Text = "Awal Diskon"
+        Me.Label9.Visible = False
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.Location = New System.Drawing.Point(16, 190)
+        Me.Label7.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(72, 28)
+        Me.Label7.TabIndex = 13
+        Me.Label7.Text = "Satuan"
+        Me.Label7.Visible = False
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Location = New System.Drawing.Point(16, 106)
+        Me.Label5.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(124, 28)
+        Me.Label5.TabIndex = 0
+        Me.Label5.Text = "Kode Barang"
+        Me.Label5.Visible = False
+        '
+        'LBBARANG
+        '
+        Me.LBBARANG.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBBARANG.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBBARANG.Location = New System.Drawing.Point(169, 146)
+        Me.LBBARANG.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.LBBARANG.Name = "LBBARANG"
+        Me.LBBARANG.Size = New System.Drawing.Size(459, 26)
+        Me.LBBARANG.TabIndex = 11
+        Me.LBBARANG.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.LBBARANG.Visible = False
+        '
+        'TXTKODE
+        '
+        Me.TXTKODE.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TXTKODE.Location = New System.Drawing.Point(169, 103)
+        Me.TXTKODE.Margin = New System.Windows.Forms.Padding(2)
+        Me.TXTKODE.Name = "TXTKODE"
+        Me.TXTKODE.Size = New System.Drawing.Size(358, 34)
+        Me.TXTKODE.TabIndex = 1
+        Me.TXTKODE.Visible = False
+        '
+        'BTNCARI
+        '
+        Me.BTNCARI.BackColor = System.Drawing.Color.Navy
+        Me.BTNCARI.FlatAppearance.BorderSize = 0
+        Me.BTNCARI.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNCARI.Font = New System.Drawing.Font("Segoe UI", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNCARI.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BTNCARI.Location = New System.Drawing.Point(520, 103)
+        Me.BTNCARI.Margin = New System.Windows.Forms.Padding(2)
+        Me.BTNCARI.Name = "BTNCARI"
+        Me.BTNCARI.Size = New System.Drawing.Size(108, 34)
+        Me.BTNCARI.TabIndex = 10
+        Me.BTNCARI.Text = "Cari (F1)"
+        Me.BTNCARI.UseVisualStyleBackColor = False
+        Me.BTNCARI.Visible = False
+        '
+        'BTNSIMPAN
+        '
+        Me.BTNSIMPAN.BackColor = System.Drawing.Color.DarkGreen
+        Me.BTNSIMPAN.FlatAppearance.BorderSize = 0
+        Me.BTNSIMPAN.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNSIMPAN.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNSIMPAN.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BTNSIMPAN.Location = New System.Drawing.Point(169, 401)
+        Me.BTNSIMPAN.Margin = New System.Windows.Forms.Padding(2)
+        Me.BTNSIMPAN.Name = "BTNSIMPAN"
+        Me.BTNSIMPAN.Size = New System.Drawing.Size(189, 51)
+        Me.BTNSIMPAN.TabIndex = 5
+        Me.BTNSIMPAN.Text = "Simpan Diskon"
+        Me.BTNSIMPAN.UseVisualStyleBackColor = False
+        Me.BTNSIMPAN.Visible = False
+        '
+        'TXTMIN
+        '
+        Me.TXTMIN.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TXTMIN.Location = New System.Drawing.Point(169, 103)
+        Me.TXTMIN.Margin = New System.Windows.Forms.Padding(2)
+        Me.TXTMIN.Name = "TXTMIN"
+        Me.TXTMIN.Size = New System.Drawing.Size(459, 34)
+        Me.TXTMIN.TabIndex = 26
+        Me.TXTMIN.Visible = False
         '
         'PEWAKTU
         '
@@ -1100,14 +981,8 @@ Partial Class FR_DISKON
         Me.Text = "MENU DISKON"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.DGTAMPIL, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.ContextMenuStrip1.ResumeLayout(False)
-        Me.Panel3.ResumeLayout(False)
-        Me.PNCARI.ResumeLayout(False)
-        Me.PNCARI.PerformLayout()
-        CType(Me.DGCARI, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PNCONTENT.ResumeLayout(False)
-        Me.Panel2.ResumeLayout(False)
-        Me.Panel2.PerformLayout()
+        Me.PNCONTENT.PerformLayout()
         Me.PNTOP.ResumeLayout(False)
         Me.PNTOP.PerformLayout()
         Me.PNCONTROL.ResumeLayout(False)
@@ -1121,27 +996,10 @@ Partial Class FR_DISKON
     End Sub
 
     Friend WithEvents DGTAMPIL As DataGridView
-    Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
-    Friend WithEvents HapusToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents Panel3 As Panel
     Friend WithEvents BTNNEXT As Button
     Friend WithEvents BTNPREV As Button
     Friend WithEvents TXTCARI As TextBox
-    Friend WithEvents PNCARI As Panel
-    Friend WithEvents DGCARI As DataGridView
-    Friend WithEvents TXTCARI_BARANG As TextBox
-    Friend WithEvents LBSATUAN As Label
-    Friend WithEvents Label7 As Label
-    Friend WithEvents LBBARANG As Label
-    Friend WithEvents BTNCARI As Button
-    Friend WithEvents BTNSIMPAN As Button
-    Friend WithEvents TXTKODE As TextBox
-    Friend WithEvents Label5 As Label
-    Friend WithEvents Label6 As Label
-    Friend WithEvents Label10 As Label
     Friend WithEvents PNCONTENT As Panel
-    Friend WithEvents Panel2 As Panel
-    Friend WithEvents Label9 As Label
     Friend WithEvents PNTOP As Panel
     Friend WithEvents LBTGL As Label
     Friend WithEvents PNCONTROL As Panel
@@ -1156,20 +1014,7 @@ Partial Class FR_DISKON
     Friend WithEvents Label2 As Label
     Friend WithEvents PNLEFT As Panel
     Friend WithEvents Button1 As Button
-    Friend WithEvents TXTTGLAKHIR As DateTimePicker
-    Friend WithEvents TXTTGLAWAL As DateTimePicker
-    Friend WithEvents Label14 As Label
-    Friend WithEvents TXTDISKON As TextBox
-    Friend WithEvents Label13 As Label
     Friend WithEvents CBTAMPIL As ComboBox
-    Friend WithEvents CBJENIS As ComboBox
-    Friend WithEvents Label11 As Label
-    Friend WithEvents TXTMIN As TextBox
-    Friend WithEvents Label12 As Label
-    Friend WithEvents BTNCETAK As Button
-    Friend WithEvents TXTDISKON_RUPIAH As TextBox
-    Friend WithEvents LBHARGA As Label
-    Friend WithEvents Label16 As Label
     Friend WithEvents PNADMIN As Panel
     Friend WithEvents BTNVOUCHER_ADMIN As Button
     Friend WithEvents BTNHISTORYPENJUALAN As Button
@@ -1187,4 +1032,26 @@ Partial Class FR_DISKON
     Friend WithEvents BTNLAPORAN As Button
     Friend WithEvents BTNLABELADMIN As Button
     Friend WithEvents BTNMEMBER_ADMIN As Button
+    Friend WithEvents LBHARGA As Label
+    Friend WithEvents Label16 As Label
+    Friend WithEvents TXTDISKON_RUPIAH As TextBox
+    Friend WithEvents Label12 As Label
+    Friend WithEvents CBJENIS As ComboBox
+    Friend WithEvents Label11 As Label
+    Friend WithEvents Label14 As Label
+    Friend WithEvents TXTDISKON As TextBox
+    Friend WithEvents Label13 As Label
+    Friend WithEvents TXTMIN As TextBox
+    Friend WithEvents TXTTGLAKHIR As DateTimePicker
+    Friend WithEvents Label6 As Label
+    Friend WithEvents TXTTGLAWAL As DateTimePicker
+    Friend WithEvents Label10 As Label
+    Friend WithEvents LBSATUAN As Label
+    Friend WithEvents Label9 As Label
+    Friend WithEvents Label7 As Label
+    Friend WithEvents Label5 As Label
+    Friend WithEvents LBBARANG As Label
+    Friend WithEvents TXTKODE As TextBox
+    Friend WithEvents BTNCARI As Button
+    Friend WithEvents BTNSIMPAN As Button
 End Class

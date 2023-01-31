@@ -27,6 +27,7 @@ Partial Class FR_KELUAR_TAMPIL
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FR_KELUAR_TAMPIL))
         Me.PNTOP = New System.Windows.Forms.Panel()
+        Me.LB_TITLE = New System.Windows.Forms.Label()
         Me.PNCONTROL = New System.Windows.Forms.Panel()
         Me.BTNCLOSE = New System.Windows.Forms.Button()
         Me.PNCONTENT = New System.Windows.Forms.Panel()
@@ -57,12 +58,23 @@ Partial Class FR_KELUAR_TAMPIL
         'PNTOP
         '
         Me.PNTOP.BackColor = System.Drawing.Color.Silver
+        Me.PNTOP.Controls.Add(Me.LB_TITLE)
         Me.PNTOP.Controls.Add(Me.PNCONTROL)
         Me.PNTOP.Dock = System.Windows.Forms.DockStyle.Top
         Me.PNTOP.Location = New System.Drawing.Point(0, 0)
         Me.PNTOP.Name = "PNTOP"
         Me.PNTOP.Size = New System.Drawing.Size(1300, 40)
         Me.PNTOP.TabIndex = 21
+        '
+        'LB_TITLE
+        '
+        Me.LB_TITLE.AutoSize = True
+        Me.LB_TITLE.Location = New System.Drawing.Point(12, 10)
+        Me.LB_TITLE.Name = "LB_TITLE"
+        Me.LB_TITLE.Size = New System.Drawing.Size(75, 23)
+        Me.LB_TITLE.TabIndex = 68
+        Me.LB_TITLE.Text = "LB_TITLE"
+        Me.LB_TITLE.Visible = False
         '
         'PNCONTROL
         '
@@ -93,7 +105,7 @@ Partial Class FR_KELUAR_TAMPIL
         Me.PNCONTENT.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PNCONTENT.Location = New System.Drawing.Point(0, 40)
         Me.PNCONTENT.Name = "PNCONTENT"
-        Me.PNCONTENT.Size = New System.Drawing.Size(1300, 510)
+        Me.PNCONTENT.Size = New System.Drawing.Size(1300, 518)
         Me.PNCONTENT.TabIndex = 22
         '
         'BTNNEXT
@@ -136,17 +148,20 @@ Partial Class FR_KELUAR_TAMPIL
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DGCARI.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
+        Me.DGCARI.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
         DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ControlLight
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
         DataGridViewCellStyle1.NullValue = "-"
         DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
         DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.DGCARI.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
-        Me.DGCARI.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DGCARI.ColumnHeadersHeight = 35
+        Me.DGCARI.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
         Me.DGCARI.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.KODE, Me.BARANG, Me.SATUAN, Me.STOK, Me.OPSI1, Me.HARGA1, Me.OPSI2, Me.HARGA2, Me.OPSI3, Me.HARGA3, Me.OPSI4, Me.HARGA4, Me.OPSI5, Me.HARGA5})
+        Me.DGCARI.EnableHeadersVisualStyles = False
         Me.DGCARI.Location = New System.Drawing.Point(12, 46)
         Me.DGCARI.MultiSelect = False
         Me.DGCARI.Name = "DGCARI"
@@ -166,7 +181,7 @@ Partial Class FR_KELUAR_TAMPIL
         Me.DGCARI.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.DGCARI.RowTemplate.Height = 30
         Me.DGCARI.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DGCARI.Size = New System.Drawing.Size(1276, 452)
+        Me.DGCARI.Size = New System.Drawing.Size(1276, 460)
         Me.DGCARI.TabIndex = 65
         '
         'KODE
@@ -175,7 +190,7 @@ Partial Class FR_KELUAR_TAMPIL
         Me.KODE.MinimumWidth = 6
         Me.KODE.Name = "KODE"
         Me.KODE.ReadOnly = True
-        Me.KODE.Width = 78
+        Me.KODE.Width = 86
         '
         'BARANG
         '
@@ -183,7 +198,7 @@ Partial Class FR_KELUAR_TAMPIL
         Me.BARANG.MinimumWidth = 6
         Me.BARANG.Name = "BARANG"
         Me.BARANG.ReadOnly = True
-        Me.BARANG.Width = 144
+        Me.BARANG.Width = 158
         '
         'SATUAN
         '
@@ -191,7 +206,6 @@ Partial Class FR_KELUAR_TAMPIL
         Me.SATUAN.MinimumWidth = 6
         Me.SATUAN.Name = "SATUAN"
         Me.SATUAN.ReadOnly = True
-        Me.SATUAN.Width = 92
         '
         'STOK
         '
@@ -199,7 +213,7 @@ Partial Class FR_KELUAR_TAMPIL
         Me.STOK.MinimumWidth = 6
         Me.STOK.Name = "STOK"
         Me.STOK.ReadOnly = True
-        Me.STOK.Width = 71
+        Me.STOK.Width = 79
         '
         'OPSI1
         '
@@ -207,7 +221,7 @@ Partial Class FR_KELUAR_TAMPIL
         Me.OPSI1.MinimumWidth = 6
         Me.OPSI1.Name = "OPSI1"
         Me.OPSI1.ReadOnly = True
-        Me.OPSI1.Width = 87
+        Me.OPSI1.Width = 96
         '
         'HARGA1
         '
@@ -215,7 +229,7 @@ Partial Class FR_KELUAR_TAMPIL
         Me.HARGA1.MinimumWidth = 6
         Me.HARGA1.Name = "HARGA1"
         Me.HARGA1.ReadOnly = True
-        Me.HARGA1.Width = 99
+        Me.HARGA1.Width = 109
         '
         'OPSI2
         '
@@ -223,7 +237,7 @@ Partial Class FR_KELUAR_TAMPIL
         Me.OPSI2.MinimumWidth = 6
         Me.OPSI2.Name = "OPSI2"
         Me.OPSI2.ReadOnly = True
-        Me.OPSI2.Width = 87
+        Me.OPSI2.Width = 96
         '
         'HARGA2
         '
@@ -231,7 +245,7 @@ Partial Class FR_KELUAR_TAMPIL
         Me.HARGA2.MinimumWidth = 6
         Me.HARGA2.Name = "HARGA2"
         Me.HARGA2.ReadOnly = True
-        Me.HARGA2.Width = 99
+        Me.HARGA2.Width = 109
         '
         'OPSI3
         '
@@ -239,7 +253,7 @@ Partial Class FR_KELUAR_TAMPIL
         Me.OPSI3.MinimumWidth = 6
         Me.OPSI3.Name = "OPSI3"
         Me.OPSI3.ReadOnly = True
-        Me.OPSI3.Width = 87
+        Me.OPSI3.Width = 96
         '
         'HARGA3
         '
@@ -247,7 +261,7 @@ Partial Class FR_KELUAR_TAMPIL
         Me.HARGA3.MinimumWidth = 6
         Me.HARGA3.Name = "HARGA3"
         Me.HARGA3.ReadOnly = True
-        Me.HARGA3.Width = 99
+        Me.HARGA3.Width = 109
         '
         'OPSI4
         '
@@ -255,7 +269,7 @@ Partial Class FR_KELUAR_TAMPIL
         Me.OPSI4.MinimumWidth = 6
         Me.OPSI4.Name = "OPSI4"
         Me.OPSI4.ReadOnly = True
-        Me.OPSI4.Width = 87
+        Me.OPSI4.Width = 96
         '
         'HARGA4
         '
@@ -263,7 +277,7 @@ Partial Class FR_KELUAR_TAMPIL
         Me.HARGA4.MinimumWidth = 6
         Me.HARGA4.Name = "HARGA4"
         Me.HARGA4.ReadOnly = True
-        Me.HARGA4.Width = 99
+        Me.HARGA4.Width = 109
         '
         'OPSI5
         '
@@ -271,7 +285,7 @@ Partial Class FR_KELUAR_TAMPIL
         Me.OPSI5.MinimumWidth = 6
         Me.OPSI5.Name = "OPSI5"
         Me.OPSI5.ReadOnly = True
-        Me.OPSI5.Width = 87
+        Me.OPSI5.Width = 96
         '
         'HARGA5
         '
@@ -279,23 +293,23 @@ Partial Class FR_KELUAR_TAMPIL
         Me.HARGA5.MinimumWidth = 6
         Me.HARGA5.Name = "HARGA5"
         Me.HARGA5.ReadOnly = True
-        Me.HARGA5.Width = 99
+        Me.HARGA5.Width = 109
         '
         'TXTCARI
         '
         Me.TXTCARI.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TXTCARI.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TXTCARI.Font = New System.Drawing.Font("Segoe UI", 15.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TXTCARI.Location = New System.Drawing.Point(12, 6)
         Me.TXTCARI.Name = "TXTCARI"
-        Me.TXTCARI.Size = New System.Drawing.Size(1164, 34)
+        Me.TXTCARI.Size = New System.Drawing.Size(1168, 41)
         Me.TXTCARI.TabIndex = 64
         '
         'FR_KELUAR_TAMPIL
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 23.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1300, 550)
+        Me.ClientSize = New System.Drawing.Size(1300, 558)
         Me.Controls.Add(Me.PNCONTENT)
         Me.Controls.Add(Me.PNTOP)
         Me.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -306,6 +320,7 @@ Partial Class FR_KELUAR_TAMPIL
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "MENU BARANG KELUAR"
         Me.PNTOP.ResumeLayout(False)
+        Me.PNTOP.PerformLayout()
         Me.PNCONTROL.ResumeLayout(False)
         Me.PNCONTENT.ResumeLayout(False)
         Me.PNCONTENT.PerformLayout()
@@ -336,4 +351,5 @@ Partial Class FR_KELUAR_TAMPIL
     Friend WithEvents HARGA4 As DataGridViewTextBoxColumn
     Friend WithEvents OPSI5 As DataGridViewTextBoxColumn
     Friend WithEvents HARGA5 As DataGridViewTextBoxColumn
+    Friend WithEvents LB_TITLE As Label
 End Class

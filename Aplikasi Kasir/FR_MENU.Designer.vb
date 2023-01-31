@@ -820,11 +820,11 @@ Partial Class FR_MENU
         Me.GroupBox1.Controls.Add(Me.DGSTOK)
         Me.GroupBox1.Controls.Add(Me.TXTCARISTOK)
         Me.GroupBox1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox1.Location = New System.Drawing.Point(10, 397)
+        Me.GroupBox1.Location = New System.Drawing.Point(10, 387)
         Me.GroupBox1.Margin = New System.Windows.Forms.Padding(2)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Padding = New System.Windows.Forms.Padding(2)
-        Me.GroupBox1.Size = New System.Drawing.Size(1074, 319)
+        Me.GroupBox1.Size = New System.Drawing.Size(1074, 329)
         Me.GroupBox1.TabIndex = 19
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Stok Barang Tersedia"
@@ -870,8 +870,9 @@ Partial Class FR_MENU
         Me.DGSTOK.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.DGSTOK.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
         DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ControlLight
         DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
         DataGridViewCellStyle1.NullValue = "-"
@@ -879,7 +880,9 @@ Partial Class FR_MENU
         DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.DGSTOK.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
-        Me.DGSTOK.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DGSTOK.ColumnHeadersHeight = 35
+        Me.DGSTOK.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
+        Me.DGSTOK.EnableHeadersVisualStyles = False
         Me.DGSTOK.Location = New System.Drawing.Point(22, 92)
         Me.DGSTOK.Margin = New System.Windows.Forms.Padding(2)
         Me.DGSTOK.MultiSelect = False
@@ -903,7 +906,7 @@ Partial Class FR_MENU
         Me.DGSTOK.ShowCellErrors = False
         Me.DGSTOK.ShowEditingIcon = False
         Me.DGSTOK.ShowRowErrors = False
-        Me.DGSTOK.Size = New System.Drawing.Size(1046, 221)
+        Me.DGSTOK.Size = New System.Drawing.Size(1046, 231)
         Me.DGSTOK.TabIndex = 67
         '
         'TXTCARISTOK

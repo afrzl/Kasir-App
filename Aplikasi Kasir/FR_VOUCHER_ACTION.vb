@@ -11,8 +11,8 @@ Public Class FR_VOUCHER_ACTION
     Dim STR As String
 
     Private Sub BTNCLOSE_Click(sender As Object, e As EventArgs) Handles BTNCLOSE.Click
-        Me.Close()
         FR_VOUCHER.Enabled = True
+        Me.Close()
     End Sub
 
     Private Sub FR_VOUCHER_ACTION_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -104,6 +104,9 @@ Public Class FR_VOUCHER_ACTION
         If CB_DATA.SelectedIndex < 1 Or TXTID_MEMBER.Text = "" Then
             MsgBox("Data tidak lengkap!")
             CB_DATA.Select()
+        ElseIf LBL_NAMA_MEMBER.Text.Remove(0, 2) = "" Then
+            MsgBox("Member tidak ditemukan!")
+            TXTID_MEMBER.Select()
         Else
             If LBL_POINT_MEMBER.Text.Remove(0, 2) - LBL_HARGA.Text.Remove(0, 2) < 0 Then
                 MsgBox("Point member tidak cukup!")
@@ -154,11 +157,11 @@ Public Class FR_VOUCHER_ACTION
 
                 MsgBox("Transaksi berhasil dilakukan.")
                 PRINT_NOTA()
-                Me.Close()
                 With FR_VOUCHER
                     .Enabled = True
                     .TAMPIL()
                 End With
+                Me.Close()
             End If
         End If
     End Sub

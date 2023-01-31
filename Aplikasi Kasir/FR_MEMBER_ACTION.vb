@@ -75,7 +75,7 @@ Public Class FR_MEMBER_ACTION
                 Else
                     RD.Close()
 
-                    STR = "INSERT INTO tbl_member VALUES (" &
+                    STR = "INSERT INTO tbl_member (Id, Nama, Alamat, No_hp, JK, Points, Created_at) VALUES (" &
                             "'" & TXTID.Text & "'," &
                             "'" & TXTNAMA.Text & "'," &
                             "'" & TXTALAMAT.Text & "'," &

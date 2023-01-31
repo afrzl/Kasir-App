@@ -171,11 +171,17 @@ Public Class FR_CETAK_LABEL
         PEWAKTU.Enabled = True
         LBLUSER.Text = NAMA_LOGIN
         TAMPIL_BARANG()
+
+        DGBARANG.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DGCETAK.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        For i = 0 To DGCETAK.Columns.Count - 1
+            DGCETAK.Columns.Item(i).SortMode = DataGridViewColumnSortMode.NotSortable
+        Next i
     End Sub
 
     Dim TBL_DATA As New DataTable
     Dim START_RECORD As Integer = 0
-    Dim TAMPIL_RECORD As Integer = 12
+    Dim TAMPIL_RECORD As Integer = 10
     Sub TAMPIL_BARANG()
         Dim STR As String = "SELECT RTRIM(Kode) AS 'Kode Barang'," &
             " RTRIM(Barang) AS 'Nama Barang'," &

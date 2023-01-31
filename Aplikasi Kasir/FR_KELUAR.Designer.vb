@@ -65,6 +65,8 @@ Partial Class FR_KELUAR
         Me.PNBAWAH = New System.Windows.Forms.Panel()
         Me.BTN_PENDING = New System.Windows.Forms.Button()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.TXTVOUCHER = New System.Windows.Forms.TextBox()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.TXTTOTALHARGA = New System.Windows.Forms.TextBox()
         Me.TXTDISKON_RUPIAH = New System.Windows.Forms.TextBox()
@@ -88,8 +90,6 @@ Partial Class FR_KELUAR
         Me.TOTAL = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.PEWAKTU = New System.Windows.Forms.Timer(Me.components)
         Me.PRINTNOTA = New System.Drawing.Printing.PrintDocument()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.TXTVOUCHER = New System.Windows.Forms.TextBox()
         Me.PNATAS.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
@@ -572,6 +572,26 @@ Partial Class FR_KELUAR
         Me.GroupBox6.TabIndex = 1
         Me.GroupBox6.TabStop = False
         '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.Location = New System.Drawing.Point(36, 18)
+        Me.Label7.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(83, 28)
+        Me.Label7.TabIndex = 20
+        Me.Label7.Text = "Voucher"
+        '
+        'TXTVOUCHER
+        '
+        Me.TXTVOUCHER.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TXTVOUCHER.Location = New System.Drawing.Point(175, 15)
+        Me.TXTVOUCHER.Margin = New System.Windows.Forms.Padding(2)
+        Me.TXTVOUCHER.Name = "TXTVOUCHER"
+        Me.TXTVOUCHER.Size = New System.Drawing.Size(262, 34)
+        Me.TXTVOUCHER.TabIndex = 19
+        '
         'Label18
         '
         Me.Label18.AutoSize = True
@@ -732,15 +752,17 @@ Partial Class FR_KELUAR
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DGTAMPIL.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
+        Me.DGTAMPIL.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
         DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ControlLight
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
         DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
         DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.DGTAMPIL.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
-        Me.DGTAMPIL.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DGTAMPIL.ColumnHeadersHeight = 40
+        Me.DGTAMPIL.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
         Me.DGTAMPIL.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.KODE, Me.BARANG, Me.SATUAN, Me.HARGA, Me.QTY, Me.Diskon, Me.TOTAL})
         DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
@@ -750,16 +772,18 @@ Partial Class FR_KELUAR
         DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.DGTAMPIL.DefaultCellStyle = DataGridViewCellStyle2
+        Me.DGTAMPIL.EnableHeadersVisualStyles = False
         Me.DGTAMPIL.Location = New System.Drawing.Point(0, 326)
         Me.DGTAMPIL.Margin = New System.Windows.Forms.Padding(2)
         Me.DGTAMPIL.MultiSelect = False
         Me.DGTAMPIL.Name = "DGTAMPIL"
         Me.DGTAMPIL.ReadOnly = True
+        Me.DGTAMPIL.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
         Me.DGTAMPIL.RowHeadersVisible = False
         Me.DGTAMPIL.RowHeadersWidth = 51
         DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         Me.DGTAMPIL.RowsDefaultCellStyle = DataGridViewCellStyle3
-        Me.DGTAMPIL.RowTemplate.Height = 30
+        Me.DGTAMPIL.RowTemplate.Height = 35
         Me.DGTAMPIL.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DGTAMPIL.Size = New System.Drawing.Size(1366, 237)
         Me.DGTAMPIL.TabIndex = 2
@@ -770,7 +794,7 @@ Partial Class FR_KELUAR
         Me.KODE.MinimumWidth = 6
         Me.KODE.Name = "KODE"
         Me.KODE.ReadOnly = True
-        Me.KODE.Width = 85
+        Me.KODE.Width = 93
         '
         'BARANG
         '
@@ -810,7 +834,7 @@ Partial Class FR_KELUAR
         Me.Diskon.MinimumWidth = 6
         Me.Diskon.Name = "Diskon"
         Me.Diskon.ReadOnly = True
-        Me.Diskon.Width = 104
+        Me.Diskon.Width = 115
         '
         'TOTAL
         '
@@ -825,26 +849,6 @@ Partial Class FR_KELUAR
         '
         'PRINTNOTA
         '
-        '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(36, 18)
-        Me.Label7.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(83, 28)
-        Me.Label7.TabIndex = 20
-        Me.Label7.Text = "Voucher"
-        '
-        'TXTVOUCHER
-        '
-        Me.TXTVOUCHER.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TXTVOUCHER.Location = New System.Drawing.Point(175, 15)
-        Me.TXTVOUCHER.Margin = New System.Windows.Forms.Padding(2)
-        Me.TXTVOUCHER.Name = "TXTVOUCHER"
-        Me.TXTVOUCHER.Size = New System.Drawing.Size(262, 34)
-        Me.TXTVOUCHER.TabIndex = 19
         '
         'FR_KELUAR
         '

@@ -2,7 +2,13 @@
 
 Public Class FR_KELUAR_TAMPIL
     Private Sub BTNCLOSE_Click(sender As Object, e As EventArgs) Handles BTNCLOSE.Click
-        FR_KELUAR.Enabled = True
+        If LB_TITLE.Text = "FR_KELUAR" Then
+            FR_KELUAR.Enabled = True
+        ElseIf LB_TITLE.Text = "FR_MASUK" Then
+            FR_MASUK.Enabled = True
+        ElseIf LB_TITLE.Text = "FR_DISKON" Then
+            FR_DISKON.Enabled = True
+        End If
         Me.Close()
     End Sub
 
@@ -113,46 +119,31 @@ Public Class FR_KELUAR_TAMPIL
         DGCARI.Columns(11).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         DGCARI.Columns(12).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
 
-        For Each EROW As DataGridViewRow In DGCARI.Rows
-            Dim KODE_PRODUK As String = EROW.Cells("Kode").Value
-            For Each N As DataGridViewRow In FR_KELUAR.DGTAMPIL.Rows
-                If N.Cells("Kode").Value = KODE_PRODUK Then
-                    EROW.Cells("Stok").Value -= N.Cells("QTY").Value
-                    Exit For
-                End If
+        DGCARI.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        For i = 0 To DGCARI.Columns.Count - 1
+            DGCARI.Columns.Item(i).SortMode = DataGridViewColumnSortMode.NotSortable
+        Next i
+
+        If LB_TITLE.Text = "FR_KELUAR" Then
+            For Each EROW As DataGridViewRow In DGCARI.Rows
+                Dim KODE_PRODUK As String = EROW.Cells("Kode").Value
+                For Each N As DataGridViewRow In FR_KELUAR.DGTAMPIL.Rows
+                    If N.Cells("Kode").Value = KODE_PRODUK Then
+                        EROW.Cells("Stok").Value -= N.Cells("QTY").Value
+                        Exit For
+                    End If
+                Next
             Next
-        Next
+        End If
 
         BTNPREV.Enabled = True
         BTNNEXT.Enabled = True
 
-        'Dim TOTAL_RECORD As Integer = 0
-        'Dim TBL_DATA As New DataTable
-        'DA = New SqlDataAdapter(STR, CONN)
-        'DA.Fill(TBL_DATA)
-
-        'STR = "SELECT COUNT(*) FROM tbl_barang WHERE Barang Like '%" & TXTCARI.Text & "%'" &
-        '            " OR Kode = '" & TXTCARI.Text & "'"
-        'Dim CMD As New SqlCommand(STR, CONN)
-
-        'TOTAL_RECORD = Convert.ToUInt64(CMD.ExecuteScalar())
-
-        'If TOTAL_RECORD = 0 Then
-        '    BTNPREV.Enabled = False
-        '    BTNNEXT.Enabled = False
         If START_RECORD = 0 Then
             BTNPREV.Enabled = False
         Else
             BTNPREV.Enabled = True
         End If
-        'ElseIf TOTAL_RECORD <= START_RECORD Then
-        '    BTNNEXT.Enabled = False
-        'ElseIf TOTAL_RECORD - START_RECORD <= TAMPIL_RECORD Then
-        '    BTNNEXT.Enabled = False
-        'Else
-        '    BTNPREV.Enabled = True
-        '    BTNNEXT.Enabled = True
-        'End If
     End Sub
     Private Sub BTNNEXT_Click(sender As Object, e As EventArgs) Handles BTNNEXT.Click
         START_RECORD = START_RECORD + TAMPIL_RECORD
@@ -170,14 +161,6 @@ Public Class FR_KELUAR_TAMPIL
         TXTCARI.Select()
     End Sub
 
-    Private Sub DGCARI_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGCARI.CellDoubleClick
-        On Error Resume Next
-        FR_KELUAR.TXTKODE.Text = DGCARI.Item(0, e.RowIndex).Value
-        FR_KELUAR.TXTKODE.Select()
-        FR_KELUAR.Enabled = True
-        Me.Close()
-    End Sub
-
     Private Sub TXTCARI_TextChanged(sender As Object, e As EventArgs) Handles TXTCARI.TextChanged
         START_RECORD = 0
         TAMPIL()
@@ -187,9 +170,25 @@ Public Class FR_KELUAR_TAMPIL
         If (e.KeyCode = Keys.Enter) Then
             e.Handled = True
             DGCARI.CurrentCell = DGCARI.Rows(DGCARI.CurrentRow.Index).Cells(0)
-            FR_KELUAR.TXTKODE.Text = DGCARI.SelectedCells(0).Value
-            FR_KELUAR.TXTKODE.Select()
-            FR_KELUAR.Enabled = True
+            If LB_TITLE.Text = "FR_KELUAR" Then
+                With FR_KELUAR
+                    .TXTKODE.Text = DGCARI.SelectedCells(0).Value
+                    .TXTKODE.Select()
+                    .Enabled = True
+                End With
+            ElseIf LB_TITLE.Text = "FR_MASUK" Then
+                With FR_MASUK
+                    .TXTKODE.Text = DGCARI.SelectedCells(0).Value
+                    .TXTKODE.Select()
+                    .Enabled = True
+                End With
+            ElseIf LB_TITLE.Text = "FR_DISKON" Then
+                With FR_DISKON
+                    .TXTKODE.Text = DGCARI.SelectedCells(0).Value
+                    .TXTKODE.Select()
+                    .Enabled = True
+                End With
+            End If
             Me.Close()
         ElseIf (e.KeyCode = Keys.F1) Then
             TXTCARI.Select()
@@ -210,7 +209,13 @@ Public Class FR_KELUAR_TAMPIL
     Private Sub FR_KELUAR_TAMPIL_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
         Select Case e.KeyCode
             Case Keys.F1
-                FR_KELUAR.Enabled = True
+                If LB_TITLE.Text = "FR_KELUAR" Then
+                    FR_KELUAR.Enabled = True
+                ElseIf LB_TITLE.Text = "FR_MASUK" Then
+                    FR_MASUK.Enabled = True
+                ElseIf LB_TITLE.Text = "FR_DISKON" Then
+                    FR_DISKON.Enabled = True
+                End If
                 Me.Close()
         End Select
     End Sub
@@ -218,16 +223,40 @@ Public Class FR_KELUAR_TAMPIL
     Private Sub TXTCARI_KeyDown(sender As Object, e As KeyEventArgs) Handles TXTCARI.KeyDown
         Select Case e.KeyCode
             Case Keys.F1
-                FR_KELUAR.Enabled = True
+                If LB_TITLE.Text = "FR_KELUAR" Then
+                    FR_KELUAR.Enabled = True
+                ElseIf LB_TITLE.Text = "FR_MASUK" Then
+                    FR_MASUK.Enabled = True
+                ElseIf LB_TITLE.Text = "FR_DISKON" Then
+                    FR_DISKON.Enabled = True
+                End If
                 Me.Close()
         End Select
     End Sub
 
     Private Sub DGCARI_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGCARI.CellClick
         On Error Resume Next
-        FR_KELUAR.TXTKODE.Text = DGCARI.Item(0, e.RowIndex).Value
-        FR_KELUAR.TXTKODE.Select()
-        FR_KELUAR.Enabled = True
-        Me.Close()
+        If e.RowIndex >= 0 Then
+            If LB_TITLE.Text = "FR_KELUAR" Then
+                With FR_KELUAR
+                    .TXTKODE.Text = DGCARI.Item(0, e.RowIndex).Value
+                    .TXTKODE.Select()
+                    .Enabled = True
+                End With
+            ElseIf LB_TITLE.Text = "FR_MASUK" Then
+                With FR_MASUK
+                    .TXTKODE.Text = DGCARI.Item(0, e.RowIndex).Value
+                    .TXTKODE.Select()
+                    .Enabled = True
+                End With
+            ElseIf LB_TITLE.Text = "FR_DISKON" Then
+                With FR_DISKON
+                    .TXTKODE.Text = DGCARI.Item(0, e.RowIndex).Value
+                    .TXTKODE.Select()
+                    .Enabled = True
+                End With
+            End If
+            Me.Close()
+        End If
     End Sub
 End Class

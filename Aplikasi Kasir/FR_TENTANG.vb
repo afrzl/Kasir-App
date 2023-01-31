@@ -12,7 +12,7 @@ Public Class FR_TENTANG
         LBTGL.Text = Format(Date.Now, "dd MMMM yyyy HH:mm:ss")
     End Sub
 
-    Private Sub FR_TENTANG_Load(sender As Object, e As EventArgs) Handles Me.Load
+    Private Sub FR_TENTANG_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Label25.Text = VERSI
 
         Select Case ROLE
@@ -94,6 +94,7 @@ Public Class FR_TENTANG
         LBALAMATTOKO.Text = ALAMAT_TOKO
         LBNOTOKO.Text = NO_TOKO
         LBPRINTER_NOTA.Text = PRINTER_NOTA
+        LB_POINTMEMBER.Text = POINT_MEMBER
         If CUSTOMER_DISPLAY Then
             LB_CUSTOMER_DISPLAY.Text = "Ya"
         Else
@@ -105,6 +106,7 @@ Public Class FR_TENTANG
         TXTNOTOKO.Text = LBNOTOKO.Text
         TXTPRINTER_NOTA.Text = LBPRINTER_NOTA.Text
         TXT_CUSTOMER_DISPLAY.Text = LB_CUSTOMER_DISPLAY.Text
+        TXT_POINTMEMBER.Text = LB_POINTMEMBER.Text
     End Sub
 
     Sub TAMPIL_TOKO()
@@ -118,6 +120,7 @@ Public Class FR_TENTANG
         TXTALAMATTOKO.Text = LBALAMATTOKO.Text
         TXTNOTOKO.Text = LBNOTOKO.Text
         TXT_CUSTOMER_DISPLAY.Text = LB_CUSTOMER_DISPLAY.Text
+        TXT_POINTMEMBER.Text = LBNO.Text
     End Sub
 
     Private Sub BTNSIMPAN_Click(sender As Object, e As EventArgs) Handles BTNSIMPAN.Click
@@ -242,11 +245,13 @@ Public Class FR_TENTANG
         LBALAMATTOKO.Visible = True
         LBNOTOKO.Visible = True
         LB_CUSTOMER_DISPLAY.Visible = True
+        LB_POINTMEMBER.Visible = True
 
         TXTNAMATOKO.Visible = False
         TXTALAMATTOKO.Visible = False
         TXTNOTOKO.Visible = False
         TXT_CUSTOMER_DISPLAY.Visible = False
+        TXT_POINTMEMBER.Visible = False
 
         BTNUBAHTOKO.Visible = True
         BTNSIMPANTOKO.Visible = False
@@ -265,11 +270,13 @@ Public Class FR_TENTANG
         LBALAMATTOKO.Visible = False
         LBNOTOKO.Visible = False
         LB_CUSTOMER_DISPLAY.Visible = False
+        LB_POINTMEMBER.Visible = False
 
         TXTNAMATOKO.Visible = True
         TXTALAMATTOKO.Visible = True
         TXTNOTOKO.Visible = True
         TXT_CUSTOMER_DISPLAY.Visible = True
+        TXT_POINTMEMBER.Visible = True
 
         BTNUBAHTOKO.Visible = False
         BTNSIMPANTOKO.Visible = True
@@ -393,7 +400,7 @@ Public Class FR_TENTANG
         If TXTNOTOKO.Text <> "" Then
             NOTOKO = 1
         End If
-        If TXTNAMATOKO.Text = "" Or TXTALAMATTOKO.Text = "" Or NOTOKO = 0 Then
+        If TXTNAMATOKO.Text = "" Or TXTALAMATTOKO.Text = "" Or NOTOKO = 0 Or TXT_CUSTOMER_DISPLAY.Text = "" Or TXT_POINTMEMBER.Text = "" Or TXTPRINTER_NOTA.Text = "" Then
             MsgBox("Data tidak lengkap!")
         Else
             If MsgBox("Apakah anda yakin akan mengubah data toko?", vbYesNo) = vbYes Then
@@ -401,7 +408,7 @@ Public Class FR_TENTANG
                 If TXT_CUSTOMER_DISPLAY.Text = "Ya" Then
                     CUSTOMERDISPLAY = 1
                 End If
-                MASUK_REGISTRY(TXTNAMATOKO.Text, TXTALAMATTOKO.Text, TXTNOTOKO.Text, TXTPRINTER_NOTA.Text, IMGBYTE, CUSTOMERDISPLAY)
+                MASUK_REGISTRY(TXTNAMATOKO.Text, TXTALAMATTOKO.Text, TXTNOTOKO.Text, TXTPRINTER_NOTA.Text, IMGBYTE, CUSTOMERDISPLAY, TXT_POINTMEMBER.Text)
                 KONDISI_AWAL_TOKO()
                 TAMPIL()
             End If
@@ -428,7 +435,7 @@ Public Class FR_TENTANG
 
     Private Sub TXTNOTOKO_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTNOTOKO.KeyPress
         If e.KeyChar = Chr(13) Then
-            BTNSIMPANTOKO.Select()
+            TXTPRINTER_NOTA.Select()
         End If
 
         If Not ((e.KeyChar >= "0" And e.KeyChar <= "9") Or e.KeyChar = vbBack) Then
@@ -592,5 +599,25 @@ Public Class FR_TENTANG
             .Show()
             .CB_ACTION.Select()
         End With
+    End Sub
+
+    Private Sub TXT_POINTMEMBER_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXT_POINTMEMBER.KeyPress
+        If Not ((e.KeyChar >= "0" And e.KeyChar <= "9") Or e.KeyChar = vbBack Or e.KeyChar = ",") Then
+            e.Handled = True
+        End If
+
+        If e.KeyChar = Chr(13) Then
+            BTNSIMPANTOKO.Select()
+        End If
+    End Sub
+
+    Private Sub TXT_POINTMEMBER_Validated(sender As Object, e As EventArgs) Handles TXT_POINTMEMBER.Validated
+        If TXT_POINTMEMBER.Text > 100 Or TXT_POINTMEMBER.Text < 0 Then
+            MsgBox("Point member harus berada dalam range 0 - 100")
+        End If
+    End Sub
+
+    Private Sub TXTPRINTER_NOTA_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTPRINTER_NOTA.KeyPress
+
     End Sub
 End Class

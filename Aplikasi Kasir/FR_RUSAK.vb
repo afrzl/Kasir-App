@@ -31,6 +31,7 @@ Public Class FR_RUSAK
     End Sub
 
     Sub TAMPIL_EXPIRED()
+        DGEXPIRED.Columns.Clear()
         Dim TANGGAL_HARI_INI As String = Format(Date.Now, "yyyy-MM-dd")
 
         Dim STR As String = "SELECT tbl_transaksi_child.Id," &
@@ -64,40 +65,69 @@ Public Class FR_RUSAK
 
         DGEXPIRED.Columns(6).DefaultCellStyle.Format = "##0.##"
         DGEXPIRED.Columns(6).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+        Dim Column_masuk = New DataGridViewButtonColumn
+        With Column_masuk
+            .Text = "Edit"
+            .HeaderText = "Edit"
+            .UseColumnTextForButtonValue = True
+            .FlatStyle = FlatStyle.Flat
+            .DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            .CellTemplate.Style.BackColor = Color.DarkGreen
+            .CellTemplate.Style.ForeColor = Color.WhiteSmoke
+            .Width = 100
+        End With
+        DGEXPIRED.Columns.Add(Column_masuk)
+
+        Dim Column_fr_masuk = New DataGridViewButtonColumn
+        With Column_fr_masuk
+            .Text = "History"
+            .HeaderText = "History"
+            .UseColumnTextForButtonValue = True
+            .FlatStyle = FlatStyle.Flat
+            .DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            .CellTemplate.Style.BackColor = Color.Crimson
+            .CellTemplate.Style.ForeColor = Color.WhiteSmoke
+            .Width = 100
+        End With
+        DGEXPIRED.Columns.Add(Column_fr_masuk)
+
+        DGEXPIRED.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
     End Sub
 
     Sub TAMPIL()
+        DGTAMPIL.Columns.Clear()
         Dim STR As String
         Select Case ROLE
             Case 1
                 STR = "SELECT Id_awal, " &
                     " RTRIM(tbl_transaksi_child.Id_trans) As 'ID Transaksi'," &
-            " RTRIM(tbl_transaksi_child.Kode) AS 'Kode Barang'," &
-            " RTRIM((SELECT Barang FROM tbl_barang WHERE RTRIM(tbl_barang.Kode) = RTRIM(tbl_transaksi_child.Kode))) AS 'Nama Barang'," &
-            " RTRIM((SELECT Nama FROM tbl_karyawan WHERE RTRIM(tbl_karyawan.Id) = RTRIM(tbl_transaksi_parent.Id_kasir))) AS 'Kasir'," &
-            " tbl_transaksi_parent.Tgl AS 'Tanggal'," &
-            " RTRIM(tbl_transaksi_parent.Person) AS 'Supplier'," &
-            " tbl_transaksi_child.Harga_beli as 'Rugi'," &
-            " tbl_transaksi_child.Jumlah AS 'QTY'" &
-            " FROM tbl_transaksi_child " &
-            " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_parent.Id_trans = tbl_transaksi_child.Id_trans" &
-            " WHERE LEFT(tbl_transaksi_child.Id_trans, 1) = 'C' AND" &
-            " tbl_transaksi_child.Id_trans LIKE '%" & TXTCARI.Text & "%'"
+                    " RTRIM(tbl_transaksi_child.Kode) AS 'Kode Barang'," &
+                    " RTRIM((SELECT Barang FROM tbl_barang WHERE RTRIM(tbl_barang.Kode) = RTRIM(tbl_transaksi_child.Kode))) AS 'Nama Barang'," &
+                    " RTRIM((SELECT Nama FROM tbl_karyawan WHERE RTRIM(tbl_karyawan.Id) = RTRIM(tbl_transaksi_parent.Id_kasir))) AS 'Kasir'," &
+                    " tbl_transaksi_parent.Tgl AS 'Tanggal'," &
+                    " RTRIM(tbl_transaksi_parent.Person) AS 'Supplier'," &
+                    " tbl_transaksi_child.Harga_beli as 'Rugi'," &
+                    " tbl_transaksi_child.Jumlah AS 'QTY'" &
+                    " FROM tbl_transaksi_child " &
+                    " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_parent.Id_trans = tbl_transaksi_child.Id_trans" &
+                    " WHERE LEFT(tbl_transaksi_child.Id_trans, 1) = 'C' AND" &
+                    " tbl_transaksi_child.Id_trans LIKE '%" & TXTCARI.Text & "%'"
             Case 2
                 STR = "SELECT Id_awal, " &
                     " RTRIM(tbl_transaksi_child.Id_trans) as 'ID Transaksi'," &
-            " RTRIM(tbl_transaksi_child.Kode) AS 'Kode Barang'," &
-            " RTRIM((SELECT Barang FROM tbl_barang WHERE RTRIM(tbl_barang.Kode) = RTRIM(tbl_transaksi_child.Kode))) AS 'Nama Barang'," &
-            " RTRIM((SELECT Nama FROM tbl_karyawan WHERE RTRIM(tbl_karyawan.Id) = RTRIM(tbl_transaksi_parent.Id_kasir))) AS 'Kasir'," &
-            " tbl_transaksi_parent.Tgl AS 'Tanggal'," &
-            " RTRIM(tbl_transaksi_parent.Person) AS 'Supplier'," &
-            " tbl_transaksi_child.Harga_beli as 'Rugi'," &
-            " tbl_transaksi_child.Jumlah AS 'QTY'" &
-            " FROM tbl_transaksi_child " &
-            " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_parent.Id_trans = tbl_transaksi_child.Id_trans" &
-            " WHERE LEFT(tbl_transaksi_child.Id_trans, 1) = 'C'" &
-            " AND tbl_transaksi_parent.Id_kasir = '" & My.Settings.ID_ACCOUNT & "'" &
-            " AND tbl_transaksi_child.Id_trans LIKE '%" & TXTCARI.Text & "%'"
+                    " RTRIM(tbl_transaksi_child.Kode) AS 'Kode Barang'," &
+                    " RTRIM((SELECT Barang FROM tbl_barang WHERE RTRIM(tbl_barang.Kode) = RTRIM(tbl_transaksi_child.Kode))) AS 'Nama Barang'," &
+                    " RTRIM((SELECT Nama FROM tbl_karyawan WHERE RTRIM(tbl_karyawan.Id) = RTRIM(tbl_transaksi_parent.Id_kasir))) AS 'Kasir'," &
+                    " tbl_transaksi_parent.Tgl AS 'Tanggal'," &
+                    " RTRIM(tbl_transaksi_parent.Person) AS 'Supplier'," &
+                    " tbl_transaksi_child.Harga_beli as 'Rugi'," &
+                    " tbl_transaksi_child.Jumlah AS 'QTY'" &
+                    " FROM tbl_transaksi_child " &
+                    " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_parent.Id_trans = tbl_transaksi_child.Id_trans" &
+                    " WHERE LEFT(tbl_transaksi_child.Id_trans, 1) = 'C'" &
+                    " AND tbl_transaksi_parent.Id_kasir = '" & My.Settings.ID_ACCOUNT & "'" &
+                    " AND tbl_transaksi_child.Id_trans LIKE '%" & TXTCARI.Text & "%'"
         End Select
 
         Dim DA As SqlDataAdapter
@@ -107,8 +137,9 @@ Public Class FR_RUSAK
         DGTAMPIL.DataSource = TBL
 
         DGTAMPIL.Columns(0).Visible = False
+        DGTAMPIL.Columns(2).Visible = False
+
         DGTAMPIL.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-        DGTAMPIL.Columns(2).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
         DGTAMPIL.Columns(3).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
         DGTAMPIL.Columns(4).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
         DGTAMPIL.Columns(5).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
@@ -120,51 +151,35 @@ Public Class FR_RUSAK
         DGTAMPIL.Columns(8).DefaultCellStyle.Format = "##0.##"
         DGTAMPIL.Columns(7).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         DGTAMPIL.Columns(8).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+        Dim Column_delete = New DataGridViewButtonColumn
+        With Column_delete
+            .Text = "Delete"
+            .HeaderText = "Delete"
+            .UseColumnTextForButtonValue = True
+            .FlatStyle = FlatStyle.Flat
+            .DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            .CellTemplate.Style.BackColor = Color.Crimson
+            .CellTemplate.Style.ForeColor = Color.WhiteSmoke
+            .Width = 100
+        End With
+        DGTAMPIL.Columns.Add(Column_delete)
+
+        DGTAMPIL.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
     End Sub
 
     Sub TAMPIL_PNCARI()
-        If PNCARI.Visible = False Then
-            PNCARI.Visible = True
-            BTNCARI.Text = "Tutup (F1)"
-            TXTCARI_TRANS.Clear()
-            DGCARI.DataSource = Nothing
-            TXTCARI_TRANS.Select()
-            CARI_TRANSAKSI()
-        Else
-            BTNCARI.Text = "Cari (F1)"
-            PNCARI.Visible = False
-            DGCARI.DataSource = Nothing
-            TXTID.Select()
-        End If
-    End Sub
-
-    Sub CARI_TRANSAKSI()
-        Dim STR As String = "SELECT RTRIM(Id_trans) AS 'ID Transaksi'," &
-            " Tgl AS 'Tanggal Transaksi'" &
-            " FROM tbl_transaksi_parent WHERE LEFT(Id_trans, 1) = 'M'" &
-            " AND Id_trans Like '%" & TXTCARI_TRANS.Text & "%'" &
-            " AND (SELECT COALESCE(SUM(Stok), 0) FROM tbl_transaksi_child WHERE tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans) > 0" &
-            " ORDER BY Tgl DESC"
-        Dim DA As SqlDataAdapter
-        DA = New SqlDataAdapter(STR, CONN)
-        Dim TBL As New DataTable
-        DA.Fill(TBL)
-        DGCARI.DataSource = TBL
-        DGCARI.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-        DGCARI.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+        Me.Enabled = False
+        With FR_RETURN_LIST
+            .Show()
+            .LB_TITLE.Text = "FR_RUSAK"
+            .TAMPIL()
+            .TXTCARI_TRANS.Select()
+        End With
     End Sub
 
     Private Sub BTNCARI_Click(sender As Object, e As EventArgs) Handles BTNCARI.Click
         TAMPIL_PNCARI()
-    End Sub
-
-    Private Sub DGCARI_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGCARI.CellDoubleClick
-        On Error Resume Next
-        TXTID.Select()
-        TXTID.Text = DGCARI.Item(0, e.RowIndex).Value
-        BTNCARI.Text = "Cari (F1)"
-        PNCARI.Visible = False
-        DGCARI.DataSource = Nothing
     End Sub
 
     Sub DATA_TRANSAKSI()
@@ -227,7 +242,7 @@ Public Class FR_RUSAK
             If TXTQTY.Text <> "" Then
                 QTY = Convert.ToDouble(TXTQTY.Text)
             End If
-            If TXTID.Text = "" Or TXTQTY.Text = "" Then
+            If TXTID.Text = "" Or TXTQTY.Text = "" Or CB_JENISTRANS.SelectedIndex < 0 Then
                 MsgBox("Data tidak lengkap!")
             ElseIf QTY > TXTSTOK.Text Then
                 MsgBox("QTY tidak boleh lebih dari stok tersedia!")
@@ -320,7 +335,7 @@ Public Class FR_RUSAK
         End If
         TXTID.Clear()
         TXTQTY.Clear()
-        TXTHARGA.Clear()
+        TXTHARGA.Text = ""
         CB_JENISTRANS.Items.Clear()
         CB_JENISTRANS.Items.Add("Hapus Produk")
         TXTSTOK.Text = 0
@@ -407,7 +422,7 @@ Public Class FR_RUSAK
             str = "SELECT Stok AS Stok, " &
                 " (SELECT Barang FROM tbl_barang WHERE RTRIM(tbl_barang.Kode) = RTRIM(tbl_transaksi_child.Kode)) AS Nama" &
                 " FROM tbl_transaksi_child WHERE Id='" & ID_AWAL & "'"
-            CMD = New SqlCommand(STR, CONN)
+            CMD = New SqlCommand(str, CONN)
             RD = CMD.ExecuteReader
             If RD.HasRows Then
                 RD.Read()
@@ -425,7 +440,7 @@ Public Class FR_RUSAK
             str = "UPDATE tbl_transaksi_child SET Stok=" & TXTSTOKAKHIR.Text.Replace(",", ".") & ", " &
                 " Modified_at = '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
                 " WHERE Id='" & ID_AWAL & "'"
-            CMD = New SqlCommand(STR, CONN)
+            CMD = New SqlCommand(str, CONN)
             CMD.ExecuteNonQuery()
 
 
@@ -491,8 +506,7 @@ Public Class FR_RUSAK
         If RD.HasRows Then
             RD.Read()
             TXTHARGA.Text = CInt(RD.Item("Harga"))
-            If RD.Item("Stok") <> 0 Then
-                TXTSTOK.Text = Format(RD.Item("Stok"), "##0.##")
+            TXTSTOK.Text = Format(RD.Item("Stok"), "##0.##")
                 TXTQTY.Text = TXTSTOK.Text
                 If IsDBNull(RD.Item("Tgl_exp")) Then
                     CB_JENISTRANS.Items.Clear()
@@ -507,10 +521,7 @@ Public Class FR_RUSAK
                     DTEXP.Value = RD.Item("Tgl_exp")
                 End If
                 CB_JENISTRANS.SelectedIndex = 0
-            Else
-                    TXTSTOK.Text = 0
-            End If
-            RD.Close()
+                RD.Close()
         Else
             RD.Close()
         End If
@@ -628,15 +639,27 @@ Public Class FR_RUSAK
 
     Private Sub DGEXPIRED_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGEXPIRED.CellClick
         On Error Resume Next
-        TXTID.Text = DGEXPIRED.Item(1, e.RowIndex).Value
 
-        DATA_TRANSAKSI()
+        If e.RowIndex >= 0 Then
+            If DGEXPIRED.Columns(e.ColumnIndex).HeaderText = "Edit" Then
+                TXTID.Text = DGEXPIRED.Item(1, e.RowIndex).Value
 
-        DGEXPIRED.Columns(0).Visible = True
-        CBKODE.SelectedValue = DGEXPIRED.Item(0, e.RowIndex).Value
-        DGEXPIRED.Columns(0).Visible = False
-        CARI_HARGA()
-        TXTQTY.Text = TXTSTOK.Text
+                DATA_TRANSAKSI()
+
+                DGEXPIRED.Columns(0).Visible = True
+                CBKODE.SelectedValue = DGEXPIRED.Item(0, e.RowIndex).Value
+                DGEXPIRED.Columns(0).Visible = False
+                CARI_HARGA()
+                TXTQTY.Text = TXTSTOK.Text
+            ElseIf DGEXPIRED.Columns(e.ColumnIndex).HeaderText = "History" Then
+                With FR_MASUK_HISTORY
+                    .Show()
+                    .TXTCARI.Text = DGEXPIRED.Item(1, e.RowIndex).Value
+                    .TAMPIL()
+                End With
+                Me.Enabled = False
+            End If
+        End If
     End Sub
 
     Private Sub CBKODE_SelectedValueChanged(sender As Object, e As EventArgs) Handles CBKODE.SelectedValueChanged
@@ -645,37 +668,13 @@ Public Class FR_RUSAK
         CARI_HARGA()
     End Sub
 
-    Private Sub TXTCARI_TRANS_KeyDown(sender As Object, e As KeyEventArgs) Handles TXTCARI_TRANS.KeyDown
-        Select Case e.KeyCode
-            Case Keys.F1
-                TAMPIL_PNCARI()
-            Case Keys.Enter
-                DGCARI.Select()
-        End Select
-    End Sub
-
-    Private Sub DGCARI_KeyDown(sender As Object, e As KeyEventArgs) Handles DGCARI.KeyDown
-        Select Case e.KeyCode
-            Case Keys.F1
-                TAMPIL_PNCARI()
-            Case Keys.Enter
-                e.Handled = True
-                DGCARI.CurrentCell = DGCARI.Rows(DGCARI.CurrentRow.Index).Cells(0)
-                TXTID.Text = DGCARI.SelectedCells(0).Value
-                BTNCARI.Text = "Cari (F1)"
-                TXTID.Select()
-                PNCARI.Visible = False
-                DGCARI.DataSource = Nothing
-        End Select
-    End Sub
-
     Private Sub TXTCARI_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTCARI.KeyPress
         If e.KeyChar = "'" Then
             e.Handled = True
         End If
     End Sub
 
-    Private Sub TXTCARI_TRANS_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTCARI_TRANS.KeyPress
+    Private Sub TXTCARI_TRANS_KeyPress(sender As Object, e As KeyPressEventArgs)
         If e.KeyChar = "'" Then
             e.Handled = True
         End If
@@ -685,6 +684,16 @@ Public Class FR_RUSAK
         If TXTID.Text <> "" Then
             DATA_TRANSAKSI()
             CARI_HARGA()
+        Else
+            TXTID.Clear()
+            CBKODE.DataSource = Nothing
+            CBKODE.SelectedIndex = -1
+            TXTHARGA.Text = ""
+            TXTSTOK.Text = ""
+            TXTQTY.Clear()
+            CB_JENISTRANS.Items.Clear()
+            CB_JENISTRANS.Items.Add("Hapus Produk")
+            CB_JENISTRANS.SelectedIndex = -1
         End If
     End Sub
 
@@ -739,5 +748,95 @@ Public Class FR_RUSAK
         If e.KeyChar = Chr(13) Then
             BTNSIMPAN.Select()
         End If
+    End Sub
+
+    Private Sub DGTAMPIL_SelectionChanged(sender As Object, e As EventArgs) Handles DGTAMPIL.SelectionChanged
+        DGTAMPIL.ClearSelection()
+    End Sub
+
+    Private Sub DGTAMPIL_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGTAMPIL.CellClick
+        On Error Resume Next
+
+        If e.RowIndex >= 0 Then
+            If DGTAMPIL.Columns(e.ColumnIndex).HeaderText = "Delete" Then
+                If MsgBox("Apakah anda yakin akan menghapus data transaksi?", vbYesNo) = vbYes Then
+
+                    DGTAMPIL.Columns(0).Visible = True
+                    DGTAMPIL.Columns(2).Visible = True
+                    Dim IDTRANS As String = DGTAMPIL.Item(1, DGTAMPIL.CurrentRow.Index).Value
+                    Dim KODE_BARANG As String = DGTAMPIL.Item(2, DGTAMPIL.CurrentRow.Index).Value.ToString.Trim
+                    Dim NAMA_BARANG As String = DGTAMPIL.Item(3, DGTAMPIL.CurrentRow.Index).Value.ToString.Trim
+                    Dim ID_AWAL As Integer = DGTAMPIL.Item(0, DGTAMPIL.CurrentRow.Index).Value
+                    DGTAMPIL.Columns(0).Visible = False
+                    DGTAMPIL.Columns(2).Visible = False
+
+                    Dim ID_MASUK As String = "M" + Mid(IDTRANS, 2, 9)
+                    Dim STOK_AWAL As Double
+
+                    Dim str As String
+
+                    str = "SELECT Jumlah AS Jumlah" &
+                " FROM tbl_transaksi_child" &
+                " WHERE RTRIM(Id_trans) = '" & IDTRANS & "'"
+                    Dim CMD As New SqlCommand(str, CONN)
+                    Dim RD As SqlDataReader
+                    RD = CMD.ExecuteReader
+                    If RD.HasRows Then
+                        RD.Read()
+                        TXTQTY.Text = RD.Item("Jumlah")
+                        RD.Close()
+                    Else
+                        RD.Close()
+                    End If
+                    RD.Close()
+
+                    str = "UPDATE tbl_stok SET Stok+=" & TXTQTY.Text.Replace(",", ".") & ", " &
+                                 " Modified_at = '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
+                                 " WHERE Kode='" & KODE_BARANG & "'"
+                    CMD = New SqlCommand(str, CONN)
+                    CMD.ExecuteNonQuery()
+
+                    str = "SELECT Stok AS Stok, " &
+                            " (SELECT Barang FROM tbl_barang WHERE RTRIM(tbl_barang.Kode) = RTRIM(tbl_transaksi_child.Kode)) AS Nama" &
+                            " FROM tbl_transaksi_child WHERE Id='" & ID_AWAL & "'"
+                    CMD = New SqlCommand(str, CONN)
+                    RD = CMD.ExecuteReader
+                    If RD.HasRows Then
+                        RD.Read()
+                        STOK_AWAL = RD.Item("Stok")
+                        NAMA_BARANG = RTrim(RD.Item("Nama"))
+                        RD.Close()
+                    Else
+                        RD.Close()
+                        STOK_AWAL = 0
+                    End If
+                    RD.Close()
+
+                    TXTSTOKAKHIR.Text = STOK_AWAL + DGTAMPIL.Item(8, DGTAMPIL.CurrentRow.Index).Value
+
+                    str = "UPDATE tbl_transaksi_child SET Stok=" & TXTSTOKAKHIR.Text.Replace(",", ".") & ", " &
+                            " Modified_at = '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
+                            " WHERE Id='" & ID_AWAL & "'"
+                    CMD = New SqlCommand(str, CONN)
+                    CMD.ExecuteNonQuery()
+
+
+                    CMD = New SqlCommand("DELETE FROM tbl_transaksi_parent WHERE Id_trans='" & IDTRANS & "'", CONN)
+                    CMD.ExecuteNonQuery()
+
+                    CMD = New SqlCommand("DELETE FROM tbl_transaksi_child WHERE Id_trans='" & IDTRANS & "'", CONN)
+                    CMD.ExecuteNonQuery()
+
+                    TAMPIL()
+                    TAMPIL_EXPIRED()
+                    TXTQTY.Text = ""
+                    MsgBox("Data barang rusak berhasil dihapus, dan stok barang " & NAMA_BARANG & " ditambah.")
+                End If
+            End If
+        End If
+    End Sub
+
+    Private Sub DGEXPIRED_SelectionChanged(sender As Object, e As EventArgs) Handles DGEXPIRED.SelectionChanged
+        DGEXPIRED.ClearSelection()
     End Sub
 End Class
