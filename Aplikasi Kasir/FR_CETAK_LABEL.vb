@@ -529,7 +529,7 @@ Public Class FR_CETAK_LABEL
                 Try
                     With RPT
                         .SetDataSource(DT)
-                        .PrintOptions.PrinterName = PrinterName
+                        '.PrintOptions.PrinterName = PrinterName
                         .PrintToPrinter(nCopies, False, sPage, ePage)
                     End With
                 Catch ex As Exception
@@ -729,7 +729,7 @@ Public Class FR_CETAK_LABEL
             Try
                 With RPT
                     .SetDataSource(DT)
-                    .PrintOptions.PrinterName = PrinterName
+                    '.PrintOptions.PrinterName = PrinterName
                     .PrintToPrinter(nCopies, False, sPage, ePage)
                 End With
             Catch ex As Exception

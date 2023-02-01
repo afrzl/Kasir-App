@@ -189,7 +189,6 @@ Public Class FR_PRODUK
                 KODE_PRODUK = DGTAMPIL.Item(0, e.RowIndex).Value
                 PPD.Document = PRINTBARCODE
                 PPD.PrinterSettings = PRINTBARCODE.PrinterSettings
-                PPD.PrinterSettings.PrinterName = "ZDesigner ZD220-203dpi ZPL"
                 PRINTBARCODE.DefaultPageSettings.PaperSize = New PaperSize("Custom", 430, 200)
                 PPD.AllowSomePages = True
 

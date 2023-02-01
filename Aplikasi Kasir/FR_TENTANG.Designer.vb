@@ -29,30 +29,6 @@ Partial Class FR_TENTANG
         Me.BTNMINIMIZE = New System.Windows.Forms.Button()
         Me.BTNCLOSE = New System.Windows.Forms.Button()
         Me.PNCONTENT = New System.Windows.Forms.Panel()
-        Me.GBTOKO = New System.Windows.Forms.GroupBox()
-        Me.Label25 = New System.Windows.Forms.Label()
-        Me.BTN_BACKRESDB = New System.Windows.Forms.Button()
-        Me.LB_CUSTOMER_DISPLAY = New System.Windows.Forms.Label()
-        Me.Label26 = New System.Windows.Forms.Label()
-        Me.TXT_CUSTOMER_DISPLAY = New System.Windows.Forms.ComboBox()
-        Me.BTNBROWSE = New System.Windows.Forms.Button()
-        Me.Label16 = New System.Windows.Forms.Label()
-        Me.PBLOGO = New System.Windows.Forms.PictureBox()
-        Me.LBPRINTER_NOTA = New System.Windows.Forms.Label()
-        Me.Label20 = New System.Windows.Forms.Label()
-        Me.BTNCANCELTOKO = New System.Windows.Forms.Button()
-        Me.LBALAMATTOKO = New System.Windows.Forms.Label()
-        Me.LBNOTOKO = New System.Windows.Forms.Label()
-        Me.LBNAMATOKO = New System.Windows.Forms.Label()
-        Me.TXTNOTOKO = New System.Windows.Forms.TextBox()
-        Me.Label15 = New System.Windows.Forms.Label()
-        Me.TXTALAMATTOKO = New System.Windows.Forms.TextBox()
-        Me.Label14 = New System.Windows.Forms.Label()
-        Me.TXTNAMATOKO = New System.Windows.Forms.TextBox()
-        Me.Label13 = New System.Windows.Forms.Label()
-        Me.BTNUBAHTOKO = New System.Windows.Forms.Button()
-        Me.TXTPRINTER_NOTA = New System.Windows.Forms.ComboBox()
-        Me.BTNSIMPANTOKO = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.BTNSIMPAN = New System.Windows.Forms.Button()
         Me.TXTPWBARU2 = New System.Windows.Forms.TextBox()
@@ -86,6 +62,34 @@ Partial Class FR_TENTANG
         Me.TXTNO = New System.Windows.Forms.TextBox()
         Me.TXTALAMAT = New System.Windows.Forms.TextBox()
         Me.TXTNAMA = New System.Windows.Forms.TextBox()
+        Me.GBTOKO = New System.Windows.Forms.GroupBox()
+        Me.Label27 = New System.Windows.Forms.Label()
+        Me.LB_POINTMEMBER = New System.Windows.Forms.Label()
+        Me.Label28 = New System.Windows.Forms.Label()
+        Me.Label25 = New System.Windows.Forms.Label()
+        Me.BTN_BACKRESDB = New System.Windows.Forms.Button()
+        Me.LB_CUSTOMER_DISPLAY = New System.Windows.Forms.Label()
+        Me.Label26 = New System.Windows.Forms.Label()
+        Me.TXT_CUSTOMER_DISPLAY = New System.Windows.Forms.ComboBox()
+        Me.BTNBROWSE = New System.Windows.Forms.Button()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.PBLOGO = New System.Windows.Forms.PictureBox()
+        Me.LBPRINTER_NOTA = New System.Windows.Forms.Label()
+        Me.Label20 = New System.Windows.Forms.Label()
+        Me.BTNCANCELTOKO = New System.Windows.Forms.Button()
+        Me.LBALAMATTOKO = New System.Windows.Forms.Label()
+        Me.LBNOTOKO = New System.Windows.Forms.Label()
+        Me.LBNAMATOKO = New System.Windows.Forms.Label()
+        Me.TXTNOTOKO = New System.Windows.Forms.TextBox()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.TXTALAMATTOKO = New System.Windows.Forms.TextBox()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.TXTNAMATOKO = New System.Windows.Forms.TextBox()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.BTNUBAHTOKO = New System.Windows.Forms.Button()
+        Me.TXTPRINTER_NOTA = New System.Windows.Forms.ComboBox()
+        Me.BTNSIMPANTOKO = New System.Windows.Forms.Button()
+        Me.TXT_POINTMEMBER = New System.Windows.Forms.TextBox()
         Me.PNTOP = New System.Windows.Forms.Panel()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -141,16 +145,12 @@ Partial Class FR_TENTANG
         Me.BTNMASUKKASIR = New System.Windows.Forms.Button()
         Me.BTNMEMBER_KASIR = New System.Windows.Forms.Button()
         Me.PEWAKTU = New System.Windows.Forms.Timer(Me.components)
-        Me.LB_POINTMEMBER = New System.Windows.Forms.Label()
-        Me.Label28 = New System.Windows.Forms.Label()
-        Me.TXT_POINTMEMBER = New System.Windows.Forms.TextBox()
-        Me.Label27 = New System.Windows.Forms.Label()
         Me.PNCONTROL.SuspendLayout()
         Me.PNCONTENT.SuspendLayout()
-        Me.GBTOKO.SuspendLayout()
-        CType(Me.PBLOGO, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
+        Me.GBTOKO.SuspendLayout()
+        CType(Me.PBLOGO, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PNTOP.SuspendLayout()
         Me.PNLEFT.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -219,318 +219,6 @@ Partial Class FR_TENTANG
         Me.PNCONTENT.Name = "PNCONTENT"
         Me.PNCONTENT.Size = New System.Drawing.Size(1096, 728)
         Me.PNCONTENT.TabIndex = 14
-        '
-        'GBTOKO
-        '
-        Me.GBTOKO.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.GBTOKO.Controls.Add(Me.Label27)
-        Me.GBTOKO.Controls.Add(Me.LB_POINTMEMBER)
-        Me.GBTOKO.Controls.Add(Me.Label28)
-        Me.GBTOKO.Controls.Add(Me.Label25)
-        Me.GBTOKO.Controls.Add(Me.BTN_BACKRESDB)
-        Me.GBTOKO.Controls.Add(Me.LB_CUSTOMER_DISPLAY)
-        Me.GBTOKO.Controls.Add(Me.Label26)
-        Me.GBTOKO.Controls.Add(Me.TXT_CUSTOMER_DISPLAY)
-        Me.GBTOKO.Controls.Add(Me.BTNBROWSE)
-        Me.GBTOKO.Controls.Add(Me.Label16)
-        Me.GBTOKO.Controls.Add(Me.PBLOGO)
-        Me.GBTOKO.Controls.Add(Me.LBPRINTER_NOTA)
-        Me.GBTOKO.Controls.Add(Me.Label20)
-        Me.GBTOKO.Controls.Add(Me.BTNCANCELTOKO)
-        Me.GBTOKO.Controls.Add(Me.LBALAMATTOKO)
-        Me.GBTOKO.Controls.Add(Me.LBNOTOKO)
-        Me.GBTOKO.Controls.Add(Me.LBNAMATOKO)
-        Me.GBTOKO.Controls.Add(Me.TXTNOTOKO)
-        Me.GBTOKO.Controls.Add(Me.Label15)
-        Me.GBTOKO.Controls.Add(Me.TXTALAMATTOKO)
-        Me.GBTOKO.Controls.Add(Me.Label14)
-        Me.GBTOKO.Controls.Add(Me.TXTNAMATOKO)
-        Me.GBTOKO.Controls.Add(Me.Label13)
-        Me.GBTOKO.Controls.Add(Me.BTNUBAHTOKO)
-        Me.GBTOKO.Controls.Add(Me.TXTPRINTER_NOTA)
-        Me.GBTOKO.Controls.Add(Me.BTNSIMPANTOKO)
-        Me.GBTOKO.Controls.Add(Me.TXT_POINTMEMBER)
-        Me.GBTOKO.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GBTOKO.Location = New System.Drawing.Point(12, 427)
-        Me.GBTOKO.Margin = New System.Windows.Forms.Padding(2)
-        Me.GBTOKO.Name = "GBTOKO"
-        Me.GBTOKO.Padding = New System.Windows.Forms.Padding(2)
-        Me.GBTOKO.Size = New System.Drawing.Size(1125, 457)
-        Me.GBTOKO.TabIndex = 8
-        Me.GBTOKO.TabStop = False
-        Me.GBTOKO.Text = "Toko Setting"
-        '
-        'Label25
-        '
-        Me.Label25.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label25.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Label25.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label25.ForeColor = System.Drawing.Color.Black
-        Me.Label25.Location = New System.Drawing.Point(1014, 256)
-        Me.Label25.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Label25.Name = "Label25"
-        Me.Label25.Size = New System.Drawing.Size(65, 36)
-        Me.Label25.TabIndex = 73
-        Me.Label25.Text = "v.3.1"
-        '
-        'BTN_BACKRESDB
-        '
-        Me.BTN_BACKRESDB.BackColor = System.Drawing.Color.Navy
-        Me.BTN_BACKRESDB.FlatAppearance.BorderSize = 0
-        Me.BTN_BACKRESDB.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BTN_BACKRESDB.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BTN_BACKRESDB.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.BTN_BACKRESDB.Location = New System.Drawing.Point(656, 392)
-        Me.BTN_BACKRESDB.Margin = New System.Windows.Forms.Padding(2)
-        Me.BTN_BACKRESDB.Name = "BTN_BACKRESDB"
-        Me.BTN_BACKRESDB.Size = New System.Drawing.Size(258, 50)
-        Me.BTN_BACKRESDB.TabIndex = 43
-        Me.BTN_BACKRESDB.Text = "Backup dan Restore DB"
-        Me.BTN_BACKRESDB.UseVisualStyleBackColor = False
-        '
-        'LB_CUSTOMER_DISPLAY
-        '
-        Me.LB_CUSTOMER_DISPLAY.AutoSize = True
-        Me.LB_CUSTOMER_DISPLAY.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LB_CUSTOMER_DISPLAY.Location = New System.Drawing.Point(217, 287)
-        Me.LB_CUSTOMER_DISPLAY.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.LB_CUSTOMER_DISPLAY.Name = "LB_CUSTOMER_DISPLAY"
-        Me.LB_CUSTOMER_DISPLAY.Size = New System.Drawing.Size(38, 28)
-        Me.LB_CUSTOMER_DISPLAY.TabIndex = 41
-        Me.LB_CUSTOMER_DISPLAY.Text = "CD"
-        '
-        'Label26
-        '
-        Me.Label26.AutoSize = True
-        Me.Label26.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label26.Location = New System.Drawing.Point(26, 287)
-        Me.Label26.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Label26.Name = "Label26"
-        Me.Label26.Size = New System.Drawing.Size(206, 35)
-        Me.Label26.TabIndex = 40
-        Me.Label26.Text = "Customer Display"
-        '
-        'TXT_CUSTOMER_DISPLAY
-        '
-        Me.TXT_CUSTOMER_DISPLAY.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.TXT_CUSTOMER_DISPLAY.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TXT_CUSTOMER_DISPLAY.FormattingEnabled = True
-        Me.TXT_CUSTOMER_DISPLAY.Items.AddRange(New Object() {"Ya", "Tidak"})
-        Me.TXT_CUSTOMER_DISPLAY.Location = New System.Drawing.Point(217, 284)
-        Me.TXT_CUSTOMER_DISPLAY.Margin = New System.Windows.Forms.Padding(2)
-        Me.TXT_CUSTOMER_DISPLAY.Name = "TXT_CUSTOMER_DISPLAY"
-        Me.TXT_CUSTOMER_DISPLAY.Size = New System.Drawing.Size(174, 36)
-        Me.TXT_CUSTOMER_DISPLAY.TabIndex = 42
-        '
-        'BTNBROWSE
-        '
-        Me.BTNBROWSE.BackColor = System.Drawing.Color.Navy
-        Me.BTNBROWSE.FlatAppearance.BorderSize = 0
-        Me.BTNBROWSE.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BTNBROWSE.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BTNBROWSE.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.BTNBROWSE.Location = New System.Drawing.Point(950, 69)
-        Me.BTNBROWSE.Margin = New System.Windows.Forms.Padding(2)
-        Me.BTNBROWSE.Name = "BTNBROWSE"
-        Me.BTNBROWSE.Size = New System.Drawing.Size(132, 50)
-        Me.BTNBROWSE.TabIndex = 39
-        Me.BTNBROWSE.Text = "Pilih Foto"
-        Me.BTNBROWSE.UseVisualStyleBackColor = False
-        Me.BTNBROWSE.Visible = False
-        '
-        'Label16
-        '
-        Me.Label16.AutoSize = True
-        Me.Label16.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label16.Location = New System.Drawing.Point(653, 32)
-        Me.Label16.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(104, 28)
-        Me.Label16.TabIndex = 38
-        Me.Label16.Text = "Logo Toko"
-        '
-        'PBLOGO
-        '
-        Me.PBLOGO.Location = New System.Drawing.Point(656, 69)
-        Me.PBLOGO.Margin = New System.Windows.Forms.Padding(2)
-        Me.PBLOGO.Name = "PBLOGO"
-        Me.PBLOGO.Size = New System.Drawing.Size(260, 130)
-        Me.PBLOGO.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PBLOGO.TabIndex = 37
-        Me.PBLOGO.TabStop = False
-        '
-        'LBPRINTER_NOTA
-        '
-        Me.LBPRINTER_NOTA.AutoSize = True
-        Me.LBPRINTER_NOTA.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LBPRINTER_NOTA.Location = New System.Drawing.Point(217, 232)
-        Me.LBPRINTER_NOTA.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.LBPRINTER_NOTA.Name = "LBPRINTER_NOTA"
-        Me.LBPRINTER_NOTA.Size = New System.Drawing.Size(119, 28)
-        Me.LBPRINTER_NOTA.TabIndex = 35
-        Me.LBPRINTER_NOTA.Text = "Printer Nota"
-        '
-        'Label20
-        '
-        Me.Label20.AutoSize = True
-        Me.Label20.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label20.Location = New System.Drawing.Point(26, 232)
-        Me.Label20.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(149, 35)
-        Me.Label20.TabIndex = 33
-        Me.Label20.Text = "Printer Nota"
-        '
-        'BTNCANCELTOKO
-        '
-        Me.BTNCANCELTOKO.BackColor = System.Drawing.Color.Crimson
-        Me.BTNCANCELTOKO.FlatAppearance.BorderSize = 0
-        Me.BTNCANCELTOKO.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BTNCANCELTOKO.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BTNCANCELTOKO.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.BTNCANCELTOKO.Location = New System.Drawing.Point(426, 393)
-        Me.BTNCANCELTOKO.Margin = New System.Windows.Forms.Padding(2)
-        Me.BTNCANCELTOKO.Name = "BTNCANCELTOKO"
-        Me.BTNCANCELTOKO.Size = New System.Drawing.Size(132, 50)
-        Me.BTNCANCELTOKO.TabIndex = 27
-        Me.BTNCANCELTOKO.Text = "Cancel"
-        Me.BTNCANCELTOKO.UseVisualStyleBackColor = False
-        '
-        'LBALAMATTOKO
-        '
-        Me.LBALAMATTOKO.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LBALAMATTOKO.Location = New System.Drawing.Point(217, 96)
-        Me.LBALAMATTOKO.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.LBALAMATTOKO.Name = "LBALAMATTOKO"
-        Me.LBALAMATTOKO.Size = New System.Drawing.Size(311, 62)
-        Me.LBALAMATTOKO.TabIndex = 32
-        Me.LBALAMATTOKO.Text = "Alamat Toko"
-        '
-        'LBNOTOKO
-        '
-        Me.LBNOTOKO.AutoSize = True
-        Me.LBNOTOKO.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LBNOTOKO.Location = New System.Drawing.Point(217, 180)
-        Me.LBNOTOKO.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.LBNOTOKO.Name = "LBNOTOKO"
-        Me.LBNOTOKO.Size = New System.Drawing.Size(120, 28)
-        Me.LBNOTOKO.TabIndex = 31
-        Me.LBNOTOKO.Text = "No. HP Toko"
-        '
-        'LBNAMATOKO
-        '
-        Me.LBNAMATOKO.AutoSize = True
-        Me.LBNAMATOKO.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LBNAMATOKO.Location = New System.Drawing.Point(217, 39)
-        Me.LBNAMATOKO.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.LBNAMATOKO.Name = "LBNAMATOKO"
-        Me.LBNAMATOKO.Size = New System.Drawing.Size(111, 28)
-        Me.LBNAMATOKO.TabIndex = 25
-        Me.LBNAMATOKO.Text = "Nama Toko"
-        '
-        'TXTNOTOKO
-        '
-        Me.TXTNOTOKO.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TXTNOTOKO.Location = New System.Drawing.Point(217, 176)
-        Me.TXTNOTOKO.Margin = New System.Windows.Forms.Padding(2)
-        Me.TXTNOTOKO.Name = "TXTNOTOKO"
-        Me.TXTNOTOKO.Size = New System.Drawing.Size(390, 34)
-        Me.TXTNOTOKO.TabIndex = 30
-        '
-        'Label15
-        '
-        Me.Label15.AutoSize = True
-        Me.Label15.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label15.Location = New System.Drawing.Point(26, 180)
-        Me.Label15.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(150, 35)
-        Me.Label15.TabIndex = 29
-        Me.Label15.Text = "No. HP Toko"
-        '
-        'TXTALAMATTOKO
-        '
-        Me.TXTALAMATTOKO.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TXTALAMATTOKO.Location = New System.Drawing.Point(217, 92)
-        Me.TXTALAMATTOKO.Margin = New System.Windows.Forms.Padding(2)
-        Me.TXTALAMATTOKO.Multiline = True
-        Me.TXTALAMATTOKO.Name = "TXTALAMATTOKO"
-        Me.TXTALAMATTOKO.Size = New System.Drawing.Size(390, 69)
-        Me.TXTALAMATTOKO.TabIndex = 28
-        '
-        'Label14
-        '
-        Me.Label14.AutoSize = True
-        Me.Label14.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label14.Location = New System.Drawing.Point(26, 96)
-        Me.Label14.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(151, 35)
-        Me.Label14.TabIndex = 27
-        Me.Label14.Text = "Alamat Toko"
-        '
-        'TXTNAMATOKO
-        '
-        Me.TXTNAMATOKO.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TXTNAMATOKO.Location = New System.Drawing.Point(217, 36)
-        Me.TXTNAMATOKO.Margin = New System.Windows.Forms.Padding(2)
-        Me.TXTNAMATOKO.Name = "TXTNAMATOKO"
-        Me.TXTNAMATOKO.Size = New System.Drawing.Size(390, 34)
-        Me.TXTNAMATOKO.TabIndex = 26
-        '
-        'Label13
-        '
-        Me.Label13.AutoSize = True
-        Me.Label13.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label13.Location = New System.Drawing.Point(26, 39)
-        Me.Label13.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(139, 35)
-        Me.Label13.TabIndex = 25
-        Me.Label13.Text = "Nama Toko"
-        '
-        'BTNUBAHTOKO
-        '
-        Me.BTNUBAHTOKO.BackColor = System.Drawing.Color.Navy
-        Me.BTNUBAHTOKO.FlatAppearance.BorderSize = 0
-        Me.BTNUBAHTOKO.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BTNUBAHTOKO.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BTNUBAHTOKO.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.BTNUBAHTOKO.Location = New System.Drawing.Point(232, 393)
-        Me.BTNUBAHTOKO.Margin = New System.Windows.Forms.Padding(2)
-        Me.BTNUBAHTOKO.Name = "BTNUBAHTOKO"
-        Me.BTNUBAHTOKO.Size = New System.Drawing.Size(189, 50)
-        Me.BTNUBAHTOKO.TabIndex = 25
-        Me.BTNUBAHTOKO.Text = "Ubah Data Toko"
-        Me.BTNUBAHTOKO.UseVisualStyleBackColor = False
-        '
-        'TXTPRINTER_NOTA
-        '
-        Me.TXTPRINTER_NOTA.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.TXTPRINTER_NOTA.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TXTPRINTER_NOTA.FormattingEnabled = True
-        Me.TXTPRINTER_NOTA.Location = New System.Drawing.Point(217, 229)
-        Me.TXTPRINTER_NOTA.Margin = New System.Windows.Forms.Padding(2)
-        Me.TXTPRINTER_NOTA.Name = "TXTPRINTER_NOTA"
-        Me.TXTPRINTER_NOTA.Size = New System.Drawing.Size(391, 36)
-        Me.TXTPRINTER_NOTA.TabIndex = 36
-        '
-        'BTNSIMPANTOKO
-        '
-        Me.BTNSIMPANTOKO.BackColor = System.Drawing.Color.DarkGreen
-        Me.BTNSIMPANTOKO.FlatAppearance.BorderSize = 0
-        Me.BTNSIMPANTOKO.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BTNSIMPANTOKO.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BTNSIMPANTOKO.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.BTNSIMPANTOKO.Location = New System.Drawing.Point(232, 393)
-        Me.BTNSIMPANTOKO.Margin = New System.Windows.Forms.Padding(2)
-        Me.BTNSIMPANTOKO.Name = "BTNSIMPANTOKO"
-        Me.BTNSIMPANTOKO.Size = New System.Drawing.Size(189, 50)
-        Me.BTNSIMPANTOKO.TabIndex = 26
-        Me.BTNSIMPANTOKO.Text = "Simpan Data Toko"
-        Me.BTNSIMPANTOKO.UseVisualStyleBackColor = False
         '
         'GroupBox2
         '
@@ -712,7 +400,7 @@ Partial Class FR_TENTANG
         Me.LBNO.Location = New System.Drawing.Point(224, 288)
         Me.LBNO.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.LBNO.Name = "LBNO"
-        Me.LBNO.Size = New System.Drawing.Size(91, 35)
+        Me.LBNO.Size = New System.Drawing.Size(73, 28)
         Me.LBNO.TabIndex = 13
         Me.LBNO.Text = "No. HP"
         '
@@ -722,7 +410,7 @@ Partial Class FR_TENTANG
         Me.LBJK.Location = New System.Drawing.Point(224, 245)
         Me.LBJK.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.LBJK.Name = "LBJK"
-        Me.LBJK.Size = New System.Drawing.Size(160, 35)
+        Me.LBJK.Size = New System.Drawing.Size(128, 28)
         Me.LBJK.TabIndex = 12
         Me.LBJK.Text = "Jenis Kelamin"
         '
@@ -732,7 +420,7 @@ Partial Class FR_TENTANG
         Me.LBTGLLAHIR.Location = New System.Drawing.Point(224, 202)
         Me.LBTGLLAHIR.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.LBTGLLAHIR.Name = "LBTGLLAHIR"
-        Me.LBTGLLAHIR.Size = New System.Drawing.Size(159, 35)
+        Me.LBTGLLAHIR.Size = New System.Drawing.Size(127, 28)
         Me.LBTGLLAHIR.TabIndex = 11
         Me.LBTGLLAHIR.Text = "Tanggal Lahir"
         '
@@ -742,7 +430,7 @@ Partial Class FR_TENTANG
         Me.LBALAMAT.Location = New System.Drawing.Point(224, 161)
         Me.LBALAMAT.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.LBALAMAT.Name = "LBALAMAT"
-        Me.LBALAMAT.Size = New System.Drawing.Size(93, 35)
+        Me.LBALAMAT.Size = New System.Drawing.Size(74, 28)
         Me.LBALAMAT.TabIndex = 10
         Me.LBALAMAT.Text = "Alamat"
         '
@@ -752,7 +440,7 @@ Partial Class FR_TENTANG
         Me.LBROLE.Location = New System.Drawing.Point(224, 119)
         Me.LBROLE.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.LBROLE.Name = "LBROLE"
-        Me.LBROLE.Size = New System.Drawing.Size(125, 35)
+        Me.LBROLE.Size = New System.Drawing.Size(100, 28)
         Me.LBROLE.TabIndex = 9
         Me.LBROLE.Text = "Hak Akses"
         '
@@ -762,7 +450,7 @@ Partial Class FR_TENTANG
         Me.LBNAMA.Location = New System.Drawing.Point(224, 78)
         Me.LBNAMA.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.LBNAMA.Name = "LBNAMA"
-        Me.LBNAMA.Size = New System.Drawing.Size(80, 35)
+        Me.LBNAMA.Size = New System.Drawing.Size(64, 28)
         Me.LBNAMA.TabIndex = 8
         Me.LBNAMA.Text = "Nama"
         '
@@ -772,7 +460,7 @@ Partial Class FR_TENTANG
         Me.LBID.Location = New System.Drawing.Point(224, 35)
         Me.LBID.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.LBID.Name = "LBID"
-        Me.LBID.Size = New System.Drawing.Size(98, 35)
+        Me.LBID.Size = New System.Drawing.Size(78, 28)
         Me.LBID.TabIndex = 7
         Me.LBID.Text = "ID Kasir"
         '
@@ -782,7 +470,7 @@ Partial Class FR_TENTANG
         Me.Label12.Location = New System.Drawing.Point(20, 288)
         Me.Label12.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(91, 35)
+        Me.Label12.Size = New System.Drawing.Size(73, 28)
         Me.Label12.TabIndex = 6
         Me.Label12.Text = "No. HP"
         '
@@ -792,7 +480,7 @@ Partial Class FR_TENTANG
         Me.Label10.Location = New System.Drawing.Point(20, 245)
         Me.Label10.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(160, 35)
+        Me.Label10.Size = New System.Drawing.Size(128, 28)
         Me.Label10.TabIndex = 5
         Me.Label10.Text = "Jenis Kelamin"
         '
@@ -802,7 +490,7 @@ Partial Class FR_TENTANG
         Me.Label9.Location = New System.Drawing.Point(20, 202)
         Me.Label9.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(159, 35)
+        Me.Label9.Size = New System.Drawing.Size(127, 28)
         Me.Label9.TabIndex = 4
         Me.Label9.Text = "Tanggal Lahir"
         '
@@ -812,7 +500,7 @@ Partial Class FR_TENTANG
         Me.Label8.Location = New System.Drawing.Point(20, 161)
         Me.Label8.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(93, 35)
+        Me.Label8.Size = New System.Drawing.Size(74, 28)
         Me.Label8.TabIndex = 3
         Me.Label8.Text = "Alamat"
         '
@@ -822,7 +510,7 @@ Partial Class FR_TENTANG
         Me.Label7.Location = New System.Drawing.Point(20, 119)
         Me.Label7.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(125, 35)
+        Me.Label7.Size = New System.Drawing.Size(100, 28)
         Me.Label7.TabIndex = 2
         Me.Label7.Text = "Hak Akses"
         '
@@ -832,7 +520,7 @@ Partial Class FR_TENTANG
         Me.Label6.Location = New System.Drawing.Point(20, 78)
         Me.Label6.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(80, 35)
+        Me.Label6.Size = New System.Drawing.Size(64, 28)
         Me.Label6.TabIndex = 1
         Me.Label6.Text = "Nama"
         '
@@ -842,7 +530,7 @@ Partial Class FR_TENTANG
         Me.Label5.Location = New System.Drawing.Point(20, 35)
         Me.Label5.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(98, 35)
+        Me.Label5.Size = New System.Drawing.Size(78, 28)
         Me.Label5.TabIndex = 0
         Me.Label5.Text = "ID Kasir"
         '
@@ -863,7 +551,7 @@ Partial Class FR_TENTANG
         Me.TXTROLE.Location = New System.Drawing.Point(228, 115)
         Me.TXTROLE.Margin = New System.Windows.Forms.Padding(2)
         Me.TXTROLE.Name = "TXTROLE"
-        Me.TXTROLE.Size = New System.Drawing.Size(390, 43)
+        Me.TXTROLE.Size = New System.Drawing.Size(390, 34)
         Me.TXTROLE.TabIndex = 23
         '
         'TXTID
@@ -872,7 +560,7 @@ Partial Class FR_TENTANG
         Me.TXTID.Location = New System.Drawing.Point(228, 31)
         Me.TXTID.Margin = New System.Windows.Forms.Padding(2)
         Me.TXTID.Name = "TXTID"
-        Me.TXTID.Size = New System.Drawing.Size(390, 43)
+        Me.TXTID.Size = New System.Drawing.Size(390, 34)
         Me.TXTID.TabIndex = 22
         '
         'TXTTGL
@@ -881,7 +569,7 @@ Partial Class FR_TENTANG
         Me.TXTTGL.Location = New System.Drawing.Point(228, 199)
         Me.TXTTGL.Margin = New System.Windows.Forms.Padding(2)
         Me.TXTTGL.Name = "TXTTGL"
-        Me.TXTTGL.Size = New System.Drawing.Size(390, 43)
+        Me.TXTTGL.Size = New System.Drawing.Size(390, 34)
         Me.TXTTGL.TabIndex = 21
         '
         'TXTNO
@@ -889,7 +577,7 @@ Partial Class FR_TENTANG
         Me.TXTNO.Location = New System.Drawing.Point(228, 282)
         Me.TXTNO.Margin = New System.Windows.Forms.Padding(2)
         Me.TXTNO.Name = "TXTNO"
-        Me.TXTNO.Size = New System.Drawing.Size(390, 43)
+        Me.TXTNO.Size = New System.Drawing.Size(390, 34)
         Me.TXTNO.TabIndex = 20
         '
         'TXTALAMAT
@@ -897,7 +585,7 @@ Partial Class FR_TENTANG
         Me.TXTALAMAT.Location = New System.Drawing.Point(228, 158)
         Me.TXTALAMAT.Margin = New System.Windows.Forms.Padding(2)
         Me.TXTALAMAT.Name = "TXTALAMAT"
-        Me.TXTALAMAT.Size = New System.Drawing.Size(390, 43)
+        Me.TXTALAMAT.Size = New System.Drawing.Size(390, 34)
         Me.TXTALAMAT.TabIndex = 17
         '
         'TXTNAMA
@@ -905,8 +593,362 @@ Partial Class FR_TENTANG
         Me.TXTNAMA.Location = New System.Drawing.Point(228, 72)
         Me.TXTNAMA.Margin = New System.Windows.Forms.Padding(2)
         Me.TXTNAMA.Name = "TXTNAMA"
-        Me.TXTNAMA.Size = New System.Drawing.Size(390, 43)
+        Me.TXTNAMA.Size = New System.Drawing.Size(390, 34)
         Me.TXTNAMA.TabIndex = 9
+        '
+        'GBTOKO
+        '
+        Me.GBTOKO.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GBTOKO.Controls.Add(Me.Label27)
+        Me.GBTOKO.Controls.Add(Me.LB_POINTMEMBER)
+        Me.GBTOKO.Controls.Add(Me.Label28)
+        Me.GBTOKO.Controls.Add(Me.Label25)
+        Me.GBTOKO.Controls.Add(Me.BTN_BACKRESDB)
+        Me.GBTOKO.Controls.Add(Me.LB_CUSTOMER_DISPLAY)
+        Me.GBTOKO.Controls.Add(Me.Label26)
+        Me.GBTOKO.Controls.Add(Me.TXT_CUSTOMER_DISPLAY)
+        Me.GBTOKO.Controls.Add(Me.BTNBROWSE)
+        Me.GBTOKO.Controls.Add(Me.Label16)
+        Me.GBTOKO.Controls.Add(Me.PBLOGO)
+        Me.GBTOKO.Controls.Add(Me.LBPRINTER_NOTA)
+        Me.GBTOKO.Controls.Add(Me.Label20)
+        Me.GBTOKO.Controls.Add(Me.BTNCANCELTOKO)
+        Me.GBTOKO.Controls.Add(Me.LBALAMATTOKO)
+        Me.GBTOKO.Controls.Add(Me.LBNOTOKO)
+        Me.GBTOKO.Controls.Add(Me.LBNAMATOKO)
+        Me.GBTOKO.Controls.Add(Me.TXTNOTOKO)
+        Me.GBTOKO.Controls.Add(Me.Label15)
+        Me.GBTOKO.Controls.Add(Me.TXTALAMATTOKO)
+        Me.GBTOKO.Controls.Add(Me.Label14)
+        Me.GBTOKO.Controls.Add(Me.TXTNAMATOKO)
+        Me.GBTOKO.Controls.Add(Me.Label13)
+        Me.GBTOKO.Controls.Add(Me.BTNUBAHTOKO)
+        Me.GBTOKO.Controls.Add(Me.TXTPRINTER_NOTA)
+        Me.GBTOKO.Controls.Add(Me.BTNSIMPANTOKO)
+        Me.GBTOKO.Controls.Add(Me.TXT_POINTMEMBER)
+        Me.GBTOKO.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GBTOKO.Location = New System.Drawing.Point(12, 427)
+        Me.GBTOKO.Margin = New System.Windows.Forms.Padding(2)
+        Me.GBTOKO.Name = "GBTOKO"
+        Me.GBTOKO.Padding = New System.Windows.Forms.Padding(2)
+        Me.GBTOKO.Size = New System.Drawing.Size(1125, 457)
+        Me.GBTOKO.TabIndex = 8
+        Me.GBTOKO.TabStop = False
+        Me.GBTOKO.Text = "Toko Setting"
+        '
+        'Label27
+        '
+        Me.Label27.AutoSize = True
+        Me.Label27.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label27.Location = New System.Drawing.Point(395, 347)
+        Me.Label27.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label27.Name = "Label27"
+        Me.Label27.Size = New System.Drawing.Size(148, 28)
+        Me.Label27.TabIndex = 77
+        Me.Label27.Text = "% dari transaksi"
+        '
+        'LB_POINTMEMBER
+        '
+        Me.LB_POINTMEMBER.AutoSize = True
+        Me.LB_POINTMEMBER.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LB_POINTMEMBER.Location = New System.Drawing.Point(217, 344)
+        Me.LB_POINTMEMBER.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.LB_POINTMEMBER.Name = "LB_POINTMEMBER"
+        Me.LB_POINTMEMBER.Size = New System.Drawing.Size(57, 28)
+        Me.LB_POINTMEMBER.TabIndex = 75
+        Me.LB_POINTMEMBER.Text = "Point"
+        '
+        'Label28
+        '
+        Me.Label28.AutoSize = True
+        Me.Label28.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label28.Location = New System.Drawing.Point(26, 344)
+        Me.Label28.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label28.Name = "Label28"
+        Me.Label28.Size = New System.Drawing.Size(135, 28)
+        Me.Label28.TabIndex = 74
+        Me.Label28.Text = "Point member"
+        '
+        'Label25
+        '
+        Me.Label25.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label25.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Label25.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label25.ForeColor = System.Drawing.Color.Black
+        Me.Label25.Location = New System.Drawing.Point(985, 256)
+        Me.Label25.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label25.Name = "Label25"
+        Me.Label25.Size = New System.Drawing.Size(99, 36)
+        Me.Label25.TabIndex = 73
+        Me.Label25.Text = "v.3.1"
+        '
+        'BTN_BACKRESDB
+        '
+        Me.BTN_BACKRESDB.BackColor = System.Drawing.Color.Navy
+        Me.BTN_BACKRESDB.FlatAppearance.BorderSize = 0
+        Me.BTN_BACKRESDB.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTN_BACKRESDB.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTN_BACKRESDB.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BTN_BACKRESDB.Location = New System.Drawing.Point(656, 392)
+        Me.BTN_BACKRESDB.Margin = New System.Windows.Forms.Padding(2)
+        Me.BTN_BACKRESDB.Name = "BTN_BACKRESDB"
+        Me.BTN_BACKRESDB.Size = New System.Drawing.Size(258, 50)
+        Me.BTN_BACKRESDB.TabIndex = 43
+        Me.BTN_BACKRESDB.Text = "Backup dan Restore DB"
+        Me.BTN_BACKRESDB.UseVisualStyleBackColor = False
+        '
+        'LB_CUSTOMER_DISPLAY
+        '
+        Me.LB_CUSTOMER_DISPLAY.AutoSize = True
+        Me.LB_CUSTOMER_DISPLAY.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LB_CUSTOMER_DISPLAY.Location = New System.Drawing.Point(217, 287)
+        Me.LB_CUSTOMER_DISPLAY.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.LB_CUSTOMER_DISPLAY.Name = "LB_CUSTOMER_DISPLAY"
+        Me.LB_CUSTOMER_DISPLAY.Size = New System.Drawing.Size(38, 28)
+        Me.LB_CUSTOMER_DISPLAY.TabIndex = 41
+        Me.LB_CUSTOMER_DISPLAY.Text = "CD"
+        '
+        'Label26
+        '
+        Me.Label26.AutoSize = True
+        Me.Label26.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label26.Location = New System.Drawing.Point(26, 287)
+        Me.Label26.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label26.Name = "Label26"
+        Me.Label26.Size = New System.Drawing.Size(165, 28)
+        Me.Label26.TabIndex = 40
+        Me.Label26.Text = "Customer Display"
+        '
+        'TXT_CUSTOMER_DISPLAY
+        '
+        Me.TXT_CUSTOMER_DISPLAY.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.TXT_CUSTOMER_DISPLAY.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TXT_CUSTOMER_DISPLAY.FormattingEnabled = True
+        Me.TXT_CUSTOMER_DISPLAY.Items.AddRange(New Object() {"Ya", "Tidak"})
+        Me.TXT_CUSTOMER_DISPLAY.Location = New System.Drawing.Point(217, 284)
+        Me.TXT_CUSTOMER_DISPLAY.Margin = New System.Windows.Forms.Padding(2)
+        Me.TXT_CUSTOMER_DISPLAY.Name = "TXT_CUSTOMER_DISPLAY"
+        Me.TXT_CUSTOMER_DISPLAY.Size = New System.Drawing.Size(174, 36)
+        Me.TXT_CUSTOMER_DISPLAY.TabIndex = 42
+        '
+        'BTNBROWSE
+        '
+        Me.BTNBROWSE.BackColor = System.Drawing.Color.Navy
+        Me.BTNBROWSE.FlatAppearance.BorderSize = 0
+        Me.BTNBROWSE.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNBROWSE.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNBROWSE.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BTNBROWSE.Location = New System.Drawing.Point(950, 69)
+        Me.BTNBROWSE.Margin = New System.Windows.Forms.Padding(2)
+        Me.BTNBROWSE.Name = "BTNBROWSE"
+        Me.BTNBROWSE.Size = New System.Drawing.Size(132, 50)
+        Me.BTNBROWSE.TabIndex = 39
+        Me.BTNBROWSE.Text = "Pilih Foto"
+        Me.BTNBROWSE.UseVisualStyleBackColor = False
+        Me.BTNBROWSE.Visible = False
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label16.Location = New System.Drawing.Point(653, 32)
+        Me.Label16.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(104, 28)
+        Me.Label16.TabIndex = 38
+        Me.Label16.Text = "Logo Toko"
+        '
+        'PBLOGO
+        '
+        Me.PBLOGO.Location = New System.Drawing.Point(656, 69)
+        Me.PBLOGO.Margin = New System.Windows.Forms.Padding(2)
+        Me.PBLOGO.Name = "PBLOGO"
+        Me.PBLOGO.Size = New System.Drawing.Size(260, 130)
+        Me.PBLOGO.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PBLOGO.TabIndex = 37
+        Me.PBLOGO.TabStop = False
+        '
+        'LBPRINTER_NOTA
+        '
+        Me.LBPRINTER_NOTA.AutoSize = True
+        Me.LBPRINTER_NOTA.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBPRINTER_NOTA.Location = New System.Drawing.Point(217, 232)
+        Me.LBPRINTER_NOTA.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.LBPRINTER_NOTA.Name = "LBPRINTER_NOTA"
+        Me.LBPRINTER_NOTA.Size = New System.Drawing.Size(119, 28)
+        Me.LBPRINTER_NOTA.TabIndex = 35
+        Me.LBPRINTER_NOTA.Text = "Printer Nota"
+        '
+        'Label20
+        '
+        Me.Label20.AutoSize = True
+        Me.Label20.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label20.Location = New System.Drawing.Point(26, 232)
+        Me.Label20.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label20.Name = "Label20"
+        Me.Label20.Size = New System.Drawing.Size(119, 28)
+        Me.Label20.TabIndex = 33
+        Me.Label20.Text = "Printer Nota"
+        '
+        'BTNCANCELTOKO
+        '
+        Me.BTNCANCELTOKO.BackColor = System.Drawing.Color.Crimson
+        Me.BTNCANCELTOKO.FlatAppearance.BorderSize = 0
+        Me.BTNCANCELTOKO.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNCANCELTOKO.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNCANCELTOKO.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BTNCANCELTOKO.Location = New System.Drawing.Point(426, 393)
+        Me.BTNCANCELTOKO.Margin = New System.Windows.Forms.Padding(2)
+        Me.BTNCANCELTOKO.Name = "BTNCANCELTOKO"
+        Me.BTNCANCELTOKO.Size = New System.Drawing.Size(132, 50)
+        Me.BTNCANCELTOKO.TabIndex = 27
+        Me.BTNCANCELTOKO.Text = "Cancel"
+        Me.BTNCANCELTOKO.UseVisualStyleBackColor = False
+        '
+        'LBALAMATTOKO
+        '
+        Me.LBALAMATTOKO.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBALAMATTOKO.Location = New System.Drawing.Point(217, 96)
+        Me.LBALAMATTOKO.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.LBALAMATTOKO.Name = "LBALAMATTOKO"
+        Me.LBALAMATTOKO.Size = New System.Drawing.Size(311, 62)
+        Me.LBALAMATTOKO.TabIndex = 32
+        Me.LBALAMATTOKO.Text = "Alamat Toko"
+        '
+        'LBNOTOKO
+        '
+        Me.LBNOTOKO.AutoSize = True
+        Me.LBNOTOKO.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBNOTOKO.Location = New System.Drawing.Point(217, 180)
+        Me.LBNOTOKO.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.LBNOTOKO.Name = "LBNOTOKO"
+        Me.LBNOTOKO.Size = New System.Drawing.Size(120, 28)
+        Me.LBNOTOKO.TabIndex = 31
+        Me.LBNOTOKO.Text = "No. HP Toko"
+        '
+        'LBNAMATOKO
+        '
+        Me.LBNAMATOKO.AutoSize = True
+        Me.LBNAMATOKO.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBNAMATOKO.Location = New System.Drawing.Point(217, 39)
+        Me.LBNAMATOKO.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.LBNAMATOKO.Name = "LBNAMATOKO"
+        Me.LBNAMATOKO.Size = New System.Drawing.Size(111, 28)
+        Me.LBNAMATOKO.TabIndex = 25
+        Me.LBNAMATOKO.Text = "Nama Toko"
+        '
+        'TXTNOTOKO
+        '
+        Me.TXTNOTOKO.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TXTNOTOKO.Location = New System.Drawing.Point(217, 176)
+        Me.TXTNOTOKO.Margin = New System.Windows.Forms.Padding(2)
+        Me.TXTNOTOKO.Name = "TXTNOTOKO"
+        Me.TXTNOTOKO.Size = New System.Drawing.Size(390, 34)
+        Me.TXTNOTOKO.TabIndex = 30
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label15.Location = New System.Drawing.Point(26, 180)
+        Me.Label15.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(120, 28)
+        Me.Label15.TabIndex = 29
+        Me.Label15.Text = "No. HP Toko"
+        '
+        'TXTALAMATTOKO
+        '
+        Me.TXTALAMATTOKO.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TXTALAMATTOKO.Location = New System.Drawing.Point(217, 92)
+        Me.TXTALAMATTOKO.Margin = New System.Windows.Forms.Padding(2)
+        Me.TXTALAMATTOKO.Multiline = True
+        Me.TXTALAMATTOKO.Name = "TXTALAMATTOKO"
+        Me.TXTALAMATTOKO.Size = New System.Drawing.Size(390, 69)
+        Me.TXTALAMATTOKO.TabIndex = 28
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label14.Location = New System.Drawing.Point(26, 96)
+        Me.Label14.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(121, 28)
+        Me.Label14.TabIndex = 27
+        Me.Label14.Text = "Alamat Toko"
+        '
+        'TXTNAMATOKO
+        '
+        Me.TXTNAMATOKO.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TXTNAMATOKO.Location = New System.Drawing.Point(217, 36)
+        Me.TXTNAMATOKO.Margin = New System.Windows.Forms.Padding(2)
+        Me.TXTNAMATOKO.Name = "TXTNAMATOKO"
+        Me.TXTNAMATOKO.Size = New System.Drawing.Size(390, 34)
+        Me.TXTNAMATOKO.TabIndex = 26
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label13.Location = New System.Drawing.Point(26, 39)
+        Me.Label13.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(111, 28)
+        Me.Label13.TabIndex = 25
+        Me.Label13.Text = "Nama Toko"
+        '
+        'BTNUBAHTOKO
+        '
+        Me.BTNUBAHTOKO.BackColor = System.Drawing.Color.Navy
+        Me.BTNUBAHTOKO.FlatAppearance.BorderSize = 0
+        Me.BTNUBAHTOKO.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNUBAHTOKO.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNUBAHTOKO.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BTNUBAHTOKO.Location = New System.Drawing.Point(232, 393)
+        Me.BTNUBAHTOKO.Margin = New System.Windows.Forms.Padding(2)
+        Me.BTNUBAHTOKO.Name = "BTNUBAHTOKO"
+        Me.BTNUBAHTOKO.Size = New System.Drawing.Size(189, 50)
+        Me.BTNUBAHTOKO.TabIndex = 25
+        Me.BTNUBAHTOKO.Text = "Ubah Data Toko"
+        Me.BTNUBAHTOKO.UseVisualStyleBackColor = False
+        '
+        'TXTPRINTER_NOTA
+        '
+        Me.TXTPRINTER_NOTA.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.TXTPRINTER_NOTA.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TXTPRINTER_NOTA.FormattingEnabled = True
+        Me.TXTPRINTER_NOTA.Location = New System.Drawing.Point(217, 229)
+        Me.TXTPRINTER_NOTA.Margin = New System.Windows.Forms.Padding(2)
+        Me.TXTPRINTER_NOTA.Name = "TXTPRINTER_NOTA"
+        Me.TXTPRINTER_NOTA.Size = New System.Drawing.Size(391, 36)
+        Me.TXTPRINTER_NOTA.TabIndex = 36
+        '
+        'BTNSIMPANTOKO
+        '
+        Me.BTNSIMPANTOKO.BackColor = System.Drawing.Color.DarkGreen
+        Me.BTNSIMPANTOKO.FlatAppearance.BorderSize = 0
+        Me.BTNSIMPANTOKO.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNSIMPANTOKO.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNSIMPANTOKO.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.BTNSIMPANTOKO.Location = New System.Drawing.Point(232, 393)
+        Me.BTNSIMPANTOKO.Margin = New System.Windows.Forms.Padding(2)
+        Me.BTNSIMPANTOKO.Name = "BTNSIMPANTOKO"
+        Me.BTNSIMPANTOKO.Size = New System.Drawing.Size(189, 50)
+        Me.BTNSIMPANTOKO.TabIndex = 26
+        Me.BTNSIMPANTOKO.Text = "Simpan Data Toko"
+        Me.BTNSIMPANTOKO.UseVisualStyleBackColor = False
+        '
+        'TXT_POINTMEMBER
+        '
+        Me.TXT_POINTMEMBER.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TXT_POINTMEMBER.Location = New System.Drawing.Point(217, 341)
+        Me.TXT_POINTMEMBER.Margin = New System.Windows.Forms.Padding(2)
+        Me.TXT_POINTMEMBER.Name = "TXT_POINTMEMBER"
+        Me.TXT_POINTMEMBER.Size = New System.Drawing.Size(174, 34)
+        Me.TXT_POINTMEMBER.TabIndex = 76
         '
         'PNTOP
         '
@@ -1844,48 +1886,6 @@ Partial Class FR_TENTANG
         'PEWAKTU
         '
         '
-        'LB_POINTMEMBER
-        '
-        Me.LB_POINTMEMBER.AutoSize = True
-        Me.LB_POINTMEMBER.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LB_POINTMEMBER.Location = New System.Drawing.Point(217, 344)
-        Me.LB_POINTMEMBER.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.LB_POINTMEMBER.Name = "LB_POINTMEMBER"
-        Me.LB_POINTMEMBER.Size = New System.Drawing.Size(71, 35)
-        Me.LB_POINTMEMBER.TabIndex = 75
-        Me.LB_POINTMEMBER.Text = "Point"
-        '
-        'Label28
-        '
-        Me.Label28.AutoSize = True
-        Me.Label28.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label28.Location = New System.Drawing.Point(26, 344)
-        Me.Label28.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Label28.Name = "Label28"
-        Me.Label28.Size = New System.Drawing.Size(169, 35)
-        Me.Label28.TabIndex = 74
-        Me.Label28.Text = "Point member"
-        '
-        'TXT_POINTMEMBER
-        '
-        Me.TXT_POINTMEMBER.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TXT_POINTMEMBER.Location = New System.Drawing.Point(217, 341)
-        Me.TXT_POINTMEMBER.Margin = New System.Windows.Forms.Padding(2)
-        Me.TXT_POINTMEMBER.Name = "TXT_POINTMEMBER"
-        Me.TXT_POINTMEMBER.Size = New System.Drawing.Size(174, 34)
-        Me.TXT_POINTMEMBER.TabIndex = 76
-        '
-        'Label27
-        '
-        Me.Label27.AutoSize = True
-        Me.Label27.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label27.Location = New System.Drawing.Point(395, 347)
-        Me.Label27.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Label27.Name = "Label27"
-        Me.Label27.Size = New System.Drawing.Size(185, 35)
-        Me.Label27.TabIndex = 77
-        Me.Label27.Text = "% dari transaksi"
-        '
         'FR_TENTANG
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(120.0!, 120.0!)
@@ -1904,13 +1904,13 @@ Partial Class FR_TENTANG
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.PNCONTROL.ResumeLayout(False)
         Me.PNCONTENT.ResumeLayout(False)
-        Me.GBTOKO.ResumeLayout(False)
-        Me.GBTOKO.PerformLayout()
-        CType(Me.PBLOGO, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
+        Me.GBTOKO.ResumeLayout(False)
+        Me.GBTOKO.PerformLayout()
+        CType(Me.PBLOGO, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PNTOP.ResumeLayout(False)
         Me.PNTOP.PerformLayout()
         Me.PNLEFT.ResumeLayout(False)

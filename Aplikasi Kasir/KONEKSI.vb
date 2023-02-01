@@ -13,7 +13,7 @@ Module KONEKSI
     Public POINT_MEMBER As Double
     Public URL_LOGO As String
 
-    Public VERSI As String = "V3.1"
+    Public VERSI As String = "V3.1.1"
 
     Public Sub MASUK_REGISTRY(ByVal TOKO As String, ByVal ALAMAT As String, ByVal NO As String, ByVal PRINTER As String, ByVal URLLOGO As Byte(), ByVal CUSTOMERDISPLAY As Boolean, ByVal POINTMEMBER As Double)
         With My.Computer.Registry

@@ -96,4 +96,8 @@ Public Class FR_TENTANG_BACKRESDB
             BTN_LOCATION.Visible = False
         End If
     End Sub
+
+    Private Sub FR_TENTANG_BACKRESDB_Load(sender As Object, e As EventArgs) Handles Me.Load
+        Label3.Text = "Hanya gunakan DB backup dengan versi " & VERSI.Remove(4, 2) & " atau " & VERSI.Remove(5, 1) & "x."
+    End Sub
 End Class
