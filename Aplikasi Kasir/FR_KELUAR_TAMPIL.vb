@@ -8,6 +8,8 @@ Public Class FR_KELUAR_TAMPIL
             FR_MASUK.Enabled = True
         ElseIf LB_TITLE.Text = "FR_DISKON" Then
             FR_DISKON.Enabled = True
+        ElseIf LB_TITLE.Text = "FR_MASUK_BONGKAR" Then
+            FR_MASUK_BONGKAR.Enabled = True
         End If
         Me.Close()
     End Sub
@@ -188,6 +190,13 @@ Public Class FR_KELUAR_TAMPIL
                     .TXTKODE.Select()
                     .Enabled = True
                 End With
+            ElseIf LB_TITLE.Text = "FR_MASUK_BONGKAR" Then
+                With FR_MASUK_BONGKAR
+                    .TXT_KODEBARANG.Text = DGCARI.SelectedCells(0).Value
+                    .CARI_PRODUK()
+                    .TXT_KODEBARANG.Select()
+                    .Enabled = True
+                End With
             End If
             Me.Close()
         ElseIf (e.KeyCode = Keys.F1) Then
@@ -215,6 +224,8 @@ Public Class FR_KELUAR_TAMPIL
                     FR_MASUK.Enabled = True
                 ElseIf LB_TITLE.Text = "FR_DISKON" Then
                     FR_DISKON.Enabled = True
+                ElseIf LB_TITLE.Text = "FR_MASUK_BONGKAR" Then
+                    FR_MASUK_BONGKAR.Enabled = True
                 End If
                 Me.Close()
         End Select
@@ -229,6 +240,8 @@ Public Class FR_KELUAR_TAMPIL
                     FR_MASUK.Enabled = True
                 ElseIf LB_TITLE.Text = "FR_DISKON" Then
                     FR_DISKON.Enabled = True
+                ElseIf LB_TITLE.Text = "FR_MASUK_BONGKAR" Then
+                    FR_MASUK_BONGKAR.Enabled = True
                 End If
                 Me.Close()
         End Select
@@ -253,6 +266,13 @@ Public Class FR_KELUAR_TAMPIL
                 With FR_DISKON
                     .TXTKODE.Text = DGCARI.Item(0, e.RowIndex).Value
                     .TXTKODE.Select()
+                    .Enabled = True
+                End With
+            ElseIf LB_TITLE.Text = "FR_MASUK_BONGKAR" Then
+                With FR_MASUK_BONGKAR
+                    .TXT_KODEBARANG.Text = DGCARI.SelectedCells(0).Value
+                    .CARI_PRODUK()
+                    .TXT_KODEBARANG.Select()
                     .Enabled = True
                 End With
             End If

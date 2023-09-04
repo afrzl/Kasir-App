@@ -1,7 +1,10 @@
 ﻿Imports System.Data.SqlClient
+Imports Microsoft.SqlServer
 Imports Microsoft.Win32
+Imports MySql.Data.MySqlClient
+
 Module KONEKSI
-    Public CONN As SqlConnection
+    Public CONN As MySqlConnection
     Public NAMA_LOGIN As String = ""
     Public ROLE As Integer = 0
 
@@ -49,9 +52,11 @@ Module KONEKSI
 
     Public Sub KONEKAN()
         'SERVER=NAMA SERVER;USER ID=USERID;PASSWORD=PASSWORD;DATABASE=DATABASE;'
-        Dim STR As String = "SERVER=" & My.Settings.SERVER & ";USER ID=" & My.Settings.USER & ";PASSWORD=" & My.Settings.PASSWORD & ";DATABASE=" & My.Settings.DATABASE & ";MultipleActiveResultSets=True;"
+        'Dim STR As String = "SERVER=" & My.Settings.SERVER & ";USER ID=" & My.Settings.USER & ";PASSWORD=" & My.Settings.PASSWORD & ";DATABASE=" & My.Settings.DATABASE & ";MultipleActiveResultSets=True;"
+        Dim STR As String = "SERVER=localhost;USER ID=root;PASSWORD=;DATABASE=toko_kasir;MultipleActiveResultSets=True;"
         Try
-            CONN = New SqlConnection(STR)
+            CONN = New MySqlConnection()
+            CONN.ConnectionString = STR
             If CONN.State = ConnectionState.Closed Then
                 CONN.Open()
             End If

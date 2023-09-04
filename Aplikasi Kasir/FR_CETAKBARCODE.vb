@@ -2,6 +2,7 @@
 Imports System.Drawing.Printing
 Imports System.IO
 Imports BarcodeLib
+Imports MySql.Data.MySqlClient
 
 Public Class FR_CETAKBARCODE
     Sub BUKA_FORM(ByVal FR As Form)
@@ -80,9 +81,9 @@ Public Class FR_CETAKBARCODE
             " OR Kode = '" & TXTCARI.Text & "'" &
             " ORDER BY 'Nama Barang' ASC"
 
-        Dim DA As SqlDataAdapter
+        Dim DA As MySqlDataAdapter
         Dim TBL As New DataSet
-        DA = New SqlDataAdapter(STR, CONN)
+        DA = New MySqlDataAdapter(STR, CONN)
         DA.Fill(TBL, START_RECORD, TAMPIL_RECORD, 0)
         DGBARANG.DataSource = TBL.Tables(0)
 
@@ -100,7 +101,7 @@ Public Class FR_CETAKBARCODE
         BTNNEXT.Enabled = True
         Dim TOTAL_RECORD As Integer = 0
 
-        DA = New SqlDataAdapter(STR, CONN)
+        DA = New MySqlDataAdapter(STR, CONN)
         DA.Fill(TBL_DATA)
 
         TOTAL_RECORD = TBL_DATA.Rows.Count

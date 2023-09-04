@@ -1,6 +1,7 @@
 ﻿Imports System.Data.SqlClient
 Imports System.Drawing.Printing
 Imports System.IO
+Imports MySql.Data.MySqlClient
 
 Public Class FR_HISTORYPENJUALAN
     Dim START_RECORD As Integer = 0
@@ -39,9 +40,9 @@ Public Class FR_HISTORYPENJUALAN
             " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
         End If
 
-        Dim DA As SqlDataAdapter
+        Dim DA As MySqlDataAdapter
         Dim TBL As New DataSet
-        DA = New SqlDataAdapter(STR, CONN)
+        DA = New MySqlDataAdapter(STR, CONN)
         DA.Fill(TBL)
         DGHISTORY.DataSource = TBL.Tables(0)
 

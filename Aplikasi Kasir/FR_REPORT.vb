@@ -88,7 +88,8 @@ Public Class FR_REPORT
 
         KONDISI_AWAL()
 
-        CRV.Refresh()
+        CBJENIS.SelectedIndex() = 0
+        BTNTAMPIL.PerformClick()
     End Sub
 
 
@@ -600,6 +601,8 @@ Public Class FR_REPORT
                                     TBL.Rows(N - 1).Item(15) = 0
                                 End If
                             Next
+
+                            TOTALITEM = Math.Round(TOTALITEM, 2)
                         Case 4
                             For N = 1 To TBL.Rows.Count - 1
                                 If TBL.Rows(N).Item(0) = TBL.Rows(N - 1).Item(0) Then
@@ -844,6 +847,8 @@ Public Class FR_REPORT
                                     TBL.Rows(N - 1).Item(15) = 0
                                 End If
                             Next
+
+                            TOTALITEM = Math.Round(TOTALITEM, 2)
                     End Select
                 Case 3
                     Select Case CBJENIS.SelectedIndex
@@ -869,6 +874,7 @@ Public Class FR_REPORT
                                     Next
                                 End If
                             Next
+                            TOTALITEM = Math.Round(TOTALITEM, 2)
                     End Select
             End Select
 

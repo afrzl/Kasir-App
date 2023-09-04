@@ -123,6 +123,10 @@
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.5.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MySql.Data, Version=8.1.0.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\..\..\Program Files (x86)\MySQL\MySQL Connector NET 8.1.0\MySql.Data.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="Syncfusion.Core.WinForms, Version=19.3460.0.43, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
@@ -240,6 +244,12 @@
       <DependentUpon>FR_KASIR_ACTION.vb</DependentUpon>
     </Compile>
     <Compile Include="FR_KASIR_ACTION.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FR_MASUK_BONGKAR.Designer.vb">
+      <DependentUpon>FR_MASUK_BONGKAR.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FR_MASUK_BONGKAR.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FR_MASUK_HISTORY.Designer.vb">
@@ -557,6 +567,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FR_KASIR_ACTION.resx">
       <DependentUpon>FR_KASIR_ACTION.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FR_MASUK_BONGKAR.resx">
+      <DependentUpon>FR_MASUK_BONGKAR.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FR_MASUK_HISTORY.resx">
       <DependentUpon>FR_MASUK_HISTORY.vb</DependentUpon>

@@ -45,7 +45,7 @@ Public Class FR_MASUK_HISTORY
                         " Harga AS 'Harga Partai'," &
                         " Stok AS 'Stok Sisa'" &
                         " FROM tbl_transaksi_child" &
-                        " INNER JOIN tbl_barang ON tbl_transaksi_child.Kode=tbl_barang.Kode" &
+                        " LEFT JOIN tbl_barang ON tbl_transaksi_child.Kode=tbl_barang.Kode" &
                         " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M'" &
                         " ORDER BY Id DESC" &
                         " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
@@ -57,7 +57,7 @@ Public Class FR_MASUK_HISTORY
                         " Jumlah as 'Stok Masuk'," &
                         " Harga AS 'Harga Partai'," &
                         " Stok AS 'Stok Sisa'" &
-                        " FROM tbl_transaksi_child INNER JOIN tbl_barang ON tbl_transaksi_child.Kode=tbl_barang.Kode" &
+                        " FROM tbl_transaksi_child LEFT JOIN tbl_barang ON tbl_transaksi_child.Kode=tbl_barang.Kode" &
                         " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M' AND" &
                         " (RTRIM(tbl_barang.Kode) = '" & TXTCARI.Text & "' OR" &
                         " RTRIM(tbl_transaksi_child.Id_trans) = '" & TXTCARI.Text & "' OR" &
@@ -74,7 +74,7 @@ Public Class FR_MASUK_HISTORY
                             " Jumlah as 'Stok Masuk'," &
                             " Harga AS 'Harga Partai'," &
                             " Stok AS 'Stok Sisa'" &
-                            " FROM tbl_transaksi_child INNER JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
+                            " FROM tbl_transaksi_child LEFT JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
                             " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M'" &
                             " AND Stok != 0" &
                             " ORDER BY Id DESC" &
@@ -87,7 +87,7 @@ Public Class FR_MASUK_HISTORY
                             " Jumlah as 'Stok Masuk'," &
                             " Harga AS 'Harga Partai'," &
                             " Stok AS 'Stok Sisa'" &
-                            " FROM tbl_transaksi_child INNER JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
+                            " FROM tbl_transaksi_child LEFT JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
                             " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M' AND" &
                             " (RTRIM(tbl_barang.Kode) = '" & TXTCARI.Text & "' OR" &
                         " RTRIM(tbl_transaksi_child.Id_trans) = '" & TXTCARI.Text & "' OR" &
@@ -105,7 +105,7 @@ Public Class FR_MASUK_HISTORY
                             " Jumlah as 'Stok Masuk'," &
                             " Harga AS 'Harga Partai'," &
                             " Stok AS 'Stok Sisa'" &
-                            " FROM tbl_transaksi_child INNER JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
+                            " FROM tbl_transaksi_child LEFT JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
                             " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M'" &
                             " AND Stok = 0" &
                             " ORDER BY Id DESC" &
@@ -118,7 +118,7 @@ Public Class FR_MASUK_HISTORY
                             " Jumlah as 'Stok Masuk'," &
                             " Harga AS 'Harga Partai'," &
                             " Stok AS 'Stok Sisa'" &
-                            " FROM tbl_transaksi_child INNER JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
+                            " FROM tbl_transaksi_child LEFT JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
                             " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M' AND" &
                             " (RTRIM(tbl_barang.Kode) = '" & TXTCARI.Text & "' OR" &
                         " RTRIM(tbl_transaksi_child.Id_trans) = '" & TXTCARI.Text & "' OR" &
@@ -136,7 +136,7 @@ Public Class FR_MASUK_HISTORY
                         " Jumlah as 'Stok Masuk'," &
                         " Harga AS 'Harga Partai'," &
                         " Stok AS 'Stok Sisa'" &
-                        " FROM tbl_transaksi_child INNER JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
+                        " FROM tbl_transaksi_child LEFT JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
                         " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M'" &
                         " ORDER BY Id DESC" &
                         " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
@@ -148,7 +148,7 @@ Public Class FR_MASUK_HISTORY
                         " Jumlah as 'Stok Masuk'," &
                         " Harga AS 'Harga Partai'," &
                         " Stok AS 'Stok Sisa'" &
-                        " FROM tbl_transaksi_child INNER JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
+                        " FROM tbl_transaksi_child LEFT JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
                         " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M' AND" &
                         " (RTRIM(tbl_barang.Kode) = '" & TXTCARI.Text & "' OR" &
                         " RTRIM(tbl_transaksi_child.Id_trans) = '" & TXTCARI.Text & "' OR" &
@@ -167,8 +167,8 @@ Public Class FR_MASUK_HISTORY
                             " Jumlah as 'Stok Masuk'," &
                             " tbl_transaksi_child.Harga AS 'Harga Partai'," &
                             " Stok AS 'Stok Sisa'" &
-                            " FROM tbl_transaksi_child INNER JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
-                            " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans=tbl_transaksi_parent.Id_trans" &
+                            " FROM tbl_transaksi_child LEFT JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
+                            " LEFT JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans=tbl_transaksi_parent.Id_trans" &
                             " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M' AND" &
                             " (tbl_transaksi_parent.Id_kasir) = '" & My.Settings.ID_ACCOUNT & "'" &
                             " ORDER BY tbl_transaksi_child.Id DESC" &
@@ -182,8 +182,8 @@ Public Class FR_MASUK_HISTORY
                             " tbl_transaksi_child.Jumlah as 'Stok Masuk'," &
                             " tbl_transaksi_child.Harga AS 'Harga Partai'," &
                             " tbl_transaksi_child.Stok AS 'Stok Sisa'" &
-                            " FROM tbl_transaksi_child INNER JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
-                            " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans=tbl_transaksi_parent.Id_trans" &
+                            " FROM tbl_transaksi_child LEFT JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
+                            " LEFT JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans=tbl_transaksi_parent.Id_trans" &
                             " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M' AND" &
                             " tbl_transaksi_parent.Id_kasir = '" & My.Settings.ID_ACCOUNT & "' AND" &
                             " (RTRIM(tbl_barang.Kode) = '" & TXTCARI.Text & "' OR" &
@@ -202,8 +202,8 @@ Public Class FR_MASUK_HISTORY
                             " tbl_transaksi_child.Jumlah as 'Stok Masuk'," &
                             " tbl_transaksi_child.Harga AS 'Harga Partai'," &
                             " tbl_transaksi_child.Stok AS 'Stok Sisa'" &
-                            " FROM tbl_transaksi_child INNER JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
-                            " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans=tbl_transaksi_parent.Id_trans" &
+                            " FROM tbl_transaksi_child LEFT JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
+                            " LEFT JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans=tbl_transaksi_parent.Id_trans" &
                             " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M'" &
                             " AND Stok != 0" &
                             " AND (tbl_transaksi_parent.Id_kasir) = '" & My.Settings.ID_ACCOUNT & "'" &
@@ -218,8 +218,8 @@ Public Class FR_MASUK_HISTORY
                             " tbl_transaksi_child.Jumlah as 'Stok Masuk'," &
                             " tbl_transaksi_child.Harga AS 'Harga Partai'," &
                             " tbl_transaksi_child.Stok AS 'Stok Sisa'" &
-                            " FROM tbl_transaksi_child INNER JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
-                            " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans=tbl_transaksi_parent.Id_trans" &
+                            " FROM tbl_transaksi_child LEFT JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
+                            " LEFT JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans=tbl_transaksi_parent.Id_trans" &
                             " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M'" &
                             " AND Stok != 0" &
                             " AND (tbl_transaksi_parent.Id_kasir) = '" & My.Settings.ID_ACCOUNT & "' AND" &
@@ -239,8 +239,8 @@ Public Class FR_MASUK_HISTORY
                                 " tbl_transaksi_child.Jumlah as 'Stok Masuk'," &
                                 " tbl_transaksi_child.Harga AS 'Harga Partai'," &
                                 " tbl_transaksi_child.Stok AS 'Stok Sisa'" &
-                                " FROM tbl_transaksi_child INNER JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
-                                " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans=tbl_transaksi_parent.Id_trans" &
+                                " FROM tbl_transaksi_child LEFT JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
+                                " LEFT JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans=tbl_transaksi_parent.Id_trans" &
                                 " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M'" &
                                 " AND Stok = 0" &
                                 " AND (tbl_transaksi_parent.Id_kasir) = '" & My.Settings.ID_ACCOUNT & "'" &
@@ -255,8 +255,8 @@ Public Class FR_MASUK_HISTORY
                                 " tbl_transaksi_child.Jumlah as 'Stok Masuk'," &
                                 " tbl_transaksi_child.Harga AS 'Harga Partai'," &
                                 " tbl_transaksi_child.Stok AS 'Stok Sisa'" &
-                                " FROM tbl_transaksi_child INNER JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
-                                " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans=tbl_transaksi_parent.Id_trans" &
+                                " FROM tbl_transaksi_child LEFT JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
+                                " LEFT JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans=tbl_transaksi_parent.Id_trans" &
                                 " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M'" &
                                 " AND Stok = 0" &
                                 " AND (tbl_transaksi_parent.Id_kasir) = '" & My.Settings.ID_ACCOUNT & "' AND" &
@@ -276,8 +276,8 @@ Public Class FR_MASUK_HISTORY
                             " tbl_transaksi_child.Jumlah as 'Stok Masuk'," &
                             " tbl_transaksi_child.Harga AS 'Harga Partai'," &
                             " tbl_transaksi_child.Stok AS 'Stok Sisa'" &
-                            " FROM tbl_transaksi_child INNER JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
-                            " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans=tbl_transaksi_parent.Id_trans" &
+                            " FROM tbl_transaksi_child LEFT JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
+                            " LEFT JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans=tbl_transaksi_parent.Id_trans" &
                             " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M'" &
                             " AND (tbl_transaksi_parent.Id_kasir) = '" & My.Settings.ID_ACCOUNT & "'" &
                             " ORDER BY tbl_transaksi_child.Id DESC" &
@@ -291,8 +291,8 @@ Public Class FR_MASUK_HISTORY
                             " tbl_transaksi_child.Jumlah as 'Stok Masuk'," &
                             " tbl_transaksi_child.Harga AS 'Harga Partai'," &
                             " tbl_transaksi_child.Stok AS 'Stok Sisa'" &
-                            " FROM tbl_transaksi_child INNER JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
-                            " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans=tbl_transaksi_parent.Id_trans" &
+                            " FROM tbl_transaksi_child LEFT JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
+                            " LEFT JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans=tbl_transaksi_parent.Id_trans" &
                             " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M'" &
                             " AND (tbl_transaksi_parent.Id_kasir) = '" & My.Settings.ID_ACCOUNT & "' AND" &
                             " (RTRIM(tbl_barang.Kode) = '" & TXTCARI.Text & "' OR" &
@@ -312,8 +312,8 @@ Public Class FR_MASUK_HISTORY
                             " Jumlah as 'Stok Masuk'," &
                             " tbl_transaksi_child.Harga AS 'Harga Partai'," &
                             " Stok AS 'Stok Sisa'" &
-                            " FROM tbl_transaksi_child INNER JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
-                            " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans=tbl_transaksi_parent.Id_trans" &
+                            " FROM tbl_transaksi_child LEFT JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
+                            " LEFT JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans=tbl_transaksi_parent.Id_trans" &
                             " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M' AND" &
                             " (tbl_transaksi_parent.Id_kasir) = '" & My.Settings.ID_ACCOUNT & "'" &
                             " ORDER BY tbl_transaksi_child.Id DESC" &
@@ -327,8 +327,8 @@ Public Class FR_MASUK_HISTORY
                             " tbl_transaksi_child.Jumlah as 'Stok Masuk'," &
                             " tbl_transaksi_child.Harga AS 'Harga Partai'," &
                             " tbl_transaksi_child.Stok AS 'Stok Sisa'" &
-                            " FROM tbl_transaksi_child INNER JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
-                            " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans=tbl_transaksi_parent.Id_trans" &
+                            " FROM tbl_transaksi_child LEFT JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
+                            " LEFT JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans=tbl_transaksi_parent.Id_trans" &
                             " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M' AND" &
                             " tbl_transaksi_parent.Id_kasir = '" & My.Settings.ID_ACCOUNT & "' AND" &
                             " (RTRIM(tbl_barang.Kode) = '" & TXTCARI.Text & "' OR" &
@@ -347,8 +347,8 @@ Public Class FR_MASUK_HISTORY
                             " tbl_transaksi_child.Jumlah as 'Stok Masuk'," &
                             " tbl_transaksi_child.Harga AS 'Harga Partai'," &
                             " tbl_transaksi_child.Stok AS 'Stok Sisa'" &
-                            " FROM tbl_transaksi_child INNER JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
-                            " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans=tbl_transaksi_parent.Id_trans" &
+                            " FROM tbl_transaksi_child LEFT JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
+                            " LEFT JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans=tbl_transaksi_parent.Id_trans" &
                             " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M'" &
                             " AND Stok != 0" &
                             " AND (tbl_transaksi_parent.Id_kasir) = '" & My.Settings.ID_ACCOUNT & "'" &
@@ -363,8 +363,8 @@ Public Class FR_MASUK_HISTORY
                             " tbl_transaksi_child.Jumlah as 'Stok Masuk'," &
                             " tbl_transaksi_child.Harga AS 'Harga Partai'," &
                             " tbl_transaksi_child.Stok AS 'Stok Sisa'" &
-                            " FROM tbl_transaksi_child INNER JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
-                            " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans=tbl_transaksi_parent.Id_trans" &
+                            " FROM tbl_transaksi_child LEFT JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
+                            " LEFT JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans=tbl_transaksi_parent.Id_trans" &
                             " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M'" &
                             " AND Stok != 0" &
                             " AND (tbl_transaksi_parent.Id_kasir) = '" & My.Settings.ID_ACCOUNT & "' AND" &
@@ -384,8 +384,8 @@ Public Class FR_MASUK_HISTORY
                                 " tbl_transaksi_child.Jumlah as 'Stok Masuk'," &
                                 " tbl_transaksi_child.Harga AS 'Harga Partai'," &
                                 " tbl_transaksi_child.Stok AS 'Stok Sisa'" &
-                                " FROM tbl_transaksi_child INNER JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
-                                " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans=tbl_transaksi_parent.Id_trans" &
+                                " FROM tbl_transaksi_child LEFT JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
+                                " LEFT JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans=tbl_transaksi_parent.Id_trans" &
                                 " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M'" &
                                 " AND Stok = 0" &
                                 " AND (tbl_transaksi_parent.Id_kasir) = '" & My.Settings.ID_ACCOUNT & "'" &
@@ -400,8 +400,8 @@ Public Class FR_MASUK_HISTORY
                                 " tbl_transaksi_child.Jumlah as 'Stok Masuk'," &
                                 " tbl_transaksi_child.Harga AS 'Harga Partai'," &
                                 " tbl_transaksi_child.Stok AS 'Stok Sisa'" &
-                                " FROM tbl_transaksi_child INNER JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
-                                " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans=tbl_transaksi_parent.Id_trans" &
+                                " FROM tbl_transaksi_child LEFT JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
+                                " LEFT JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans=tbl_transaksi_parent.Id_trans" &
                                 " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M'" &
                                 " AND Stok = 0" &
                                 " AND (tbl_transaksi_parent.Id_kasir) = '" & My.Settings.ID_ACCOUNT & "' AND" &
@@ -421,8 +421,8 @@ Public Class FR_MASUK_HISTORY
                             " tbl_transaksi_child.Jumlah as 'Stok Masuk'," &
                             " tbl_transaksi_child.Harga AS 'Harga Partai'," &
                             " tbl_transaksi_child.Stok AS 'Stok Sisa'" &
-                            " FROM tbl_transaksi_child INNER JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
-                            " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans=tbl_transaksi_parent.Id_trans" &
+                            " FROM tbl_transaksi_child LEFT JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
+                            " LEFT JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans=tbl_transaksi_parent.Id_trans" &
                             " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M'" &
                             " AND (tbl_transaksi_parent.Id_kasir) = '" & My.Settings.ID_ACCOUNT & "'" &
                             " ORDER BY tbl_transaksi_child.Id DESC" &
@@ -436,8 +436,8 @@ Public Class FR_MASUK_HISTORY
                             " tbl_transaksi_child.Jumlah as 'Stok Masuk'," &
                             " tbl_transaksi_child.Harga AS 'Harga Partai'," &
                             " tbl_transaksi_child.Stok AS 'Stok Sisa'" &
-                            " FROM tbl_transaksi_child INNER JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
-                            " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans=tbl_transaksi_parent.Id_trans" &
+                            " FROM tbl_transaksi_child LEFT JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
+                            " LEFT JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans=tbl_transaksi_parent.Id_trans" &
                             " WHERE (LEFT(tbl_transaksi_child.Id_trans,1))='M'" &
                             " AND (tbl_transaksi_parent.Id_kasir) = '" & My.Settings.ID_ACCOUNT & "' AND" &
                             " (RTRIM(tbl_barang.Kode) = '" & TXTCARI.Text & "' OR" &
@@ -486,6 +486,20 @@ Public Class FR_MASUK_HISTORY
             .Width = 100
         End With
         DGHISTORY.Columns.Add(Column_delete)
+        DGHISTORY.Columns(8).Width = 50
+
+        Dim Column_pecah = New DataGridViewButtonColumn
+        With Column_pecah
+            .Text = "Bongkar"
+            .HeaderText = "Bongkar"
+            .UseColumnTextForButtonValue = True
+            .FlatStyle = FlatStyle.Flat
+            .DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            .CellTemplate.Style.BackColor = Color.DarkGreen
+            .CellTemplate.Style.ForeColor = Color.WhiteSmoke
+            .Width = 100
+        End With
+        DGHISTORY.Columns.Add(Column_pecah)
         DGHISTORY.Columns(8).Width = 50
 
         BTNPREV.Enabled = True
@@ -569,6 +583,13 @@ Public Class FR_MASUK_HISTORY
                     TAMPIL()
                     MsgBox("Data transaksi berhasil dihapus")
                 End If
+            ElseIf DGHISTORY.Columns(e.ColumnIndex).HeaderText = "Bongkar" Then
+                With FR_MASUK_BONGKAR
+                    .TXT_IDBRG.Text = DGHISTORY.Item(0, DGHISTORY.CurrentRow.Index).Value
+                    .Show()
+                    .TXT_JML.Select()
+                End With
+                Me.Enabled = False
             End If
         End If
     End Sub

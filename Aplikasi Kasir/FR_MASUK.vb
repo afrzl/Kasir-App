@@ -124,12 +124,6 @@ Public Class FR_MASUK
         Next
 
         LBTOTAL.Text = Format(TOT_HARGA, "##,##0")
-
-        If LBTOTAL.Text <> 0 Then
-            BTNSTOK.Visible = True
-        Else
-            BTNSTOK.Visible = False
-        End If
     End Sub
 
     Sub MASUK_DATA()
@@ -722,5 +716,21 @@ Public Class FR_MASUK
                 End With
                 Me.Enabled = False
         End Select
+    End Sub
+
+    Private Sub DGTAMPIL_RowsAdded(sender As Object, e As DataGridViewRowsAddedEventArgs) Handles DGTAMPIL.RowsAdded
+        If DGTAMPIL.Rows.Count > 0 Then
+            BTNSTOK.Visible = True
+        Else
+            BTNSTOK.Visible = False
+        End If
+    End Sub
+
+    Private Sub DGTAMPIL_RowsRemoved(sender As Object, e As DataGridViewRowsRemovedEventArgs) Handles DGTAMPIL.RowsRemoved
+        If DGTAMPIL.Rows.Count > 0 Then
+            BTNSTOK.Visible = True
+        Else
+            BTNSTOK.Visible = False
+        End If
     End Sub
 End Class
