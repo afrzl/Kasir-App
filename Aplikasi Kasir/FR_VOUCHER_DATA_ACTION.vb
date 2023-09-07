@@ -1,10 +1,10 @@
-﻿Imports System.Data.SqlClient
+﻿Imports MySql.Data.MySqlClient
 
 Public Class FR_VOUCHER_DATA_ACTION
 
-    Dim CMD As SqlCommand
-    Dim RD As SqlDataReader
-    Dim DA As SqlDataAdapter
+    Dim CMD As MySqlCommand
+    Dim RD As MySqlDataReader
+    Dim DA As MySqlDataAdapter
     Dim STR As String
 
     Sub CLOSE_FORM()
@@ -47,9 +47,9 @@ Public Class FR_VOUCHER_DATA_ACTION
                             "'" & TXTNAMA.Text & "'," &
                             "'" & TXTHARGA.Text & "'," &
                             "'" & TXTHARGA_JUAL.Text & "'," &
-                            "'" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
+                            "'" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "'" &
                             ")"
-                        CMD = New SqlCommand(STR, CONN)
+                        CMD = New MySqlCommand(STR, CONN)
                         CMD.ExecuteNonQuery()
 
                         MsgBox("Data voucher berhasil disimpan.")
@@ -59,9 +59,9 @@ Public Class FR_VOUCHER_DATA_ACTION
                             " Nama = '" & TXTNAMA.Text & "'," &
                             " Harga = '" & TXTHARGA.Text & "'," &
                             " Harga_jual = '" & TXTHARGA_JUAL.Text & "'," &
-                            " Modified_at = '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
+                            " Modified_at = '" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "'" &
                             " WHERE Id = '" & LBL_ID.Text & "'"
-                        CMD = New SqlCommand(STR, CONN)
+                        CMD = New MySqlCommand(STR, CONN)
                         CMD.ExecuteNonQuery()
 
                         MsgBox("Data voucher berhasil diubah.")
@@ -74,9 +74,9 @@ Public Class FR_VOUCHER_DATA_ACTION
                             "'" & CB_JENIS.Text & "'," &
                             "'" & TXTNAMA.Text & "'," &
                             "'" & TXTHARGA.Text & "'," &
-                            "'" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
+                            "'" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "'" &
                             ")"
-                    CMD = New SqlCommand(STR, CONN)
+                    CMD = New MySqlCommand(STR, CONN)
                     CMD.ExecuteNonQuery()
 
                     MsgBox("Data voucher berhasil disimpan.")
@@ -86,9 +86,9 @@ Public Class FR_VOUCHER_DATA_ACTION
                             " Nama = '" & TXTNAMA.Text & "'," &
                             " Harga = '" & TXTHARGA.Text & "'," &
                             " Harga_jual = NULL," &
-                            " Modified_at = '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
+                            " Modified_at = '" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "'" &
                             " WHERE Id = '" & LBL_ID.Text & "'"
-                    CMD = New SqlCommand(STR, CONN)
+                    CMD = New MySqlCommand(STR, CONN)
                     CMD.ExecuteNonQuery()
 
                     MsgBox("Data voucher berhasil diubah.")
@@ -100,7 +100,7 @@ Public Class FR_VOUCHER_DATA_ACTION
 
     Sub CARI_DATA()
         STR = "SELECT * FROM tbl_data_voucher WHERE Id = '" & LBL_ID.Text & "'"
-        CMD = New SqlCommand(STR, CONN)
+        CMD = New MySqlCommand(STR, CONN)
         RD = CMD.ExecuteReader
         RD.Read()
         If RD.HasRows Then

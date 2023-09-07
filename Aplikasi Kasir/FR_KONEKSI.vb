@@ -3,7 +3,7 @@
         End
     End Sub
     Private Sub BTNCONNECT_Click(sender As Object, e As EventArgs) Handles BTNCONNECT.Click
-        If TXTSERVER.Text = "" Or TXTUSER.Text = "" Or TXTPASSWORD.Text = "" Or TXTDATABASE.Text = "" Then
+        If TXTSERVER.Text = "" Or TXTUSER.Text = "" Or TXTDATABASE.Text = "" Then
             MsgBox("Data harus diisi semua!")
         Else
             With My.Settings

@@ -1,4 +1,4 @@
-﻿Imports System.Data.SqlClient
+﻿Imports MySql.Data.MySqlClient
 Imports System.Drawing.Printing
 Imports BarcodeLib
 
@@ -63,9 +63,9 @@ Public Class FR_PRODUK
             " OR Kode = '" & TXTCARI.Text & "'" &
             " ORDER BY 'Nama Barang' ASC"
 
-        Dim DA As SqlDataAdapter
+        Dim DA As MySqlDataAdapter
         Dim TBL As New DataSet
-        DA = New SqlDataAdapter(STR, CONN)
+        DA = New MySqlDataAdapter(STR, CONN)
         DA.Fill(TBL, START_RECORD, TAMPIL_RECORD, 0)
         DGTAMPIL.DataSource = TBL.Tables(0)
 
@@ -134,7 +134,7 @@ Public Class FR_PRODUK
 
         Dim TOTAL_RECORD As Integer = 0
         Dim TBL_DATA As New DataTable
-        DA = New SqlDataAdapter(STR, CONN)
+        DA = New MySqlDataAdapter(STR, CONN)
         DA.Fill(TBL_DATA)
 
         TOTAL_RECORD = TBL_DATA.Rows.Count
@@ -160,9 +160,8 @@ Public Class FR_PRODUK
     End Sub
 
     Private Sub DGTAMPIL_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGTAMPIL.CellClick
-        On Error Resume Next
         Dim STR As String
-        Dim CMD As SqlCommand
+        Dim CMD As MySqlCommand
 
         If e.RowIndex >= 0 Then
             If DGTAMPIL.Columns(e.ColumnIndex).HeaderText = "Edit" Then
@@ -178,12 +177,23 @@ Public Class FR_PRODUK
                 End With
             ElseIf DGTAMPIL.Columns(e.ColumnIndex).HeaderText = "Delete" Then
                 If MsgBox("Apakah anda yakin akan menghapus produk?", vbYesNo) = vbYes Then
-                    STR = "DELETE tbl_barang " &
+                    Try
+                        CONN.Open()
+
+                        STR = "DELETE FROM tbl_barang " &
                             " WHERE Kode='" & DGTAMPIL.Item(0, e.RowIndex).Value & "'"
-                    CMD = New SqlCommand(STR, CONN)
-                    CMD.ExecuteNonQuery()
-                    MsgBox("Data produk berhasil dihapus!")
-                    TAMPIL()
+                        CMD = New MySqlCommand(STR, CONN)
+                        CMD.ExecuteNonQuery()
+                        MsgBox("Data produk berhasil dihapus!")
+
+                        CONN.Close()
+                    Catch ex As MySqlException
+                        MessageBox.Show(ex.Message)
+                    Finally
+                        CONN.Dispose()
+                        TAMPIL()
+                    End Try
+
                 End If
             ElseIf DGTAMPIL.Columns(e.ColumnIndex).HeaderText = "Cetak" Then
                 KODE_PRODUK = DGTAMPIL.Item(0, e.RowIndex).Value

@@ -1,4 +1,4 @@
-﻿Imports System.Data.SqlClient
+﻿Imports MySql.Data.MySqlClient
 Imports System.Drawing.Printing
 Imports System.IO
 
@@ -191,9 +191,9 @@ Public Class FR_CETAK_LABEL
             " OR Kode = '" & TXTCARI.Text & "'" &
             " ORDER BY 'Nama Barang' ASC"
 
-        Dim DA As SqlDataAdapter
+        Dim DA As MySqlDataAdapter
         Dim TBL As New DataSet
-        DA = New SqlDataAdapter(STR, CONN)
+        DA = New MySqlDataAdapter(STR, CONN)
         DA.Fill(TBL, START_RECORD, TAMPIL_RECORD, 0)
         DGBARANG.DataSource = TBL.Tables(0)
 
@@ -211,7 +211,7 @@ Public Class FR_CETAK_LABEL
         BTNNEXT.Enabled = True
         Dim TOTAL_RECORD As Integer = 0
 
-        DA = New SqlDataAdapter(STR, CONN)
+        DA = New MySqlDataAdapter(STR, CONN)
         DA.Fill(TBL_DATA)
 
         TOTAL_RECORD = TBL_DATA.Rows.Count
@@ -292,9 +292,9 @@ Public Class FR_CETAK_LABEL
                     " End4," &
                     " Harga5" &
                     " From tbl_barang WHERE Kode='" & IDPRODUK & "'"
-                Dim CMD As SqlCommand
-                CMD = New SqlCommand(STR, CONN)
-                Dim RD As SqlDataReader
+                Dim CMD As MySqlCommand
+                CMD = New MySqlCommand(STR, CONN)
+                Dim RD As MySqlDataReader
                 RD = CMD.ExecuteReader
 
                 If RD.HasRows Then
@@ -360,7 +360,7 @@ Public Class FR_CETAK_LABEL
                         " AND Jenis = 'B'" &
                         " AND Tgl_awal <= '" & TGL_SKRG & "'" &
                         " And Tgl_akhir >= '" & TGL_SKRG & "'"
-                    CMD = New SqlCommand(STR, CONN)
+                    CMD = New MySqlCommand(STR, CONN)
                     RD = CMD.ExecuteReader
                     If RD.HasRows Then
                         RD.Read()
@@ -559,9 +559,9 @@ Public Class FR_CETAK_LABEL
                         " tbl_diskon.Diskon" &
                         " FROM tbl_barang LEFT OUTER JOIN tbl_diskon On tbl_diskon.Kode = tbl_barang.Kode" &
                         " ORDER BY tbl_barang.Barang ASC"
-        Dim DA As SqlDataAdapter
+        Dim DA As MySqlDataAdapter
         Dim TBL As New DataTable
-        DA = New SqlDataAdapter(STR, CONN)
+        DA = New MySqlDataAdapter(STR, CONN)
         DA.Fill(TBL)
 
         Dim DT As New DataTable

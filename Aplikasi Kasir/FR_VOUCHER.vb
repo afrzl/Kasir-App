@@ -1,13 +1,13 @@
-﻿Imports System.Data.SqlClient
+﻿Imports MySql.Data.MySqlClient
 
 Public Class FR_VOUCHER
     Private Sub PEWAKTU_Tick(sender As Object, e As EventArgs) Handles PEWAKTU.Tick
         LBTGL.Text = Format(Date.Now, "dd MMMM yyyy HH:mm:ss")
     End Sub
 
-    Dim CMD As SqlCommand
-    Dim RD As SqlDataReader
-    Dim DA As SqlDataAdapter
+    Dim CMD As MySqlCommand
+    Dim RD As MySqlDataReader
+    Dim DA As MySqlDataAdapter
     Dim STR As String
 
     Sub BUKA_FORM(ByVal FR As Form)
@@ -214,7 +214,7 @@ Public Class FR_VOUCHER
                     " WHERE tbl_data_voucher.Nama Like '%" & TXTCARI.Text & "%' " &
                     " OR tbl_transaksi_voucher.Kode = '" & TXTCARI.Text & "'" &
                     " ORDER BY tbl_transaksi_voucher.Id ASC"
-            DA = New SqlDataAdapter(STR, CONN)
+            DA = New MySqlDataAdapter(STR, CONN)
             Dim TBL As New DataTable
             DA.Fill(TBL)
             DGTAMPIL.DataSource = TBL

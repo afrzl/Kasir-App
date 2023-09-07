@@ -1,4 +1,4 @@
-﻿Imports System.Data.SqlClient
+﻿Imports MySql.Data.MySqlClient
 Imports System.Drawing.Printing
 Imports System.IO
 
@@ -66,27 +66,32 @@ Public Class FR_MASUK
 
     Private Function AUTOID() As String
         Dim ID_AWAL As String = Format(Date.Now, "yyMMdd")
-        Dim STR As String = "SELECT TOP 1 (Id_trans) AS Id_trans FROM tbl_transaksi_parent WHERE LEFT(Id_trans,1)='M' ORDER BY Id DESC"
-        Dim CMD As SqlCommand
-        CMD = New SqlCommand(STR, CONN)
-        Dim RD As SqlDataReader
-        RD = CMD.ExecuteReader
-        RD.Read()
-        If RD.HasRows Then
-            If Mid(RD.Item("Id_trans"), 2, 6) = ID_AWAL Then
-                Dim ID As Integer = Mid(RD.Item("Id_trans"), 8, 3) + 1
-                RD.Close()
-                AUTOID = "M" + ID_AWAL + Format(ID, "000")
-            Else
-                RD.Close()
-                AUTOID = "M" + ID_AWAL + Format(1, "000")
-            End If
-            RD.Close()
-        Else
-            RD.Close()
-            AUTOID = "M" + ID_AWAL + Format(1, "000")
-        End If
-        RD.Close()
+
+        Try
+            CONN.Open()
+            Dim STR As String = "SELECT (Id_trans) AS Id_trans FROM tbl_transaksi_parent WHERE LEFT(Id_trans,1)='M' ORDER BY Id DESC LIMIT 1"
+            Dim CMD As MySqlCommand
+            CMD = New MySqlCommand(STR, CONN)
+            Dim RD As MySqlDataReader
+            RD = CMD.ExecuteReader
+            While RD.Read()
+                If Not RD.IsDBNull(0) Then
+                    If Mid(RD.Item("Id_trans"), 2, 6) = ID_AWAL Then
+                        Dim ID As Integer = Mid(RD.Item("Id_trans"), 8, 3) + 1
+                        AUTOID = "M" + ID_AWAL + Format(ID, "000")
+                    Else
+                        AUTOID = "M" + ID_AWAL + Format(1, "000")
+                    End If
+                Else
+                    AUTOID = "M" + ID_AWAL + Format(1, "000")
+                End If
+            End While
+            CONN.Close()
+        Catch ex As MySqlException
+            MessageBox.Show(ex.Message)
+        Finally
+            CONN.Dispose()
+        End Try
     End Function
 
     Private Sub TXTKODE_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTKODE.KeyPress
@@ -255,50 +260,71 @@ Public Class FR_MASUK
             JUMLAH_ITEM += Convert.ToDouble(EROW.Cells("QTY").Value)
         Next
 
-        Dim STR As String = "INSERT INTO tbl_transaksi_parent" &
-            " (Id_trans, Id_kasir, Tgl, Jenis, Person, Harga, Jumlah_item)" &
-            " VALUES('" & ID_TRANSAKSI & "'," &
-            " '" & My.Settings.ID_ACCOUNT & "'," &
-            " '" & Format(Date.Now, "MM/dd/yyyy HH:mm:ss") & "'," &
-            " 'M'," &
-            " '" & TXTSUPPLIER.Text & "'," &
-            " '" & HARGA_TOTAL & "'," &
-            " '" & JUMLAH_ITEM.ToString.Replace(",", ".") & "')"
-        Dim CMD As New SqlCommand(STR, CONN)
-        CMD.ExecuteNonQuery()
+        Try
+            CONN.Open()
 
-        For Each EROW As DataGridViewRow In DGTAMPIL.Rows
-            Dim KODE_PRODUK As String = EROW.Cells("Kode").Value
-            Dim JUMLAH_PRODUK As Double = Convert.ToDouble(EROW.Cells("QTY").Value)
-            Dim HARGA_PRODUK As Integer = EROW.Cells("Harga").Value
-            If EROW.Cells("EXPIRED").Value = "-" Then
-                STR = "INSERT INTO tbl_transaksi_child (Id_trans, Kode, Jumlah, Harga, Stok, Created_at) VALUES" &
-                    " ('" & ID_TRANSAKSI & "'," &
-                    " '" & KODE_PRODUK & "'," &
-                    " " & JUMLAH_PRODUK.ToString.Replace(",", ".") & "," &
-                    " '" & HARGA_PRODUK & "'," &
-                    " '" & JUMLAH_PRODUK.ToString.Replace(",", ".") & "'," &
-                    " '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "')"
-            Else
-                Dim TGL_EXP As String = Format(Convert.ToDateTime(EROW.Cells("EXPIRED").Value), "yyyy-MM-dd")
-                STR = "INSERT INTO tbl_transaksi_child (Id_trans, Kode, Jumlah, Harga, Stok, Tgl_exp, Created_at) VALUES" &
-                        " ('" & ID_TRANSAKSI & "'," &
-                        " '" & KODE_PRODUK & "'," &
-                        " " & JUMLAH_PRODUK.ToString.Replace(",", ".") & "," &
-                        " '" & HARGA_PRODUK & "'," &
-                        " '" & JUMLAH_PRODUK.ToString.Replace(",", ".") & "'," &
-                        " '" & TGL_EXP & "'," &
-                        " '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "')"
-            End If
-            CMD = New SqlCommand(STR, CONN)
-            CMD.ExecuteNonQuery()
+            Dim StoreMasuk As MySqlTransaction = CONN.BeginTransaction
 
-            STR = "UPDATE tbl_stok SET Stok+=" & JUMLAH_PRODUK.ToString.Replace(",", ".") & ", " &
-                " Modified_at = '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
-                " WHERE Kode='" & KODE_PRODUK & "'"
-            CMD = New SqlCommand(STR, CONN)
-            CMD.ExecuteNonQuery()
-        Next
+            Try
+                Dim STR As String = "INSERT INTO tbl_transaksi_parent" &
+                " (Id_trans, Id_kasir, Tgl, Jenis, Person, Harga, Jumlah_item)" &
+                " VALUES('" & ID_TRANSAKSI & "'," &
+                " '" & My.Settings.ID_ACCOUNT & "'," &
+                " '" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "'," &
+                " 'M'," &
+                " '" & TXTSUPPLIER.Text & "'," &
+                " '" & HARGA_TOTAL & "'," &
+                " '" & JUMLAH_ITEM.ToString.Replace(",", ".") & "')"
+                Dim CMD As New MySqlCommand(STR, CONN)
+                CMD.ExecuteNonQuery()
+
+                For Each EROW As DataGridViewRow In DGTAMPIL.Rows
+                    Dim KODE_PRODUK As String = EROW.Cells("Kode").Value
+                    Dim JUMLAH_PRODUK As Double = Convert.ToDouble(EROW.Cells("QTY").Value)
+                    Dim HARGA_PRODUK As Integer = EROW.Cells("Harga").Value
+                    If EROW.Cells("EXPIRED").Value = "-" Then
+                        STR = "INSERT INTO tbl_transaksi_child (Id_trans, Kode, Jumlah, Harga, Stok, Created_at) VALUES" &
+                            " ('" & ID_TRANSAKSI & "'," &
+                            " '" & KODE_PRODUK & "'," &
+                            " " & JUMLAH_PRODUK.ToString.Replace(",", ".") & "," &
+                            " '" & HARGA_PRODUK & "'," &
+                            " '" & JUMLAH_PRODUK.ToString.Replace(",", ".") & "'," &
+                            " '" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "')"
+                    Else
+                        Dim TGL_EXP As String = Format(Convert.ToDateTime(EROW.Cells("EXPIRED").Value), "yyyy-MM-dd")
+                        STR = "INSERT INTO tbl_transaksi_child (Id_trans, Kode, Jumlah, Harga, Stok, Tgl_exp, Created_at) VALUES" &
+                                " ('" & ID_TRANSAKSI & "'," &
+                                " '" & KODE_PRODUK & "'," &
+                                " " & JUMLAH_PRODUK.ToString.Replace(",", ".") & "," &
+                                " '" & HARGA_PRODUK & "'," &
+                                " '" & JUMLAH_PRODUK.ToString.Replace(",", ".") & "'," &
+                                " '" & TGL_EXP & "'," &
+                                " '" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "')"
+                    End If
+                    CMD = New MySqlCommand(STR, CONN)
+                    CMD.ExecuteNonQuery()
+
+                    STR = "UPDATE tbl_stok SET Stok=Stok+" & JUMLAH_PRODUK.ToString.Replace(",", ".") & ", " &
+                        " Modified_at = '" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "'" &
+                        " WHERE Kode='" & KODE_PRODUK & "'"
+                    CMD = New MySqlCommand(STR, CONN)
+                    CMD.ExecuteNonQuery()
+
+                Next
+                StoreMasuk.Commit()
+                CONN.Close()
+            Catch ex As MySqlException
+                StoreMasuk.Rollback()
+                MessageBox.Show(ex.Message)
+            Finally
+                CONN.Dispose()
+            End Try
+        Catch ex As MySqlException
+            CONN.Close()
+            MessageBox.Show(ex.Message)
+        Finally
+            CONN.Dispose()
+        End Try
     End Sub
 
     'PRINTING
@@ -420,45 +446,52 @@ Public Class FR_MASUK
     End Sub
 
     Sub CARI_DATA_BARANG()
-        Dim STR As String = "SELECT * FROM tbl_barang WHERE RTRIM(Kode)='" & TXTKODE.Text & "'"
-        Dim CMD As SqlCommand
-        CMD = New SqlCommand(STR, CONN)
-        Dim RD As SqlDataReader
-        RD = CMD.ExecuteReader
-        If RD.HasRows Then
-            RD.Read()
-            TXTBARANG.Text = RD.Item("Barang").ToString.Trim
-            TXTSATUAN.Text = RD.Item("Satuan").ToString.Trim
-            Dim HARGA_TERENDAH As Integer = 0
-            If RD.Item("End4") <> 0 Then
-                HARGA_TERENDAH = RD.Item("Harga5")
-            Else
-                If RD.Item("End3") <> 0 Then
-                    HARGA_TERENDAH = RD.Item("Harga4")
-                Else
-                    If RD.Item("End2") <> 0 Then
-                        HARGA_TERENDAH = RD.Item("Harga3")
+        Try
+            CONN.Open()
+            Dim STR As String = "SELECT * FROM tbl_barang WHERE RTRIM(Kode)='" & TXTKODE.Text & "'"
+            Dim CMD As MySqlCommand
+            CMD = New MySqlCommand(STR, CONN)
+            Dim RD As MySqlDataReader
+            RD = CMD.ExecuteReader
+            While RD.Read()
+                If Not RD.IsDBNull(0) Then
+                    TXTBARANG.Text = RD.Item("Barang").ToString.Trim
+                    TXTSATUAN.Text = RD.Item("Satuan").ToString.Trim
+                    Dim HARGA_TERENDAH As Integer = 0
+                    If RD.Item("End4") <> 0 Then
+                        HARGA_TERENDAH = RD.Item("Harga5")
                     Else
-                        If RD.Item("End1") <> 0 Then
-                            HARGA_TERENDAH = RD.Item("Harga2")
+                        If RD.Item("End3") <> 0 Then
+                            HARGA_TERENDAH = RD.Item("Harga4")
                         Else
-                            HARGA_TERENDAH = RD.Item("Harga1")
+                            If RD.Item("End2") <> 0 Then
+                                HARGA_TERENDAH = RD.Item("Harga3")
+                            Else
+                                If RD.Item("End1") <> 0 Then
+                                    HARGA_TERENDAH = RD.Item("Harga2")
+                                Else
+                                    HARGA_TERENDAH = RD.Item("Harga1")
+                                End If
+                            End If
                         End If
                     End If
-                End If
-            End If
 
-            TXTHARGATERENDAH.Text = HARGA_TERENDAH
+                    TXTHARGATERENDAH.Text = HARGA_TERENDAH
+                Else
+                    MsgBox("Produk tidak ditemukan")
+                    TXTKODE.Text = ""
+                    TXTKODE.Select()
+                    TXTBARANG.Text = ""
+                    TXTSATUAN.Text = ""
+                End If
+            End While
             RD.Close()
-        Else
-            RD.Close()
-            MsgBox("Produk tidak ditemukan")
-            TXTKODE.Text = ""
-            TXTKODE.Select()
-            TXTBARANG.Text = ""
-            TXTSATUAN.Text = ""
-        End If
-        RD.Close()
+            CONN.Close()
+        Catch ex As MySqlException
+            MessageBox.Show(ex.Message)
+        Finally
+            CONN.Dispose()
+        End Try
     End Sub
 
     Private Sub TXTKODE_Leave(sender As Object, e As EventArgs) Handles TXTKODE.Leave

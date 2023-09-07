@@ -1,4 +1,4 @@
-﻿Imports System.Data.SqlClient
+﻿Imports MySql.Data.MySqlClient
 
 Public Class FR_MEMBER_ACTION
     Private Sub BTNCLOSE_Click(sender As Object, e As EventArgs) Handles BTNCLOSE.Click
@@ -49,8 +49,8 @@ Public Class FR_MEMBER_ACTION
         End If
     End Sub
 
-    Dim CMD As SqlCommand
-    Dim RD As SqlDataReader
+    Dim CMD As MySqlCommand
+    Dim RD As MySqlDataReader
     Dim STR As String
 
     Private Sub BTNSIMPAN_Click(sender As Object, e As EventArgs) Handles BTNSIMPAN.Click
@@ -67,7 +67,7 @@ Public Class FR_MEMBER_ACTION
             If TXTID.Enabled = True Then
 
                 STR = "SELECT * FROM tbl_member WHERE Id='" & TXTID.Text & "'"
-                CMD = New SqlCommand(STR, CONN)
+                CMD = New MySqlCommand(STR, CONN)
                 RD = CMD.ExecuteReader
                 If RD.HasRows Then
                     RD.Close()
@@ -82,9 +82,9 @@ Public Class FR_MEMBER_ACTION
                             "'" & TXTNOHP.Text & "'," &
                             "'" & jk & "'," &
                             "'" & 0 & "'," &
-                            "'" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
+                            "'" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "'" &
                             ")"
-                    CMD = New SqlCommand(STR, CONN)
+                    CMD = New MySqlCommand(STR, CONN)
                     CMD.ExecuteNonQuery()
                     MsgBox("Data member berhasil disimpan!")
                 End If
@@ -93,9 +93,9 @@ Public Class FR_MEMBER_ACTION
                     " Alamat='" & TXTALAMAT.Text & "'," &
                     " No_hp='" & TXTNOHP.Text & "'," &
                     " JK='" & jk & "'," &
-                    " Modified_at='" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
+                    " Modified_at='" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "'" &
                     " WHERE Id='" & TXTID.Text & "'"
-                CMD = New SqlCommand(STR, CONN)
+                CMD = New MySqlCommand(STR, CONN)
                 CMD.ExecuteNonQuery()
                 MsgBox("Data member berhasil diubah!")
             End If
@@ -114,7 +114,7 @@ Public Class FR_MEMBER_ACTION
             " RTRIM(JK) AS 'JK'," &
             " Points" &
             " FROM tbl_member WHERE Id='" & TXTID.Text & "'"
-        CMD = New SqlCommand(STR, CONN)
+        CMD = New MySqlCommand(STR, CONN)
         RD = CMD.ExecuteReader
         If RD.HasRows Then
             RD.Read()

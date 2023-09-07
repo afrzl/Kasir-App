@@ -1,4 +1,4 @@
-﻿Imports System.Data.SqlClient
+﻿Imports MySql.Data.MySqlClient
 
 Public Class FR_RUSAK
     Sub BUKA_FORM(ByVal FR As Form)
@@ -48,8 +48,8 @@ Public Class FR_RUSAK
             " tbl_transaksi_child.Stok != 0 AND" &
             " tbl_transaksi_child.Tgl_exp <= DATEADD(day,+14, GETDATE())"
 
-        Dim DA As SqlDataAdapter
-        DA = New SqlDataAdapter(STR, CONN)
+        Dim DA As MySqlDataAdapter
+        DA = New MySqlDataAdapter(STR, CONN)
         Dim TBL As New DataTable
         DA.Fill(TBL)
         DGEXPIRED.DataSource = TBL
@@ -130,8 +130,8 @@ Public Class FR_RUSAK
                     " AND tbl_transaksi_child.Id_trans LIKE '%" & TXTCARI.Text & "%'"
         End Select
 
-        Dim DA As SqlDataAdapter
-        DA = New SqlDataAdapter(STR, CONN)
+        Dim DA As MySqlDataAdapter
+        DA = New MySqlDataAdapter(STR, CONN)
         Dim TBL As New DataTable
         DA.Fill(TBL)
         DGTAMPIL.DataSource = TBL
@@ -189,9 +189,9 @@ Public Class FR_RUSAK
            " FROM tbl_transaksi_child" &
            " WHERE Id_trans = '" & TXTID.Text & "'" &
            " AND (SELECT COALESCE(SUM(Stok), 0) FROM tbl_transaksi_child WHERE tbl_transaksi_child.Id_trans = tbl_transaksi_child.Id_trans) > 0"
-        Dim DA As SqlDataAdapter
+        Dim DA As MySqlDataAdapter
         Dim TBL As New DataTable
-        DA = New SqlDataAdapter(STR, CONN)
+        DA = New MySqlDataAdapter(STR, CONN)
         DA.Fill(TBL)
 
         If TBL.Rows.Count = 0 Then
@@ -215,9 +215,9 @@ Public Class FR_RUSAK
         Dim ID_RUSAK As String = "C" + ID
         Dim STR As String = "SELECT TOP 1 (Id_trans) AS Id_trans FROM tbl_transaksi_parent" &
             " WHERE LEFT(Id_trans, 10)='" & ID_RUSAK & "' ORDER BY Id DESC"
-        Dim CMD As SqlCommand
-        CMD = New SqlCommand(STR, CONN)
-        Dim RD As SqlDataReader
+        Dim CMD As MySqlCommand
+        CMD = New MySqlCommand(STR, CONN)
+        Dim RD As MySqlDataReader
         RD = CMD.ExecuteReader
         If RD.HasRows Then
             RD.Read()
@@ -253,13 +253,13 @@ Public Class FR_RUSAK
                 Dim SUPPLIER As String = ""
 
                 Dim STR As String
-                Dim CMD As SqlCommand
+                Dim CMD As MySqlCommand
 
                 STR = "SELECT RTRIM(Person) AS Supplier " &
                 " FROM tbl_transaksi_parent" &
                 " WHERE RTRIM(Id_trans) = '" & TXTID.Text & "'"
-                CMD = New SqlCommand(STR, CONN)
-                Dim RD As SqlDataReader
+                CMD = New MySqlCommand(STR, CONN)
+                Dim RD As MySqlDataReader
                 RD = CMD.ExecuteReader
                 If RD.HasRows Then
                     RD.Read()
@@ -274,14 +274,14 @@ Public Class FR_RUSAK
                 " (Id_trans, Id_kasir, Tgl, Jenis, Person, Harga, Diskon, Jumlah_item, Harga_total)" &
                 " VALUES('" & ID_TRANS & "'," &
                 " '" & My.Settings.ID_ACCOUNT & "'," &
-                " '" & Format(Date.Now, "MM/dd/yyyy HH:mm:ss") & "'," &
+                " '" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "'," &
                 " 'C'," &
                 " '" & SUPPLIER & "'," &
                 " 0," &
                 " 0," &
                 " " & TXTQTY.Text.Replace(",", ".") & "," &
                 " 0)"
-                CMD = New SqlCommand(STR, CONN)
+                CMD = New MySqlCommand(STR, CONN)
                 CMD.ExecuteNonQuery()
 
                 STR = "INSERT INTO tbl_transaksi_child (Id_trans, Id_awal, Kode, Jumlah, Harga_beli, Harga, Harga_akhir, Created_at) VALUES" &
@@ -292,23 +292,23 @@ Public Class FR_RUSAK
                         " '" & CInt(TXTHARGA.Text) * QTY & "'," &
                         " 0," &
                         " 0," &
-                        " '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "')"
-                CMD = New SqlCommand(STR, CONN)
+                        " '" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "')"
+                CMD = New MySqlCommand(STR, CONN)
                 CMD.ExecuteNonQuery()
 
                 TXTSTOKAKHIR.Text = Convert.ToDouble(TXTSTOK.Text) - QTY
 
                 STR = "UPDATE tbl_transaksi_child SET Stok=" & TXTSTOKAKHIR.Text.Replace(",", ".") & ", " &
-                    " Modified_at = '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
+                    " Modified_at = '" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "'" &
                     " WHERE Id_trans='" & TXTID.Text & "'" &
                     " AND Id = '" & CBKODE.SelectedValue & "'"
-                CMD = New SqlCommand(STR, CONN)
+                CMD = New MySqlCommand(STR, CONN)
                 CMD.ExecuteNonQuery()
 
                 STR = "UPDATE tbl_stok SET Stok-=" & TXTQTY.Text.Replace(",", ".") & ", " &
-                    " Modified_at = '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
+                    " Modified_at = '" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "'" &
                     " WHERE Kode='" & KODEBARANG & "'"
-                CMD = New SqlCommand(STR, CONN)
+                CMD = New MySqlCommand(STR, CONN)
                 CMD.ExecuteNonQuery()
 
                 MsgBox("Barang rusak berhasil ditambah! Stok barang " & CBKODE.Text & " berkurang.")
@@ -316,19 +316,19 @@ Public Class FR_RUSAK
         ElseIf CB_JENISTRANS.SelectedIndex = 1 Then
             Dim TGL_EXP As String = Format(Convert.ToDateTime(DTEXP.Value), "yyyy-MM-dd")
             Dim STR As String = "UPDATE tbl_transaksi_child SET Tgl_exp='" & TGL_EXP & "'," &
-                " Modified_at = '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
+                " Modified_at = '" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "'" &
                 " WHERE Id_trans='" & TXTID.Text & "'" &
                 " AND Id = '" & CBKODE.SelectedValue & "'"
-            Dim CMD As New SqlCommand(STR, CONN)
+            Dim CMD As New MySqlCommand(STR, CONN)
             CMD.ExecuteNonQuery()
             MsgBox("Expired barang " & CBKODE.Text & " berhasil diperbarui menjadi tanggal " & Format(Convert.ToDateTime(DTEXP.Value), "dd-MM-yyyy"))
 
         ElseIf CB_JENISTRANS.SelectedIndex = 2 Then
             Dim STR As String = "UPDATE tbl_transaksi_child SET Tgl_exp = NULL," &
-                " Modified_at = '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
+                " Modified_at = '" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "'" &
                 " WHERE Id_trans='" & TXTID.Text & "'" &
                 " AND Id = '" & CBKODE.SelectedValue & "'"
-            Dim CMD As New SqlCommand(STR, CONN)
+            Dim CMD As New MySqlCommand(STR, CONN)
             CMD.ExecuteNonQuery()
 
             MsgBox("Expired barang " & CBKODE.Text & " berhasil dihapus.")
@@ -402,8 +402,8 @@ Public Class FR_RUSAK
             str = "SELECT Jumlah AS Jumlah" &
                 " FROM tbl_transaksi_child" &
                 " WHERE RTRIM(Id_trans) = '" & IDTRANS & "'"
-            Dim CMD As New SqlCommand(str, CONN)
-            Dim RD As SqlDataReader
+            Dim CMD As New MySqlCommand(str, CONN)
+            Dim RD As MySqlDataReader
             RD = CMD.ExecuteReader
             If RD.HasRows Then
                 RD.Read()
@@ -414,15 +414,15 @@ Public Class FR_RUSAK
             End If
             RD.Close()
 
-            CMD = New SqlCommand("UPDATE tbl_stok SET Stok+=" & TXTQTY.Text.Replace(",", ".") & ", " &
-                                 " Modified_at = '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
+            CMD = New MySqlCommand("UPDATE tbl_stok SET Stok+=" & TXTQTY.Text.Replace(",", ".") & ", " &
+                                 " Modified_at = '" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "'" &
                                  " WHERE Kode='" & KODE_BARANG & "'", CONN)
             CMD.ExecuteNonQuery()
 
             str = "SELECT Stok AS Stok, " &
                 " (SELECT Barang FROM tbl_barang WHERE RTRIM(tbl_barang.Kode) = RTRIM(tbl_transaksi_child.Kode)) AS Nama" &
                 " FROM tbl_transaksi_child WHERE Id='" & ID_AWAL & "'"
-            CMD = New SqlCommand(str, CONN)
+            CMD = New MySqlCommand(str, CONN)
             RD = CMD.ExecuteReader
             If RD.HasRows Then
                 RD.Read()
@@ -438,16 +438,16 @@ Public Class FR_RUSAK
             TXTSTOKAKHIR.Text = STOK_AWAL + DGTAMPIL.Item(8, DGTAMPIL.CurrentRow.Index).Value
 
             str = "UPDATE tbl_transaksi_child SET Stok=" & TXTSTOKAKHIR.Text.Replace(",", ".") & ", " &
-                " Modified_at = '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
+                " Modified_at = '" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "'" &
                 " WHERE Id='" & ID_AWAL & "'"
-            CMD = New SqlCommand(str, CONN)
+            CMD = New MySqlCommand(str, CONN)
             CMD.ExecuteNonQuery()
 
 
-            CMD = New SqlCommand("DELETE FROM tbl_transaksi_parent WHERE Id_trans='" & IDTRANS & "'", CONN)
+            CMD = New MySqlCommand("DELETE FROM tbl_transaksi_parent WHERE Id_trans='" & IDTRANS & "'", CONN)
             CMD.ExecuteNonQuery()
 
-            CMD = New SqlCommand("DELETE FROM tbl_transaksi_child WHERE Id_trans='" & IDTRANS & "'", CONN)
+            CMD = New MySqlCommand("DELETE FROM tbl_transaksi_child WHERE Id_trans='" & IDTRANS & "'", CONN)
             CMD.ExecuteNonQuery()
 
             TAMPIL()
@@ -479,9 +479,9 @@ Public Class FR_RUSAK
         STR = "SELECT RTRIM(Kode) AS Kode " &
                 " FROM tbl_transaksi_child" &
                 " WHERE Id = '" & CBKODE.SelectedValue & "'"
-        Dim CMD As SqlCommand
-        CMD = New SqlCommand(STR, CONN)
-        Dim RD As SqlDataReader
+        Dim CMD As MySqlCommand
+        CMD = New MySqlCommand(STR, CONN)
+        Dim RD As MySqlDataReader
         RD = CMD.ExecuteReader
         If RD.HasRows Then
             RD.Read()
@@ -501,7 +501,7 @@ Public Class FR_RUSAK
                             & " AND Kode = '" _
                             & KODEBARANG _
                             & "'"
-        CMD = New SqlCommand(STR, CONN)
+        CMD = New MySqlCommand(STR, CONN)
         RD = CMD.ExecuteReader
         If RD.HasRows Then
             RD.Read()
@@ -778,8 +778,8 @@ Public Class FR_RUSAK
                     str = "SELECT Jumlah AS Jumlah" &
                 " FROM tbl_transaksi_child" &
                 " WHERE RTRIM(Id_trans) = '" & IDTRANS & "'"
-                    Dim CMD As New SqlCommand(str, CONN)
-                    Dim RD As SqlDataReader
+                    Dim CMD As New MySqlCommand(str, CONN)
+                    Dim RD As MySqlDataReader
                     RD = CMD.ExecuteReader
                     If RD.HasRows Then
                         RD.Read()
@@ -791,15 +791,15 @@ Public Class FR_RUSAK
                     RD.Close()
 
                     str = "UPDATE tbl_stok SET Stok+=" & TXTQTY.Text.Replace(",", ".") & ", " &
-                                 " Modified_at = '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
+                                 " Modified_at = '" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "'" &
                                  " WHERE Kode='" & KODE_BARANG & "'"
-                    CMD = New SqlCommand(str, CONN)
+                    CMD = New MySqlCommand(str, CONN)
                     CMD.ExecuteNonQuery()
 
                     str = "SELECT Stok AS Stok, " &
                             " (SELECT Barang FROM tbl_barang WHERE RTRIM(tbl_barang.Kode) = RTRIM(tbl_transaksi_child.Kode)) AS Nama" &
                             " FROM tbl_transaksi_child WHERE Id='" & ID_AWAL & "'"
-                    CMD = New SqlCommand(str, CONN)
+                    CMD = New MySqlCommand(str, CONN)
                     RD = CMD.ExecuteReader
                     If RD.HasRows Then
                         RD.Read()
@@ -815,16 +815,16 @@ Public Class FR_RUSAK
                     TXTSTOKAKHIR.Text = STOK_AWAL + DGTAMPIL.Item(8, DGTAMPIL.CurrentRow.Index).Value
 
                     str = "UPDATE tbl_transaksi_child SET Stok=" & TXTSTOKAKHIR.Text.Replace(",", ".") & ", " &
-                            " Modified_at = '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
+                            " Modified_at = '" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "'" &
                             " WHERE Id='" & ID_AWAL & "'"
-                    CMD = New SqlCommand(str, CONN)
+                    CMD = New MySqlCommand(str, CONN)
                     CMD.ExecuteNonQuery()
 
 
-                    CMD = New SqlCommand("DELETE FROM tbl_transaksi_parent WHERE Id_trans='" & IDTRANS & "'", CONN)
+                    CMD = New MySqlCommand("DELETE FROM tbl_transaksi_parent WHERE Id_trans='" & IDTRANS & "'", CONN)
                     CMD.ExecuteNonQuery()
 
-                    CMD = New SqlCommand("DELETE FROM tbl_transaksi_child WHERE Id_trans='" & IDTRANS & "'", CONN)
+                    CMD = New MySqlCommand("DELETE FROM tbl_transaksi_child WHERE Id_trans='" & IDTRANS & "'", CONN)
                     CMD.ExecuteNonQuery()
 
                     TAMPIL()

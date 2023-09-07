@@ -1,12 +1,12 @@
-﻿Imports System.Data.SqlClient
+﻿Imports MySql.Data.MySqlClient
 
 Public Class FR_MEMBER
     Private Sub PEWAKTU_Tick(sender As Object, e As EventArgs) Handles PEWAKTU.Tick
         LBTGL.Text = Format(Date.Now, "dd MMMM yyyy HH:mm:ss")
     End Sub
 
-    Dim CMD As SqlCommand
-    Dim RD As SqlDataReader
+    Dim CMD As MySqlCommand
+    Dim RD As MySqlDataReader
     Dim STR As String
 
     Sub BUKA_FORM(ByVal FR As Form)
@@ -204,8 +204,8 @@ Public Class FR_MEMBER
             "FROM tbl_member " &
             "WHERE Nama Like '%" & TXTCARI.Text & "%' " &
             "OR Id = '" & TXTCARI.Text & "'"
-        Dim DA As SqlDataAdapter
-        DA = New SqlDataAdapter(STR, CONN)
+        Dim DA As MySqlDataAdapter
+        DA = New MySqlDataAdapter(STR, CONN)
         Dim TBL As New DataTable
         DA.Fill(TBL)
         DGTAMPIL.DataSource = TBL
@@ -301,7 +301,7 @@ Public Class FR_MEMBER
                     If MsgBox("Apakah anda yakin akan menghapus member?", vbYesNo) = vbYes Then
                         STR = "DELETE tbl_member " &
                             " WHERE Id='" & DGTAMPIL.Item("Id", e.RowIndex).Value & "'"
-                        CMD = New SqlCommand(STR, CONN)
+                        CMD = New MySqlCommand(STR, CONN)
                         CMD.ExecuteNonQuery()
                         MsgBox("Data member berhasil dihapus!")
                         TAMPIL()

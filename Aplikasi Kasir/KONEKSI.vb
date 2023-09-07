@@ -1,7 +1,6 @@
-﻿Imports System.Data.SqlClient
+﻿Imports MySql.Data.MySqlClient
 Imports Microsoft.SqlServer
 Imports Microsoft.Win32
-Imports MySql.Data.MySqlClient
 
 Module KONEKSI
     Public CONN As MySqlConnection
@@ -54,23 +53,36 @@ Module KONEKSI
         'SERVER=NAMA SERVER;USER ID=USERID;PASSWORD=PASSWORD;DATABASE=DATABASE;'
         'Dim STR As String = "SERVER=" & My.Settings.SERVER & ";USER ID=" & My.Settings.USER & ";PASSWORD=" & My.Settings.PASSWORD & ";DATABASE=" & My.Settings.DATABASE & ";MultipleActiveResultSets=True;"
         Dim STR As String = "SERVER=localhost;USER ID=root;PASSWORD=;DATABASE=toko_kasir;MultipleActiveResultSets=True;"
-        Try
-            CONN = New MySqlConnection()
-            CONN.ConnectionString = STR
-            If CONN.State = ConnectionState.Closed Then
-                CONN.Open()
-            End If
-        Catch ex As Exception
-            MsgBox("Koneksi dengan database gagal!")
-            With My.Settings
-                .SERVER = ""
-                .USER = ""
-                .PASSWORD = ""
-                .DATABASE = ""
-                .Save()
-            End With
-            End
-        End Try
+        CONN = New MySqlConnection()
+        CONN.ConnectionString = "server=localhost;user id=root;" &
+                            "password=;database=toko_kasir"
+        'Try
+        '    If CONN.State = ConnectionState.Closed Then CONN.Open()
+
+        'Catch myerror As MySqlException
+        '    MessageBox.Show("Error: " & myerror.Message)
+        'Finally
+        '    CONN.Dispose()
+        'End Try
+
+        'Try
+        '    CONN = New MySqlConnection()
+        '    CONN.ConnectionString = "server=localhost;user id=root;" &
+        '                    "password=;database=toko_kasir"
+        '    If CONN.State = ConnectionState.Closed Then
+        '        CONN.Open()
+        '    End If
+        'Catch ex As Exception
+        '    MsgBox("Koneksi dengan database gagal!")
+        '    With My.Settings
+        '        .SERVER = ""
+        '        .USER = ""
+        '        .PASSWORD = ""
+        '        .DATABASE = ""
+        '        .Save()
+        '    End With
+        '    End
+        'End Try
 
         AMBIL_DATA_REGISTRY()
     End Sub

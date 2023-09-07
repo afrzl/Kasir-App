@@ -1,13 +1,13 @@
-﻿Imports System.Data.SqlClient
+﻿Imports MySql.Data.MySqlClient
 Imports System.Drawing.Printing
 Imports System.IO
 Imports System.Text
 
 Public Class FR_VOUCHER_ACTION
 
-    Dim CMD As SqlCommand
-    Dim RD As SqlDataReader
-    Dim DA As SqlDataAdapter
+    Dim CMD As MySqlCommand
+    Dim RD As MySqlDataReader
+    Dim DA As MySqlDataAdapter
     Dim STR As String
 
     Private Sub BTNCLOSE_Click(sender As Object, e As EventArgs) Handles BTNCLOSE.Click
@@ -23,7 +23,7 @@ Public Class FR_VOUCHER_ACTION
             " FROM tbl_data_voucher" &
             " ORDER BY Nama ASC"
         Dim TBL As New DataTable
-        DA = New SqlDataAdapter(STR, CONN)
+        DA = New MySqlDataAdapter(STR, CONN)
         DA.Fill(TBL)
 
         If TBL.Rows.Count > 0 Then
@@ -47,7 +47,7 @@ Public Class FR_VOUCHER_ACTION
             " Harga AS Harga" &
             " FROM tbl_data_voucher" &
             " WHERE Id = '" & CB_DATA.SelectedValue & "'"
-        CMD = New SqlCommand(STR, CONN)
+        CMD = New MySqlCommand(STR, CONN)
         RD = CMD.ExecuteReader
         RD.Read()
         If RD.HasRows Then
@@ -84,7 +84,7 @@ Public Class FR_VOUCHER_ACTION
             " Points AS Points" &
             " FROM tbl_member" &
             " WHERE Id = '" & TXTID_MEMBER.Text & "'"
-        CMD = New SqlCommand(STR, CONN)
+        CMD = New MySqlCommand(STR, CONN)
         RD = CMD.ExecuteReader
         RD.Read()
         If RD.HasRows Then
@@ -113,9 +113,9 @@ Public Class FR_VOUCHER_ACTION
                 TXTID_MEMBER.Select()
             Else
                 STR = "UPDATE tbl_member SET Points-='" & LBL_HARGA.Text.Remove(0, 2) & "', " &
-                    " Modified_at = '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
+                    " Modified_at = '" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "'" &
                     " WHERE Id='" & TXTID_MEMBER.Text & "'"
-                CMD = New SqlCommand(STR, CONN)
+                CMD = New MySqlCommand(STR, CONN)
                 CMD.ExecuteNonQuery()
 
                 Dim validchars As String = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
@@ -131,7 +131,7 @@ Public Class FR_VOUCHER_ACTION
                     STR = "SELECT Id" &
                             " FROM tbl_transaksi_voucher" &
                             " WHERE Kode = '" & sb.ToString & "'"
-                    CMD = New SqlCommand(STR, CONN)
+                    CMD = New MySqlCommand(STR, CONN)
                     RD = CMD.ExecuteReader
                     RD.Read()
                     If RD.HasRows Then
@@ -150,9 +150,9 @@ Public Class FR_VOUCHER_ACTION
                             "'" & TXTID_MEMBER.Text & "'," &
                             "'" & LBL_HARGA.Text.Remove(0, 2) & "'," &
                             "'" & Kode & "'," &
-                            "'" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
+                            "'" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "'" &
                             ")"
-                CMD = New SqlCommand(STR, CONN)
+                CMD = New MySqlCommand(STR, CONN)
                 CMD.ExecuteNonQuery()
 
                 MsgBox("Transaksi berhasil dilakukan.")

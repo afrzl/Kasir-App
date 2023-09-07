@@ -1,4 +1,4 @@
-﻿Imports System.Data.SqlClient
+﻿Imports MySql.Data.MySqlClient
 Imports CrystalDecisions.CrystalReports.Engine
 Imports CrystalDecisions.Shared
 
@@ -404,7 +404,7 @@ Public Class FR_REPORT
                 End Select
         End Select
 
-        Dim DA As New SqlDataAdapter(STR, CONN)
+        Dim DA As New MySqlDataAdapter(STR, CONN)
         TBL.Clear()
         TBL.Columns.Clear()
         DA.Fill(TBL)

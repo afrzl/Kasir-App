@@ -1,4 +1,4 @@
-﻿Imports System.Data.SqlClient
+﻿Imports MySql.Data.MySqlClient
 
 Public Class FR_RETURN
     Sub BUKA_FORM(ByVal FR As Form)
@@ -83,8 +83,8 @@ Public Class FR_RETURN
             " tbl_transaksi_parent.Id_kasir = '" & My.Settings.ID_ACCOUNT & "' AND" &
             " tbl_transaksi_child.Id_trans LIKE '%" & TXTCARI.Text & "%'"
         End Select
-        Dim DA As SqlDataAdapter
-        DA = New SqlDataAdapter(STR, CONN)
+        Dim DA As MySqlDataAdapter
+        DA = New MySqlDataAdapter(STR, CONN)
         Dim TBL As New DataTable
         DA.Fill(TBL)
         DGTAMPIL.DataSource = TBL
@@ -124,9 +124,9 @@ Public Class FR_RETURN
             " (SELECT RTRIM(Barang) FROM tbl_barang WHERE RTRIM(Kode) = RTRIM(tbl_transaksi_child.Kode)) AS Barang" &
             " FROM tbl_transaksi_child" &
             " WHERE Id_trans = '" & TXTID.Text & "'"
-        Dim DA As SqlDataAdapter
+        Dim DA As MySqlDataAdapter
         Dim TBL As New DataTable
-        DA = New SqlDataAdapter(STR, CONN)
+        DA = New MySqlDataAdapter(STR, CONN)
         DA.Fill(TBL)
 
         If TBL.Rows.Count = 0 Then
@@ -173,8 +173,8 @@ Public Class FR_RETURN
                             & CBKODE.SelectedValue _
                             & "'" _
                             & " AND (SELECT Tgl FROM tbl_transaksi_parent WHERE tbl_transaksi_parent.Id_trans = tbl_transaksi_child.Id_trans) >= DATEADD(day,-7, GETDATE())"
-        Dim CMD As New SqlCommand(STR, CONN)
-        Dim RD As SqlDataReader
+        Dim CMD As New MySqlCommand(STR, CONN)
+        Dim RD As MySqlDataReader
         RD = CMD.ExecuteReader
         If RD.HasRows Then
             RD.Read()
@@ -226,9 +226,9 @@ Public Class FR_RETURN
         Dim ID_RETURN As String = "R" + ID
         Dim STR As String = "SELECT TOP 1 (Id_trans) AS Id_trans FROM tbl_transaksi_parent" &
                             " WHERE LEFT(Id_trans, 10)='" & ID_RETURN & "' ORDER BY Id DESC"
-        Dim CMD As SqlCommand
-        CMD = New SqlCommand(STR, CONN)
-        Dim RD As SqlDataReader
+        Dim CMD As MySqlCommand
+        CMD = New MySqlCommand(STR, CONN)
+        Dim RD As MySqlDataReader
         RD = CMD.ExecuteReader
         If RD.HasRows Then
             RD.Read()
@@ -264,13 +264,13 @@ Public Class FR_RETURN
             Dim PEMBELI As String = ""
 
             Dim STR As String
-            Dim CMD As SqlCommand
+            Dim CMD As MySqlCommand
 
             STR = "SELECT RTRIM(Person) AS Pembeli " &
                 " FROM tbl_transaksi_parent" &
                 " WHERE RTRIM(Id_trans) = '" & TXTID.Text & "'"
-            CMD = New SqlCommand(STR, CONN)
-            Dim RD As SqlDataReader
+            CMD = New MySqlCommand(STR, CONN)
+            Dim RD As MySqlDataReader
             RD = CMD.ExecuteReader
             If RD.HasRows Then
                 RD.Read()
@@ -285,12 +285,12 @@ Public Class FR_RETURN
                 " (Id_trans, Id_kasir, Tgl, Jenis, Person, Harga, Jumlah_item)" &
                 " VALUES('" & ID_TRANS & "'," &
                 " '" & My.Settings.ID_ACCOUNT & "'," &
-                " '" & Format(Date.Now, "MM/dd/yyyy HH:mm:ss") & "'," &
+                " '" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "'," &
                 " 'R'," &
                 " '" & PEMBELI & "'," &
                 " '" & TXTHARGA.Text & "'," &
                 " " & TXTQTY.Text.Replace(",", ".") & ")"
-            CMD = New SqlCommand(STR, CONN)
+            CMD = New MySqlCommand(STR, CONN)
             CMD.ExecuteNonQuery()
 
             STR = "INSERT INTO tbl_transaksi_child (Id_trans, Kode, Jumlah, Harga, Stok, Created_at) VALUES" &
@@ -299,14 +299,14 @@ Public Class FR_RETURN
                         " " & TXTQTY.Text.Replace(",", ".") & "," &
                         " '" & TXTHARGA.Text & "'," &
                         " " & TXTQTY.Text.Replace(",", ".") & "," &
-                        " '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "')"
-            CMD = New SqlCommand(STR, CONN)
+                        " '" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "')"
+            CMD = New MySqlCommand(STR, CONN)
             CMD.ExecuteNonQuery()
 
             STR = "UPDATE tbl_stok SET Stok+=" & TXTQTY.Text.Replace(",", ".") & ", " &
-                " Modified_at = '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
+                " Modified_at = '" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "'" &
                 " WHERE Kode='" & CBKODE.SelectedValue & "'"
-            CMD = New SqlCommand(STR, CONN)
+            CMD = New MySqlCommand(STR, CONN)
             CMD.ExecuteNonQuery()
 
             MsgBox("Return berhasil disimpan! Stok " & CBKODE.Text & " ditambah.")
@@ -357,8 +357,8 @@ Public Class FR_RETURN
             Dim Str As String = "SELECT Stok AS Stok" &
                 " FROM tbl_transaksi_child" &
                 " WHERE RTRIM(Id_trans) = '" & IDX & "'"
-            Dim CMD As New SqlCommand(Str, CONN)
-            Dim RD As SqlDataReader
+            Dim CMD As New MySqlCommand(Str, CONN)
+            Dim RD As MySqlDataReader
             RD = CMD.ExecuteReader
             If RD.HasRows Then
                 RD.Read()
@@ -369,14 +369,14 @@ Public Class FR_RETURN
             End If
             RD.Close()
 
-            CMD = New SqlCommand("DELETE FROM tbl_transaksi_child WHERE Id_trans='" & IDX & "'", CONN)
+            CMD = New MySqlCommand("DELETE FROM tbl_transaksi_child WHERE Id_trans='" & IDX & "'", CONN)
             CMD.ExecuteNonQuery()
 
-            CMD = New SqlCommand("DELETE FROM tbl_transaksi_parent WHERE Id_trans='" & IDX & "'", CONN)
+            CMD = New MySqlCommand("DELETE FROM tbl_transaksi_parent WHERE Id_trans='" & IDX & "'", CONN)
             CMD.ExecuteNonQuery()
 
-            CMD = New SqlCommand("UPDATE tbl_stok SET Stok-=" & TXTQTY.Text.Replace(",", ".") & ", " &
-                                 " Modified_at = '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
+            CMD = New MySqlCommand("UPDATE tbl_stok SET Stok-=" & TXTQTY.Text.Replace(",", ".") & ", " &
+                                 " Modified_at = '" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "'" &
                                  " WHERE Kode='" & DGTAMPIL.Item(1, DGTAMPIL.CurrentRow.Index).Value & "'", CONN)
             CMD.ExecuteNonQuery()
             TAMPIL()
@@ -562,8 +562,8 @@ Public Class FR_RETURN
                     Dim Str As String = "SELECT Stok AS Stok" &
                 " FROM tbl_transaksi_child" &
                 " WHERE RTRIM(Id_trans) = '" & IDX & "'"
-                    Dim CMD As New SqlCommand(Str, CONN)
-                    Dim RD As SqlDataReader
+                    Dim CMD As New MySqlCommand(Str, CONN)
+                    Dim RD As MySqlDataReader
                     RD = CMD.ExecuteReader
                     If RD.HasRows Then
                         RD.Read()
@@ -574,14 +574,14 @@ Public Class FR_RETURN
                     End If
                     RD.Close()
 
-                    CMD = New SqlCommand("DELETE FROM tbl_transaksi_child WHERE Id_trans='" & IDX & "'", CONN)
+                    CMD = New MySqlCommand("DELETE FROM tbl_transaksi_child WHERE Id_trans='" & IDX & "'", CONN)
                     CMD.ExecuteNonQuery()
 
-                    CMD = New SqlCommand("DELETE FROM tbl_transaksi_parent WHERE Id_trans='" & IDX & "'", CONN)
+                    CMD = New MySqlCommand("DELETE FROM tbl_transaksi_parent WHERE Id_trans='" & IDX & "'", CONN)
                     CMD.ExecuteNonQuery()
 
-                    CMD = New SqlCommand("UPDATE tbl_stok SET Stok-=" & TXTQTY.Text.Replace(",", ".") & ", " &
-                                 " Modified_at = '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
+                    CMD = New MySqlCommand("UPDATE tbl_stok SET Stok-=" & TXTQTY.Text.Replace(",", ".") & ", " &
+                                 " Modified_at = '" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "'" &
                                  " WHERE Kode='" & DGTAMPIL.Item(1, DGTAMPIL.CurrentRow.Index).Value & "'", CONN)
                     CMD.ExecuteNonQuery()
                     TAMPIL()

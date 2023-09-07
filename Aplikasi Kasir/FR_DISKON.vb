@@ -1,5 +1,4 @@
-﻿Imports System.Data.SqlClient
-Imports MySql.Data.MySqlClient
+﻿Imports MySql.Data.MySqlClient
 
 Public Class FR_DISKON
     Private Sub PEWAKTU_Tick(sender As Object, e As EventArgs) Handles PEWAKTU.Tick
@@ -157,30 +156,30 @@ Public Class FR_DISKON
         Next
 
         Dim Column_delete = New DataGridViewButtonColumn
-            With Column_delete
-                .Text = "Delete"
-                .HeaderText = "Delete"
-                .UseColumnTextForButtonValue = True
-                .FlatStyle = FlatStyle.Flat
-                .DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-                .CellTemplate.Style.BackColor = Color.Crimson
-                .CellTemplate.Style.ForeColor = Color.WhiteSmoke
-                .Width = 100
-            End With
-            DGTAMPIL.Columns.Add(Column_delete)
+        With Column_delete
+            .Text = "Delete"
+            .HeaderText = "Delete"
+            .UseColumnTextForButtonValue = True
+            .FlatStyle = FlatStyle.Flat
+            .DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            .CellTemplate.Style.BackColor = Color.Crimson
+            .CellTemplate.Style.ForeColor = Color.WhiteSmoke
+            .Width = 100
+        End With
+        DGTAMPIL.Columns.Add(Column_delete)
 
-            Dim Column_cetak As New DataGridViewButtonColumn
-            With Column_cetak
-                .Text = "Cetak"
-                .HeaderText = "Cetak"
-                .UseColumnTextForButtonValue = True
-                .FlatStyle = FlatStyle.Flat
-                .DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-                .CellTemplate.Style.BackColor = Color.DarkGreen
-                .CellTemplate.Style.ForeColor = Color.WhiteSmoke
-                .Width = 100
-            End With
-            DGTAMPIL.Columns.Add(Column_cetak)
+        Dim Column_cetak As New DataGridViewButtonColumn
+        With Column_cetak
+            .Text = "Cetak"
+            .HeaderText = "Cetak"
+            .UseColumnTextForButtonValue = True
+            .FlatStyle = FlatStyle.Flat
+            .DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            .CellTemplate.Style.BackColor = Color.DarkGreen
+            .CellTemplate.Style.ForeColor = Color.WhiteSmoke
+            .Width = 100
+        End With
+        DGTAMPIL.Columns.Add(Column_cetak)
         DGTAMPIL.ColumnHeadersHeight = 35
 
         DGTAMPIL.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing
@@ -194,7 +193,7 @@ Public Class FR_DISKON
 
         Dim TOTAL_RECORD As Integer = 0
         Dim TBL_DATA As New DataTable
-        DA = New SqlDataAdapter(STR, CONN)
+        DA = New MySqlDataAdapter(STR, CONN)
         DA.Fill(TBL_DATA)
 
         TOTAL_RECORD = TBL_DATA.Rows.Count
@@ -234,9 +233,9 @@ Public Class FR_DISKON
 
     Private Sub TXTKODE_TextChanged(sender As Object, e As EventArgs) Handles TXTKODE.TextChanged
         Dim STR As String = "SELECT Barang, Satuan, Harga1, Harga2, Harga3, Harga4, Harga5, End1, End2, End3, End4 FROM tbl_barang WHERE RTRIM(Kode)='" & TXTKODE.Text & "'"
-        Dim CMD As SqlCommand
-        CMD = New SqlCommand(STR, CONN)
-        Dim RD As SqlDataReader
+        Dim CMD As MySqlCommand
+        CMD = New MySqlCommand(STR, CONN)
+        Dim RD As MySqlDataReader
         RD = CMD.ExecuteReader
         If RD.HasRows Then
             RD.Read()
@@ -424,8 +423,8 @@ Public Class FR_DISKON
                 " OR (Tgl_awal <= '" & Format(TXTTGLAKHIR.Value, "yyyy-MM-dd") & "' AND Tgl_akhir >= '" & Format(TXTTGLAKHIR.Value, "yyyy-MM-dd") & "')" &
                 " OR (Tgl_awal <= '" & Format(TXTTGLAWAL.Value, "yyyy-MM-dd") & "' AND Tgl_awal >= '" & Format(TXTTGLAWAL.Value, "yyyy-MM-dd") & "')" &
                 " OR (Tgl_awal >= '" & Format(TXTTGLAWAL.Value, "yyyy-MM-dd") & "' AND Tgl_akhir <= '" & Format(TXTTGLAKHIR.Value, "yyyy-MM-dd") & "'))"
-                Dim CMD As New SqlCommand(STR, CONN)
-                Dim RD As SqlDataReader
+                Dim CMD As New MySqlCommand(STR, CONN)
+                Dim RD As MySqlDataReader
                 RD = CMD.ExecuteReader
                 If RD.HasRows Then
                     MsgBox("Data diskon sudah ada! Silahkan pilih barang/tanggal lain!")
@@ -439,9 +438,9 @@ Public Class FR_DISKON
                             " '" & TXTKODE.Text & "'," &
                             " 'R'," &
                             " " & TXTDISKON_RUPIAH.Text.ToString.Replace(",", ".") & "," &
-                            " '" & Format(TXTTGLAWAL.Value, "MM/dd/yyyy") & "'," &
-                            " '" & Format(TXTTGLAKHIR.Value, "MM/dd/yyyy") & "'," &
-                            " '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
+                            " '" & Format(TXTTGLAWAL.Value, "yyyy-MM-dd") & "'," &
+                            " '" & Format(TXTTGLAKHIR.Value, "yyyy-MM-dd") & "'," &
+                            " '" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "'" &
                             " )"
                     Else
                         STR = "INSERT INTO tbl_diskon (Jenis, Kode, Jenis_nominal, Diskon, Tgl_awal, Tgl_akhir, Created_at)" &
@@ -450,12 +449,12 @@ Public Class FR_DISKON
                             " '" & TXTKODE.Text & "'," &
                             " 'P'," &
                             " " & TXTDISKON.Text.ToString.Replace(",", ".") & "," &
-                            " '" & Format(TXTTGLAWAL.Value, "MM/dd/yyyy") & "'," &
-                            " '" & Format(TXTTGLAKHIR.Value, "MM/dd/yyyy") & "'," &
-                            " '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
+                            " '" & Format(TXTTGLAWAL.Value, "yyyy-MM-dd") & "'," &
+                            " '" & Format(TXTTGLAKHIR.Value, "yyyy-MM-dd") & "'," &
+                            " '" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "'" &
                             " )"
                     End If
-                    CMD = New SqlCommand(STR, CONN)
+                    CMD = New MySqlCommand(STR, CONN)
                     CMD.ExecuteNonQuery()
                     MsgBox("Data tersimpan")
                     TXTKODE.Clear()
@@ -478,9 +477,9 @@ Public Class FR_DISKON
                         " '" & TXTMIN.Text & "'," &
                         " 'R'," &
                         " " & TXTDISKON_RUPIAH.Text.ToString.Replace(",", ".") & "," &
-                        " '" & Format(TXTTGLAWAL.Value, "MM/dd/yyyy") & "'," &
-                        " '" & Format(TXTTGLAKHIR.Value, "MM/dd/yyyy") & "'," &
-                        " '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
+                        " '" & Format(TXTTGLAWAL.Value, "yyyy-MM-dd") & "'," &
+                        " '" & Format(TXTTGLAKHIR.Value, "yyyy-MM-dd") & "'," &
+                        " '" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "'" &
                         " )"
                 Else
                     STR = "INSERT INTO tbl_diskon (Jenis, Min_transaksi, Jenis_nominal, Diskon, Tgl_awal, Tgl_akhir, Created_at)" &
@@ -489,12 +488,12 @@ Public Class FR_DISKON
                         " '" & TXTMIN.Text & "'," &
                         " 'P'," &
                         " " & TXTDISKON.Text.ToString.Replace(",", ".") & "," &
-                        " '" & Format(TXTTGLAWAL.Value, "MM/dd/yyyy") & "'," &
-                        " '" & Format(TXTTGLAKHIR.Value, "MM/dd/yyyy") & "'," &
-                        " '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
+                        " '" & Format(TXTTGLAWAL.Value, "yyyy-MM-dd") & "'," &
+                        " '" & Format(TXTTGLAKHIR.Value, "yyyy-MM-dd") & "'," &
+                        " '" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "'" &
                         " )"
                 End If
-                Dim CMD As New SqlCommand(STR, CONN)
+                Dim CMD As New MySqlCommand(STR, CONN)
                 CMD.ExecuteNonQuery()
                 MsgBox("Data tersimpan")
                 TXTMIN.Clear()
@@ -635,7 +634,7 @@ Public Class FR_DISKON
 
     Private Sub DGTAMPIL_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGTAMPIL.CellClick
         Dim STR As String
-        Dim CMD As SqlCommand
+        Dim CMD As MySqlCommand
 
         If e.RowIndex >= 0 Then
             If DGTAMPIL.Columns(e.ColumnIndex).HeaderText = "Cetak" Then
@@ -686,7 +685,7 @@ Public Class FR_DISKON
                     DGTAMPIL.Columns(0).Visible = True
                     Dim IDX As String = DGTAMPIL.CurrentRow.Cells("Id").Value
                     DGTAMPIL.Columns(0).Visible = False
-                    CMD = New SqlCommand("DELETE FROM tbl_diskon WHERE Id='" & IDX & "'", CONN)
+                    CMD = New MySqlCommand("DELETE FROM tbl_diskon WHERE Id='" & IDX & "'", CONN)
                     CMD.ExecuteNonQuery()
                     TAMPIL()
                     MsgBox("Data transaksi berhasil dihapus")

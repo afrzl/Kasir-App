@@ -1,10 +1,10 @@
-﻿Imports System.Data.SqlClient
+﻿Imports MySql.Data.MySqlClient
 
 Public Class FR_VOUCHER_DATA
 
-    Dim CMD As SqlCommand
-    Dim RD As SqlDataReader
-    Dim DA As SqlDataAdapter
+    Dim CMD As MySqlCommand
+    Dim RD As MySqlDataReader
+    Dim DA As MySqlDataAdapter
     Dim STR As String
 
     Private Sub BTNCLOSE_Click(sender As Object, e As EventArgs) Handles BTNCLOSE.Click
@@ -23,7 +23,7 @@ Public Class FR_VOUCHER_DATA
                     " FROM tbl_data_voucher" &
                     " WHERE Nama Like '%" & TXTCARI.Text & "%' " &
                     " ORDER BY Id ASC"
-        DA = New SqlDataAdapter(STR, CONN)
+        DA = New MySqlDataAdapter(STR, CONN)
         Dim TBL As New DataTable
         DA.Fill(TBL)
         DGTAMPIL.DataSource = TBL
@@ -105,7 +105,7 @@ Public Class FR_VOUCHER_DATA
                     If MsgBox("Apakah anda yakin akan menghapus data voucher?", vbYesNo) = vbYes Then
                         STR = "DELETE tbl_data_voucher " &
                             " WHERE Id='" & DGTAMPIL.Item("Id", e.RowIndex).Value & "'"
-                        CMD = New SqlCommand(STR, CONN)
+                        CMD = New MySqlCommand(STR, CONN)
                         CMD.ExecuteNonQuery()
                         MsgBox("Data voucher berhasil dihapus!")
                         TAMPIL()

@@ -1,4 +1,4 @@
-﻿Imports System.Data.SqlClient
+﻿Imports MySql.Data.MySqlClient
 
 Public Class FR_KASIR_ACTION
     Private Sub BTNCLOSE_Click(sender As Object, e As EventArgs) Handles BTNCLOSE.Click
@@ -61,38 +61,39 @@ Public Class FR_KASIR_ACTION
     End Sub
 
     Sub CARI_DATA()
-        Dim STR As String = "SELECT * FROM tbl_karyawan WHERE Id='" & TXTID.Text & "'"
-        Dim CMD As SqlCommand
-        CMD = New SqlCommand(STR, CONN)
-        Dim RD As SqlDataReader
-        RD = CMD.ExecuteReader
-        If RD.HasRows Then
-            RD.Read()
-            TXTNAMA.Text = RD.Item("Nama").ToString.Trim
-            TXTALAMAT.Text = RD.Item("Alamat").ToString.Trim
-            TXTTGL.Value = RD.Item("Tgl_lahir")
-            If RD.Item("JK") = "L" Then
-                TXTJK.Text = "Laki-laki"
-            ElseIf RD.Item("JK") = "P" Then
-                TXTJK.Text = "Perempuan"
-            End If
-            If RD.Item("Role") = 1 Then
-                CBROLE.Text = "Administrator"
-            ElseIf RD.Item("Role") = 2 Then
-                CBROLE.Text = "Operator"
-            ElseIf RD.Item("Role") = 3 Then
-                CBROLE.Text = "Kasir"
-            End If
-            TXTNOHP.Text = RD.Item("No_hp").ToString.Trim
-            RD.Close()
-        Else
-            RD.Close()
-            TXTNAMA.Clear()
-            TXTALAMAT.Clear()
-            TXTNOHP.Clear()
-            TXTNAMA.Select()
-        End If
-        RD.Close()
+        Dim RD As MySqlDataReader
+        Dim CMD As MySqlCommand
+
+        Try
+            CONN.Open()
+            Dim STR As String = "SELECT * FROM tbl_karyawan WHERE Id='" & TXTID.Text & "'"
+            CMD = New MySqlCommand(STR, CONN)
+            RD = CMD.ExecuteReader
+
+            While RD.Read()
+                TXTNAMA.Text = RD.GetString("Nama")
+                TXTALAMAT.Text = RD.GetString("Alamat")
+                TXTTGL.Value = RD.GetDateTime("Tgl_lahir")
+                If RD.Item("JK") = "L" Then
+                    TXTJK.Text = "Laki-laki"
+                ElseIf RD.Item("JK") = "P" Then
+                    TXTJK.Text = "Perempuan"
+                End If
+                If RD.Item("Role") = 1 Then
+                    CBROLE.Text = "Administrator"
+                ElseIf RD.Item("Role") = 2 Then
+                    CBROLE.Text = "Operator"
+                ElseIf RD.Item("Role") = 3 Then
+                    CBROLE.Text = "Kasir"
+                End If
+                TXTNOHP.Text = RD.Item("No_hp").ToString.Trim
+            End While
+            CONN.Close()
+        Catch ex As MySqlException
+            MessageBox.Show(ex.Message)
+        Finally
+            CONN.Dispose()
+        End Try
     End Sub
 
     Private Sub FR_KASIR_ACTION_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -100,22 +101,32 @@ Public Class FR_KASIR_ACTION
     End Sub
 
     Private Function AUTOID() As String
+        Dim CMD As MySqlCommand
+        Dim RD As MySqlDataReader
         Dim ID_AWAL As String = Format(TXTTGL.Value, "yyyyMMdd")
-        Dim STR As String = "SELECT TOP 1 Id FROM tbl_karyawan ORDER BY Auto_id DESC"
-        Dim CMD As SqlCommand
-        CMD = New SqlCommand(STR, CONN)
-        Dim RD As SqlDataReader
-        RD = CMD.ExecuteReader
-        If RD.HasRows() Then
-            RD.Read()
-            Dim ID As Integer = Mid(RD.Item("Id"), 9, 3) + 1
+
+        Try
+            CONN.Open()
+            Dim STR As String = "SELECT Id FROM tbl_karyawan ORDER BY Created_at DESC LIMIT 1"
+            CMD = New MySqlCommand(STR, CONN)
+            RD = CMD.ExecuteReader
+
+            While RD.Read()
+                If RD.HasRows() Then
+                    Dim ID As Integer = Mid(RD.Item("Id"), 9, 3) + 1
+                    AUTOID = ID_AWAL + Format(ID, "000")
+                Else
+                    AUTOID = ID_AWAL + Format(1, "000")
+                End If
+            End While
             RD.Close()
-            AUTOID = ID_AWAL + Format(ID, "000")
-        Else
-            RD.Close()
-            AUTOID = ID_AWAL + Format(1, "000")
-        End If
-        RD.Close()
+            CONN.Close()
+        Catch ex As MySqlException
+            MessageBox.Show(ex.Message)
+        Finally
+            CONN.Dispose()
+        End Try
+
     End Function
 
     Private Sub BTNSIMPAN_Click(sender As Object, e As EventArgs) Handles BTNSIMPAN.Click
@@ -141,41 +152,65 @@ Public Class FR_KASIR_ACTION
             Dim ID As String = AUTOID()
 
             Dim STR As String
-            Dim CMD As SqlCommand
+            Dim CMD As MySqlCommand
             If TXTID.Text = "" Then
-                STR = "INSERT INTO tbl_karyawan (Id, Nama, Password, Role, Alamat, Tgl_lahir, JK, No_hp, Created_at) VALUES ('" & ID & "','" &
-                    TXTNAMA.Text & "', '123456', '" & role & "', '" & TXTALAMAT.Text & "', '" &
-                    Format(TXTTGL.Value, "MM/dd/yyyy") & "', '" & jk & "', '" &
-                    TXTNOHP.Text & "', '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "')"
-                CMD = New SqlCommand(STR, CONN)
-                CMD.ExecuteNonQuery()
-                MsgBox("Data berhasil disimpan dengan ID : " & ID & " dan Password : 123456")
-            Else
-                STR = "SELECT * FROM tbl_karyawan WHERE Id='" & TXTID.Text & "'"
-                CMD = New SqlCommand(STR, CONN)
-                Dim RD As SqlDataReader
-                RD = CMD.ExecuteReader
-                If RD.HasRows Then
-                    RD.Close()
-                    ID = TXTID.Text
-                    STR = "UPDATE tbl_karyawan SET Nama='" & TXTNAMA.Text &
-                        "',Role='" & role &
-                        "',Alamat='" & TXTALAMAT.Text &
-                        "',Tgl_lahir='" & Format(TXTTGL.Value, "MM/dd/yyyy") &
-                        "',JK='" & jk &
-                        "',No_hp='" & TXTNOHP.Text &
-                        "',Modified_at='" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") &
-                        "' WHERE Id='" & TXTID.Text & "'"
-                Else
-                    RD.Close()
+                Try
+                    CONN.Open()
+
                     STR = "INSERT INTO tbl_karyawan (Id, Nama, Password, Role, Alamat, Tgl_lahir, JK, No_hp, Created_at) VALUES ('" & ID & "','" &
-                        TXTNAMA.Text & "', '123456', '" & role & "', '" & TXTALAMAT.Text & "', '" &
-                        Format(TXTTGL.Value, "MM/dd/yyyy") & "', '" & jk & "', '" &
-                        TXTNOHP.Text & "', '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "')"
-                End If
-                CMD = New SqlCommand(STR, CONN)
-                CMD.ExecuteNonQuery()
-                MsgBox("ID : " & TXTID.Text & " berhasil diubah!")
+                    TXTNAMA.Text & "', '123456', '" & role & "', '" & TXTALAMAT.Text & "', '" &
+                    Format(TXTTGL.Value, "yyyy-MM-dd") & "', '" & jk & "', '" &
+                    TXTNOHP.Text & "', '" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "')"
+                    CMD = New MySqlCommand(STR, CONN)
+                    CMD.ExecuteNonQuery()
+                    MsgBox("Data berhasil disimpan dengan ID : " & ID & " dan Password : 123456")
+
+                    CONN.Close()
+                Catch ex As MySqlException
+                    MessageBox.Show(ex.Message)
+                Finally
+                    CONN.Dispose()
+                End Try
+            Else
+                Try
+                    CONN.Open()
+                    STR = "SELECT * FROM tbl_karyawan WHERE Id='" & TXTID.Text & "'"
+                    CMD = New MySqlCommand(STR, CONN)
+                    Dim RD As MySqlDataReader
+                    RD = CMD.ExecuteReader
+
+                    While RD.Read()
+                        If RD.HasRows Then
+                            ID = TXTID.Text
+                            STR = "UPDATE tbl_karyawan SET Nama='" & TXTNAMA.Text &
+                                "',Role='" & role &
+                                "',Alamat='" & TXTALAMAT.Text &
+                                "',Tgl_lahir='" & Format(TXTTGL.Value, "yyyy-MM-dd") &
+                                "',JK='" & jk &
+                                "',No_hp='" & TXTNOHP.Text &
+                                "',Modified_at='" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") &
+                                "' WHERE Id='" & TXTID.Text & "'"
+                        Else
+                            STR = "INSERT INTO tbl_karyawan (Id, Nama, Password, Role, Alamat, Tgl_lahir, JK, No_hp, Created_at) VALUES ('" & ID & "','" &
+                                TXTNAMA.Text & "', '123456', '" & role & "', '" & TXTALAMAT.Text & "', '" &
+                                Format(TXTTGL.Value, "yyyy-MM-dd") & "', '" & jk & "', '" &
+                                TXTNOHP.Text & "', '" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "')"
+                        End If
+                    End While
+                    RD.Close()
+
+                    CMD = New MySqlCommand(STR, CONN)
+                    CMD.ExecuteNonQuery()
+                    MsgBox("ID : " & TXTID.Text & " berhasil diubah!")
+                    CONN.Close()
+
+                Catch ex As MySqlException
+                    MessageBox.Show(ex.Message)
+                Finally
+                    CONN.Dispose()
+                End Try
+
+
             End If
             FR_KASIR.Enabled = True
             FR_KASIR.TAMPIL()

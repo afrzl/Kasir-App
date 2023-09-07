@@ -1,6 +1,9 @@
-﻿Imports System.Data.SqlClient
+﻿Imports System.Diagnostics.Eventing
+Imports MySql.Data.MySqlClient
+
 
 Public Class FR_MENU
+    Dim CMD As MySqlCommand
     Dim START_RECORD As Integer = 0
     Dim TAMPIL_RECORD As Integer = 10
 
@@ -44,6 +47,8 @@ Public Class FR_MENU
         End If
     End Sub
 
+    Dim TOTAL_RECORD As Integer = 0
+
     Sub TAMPIL()
         Dim STR As String = "SELECT RTRIM(tbl_barang.Kode) AS Kode," &
             " RTRIM(Barang) As 'Nama Barang'," &
@@ -53,11 +58,11 @@ Public Class FR_MENU
             " OR tbl_barang.Kode = '" & TXTCARISTOK.Text & "'" &
             " AND (tbl_stok.Stok) != 0" &
             " ORDER BY 'Nama Barang' ASC" &
-            " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
+            " LIMIT " & TAMPIL_RECORD & " OFFSET " & START_RECORD
 
-        Dim DA As SqlDataAdapter
+        Dim DA As MySqlDataAdapter
         Dim TBL As New DataSet
-        DA = New SqlDataAdapter(STR, CONN)
+        DA = New MySqlDataAdapter(STR, CONN)
         DA.Fill(TBL)
         DGSTOK.DataSource = TBL.Tables(0)
 
@@ -73,17 +78,9 @@ Public Class FR_MENU
         BTNPREV.Enabled = True
         BTNNEXT.Enabled = True
 
-        Dim TOTAL_RECORD As Integer = 0
         Dim TBL_DATA As New DataTable
-        DA = New SqlDataAdapter(STR, CONN)
+        DA = New MySqlDataAdapter(STR, CONN)
         DA.Fill(TBL_DATA)
-
-        STR = "SELECT COUNT(Kode) FROM tbl_barang WHERE Barang Like '%" & TXTCARISTOK.Text & "%'" &
-            " OR Kode = '" & TXTCARISTOK.Text & "'" &
-            " AND (SELECT Stok FROM tbl_stok WHERE tbl_stok.Kode = tbl_barang.Kode) != 0"
-        Dim CMD As New SqlCommand(STR, CONN)
-
-        TOTAL_RECORD = Convert.ToUInt64(CMD.ExecuteScalar())
 
         If TOTAL_RECORD = 0 Then
             BTNPREV.Enabled = False
@@ -118,26 +115,60 @@ Public Class FR_MENU
     End Sub
 
     Private Function CEK_EXPIRED() As Boolean
-        Dim STR As String = "SELECT * FROM tbl_transaksi_child WHERE LEFT(Id_trans, 1) = 'M'" &
-            " AND Tgl_exp <= DATEADD(day,+14, GETDATE())" &
-            " AND Stok != 0"
-        Dim CMD As SqlCommand
-        CMD = New SqlCommand(STR, CONN)
-        Dim RD As SqlDataReader
-        RD = CMD.ExecuteReader
-        If RD.HasRows Then
+        Try
+            CONN.Open()
+
+            Dim STR As String = "SELECT * FROM tbl_transaksi_child WHERE LEFT(Id_trans, 1) = 'M'" &
+                " AND Tgl_exp <= DATE_ADD(CURRENT_DATE, INTERVAL 14 DAY)" &
+                " AND Stok != 0"
+            Dim CMD As MySqlCommand
+            CMD = New MySqlCommand(STR, CONN)
+            Dim RD As MySqlDataReader
+            RD = CMD.ExecuteReader
+            While RD.Read()
+                If RD.HasRows Then
+                    'RD.Close()
+                    CEK_EXPIRED = True
+                Else
+                    'RD.Close()
+                    CEK_EXPIRED = False
+                End If
+            End While
             RD.Close()
-            CEK_EXPIRED = True
-        Else
-            RD.Close()
-            CEK_EXPIRED = False
-        End If
-        RD.Close()
+
+            CONN.Close()
+        Catch ex As MySqlException
+            MessageBox.Show(ex.Message)
+        Finally
+            CONN.Dispose()
+        End Try
+
     End Function
 
     Private Sub FR_MENU_Activated(sender As Object, e As EventArgs) Handles Me.Activated
         TAMPIL()
         TAMPIL_DATA()
+
+        Dim CMD As MySqlCommand
+
+        Dim Str As String
+
+        Try
+            CONN.Open()
+
+            Str = "SELECT COUNT(Kode) FROM tbl_barang WHERE Barang Like '%" & TXTCARISTOK.Text & "%'" &
+            " OR Kode = '" & TXTCARISTOK.Text & "'" &
+            " AND (SELECT Stok FROM tbl_stok WHERE tbl_stok.Kode = tbl_barang.Kode) != 0"
+            CMD = New MySqlCommand(Str, CONN)
+
+            TOTAL_RECORD = Convert.ToUInt64(CMD.ExecuteScalar())
+            CONN.Close()
+        Catch ex As MySqlException
+            MessageBox.Show(ex.Message)
+        Finally
+            CONN.Dispose()
+
+        End Try
     End Sub
 
     Sub TAMPIL_DATA()
@@ -147,29 +178,41 @@ Public Class FR_MENU
         TGLAKHIR = TGLAKHIR & " 23:59:59"
 
         Dim STR As String
-        Dim CMD As SqlCommand
-        STR = "SELECT COUNT(*) FROM tbl_karyawan"
-        CMD = New SqlCommand(STR, CONN)
-        LBKASIR.Text = Convert.ToUInt64(CMD.ExecuteScalar())
+        Dim CMD As MySqlCommand
 
-        STR = "SELECT COUNT(*) FROM tbl_barang"
-        CMD = New SqlCommand(STR, CONN)
-        LBBARANG.Text = Convert.ToUInt64(CMD.ExecuteScalar())
+        Try
+            CONN.Open()
 
-        STR = "SELECT COUNT(*) FROM tbl_transaksi_parent WHERE Jenis='M'"
-        CMD = New SqlCommand(STR, CONN)
-        LBMASUK.Text = Convert.ToUInt64(CMD.ExecuteScalar())
+            STR = "SELECT COUNT(*) FROM tbl_karyawan"
+            CMD = New MySqlCommand(STR, CONN)
+            LBKASIR.Text = Convert.ToUInt64(CMD.ExecuteScalar())
 
-        STR = "SELECT COUNT(*) FROM tbl_transaksi_parent WHERE Jenis='K'"
-        CMD = New SqlCommand(STR, CONN)
-        LBKELUAR.Text = Convert.ToUInt64(CMD.ExecuteScalar())
+            STR = "SELECT COUNT(*) FROM tbl_barang"
+            CMD = New MySqlCommand(STR, CONN)
+            LBBARANG.Text = Convert.ToUInt64(CMD.ExecuteScalar())
 
-        STR = "SELECT COUNT(*) as Count FROM tbl_transaksi_parent WHERE Jenis='K' AND (Tgl >= '" & TGLAWAL & "' AND Tgl <= '" & TGLAKHIR & "')"
-        CMD = New SqlCommand(STR, CONN)
-        LBKELUARHARI.Text = Convert.ToUInt64(CMD.ExecuteScalar())
-        'CMD = New SqlCommand(STR, CONN)
+            STR = "SELECT COUNT(*) FROM tbl_transaksi_parent WHERE Jenis='M'"
+            CMD = New MySqlCommand(STR, CONN)
+            LBMASUK.Text = Convert.ToUInt64(CMD.ExecuteScalar())
 
-        'Dim RD As SqlDataReader
+            STR = "SELECT COUNT(*) FROM tbl_transaksi_parent WHERE Jenis='K'"
+            CMD = New MySqlCommand(STR, CONN)
+            LBKELUAR.Text = Convert.ToUInt64(CMD.ExecuteScalar())
+
+            STR = "SELECT COUNT(*) as Count FROM tbl_transaksi_parent WHERE Jenis='K' AND (Tgl >= '" & TGLAWAL & "' AND Tgl <= '" & TGLAKHIR & "')"
+            CMD = New MySqlCommand(STR, CONN)
+            LBKELUARHARI.Text = Convert.ToUInt64(CMD.ExecuteScalar())
+
+            CONN.Close()
+        Catch ex As MySqlException
+            MessageBox.Show(ex.Message)
+        Finally
+            CONN.Dispose()
+        End Try
+
+        'CMD = New MySqlCommand(STR, CONN)
+
+        'Dim RD As MySqlDataReader
         'RD = CMD.ExecuteReader
         'RD.Read()
         'If RD.HasRows Then
@@ -181,9 +224,9 @@ Public Class FR_MENU
         'RD.Close()
 
 
-        ''Dim DA As SqlDataAdapter
+        ''Dim DA As MySqlDataAdapter
         ''Dim TBL As New DataTable
-        ''DA = New SqlDataAdapter(STR, CONN)
+        ''DA = New MySqlDataAdapter(STR, CONN)
         ''DA.Fill(TBL)
 
         ''LBKELUARHARI.Text = TBL.Rows.Count()

@@ -1,10 +1,10 @@
-﻿Imports System.Data.SqlClient
+﻿Imports MySql.Data.MySqlClient
 
 Public Class FR_MASUK_BONGKAR
     Dim STR As String
-    Dim CMD As SqlCommand
-    Dim RD As SqlDataReader
-    Dim DA As SqlDataAdapter
+    Dim CMD As MySqlCommand
+    Dim RD As MySqlDataReader
+    Dim DA As MySqlDataAdapter
 
     Private Sub BTNCLOSE_Click(sender As Object, e As EventArgs) Handles BTNCLOSE.Click
         With FR_MASUK_HISTORY
@@ -27,7 +27,7 @@ Public Class FR_MASUK_BONGKAR
                        " FROM tbl_transaksi_child" &
                        " INNER JOIN tbl_barang ON tbl_transaksi_child.Kode=tbl_barang.Kode" &
                        " WHERE tbl_transaksi_child.Id = '" & TXT_IDBRG.Text & "'"
-        CMD = New SqlCommand(STR, CONN)
+        CMD = New MySqlCommand(STR, CONN)
         RD = CMD.ExecuteReader
         If RD.HasRows Then
             RD.Read()
@@ -65,7 +65,7 @@ Public Class FR_MASUK_BONGKAR
         STR = "SELECT Kode, RTRIM(Barang) AS 'Nama Barang', RTRIM(Satuan) AS 'Satuan'" &
                        " FROM tbl_barang" &
                        " WHERE Kode = '" & TXT_KODEBARANG.Text & "'"
-        CMD = New SqlCommand(STR, CONN)
+        CMD = New MySqlCommand(STR, CONN)
         RD = CMD.ExecuteReader
         If RD.HasRows Then
             RD.Read()
@@ -98,32 +98,32 @@ Public Class FR_MASUK_BONGKAR
                         " " & JML_BARANG & "," &
                         " '" & HARGA_PARTAI & "'," &
                         " '" & JML_BARANG & "'," &
-                        " '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "')"
-            CMD = New SqlCommand(STR, CONN)
+                        " '" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "')"
+            CMD = New MySqlCommand(STR, CONN)
             CMD.ExecuteNonQuery()
 
             STR = "UPDATE tbl_transaksi_parent SET Jumlah_item = Jumlah_item - " & TXT_JML.Text.ToString.Replace(",", ".") & " + " & JML_BARANG & ", " &
-                    " Modified_at = '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
+                    " Modified_at = '" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "'" &
                     " WHERE Id_trans='" & TXT_ID.Text & "'"
-            CMD = New SqlCommand(STR, CONN)
+            CMD = New MySqlCommand(STR, CONN)
             CMD.ExecuteNonQuery()
 
             STR = "UPDATE tbl_transaksi_child SET Stok-=" & TXT_JML.Text.ToString.Replace(",", ".") & ", " &
-                    " Modified_at = '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
+                    " Modified_at = '" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "'" &
                     " WHERE Id='" & TXT_IDBRG.Text & "'"
-            CMD = New SqlCommand(STR, CONN)
+            CMD = New MySqlCommand(STR, CONN)
             CMD.ExecuteNonQuery()
 
             STR = "UPDATE tbl_stok SET Stok+=" & JML_BARANG & ", " &
-                    " Modified_at = '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
+                    " Modified_at = '" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "'" &
                     " WHERE Kode='" & TXT_KODEBARANG.Text & "'"
-            CMD = New SqlCommand(STR, CONN)
+            CMD = New MySqlCommand(STR, CONN)
             CMD.ExecuteNonQuery()
 
             STR = "UPDATE tbl_stok SET Stok-=" & TXT_JML.Text.ToString.Replace(",", ".") & ", " &
-                    " Modified_at = '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
+                    " Modified_at = '" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "'" &
                     " WHERE Kode='" & KODE & "'"
-            CMD = New SqlCommand(STR, CONN)
+            CMD = New MySqlCommand(STR, CONN)
             CMD.ExecuteNonQuery()
             MsgBox("Bongkar barang berhasil disimpan!")
             FR_MASUK_HISTORY.Enabled = True

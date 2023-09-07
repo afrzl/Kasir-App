@@ -1,4 +1,4 @@
-﻿Imports System.Data.SqlClient
+﻿Imports MySql.Data.MySqlClient
 
 Public Class FR_OPS_DASHBOARD
     Dim START_RECORD As Integer = 0
@@ -26,9 +26,9 @@ Public Class FR_OPS_DASHBOARD
         Dim STR As String = "SELECT * FROM tbl_transaksi_child WHERE LEFT(Id_trans, 1) = 'M'" &
             " AND Tgl_exp <= DATEADD(day,+14, GETDATE())" &
             " AND Stok != 0"
-        Dim CMD As SqlCommand
-        CMD = New SqlCommand(STR, CONN)
-        Dim RD As SqlDataReader
+        Dim CMD As MySqlCommand
+        CMD = New MySqlCommand(STR, CONN)
+        Dim RD As MySqlDataReader
         RD = CMD.ExecuteReader
         If RD.HasRows Then
             RD.Close()
@@ -72,11 +72,11 @@ Public Class FR_OPS_DASHBOARD
             " OR tbl_barang.Kode = '" & TXTCARISTOK.Text & "'" &
             " AND (tbl_stok.Stok) != 0" &
             " ORDER BY 'Nama Barang' ASC" &
-            " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
+            " LIMIT " & TAMPIL_RECORD & " OFFSET " & START_RECORD
 
-        Dim DA As SqlDataAdapter
+        Dim DA As MySqlDataAdapter
         Dim TBL As New DataSet
-        DA = New SqlDataAdapter(STR, CONN)
+        DA = New MySqlDataAdapter(STR, CONN)
         DA.Fill(TBL)
         DGSTOK.DataSource = TBL.Tables(0)
 
@@ -96,13 +96,13 @@ Public Class FR_OPS_DASHBOARD
 
         Dim TOTAL_RECORD As Integer = 0
         Dim TBL_DATA As New DataTable
-        DA = New SqlDataAdapter(STR, CONN)
+        DA = New MySqlDataAdapter(STR, CONN)
         DA.Fill(TBL_DATA)
 
         STR = "SELECT COUNT(*) FROM tbl_barang WHERE Barang Like '%" & TXTCARISTOK.Text & "%'" &
             " OR Kode = '" & TXTCARISTOK.Text & "'" &
             " AND (SELECT Stok FROM tbl_stok WHERE tbl_stok.Kode = tbl_barang.Kode) != 0"
-        Dim CMD As New SqlCommand(STR, CONN)
+        Dim CMD As New MySqlCommand(STR, CONN)
 
         TOTAL_RECORD = Convert.ToUInt64(CMD.ExecuteScalar())
 
@@ -145,26 +145,26 @@ Public Class FR_OPS_DASHBOARD
         Dim TGLAKHIR = Format(Date.Now, "yyyy-MM-dd") & " 23:59:59"
 
         Dim STR As String
-        Dim CMD As SqlCommand
+        Dim CMD As MySqlCommand
 
         STR = "SELECT COUNT(*) FROM tbl_transaksi_parent WHERE Jenis='M' AND Id_kasir = '" & My.Settings.ID_ACCOUNT & "'"
-        CMD = New SqlCommand(STR, CONN)
+        CMD = New MySqlCommand(STR, CONN)
         LBMASUK.Text = Convert.ToUInt64(CMD.ExecuteScalar())
 
         STR = "SELECT COUNT(*) FROM tbl_transaksi_parent WHERE Jenis='M'" &
             " And (Tgl >= '" & TGLAWAL & "' AND Tgl <= '" & TGLAKHIR & "')" &
             " AND Id_kasir = '" & My.Settings.ID_ACCOUNT & "'"
-        CMD = New SqlCommand(STR, CONN)
+        CMD = New MySqlCommand(STR, CONN)
         LBMASUKHARI.Text = Convert.ToUInt64(CMD.ExecuteScalar())
 
         STR = "SELECT COUNT(*) FROM tbl_transaksi_parent WHERE Jenis='K' AND Id_kasir = '" & My.Settings.ID_ACCOUNT & "'"
-        CMD = New SqlCommand(STR, CONN)
+        CMD = New MySqlCommand(STR, CONN)
         LBKELUAR.Text = Convert.ToUInt64(CMD.ExecuteScalar())
 
         STR = "SELECT COUNT(*) FROM tbl_transaksi_parent WHERE Jenis='K'" &
             " And (Tgl >= '" & TGLAWAL & "' AND Tgl <= '" & TGLAKHIR & "')" &
             " AND Id_kasir = '" & My.Settings.ID_ACCOUNT & "'"
-        CMD = New SqlCommand(STR, CONN)
+        CMD = New MySqlCommand(STR, CONN)
         LBKELUARHARI.Text = Convert.ToUInt64(CMD.ExecuteScalar())
     End Sub
 

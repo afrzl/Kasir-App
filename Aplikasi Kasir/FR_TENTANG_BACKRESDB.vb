@@ -1,11 +1,11 @@
-﻿Imports System.Data.SqlClient
+﻿Imports MySql.Data.MySqlClient
 
 Public Class FR_TENTANG_BACKRESDB
-    Dim con As SqlConnection = New SqlConnection("SERVER=" & My.Settings.SERVER & ";USER ID=" & My.Settings.USER & ";PASSWORD=" & My.Settings.PASSWORD & ";DATABASE=Master;MultipleActiveResultSets=True;")
-    Dim dr As SqlDataReader
+    Dim con As MySqlConnection = New MySqlConnection("SERVER=" & My.Settings.SERVER & ";USER ID=" & My.Settings.USER & ";PASSWORD=" & My.Settings.PASSWORD & ";DATABASE=Master;MultipleActiveResultSets=True;")
+    Dim dr As MySqlDataReader
 
     Dim STR As String
-    Dim CMD As SqlCommand
+    Dim CMD As MySqlCommand
     Sub TUTUP_FORM()
         With FR_TENTANG
             .Enabled = True
@@ -25,7 +25,7 @@ Public Class FR_TENTANG_BACKRESDB
                     con.Open()
                     STR = "BACKUP DATABASE TOKO_KASIR To DISK='" & SaveFileDialog1.FileName & "'"
 
-                    Using CMD = New SqlCommand(STR, con)
+                    Using CMD = New MySqlCommand(STR, con)
                         CMD.ExecuteNonQuery()
                     End Using
 
@@ -42,12 +42,12 @@ Public Class FR_TENTANG_BACKRESDB
                 CONN.Close()
                 con.Open()
                 STR = "ALTER DATABASE TOKO_KASIR SET SINGLE_USER WITH ROLLBACK IMMEDIATE"
-                Using CMD = New SqlCommand(STR, con)
+                Using CMD = New MySqlCommand(STR, con)
                     CMD.ExecuteNonQuery()
                 End Using
                 STR = "RESTORE DATABASE TOKO_KASIR FROM DISK = '" & TXTFILE.Text & "' WITH REPLACE"
 
-                Using CMD = New SqlCommand(STR, con)
+                Using CMD = New MySqlCommand(STR, con)
                     CMD.ExecuteNonQuery()
                 End Using
 

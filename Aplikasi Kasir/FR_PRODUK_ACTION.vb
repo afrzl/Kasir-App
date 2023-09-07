@@ -1,7 +1,7 @@
-﻿Imports System.Data.SqlClient
+﻿Imports MySql.Data.MySqlClient
 
 Public Class FR_PRODUK_ACTION
-    Dim CMD As SQLCOMMAND
+    Dim CMD As MySqlCommand
 
     Private Sub TXTKODE_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TXTKODE.KeyPress
         If e.KeyChar = Chr(13) Then
@@ -279,151 +279,186 @@ Public Class FR_PRODUK_ACTION
                 End If
 
                 Dim STR As String
-                Dim CMD As SqlCommand
+                Dim CMD As MySqlCommand
 
 
                 If TXTKODE.Enabled = False Then
-                    STR = "UPDATE tbl_barang SET Barang='" & TXTNAMA.Text & "'," &
-                    "Satuan='" & CBSATUAN.Text & "'," &
-                    "Harga1='" & TXTHARGA1.Text & "'," &
-                    "End1=" & END1.ToString.Replace(",", ".") & "," &
-                    "Harga2='" & TXTHARGA2.Text & "'," &
-                    "End2=" & END2.ToString.Replace(",", ".") & "," &
-                    "Harga3='" & TXTHARGA3.Text & "'," &
-                    "End3=" & END3.ToString.Replace(",", ".") & "," &
-                    "Harga4='" & TXTHARGA4.Text & "'," &
-                    "End4=" & END4.ToString.Replace(",", ".") & "," &
-                    "Harga5='" & TXTHARGA5.Text & "'," &
-                    "Modified_at='" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
-                    "WHERE Kode='" & TXTKODE.Text & "'"
-                    CMD = New SqlCommand(STR, CONN)
-                    CMD.ExecuteNonQuery()
-                    MsgBox("Data produk berhasil diubah.")
-                    With FR_PRODUK
-                        .Enabled = True
-                        .TAMPIL()
-                    End With
-                    Me.Close()
-                Else
-                    STR = "SELECT * FROM tbl_barang WHERE Kode='" & TXTKODE.Text & "'"
-                    CMD = New SqlCommand(STR, CONN)
-                    Dim RD As SqlDataReader
-                    RD = CMD.ExecuteReader
-                    If RD.HasRows Then
-                        RD.Close()
-                        MsgBox("Kode produk telah digunakan.")
-                        TXTKODE.Select()
-                    Else
-                        RD.Close()
-                        STR = "INSERT INTO tbl_barang" &
-                            " (Kode, Barang, Satuan, Harga1, End1, Harga2, End2, Harga3, End3, Harga4, End4, Harga5, Created_at)" &
-                            " VALUES (" &
-                            "'" & TXTKODE.Text & "'," &
-                            "'" & TXTNAMA.Text & "'," &
-                            "'" & CBSATUAN.Text & "'," &
-                            "'" & TXTHARGA1.Text & "'," &
-                            END1.ToString.Replace(",", ".") & "," &
-                            "'" & TXTHARGA2.Text & "'," &
-                            END2.ToString.Replace(",", ".") & "," &
-                            "'" & TXTHARGA3.Text & "'," &
-                            END3.ToString.Replace(",", ".") & "," &
-                            "'" & TXTHARGA4.Text & "'," &
-                            END4.ToString.Replace(",", ".") & "," &
-                            "'" & TXTHARGA5.Text & "'," &
-                            "'" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
-                            ")"
-                        CMD = New SqlCommand(STR, CONN)
+
+                    Try
+                        CONN.Open()
+                        STR = "UPDATE tbl_barang SET Barang='" & TXTNAMA.Text & "'," &
+                        "Satuan='" & CBSATUAN.Text & "'," &
+                        "Harga1='" & TXTHARGA1.Text & "'," &
+                        "End1=" & END1.ToString.Replace(",", ".") & "," &
+                        "Harga2='" & TXTHARGA2.Text & "'," &
+                        "End2=" & END2.ToString.Replace(",", ".") & "," &
+                        "Harga3='" & TXTHARGA3.Text & "'," &
+                        "End3=" & END3.ToString.Replace(",", ".") & "," &
+                        "Harga4='" & TXTHARGA4.Text & "'," &
+                        "End4=" & END4.ToString.Replace(",", ".") & "," &
+                        "Harga5='" & TXTHARGA5.Text & "'," &
+                        "Modified_at='" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "'" &
+                        "WHERE Kode='" & TXTKODE.Text & "'"
+                        CMD = New MySqlCommand(STR, CONN)
                         CMD.ExecuteNonQuery()
 
-                        STR = "INSERT INTO tbl_stok" &
-                            " (Kode, Stok, Created_at)" &
-                            " VALUES (" &
-                            "'" & TXTKODE.Text & "'," &
-                            "0, " &
-                            "'" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
-                            ")"
-                        CMD = New SqlCommand(STR, CONN)
-                        CMD.ExecuteNonQuery()
-                        MsgBox("Data produk berhasil disimpan.")
+                        CONN.Close()
+                    Catch ex As MySqlException
+                        MessageBox.Show(ex.Message)
+                    Finally
+                        CONN.Dispose()
+                        MsgBox("Data produk berhasil diubah.")
                         With FR_PRODUK
                             .Enabled = True
                             .TAMPIL()
                         End With
                         Me.Close()
-                    End If
-                    RD.Close()
+                    End Try
+
+                Else
+                    Try
+                        CONN.Open()
+
+                        STR = "SELECT COUNT(*) FROM tbl_barang WHERE Kode='" & TXTKODE.Text & "'"
+                        CMD = New MySqlCommand(STR, CONN)
+                        If CMD.ExecuteScalar > 0 Then
+                            MsgBox("Kode produk telah digunakan.")
+                            TXTKODE.Select()
+                        Else
+
+                            Dim StoreProduct As MySqlTransaction = CONN.BeginTransaction
+
+                            Try
+                                STR = "INSERT INTO tbl_barang" &
+                                    " (Kode, Barang, Satuan, Harga1, End1, Harga2, End2, Harga3, End3, Harga4, End4, Harga5, Created_at)" &
+                                    " VALUES (" &
+                                    "'" & TXTKODE.Text & "'," &
+                                    "'" & TXTNAMA.Text & "'," &
+                                    "'" & CBSATUAN.Text & "'," &
+                                    "" & IIf(TXTHARGA1.Text <> "", TXTHARGA1.Text, 0) & "," &
+                                    END1.ToString.Replace(",", ".") & "," &
+                                    "" & IIf(TXTHARGA2.Text <> "", TXTHARGA2.Text, 0) & "," &
+                                    END2.ToString.Replace(",", ".") & "," &
+                                    "" & IIf(TXTHARGA3.Text <> "", TXTHARGA3.Text, 0) & "," &
+                                    END3.ToString.Replace(",", ".") & "," &
+                                    "" & IIf(TXTHARGA4.Text <> "", TXTHARGA4.Text, 0) & "," &
+                                    END4.ToString.Replace(",", ".") & "," &
+                                    "" & IIf(TXTHARGA5.Text <> "", TXTHARGA5.Text, 0) & "," &
+                                    "'" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "'" &
+                                    ")"
+                                CMD = New MySqlCommand(STR, CONN)
+                                CMD.ExecuteNonQuery()
+                                Try
+                                    STR = "INSERT INTO tbl_stok" &
+                                        " (Kode, Stok, Created_at)" &
+                                        " VALUES (" &
+                                        "'" & TXTKODE.Text & "'," &
+                                        "0, " &
+                                        "'" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "'" &
+                                        ")"
+                                    CMD = New MySqlCommand(STR, CONN)
+                                    CMD.ExecuteNonQuery()
+                                Catch ex As MySqlException
+                                    MessageBox.Show(ex.Message)
+                                Finally
+                                    MsgBox("Data produk berhasil disimpan.")
+                                    With FR_PRODUK
+                                        .Enabled = True
+                                        .TAMPIL()
+                                    End With
+                                    Me.Close()
+                                End Try
+                                StoreProduct.Commit()
+                            Catch ex As MySqlException
+                                StoreProduct.Rollback()
+                                MessageBox.Show(ex.Message)
+                            End Try
+                        End If
+                        CONN.Close()
+                    Catch ex As MySqlException
+                        MessageBox.Show(ex.Message)
+                    Finally
+                        CONN.Dispose()
+                    End Try
                 End If
             End If
         End If
     End Sub
 
     Sub CARI_PRODUK()
-        Dim STR As String = "SELECT * FROM tbl_barang WHERE RTRIM(Kode)='" & TXTKODE.Text & "'"
-        Dim CMD As SqlCommand
-        CMD = New SqlCommand(STR, CONN)
-        Dim RD As SqlDataReader
-        RD = CMD.ExecuteReader
-        If RD.HasRows Then
-            RD.Read()
-            TXTNAMA.Enabled = True
-            TXTEND1.Enabled = True
-            TXTHARGA1.Enabled = True
-            Dim END1 As String = ""
-            If Not RD.Item("End1") = 0 Then
-                END1 = Format(RD.Item("End1"), "##0.##")
-            End If
-            Dim END2 As String = ""
-            If Not RD.Item("End2") = 0 Then
-                END2 = Format(RD.Item("End2"), "##0.##")
-            Else
-                TXTEND2.Enabled = False
-            End If
-            Dim END3 As String = ""
-            If Not RD.Item("End3") = 0 Then
-                END3 = Format(RD.Item("End3"), "##0.##")
-            Else
-                TXTEND3.Enabled = False
-            End If
-            Dim END4 As String = ""
-            If Not RD.Item("End4") = 0 Then
-                END4 = Format(RD.Item("End4"), "##0.##")
-            Else
-                TXTEND4.Enabled = False
-            End If
+        Try
+            CONN.Open()
 
-            TXTNAMA.Text = RD.Item("Barang").ToString.Trim
-            CBSATUAN.Text = RD.Item("Satuan").ToString.Trim
-            TXTHARGA1.Text = CInt(RD.Item("Harga1"))
-            TXTEND1.Text = END1
-            TXTHARGA2.Text = CInt(RD.Item("Harga2"))
-            TXTEND2.Text = END2
-            TXTHARGA3.Text = CInt(RD.Item("Harga3"))
-            TXTEND3.Text = END3
-            TXTHARGA4.Text = CInt(RD.Item("Harga4"))
-            TXTEND4.Text = END4
-            TXTHARGA5.Text = CInt(RD.Item("Harga5"))
+            Dim STR As String = "SELECT * FROM tbl_barang WHERE RTRIM(Kode)='" & TXTKODE.Text & "'"
+            Dim CMD As MySqlCommand
+            CMD = New MySqlCommand(STR, CONN)
+            Dim RD As MySqlDataReader
+            RD = CMD.ExecuteReader
+            While RD.Read
+                TXTNAMA.Enabled = True
+                TXTEND1.Enabled = True
+                TXTHARGA1.Enabled = True
+                Dim END1 As String = ""
+                If Not RD.Item("End1") = 0 Then
+                    END1 = Format(RD.Item("End1"), "##0.##")
+                End If
+                Dim END2 As String = ""
+                If Not RD.Item("End2") = 0 Then
+                    END2 = Format(RD.Item("End2"), "##0.##")
+                Else
+                    TXTEND2.Enabled = False
+                End If
+                Dim END3 As String = ""
+                If Not RD.Item("End3") = 0 Then
+                    END3 = Format(RD.Item("End3"), "##0.##")
+                Else
+                    TXTEND3.Enabled = False
+                End If
+                Dim END4 As String = ""
+                If Not RD.Item("End4") = 0 Then
+                    END4 = Format(RD.Item("End4"), "##0.##")
+                Else
+                    TXTEND4.Enabled = False
+                End If
+
+                TXTNAMA.Text = RD.Item("Barang").ToString.Trim
+                CBSATUAN.Text = RD.Item("Satuan").ToString.Trim
+                TXTHARGA1.Text = CInt(RD.Item("Harga1"))
+                TXTEND1.Text = END1
+                TXTHARGA2.Text = CInt(RD.Item("Harga2"))
+                TXTEND2.Text = END2
+                TXTHARGA3.Text = CInt(RD.Item("Harga3"))
+                TXTEND3.Text = END3
+                TXTHARGA4.Text = CInt(RD.Item("Harga4"))
+                TXTEND4.Text = END4
+                TXTHARGA5.Text = CInt(RD.Item("Harga5"))
+
+                'TXTKODE.Enabled = False
+                'TXTNAMA.Enabled = False
+                CBSATUAN.DropDownStyle = ComboBoxStyle.DropDownList
+                'TXTEND1.Enabled = False
+                'TXTHARGA1.Enabled = False
+                'TXTHARGA2.Enabled = False
+                'TXTEND2.Enabled = False
+                'TXTHARGA3.Enabled = False
+                'TXTEND3.Enabled = False
+                'TXTHARGA4.Enabled = False
+                'TXTEND4.Enabled = False
+                'TXTHARGA5.Enabled = False
+                'BTNSIMPAN.Visible = False
+                'BTNCANCEL.Visible = True
+                'BTNUBAH.Visible = True
+                'CBSATUAN.Enabled = False
+            End While
             RD.Close()
 
-            'TXTKODE.Enabled = False
-            'TXTNAMA.Enabled = False
-            CBSATUAN.DropDownStyle = ComboBoxStyle.DropDownList
-            'TXTEND1.Enabled = False
-            'TXTHARGA1.Enabled = False
-            'TXTHARGA2.Enabled = False
-            'TXTEND2.Enabled = False
-            'TXTHARGA3.Enabled = False
-            'TXTEND3.Enabled = False
-            'TXTHARGA4.Enabled = False
-            'TXTEND4.Enabled = False
-            'TXTHARGA5.Enabled = False
-            'BTNSIMPAN.Visible = False
-            'BTNCANCEL.Visible = True
-            'BTNUBAH.Visible = True
-            'CBSATUAN.Enabled = False
-        Else
-            RD.Close()
-        End If
-        RD.Close()
+            CONN.Close()
+        Catch ex As MySqlException
+            MessageBox.Show(ex.Message)
+        Finally
+            CONN.Dispose()
+        End Try
+
     End Sub
 
     Private Sub BTNCLOSE_Click(sender As Object, e As EventArgs) Handles BTNCLOSE.Click

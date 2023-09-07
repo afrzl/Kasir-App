@@ -1,4 +1,4 @@
-﻿Imports System.Data.SqlClient
+﻿Imports MySql.Data.MySqlClient
 Imports System.Drawing.Printing
 Imports System.IO
 
@@ -17,8 +17,8 @@ Public Class FR_KELUAR
     Private Function CARI_HARGA(ByVal QTY As Double) As Long
         Dim STR As String = "SELECT * FROM tbl_barang" &
             " WHERE RTRIM(Kode)='" & TXTKODE.Text & "'"
-        Dim CMD As New SqlCommand(STR, CONN)
-        Dim RD As SqlDataReader
+        Dim CMD As New MySqlCommand(STR, CONN)
+        Dim RD As MySqlDataReader
         RD = CMD.ExecuteReader
         If RD.HasRows Then
             RD.Read()
@@ -201,9 +201,9 @@ Public Class FR_KELUAR
         STR = "SELECT Kode, RTRIM(Barang) as Barang, RTRIM(Satuan) as Satuan," &
                 "(SELECT Stok FROM tbl_stok WHERE tbl_stok.Kode = tbl_barang.Kode) as Stok" &
                 " From tbl_barang WHERE kode='" & Kode & "'"
-        Dim CMD As SqlCommand
-        CMD = New SqlCommand(STR, CONN)
-        Dim RD As SqlDataReader
+        Dim CMD As MySqlCommand
+        CMD = New MySqlCommand(STR, CONN)
+        Dim RD As MySqlDataReader
         RD = CMD.ExecuteReader
 
         Dim STOK_DATA As Double = 0
@@ -335,7 +335,7 @@ Public Class FR_KELUAR
             " (Id_trans, Id_kasir, Tgl, Jenis, Person, Harga, Diskon, Jumlah_item, Harga_total, Harga_tunai, Harga_kembali)" &
             " VALUES('" & ID_TRANSAKSI & "'," &
             " '" & My.Settings.ID_ACCOUNT & "'," &
-            " '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'," &
+            " '" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "'," &
             " 'K'," &
             " '" & TXTPEMBELI.Text & "'," &
             " '" & SUBTOTAL & "'," &
@@ -349,7 +349,7 @@ Public Class FR_KELUAR
             " (Id_trans, Id_kasir, Tgl, Jenis, Id_member, Person, Harga, Diskon, Jumlah_item, Harga_total, Harga_tunai, Harga_kembali)" &
             " VALUES('" & ID_TRANSAKSI & "'," &
             " '" & My.Settings.ID_ACCOUNT & "'," &
-            " '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'," &
+            " '" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "'," &
             " 'K'," &
             " '" & ID_pembeli & "'," &
             " '" & TXTPEMBELI.Text & "'," &
@@ -360,7 +360,7 @@ Public Class FR_KELUAR
             " '" & BAYAR & "'," &
             " '" & KEMBALIAN & "')"
         End If
-        Dim CMD As New SqlCommand(STR, CONN)
+        Dim CMD As New MySqlCommand(STR, CONN)
         CMD.ExecuteNonQuery()
 
         For Each EROW As DataGridViewRow In DGTAMPIL.Rows
@@ -383,19 +383,19 @@ Public Class FR_KELUAR
                     " '" & HARGA_PRODUK & "'," &
                     " '" & DISKON_PRODUK & "'," &
                     " '" & HARGA_AKHIR_PRODUK & "', " &
-                    " '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "')"
-            CMD = New SqlCommand(STR, CONN)
+                    " '" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "')"
+            CMD = New MySqlCommand(STR, CONN)
             CMD.ExecuteNonQuery()
 
             STR = "UPDATE tbl_stok SET Stok-=" & JUMLAH_PRODUK.ToString.Replace(",", ".") & "," &
-                " Modified_at = '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
+                " Modified_at = '" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "'" &
                 " WHERE Kode='" & KODE_PRODUK & "'"
-            CMD = New SqlCommand(STR, CONN)
+            CMD = New MySqlCommand(STR, CONN)
             CMD.ExecuteNonQuery()
 
             If HARGA_PRODUK <= 0 Then
-                STR = "UPDATE tbl_transaksi_voucher SET Updated_at ='" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "' WHERE Kode='" & KODE_PRODUK & "'"
-                CMD = New SqlCommand(STR, CONN)
+                STR = "UPDATE tbl_transaksi_voucher SET Updated_at ='" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "' WHERE Kode='" & KODE_PRODUK & "'"
+                CMD = New MySqlCommand(STR, CONN)
                 CMD.ExecuteNonQuery()
             End If
         Next
@@ -414,9 +414,9 @@ Public Class FR_KELUAR
                 " Stok" &
                 " FROM tbl_transaksi_child WHERE (LEFT(Id_trans,1)='M' or LEFT(Id_trans,1)='R')" &
                 " And Kode='" & KODE & "' AND Stok != 0 ORDER BY Id ASC"
-            Dim CMD As SqlCommand
-            CMD = New SqlCommand(STR, CONN)
-            Dim RD As SqlDataReader
+            Dim CMD As MySqlCommand
+            CMD = New MySqlCommand(STR, CONN)
+            Dim RD As MySqlDataReader
             RD = CMD.ExecuteReader
             If RD.HasRows Then
                 RD.Read()
@@ -429,9 +429,9 @@ Public Class FR_KELUAR
                     HARGA_BELI += RD.Item("Harga") * STOKTERSEDIA
                     RD.Close()
                     STR = "UPDATE tbl_transaksi_child SET Stok='" & STOK_AKHIR & "'," &
-                        " Modified_at = '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
+                        " Modified_at = '" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "'" &
                         " WHERE Id='" & ID & "'"
-                    CMD = New SqlCommand(STR, CONN)
+                    CMD = New MySqlCommand(STR, CONN)
                     CMD.ExecuteNonQuery()
                 Else
                     Dim STOK_AKHIR As Double = STOKTERSEDIA - QUANTITY
@@ -439,9 +439,9 @@ Public Class FR_KELUAR
                     QUANTITY = 0
                     RD.Close()
                     STR = "UPDATE tbl_transaksi_child SET Stok=" & STOK_AKHIR.ToString.Replace(",", ".") & "," &
-                        " Modified_at = '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
+                        " Modified_at = '" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "'" &
                         " WHERE Id='" & ID & "'"
-                    CMD = New SqlCommand(STR, CONN)
+                    CMD = New MySqlCommand(STR, CONN)
                     CMD.ExecuteNonQuery()
                 End If
                 RD.Close()
@@ -456,9 +456,9 @@ Public Class FR_KELUAR
     Private Function AUTOID() As String
         Dim ID_AWAL As String = Format(Date.Now, "yyMMdd")
         Dim STR As String = "SELECT TOP 1 (Id_trans) AS Id_trans FROM tbl_transaksi_parent WHERE LEFT(Id_trans,1)='K' ORDER BY Id DESC"
-        Dim CMD As SqlCommand
-        CMD = New SqlCommand(STR, CONN)
-        Dim RD As SqlDataReader
+        Dim CMD As MySqlCommand
+        CMD = New MySqlCommand(STR, CONN)
+        Dim RD As MySqlDataReader
         RD = CMD.ExecuteReader
         RD.Read()
         If RD.HasRows Then
@@ -538,9 +538,9 @@ Public Class FR_KELUAR
         If ID_pembeli <> "" Then
             Dim Points As Integer = TXTTOTALHARGA.Text * (persentase_point / 100)
             Dim STR As String = "UPDATE tbl_member SET Points+=" & Points & ", " &
-                " Modified_at = '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
+                " Modified_at = '" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "'" &
                 " WHERE Id='" & ID_pembeli & "'"
-            Dim CMD As New SqlCommand(STR, CONN)
+            Dim CMD As New MySqlCommand(STR, CONN)
             CMD.ExecuteNonQuery()
         End If
     End Sub
@@ -587,8 +587,8 @@ Public Class FR_KELUAR
                 " AND Min_transaksi <= '" & CInt(TXTSUBTOTAL.Text) & "'" &
                 " AND Tgl_awal <= '" & TGL_SKRG & "'" &
                 " And Tgl_akhir >= '" & TGL_SKRG & "'"
-        Dim CMD As New SqlCommand(STR, CONN)
-        Dim RD As SqlDataReader
+        Dim CMD As New MySqlCommand(STR, CONN)
+        Dim RD As MySqlDataReader
         RD = CMD.ExecuteReader()
         If RD.HasRows Then
             RD.Read()
@@ -623,9 +623,9 @@ Public Class FR_KELUAR
             If TXTKODE.Enabled = True Then
                 Dim STR As String = "SELECT Barang" &
                                     " From tbl_barang WHERE kode='" & TXTKODE.Text & "'"
-                Dim CMD As SqlCommand
-                CMD = New SqlCommand(STR, CONN)
-                Dim RD As SqlDataReader
+                Dim CMD As MySqlCommand
+                CMD = New MySqlCommand(STR, CONN)
+                Dim RD As MySqlDataReader
                 RD = CMD.ExecuteReader
 
                 If RD.HasRows Then
@@ -753,9 +753,9 @@ Public Class FR_KELUAR
             e.Handled = True
             Dim STR As String = "SELECT Barang" &
                                 " From tbl_barang WHERE kode='" & TXTKODE.Text & "'"
-            Dim CMD As SqlCommand
-            CMD = New SqlCommand(STR, CONN)
-            Dim RD As SqlDataReader
+            Dim CMD As MySqlCommand
+            CMD = New MySqlCommand(STR, CONN)
+            Dim RD As MySqlDataReader
             RD = CMD.ExecuteReader
 
             If RD.HasRows Then
@@ -794,8 +794,8 @@ Public Class FR_KELUAR
 
         Dim STR As String = "SELECT Barang, Satuan FROM tbl_barang" &
             " WHERE RTRIM(Kode)='" & TXTKODE.Text & "'"
-        Dim CMD As New SqlCommand(STR, CONN)
-        Dim RD As SqlDataReader
+        Dim CMD As New MySqlCommand(STR, CONN)
+        Dim RD As MySqlDataReader
         RD = CMD.ExecuteReader
         If RD.HasRows Then
             RD.Read()
@@ -808,7 +808,7 @@ Public Class FR_KELUAR
                 " AND Jenis = 'B'" &
                 " AND Tgl_awal <= '" & TGL_SKRG & "'" &
                 " And Tgl_akhir >= '" & TGL_SKRG & "'"
-            CMD = New SqlCommand(STR, CONN)
+            CMD = New MySqlCommand(STR, CONN)
             RD = CMD.ExecuteReader
             If RD.HasRows Then
                 RD.Read()
@@ -1043,9 +1043,9 @@ Public Class FR_KELUAR
         If TXTKODE.Enabled = True Then
             Dim STR As String = "SELECT Barang" &
                                 " From tbl_barang WHERE kode='" & TXTKODE.Text & "'"
-            Dim CMD As SqlCommand
-            CMD = New SqlCommand(STR, CONN)
-            Dim RD As SqlDataReader
+            Dim CMD As MySqlCommand
+            CMD = New MySqlCommand(STR, CONN)
+            Dim RD As MySqlDataReader
             RD = CMD.ExecuteReader
 
             If RD.HasRows Then
@@ -1188,8 +1188,8 @@ Public Class FR_KELUAR
         ID_pembeli = TXTPEMBELI.Text
         Dim STR As String = "SELECT Nama, Points FROM tbl_member" &
             " WHERE RTRIM(Id)='" & TXTPEMBELI.Text & "'"
-        Dim CMD As New SqlCommand(STR, CONN)
-        Dim RD As SqlDataReader
+        Dim CMD As New MySqlCommand(STR, CONN)
+        Dim RD As MySqlDataReader
         RD = CMD.ExecuteReader
         If RD.HasRows Then
             RD.Read()
@@ -1258,8 +1258,8 @@ Public Class FR_KELUAR
             " FROM tbl_transaksi_voucher" &
             " INNER JOIN tbl_data_voucher ON tbl_transaksi_voucher.Id_data = tbl_data_voucher.Id" &
             " WHERE RTRIM(Kode)='" & TXTVOUCHER.Text & "'"
-        Dim CMD As New SqlCommand(STR, CONN)
-        Dim RD As SqlDataReader
+        Dim CMD As New MySqlCommand(STR, CONN)
+        Dim RD As MySqlDataReader
         RD = CMD.ExecuteReader
         If RD.HasRows Then
             RD.Read()

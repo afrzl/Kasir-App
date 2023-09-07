@@ -1,4 +1,4 @@
-﻿Imports System.Data.SqlClient
+﻿Imports MySql.Data.MySqlClient
 Public Class FR_KASIR
     Private Sub PEWAKTU_Tick(sender As Object, e As EventArgs) Handles PEWAKTU.Tick
         LBTGL.Text = Format(Date.Now, "dd MMMM yyyy HH:mm:ss")
@@ -14,8 +14,8 @@ Public Class FR_KASIR
         Dim STR As String = "SELECT RTRIM(Id) as ID,RTRIM(Nama) AS 'Nama Lengkap',RTRIM(Alamat) AS Alamat," &
             " Tgl_lahir as 'Tanggal Lahir',JK as 'Jenis Kelamin',RTRIM(No_hp) AS 'Nomor HP', Role AS 'Hak Akses'" &
             " FROM tbl_karyawan WHERE Nama Like '%" & TXTCARI.Text & "%' AND ID != '" & My.Settings.ID_ACCOUNT & "'"
-        Dim DA As SqlDataAdapter
-        DA = New SqlDataAdapter(STR, CONN)
+        Dim DA As MySqlDataAdapter
+        DA = New MySqlDataAdapter(STR, CONN)
         Dim TBL As New DataTable
         DA.Fill(TBL)
         DGTAMPIL.DataSource = TBL
@@ -110,13 +110,12 @@ Public Class FR_KASIR
     End Sub
 
     Private Sub DGTAMPIL_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGTAMPIL.CellClick
-        On Error Resume Next
         'TXTID.Visible = True
         'LBID.Visible = True
         'TXTID.Text = DGTAMPIL.Item("Id", e.RowIndex).Value
 
         Dim STR As String
-        Dim CMD As SqlCommand
+        Dim CMD As MySqlCommand
 
         If e.RowIndex >= 0 Then
             If DGTAMPIL.Columns(e.ColumnIndex).HeaderText = "Edit" Then
@@ -133,23 +132,45 @@ Public Class FR_KASIR
                 End With
             ElseIf DGTAMPIL.Columns(e.ColumnIndex).HeaderText = "Delete" Then
                 If MsgBox("Apakah anda yakin akan menghapus kasir?", vbYesNo) = vbYes Then
-                    STR = "DELETE tbl_karyawan " &
-                        " WHERE Id='" & DGTAMPIL.Item("Id", e.RowIndex).Value & "'"
-                    CMD = New SqlCommand(STR, CONN)
-                    CMD.ExecuteNonQuery()
-                    MsgBox("Data kasir berhasil dihapus!")
-                    TAMPIL()
+                    Try
+                        CONN.Open()
+
+                        STR = "DELETE FROM tbl_karyawan " &
+                            " WHERE Id='" & DGTAMPIL.Item("Id", e.RowIndex).Value & "'"
+                        CMD = New MySqlCommand(STR, CONN)
+                        CMD.ExecuteNonQuery()
+
+                        CONN.Close()
+                    Catch ex As MySqlException
+                        MessageBox.Show(ex.Message)
+                    Finally
+                        CONN.Dispose()
+                        MsgBox("Data kasir berhasil dihapus!")
+                        TAMPIL()
+                    End Try
+
                 End If
             ElseIf DGTAMPIL.Columns(e.ColumnIndex).HeaderText = "Reset" Then
                 Dim message As String = "Apakah anda yakin akan mereset password akun " & DGTAMPIL.Item("Nama Lengkap", e.RowIndex).Value & " ke 123456?"
                 If MsgBox(message, vbYesNo) = vbYes Then
-                    STR = "UPDATE tbl_karyawan set Password = '123456', " &
-                        " Modified_at = '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
+                    Try
+                        CONN.Open()
+
+                        STR = "UPDATE tbl_karyawan set Password = '123456', " &
+                        " Modified_at = '" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "'" &
                         " WHERE Id='" & DGTAMPIL.Item("Id", e.RowIndex).Value & "'"
-                    CMD = New SqlCommand(STR, CONN)
-                    CMD.ExecuteNonQuery()
-                    MsgBox("Password berhasil direset ke 123456!")
-                    TAMPIL()
+                        CMD = New MySqlCommand(STR, CONN)
+                        CMD.ExecuteNonQuery()
+
+                        CONN.Close()
+                    Catch ex As MySqlException
+                        MessageBox.Show(ex.Message)
+                    Finally
+                        CONN.Dispose()
+                        MsgBox("Password berhasil direset ke 123456!")
+                        TAMPIL()
+                    End Try
+
                 End If
             End If
         End If

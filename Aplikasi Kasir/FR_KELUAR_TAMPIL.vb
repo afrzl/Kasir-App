@@ -1,4 +1,4 @@
-﻿Imports System.Data.SqlClient
+﻿Imports MySql.Data.MySqlClient
 
 Public Class FR_KELUAR_TAMPIL
     Private Sub BTNCLOSE_Click(sender As Object, e As EventArgs) Handles BTNCLOSE.Click
@@ -44,11 +44,11 @@ Public Class FR_KELUAR_TAMPIL
                     " Like '%" & TXTCARI.Text & "%'" &
                     " OR tbl_barang.Kode Like '%" & TXTCARI.Text & "%'" &
                     " ORDER BY 'Barang' ASC" &
-                    " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
+                    " LIMIT " & TAMPIL_RECORD & " OFFSET " & START_RECORD
 
-        Dim DA As SqlDataAdapter
+        Dim DA As MySqlDataAdapter
         Dim TBL As New DataSet
-        DA = New SqlDataAdapter(STR, CONN)
+        DA = New MySqlDataAdapter(STR, CONN)
         DA.Fill(TBL)
 
         For Each EROW As DataRow In TBL.Tables(0).Rows

@@ -1,4 +1,5 @@
-﻿Imports System.Data.SqlClient
+﻿Imports System.Web.Services.Description
+Imports MySql.Data.MySqlClient
 Public Class FR_LOGIN
     Private Sub BTNLOGIN_Click(sender As Object, e As EventArgs) Handles BTNLOGIN.Click
         If TXTID.Text = "" Then
@@ -19,50 +20,59 @@ Public Class FR_LOGIN
             FR.Show()
             Me.Hide()
         Else
-            Dim STR As String = "SELECT RTRIM(Nama) AS Nama, RTRIM(Role) AS Role FROM tbl_karyawan WHERE Id='" & TXTID.Text & "' AND Password='" & TXTPASSWORD.Text & "'"
-            Dim CMD As SqlCommand
-            CMD = New SqlCommand(STR, CONN)
-            Dim RD As SqlDataReader
-            RD = CMD.ExecuteReader
-            If RD.HasRows Then
-                RD.Read()
-                If RD.Item("Role") = 1 Then
-                    My.Settings.ID_ACCOUNT = TXTID.Text
-                    NAMA_LOGIN = RD.Item("Nama").ToString.Trim
-                    ROLE = RD.Item("Role")
-                    RD.Close()
+            Try
+                CONN.Open()
 
+                Dim CMD As MySqlCommand
+                Dim STR As String = "SELECT COUNT(*) FROM tbl_karyawan WHERE Id='" & TXTID.Text & "' AND Password='" & TXTPASSWORD.Text & "'"
+                CMD = New MySqlCommand(STR, CONN)
+                If CMD.ExecuteScalar > 0 Then
+
+                    STR = "SELECT RTRIM(Nama) AS Nama, RTRIM(Role) AS Role FROM tbl_karyawan WHERE Id='" & TXTID.Text & "' AND Password='" & TXTPASSWORD.Text & "'"
+                    CMD = New MySqlCommand(STR, CONN)
+                    Dim RD As MySqlDataReader
+                    RD = CMD.ExecuteReader
+                    While RD.Read()
+                        If RD.Item("Role") = 1 Then
+                                My.Settings.ID_ACCOUNT = TXTID.Text
+                                NAMA_LOGIN = RD.Item("Nama").ToString.Trim
+                                ROLE = RD.Item("Role")
+                            ElseIf RD.Item("Role") = 2 Then
+                                My.Settings.ID_ACCOUNT = TXTID.Text
+                                NAMA_LOGIN = RD.Item("Nama").ToString.Trim
+                                ROLE = RD.Item("Role")
+                            ElseIf RD.Item("Role") = 3 Then
+                                My.Settings.ID_ACCOUNT = TXTID.Text
+                                NAMA_LOGIN = RD.Item("Nama").ToString.Trim
+                                ROLE = RD.Item("Role")
+                            End If
+                    End While
+                    RD.Close()
+                Else
+                    MsgBox("Id / password yang anda masukkan salah!")
+                    TXTID.Clear()
+                    TXTPASSWORD.Clear()
+                    TXTID.Select()
+                End If
+                CONN.Close()
+            Catch ex As MySqlException
+                MessageBox.Show(ex.Message)
+            Finally
+                If ROLE = 1 Then
                     Dim FR As New FR_MENU
                     FR.Show()
                     Me.Hide()
-                ElseIf RD.Item("Role") = 2 Then
-                    My.Settings.ID_ACCOUNT = TXTID.Text
-                    NAMA_LOGIN = RD.Item("Nama").ToString.Trim
-                    ROLE = RD.Item("Role")
-                    RD.Close()
-
+                ElseIf ROLE = 2 Then
                     Dim FR As New FR_OPS_DASHBOARD
                     FR.Show()
                     Me.Hide()
-                ElseIf RD.Item("Role") = 3 Then
-                    My.Settings.ID_ACCOUNT = TXTID.Text
-                    NAMA_LOGIN = RD.Item("Nama").ToString.Trim
-                    ROLE = RD.Item("Role")
-                    RD.Close()
-
+                ElseIf ROLE = 3 Then
                     Dim FR As New FR_KASIR_DASHBOARD
                     FR.Show()
                     Me.Hide()
                 End If
-                RD.Close()
-            Else
-                RD.Close()
-                MsgBox("Id / password yang anda masukkan salah!")
-                TXTID.Clear()
-                TXTPASSWORD.Clear()
-                TXTID.Select()
-            End If
-            RD.Close()
+                CONN.Dispose()
+            End Try
         End If
     End Sub
 
@@ -85,7 +95,7 @@ Public Class FR_LOGIN
             e.Handled = True
             TXTPASSWORD.Select()
         End If
-        If Not ((e.KeyChar >= "0" And e.KeyChar <= "9") Or e.KeyChar = vbBack) Then
+        If Not ((e.KeyChar >= "0" And e.KeyChar <="9") Or e.KeyChar = vbBack) Then
             e.Handled = True
         End If
     End Sub

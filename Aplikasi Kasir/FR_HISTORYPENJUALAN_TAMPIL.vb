@@ -1,12 +1,12 @@
-﻿Imports System.Data.SqlClient
+﻿Imports MySql.Data.MySqlClient
 Imports System.Drawing.Printing
 Imports System.IO
 
 Public Class FR_HISTORYPENJUALAN_TAMPIL
     Dim STR As String
-    Dim DA As SqlDataAdapter
-    Dim RD As SqlDataReader
-    Dim CMD As SqlCommand
+    Dim DA As MySqlDataAdapter
+    Dim RD As MySqlDataReader
+    Dim CMD As MySqlCommand
     Dim TBL As DataSet
     Dim ID_TRANS As String
 
@@ -31,7 +31,7 @@ Public Class FR_HISTORYPENJUALAN_TAMPIL
             " FROM tbl_transaksi_parent" &
             " INNER JOIN tbl_karyawan ON tbl_transaksi_parent.Id_kasir = tbl_karyawan.Id" &
             " WHERE tbl_transaksi_parent.Id_trans = '" & ID_TRANS & "'"
-        CMD = New SqlCommand(STR, CONN)
+        CMD = New MySqlCommand(STR, CONN)
         RD = CMD.ExecuteReader
         If RD.HasRows Then
             RD.Read()
@@ -68,7 +68,7 @@ Public Class FR_HISTORYPENJUALAN_TAMPIL
             " ORDER BY tbl_transaksi_child.Id ASC"
 
         TBL = New DataSet
-        DA = New SqlDataAdapter(STR, CONN)
+        DA = New MySqlDataAdapter(STR, CONN)
         DA.Fill(TBL)
         DGHISTORY.DataSource = TBL.Tables(0)
 
@@ -100,7 +100,7 @@ Public Class FR_HISTORYPENJUALAN_TAMPIL
                     " FROM tbl_transaksi_voucher" &
                     " INNER JOIN tbl_data_voucher ON tbl_data_voucher.Id = tbl_transaksi_voucher.Id_data" &
                     " WHERE tbl_transaksi_voucher.Kode = '" & DGHISTORY.Item(0, i).Value & "'"
-                CMD = New SqlCommand(STR, CONN)
+                CMD = New MySqlCommand(STR, CONN)
                 RD = CMD.ExecuteReader
                 If RD.HasRows Then
                     RD.Read()

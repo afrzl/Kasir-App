@@ -1,8 +1,6 @@
-﻿Imports System.Data.SqlClient
+﻿Imports MySql.Data.MySqlClient
 Imports System.Drawing.Printing
 Imports System.IO
-Imports MySql.Data.MySqlClient
-
 Public Class FR_HISTORYPENJUALAN
     Dim START_RECORD As Integer = 0
     Dim TAMPIL_RECORD As Integer = 20
@@ -25,7 +23,7 @@ Public Class FR_HISTORYPENJUALAN
             " WHERE Left(tbl_transaksi_parent.Id_trans, 1) = 'K'" &
             " AND Tgl >= DATEADD(day,-7, GETDATE())" &
             " ORDER BY Tgl DESC" &
-            " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
+            " LIMIT " & TAMPIL_RECORD & " OFFSET " & START_RECORD
         Else
             STR = "SELECT" &
             " RTRIM(tbl_transaksi_parent.Id_trans) AS 'Id Transaksi'," &
@@ -37,7 +35,7 @@ Public Class FR_HISTORYPENJUALAN
             " AND Tgl >= DATEADD(day,-7, GETDATE())" &
             " AND tbl_transaksi_parent.Id_trans = '" & TXTCARI.Text & "'" &
             " ORDER BY Tgl DESC" &
-            " OFFSET " & START_RECORD & " ROWS FETCH NEXT " & TAMPIL_RECORD & " ROWS ONLY"
+            " LIMIT " & TAMPIL_RECORD & " OFFSET " & START_RECORD
         End If
 
         Dim DA As MySqlDataAdapter
@@ -438,7 +436,7 @@ Public Class FR_HISTORYPENJUALAN
     Private Sub DGHISTORY_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGHISTORY.CellClick
         On Error Resume Next
         Dim STR As String
-        Dim CMD As SqlCommand
+        Dim CMD As MySqlCommand
 
         If e.RowIndex >= 0 Then
             If DGHISTORY.Columns(e.ColumnIndex).HeaderText = "Tampil" Then
@@ -460,8 +458,8 @@ Public Class FR_HISTORYPENJUALAN
             " WHERE tbl_transaksi_child.Id_trans = '" & DGHISTORY.Item(0, e.RowIndex).Value & "'"
 
                 transaksi.Clear()
-                Dim DA As SqlDataAdapter
-                DA = New SqlDataAdapter(STR, CONN)
+                Dim DA As MySqlDataAdapter
+                DA = New MySqlDataAdapter(STR, CONN)
                 DA.Fill(transaksi)
 
                 With FR_HISTORYPENJUALAN_TAMPIL

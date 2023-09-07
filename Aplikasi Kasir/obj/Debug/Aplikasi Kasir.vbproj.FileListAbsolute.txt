@@ -227,7 +227,6 @@ C:\Users\muham\OneDrive\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir
 C:\Users\muham\OneDrive\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Debug\System.Threading.Tasks.Extensions.xml
 C:\Users\muham\OneDrive\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Debug\System.ValueTuple.xml
 C:\Users\muham\OneDrive\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\obj\Debug\Aplikasi Kasir.vbproj.AssemblyReference.cache
-C:\Users\muham\OneDrive\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\obj\Debug\Aplikasi Kasir.vbproj.SuggestedBindingRedirects.cache
 C:\Users\muham\OneDrive\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\obj\Debug\Aplikasi_Kasir.FR_CETAKBARCODE.resources
 C:\Users\muham\OneDrive\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\obj\Debug\Aplikasi_Kasir.FR_CETAK_LABEL.resources
 C:\Users\muham\OneDrive\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\obj\Debug\Aplikasi_Kasir.FR_DISKON.resources
@@ -273,3 +272,5 @@ C:\Users\muham\OneDrive\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir
 C:\Users\muham\OneDrive\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\obj\Debug\Aplikasi Kasir.exe
 C:\Users\muham\OneDrive\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\obj\Debug\Aplikasi Kasir.xml
 C:\Users\muham\OneDrive\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\obj\Debug\Aplikasi Kasir.pdb
+C:\Users\muham\OneDrive\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Debug\MySql.Data.dll
+C:\Users\muham\OneDrive\Documents\Coding\vbnet\POS\Aplikasi Kasir\Aplikasi Kasir\bin\Debug\MySql.Data.xml

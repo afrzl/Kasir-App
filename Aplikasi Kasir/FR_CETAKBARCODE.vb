@@ -1,8 +1,7 @@
-﻿Imports System.Data.SqlClient
+﻿Imports MySql.Data.MySqlClient
 Imports System.Drawing.Printing
 Imports System.IO
 Imports BarcodeLib
-Imports MySql.Data.MySqlClient
 
 Public Class FR_CETAKBARCODE
     Sub BUKA_FORM(ByVal FR As Form)

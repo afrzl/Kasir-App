@@ -1,9 +1,9 @@
-﻿Imports System.Data.SqlClient
+﻿Imports MySql.Data.MySqlClient
 
 Public Class FR_RETURN_LIST
 
     Dim STR As String
-    Dim DA As SqlDataAdapter
+    Dim DA As MySqlDataAdapter
     Dim TBL As DataTable
 
     Sub TUTUP_FORM()
@@ -34,7 +34,7 @@ Public Class FR_RETURN_LIST
                       " AND Id_trans Like '%" & TXTCARI_TRANS.Text & "%'" &
                       " ORDER BY Id DESC"
 
-            DA = New SqlDataAdapter(STR, CONN)
+            DA = New MySqlDataAdapter(STR, CONN)
             TBL = New DataTable
             DA.Fill(TBL)
             With DGCARI
@@ -50,7 +50,7 @@ Public Class FR_RETURN_LIST
                     " AND (SELECT COALESCE(SUM(Stok), 0) FROM tbl_transaksi_child WHERE tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans) > 0" &
                     " ORDER BY Tgl DESC"
 
-            DA = New SqlDataAdapter(STR, CONN)
+            DA = New MySqlDataAdapter(STR, CONN)
             Dim TBL As New DataTable
             DA.Fill(TBL)
             With DGCARI

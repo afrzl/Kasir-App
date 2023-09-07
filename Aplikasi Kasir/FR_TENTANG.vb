@@ -1,4 +1,4 @@
-﻿Imports System.Data.SqlClient
+﻿Imports MySql.Data.MySqlClient
 Imports System.Drawing.Printing
 Imports System.IO
 
@@ -46,9 +46,9 @@ Public Class FR_TENTANG
 
     Sub TAMPIL()
         Dim STR As String = "SELECT * FROM tbl_karyawan WHERE RTRIM(Id)='" & My.Settings.ID_ACCOUNT & "'"
-        Dim CMD As SqlCommand
-        CMD = New SqlCommand(STR, CONN)
-        Dim RD As SqlDataReader
+        Dim CMD As MySqlCommand
+        CMD = New MySqlCommand(STR, CONN)
+        Dim RD As MySqlDataReader
         RD = CMD.ExecuteReader
         If RD.HasRows Then
             RD.Read()
@@ -126,9 +126,9 @@ Public Class FR_TENTANG
     Private Sub BTNSIMPAN_Click(sender As Object, e As EventArgs) Handles BTNSIMPAN.Click
         Dim PASSWORD As String
         Dim STR As String = "SELECT Password FROM tbl_karyawan WHERE RTRIM(Id)='" & My.Settings.ID_ACCOUNT & "'"
-        Dim CMD As SqlCommand
-        CMD = New SqlCommand(STR, CONN)
-        Dim RD As SqlDataReader
+        Dim CMD As MySqlCommand
+        CMD = New MySqlCommand(STR, CONN)
+        Dim RD As MySqlDataReader
         RD = CMD.ExecuteReader
         If RD.HasRows Then
             RD.Read()
@@ -150,9 +150,9 @@ Public Class FR_TENTANG
             TXTPWLAMA.Select()
         Else
             STR = "UPDATE tbl_karyawan SET Password='" & TXTPWBARU1.Text & "', " &
-                " Modified_at = '" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") & "'" &
+                " Modified_at = '" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "'" &
                 " WHERE Id='" & My.Settings.ID_ACCOUNT & "'"
-            CMD = New SqlCommand(STR, CONN)
+            CMD = New MySqlCommand(STR, CONN)
             CMD.ExecuteNonQuery()
 
             MsgBox("Password berhasil diubah!")
@@ -349,26 +349,26 @@ Public Class FR_TENTANG
             End If
 
             Dim STR As String
-            Dim CMD As SqlCommand
+            Dim CMD As MySqlCommand
 
             STR = "SELECT * FROM tbl_karyawan WHERE Id='" & TXTID.Text & "'"
-            CMD = New SqlCommand(STR, CONN)
-            Dim RD As SqlDataReader
+            CMD = New MySqlCommand(STR, CONN)
+            Dim RD As MySqlDataReader
             RD = CMD.ExecuteReader
             If RD.HasRows Then
                 RD.Close()
                 STR = "UPDATE tbl_karyawan SET Nama='" & TXTNAMA.Text &
                     "',Alamat='" & TXTALAMAT.Text &
-                    "',Tgl_lahir='" & Format(TXTTGL.Value, "MM/dd/yyyy") &
+                    "',Tgl_lahir='" & Format(TXTTGL.Value, "yyyy-MM-dd") &
                     "',JK='" & jk &
                     "',No_hp='" & TXTNO.Text &
-                    "',Modified_at='" & DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") &
+                    "',Modified_at='" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") &
                     "' WHERE Id='" & TXTID.Text & "'"
             Else
                 RD.Close()
                 MsgBox("Error")
             End If
-            CMD = New SqlCommand(STR, CONN)
+            CMD = New MySqlCommand(STR, CONN)
             CMD.ExecuteNonQuery()
             MsgBox("Data berhasil diri berhasil diperbarui")
             NAMA_LOGIN = TXTNAMA.Text
