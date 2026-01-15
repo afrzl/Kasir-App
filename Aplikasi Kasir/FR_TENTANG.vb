@@ -46,48 +46,47 @@ Public Class FR_TENTANG
 
     Sub TAMPIL()
         Dim STR As String = "SELECT * FROM tbl_karyawan WHERE RTRIM(Id)='" & My.Settings.ID_ACCOUNT & "'"
-        Dim CMD As MySqlCommand
-        CMD = New MySqlCommand(STR, CONN)
         Dim RD As MySqlDataReader
-        RD = CMD.ExecuteReader
-        If RD.HasRows Then
-            RD.Read()
+        Try
+            RD = EXECUTE_READER(STR)
+            If RD.HasRows Then
+                RD.Read()
 
-            Dim ROLE As String
-            If RD.Item("Role") = 1 Then
-                ROLE = "Administrator"
-            ElseIf RD.Item("Role") = 2 Then
-                ROLE = "Admin Barang"
-            Else
-                ROLE = "Kasir"
+                Dim ROLE As String
+                If RD.Item("Role") = 1 Then
+                    ROLE = "Administrator"
+                ElseIf RD.Item("Role") = 2 Then
+                    ROLE = "Admin Barang"
+                Else
+                    ROLE = "Kasir"
+                End If
+                Dim JK As String
+                If RD.Item("JK") = "L" Then
+                    JK = "Laki-laki"
+                Else
+                    JK = "Perempuan"
+                End If
+
+                LBID.Text = RD.Item("Id").ToString.Trim
+                LBNAMA.Text = RD.Item("Nama").ToString.Trim
+                LBROLE.Text = ROLE
+                LBALAMAT.Text = RD.Item("Alamat").ToString.Trim
+                LBTGLLAHIR.Text = RD.Item("Tgl_lahir")
+                LBJK.Text = JK
+                LBNO.Text = RD.Item("No_hp").ToString.Trim
+
+                TXTID.Text = LBID.Text
+                TXTNAMA.Text = LBNAMA.Text
+                TXTROLE.Text = LBROLE.Text
+                TXTALAMAT.Text = LBALAMAT.Text
+                TXTTGL.Value = LBTGLLAHIR.Text
+                TXTJK.Text = LBJK.Text
+                TXTNO.Text = LBNO.Text
             End If
-            Dim JK As String
-            If RD.Item("JK") = "L" Then
-                JK = "Laki-laki"
-            Else
-                JK = "Perempuan"
-            End If
-
-            LBID.Text = RD.Item("Id").ToString.Trim
-            LBNAMA.Text = RD.Item("Nama").ToString.Trim
-            LBROLE.Text = ROLE
-            LBALAMAT.Text = RD.Item("Alamat").ToString.Trim
-            LBTGLLAHIR.Text = RD.Item("Tgl_lahir")
-            LBJK.Text = JK
-            LBNO.Text = RD.Item("No_hp").ToString.Trim
-
-            TXTID.Text = LBID.Text
-            TXTNAMA.Text = LBNAMA.Text
-            TXTROLE.Text = LBROLE.Text
-            TXTALAMAT.Text = LBALAMAT.Text
-            TXTTGL.Value = LBTGLLAHIR.Text
-            TXTJK.Text = LBJK.Text
-            TXTNO.Text = LBNO.Text
             RD.Close()
-        Else
-            RD.Close()
-        End If
-        RD.Close()
+        Finally
+            TUTUP_KONEKSI()
+        End Try
 
         AMBIL_DATA_REGISTRY()
         LBNAMATOKO.Text = NAMA_TOKO
@@ -392,9 +391,14 @@ Public Class FR_TENTANG
         Dim NOTOKO As Integer = 0
 
         Dim IMGBYTE As Byte() = Nothing
-        Dim MS As New MemoryStream
-        PBLOGO.Image.Save(MS, Imaging.ImageFormat.Jpeg)
-        IMGBYTE = MS.GetBuffer()
+
+        ' Cek apakah ada gambar di PictureBox
+        If PBLOGO.Image IsNot Nothing Then
+            Dim MS As New MemoryStream
+            PBLOGO.Image.Save(MS, Imaging.ImageFormat.Jpeg)
+            IMGBYTE = MS.GetBuffer()
+            MS.Close()
+        End If
 
 
         If TXTNOTOKO.Text <> "" Then
@@ -402,6 +406,8 @@ Public Class FR_TENTANG
         End If
         If TXTNAMATOKO.Text = "" Or TXTALAMATTOKO.Text = "" Or NOTOKO = 0 Or TXT_CUSTOMER_DISPLAY.Text = "" Or TXT_POINTMEMBER.Text = "" Or TXTPRINTER_NOTA.Text = "" Then
             MsgBox("Data tidak lengkap!")
+        ElseIf PBLOGO.Image Is Nothing Then
+            MsgBox("Logo toko belum dipilih!")
         Else
             If MsgBox("Apakah anda yakin akan mengubah data toko?", vbYesNo) = vbYes Then
                 Dim CUSTOMERDISPLAY As Boolean = 0

@@ -50,40 +50,82 @@ Module KONEKSI
     End Sub
 
     Public Sub KONEKAN()
-        'SERVER=NAMA SERVER;USER ID=USERID;PASSWORD=PASSWORD;DATABASE=DATABASE;'
-        'Dim STR As String = "SERVER=" & My.Settings.SERVER & ";USER ID=" & My.Settings.USER & ";PASSWORD=" & My.Settings.PASSWORD & ";DATABASE=" & My.Settings.DATABASE & ";MultipleActiveResultSets=True;"
-        Dim STR As String = "SERVER=localhost;USER ID=root;PASSWORD=;DATABASE=toko_kasir;MultipleActiveResultSets=True;"
         CONN = New MySqlConnection()
-        CONN.ConnectionString = "server=localhost;user id=root;" &
-                            "password=;database=toko_kasir"
-        'Try
-        '    If CONN.State = ConnectionState.Closed Then CONN.Open()
 
-        'Catch myerror As MySqlException
-        '    MessageBox.Show("Error: " & myerror.Message)
-        'Finally
-        '    CONN.Dispose()
-        'End Try
+        ' Ambil server dari settings
+        Dim serverSetting As String = My.Settings.SERVER
+        Dim serverHost As String = "localhost"
+        Dim serverPort As String = "3306" ' Default MySQL port
 
-        'Try
-        '    CONN = New MySqlConnection()
-        '    CONN.ConnectionString = "server=localhost;user id=root;" &
-        '                    "password=;database=toko_kasir"
-        '    If CONN.State = ConnectionState.Closed Then
-        '        CONN.Open()
-        '    End If
-        'Catch ex As Exception
-        '    MsgBox("Koneksi dengan database gagal!")
-        '    With My.Settings
-        '        .SERVER = ""
-        '        .USER = ""
-        '        .PASSWORD = ""
-        '        .DATABASE = ""
-        '        .Save()
-        '    End With
-        '    End
-        'End Try
+        ' Pisahkan server dan port jika ada tanda ":"
+        If Not String.IsNullOrEmpty(serverSetting) AndAlso serverSetting.Contains(":") Then
+            Dim serverParts() As String = serverSetting.Split(":"c)
+            serverHost = serverParts(0)
+            If serverParts.Length > 1 AndAlso Not String.IsNullOrEmpty(serverParts(1)) Then
+                serverPort = serverParts(1)
+            End If
+        ElseIf Not String.IsNullOrEmpty(serverSetting) Then
+            ' Jika tidak ada ":", gunakan sebagai host saja
+            serverHost = serverSetting
+        End If
+
+        ' Buat connection string dengan server dan port yang sudah dipisah
+        CONN.ConnectionString = $"server={serverHost};port={serverPort};uid={My.Settings.USER};pwd={My.Settings.PASSWORD};database={My.Settings.DATABASE};charset=utf8;"
 
         AMBIL_DATA_REGISTRY()
     End Sub
+
+    ''' <summary>
+    ''' Membuka koneksi database jika belum terbuka
+    ''' </summary>
+    Public Sub BUKA_KONEKSI()
+        If CONN Is Nothing Then
+            KONEKAN()
+        End If
+        If CONN.State = ConnectionState.Closed Then
+            CONN.Open()
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' Menutup koneksi database jika masih terbuka
+    ''' </summary>
+    Public Sub TUTUP_KONEKSI()
+        If CONN IsNot Nothing AndAlso CONN.State = ConnectionState.Open Then
+            CONN.Close()
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' Mengeksekusi query SELECT dan mengembalikan DataReader
+    ''' Koneksi harus ditutup manual setelah selesai membaca data
+    ''' </summary>
+    Public Function EXECUTE_READER(ByVal query As String) As MySqlDataReader
+        BUKA_KONEKSI()
+        Dim CMD As New MySqlCommand(query, CONN)
+        Return CMD.ExecuteReader()
+    End Function
+
+    ''' <summary>
+    ''' Mengeksekusi query INSERT/UPDATE/DELETE
+    ''' </summary>
+    Public Function EXECUTE_NONQUERY(ByVal query As String) As Integer
+        BUKA_KONEKSI()
+        Dim CMD As New MySqlCommand(query, CONN)
+        Dim result As Integer = CMD.ExecuteNonQuery()
+        TUTUP_KONEKSI()
+        Return result
+    End Function
+
+    ''' <summary>
+    ''' Mengeksekusi query dan mengembalikan nilai pertama (untuk COUNT, SUM, dll)
+    ''' </summary>
+    Public Function EXECUTE_SCALAR(ByVal query As String) As Object
+        BUKA_KONEKSI()
+        Dim CMD As New MySqlCommand(query, CONN)
+        Dim result As Object = CMD.ExecuteScalar()
+        TUTUP_KONEKSI()
+        Return result
+    End Function
+
 End Module

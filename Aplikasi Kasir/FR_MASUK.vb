@@ -68,12 +68,9 @@ Public Class FR_MASUK
         Dim ID_AWAL As String = Format(Date.Now, "yyMMdd")
 
         Try
-            CONN.Open()
             Dim STR As String = "SELECT (Id_trans) AS Id_trans FROM tbl_transaksi_parent WHERE LEFT(Id_trans,1)='M' ORDER BY Id DESC LIMIT 1"
-            Dim CMD As MySqlCommand
-            CMD = New MySqlCommand(STR, CONN)
             Dim RD As MySqlDataReader
-            RD = CMD.ExecuteReader
+            RD = EXECUTE_READER(STR)
             While RD.Read()
                 If Not RD.IsDBNull(0) Then
                     If Mid(RD.Item("Id_trans"), 2, 6) = ID_AWAL Then
@@ -86,11 +83,11 @@ Public Class FR_MASUK
                     AUTOID = "M" + ID_AWAL + Format(1, "000")
                 End If
             End While
-            CONN.Close()
+            RD.Close()
         Catch ex As MySqlException
             MessageBox.Show(ex.Message)
         Finally
-            CONN.Dispose()
+            TUTUP_KONEKSI()
         End Try
     End Function
 
@@ -261,7 +258,7 @@ Public Class FR_MASUK
         Next
 
         Try
-            CONN.Open()
+            BUKA_KONEKSI()
 
             Dim StoreMasuk As MySqlTransaction = CONN.BeginTransaction
 
@@ -312,18 +309,15 @@ Public Class FR_MASUK
 
                 Next
                 StoreMasuk.Commit()
-                CONN.Close()
             Catch ex As MySqlException
                 StoreMasuk.Rollback()
                 MessageBox.Show(ex.Message)
             Finally
-                CONN.Dispose()
+                TUTUP_KONEKSI()
             End Try
         Catch ex As MySqlException
-            CONN.Close()
+            TUTUP_KONEKSI()
             MessageBox.Show(ex.Message)
-        Finally
-            CONN.Dispose()
         End Try
     End Sub
 
@@ -447,12 +441,9 @@ Public Class FR_MASUK
 
     Sub CARI_DATA_BARANG()
         Try
-            CONN.Open()
             Dim STR As String = "SELECT * FROM tbl_barang WHERE RTRIM(Kode)='" & TXTKODE.Text & "'"
-            Dim CMD As MySqlCommand
-            CMD = New MySqlCommand(STR, CONN)
             Dim RD As MySqlDataReader
-            RD = CMD.ExecuteReader
+            RD = EXECUTE_READER(STR)
             While RD.Read()
                 If Not RD.IsDBNull(0) Then
                     TXTBARANG.Text = RD.Item("Barang").ToString.Trim
@@ -486,11 +477,10 @@ Public Class FR_MASUK
                 End If
             End While
             RD.Close()
-            CONN.Close()
         Catch ex As MySqlException
             MessageBox.Show(ex.Message)
         Finally
-            CONN.Dispose()
+            TUTUP_KONEKSI()
         End Try
     End Sub
 

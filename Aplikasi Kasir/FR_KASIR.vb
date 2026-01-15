@@ -133,19 +133,13 @@ Public Class FR_KASIR
             ElseIf DGTAMPIL.Columns(e.ColumnIndex).HeaderText = "Delete" Then
                 If MsgBox("Apakah anda yakin akan menghapus kasir?", vbYesNo) = vbYes Then
                     Try
-                        CONN.Open()
-
                         STR = "DELETE FROM tbl_karyawan " &
                             " WHERE Id='" & DGTAMPIL.Item("Id", e.RowIndex).Value & "'"
-                        CMD = New MySqlCommand(STR, CONN)
-                        CMD.ExecuteNonQuery()
-
-                        CONN.Close()
+                        EXECUTE_NONQUERY(STR)
+                        MsgBox("Data kasir berhasil dihapus!")
                     Catch ex As MySqlException
                         MessageBox.Show(ex.Message)
                     Finally
-                        CONN.Dispose()
-                        MsgBox("Data kasir berhasil dihapus!")
                         TAMPIL()
                     End Try
 
@@ -154,20 +148,14 @@ Public Class FR_KASIR
                 Dim message As String = "Apakah anda yakin akan mereset password akun " & DGTAMPIL.Item("Nama Lengkap", e.RowIndex).Value & " ke 123456?"
                 If MsgBox(message, vbYesNo) = vbYes Then
                     Try
-                        CONN.Open()
-
                         STR = "UPDATE tbl_karyawan set Password = '123456', " &
                         " Modified_at = '" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "'" &
                         " WHERE Id='" & DGTAMPIL.Item("Id", e.RowIndex).Value & "'"
-                        CMD = New MySqlCommand(STR, CONN)
-                        CMD.ExecuteNonQuery()
-
-                        CONN.Close()
+                        EXECUTE_NONQUERY(STR)
+                        MsgBox("Password berhasil direset ke 123456!")
                     Catch ex As MySqlException
                         MessageBox.Show(ex.Message)
                     Finally
-                        CONN.Dispose()
-                        MsgBox("Password berhasil direset ke 123456!")
                         TAMPIL()
                     End Try
 

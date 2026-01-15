@@ -564,7 +564,7 @@ Public Class FR_MASUK_HISTORY
                     Dim IDTrans As String = DGHISTORY.Item(1, DGHISTORY.CurrentRow.Index).Value
                     Dim CMD As New MySqlCommand("DELETE FROM tbl_transaksi_child WHERE Id='" & IDX & "'", CONN)
                     CMD.ExecuteNonQuery()
-                    CMD = New MySqlCommand("UPDATE tbl_stok SET Stok-=" & DGHISTORY.Item(7, DGHISTORY.CurrentRow.Index).Value.ToString.Replace(",", ".") & ", " &
+                    CMD = New MySqlCommand("UPDATE tbl_stok SET Stok = Stok - " & DGHISTORY.Item(7, DGHISTORY.CurrentRow.Index).Value.ToString.Replace(",", ".") & ", " &
                                          " Modified_at = '" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "'" &
                                          " WHERE Kode='" & DGHISTORY.Item(2, DGHISTORY.CurrentRow.Index).Value & "'", CONN)
                     CMD.ExecuteNonQuery()

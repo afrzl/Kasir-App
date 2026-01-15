@@ -75,10 +75,10 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>589E050BD15436FB8D20BCFD69B66FB52A6B1821</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>7ACEF3FE94D06FEF9EA3FBF63FE07611409744DB</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>Aplikasi Kasir_2_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>Aplikasi Kasir_3_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -753,6 +753,7 @@
     <Content Include="fonts\FontAwesome.otf" />
     <None Include="Aplikasi Kasir_1_TemporaryKey.pfx" />
     <None Include="Aplikasi Kasir_2_TemporaryKey.pfx" />
+    <None Include="Aplikasi Kasir_3_TemporaryKey.pfx" />
     <None Include="Aplikasi Kasir_TemporaryKey.pfx" />
     <None Include="DATA_LAPORAN.xsc">
       <DependentUpon>DATA_LAPORAN.xsd</DependentUpon>

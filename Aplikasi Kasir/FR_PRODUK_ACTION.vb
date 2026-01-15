@@ -285,7 +285,6 @@ Public Class FR_PRODUK_ACTION
                 If TXTKODE.Enabled = False Then
 
                     Try
-                        CONN.Open()
                         STR = "UPDATE tbl_barang SET Barang='" & TXTNAMA.Text & "'," &
                         "Satuan='" & CBSATUAN.Text & "'," &
                         "Harga1='" & TXTHARGA1.Text & "'," &
@@ -299,25 +298,20 @@ Public Class FR_PRODUK_ACTION
                         "Harga5='" & TXTHARGA5.Text & "'," &
                         "Modified_at='" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "'" &
                         "WHERE Kode='" & TXTKODE.Text & "'"
-                        CMD = New MySqlCommand(STR, CONN)
-                        CMD.ExecuteNonQuery()
-
-                        CONN.Close()
-                    Catch ex As MySqlException
-                        MessageBox.Show(ex.Message)
-                    Finally
-                        CONN.Dispose()
+                        EXECUTE_NONQUERY(STR)
                         MsgBox("Data produk berhasil diubah.")
                         With FR_PRODUK
                             .Enabled = True
                             .TAMPIL()
                         End With
                         Me.Close()
+                    Catch ex As MySqlException
+                        MessageBox.Show(ex.Message)
                     End Try
 
                 Else
                     Try
-                        CONN.Open()
+                        BUKA_KONEKSI()
 
                         STR = "SELECT COUNT(*) FROM tbl_barang WHERE Kode='" & TXTKODE.Text & "'"
                         CMD = New MySqlCommand(STR, CONN)
@@ -374,11 +368,10 @@ Public Class FR_PRODUK_ACTION
                                 MessageBox.Show(ex.Message)
                             End Try
                         End If
-                        CONN.Close()
                     Catch ex As MySqlException
                         MessageBox.Show(ex.Message)
                     Finally
-                        CONN.Dispose()
+                        TUTUP_KONEKSI()
                     End Try
                 End If
             End If
@@ -387,13 +380,9 @@ Public Class FR_PRODUK_ACTION
 
     Sub CARI_PRODUK()
         Try
-            CONN.Open()
-
             Dim STR As String = "SELECT * FROM tbl_barang WHERE RTRIM(Kode)='" & TXTKODE.Text & "'"
-            Dim CMD As MySqlCommand
-            CMD = New MySqlCommand(STR, CONN)
             Dim RD As MySqlDataReader
-            RD = CMD.ExecuteReader
+            RD = EXECUTE_READER(STR)
             While RD.Read
                 TXTNAMA.Enabled = True
                 TXTEND1.Enabled = True
@@ -451,12 +440,10 @@ Public Class FR_PRODUK_ACTION
                 'CBSATUAN.Enabled = False
             End While
             RD.Close()
-
-            CONN.Close()
         Catch ex As MySqlException
             MessageBox.Show(ex.Message)
         Finally
-            CONN.Dispose()
+            TUTUP_KONEKSI()
         End Try
 
     End Sub

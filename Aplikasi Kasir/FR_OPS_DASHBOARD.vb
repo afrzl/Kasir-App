@@ -24,7 +24,7 @@ Public Class FR_OPS_DASHBOARD
 
     Private Function CEK_EXPIRED() As Boolean
         Dim STR As String = "SELECT * FROM tbl_transaksi_child WHERE LEFT(Id_trans, 1) = 'M'" &
-            " AND Tgl_exp <= DATEADD(day,+14, GETDATE())" &
+            " AND Tgl_exp <= DATE_ADD(NOW(), INTERVAL 14 DAY)" &
             " AND Stok != 0"
         Dim CMD As MySqlCommand
         CMD = New MySqlCommand(STR, CONN)

@@ -172,7 +172,7 @@ Public Class FR_RETURN
                             & " AND Kode = '" _
                             & CBKODE.SelectedValue _
                             & "'" _
-                            & " AND (SELECT Tgl FROM tbl_transaksi_parent WHERE tbl_transaksi_parent.Id_trans = tbl_transaksi_child.Id_trans) >= DATEADD(day,-7, GETDATE())"
+                            & " AND (SELECT Tgl FROM tbl_transaksi_parent WHERE tbl_transaksi_parent.Id_trans = tbl_transaksi_child.Id_trans) >= DATE_SUB(NOW(), INTERVAL 7 DAY)"
         Dim CMD As New MySqlCommand(STR, CONN)
         Dim RD As MySqlDataReader
         RD = CMD.ExecuteReader
@@ -303,7 +303,7 @@ Public Class FR_RETURN
             CMD = New MySqlCommand(STR, CONN)
             CMD.ExecuteNonQuery()
 
-            STR = "UPDATE tbl_stok SET Stok+=" & TXTQTY.Text.Replace(",", ".") & ", " &
+            STR = "UPDATE tbl_stok SET Stok = Stok + " & TXTQTY.Text.Replace(",", ".") & ", " &
                 " Modified_at = '" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "'" &
                 " WHERE Kode='" & CBKODE.SelectedValue & "'"
             CMD = New MySqlCommand(STR, CONN)
@@ -375,7 +375,7 @@ Public Class FR_RETURN
             CMD = New MySqlCommand("DELETE FROM tbl_transaksi_parent WHERE Id_trans='" & IDX & "'", CONN)
             CMD.ExecuteNonQuery()
 
-            CMD = New MySqlCommand("UPDATE tbl_stok SET Stok-=" & TXTQTY.Text.Replace(",", ".") & ", " &
+            CMD = New MySqlCommand("UPDATE tbl_stok SET Stok = Stok - " & TXTQTY.Text.Replace(",", ".") & ", " &
                                  " Modified_at = '" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "'" &
                                  " WHERE Kode='" & DGTAMPIL.Item(1, DGTAMPIL.CurrentRow.Index).Value & "'", CONN)
             CMD.ExecuteNonQuery()
@@ -580,7 +580,7 @@ Public Class FR_RETURN
                     CMD = New MySqlCommand("DELETE FROM tbl_transaksi_parent WHERE Id_trans='" & IDX & "'", CONN)
                     CMD.ExecuteNonQuery()
 
-                    CMD = New MySqlCommand("UPDATE tbl_stok SET Stok-=" & TXTQTY.Text.Replace(",", ".") & ", " &
+                    CMD = New MySqlCommand("UPDATE tbl_stok SET Stok = Stok - " & TXTQTY.Text.Replace(",", ".") & ", " &
                                  " Modified_at = '" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "'" &
                                  " WHERE Kode='" & DGTAMPIL.Item(1, DGTAMPIL.CurrentRow.Index).Value & "'", CONN)
                     CMD.ExecuteNonQuery()

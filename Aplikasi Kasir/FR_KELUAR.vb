@@ -17,38 +17,38 @@ Public Class FR_KELUAR
     Private Function CARI_HARGA(ByVal QTY As Double) As Long
         Dim STR As String = "SELECT * FROM tbl_barang" &
             " WHERE RTRIM(Kode)='" & TXTKODE.Text & "'"
-        Dim CMD As New MySqlCommand(STR, CONN)
         Dim RD As MySqlDataReader
-        RD = CMD.ExecuteReader
-        If RD.HasRows Then
-            RD.Read()
-            Dim END1 As Double = RD.Item("End1")
-            Dim END2 As Double = RD.Item("End2")
-            Dim END3 As Double = RD.Item("End3")
-            Dim END4 As Double = RD.Item("End4")
+        Try
+            RD = EXECUTE_READER(STR)
+            If RD.HasRows Then
+                RD.Read()
+                Dim END1 As Double = RD.Item("End1")
+                Dim END2 As Double = RD.Item("End2")
+                Dim END3 As Double = RD.Item("End3")
+                Dim END4 As Double = RD.Item("End4")
 
-            Dim HARGA1 As Long = CLng(RD.Item("Harga1"))
-            Dim HARGA2 As Long = CLng(RD.Item("Harga2"))
-            Dim HARGA3 As Long = CLng(RD.Item("Harga3"))
-            Dim HARGA4 As Long = CLng(RD.Item("Harga4"))
-            Dim HARGA5 As Long = CLng(RD.Item("Harga5"))
+                Dim HARGA1 As Long = CLng(RD.Item("Harga1"))
+                Dim HARGA2 As Long = CLng(RD.Item("Harga2"))
+                Dim HARGA3 As Long = CLng(RD.Item("Harga3"))
+                Dim HARGA4 As Long = CLng(RD.Item("Harga4"))
+                Dim HARGA5 As Long = CLng(RD.Item("Harga5"))
 
-            If Not QTY = 0 Then
-                If Not END1 = 0 Then
-                    If Not END2 = 0 Then
-                        If Not END3 = 0 Then
-                            If Not END4 = 0 Then
-                                If QTY <= END1 Then
-                                    CARI_HARGA = HARGA1
-                                ElseIf QTY <= END2 And QTY > END1 Then
-                                    CARI_HARGA = HARGA2
-                                ElseIf QTY <= END3 And QTY > END2 Then
-                                    CARI_HARGA = HARGA3
-                                ElseIf QTY <= END4 And QTY > END3 Then
-                                    CARI_HARGA = HARGA4
-                                Else
-                                    CARI_HARGA = HARGA5
-                                End If
+                If Not QTY = 0 Then
+                    If Not END1 = 0 Then
+                        If Not END2 = 0 Then
+                            If Not END3 = 0 Then
+                                If Not END4 = 0 Then
+                                    If QTY <= END1 Then
+                                        CARI_HARGA = HARGA1
+                                    ElseIf QTY <= END2 And QTY > END1 Then
+                                        CARI_HARGA = HARGA2
+                                    ElseIf QTY <= END3 And QTY > END2 Then
+                                        CARI_HARGA = HARGA3
+                                    ElseIf QTY <= END4 And QTY > END3 Then
+                                        CARI_HARGA = HARGA4
+                                    Else
+                                        CARI_HARGA = HARGA5
+                                    End If
                             Else
                                 If QTY <= END1 Then
                                     CARI_HARGA = HARGA1
@@ -83,9 +83,10 @@ Public Class FR_KELUAR
                 CARI_HARGA = 0
             End If
             RD.Close()
-        Else
-            RD.Close()
         End If
+        Finally
+            TUTUP_KONEKSI()
+        End Try
     End Function
 
     Sub MASUK_DATA()
@@ -197,24 +198,25 @@ Public Class FR_KELUAR
     Private Function CARI_STOK(ByVal Kode As String) As Double
         CARI_STOK = 0
         Dim STR As String
+        Dim STOK_DATA As Double = 0
 
         STR = "SELECT Kode, RTRIM(Barang) as Barang, RTRIM(Satuan) as Satuan," &
                 "(SELECT Stok FROM tbl_stok WHERE tbl_stok.Kode = tbl_barang.Kode) as Stok" &
                 " From tbl_barang WHERE kode='" & Kode & "'"
-        Dim CMD As MySqlCommand
-        CMD = New MySqlCommand(STR, CONN)
         Dim RD As MySqlDataReader
-        RD = CMD.ExecuteReader
+        Try
+            RD = EXECUTE_READER(STR)
 
-        Dim STOK_DATA As Double = 0
-        If RD.HasRows Then
-            RD.Read()
-            STOK_DATA = RD.Item("Stok")
+            If RD.HasRows Then
+                RD.Read()
+                STOK_DATA = RD.Item("Stok")
+            Else
+                STOK_DATA = 0
+            End If
             RD.Close()
-        Else
-            RD.Close()
-            STOK_DATA = 0
-        End If
+        Finally
+            TUTUP_KONEKSI()
+        End Try
 
         Dim STOK_ORDER As Double = Convert.ToDouble(TXTQTY.Text)
         For N = 0 To DGTAMPIL.RowCount - 1
@@ -360,6 +362,7 @@ Public Class FR_KELUAR
             " '" & BAYAR & "'," &
             " '" & KEMBALIAN & "')"
         End If
+        BUKA_KONEKSI()
         Dim CMD As New MySqlCommand(STR, CONN)
         CMD.ExecuteNonQuery()
 
@@ -387,7 +390,7 @@ Public Class FR_KELUAR
             CMD = New MySqlCommand(STR, CONN)
             CMD.ExecuteNonQuery()
 
-            STR = "UPDATE tbl_stok SET Stok-=" & JUMLAH_PRODUK.ToString.Replace(",", ".") & "," &
+            STR = "UPDATE tbl_stok SET Stok = Stok - " & JUMLAH_PRODUK.ToString.Replace(",", ".") & "," &
                 " Modified_at = '" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "'" &
                 " WHERE Kode='" & KODE_PRODUK & "'"
             CMD = New MySqlCommand(STR, CONN)
@@ -399,6 +402,7 @@ Public Class FR_KELUAR
                 CMD.ExecuteNonQuery()
             End If
         Next
+        TUTUP_KONEKSI()
         TXTDISKON_RUPIAH.Text = "0"
         TXTDISKON_PERSEN.Text = "0"
     End Sub
@@ -408,12 +412,12 @@ Public Class FR_KELUAR
         Dim HARGA_BELI As Integer = 0
         Dim QUANTITY As Double = QTY
         While QUANTITY <> 0
-            Dim STR As String = "SELECT TOP 1 Id," &
+            Dim STR As String = "SELECT Id," &
                 " Id_trans," &
                 " Harga," &
                 " Stok" &
                 " FROM tbl_transaksi_child WHERE (LEFT(Id_trans,1)='M' or LEFT(Id_trans,1)='R')" &
-                " And Kode='" & KODE & "' AND Stok != 0 ORDER BY Id ASC"
+                " And Kode='" & KODE & "' AND Stok != 0 ORDER BY Id ASC LIMIT 1"
             Dim CMD As MySqlCommand
             CMD = New MySqlCommand(STR, CONN)
             Dim RD As MySqlDataReader
@@ -444,37 +448,36 @@ Public Class FR_KELUAR
                     CMD = New MySqlCommand(STR, CONN)
                     CMD.ExecuteNonQuery()
                 End If
-                RD.Close()
             Else
+                ' Jika tidak ada stok tersedia, keluar dari loop untuk menghindari hang
                 RD.Close()
+                Exit While
             End If
-            RD.Close()
         End While
         Return HARGA_BELI
     End Function
 
     Private Function AUTOID() As String
         Dim ID_AWAL As String = Format(Date.Now, "yyMMdd")
-        Dim STR As String = "SELECT TOP 1 (Id_trans) AS Id_trans FROM tbl_transaksi_parent WHERE LEFT(Id_trans,1)='K' ORDER BY Id DESC"
-        Dim CMD As MySqlCommand
-        CMD = New MySqlCommand(STR, CONN)
+        Dim STR As String = "SELECT Id_trans FROM tbl_transaksi_parent WHERE LEFT(Id_trans,1)='K' ORDER BY Id DESC LIMIT 1"
         Dim RD As MySqlDataReader
-        RD = CMD.ExecuteReader
-        RD.Read()
-        If RD.HasRows Then
-            If Mid(RD.Item("Id_trans"), 2, 6) = ID_AWAL Then
-                Dim ID As Integer = Mid(RD.Item("Id_trans"), 8, 3) + 1
-                RD.Close()
-                AUTOID = "K" + ID_AWAL + Format(ID, "000")
+        Try
+            RD = EXECUTE_READER(STR)
+            RD.Read()
+            If RD.HasRows Then
+                If Mid(RD.Item("Id_trans"), 2, 6) = ID_AWAL Then
+                    Dim ID As Integer = Mid(RD.Item("Id_trans"), 8, 3) + 1
+                    AUTOID = "K" + ID_AWAL + Format(ID, "000")
+                Else
+                    AUTOID = "K" + ID_AWAL + Format(1, "000")
+                End If
             Else
-                RD.Close()
                 AUTOID = "K" + ID_AWAL + Format(1, "000")
             End If
-        Else
             RD.Close()
-            AUTOID = "K" + ID_AWAL + Format(1, "000")
-        End If
-        RD.Close()
+        Finally
+            TUTUP_KONEKSI()
+        End Try
     End Function
 
     Private Sub BTNCLOSE_Click(sender As Object, e As EventArgs) Handles BTNCLOSE.Click
@@ -536,12 +539,12 @@ Public Class FR_KELUAR
 
     Sub INPUT_MEMBER()
         If ID_pembeli <> "" Then
-            Dim Points As Integer = TXTTOTALHARGA.Text * (persentase_point / 100)
-            Dim STR As String = "UPDATE tbl_member SET Points+=" & Points & ", " &
+            Dim TOTAL_BELANJA As Integer = CInt(TXTTOTALHARGA.Text)
+            Dim Points As Integer = Math.Floor(TOTAL_BELANJA / 50000)
+            Dim STR As String = "UPDATE tbl_member SET Points = Points + " & Points & ", " &
                 " Modified_at = '" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "'" &
                 " WHERE Id='" & ID_pembeli & "'"
-            Dim CMD As New MySqlCommand(STR, CONN)
-            CMD.ExecuteNonQuery()
+            EXECUTE_NONQUERY(STR)
         End If
     End Sub
 
@@ -587,21 +590,23 @@ Public Class FR_KELUAR
                 " AND Min_transaksi <= '" & CInt(TXTSUBTOTAL.Text) & "'" &
                 " AND Tgl_awal <= '" & TGL_SKRG & "'" &
                 " And Tgl_akhir >= '" & TGL_SKRG & "'"
-        Dim CMD As New MySqlCommand(STR, CONN)
         Dim RD As MySqlDataReader
-        RD = CMD.ExecuteReader()
-        If RD.HasRows Then
-            RD.Read()
-            If RD.Item("Jenis_nominal") = "R" Then
-                TXTDISKON_RUPIAH.Text = Format(RD.Item("Diskon"), "##0.##")
-            ElseIf RD.Item("Jenis_nominal") = "P" Then
-                TXTDISKON_PERSEN.Text = Format(RD.Item("Diskon"), "##0.##")
+        Try
+            RD = EXECUTE_READER(STR)
+            If RD.HasRows Then
+                RD.Read()
+                If RD.Item("Jenis_nominal") = "R" Then
+                    TXTDISKON_RUPIAH.Text = Format(RD.Item("Diskon"), "##0.##")
+                ElseIf RD.Item("Jenis_nominal") = "P" Then
+                    TXTDISKON_PERSEN.Text = Format(RD.Item("Diskon"), "##0.##")
+                End If
+            Else
+                TXTDISKON_PERSEN.Text = 0
             End If
             RD.Close()
-        Else
-            TXTDISKON_PERSEN.Text = 0
-            RD.Close()
-        End If
+        Finally
+            TUTUP_KONEKSI()
+        End Try
     End Sub
 
     Private Sub TXTSUBTOTAL_TextChanged(sender As Object, e As EventArgs) Handles TXTSUBTOTAL.TextChanged
@@ -623,34 +628,37 @@ Public Class FR_KELUAR
             If TXTKODE.Enabled = True Then
                 Dim STR As String = "SELECT Barang" &
                                     " From tbl_barang WHERE kode='" & TXTKODE.Text & "'"
-                Dim CMD As MySqlCommand
-                CMD = New MySqlCommand(STR, CONN)
                 Dim RD As MySqlDataReader
-                RD = CMD.ExecuteReader
+                Try
+                    RD = EXECUTE_READER(STR)
 
-                If RD.HasRows Then
-                    RD.Close()
-                    Dim JUMLAH_QTY As Integer = 0
-                    If Not TXTQTY.Text = "" Then
-                        JUMLAH_QTY = CInt(TXTQTY.Text)
-                    End If
+                    If RD.HasRows Then
+                        RD.Close()
+                        TUTUP_KONEKSI()
+                        Dim JUMLAH_QTY As Integer = 0
+                        If Not TXTQTY.Text = "" Then
+                            JUMLAH_QTY = CInt(TXTQTY.Text)
+                        End If
 
-                    TXTHARGA.Text = CARI_HARGA(JUMLAH_QTY)
-                    If CARI_STOK(TXTKODE.Text) < 0 Then
-                        MsgBox("Stok barang tidak mencukupi!")
-                        TXTKODE.Clear()
+                        TXTHARGA.Text = CARI_HARGA(JUMLAH_QTY)
+                        If CARI_STOK(TXTKODE.Text) < 0 Then
+                            MsgBox("Stok barang tidak mencukupi!")
+                            TXTKODE.Clear()
+                        Else
+                            MASUK_DATA()
+                            TXTKODE.Clear()
+                            TXTKODE.Select()
+                        End If
                     Else
-                        MASUK_DATA()
-                        TXTKODE.Clear()
+                        RD.Close()
+                        TUTUP_KONEKSI()
+                        MsgBox("Barang tidak ditemukan!")
+                        TXTKODE.Text = ""
                         TXTKODE.Select()
                     End If
-                Else
-                    RD.Close()
-                    MsgBox("Barang tidak ditemukan!")
-                    TXTKODE.Text = ""
-                    TXTKODE.Select()
-                End If
-                RD.Close()
+                Catch
+                    TUTUP_KONEKSI()
+                End Try
             Else
                 Dim HARGA As Long = 0
                 If TXTHARGA.Text <> "" Then
@@ -753,35 +761,38 @@ Public Class FR_KELUAR
             e.Handled = True
             Dim STR As String = "SELECT Barang" &
                                 " From tbl_barang WHERE kode='" & TXTKODE.Text & "'"
-            Dim CMD As MySqlCommand
-            CMD = New MySqlCommand(STR, CONN)
             Dim RD As MySqlDataReader
-            RD = CMD.ExecuteReader
+            Try
+                RD = EXECUTE_READER(STR)
 
-            If RD.HasRows Then
-                RD.Close()
-                TXTQTY.Text = 1
-                Dim JUMLAH_QTY As Integer = 0
-                If Not TXTQTY.Text = "" Then
-                    JUMLAH_QTY = CInt(TXTQTY.Text)
-                End If
+                If RD.HasRows Then
+                    RD.Close()
+                    TUTUP_KONEKSI()
+                    TXTQTY.Text = 1
+                    Dim JUMLAH_QTY As Integer = 0
+                    If Not TXTQTY.Text = "" Then
+                        JUMLAH_QTY = CInt(TXTQTY.Text)
+                    End If
 
-                TXTHARGA.Text = CARI_HARGA(JUMLAH_QTY)
-                If CARI_STOK(TXTKODE.Text) < 0 Then
-                    MsgBox("Stok barang tidak mencukupi!")
-                    TXTKODE.Clear()
+                    TXTHARGA.Text = CARI_HARGA(JUMLAH_QTY)
+                    If CARI_STOK(TXTKODE.Text) < 0 Then
+                        MsgBox("Stok barang tidak mencukupi!")
+                        TXTKODE.Clear()
+                    Else
+                        MASUK_DATA()
+                        TXTKODE.Clear()
+                        TXTKODE.Select()
+                    End If
                 Else
-                    MASUK_DATA()
-                    TXTKODE.Clear()
+                    RD.Close()
+                    TUTUP_KONEKSI()
+                    MsgBox("Barang tidak ditemukan!")
+                    TXTKODE.Text = ""
                     TXTKODE.Select()
                 End If
-            Else
-                RD.Close()
-                MsgBox("Barang tidak ditemukan!")
-                TXTKODE.Text = ""
-                TXTKODE.Select()
-            End If
-            RD.Close()
+            Catch
+                TUTUP_KONEKSI()
+            End Try
         End If
 
         If e.KeyChar = "'" Then
@@ -794,40 +805,42 @@ Public Class FR_KELUAR
 
         Dim STR As String = "SELECT Barang, Satuan FROM tbl_barang" &
             " WHERE RTRIM(Kode)='" & TXTKODE.Text & "'"
-        Dim CMD As New MySqlCommand(STR, CONN)
         Dim RD As MySqlDataReader
-        RD = CMD.ExecuteReader
-        If RD.HasRows Then
-            RD.Read()
-            TXTBARANG.Text = RD.Item("Barang").ToString.Trim
-            TXTSATUAN.Text = RD.Item("Satuan").ToString.Trim
-            TXTQTY.Enabled = True
-            RD.Close()
-            STR = "SELECT Diskon AS 'Diskon', Jenis_nominal AS 'Jenis_nominal' FROM tbl_diskon" &
-                " WHERE Kode='" & TXTKODE.Text & "'" &
-                " AND Jenis = 'B'" &
-                " AND Tgl_awal <= '" & TGL_SKRG & "'" &
-                " And Tgl_akhir >= '" & TGL_SKRG & "'"
-            CMD = New MySqlCommand(STR, CONN)
-            RD = CMD.ExecuteReader
+        Try
+            RD = EXECUTE_READER(STR)
             If RD.HasRows Then
                 RD.Read()
-                If RD.Item("Jenis_nominal") = "R" Then
-                    Label6.Text = "Rp"
-                ElseIf RD.Item("Jenis_nominal") = "P" Then
-                    Label6.Text = "%"
-                End If
-                TXTDISKON.Text = Format(RD.Item("Diskon"), "##0.##")
+                TXTBARANG.Text = RD.Item("Barang").ToString.Trim
+                TXTSATUAN.Text = RD.Item("Satuan").ToString.Trim
+                TXTQTY.Enabled = True
                 RD.Close()
+                TUTUP_KONEKSI()
+                STR = "SELECT Diskon AS 'Diskon', Jenis_nominal AS 'Jenis_nominal' FROM tbl_diskon" &
+                    " WHERE Kode='" & TXTKODE.Text & "'" &
+                    " AND Jenis = 'B'" &
+                    " AND Tgl_awal <= '" & TGL_SKRG & "'" &
+                    " And Tgl_akhir >= '" & TGL_SKRG & "'"
+                RD = EXECUTE_READER(STR)
+                If RD.HasRows Then
+                    RD.Read()
+                    If RD.Item("Jenis_nominal") = "R" Then
+                        Label6.Text = "Rp"
+                    ElseIf RD.Item("Jenis_nominal") = "P" Then
+                        Label6.Text = "%"
+                    End If
+                    TXTDISKON.Text = Format(RD.Item("Diskon"), "##0.##")
+                Else
+                    TXTDISKON.Text = 0
+                End If
+                RD.Close()
+                TXTQTY.Text = 1
             Else
-                TXTDISKON.Text = 0
+                TXTQTY.Enabled = False
                 RD.Close()
             End If
-            TXTQTY.Text = 1
-        Else
-            TXTQTY.Enabled = False
-            RD.Close()
-        End If
+        Finally
+            TUTUP_KONEKSI()
+        End Try
     End Sub
 
     Private Sub TXTKODE_TextChanged(sender As Object, e As EventArgs) Handles TXTKODE.TextChanged
@@ -1043,34 +1056,37 @@ Public Class FR_KELUAR
         If TXTKODE.Enabled = True Then
             Dim STR As String = "SELECT Barang" &
                                 " From tbl_barang WHERE kode='" & TXTKODE.Text & "'"
-            Dim CMD As MySqlCommand
-            CMD = New MySqlCommand(STR, CONN)
             Dim RD As MySqlDataReader
-            RD = CMD.ExecuteReader
+            Try
+                RD = EXECUTE_READER(STR)
 
-            If RD.HasRows Then
-                RD.Close()
-                Dim JUMLAH_QTY As Integer = 0
-                If Not TXTQTY.Text = "" Then
-                    JUMLAH_QTY = CInt(TXTQTY.Text)
-                End If
+                If RD.HasRows Then
+                    RD.Close()
+                    TUTUP_KONEKSI()
+                    Dim JUMLAH_QTY As Integer = 0
+                    If Not TXTQTY.Text = "" Then
+                        JUMLAH_QTY = CInt(TXTQTY.Text)
+                    End If
 
-                TXTHARGA.Text = CARI_HARGA(JUMLAH_QTY)
-                If CARI_STOK(TXTKODE.Text) < 0 Then
-                    MsgBox("Stok barang tidak mencukupi!")
-                    TXTKODE.Clear()
+                    TXTHARGA.Text = CARI_HARGA(JUMLAH_QTY)
+                    If CARI_STOK(TXTKODE.Text) < 0 Then
+                        MsgBox("Stok barang tidak mencukupi!")
+                        TXTKODE.Clear()
+                    Else
+                        MASUK_DATA()
+                        TXTKODE.Clear()
+                        TXTKODE.Select()
+                    End If
                 Else
-                    MASUK_DATA()
-                    TXTKODE.Clear()
+                    RD.Close()
+                    TUTUP_KONEKSI()
+                    MsgBox("Barang tidak ditemukan!")
+                    TXTKODE.Text = ""
                     TXTKODE.Select()
                 End If
-            Else
-                RD.Close()
-                MsgBox("Barang tidak ditemukan!")
-                TXTKODE.Text = ""
-                TXTKODE.Select()
-            End If
-            RD.Close()
+            Catch
+                TUTUP_KONEKSI()
+            End Try
         Else
             Dim HARGA As Long = 0
             If TXTHARGA.Text <> "" Then
@@ -1188,26 +1204,27 @@ Public Class FR_KELUAR
         ID_pembeli = TXTPEMBELI.Text
         Dim STR As String = "SELECT Nama, Points FROM tbl_member" &
             " WHERE RTRIM(Id)='" & TXTPEMBELI.Text & "'"
-        Dim CMD As New MySqlCommand(STR, CONN)
         Dim RD As MySqlDataReader
-        RD = CMD.ExecuteReader
-        If RD.HasRows Then
-            RD.Read()
-            TXTPEMBELI.Text = RD.Item("Nama").ToString.Trim
-            Points_pembeli = RD.Item("Points")
-            TXTPEMBELI.Enabled = False
-            TXTKODE.Focus()
+        Try
+            RD = EXECUTE_READER(STR)
+            If RD.HasRows Then
+                RD.Read()
+                TXTPEMBELI.Text = RD.Item("Nama").ToString.Trim
+                Points_pembeli = RD.Item("Points")
+                TXTPEMBELI.Enabled = False
+                TXTKODE.Focus()
+            Else
+                ID_pembeli = ""
+                Points_pembeli = 0
+                TXTPEMBELI.Enabled = True
+                MsgBox("Data member tidak ditemukan!")
+                TXTPEMBELI.Clear()
+                TXTPEMBELI.Focus()
+            End If
             RD.Close()
-        Else
-            RD.Close()
-            ID_pembeli = ""
-            Points_pembeli = 0
-            TXTPEMBELI.Enabled = True
-            MsgBox("Data member tidak ditemukan!")
-            TXTPEMBELI.Clear()
-            TXTPEMBELI.Focus()
-        End If
-        RD.Close()
+        Finally
+            TUTUP_KONEKSI()
+        End Try
     End Sub
 
     Private Sub CB_TYPE_PEMBELI_TextChanged(sender As Object, e As EventArgs) Handles CB_TYPE_PEMBELI.TextChanged
@@ -1258,41 +1275,41 @@ Public Class FR_KELUAR
             " FROM tbl_transaksi_voucher" &
             " INNER JOIN tbl_data_voucher ON tbl_transaksi_voucher.Id_data = tbl_data_voucher.Id" &
             " WHERE RTRIM(Kode)='" & TXTVOUCHER.Text & "'"
-        Dim CMD As New MySqlCommand(STR, CONN)
         Dim RD As MySqlDataReader
-        RD = CMD.ExecuteReader
-        If RD.HasRows Then
-            RD.Read()
-            If IsDBNull(RD.Item("Updated_at")) Then
-                Dim ADA_DATA As Boolean = False
+        Try
+            RD = EXECUTE_READER(STR)
+            If RD.HasRows Then
+                RD.Read()
+                If IsDBNull(RD.Item("Updated_at")) Then
+                    Dim ADA_DATA As Boolean = False
 
-                For N = 0 To DGTAMPIL.Rows.Count - 1
-                    Dim Kode As String = DGTAMPIL.Item("Kode", N).Value
-                    If Kode = TXTVOUCHER.Text Then
-                        ADA_DATA = True
-                        Exit For
-                    End If
-                Next
-                If ADA_DATA Then
-                    MsgBox("Voucher telah digunakan!")
-                    TXTVOUCHER.Clear()
-                    TXTVOUCHER.Select()
-                Else
-
-                    DGTAMPIL.Rows.Add()
-                    DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Kode").Value = RD.Item("Kode")
-                    DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Barang").Value = RD.Item("Nama")
-                    If IsDBNull(RD.Item("Harga")) Then
-                        DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Harga").Value = 0
-                    Else
-                        If LBTOTAL.Text < RD.Item("Harga") Then
-                            DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Harga").Value = LBTOTAL.Text * -1
-                        Else
-                            DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Harga").Value = Format(RD.Item("Harga"), "###") * -1
+                    For N = 0 To DGTAMPIL.Rows.Count - 1
+                        Dim Kode As String = DGTAMPIL.Item("Kode", N).Value
+                        If Kode = TXTVOUCHER.Text Then
+                            ADA_DATA = True
+                            Exit For
                         End If
-                    End If
-                    DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Diskon").Value = 0
-                    DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Qty").Value = 1
+                    Next
+                    If ADA_DATA Then
+                        MsgBox("Voucher telah digunakan!")
+                        TXTVOUCHER.Clear()
+                        TXTVOUCHER.Select()
+                    Else
+
+                        DGTAMPIL.Rows.Add()
+                        DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Kode").Value = RD.Item("Kode")
+                        DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Barang").Value = RD.Item("Nama")
+                        If IsDBNull(RD.Item("Harga")) Then
+                            DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Harga").Value = 0
+                        Else
+                            If LBTOTAL.Text < RD.Item("Harga") Then
+                                DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Harga").Value = LBTOTAL.Text * -1
+                            Else
+                                DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Harga").Value = Format(RD.Item("Harga"), "###") * -1
+                            End If
+                        End If
+                        DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Diskon").Value = 0
+                        DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Qty").Value = 1
                     DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Total").Value = DGTAMPIL.Rows(DGTAMPIL.Rows.Count - 1).Cells("Harga").Value
 
                     FR_KELUAR_CUSTOMER.LBL_LASTITEM_NAME.Text = RD.Item("Nama")
@@ -1325,7 +1342,9 @@ Public Class FR_KELUAR
             TXTVOUCHER.Clear()
             TXTVOUCHER.Select()
         End If
-        RD.Close()
+        Finally
+            TUTUP_KONEKSI()
+        End Try
     End Sub
 
     Private Sub DGTAMPIL_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGTAMPIL.CellClick

@@ -12,13 +12,22 @@
                 .PASSWORD = TXTPASSWORD.Text
                 .DATABASE = TXTDATABASE.Text
                 .Save()
+                .Reload()
             End With
 
-            KONEKAN()
+            Try
+                KONEKAN()
+                MsgBox("Koneksi berhasil!")
 
-            Dim FR As New FR_LOGIN
-            FR.Show()
-            Me.Close()
+                ' Tutup form koneksi dan buka login
+                Me.Hide()
+                Dim FR As New FR_LOGIN
+                FR.Show()
+
+            Catch ex As Exception
+                MsgBox("Koneksi gagal: " & ex.Message)
+                ' Jangan tutup form jika koneksi gagal
+            End Try
         End If
     End Sub
 End Class

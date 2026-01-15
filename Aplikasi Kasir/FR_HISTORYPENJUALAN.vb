@@ -21,7 +21,7 @@ Public Class FR_HISTORYPENJUALAN
             " FROM tbl_transaksi_parent" &
             " INNER JOIN tbl_karyawan ON tbl_transaksi_parent.Id_kasir = tbl_karyawan.Id" &
             " WHERE Left(tbl_transaksi_parent.Id_trans, 1) = 'K'" &
-            " AND Tgl >= DATEADD(day,-7, GETDATE())" &
+            " AND Tgl >= DATE_SUB(NOW(), INTERVAL 7 DAY)" &
             " ORDER BY Tgl DESC" &
             " LIMIT " & TAMPIL_RECORD & " OFFSET " & START_RECORD
         Else
@@ -32,7 +32,7 @@ Public Class FR_HISTORYPENJUALAN
             " FROM tbl_transaksi_parent" &
             " INNER JOIN tbl_karyawan ON tbl_transaksi_parent.Id_kasir = tbl_karyawan.Id" &
             " WHERE Left(tbl_transaksi_parent.Id_trans, 1) = 'K'" &
-            " AND Tgl >= DATEADD(day,-7, GETDATE())" &
+            " AND Tgl >= DATE_SUB(NOW(), INTERVAL 7 DAY)" &
             " AND tbl_transaksi_parent.Id_trans = '" & TXTCARI.Text & "'" &
             " ORDER BY Tgl DESC" &
             " LIMIT " & TAMPIL_RECORD & " OFFSET " & START_RECORD

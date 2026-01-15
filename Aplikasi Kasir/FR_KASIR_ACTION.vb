@@ -62,13 +62,10 @@ Public Class FR_KASIR_ACTION
 
     Sub CARI_DATA()
         Dim RD As MySqlDataReader
-        Dim CMD As MySqlCommand
 
         Try
-            CONN.Open()
             Dim STR As String = "SELECT * FROM tbl_karyawan WHERE Id='" & TXTID.Text & "'"
-            CMD = New MySqlCommand(STR, CONN)
-            RD = CMD.ExecuteReader
+            RD = EXECUTE_READER(STR)
 
             While RD.Read()
                 TXTNAMA.Text = RD.GetString("Nama")
@@ -88,11 +85,11 @@ Public Class FR_KASIR_ACTION
                 End If
                 TXTNOHP.Text = RD.Item("No_hp").ToString.Trim
             End While
-            CONN.Close()
+            RD.Close()
         Catch ex As MySqlException
             MessageBox.Show(ex.Message)
         Finally
-            CONN.Dispose()
+            TUTUP_KONEKSI()
         End Try
     End Sub
 
@@ -101,15 +98,12 @@ Public Class FR_KASIR_ACTION
     End Sub
 
     Private Function AUTOID() As String
-        Dim CMD As MySqlCommand
         Dim RD As MySqlDataReader
         Dim ID_AWAL As String = Format(TXTTGL.Value, "yyyyMMdd")
 
         Try
-            CONN.Open()
             Dim STR As String = "SELECT Id FROM tbl_karyawan ORDER BY Created_at DESC LIMIT 1"
-            CMD = New MySqlCommand(STR, CONN)
-            RD = CMD.ExecuteReader
+            RD = EXECUTE_READER(STR)
 
             While RD.Read()
                 If RD.HasRows() Then
@@ -120,11 +114,10 @@ Public Class FR_KASIR_ACTION
                 End If
             End While
             RD.Close()
-            CONN.Close()
         Catch ex As MySqlException
             MessageBox.Show(ex.Message)
         Finally
-            CONN.Dispose()
+            TUTUP_KONEKSI()
         End Try
 
     End Function
@@ -155,29 +148,20 @@ Public Class FR_KASIR_ACTION
             Dim CMD As MySqlCommand
             If TXTID.Text = "" Then
                 Try
-                    CONN.Open()
-
                     STR = "INSERT INTO tbl_karyawan (Id, Nama, Password, Role, Alamat, Tgl_lahir, JK, No_hp, Created_at) VALUES ('" & ID & "','" &
                     TXTNAMA.Text & "', '123456', '" & role & "', '" & TXTALAMAT.Text & "', '" &
                     Format(TXTTGL.Value, "yyyy-MM-dd") & "', '" & jk & "', '" &
                     TXTNOHP.Text & "', '" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "')"
-                    CMD = New MySqlCommand(STR, CONN)
-                    CMD.ExecuteNonQuery()
+                    EXECUTE_NONQUERY(STR)
                     MsgBox("Data berhasil disimpan dengan ID : " & ID & " dan Password : 123456")
-
-                    CONN.Close()
                 Catch ex As MySqlException
                     MessageBox.Show(ex.Message)
-                Finally
-                    CONN.Dispose()
                 End Try
             Else
                 Try
-                    CONN.Open()
                     STR = "SELECT * FROM tbl_karyawan WHERE Id='" & TXTID.Text & "'"
-                    CMD = New MySqlCommand(STR, CONN)
                     Dim RD As MySqlDataReader
-                    RD = CMD.ExecuteReader
+                    RD = EXECUTE_READER(STR)
 
                     While RD.Read()
                         If RD.HasRows Then
@@ -198,16 +182,13 @@ Public Class FR_KASIR_ACTION
                         End If
                     End While
                     RD.Close()
+                    TUTUP_KONEKSI()
 
-                    CMD = New MySqlCommand(STR, CONN)
-                    CMD.ExecuteNonQuery()
+                    EXECUTE_NONQUERY(STR)
                     MsgBox("ID : " & TXTID.Text & " berhasil diubah!")
-                    CONN.Close()
 
                 Catch ex As MySqlException
                     MessageBox.Show(ex.Message)
-                Finally
-                    CONN.Dispose()
                 End Try
 
 

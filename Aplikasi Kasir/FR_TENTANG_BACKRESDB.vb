@@ -21,7 +21,7 @@ Public Class FR_TENTANG_BACKRESDB
             If CB_ACTION.SelectedIndex = 1 Then
                 SaveFileDialog1.FileName = "DB TOKO_KASIR " & VERSI & " " & Format(Date.Now(), "yyyyMMddHHmmss") & ".bak"
                 If SaveFileDialog1.ShowDialog() = DialogResult.OK Then
-                    CONN.Close()
+                    TUTUP_KONEKSI()
                     con.Open()
                     STR = "BACKUP DATABASE TOKO_KASIR To DISK='" & SaveFileDialog1.FileName & "'"
 
@@ -30,7 +30,7 @@ Public Class FR_TENTANG_BACKRESDB
                     End Using
 
                     con.Close()
-                    CONN.Open()
+                    BUKA_KONEKSI()
                     MsgBox("Database berhasil dibackup!")
                     TUTUP_FORM()
                 End If
@@ -39,7 +39,7 @@ Public Class FR_TENTANG_BACKRESDB
                     MsgBox("File restore tidak ditemukan!")
                     Exit Sub
                 End If
-                CONN.Close()
+                TUTUP_KONEKSI()
                 con.Open()
                 STR = "ALTER DATABASE TOKO_KASIR SET SINGLE_USER WITH ROLLBACK IMMEDIATE"
                 Using CMD = New MySqlCommand(STR, con)
@@ -52,7 +52,7 @@ Public Class FR_TENTANG_BACKRESDB
                 End Using
 
                 con.Close()
-                CONN.Open()
+                BUKA_KONEKSI()
                 MsgBox("Database berhasil direstore!")
                 With FR_TENTANG
                     .Enabled = True

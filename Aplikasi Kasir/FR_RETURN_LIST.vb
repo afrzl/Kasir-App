@@ -30,7 +30,7 @@ Public Class FR_RETURN_LIST
             STR = "SELECT RTRIM(Id_trans) AS 'ID Transaksi'," &
                       " Tgl AS 'Tanggal Transaksi'" &
                       " FROM tbl_transaksi_parent WHERE LEFT(Id_trans, 1) = 'K'" &
-                      " AND Tgl >= DATEADD(day,-7, GETDATE())" &
+                      " AND Tgl >= DATE_SUB(NOW(), INTERVAL 7 DAY)" &
                       " AND Id_trans Like '%" & TXTCARI_TRANS.Text & "%'" &
                       " ORDER BY Id DESC"
 

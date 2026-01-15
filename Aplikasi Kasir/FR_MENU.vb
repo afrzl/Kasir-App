@@ -116,31 +116,23 @@ Public Class FR_MENU
 
     Private Function CEK_EXPIRED() As Boolean
         Try
-            CONN.Open()
-
             Dim STR As String = "SELECT * FROM tbl_transaksi_child WHERE LEFT(Id_trans, 1) = 'M'" &
                 " AND Tgl_exp <= DATE_ADD(CURRENT_DATE, INTERVAL 14 DAY)" &
                 " AND Stok != 0"
-            Dim CMD As MySqlCommand
-            CMD = New MySqlCommand(STR, CONN)
             Dim RD As MySqlDataReader
-            RD = CMD.ExecuteReader
+            RD = EXECUTE_READER(STR)
             While RD.Read()
                 If RD.HasRows Then
-                    'RD.Close()
                     CEK_EXPIRED = True
                 Else
-                    'RD.Close()
                     CEK_EXPIRED = False
                 End If
             End While
             RD.Close()
-
-            CONN.Close()
         Catch ex As MySqlException
             MessageBox.Show(ex.Message)
         Finally
-            CONN.Dispose()
+            TUTUP_KONEKSI()
         End Try
 
     End Function
@@ -149,25 +141,16 @@ Public Class FR_MENU
         TAMPIL()
         TAMPIL_DATA()
 
-        Dim CMD As MySqlCommand
-
         Dim Str As String
 
         Try
-            CONN.Open()
-
             Str = "SELECT COUNT(Kode) FROM tbl_barang WHERE Barang Like '%" & TXTCARISTOK.Text & "%'" &
             " OR Kode = '" & TXTCARISTOK.Text & "'" &
             " AND (SELECT Stok FROM tbl_stok WHERE tbl_stok.Kode = tbl_barang.Kode) != 0"
-            CMD = New MySqlCommand(Str, CONN)
 
-            TOTAL_RECORD = Convert.ToUInt64(CMD.ExecuteScalar())
-            CONN.Close()
+            TOTAL_RECORD = Convert.ToUInt64(EXECUTE_SCALAR(Str))
         Catch ex As MySqlException
             MessageBox.Show(ex.Message)
-        Finally
-            CONN.Dispose()
-
         End Try
     End Sub
 
@@ -178,36 +161,24 @@ Public Class FR_MENU
         TGLAKHIR = TGLAKHIR & " 23:59:59"
 
         Dim STR As String
-        Dim CMD As MySqlCommand
 
         Try
-            CONN.Open()
-
             STR = "SELECT COUNT(*) FROM tbl_karyawan"
-            CMD = New MySqlCommand(STR, CONN)
-            LBKASIR.Text = Convert.ToUInt64(CMD.ExecuteScalar())
+            LBKASIR.Text = Convert.ToUInt64(EXECUTE_SCALAR(STR))
 
             STR = "SELECT COUNT(*) FROM tbl_barang"
-            CMD = New MySqlCommand(STR, CONN)
-            LBBARANG.Text = Convert.ToUInt64(CMD.ExecuteScalar())
+            LBBARANG.Text = Convert.ToUInt64(EXECUTE_SCALAR(STR))
 
             STR = "SELECT COUNT(*) FROM tbl_transaksi_parent WHERE Jenis='M'"
-            CMD = New MySqlCommand(STR, CONN)
-            LBMASUK.Text = Convert.ToUInt64(CMD.ExecuteScalar())
+            LBMASUK.Text = Convert.ToUInt64(EXECUTE_SCALAR(STR))
 
             STR = "SELECT COUNT(*) FROM tbl_transaksi_parent WHERE Jenis='K'"
-            CMD = New MySqlCommand(STR, CONN)
-            LBKELUAR.Text = Convert.ToUInt64(CMD.ExecuteScalar())
+            LBKELUAR.Text = Convert.ToUInt64(EXECUTE_SCALAR(STR))
 
             STR = "SELECT COUNT(*) as Count FROM tbl_transaksi_parent WHERE Jenis='K' AND (Tgl >= '" & TGLAWAL & "' AND Tgl <= '" & TGLAKHIR & "')"
-            CMD = New MySqlCommand(STR, CONN)
-            LBKELUARHARI.Text = Convert.ToUInt64(CMD.ExecuteScalar())
-
-            CONN.Close()
+            LBKELUARHARI.Text = Convert.ToUInt64(EXECUTE_SCALAR(STR))
         Catch ex As MySqlException
             MessageBox.Show(ex.Message)
-        Finally
-            CONN.Dispose()
         End Try
 
         'CMD = New MySqlCommand(STR, CONN)

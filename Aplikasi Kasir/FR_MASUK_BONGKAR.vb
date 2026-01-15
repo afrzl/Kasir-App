@@ -108,19 +108,19 @@ Public Class FR_MASUK_BONGKAR
             CMD = New MySqlCommand(STR, CONN)
             CMD.ExecuteNonQuery()
 
-            STR = "UPDATE tbl_transaksi_child SET Stok-=" & TXT_JML.Text.ToString.Replace(",", ".") & ", " &
+            STR = "UPDATE tbl_transaksi_child SET Stok = Stok - " & TXT_JML.Text.ToString.Replace(",", ".") & ", " &
                     " Modified_at = '" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "'" &
                     " WHERE Id='" & TXT_IDBRG.Text & "'"
             CMD = New MySqlCommand(STR, CONN)
             CMD.ExecuteNonQuery()
 
-            STR = "UPDATE tbl_stok SET Stok+=" & JML_BARANG & ", " &
+            STR = "UPDATE tbl_stok SET Stok = Stok + " & JML_BARANG & ", " &
                     " Modified_at = '" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "'" &
                     " WHERE Kode='" & TXT_KODEBARANG.Text & "'"
             CMD = New MySqlCommand(STR, CONN)
             CMD.ExecuteNonQuery()
 
-            STR = "UPDATE tbl_stok SET Stok-=" & TXT_JML.Text.ToString.Replace(",", ".") & ", " &
+            STR = "UPDATE tbl_stok SET Stok = Stok - " & TXT_JML.Text.ToString.Replace(",", ".") & ", " &
                     " Modified_at = '" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "'" &
                     " WHERE Kode='" & KODE & "'"
             CMD = New MySqlCommand(STR, CONN)

@@ -178,19 +178,13 @@ Public Class FR_PRODUK
             ElseIf DGTAMPIL.Columns(e.ColumnIndex).HeaderText = "Delete" Then
                 If MsgBox("Apakah anda yakin akan menghapus produk?", vbYesNo) = vbYes Then
                     Try
-                        CONN.Open()
-
                         STR = "DELETE FROM tbl_barang " &
                             " WHERE Kode='" & DGTAMPIL.Item(0, e.RowIndex).Value & "'"
-                        CMD = New MySqlCommand(STR, CONN)
-                        CMD.ExecuteNonQuery()
+                        EXECUTE_NONQUERY(STR)
                         MsgBox("Data produk berhasil dihapus!")
-
-                        CONN.Close()
                     Catch ex As MySqlException
                         MessageBox.Show(ex.Message)
                     Finally
-                        CONN.Dispose()
                         TAMPIL()
                     End Try
 

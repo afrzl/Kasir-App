@@ -46,7 +46,7 @@ Public Class FR_RUSAK
             " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_parent.Id_trans = tbl_transaksi_child.Id_trans" &
             " WHERE LEFT(tbl_transaksi_child.Id_trans, 1) = 'M' AND" &
             " tbl_transaksi_child.Stok != 0 AND" &
-            " tbl_transaksi_child.Tgl_exp <= DATEADD(day,+14, GETDATE())"
+            " tbl_transaksi_child.Tgl_exp <= DATE_ADD(NOW(), INTERVAL 14 DAY)"
 
         Dim DA As MySqlDataAdapter
         DA = New MySqlDataAdapter(STR, CONN)
@@ -305,7 +305,7 @@ Public Class FR_RUSAK
                 CMD = New MySqlCommand(STR, CONN)
                 CMD.ExecuteNonQuery()
 
-                STR = "UPDATE tbl_stok SET Stok-=" & TXTQTY.Text.Replace(",", ".") & ", " &
+                STR = "UPDATE tbl_stok SET Stok = Stok - " & TXTQTY.Text.Replace(",", ".") & ", " &
                     " Modified_at = '" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "'" &
                     " WHERE Kode='" & KODEBARANG & "'"
                 CMD = New MySqlCommand(STR, CONN)
@@ -414,7 +414,7 @@ Public Class FR_RUSAK
             End If
             RD.Close()
 
-            CMD = New MySqlCommand("UPDATE tbl_stok SET Stok+=" & TXTQTY.Text.Replace(",", ".") & ", " &
+            CMD = New MySqlCommand("UPDATE tbl_stok SET Stok = Stok + " & TXTQTY.Text.Replace(",", ".") & ", " &
                                  " Modified_at = '" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "'" &
                                  " WHERE Kode='" & KODE_BARANG & "'", CONN)
             CMD.ExecuteNonQuery()
@@ -790,7 +790,7 @@ Public Class FR_RUSAK
                     End If
                     RD.Close()
 
-                    str = "UPDATE tbl_stok SET Stok+=" & TXTQTY.Text.Replace(",", ".") & ", " &
+                    str = "UPDATE tbl_stok SET Stok = Stok + " & TXTQTY.Text.Replace(",", ".") & ", " &
                                  " Modified_at = '" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "'" &
                                  " WHERE Kode='" & KODE_BARANG & "'"
                     CMD = New MySqlCommand(str, CONN)

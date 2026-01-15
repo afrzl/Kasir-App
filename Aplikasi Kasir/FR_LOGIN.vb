@@ -21,17 +21,14 @@ Public Class FR_LOGIN
             Me.Hide()
         Else
             Try
-                CONN.Open()
+                BUKA_KONEKSI()
 
-                Dim CMD As MySqlCommand
                 Dim STR As String = "SELECT COUNT(*) FROM tbl_karyawan WHERE Id='" & TXTID.Text & "' AND Password='" & TXTPASSWORD.Text & "'"
-                CMD = New MySqlCommand(STR, CONN)
-                If CMD.ExecuteScalar > 0 Then
+                If EXECUTE_SCALAR(STR) > 0 Then
 
                     STR = "SELECT RTRIM(Nama) AS Nama, RTRIM(Role) AS Role FROM tbl_karyawan WHERE Id='" & TXTID.Text & "' AND Password='" & TXTPASSWORD.Text & "'"
-                    CMD = New MySqlCommand(STR, CONN)
                     Dim RD As MySqlDataReader
-                    RD = CMD.ExecuteReader
+                    RD = EXECUTE_READER(STR)
                     While RD.Read()
                         If RD.Item("Role") = 1 Then
                                 My.Settings.ID_ACCOUNT = TXTID.Text
@@ -54,10 +51,10 @@ Public Class FR_LOGIN
                     TXTPASSWORD.Clear()
                     TXTID.Select()
                 End If
-                CONN.Close()
             Catch ex As MySqlException
                 MessageBox.Show(ex.Message)
             Finally
+                TUTUP_KONEKSI()
                 If ROLE = 1 Then
                     Dim FR As New FR_MENU
                     FR.Show()
@@ -71,19 +68,23 @@ Public Class FR_LOGIN
                     FR.Show()
                     Me.Hide()
                 End If
-                CONN.Dispose()
             End Try
         End If
     End Sub
 
     Private Sub FR_LOGIN_Load(sender As Object, e As EventArgs) Handles Me.Load
-        If My.Settings.SERVER = "" Or My.Settings.USER = "" Or My.Settings.PASSWORD = "" Or My.Settings.DATABASE = "" Then
-            MsgBox("Database belum terhubung!")
-            Dim FR As New FR_KONEKSI
-            FR.ShowDialog()
-        Else
+        Try
             KONEKAN()
-        End If
+        Catch ex As Exception
+            ' Jika gagal baru cek settings
+            If My.Settings.SERVER = "" Or My.Settings.USER = "" Or My.Settings.PASSWORD = "" Or My.Settings.DATABASE = "" Then
+                MsgBox("Database belum terhubung!")
+                Dim FR As New FR_KONEKSI
+                FR.ShowDialog()
+            Else
+                MsgBox("Error koneksi: " & ex.Message)
+            End If
+        End Try
 
         TXTID.Clear()
         TXTPASSWORD.Clear()
