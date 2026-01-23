@@ -37,16 +37,18 @@ Public Class FR_RUSAK
         Dim STR As String = "SELECT tbl_transaksi_child.Id," &
             " RTRIM(tbl_transaksi_child.Id_trans) As 'ID Transaksi'," &
             " RTRIM(tbl_transaksi_child.Kode) AS 'Kode Barang'," &
-            " RTRIM((SELECT Barang FROM tbl_barang WHERE RTRIM(tbl_barang.Kode) = RTRIM(tbl_transaksi_child.Kode))) AS 'Nama Barang'," &
+            " RTRIM(tbl_barang.Barang) AS 'Nama Barang'," &
             " tbl_transaksi_parent.Tgl AS 'Tanggal Masuk'," &
             " RTRIM(tbl_transaksi_parent.Person) AS 'Supplier'," &
             " tbl_transaksi_child.Stok AS 'QTY'," &
             " tbl_transaksi_child.Tgl_exp AS 'Tanggal Expired'" &
             " FROM tbl_transaksi_child " &
             " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_parent.Id_trans = tbl_transaksi_child.Id_trans" &
-            " WHERE LEFT(tbl_transaksi_child.Id_trans, 1) = 'M' AND" &
-            " tbl_transaksi_child.Stok != 0 AND" &
-            " tbl_transaksi_child.Tgl_exp <= DATE_ADD(NOW(), INTERVAL 14 DAY)"
+            " LEFT JOIN tbl_barang ON tbl_barang.Kode = tbl_transaksi_child.Kode" &
+            " WHERE LEFT(tbl_transaksi_child.Id_trans, 1) = 'M'" &
+            " AND tbl_transaksi_child.Stok != 0" &
+            " AND tbl_transaksi_child.Tgl_exp <= DATE_ADD(NOW(), INTERVAL 14 DAY)" &
+            " ORDER BY tbl_transaksi_child.Tgl_exp ASC LIMIT 100"
 
         Dim DA As MySqlDataAdapter
         DA = New MySqlDataAdapter(STR, CONN)
@@ -103,31 +105,37 @@ Public Class FR_RUSAK
                 STR = "SELECT Id_awal, " &
                     " RTRIM(tbl_transaksi_child.Id_trans) As 'ID Transaksi'," &
                     " RTRIM(tbl_transaksi_child.Kode) AS 'Kode Barang'," &
-                    " RTRIM((SELECT Barang FROM tbl_barang WHERE RTRIM(tbl_barang.Kode) = RTRIM(tbl_transaksi_child.Kode))) AS 'Nama Barang'," &
-                    " RTRIM((SELECT Nama FROM tbl_karyawan WHERE RTRIM(tbl_karyawan.Id) = RTRIM(tbl_transaksi_parent.Id_kasir))) AS 'Kasir'," &
+                    " RTRIM(tbl_barang.Barang) AS 'Nama Barang'," &
+                    " RTRIM(tbl_karyawan.Nama) AS 'Kasir'," &
                     " tbl_transaksi_parent.Tgl AS 'Tanggal'," &
                     " RTRIM(tbl_transaksi_parent.Person) AS 'Supplier'," &
                     " tbl_transaksi_child.Harga_beli as 'Rugi'," &
                     " tbl_transaksi_child.Jumlah AS 'QTY'" &
                     " FROM tbl_transaksi_child " &
                     " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_parent.Id_trans = tbl_transaksi_child.Id_trans" &
-                    " WHERE LEFT(tbl_transaksi_child.Id_trans, 1) = 'C' AND" &
-                    " tbl_transaksi_child.Id_trans LIKE '%" & TXTCARI.Text & "%'"
+                    " LEFT JOIN tbl_barang ON tbl_barang.Kode = tbl_transaksi_child.Kode" &
+                    " LEFT JOIN tbl_karyawan ON tbl_karyawan.Id = tbl_transaksi_parent.Id_kasir" &
+                    " WHERE LEFT(tbl_transaksi_child.Id_trans, 1) = 'C'" &
+                    " AND tbl_transaksi_child.Id_trans LIKE '%" & TXTCARI.Text & "%'" &
+                    " ORDER BY tbl_transaksi_parent.Tgl DESC LIMIT 500"
             Case 2
                 STR = "SELECT Id_awal, " &
                     " RTRIM(tbl_transaksi_child.Id_trans) as 'ID Transaksi'," &
                     " RTRIM(tbl_transaksi_child.Kode) AS 'Kode Barang'," &
-                    " RTRIM((SELECT Barang FROM tbl_barang WHERE RTRIM(tbl_barang.Kode) = RTRIM(tbl_transaksi_child.Kode))) AS 'Nama Barang'," &
-                    " RTRIM((SELECT Nama FROM tbl_karyawan WHERE RTRIM(tbl_karyawan.Id) = RTRIM(tbl_transaksi_parent.Id_kasir))) AS 'Kasir'," &
+                    " RTRIM(tbl_barang.Barang) AS 'Nama Barang'," &
+                    " RTRIM(tbl_karyawan.Nama) AS 'Kasir'," &
                     " tbl_transaksi_parent.Tgl AS 'Tanggal'," &
                     " RTRIM(tbl_transaksi_parent.Person) AS 'Supplier'," &
                     " tbl_transaksi_child.Harga_beli as 'Rugi'," &
                     " tbl_transaksi_child.Jumlah AS 'QTY'" &
                     " FROM tbl_transaksi_child " &
                     " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_parent.Id_trans = tbl_transaksi_child.Id_trans" &
+                    " LEFT JOIN tbl_barang ON tbl_barang.Kode = tbl_transaksi_child.Kode" &
+                    " LEFT JOIN tbl_karyawan ON tbl_karyawan.Id = tbl_transaksi_parent.Id_kasir" &
                     " WHERE LEFT(tbl_transaksi_child.Id_trans, 1) = 'C'" &
                     " AND tbl_transaksi_parent.Id_kasir = '" & My.Settings.ID_ACCOUNT & "'" &
-                    " AND tbl_transaksi_child.Id_trans LIKE '%" & TXTCARI.Text & "%'"
+                    " AND tbl_transaksi_child.Id_trans LIKE '%" & TXTCARI.Text & "%'" &
+                    " ORDER BY tbl_transaksi_parent.Tgl DESC LIMIT 500"
         End Select
 
         Dim DA As MySqlDataAdapter
@@ -183,12 +191,13 @@ Public Class FR_RUSAK
     End Sub
 
     Sub DATA_TRANSAKSI()
-        Dim STR As String = "SELECT Id, RTRIM(Kode) AS Kode," &
-           " (SELECT RTRIM(Barang) FROM tbl_barang WHERE RTRIM(Kode) = RTRIM(tbl_transaksi_child.Kode)) AS Barang," &
-           " Tgl_exp as Tgl_exp" &
+        Dim STR As String = "SELECT tbl_transaksi_child.Id, RTRIM(tbl_transaksi_child.Kode) AS Kode," &
+           " RTRIM(tbl_barang.Barang) AS Barang," &
+           " tbl_transaksi_child.Tgl_exp as Tgl_exp" &
            " FROM tbl_transaksi_child" &
-           " WHERE Id_trans = '" & TXTID.Text & "'" &
-           " AND (SELECT COALESCE(SUM(Stok), 0) FROM tbl_transaksi_child WHERE tbl_transaksi_child.Id_trans = tbl_transaksi_child.Id_trans) > 0"
+           " LEFT JOIN tbl_barang ON tbl_barang.Kode = tbl_transaksi_child.Kode" &
+           " WHERE tbl_transaksi_child.Id_trans = '" & TXTID.Text & "'" &
+           " AND (SELECT COALESCE(SUM(Stok), 0) FROM tbl_transaksi_child tc WHERE tc.Id_trans = tbl_transaksi_child.Id_trans) > 0"
         Dim DA As MySqlDataAdapter
         Dim TBL As New DataTable
         DA = New MySqlDataAdapter(STR, CONN)
@@ -419,9 +428,10 @@ Public Class FR_RUSAK
                                  " WHERE Kode='" & KODE_BARANG & "'", CONN)
             CMD.ExecuteNonQuery()
 
-            str = "SELECT Stok AS Stok, " &
-                " (SELECT Barang FROM tbl_barang WHERE RTRIM(tbl_barang.Kode) = RTRIM(tbl_transaksi_child.Kode)) AS Nama" &
-                " FROM tbl_transaksi_child WHERE Id='" & ID_AWAL & "'"
+            str = "SELECT tc.Stok AS Stok, RTRIM(tb.Barang) AS Nama" &
+                " FROM tbl_transaksi_child tc" &
+                " LEFT JOIN tbl_barang tb ON tb.Kode = tc.Kode" &
+                " WHERE tc.Id='" & ID_AWAL & "'"
             CMD = New MySqlCommand(str, CONN)
             RD = CMD.ExecuteReader
             If RD.HasRows Then
@@ -796,9 +806,10 @@ Public Class FR_RUSAK
                     CMD = New MySqlCommand(str, CONN)
                     CMD.ExecuteNonQuery()
 
-                    str = "SELECT Stok AS Stok, " &
-                            " (SELECT Barang FROM tbl_barang WHERE RTRIM(tbl_barang.Kode) = RTRIM(tbl_transaksi_child.Kode)) AS Nama" &
-                            " FROM tbl_transaksi_child WHERE Id='" & ID_AWAL & "'"
+                    str = "SELECT tc.Stok AS Stok, RTRIM(tb.Barang) AS Nama" &
+                            " FROM tbl_transaksi_child tc" &
+                            " LEFT JOIN tbl_barang tb ON tb.Kode = tc.Kode" &
+                            " WHERE tc.Id='" & ID_AWAL & "'"
                     CMD = New MySqlCommand(str, CONN)
                     RD = CMD.ExecuteReader
                     If RD.HasRows Then

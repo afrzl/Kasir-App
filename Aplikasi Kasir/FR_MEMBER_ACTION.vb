@@ -67,10 +67,12 @@ Public Class FR_MEMBER_ACTION
             If TXTID.Enabled = True Then
 
                 STR = "SELECT * FROM tbl_member WHERE Id='" & TXTID.Text & "'"
+                BUKA_KONEKSI()
                 CMD = New MySqlCommand(STR, CONN)
                 RD = CMD.ExecuteReader
                 If RD.HasRows Then
                     RD.Close()
+                    TUTUP_KONEKSI()
                     MsgBox("Id member telah digunakan!")
                 Else
                     RD.Close()
@@ -86,6 +88,7 @@ Public Class FR_MEMBER_ACTION
                             ")"
                     CMD = New MySqlCommand(STR, CONN)
                     CMD.ExecuteNonQuery()
+                    TUTUP_KONEKSI()
                     MsgBox("Data member berhasil disimpan!")
                 End If
             Else
@@ -95,8 +98,10 @@ Public Class FR_MEMBER_ACTION
                     " JK='" & jk & "'," &
                     " Modified_at='" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "'" &
                     " WHERE Id='" & TXTID.Text & "'"
+                BUKA_KONEKSI()
                 CMD = New MySqlCommand(STR, CONN)
                 CMD.ExecuteNonQuery()
+                TUTUP_KONEKSI()
                 MsgBox("Data member berhasil diubah!")
             End If
 

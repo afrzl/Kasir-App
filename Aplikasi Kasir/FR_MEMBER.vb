@@ -37,6 +37,7 @@ Public Class FR_MEMBER
 
         End If
         TAMPIL()
+        LOAD_RIWAYAT()
 
         LBTGL.Text = Format(Date.Now, "dd MMMM yyyy HH:mm:ss")
         PEWAKTU.Enabled = True
@@ -258,6 +259,21 @@ Public Class FR_MEMBER
             DGTAMPIL.Columns.Add(Column_delete)
             DGTAMPIL.Columns(7).Width = 50
 
+            ' Tambah kolom Tukar Point
+            Dim Column_tukarpoint = New DataGridViewButtonColumn
+            With Column_tukarpoint
+                .Text = "Tukar Point"
+                .HeaderText = "Tukar Point"
+                .UseColumnTextForButtonValue = True
+                .FlatStyle = FlatStyle.Flat
+                .DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+                .CellTemplate.Style.BackColor = Color.DarkOrange
+                .CellTemplate.Style.ForeColor = Color.WhiteSmoke
+                .Width = 100
+            End With
+            DGTAMPIL.Columns.Add(Column_tukarpoint)
+            DGTAMPIL.Columns(8).Width = 50
+
         End If
         DGTAMPIL.ColumnHeadersHeight = 35
         DGTAMPIL.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing
@@ -305,7 +321,18 @@ Public Class FR_MEMBER
                         CMD.ExecuteNonQuery()
                         MsgBox("Data member berhasil dihapus!")
                         TAMPIL()
+                        LOAD_RIWAYAT()
                     End If
+                ElseIf DGTAMPIL.Columns(e.ColumnIndex).HeaderText = "Tukar Point" Then
+                    Me.Enabled = False
+
+                    With FR_TUKAR_POINT
+                        .Show()
+                        .LBIDMEMBER.Text = DGTAMPIL.Item("ID", e.RowIndex).Value
+                        .LBNAMAMEMBER.Text = DGTAMPIL.Item("Nama Lengkap", e.RowIndex).Value
+                        .LBPOINTTERSEDIA.Text = Convert.ToDecimal(DGTAMPIL.Item("Points", e.RowIndex).Value).ToString("###,##0")
+                        .TXTNAMABARANG.Select()
+                    End With
                 End If
             End If
         End If
@@ -313,5 +340,50 @@ Public Class FR_MEMBER
 
     Private Sub DGTAMPIL_SelectionChanged(sender As Object, e As EventArgs) Handles DGTAMPIL.SelectionChanged
         DGTAMPIL.ClearSelection()
+    End Sub
+
+    Sub LOAD_RIWAYAT()
+        Try
+            DGRIWAYAT.Columns.Clear()
+            
+            ' Tampilkan semua riwayat penukaran point
+            STR = "SELECT " &
+                  "DATE_FORMAT(tp.Created_at, '%d/%m/%Y %H:%i') AS 'Tanggal', " &
+                  "m.Nama AS 'Member', " &
+                  "tp.Nama_barang AS 'Nama Barang', " &
+                  "tp.Point AS 'Point', " &
+                  "k.Nama AS 'Kasir' " &
+                  "FROM tbl_penukaran_point tp " &
+                  "LEFT JOIN tbl_karyawan k ON tp.Id_kasir = k.Id " &
+                  "LEFT JOIN tbl_member m ON tp.Id_member = m.Id " &
+                  "ORDER BY tp.Created_at DESC " &
+                  "LIMIT 50"
+
+            Dim DA As New MySqlDataAdapter(STR, CONN)
+            Dim TBL As New DataTable
+            DA.Fill(TBL)
+            DGRIWAYAT.DataSource = TBL
+
+            If DGRIWAYAT.Columns.Count > 0 Then
+                DGRIWAYAT.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+                DGRIWAYAT.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+                DGRIWAYAT.Columns(2).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+                DGRIWAYAT.Columns(3).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+                DGRIWAYAT.Columns(4).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+                DGRIWAYAT.Columns(3).DefaultCellStyle.Format = "###,##0"
+                DGRIWAYAT.Columns(3).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            End If
+
+            DGRIWAYAT.ColumnHeadersHeight = 35
+            DGRIWAYAT.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing
+            DGRIWAYAT.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+            For i = 0 To DGRIWAYAT.Columns.Count - 1
+                DGRIWAYAT.Columns.Item(i).SortMode = DataGridViewColumnSortMode.NotSortable
+            Next
+
+        Catch ex As Exception
+            MessageBox.Show("Error loading riwayat: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 End Class

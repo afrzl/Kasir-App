@@ -26,9 +26,14 @@ Partial Class FR_MEMBER
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FR_MEMBER))
         Me.PRINTNOTA = New System.Drawing.Printing.PrintDocument()
         Me.PNCONTENT = New System.Windows.Forms.Panel()
+        Me.DGRIWAYAT = New System.Windows.Forms.DataGridView()
+        Me.Label25 = New System.Windows.Forms.Label()
         Me.BTNSIMPAN = New System.Windows.Forms.Button()
         Me.TXTCARI = New System.Windows.Forms.TextBox()
         Me.DGTAMPIL = New System.Windows.Forms.DataGridView()
@@ -104,6 +109,8 @@ Partial Class FR_MEMBER
         '
         'PNCONTENT
         '
+        Me.PNCONTENT.Controls.Add(Me.DGRIWAYAT)
+        Me.PNCONTENT.Controls.Add(Me.Label25)
         Me.PNCONTENT.Controls.Add(Me.BTNSIMPAN)
         Me.PNCONTENT.Controls.Add(Me.TXTCARI)
         Me.PNCONTENT.Controls.Add(Me.DGTAMPIL)
@@ -183,8 +190,65 @@ Partial Class FR_MEMBER
         Me.DGTAMPIL.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.DGTAMPIL.RowTemplate.Height = 40
         Me.DGTAMPIL.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DGTAMPIL.Size = New System.Drawing.Size(1073, 651)
+        Me.DGTAMPIL.Size = New System.Drawing.Size(1073, 340)
         Me.DGTAMPIL.TabIndex = 21
+        '
+        'Label25
+        '
+        Me.Label25.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label25.BackColor = System.Drawing.Color.Navy
+        Me.Label25.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label25.ForeColor = System.Drawing.Color.White
+        Me.Label25.Location = New System.Drawing.Point(10, 456)
+        Me.Label25.Name = "Label25"
+        Me.Label25.Padding = New System.Windows.Forms.Padding(10, 0, 0, 0)
+        Me.Label25.Size = New System.Drawing.Size(1073, 35)
+        Me.Label25.TabIndex = 22
+        Me.Label25.Text = "RIWAYAT PENUKARAN POINT"
+        Me.Label25.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'DGRIWAYAT
+        '
+        Me.DGRIWAYAT.AllowUserToAddRows = False
+        Me.DGRIWAYAT.AllowUserToDeleteRows = False
+        Me.DGRIWAYAT.AllowUserToResizeRows = False
+        Me.DGRIWAYAT.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.DGRIWAYAT.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
+        Me.DGRIWAYAT.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.ControlLight
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DGRIWAYAT.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle4
+        Me.DGRIWAYAT.ColumnHeadersHeight = 35
+        Me.DGRIWAYAT.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
+        Me.DGRIWAYAT.EnableHeadersVisualStyles = False
+        Me.DGRIWAYAT.Location = New System.Drawing.Point(10, 501)
+        Me.DGRIWAYAT.Margin = New System.Windows.Forms.Padding(2)
+        Me.DGRIWAYAT.MultiSelect = False
+        Me.DGRIWAYAT.Name = "DGRIWAYAT"
+        Me.DGRIWAYAT.ReadOnly = True
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DGRIWAYAT.RowHeadersDefaultCellStyle = DataGridViewCellStyle5
+        Me.DGRIWAYAT.RowHeadersVisible = False
+        Me.DGRIWAYAT.RowHeadersWidth = 51
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.DGRIWAYAT.RowsDefaultCellStyle = DataGridViewCellStyle6
+        Me.DGRIWAYAT.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.DGRIWAYAT.RowTemplate.Height = 40
+        Me.DGRIWAYAT.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.DGRIWAYAT.Size = New System.Drawing.Size(1073, 256)
+        Me.DGRIWAYAT.TabIndex = 23
         '
         'PNTOP
         '
@@ -1268,4 +1332,6 @@ Partial Class FR_MEMBER
     Friend WithEvents TXTCARI As TextBox
     Friend WithEvents DGTAMPIL As DataGridView
     Friend WithEvents BTNSIMPAN As Button
+    Friend WithEvents DGRIWAYAT As DataGridView
+    Friend WithEvents Label25 As Label
 End Class

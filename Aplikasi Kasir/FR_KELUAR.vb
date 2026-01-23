@@ -4,8 +4,6 @@ Imports System.IO
 
 Public Class FR_KELUAR
 
-    Dim persentase_point As Double = POINT_MEMBER
-
     Private Sub PEWAKTU_Tick(sender As Object, e As EventArgs) Handles PEWAKTU.Tick
         LBTGL.Text = Format(Date.Now, "dd MMMM yyyy HH:mm:ss")
     End Sub
@@ -540,7 +538,7 @@ Public Class FR_KELUAR
     Sub INPUT_MEMBER()
         If ID_pembeli <> "" Then
             Dim TOTAL_BELANJA As Integer = CInt(TXTTOTALHARGA.Text)
-            Dim Points As Integer = Math.Floor(TOTAL_BELANJA / 50000)
+            Dim Points As Integer = Math.Floor(TOTAL_BELANJA / KONVERSI_POINT)
             Dim STR As String = "UPDATE tbl_member SET Points = Points + " & Points & ", " &
                 " Modified_at = '" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "'" &
                 " WHERE Id='" & ID_pembeli & "'"

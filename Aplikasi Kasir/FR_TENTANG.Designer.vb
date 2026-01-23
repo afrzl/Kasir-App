@@ -63,9 +63,10 @@ Partial Class FR_TENTANG
         Me.TXTALAMAT = New System.Windows.Forms.TextBox()
         Me.TXTNAMA = New System.Windows.Forms.TextBox()
         Me.GBTOKO = New System.Windows.Forms.GroupBox()
-        Me.Label27 = New System.Windows.Forms.Label()
-        Me.LB_POINTMEMBER = New System.Windows.Forms.Label()
-        Me.Label28 = New System.Windows.Forms.Label()
+        Me.Label29 = New System.Windows.Forms.Label()
+        Me.LB_KONVERSI_POINT = New System.Windows.Forms.Label()
+        Me.TXT_KONVERSI_POINT = New System.Windows.Forms.TextBox()
+        Me.Label30 = New System.Windows.Forms.Label()
         Me.Label25 = New System.Windows.Forms.Label()
         Me.BTN_BACKRESDB = New System.Windows.Forms.Button()
         Me.LB_CUSTOMER_DISPLAY = New System.Windows.Forms.Label()
@@ -89,7 +90,6 @@ Partial Class FR_TENTANG
         Me.BTNUBAHTOKO = New System.Windows.Forms.Button()
         Me.TXTPRINTER_NOTA = New System.Windows.Forms.ComboBox()
         Me.BTNSIMPANTOKO = New System.Windows.Forms.Button()
-        Me.TXT_POINTMEMBER = New System.Windows.Forms.TextBox()
         Me.PNTOP = New System.Windows.Forms.Panel()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -601,9 +601,10 @@ Partial Class FR_TENTANG
         Me.GBTOKO.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.GBTOKO.Controls.Add(Me.Label27)
-        Me.GBTOKO.Controls.Add(Me.LB_POINTMEMBER)
-        Me.GBTOKO.Controls.Add(Me.Label28)
+        Me.GBTOKO.Controls.Add(Me.Label29)
+        Me.GBTOKO.Controls.Add(Me.LB_KONVERSI_POINT)
+        Me.GBTOKO.Controls.Add(Me.TXT_KONVERSI_POINT)
+        Me.GBTOKO.Controls.Add(Me.Label30)
         Me.GBTOKO.Controls.Add(Me.Label25)
         Me.GBTOKO.Controls.Add(Me.BTN_BACKRESDB)
         Me.GBTOKO.Controls.Add(Me.LB_CUSTOMER_DISPLAY)
@@ -627,7 +628,6 @@ Partial Class FR_TENTANG
         Me.GBTOKO.Controls.Add(Me.BTNUBAHTOKO)
         Me.GBTOKO.Controls.Add(Me.TXTPRINTER_NOTA)
         Me.GBTOKO.Controls.Add(Me.BTNSIMPANTOKO)
-        Me.GBTOKO.Controls.Add(Me.TXT_POINTMEMBER)
         Me.GBTOKO.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GBTOKO.Location = New System.Drawing.Point(12, 427)
         Me.GBTOKO.Margin = New System.Windows.Forms.Padding(2)
@@ -638,38 +638,47 @@ Partial Class FR_TENTANG
         Me.GBTOKO.TabStop = False
         Me.GBTOKO.Text = "Toko Setting"
         '
-        'Label27
+        'Label29
         '
-        Me.Label27.AutoSize = True
-        Me.Label27.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label27.Location = New System.Drawing.Point(395, 347)
-        Me.Label27.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Label27.Name = "Label27"
-        Me.Label27.Size = New System.Drawing.Size(148, 28)
-        Me.Label27.TabIndex = 77
-        Me.Label27.Text = "% dari transaksi"
+        Me.Label29.AutoSize = True
+        Me.Label29.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label29.Location = New System.Drawing.Point(26, 344)
+        Me.Label29.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label29.Name = "Label29"
+        Me.Label29.Size = New System.Drawing.Size(144, 28)
+        Me.Label29.TabIndex = 78
+        Me.Label29.Text = "Konversi Point"
         '
-        'LB_POINTMEMBER
+        'LB_KONVERSI_POINT
         '
-        Me.LB_POINTMEMBER.AutoSize = True
-        Me.LB_POINTMEMBER.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LB_POINTMEMBER.Location = New System.Drawing.Point(217, 344)
-        Me.LB_POINTMEMBER.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.LB_POINTMEMBER.Name = "LB_POINTMEMBER"
-        Me.LB_POINTMEMBER.Size = New System.Drawing.Size(57, 28)
-        Me.LB_POINTMEMBER.TabIndex = 75
-        Me.LB_POINTMEMBER.Text = "Point"
+        Me.LB_KONVERSI_POINT.AutoSize = True
+        Me.LB_KONVERSI_POINT.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LB_KONVERSI_POINT.Location = New System.Drawing.Point(217, 344)
+        Me.LB_KONVERSI_POINT.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.LB_KONVERSI_POINT.Name = "LB_KONVERSI_POINT"
+        Me.LB_KONVERSI_POINT.Size = New System.Drawing.Size(40, 28)
+        Me.LB_KONVERSI_POINT.TabIndex = 79
+        Me.LB_KONVERSI_POINT.Text = "Rp"
         '
-        'Label28
+        'TXT_KONVERSI_POINT
         '
-        Me.Label28.AutoSize = True
-        Me.Label28.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label28.Location = New System.Drawing.Point(26, 344)
-        Me.Label28.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Label28.Name = "Label28"
-        Me.Label28.Size = New System.Drawing.Size(135, 28)
-        Me.Label28.TabIndex = 74
-        Me.Label28.Text = "Point member"
+        Me.TXT_KONVERSI_POINT.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TXT_KONVERSI_POINT.Location = New System.Drawing.Point(217, 341)
+        Me.TXT_KONVERSI_POINT.Margin = New System.Windows.Forms.Padding(2)
+        Me.TXT_KONVERSI_POINT.Name = "TXT_KONVERSI_POINT"
+        Me.TXT_KONVERSI_POINT.Size = New System.Drawing.Size(174, 34)
+        Me.TXT_KONVERSI_POINT.TabIndex = 80
+        '
+        'Label30
+        '
+        Me.Label30.AutoSize = True
+        Me.Label30.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label30.Location = New System.Drawing.Point(395, 347)
+        Me.Label30.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label30.Name = "Label30"
+        Me.Label30.Size = New System.Drawing.Size(106, 28)
+        Me.Label30.TabIndex = 81
+        Me.Label30.Text = "per 1 point"
         '
         'Label25
         '
@@ -940,15 +949,6 @@ Partial Class FR_TENTANG
         Me.BTNSIMPANTOKO.TabIndex = 26
         Me.BTNSIMPANTOKO.Text = "Simpan Data Toko"
         Me.BTNSIMPANTOKO.UseVisualStyleBackColor = False
-        '
-        'TXT_POINTMEMBER
-        '
-        Me.TXT_POINTMEMBER.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TXT_POINTMEMBER.Location = New System.Drawing.Point(217, 341)
-        Me.TXT_POINTMEMBER.Margin = New System.Windows.Forms.Padding(2)
-        Me.TXT_POINTMEMBER.Name = "TXT_POINTMEMBER"
-        Me.TXT_POINTMEMBER.Size = New System.Drawing.Size(174, 34)
-        Me.TXT_POINTMEMBER.TabIndex = 76
         '
         'PNTOP
         '
@@ -2043,8 +2043,8 @@ Partial Class FR_TENTANG
     Friend WithEvents BTNMEMBER_KASIR As Button
     Friend WithEvents BTN_BACKRESDB As Button
     Friend WithEvents Label25 As Label
-    Friend WithEvents LB_POINTMEMBER As Label
-    Friend WithEvents Label28 As Label
-    Friend WithEvents TXT_POINTMEMBER As TextBox
-    Friend WithEvents Label27 As Label
+    Friend WithEvents Label29 As Label
+    Friend WithEvents LB_KONVERSI_POINT As Label
+    Friend WithEvents TXT_KONVERSI_POINT As TextBox
+    Friend WithEvents Label30 As Label
 End Class

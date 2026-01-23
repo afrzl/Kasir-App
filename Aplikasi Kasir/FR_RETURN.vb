@@ -44,44 +44,53 @@ Public Class FR_RETURN
             Case 1
                 STR = "SELECT tbl_transaksi_child.Id_trans as 'ID Transaksi'," &
             " RTRIM(tbl_transaksi_child.Kode) AS 'Kode Barang', " &
-            " RTRIM((SELECT Barang FROM tbl_barang WHERE RTRIM(tbl_barang.Kode) = RTRIM(tbl_transaksi_child.Kode))) AS 'Nama Barang'," &
-            " RTRIM((SELECT Nama FROM tbl_karyawan WHERE RTRIM(tbl_karyawan.Id) = RTRIM(tbl_transaksi_parent.Id_kasir))) AS 'Kasir'," &
+            " RTRIM(tbl_barang.Barang) AS 'Nama Barang'," &
+            " RTRIM(tbl_karyawan.Nama) AS 'Kasir'," &
             " tbl_transaksi_parent.Tgl AS 'Tanggal'," &
             " RTRIM(tbl_transaksi_parent.Person) AS 'Pembeli'," &
             " tbl_transaksi_child.Harga as 'Harga'," &
             " tbl_transaksi_child.Jumlah AS 'QTY'" &
             " FROM tbl_transaksi_child " &
             " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans" &
-            " WHERE LEFT(tbl_transaksi_child.Id_trans, 1) = 'R' AND" &
-            " tbl_transaksi_child.Id_trans LIKE '%" & TXTCARI.Text & "%'"
+            " LEFT JOIN tbl_barang ON tbl_barang.Kode = tbl_transaksi_child.Kode" &
+            " LEFT JOIN tbl_karyawan ON tbl_karyawan.Id = tbl_transaksi_parent.Id_kasir" &
+            " WHERE LEFT(tbl_transaksi_child.Id_trans, 1) = 'R'" &
+            " AND tbl_transaksi_child.Id_trans LIKE '%" & TXTCARI.Text & "%'" &
+            " ORDER BY tbl_transaksi_parent.Tgl DESC LIMIT 500"
             Case 2
                 STR = "SELECT tbl_transaksi_child.Id_trans as 'ID Transaksi'," &
             " RTRIM(tbl_transaksi_child.Kode) AS 'Kode Barang', " &
-            " RTRIM((SELECT Barang FROM tbl_barang WHERE RTRIM(tbl_barang.Kode) = RTRIM(tbl_transaksi_child.Kode))) AS 'Nama Barang'," &
-            " RTRIM((SELECT Nama FROM tbl_karyawan WHERE RTRIM(tbl_karyawan.Id) = RTRIM(tbl_transaksi_parent.Id_kasir))) AS 'Kasir'," &
+            " RTRIM(tbl_barang.Barang) AS 'Nama Barang'," &
+            " RTRIM(tbl_karyawan.Nama) AS 'Kasir'," &
             " tbl_transaksi_parent.Tgl AS 'Tanggal'," &
             " RTRIM(tbl_transaksi_parent.Person) AS 'Pembeli'," &
             " tbl_transaksi_child.Harga as 'Harga'," &
             " tbl_transaksi_child.Jumlah AS 'QTY'" &
             " FROM tbl_transaksi_child " &
             " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans" &
-            " WHERE LEFT(tbl_transaksi_child.Id_trans, 1) = 'R' AND" &
-            " tbl_transaksi_parent.Id_kasir = '" & My.Settings.ID_ACCOUNT & "' AND" &
-            " tbl_transaksi_child.Id_trans LIKE '%" & TXTCARI.Text & "%'"
+            " LEFT JOIN tbl_barang ON tbl_barang.Kode = tbl_transaksi_child.Kode" &
+            " LEFT JOIN tbl_karyawan ON tbl_karyawan.Id = tbl_transaksi_parent.Id_kasir" &
+            " WHERE LEFT(tbl_transaksi_child.Id_trans, 1) = 'R'" &
+            " AND tbl_transaksi_parent.Id_kasir = '" & My.Settings.ID_ACCOUNT & "'" &
+            " AND tbl_transaksi_child.Id_trans LIKE '%" & TXTCARI.Text & "%'" &
+            " ORDER BY tbl_transaksi_parent.Tgl DESC LIMIT 500"
             Case 3
                 STR = "SELECT tbl_transaksi_child.Id_trans as 'ID Transaksi'," &
             " RTRIM(tbl_transaksi_child.Kode) AS 'Kode Barang', " &
-            " RTRIM((SELECT Barang FROM tbl_barang WHERE RTRIM(tbl_barang.Kode) = RTRIM(tbl_transaksi_child.Kode))) AS 'Nama Barang'," &
-            " RTRIM((SELECT Nama FROM tbl_karyawan WHERE RTRIM(tbl_karyawan.Id) = RTRIM(tbl_transaksi_parent.Id_kasir))) AS 'Kasir'," &
+            " RTRIM(tbl_barang.Barang) AS 'Nama Barang'," &
+            " RTRIM(tbl_karyawan.Nama) AS 'Kasir'," &
             " tbl_transaksi_parent.Tgl AS 'Tanggal'," &
             " RTRIM(tbl_transaksi_parent.Person) AS 'Pembeli'," &
             " tbl_transaksi_child.Harga as 'Harga'," &
             " tbl_transaksi_child.Jumlah AS 'QTY'" &
             " FROM tbl_transaksi_child " &
             " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans" &
-            " WHERE LEFT(tbl_transaksi_child.Id_trans, 1) = 'R' AND" &
-            " tbl_transaksi_parent.Id_kasir = '" & My.Settings.ID_ACCOUNT & "' AND" &
-            " tbl_transaksi_child.Id_trans LIKE '%" & TXTCARI.Text & "%'"
+            " LEFT JOIN tbl_barang ON tbl_barang.Kode = tbl_transaksi_child.Kode" &
+            " LEFT JOIN tbl_karyawan ON tbl_karyawan.Id = tbl_transaksi_parent.Id_kasir" &
+            " WHERE LEFT(tbl_transaksi_child.Id_trans, 1) = 'R'" &
+            " AND tbl_transaksi_parent.Id_kasir = '" & My.Settings.ID_ACCOUNT & "'" &
+            " AND tbl_transaksi_child.Id_trans LIKE '%" & TXTCARI.Text & "%'" &
+            " ORDER BY tbl_transaksi_parent.Tgl DESC LIMIT 500"
         End Select
         Dim DA As MySqlDataAdapter
         DA = New MySqlDataAdapter(STR, CONN)
@@ -120,10 +129,10 @@ Public Class FR_RETURN
     End Sub
 
     Sub DATA_TRANSAKSI()
-        Dim STR As String = "SELECT RTRIM(Kode) AS Kode," &
-            " (SELECT RTRIM(Barang) FROM tbl_barang WHERE RTRIM(Kode) = RTRIM(tbl_transaksi_child.Kode)) AS Barang" &
-            " FROM tbl_transaksi_child" &
-            " WHERE Id_trans = '" & TXTID.Text & "'"
+        Dim STR As String = "SELECT RTRIM(tc.Kode) AS Kode, RTRIM(tb.Barang) AS Barang" &
+            " FROM tbl_transaksi_child tc" &
+            " LEFT JOIN tbl_barang tb ON tb.Kode = tc.Kode" &
+            " WHERE tc.Id_trans = '" & TXTID.Text & "'"
         Dim DA As MySqlDataAdapter
         Dim TBL As New DataTable
         DA = New MySqlDataAdapter(STR, CONN)

@@ -12,19 +12,19 @@ Module KONEKSI
     Public NO_TOKO As String
     Public PRINTER_NOTA As String
     Public CUSTOMER_DISPLAY As Boolean
-    Public POINT_MEMBER As Double
+    Public KONVERSI_POINT As Integer
     Public URL_LOGO As String
 
-    Public VERSI As String = "V3.1.1"
+    Public VERSI As String = "V3.5.1"
 
-    Public Sub MASUK_REGISTRY(ByVal TOKO As String, ByVal ALAMAT As String, ByVal NO As String, ByVal PRINTER As String, ByVal URLLOGO As Byte(), ByVal CUSTOMERDISPLAY As Boolean, ByVal POINTMEMBER As Double)
+    Public Sub MASUK_REGISTRY(ByVal TOKO As String, ByVal ALAMAT As String, ByVal NO As String, ByVal PRINTER As String, ByVal URLLOGO As Byte(), ByVal CUSTOMERDISPLAY As Boolean, ByVal KONVERSIPOINT As Integer)
         With My.Computer.Registry
             .SetValue("HKEY_CURRENT_USER\Software\Aplikasi Kasir", "Nama_toko", TOKO)
             .SetValue("HKEY_CURRENT_USER\Software\Aplikasi Kasir", "Alamat_toko", ALAMAT)
             .SetValue("HKEY_CURRENT_USER\Software\Aplikasi Kasir", "No_toko", NO)
             .SetValue("HKEY_CURRENT_USER\Software\Aplikasi Kasir", "Printer_nota", PRINTER)
             .SetValue("HKEY_CURRENT_USER\Software\Aplikasi Kasir", "Customer_display", CUSTOMERDISPLAY)
-            .SetValue("HKEY_CURRENT_USER\Software\Aplikasi Kasir", "Point_member", POINTMEMBER)
+            .SetValue("HKEY_CURRENT_USER\Software\Aplikasi Kasir", "Konversi_point", KONVERSIPOINT)
             .SetValue("HKEY_CURRENT_USER\Software\Aplikasi Kasir", "Url_logo", Convert.ToBase64String(URLLOGO))
         End With
 
@@ -45,8 +45,9 @@ Module KONEKSI
         NO_TOKO = My.Computer.Registry.GetValue(“HKEY_CURRENT_USER\Software\Aplikasi Kasir”, “No_toko”, Nothing)
         PRINTER_NOTA = My.Computer.Registry.GetValue(“HKEY_CURRENT_USER\Software\Aplikasi Kasir”, “Printer_nota”, Nothing)
         CUSTOMER_DISPLAY = My.Computer.Registry.GetValue(“HKEY_CURRENT_USER\Software\Aplikasi Kasir”, “Customer_display”, Nothing)
-        POINT_MEMBER = My.Computer.Registry.GetValue(“HKEY_CURRENT_USER\Software\Aplikasi Kasir”, “Point_member”, Nothing)
-        URL_LOGO = My.Computer.Registry.GetValue(“HKEY_CURRENT_USER\Software\Aplikasi Kasir”, “Url_logo”, Nothing)
+
+        KONVERSI_POINT = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\Aplikasi Kasir", "Konversi_point", 1000)
+        URL_LOGO = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\Aplikasi Kasir", "Url_logo", Nothing)
     End Sub
 
     Public Sub KONEKAN()
