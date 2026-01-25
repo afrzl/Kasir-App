@@ -71,8 +71,8 @@ Module KONEKSI
         End If
 
         ' Buat connection string dengan server dan port yang sudah dipisah
-        ' Menambahkan SQL Mode untuk mencegah datetime invalid (0000-00-00)
-        CONN.ConnectionString = $"server={serverHost};port={serverPort};uid={My.Settings.USER};pwd={My.Settings.PASSWORD};database={My.Settings.DATABASE};charset=utf8;Allow Zero Datetime=False;Convert Zero Datetime=False;SQL Mode=STRICT_TRANS_TABLES,NO_ZERO_DATE,NO_ZERO_IN_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION"
+        ' Menambahkan parameter untuk mencegah datetime invalid (0000-00-00)
+        CONN.ConnectionString = $"server={serverHost};port={serverPort};uid={My.Settings.USER};pwd={My.Settings.PASSWORD};database={My.Settings.DATABASE};charset=utf8;Allow Zero Datetime=False;Convert Zero Datetime=False"
 
         AMBIL_DATA_REGISTRY()
     End Sub

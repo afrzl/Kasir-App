@@ -99,6 +99,7 @@ Public Class FR_REPORT
     Dim TOTALLABA As Integer = 0
     Dim TOTALITEM As Double = 0
     Dim TOTALPEMBELIAN As Integer = 0
+    Dim TOTALPENJUALAN As Long = 0
 
     Dim ADA_TRANSAKSI As Boolean
     Sub TAMPIL()
@@ -617,12 +618,28 @@ Public Class FR_REPORT
                         Case 3
                             TOTALLABA = Convert.ToDouble(TBL.Compute("SUM(Laba)", ""))
                             TOTALITEM = Convert.ToDouble(TBL.Compute("SUM(Jumlah_item)", ""))
+                            TOTALPENJUALAN = 0
 
-                            For N = 1 To TBL.Rows.Count - 1
-                                If TBL.Rows(N).Item(0) = TBL.Rows(N - 1).Item(0) Then
-                                    TOTALLABA -= TBL.Rows(N - 1).Item(19)
-                                    TOTALITEM -= TBL.Rows(N - 1).Item(5)
-                                    TBL.Rows(N - 1).Item(15) = 0
+                            ' Fix: Gunakan HashSet untuk track transaksi yang sudah dihitung
+                            Dim transaksiDihitung As New HashSet(Of String)
+                            
+                            For N = 0 To TBL.Rows.Count - 1
+                                Dim idTrans As String = TBL.Rows(N).Item(0).ToString()
+                                
+                                If Not transaksiDihitung.Contains(idTrans) Then
+                                    ' Transaksi baru - tambahkan ke total
+                                    TOTALPENJUALAN += CLng(TBL.Rows(N).Item(15))
+                                    transaksiDihitung.Add(idTrans)
+                                Else
+                                    ' Row duplikat - nolkan semua nilai parent
+                                    TOTALLABA -= Convert.ToDouble(TBL.Rows(N).Item(19))
+                                    TOTALITEM -= Convert.ToDouble(TBL.Rows(N).Item(5))
+                                    TBL.Rows(N).Item(13) = 0 ' Total (Harga)
+                                    TBL.Rows(N).Item(14) = 0 ' Diskon Transaksi
+                                    TBL.Rows(N).Item(15) = 0 ' Total Akhir (Harga_total)
+                                    TBL.Rows(N).Item(16) = 0 ' Bayar (Harga_tunai)
+                                    TBL.Rows(N).Item(17) = 0 ' Kembalian (Harga_kembali)
+                                    TBL.Rows(N).Item(19) = 0 ' Laba
                                 End If
                             Next
 
@@ -865,10 +882,27 @@ Public Class FR_REPORT
                             'Next
                         Case 3
                             TOTALITEM = Convert.ToDouble(TBL.Compute("SUM(Jumlah_item)", ""))
-                            For N = 1 To TBL.Rows.Count - 1
-                                If TBL.Rows(N).Item(0) = TBL.Rows(N - 1).Item(0) Then
-                                    TOTALITEM -= TBL.Rows(N - 1).Item(5)
-                                    TBL.Rows(N - 1).Item(15) = 0
+                            TOTALPENJUALAN = 0
+                            
+                            ' Fix: Gunakan HashSet untuk track transaksi yang sudah dihitung
+                            ' agar tidak ada duplikasi perhitungan
+                            Dim transaksiDihitung As New HashSet(Of String)
+                            
+                            For N = 0 To TBL.Rows.Count - 1
+                                Dim idTrans As String = TBL.Rows(N).Item(0).ToString()
+                                
+                                If Not transaksiDihitung.Contains(idTrans) Then
+                                    ' Transaksi baru - tambahkan ke total
+                                    TOTALPENJUALAN += CLng(TBL.Rows(N).Item(15))
+                                    transaksiDihitung.Add(idTrans)
+                                Else
+                                    ' Row duplikat - nolkan semua nilai parent
+                                    TOTALITEM -= Convert.ToDouble(TBL.Rows(N).Item(5))
+                                    TBL.Rows(N).Item(13) = 0 ' Total (Harga)
+                                    TBL.Rows(N).Item(14) = 0 ' Diskon Transaksi
+                                    TBL.Rows(N).Item(15) = 0 ' Total Akhir (Harga_total)
+                                    TBL.Rows(N).Item(16) = 0 ' Bayar (Harga_tunai)
+                                    TBL.Rows(N).Item(17) = 0 ' Kembalian (Harga_kembali)
                                 End If
                             Next
 
@@ -887,15 +921,26 @@ Public Class FR_REPORT
                             'Next
                         Case 2
                             TOTALITEM = Convert.ToDouble(TBL.Compute("SUM(Jumlah_item)", ""))
-                            For N = 1 To TBL.Rows.Count - 1
-                                If TBL.Rows(N).Item(0) = TBL.Rows(N - 1).Item(0) Then
-                                    TOTALITEM -= TBL.Rows(N - 1).Item(5)
-                                    TBL.Rows(N - 1).Item(15) = 0
-                                    For J = N To TBL.Rows.Count - 1
-                                        If TBL.Rows(J).Item(0) = TBL.Rows(J - 1).Item(0) Then
-                                            TBL.Rows(J - 1).Item(15) = 0
-                                        End If
-                                    Next
+                            TOTALPENJUALAN = 0
+                            
+                            ' Fix: Gunakan HashSet untuk track transaksi yang sudah dihitung
+                            Dim transaksiDihitung As New HashSet(Of String)
+                            
+                            For N = 0 To TBL.Rows.Count - 1
+                                Dim idTrans As String = TBL.Rows(N).Item(0).ToString()
+                                
+                                If Not transaksiDihitung.Contains(idTrans) Then
+                                    ' Transaksi baru - tambahkan ke total
+                                    TOTALPENJUALAN += CLng(TBL.Rows(N).Item(15))
+                                    transaksiDihitung.Add(idTrans)
+                                Else
+                                    ' Row duplikat - nolkan semua nilai parent
+                                    TOTALITEM -= Convert.ToDouble(TBL.Rows(N).Item(5))
+                                    TBL.Rows(N).Item(13) = 0 ' Total (Harga)
+                                    TBL.Rows(N).Item(14) = 0 ' Diskon Transaksi
+                                    TBL.Rows(N).Item(15) = 0 ' Total Akhir (Harga_total)
+                                    TBL.Rows(N).Item(16) = 0 ' Bayar (Harga_tunai)
+                                    TBL.Rows(N).Item(17) = 0 ' Kembalian (Harga_kembali)
                                 End If
                             Next
                             TOTALITEM = Math.Round(TOTALITEM, 2)
@@ -1149,9 +1194,12 @@ Public Class FR_REPORT
                         Case 3
                             CRV.Refresh()
                             Dim RPT As New RPT_KELUAR_KASIR
+                            ' Debug: tampilkan nilai TOTALPENJUALAN
+                            MsgBox("TOTALPENJUALAN = " & TOTALPENJUALAN)
                             With RPT
                                 .SetDataSource(TBL)
                                 .SetParameterValue("total_item", TOTALITEM)
+                                .SetParameterValue("total_penjualan", TOTALPENJUALAN)
                                 .SetParameterValue("tgl_mulai", TXTTGLAWAL.Value.ToString("dd MMMM yyyy"))
                                 .SetParameterValue("tgl_akhir", TXTTGLAKHIR.Value.ToString("dd MMMM yyyy"))
                                 .SetParameterValue("nama_kasir", LBLUSER.Text)
@@ -1194,6 +1242,7 @@ Public Class FR_REPORT
                             With RPT
                                 .SetDataSource(TBL)
                                 .SetParameterValue("total_item", TOTALITEM)
+                                .SetParameterValue("total_penjualan", TOTALPENJUALAN)
                                 .SetParameterValue("tgl_mulai", TXTTGLAWAL.Value.ToString("dd MMMM yyyy"))
                                 .SetParameterValue("tgl_akhir", TXTTGLAKHIR.Value.ToString("dd MMMM yyyy"))
                                 .SetParameterValue("nama_kasir", LBLUSER.Text)
