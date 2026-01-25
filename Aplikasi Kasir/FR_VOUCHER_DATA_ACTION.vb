@@ -41,6 +41,13 @@ Public Class FR_VOUCHER_DATA_ACTION
                     MsgBox("Data tidak lengkap!")
                     TXTHARGA_JUAL.Select()
                 Else
+                    Try
+                        BUKA_KONEKSI()
+                    Catch ex As Exception
+                        MsgBox("Koneksi database gagal: " & ex.Message, vbCritical)
+                        Return
+                    End Try
+
                     If LBL_ID.Text = "" Then
                         STR = "INSERT INTO tbl_data_voucher (Jenis, Nama, Harga, Harga_jual, Created_at) VALUES (" &
                             "'" & CB_JENIS.Text & "'," &
@@ -69,6 +76,13 @@ Public Class FR_VOUCHER_DATA_ACTION
                     CLOSE_FORM()
                 End If
             Else
+                Try
+                    BUKA_KONEKSI()
+                Catch ex As Exception
+                    MsgBox("Koneksi database gagal: " & ex.Message, vbCritical)
+                    Return
+                End Try
+
                 If LBL_ID.Text = "" Then
                     STR = "INSERT INTO tbl_data_voucher (Jenis, Nama, Harga, Created_at) VALUES (" &
                             "'" & CB_JENIS.Text & "'," &
@@ -99,6 +113,13 @@ Public Class FR_VOUCHER_DATA_ACTION
     End Sub
 
     Sub CARI_DATA()
+        Try
+            BUKA_KONEKSI()
+        Catch ex As Exception
+            MsgBox("Koneksi database gagal: " & ex.Message, vbCritical)
+            Return
+        End Try
+
         STR = "SELECT * FROM tbl_data_voucher WHERE Id = '" & LBL_ID.Text & "'"
         CMD = New MySqlCommand(STR, CONN)
         RD = CMD.ExecuteReader

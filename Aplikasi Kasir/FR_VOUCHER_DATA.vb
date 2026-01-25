@@ -87,8 +87,6 @@ Public Class FR_VOUCHER_DATA
     End Sub
 
     Private Sub DGTAMPIL_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGTAMPIL.CellClick
-        On Error Resume Next
-
         If e.RowIndex >= 0 Then
             If ROLE = 1 Or ROLE = 2 Then
                 If DGTAMPIL.Columns(e.ColumnIndex).HeaderText = "Edit" Then
@@ -103,6 +101,13 @@ Public Class FR_VOUCHER_DATA
                     End With
                 ElseIf DGTAMPIL.Columns(e.ColumnIndex).HeaderText = "Delete" Then
                     If MsgBox("Apakah anda yakin akan menghapus data voucher?", vbYesNo) = vbYes Then
+                        Try
+                            BUKA_KONEKSI()
+                        Catch ex As Exception
+                            MsgBox("Koneksi database gagal: " & ex.Message, vbCritical)
+                            Return
+                        End Try
+
                         STR = "DELETE tbl_data_voucher " &
                             " WHERE Id='" & DGTAMPIL.Item("Id", e.RowIndex).Value & "'"
                         CMD = New MySqlCommand(STR, CONN)

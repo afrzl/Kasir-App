@@ -102,6 +102,13 @@ Public Class FR_REPORT
 
     Dim ADA_TRANSAKSI As Boolean
     Sub TAMPIL()
+        Try
+            BUKA_KONEKSI()
+        Catch ex As Exception
+            MsgBox("Koneksi database gagal: " & ex.Message, vbCritical)
+            Return
+        End Try
+
         TOTALLABA = 0
         Dim TGL_SKRG As String = Format(Date.Now, "yyyy-MM-dd")
         Select Case ROLE
@@ -127,18 +134,20 @@ Public Class FR_REPORT
                         " LEFT JOIN tbl_diskon ON (tbl_barang.Kode = tbl_diskon.Kode AND tbl_diskon.Tgl_awal <= '" & TGL_SKRG & "' AND tbl_diskon.Tgl_akhir >= '" & TGL_SKRG & "')" &
                         " ORDER BY tbl_barang.Barang ASC"
                     Case 1
-                            STR = "SELECT Kode AS 'Kode Barang'," &
-                        " Barang AS 'Nama Barang'," &
-                        " Satuan AS 'Satuan'," &
-                        " (SELECT COALESCE(SUM(Jumlah), 0) FROM tbl_transaksi_child WHERE (LEFT(tbl_transaksi_child.Id_trans, 1) = 'M' or LEFT(tbl_transaksi_child.Id_trans, 1) = 'R') AND tbl_transaksi_child.Kode = tbl_barang.Kode) AS 'Barang Masuk'," &
-                        " (SELECT COALESCE(SUM(Jumlah), 0) FROM tbl_transaksi_child WHERE (LEFT(tbl_transaksi_child.Id_trans, 1) = 'K' or LEFT(tbl_transaksi_child.Id_trans, 1) = 'C') AND tbl_transaksi_child.Kode = tbl_barang.Kode) AS 'Barang Keluar'" &
+                        STR = "SELECT tbl_barang.Kode AS 'Kode Barang'," &
+                        " tbl_barang.Barang AS 'Nama Barang'," &
+                        " tbl_barang.Satuan AS 'Satuan'," &
+                        " COALESCE(SUM(CASE WHEN (LEFT(tbl_transaksi_child.Id_trans, 1) = 'M' OR LEFT(tbl_transaksi_child.Id_trans, 1) = 'R') THEN tbl_transaksi_child.Jumlah ELSE 0 END), 0) AS 'Barang Masuk'," &
+                        " COALESCE(SUM(CASE WHEN (LEFT(tbl_transaksi_child.Id_trans, 1) = 'K' OR LEFT(tbl_transaksi_child.Id_trans, 1) = 'C') THEN tbl_transaksi_child.Jumlah ELSE 0 END), 0) AS 'Barang Keluar'" &
                         " FROM tbl_barang" &
-                        " ORDER BY 'Nama Barang' ASC"
+                        " LEFT JOIN tbl_transaksi_child ON tbl_barang.Kode = tbl_transaksi_child.Kode" &
+                        " GROUP BY tbl_barang.Kode, tbl_barang.Barang, tbl_barang.Satuan" &
+                        " ORDER BY tbl_barang.Barang ASC"
                     Case 2
                         STR = "SELECT RTRIM(tbl_transaksi_child.Id_trans) AS 'ID Transaksi'," &
                     " RTRIM(tbl_transaksi_parent.Jenis) AS 'Jenis'," &
                     " tbl_transaksi_parent.Tgl AS 'Tanggal'," &
-                    " RTRIM((SELECT Nama FROM tbl_karyawan WHERE Id = tbl_transaksi_parent.Id_kasir)) AS 'Kasir'," &
+                    " RTRIM(tbl_karyawan.Nama) AS 'Kasir'," &
                     " RTRIM(tbl_transaksi_parent.Person) AS 'Supplier'," &
                     " tbl_transaksi_child.Jumlah AS 'Jumlah_item'," &
                     " RTRIM(tbl_transaksi_child.Kode) As 'Kode Barang'," &
@@ -147,7 +156,9 @@ Public Class FR_REPORT
                     " tbl_transaksi_child.Jumlah AS 'Stok Masuk'," &
                     " (tbl_transaksi_child.Harga * tbl_transaksi_child.Jumlah) AS 'Harga'," &
                     " tbl_transaksi_child.Stok AS 'Sisa Stok'" &
-                    " From tbl_transaksi_child inner Join tbl_transaksi_parent On tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans" &
+                    " From tbl_transaksi_child" &
+                    " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans" &
+                    " LEFT JOIN tbl_karyawan ON tbl_transaksi_parent.Id_kasir = tbl_karyawan.Id" &
                     " LEFT JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
                     " Where (Left(tbl_transaksi_child.Id_trans, 1) = 'M' OR Left(tbl_transaksi_child.Id_trans, 1) = 'R')" &
                     " And tbl_transaksi_parent.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & " 00:00:00'" &
@@ -295,13 +306,15 @@ Public Class FR_REPORT
                         " LEFT JOIN tbl_diskon ON (tbl_barang.Kode = tbl_diskon.Kode AND tbl_diskon.Tgl_awal <= '" & TGL_SKRG & "' AND tbl_diskon.Tgl_akhir >= '" & TGL_SKRG & "')" &
                         " ORDER BY tbl_barang.Barang ASC"
                     Case 1
-                        STR = "SELECT Kode AS 'Kode Barang'," &
-                    " Barang AS 'Nama Barang'," &
-                    " Satuan AS 'Satuan'," &
-                    " (SELECT COALESCE(SUM(Jumlah), 0) FROM tbl_transaksi_child WHERE LEFT(tbl_transaksi_child.Id_trans, 1) = 'M' AND tbl_transaksi_child.Kode = tbl_barang.Kode) AS 'Barang Masuk'," &
-                    " (SELECT COALESCE(SUM(Jumlah), 0) FROM tbl_transaksi_child WHERE LEFT(tbl_transaksi_child.Id_trans, 1) = 'K' AND tbl_transaksi_child.Kode = tbl_barang.Kode) AS 'Barang Keluar'" &
+                        STR = "SELECT tbl_barang.Kode AS 'Kode Barang'," &
+                    " tbl_barang.Barang AS 'Nama Barang'," &
+                    " tbl_barang.Satuan AS 'Satuan'," &
+                    " COALESCE(SUM(CASE WHEN LEFT(tbl_transaksi_child.Id_trans, 1) = 'M' THEN tbl_transaksi_child.Jumlah ELSE 0 END), 0) AS 'Barang Masuk'," &
+                    " COALESCE(SUM(CASE WHEN LEFT(tbl_transaksi_child.Id_trans, 1) = 'K' THEN tbl_transaksi_child.Jumlah ELSE 0 END), 0) AS 'Barang Keluar'" &
                     " FROM tbl_barang" &
-                    " ORDER BY 'Nama Barang' ASC"
+                    " LEFT JOIN tbl_transaksi_child ON tbl_barang.Kode = tbl_transaksi_child.Kode" &
+                    " GROUP BY tbl_barang.Kode, tbl_barang.Barang, tbl_barang.Satuan" &
+                    " ORDER BY tbl_barang.Barang ASC"
                     Case 2
                         STR = "SELECT RTRIM(tbl_transaksi_child.Id_trans) AS 'ID Transaksi'," &
                     " RTRIM(tbl_transaksi_parent.Jenis) AS 'Jenis'," &
@@ -325,11 +338,11 @@ Public Class FR_REPORT
                         STR = "SELECT RTRIM(tbl_transaksi_child.Id_trans) AS 'ID Transaksi'," &
                     " RTRIM(tbl_transaksi_parent.Jenis) AS 'Jenis'," &
                     " tbl_transaksi_parent.Tgl AS 'Tanggal'," &
-                    " RTRIM((SELECT Nama FROM tbl_karyawan WHERE Id = tbl_transaksi_parent.Id_kasir)) AS 'Kasir'," &
+                    " RTRIM(tbl_karyawan.Nama) AS 'Kasir'," &
                     " RTRIM(tbl_transaksi_parent.Person) AS 'Pembeli'," &
                     " tbl_transaksi_parent.Jumlah_item AS 'Jumlah_item'," &
                     " RTRIM(tbl_transaksi_child.Kode) As 'Kode Barang'," &
-                    " RTRIM((SELECT Barang FROM tbl_barang WHERE Kode = tbl_transaksi_child.Kode)) AS 'Nama Barang'," &
+                    " RTRIM(tbl_barang.Barang) AS 'Nama Barang'," &
                     " (tbl_transaksi_child.Harga / tbl_transaksi_child.Jumlah)  AS 'Harga QTY'," &
                     " tbl_transaksi_child.Jumlah AS 'QTY'," &
                     " tbl_transaksi_child.Harga  AS 'Harga Jual'," &
@@ -340,7 +353,10 @@ Public Class FR_REPORT
                     " tbl_transaksi_parent.Harga_total AS 'Total Akhir'," &
                     " tbl_transaksi_parent.Harga_tunai AS 'Bayar'," &
                     " tbl_transaksi_parent.Harga_kembali AS 'Kembalian'" &
-                    " From tbl_transaksi_child inner Join tbl_transaksi_parent On tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans" &
+                    " From tbl_transaksi_child" &
+                    " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans" &
+                    " LEFT JOIN tbl_karyawan ON tbl_transaksi_parent.Id_kasir = tbl_karyawan.Id" &
+                    " LEFT JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
                     " Where (Left(tbl_transaksi_child.Id_trans, 1) = 'K' OR Left(tbl_transaksi_child.Id_trans, 1) = 'C')" &
                     " And tbl_transaksi_parent.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & " 00:00:00'" &
                     " And tbl_transaksi_parent.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd") & " 23:59:59'" &
@@ -350,27 +366,32 @@ Public Class FR_REPORT
             Case 3
                 Select Case CBJENIS.SelectedIndex
                     Case 0
-                        STR = "SELECT Kode AS 'Kode Barang'," &
-                    " Barang AS 'Nama Barang'," &
-                    " Satuan AS 'Satuan'," &
-                    " (SELECT COALESCE(SUM(Jumlah), 0) FROM tbl_transaksi_child WHERE LEFT(tbl_transaksi_child.Id_trans, 1) = 'M' AND tbl_transaksi_child.Kode = tbl_barang.Kode) AS 'Barang Masuk'," &
-                    " (SELECT COALESCE(SUM(Jumlah), 0) FROM tbl_transaksi_child WHERE LEFT(tbl_transaksi_child.Id_trans, 1) = 'K' AND tbl_transaksi_child.Kode = tbl_barang.Kode) AS 'Barang Keluar'" &
+                        STR = "SELECT tbl_barang.Kode AS 'Kode Barang'," &
+                    " tbl_barang.Barang AS 'Nama Barang'," &
+                    " tbl_barang.Satuan AS 'Satuan'," &
+                    " COALESCE(SUM(CASE WHEN LEFT(tbl_transaksi_child.Id_trans, 1) = 'M' THEN tbl_transaksi_child.Jumlah ELSE 0 END), 0) AS 'Barang Masuk'," &
+                    " COALESCE(SUM(CASE WHEN LEFT(tbl_transaksi_child.Id_trans, 1) = 'K' THEN tbl_transaksi_child.Jumlah ELSE 0 END), 0) AS 'Barang Keluar'" &
                     " FROM tbl_barang" &
-                    " ORDER BY 'Nama Barang' ASC"
+                    " LEFT JOIN tbl_transaksi_child ON tbl_barang.Kode = tbl_transaksi_child.Kode" &
+                    " GROUP BY tbl_barang.Kode, tbl_barang.Barang, tbl_barang.Satuan" &
+                    " ORDER BY tbl_barang.Barang ASC"
                     Case 1
                         STR = "SELECT RTRIM(tbl_transaksi_child.Id_trans) AS 'ID Transaksi'," &
                     " RTRIM(tbl_transaksi_parent.Jenis) AS 'Jenis'," &
                     " tbl_transaksi_parent.Tgl AS 'Tanggal'," &
-                    " RTRIM((SELECT Nama FROM tbl_karyawan WHERE Id = tbl_transaksi_parent.Id_kasir)) AS 'Kasir'," &
+                    " RTRIM(tbl_karyawan.Nama) AS 'Kasir'," &
                     " RTRIM(tbl_transaksi_parent.Person) AS 'Supplier'," &
                     " tbl_transaksi_child.Jumlah AS 'Jumlah_item'," &
                     " RTRIM(tbl_transaksi_child.Kode) As 'Kode Barang'," &
-                    " RTRIM((SELECT Barang FROM tbl_barang WHERE Kode = tbl_transaksi_child.Kode)) AS 'Nama Barang'," &
+                    " RTRIM(tbl_barang.Barang) AS 'Nama Barang'," &
                     " tbl_transaksi_child.Harga  AS 'Harga QTY'," &
                     " tbl_transaksi_child.Jumlah AS 'Stok Masuk'," &
                     " (tbl_transaksi_child.Harga * tbl_transaksi_child.Jumlah) AS 'Harga'," &
                     " tbl_transaksi_child.Stok AS 'Sisa Stok'" &
-                    " From tbl_transaksi_child inner Join tbl_transaksi_parent On tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans" &
+                    " From tbl_transaksi_child" &
+                    " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans" &
+                    " LEFT JOIN tbl_karyawan ON tbl_transaksi_parent.Id_kasir = tbl_karyawan.Id" &
+                    " LEFT JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
                     " Where (Left(tbl_transaksi_child.Id_trans, 1) = 'M' OR Left(tbl_transaksi_child.Id_trans, 1) = 'R')" &
                     " And tbl_transaksi_parent.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & " 00:00:00'" &
                     " And tbl_transaksi_parent.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd") & " 23:59:59'" &
@@ -380,11 +401,11 @@ Public Class FR_REPORT
                         STR = "SELECT RTRIM(tbl_transaksi_child.Id_trans) AS 'ID Transaksi'," &
                     " RTRIM(tbl_transaksi_parent.Jenis) AS 'Jenis'," &
                     " tbl_transaksi_parent.Tgl AS 'Tanggal'," &
-                    " RTRIM((SELECT Nama FROM tbl_karyawan WHERE Id = tbl_transaksi_parent.Id_kasir)) AS 'Kasir'," &
+                    " RTRIM(tbl_karyawan.Nama) AS 'Kasir'," &
                     " RTRIM(tbl_transaksi_parent.Person) AS 'Pembeli'," &
                     " tbl_transaksi_parent.Jumlah_item AS 'Jumlah_item'," &
                     " RTRIM(tbl_transaksi_child.Kode) As 'Kode Barang'," &
-                    " RTRIM((SELECT Barang FROM tbl_barang WHERE Kode = tbl_transaksi_child.Kode)) AS 'Nama Barang'," &
+                    " RTRIM(tbl_barang.Barang) AS 'Nama Barang'," &
                     " (tbl_transaksi_child.Harga / tbl_transaksi_child.Jumlah)  AS 'Harga QTY'," &
                     " tbl_transaksi_child.Jumlah AS 'QTY'," &
                     " tbl_transaksi_child.Harga  AS 'Harga Jual'," &
@@ -395,7 +416,10 @@ Public Class FR_REPORT
                     " tbl_transaksi_parent.Harga_total AS 'Total Akhir'," &
                     " tbl_transaksi_parent.Harga_tunai AS 'Bayar'," &
                     " tbl_transaksi_parent.Harga_kembali AS 'Kembalian'" &
-                    " From tbl_transaksi_child inner Join tbl_transaksi_parent On tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans" &
+                    " From tbl_transaksi_child" &
+                    " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans" &
+                    " LEFT JOIN tbl_karyawan ON tbl_transaksi_parent.Id_kasir = tbl_karyawan.Id" &
+                    " LEFT JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
                     " Where (Left(tbl_transaksi_child.Id_trans, 1) = 'K' OR Left(tbl_transaksi_child.Id_trans, 1) = 'C')" &
                     " And tbl_transaksi_parent.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & " 00:00:00'" &
                     " And tbl_transaksi_parent.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd") & " 23:59:59'" &

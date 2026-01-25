@@ -18,6 +18,13 @@ Public Class FR_MASUK_BONGKAR
     Dim KODE As String
 
     Private Sub FR_MASUK_BONGKAR_Load(sender As Object, e As EventArgs) Handles Me.Load
+        Try
+            BUKA_KONEKSI()
+        Catch ex As Exception
+            MsgBox("Koneksi database gagal: " & ex.Message, vbCritical)
+            Return
+        End Try
+
         STR = "SELECT Id, RTRIM(Id_trans) AS 'ID Transaksi'," &
                        " RTRIM(tbl_barang.Kode) AS 'Kode Barang'," &
                        " RTRIM(tbl_barang.Barang) AS 'Nama Barang'," &

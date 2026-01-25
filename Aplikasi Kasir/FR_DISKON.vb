@@ -232,6 +232,13 @@ Public Class FR_DISKON
     End Sub
 
     Private Sub TXTKODE_TextChanged(sender As Object, e As EventArgs) Handles TXTKODE.TextChanged
+        Try
+            BUKA_KONEKSI()
+        Catch ex As Exception
+            MsgBox("Koneksi database gagal: " & ex.Message, vbCritical)
+            Return
+        End Try
+
         Dim STR As String = "SELECT Barang, Satuan, Harga1, Harga2, Harga3, Harga4, Harga5, End1, End2, End3, End4 FROM tbl_barang WHERE RTRIM(Kode)='" & TXTKODE.Text & "'"
         Dim CMD As MySqlCommand
         CMD = New MySqlCommand(STR, CONN)

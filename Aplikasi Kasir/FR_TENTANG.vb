@@ -122,6 +122,13 @@ Public Class FR_TENTANG
     End Sub
 
     Private Sub BTNSIMPAN_Click(sender As Object, e As EventArgs) Handles BTNSIMPAN.Click
+        Try
+            BUKA_KONEKSI()
+        Catch ex As Exception
+            MsgBox("Koneksi database gagal: " & ex.Message, vbCritical)
+            Return
+        End Try
+
         Dim PASSWORD As String
         Dim STR As String = "SELECT Password FROM tbl_karyawan WHERE RTRIM(Id)='" & My.Settings.ID_ACCOUNT & "'"
         Dim CMD As MySqlCommand
@@ -345,6 +352,13 @@ Public Class FR_TENTANG
             ElseIf TXTJK.Text = "Perempuan" Then
                 jk = "P"
             End If
+
+            Try
+                BUKA_KONEKSI()
+            Catch ex As Exception
+                MsgBox("Koneksi database gagal: " & ex.Message, vbCritical)
+                Return
+            End Try
 
             Dim STR As String
             Dim CMD As MySqlCommand

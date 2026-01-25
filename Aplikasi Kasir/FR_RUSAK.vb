@@ -221,6 +221,13 @@ Public Class FR_RUSAK
     End Sub
 
     Private Function CARI_ID(ByVal ID As String) As String
+        Try
+            BUKA_KONEKSI()
+        Catch ex As Exception
+            MsgBox("Koneksi database gagal: " & ex.Message, vbCritical)
+            Return "00"
+        End Try
+
         Dim ID_RUSAK As String = "C" + ID
         Dim STR As String = "SELECT TOP 1 (Id_trans) AS Id_trans FROM tbl_transaksi_parent" &
             " WHERE LEFT(Id_trans, 10)='" & ID_RUSAK & "' ORDER BY Id DESC"
@@ -260,6 +267,13 @@ Public Class FR_RUSAK
             Else
                 Dim ID_TRANS As String = "C" + Mid(TXTID.Text, 2) + CARI_ID(Mid(TXTID.Text, 2))
                 Dim SUPPLIER As String = ""
+
+                Try
+                    BUKA_KONEKSI()
+                Catch ex As Exception
+                    MsgBox("Koneksi database gagal: " & ex.Message, vbCritical)
+                    Return
+                End Try
 
                 Dim STR As String
                 Dim CMD As MySqlCommand
@@ -406,6 +420,13 @@ Public Class FR_RUSAK
             Dim ID_MASUK As String = "M" + Mid(IDTRANS, 2, 9)
             Dim STOK_AWAL As Double
 
+            Try
+                BUKA_KONEKSI()
+            Catch ex As Exception
+                MsgBox("Koneksi database gagal: " & ex.Message, vbCritical)
+                Return
+            End Try
+
             Dim str As String
 
             str = "SELECT Jumlah AS Jumlah" &
@@ -484,6 +505,13 @@ Public Class FR_RUSAK
     End Sub
 
     Sub CARI_HARGA()
+        Try
+            BUKA_KONEKSI()
+        Catch ex As Exception
+            MsgBox("Koneksi database gagal: " & ex.Message, vbCritical)
+            Return
+        End Try
+
         Dim STR As String
 
         STR = "SELECT RTRIM(Kode) AS Kode " &
@@ -540,8 +568,6 @@ Public Class FR_RUSAK
 
     Dim KODEBARANG As String
     Private Sub CBKODE_TextChanged(sender As Object, e As EventArgs) Handles CBKODE.TextChanged
-        On Error Resume Next
-
         CARI_HARGA()
     End Sub
 
@@ -648,8 +674,6 @@ Public Class FR_RUSAK
     End Sub
 
     Private Sub DGEXPIRED_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGEXPIRED.CellClick
-        On Error Resume Next
-
         If e.RowIndex >= 0 Then
             If DGEXPIRED.Columns(e.ColumnIndex).HeaderText = "Edit" Then
                 TXTID.Text = DGEXPIRED.Item(1, e.RowIndex).Value
@@ -673,8 +697,6 @@ Public Class FR_RUSAK
     End Sub
 
     Private Sub CBKODE_SelectedValueChanged(sender As Object, e As EventArgs) Handles CBKODE.SelectedValueChanged
-        On Error Resume Next
-
         CARI_HARGA()
     End Sub
 
@@ -708,8 +730,6 @@ Public Class FR_RUSAK
     End Sub
 
     Private Sub CB_JENISTRANS_TextChanged(sender As Object, e As EventArgs) Handles CB_JENISTRANS.TextChanged
-        On Error Resume Next
-
         If CB_JENISTRANS.SelectedIndex = 1 Then
             Label13.Visible = True
             DTEXP.Visible = True
@@ -720,8 +740,6 @@ Public Class FR_RUSAK
     End Sub
 
     Private Sub CB_JENISTRANS_SelectedValueChanged(sender As Object, e As EventArgs) Handles CB_JENISTRANS.SelectedValueChanged
-        On Error Resume Next
-
         If CB_JENISTRANS.SelectedIndex = 0 Then
             Label13.Visible = False
             DTEXP.Visible = False
@@ -765,8 +783,6 @@ Public Class FR_RUSAK
     End Sub
 
     Private Sub DGTAMPIL_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGTAMPIL.CellClick
-        On Error Resume Next
-
         If e.RowIndex >= 0 Then
             If DGTAMPIL.Columns(e.ColumnIndex).HeaderText = "Delete" Then
                 If MsgBox("Apakah anda yakin akan menghapus data transaksi?", vbYesNo) = vbYes Then
@@ -782,6 +798,13 @@ Public Class FR_RUSAK
 
                     Dim ID_MASUK As String = "M" + Mid(IDTRANS, 2, 9)
                     Dim STOK_AWAL As Double
+
+                    Try
+                        BUKA_KONEKSI()
+                    Catch ex As Exception
+                        MsgBox("Koneksi database gagal: " & ex.Message, vbCritical)
+                        Return
+                    End Try
 
                     Dim str As String
 

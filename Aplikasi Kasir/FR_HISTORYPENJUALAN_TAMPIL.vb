@@ -18,6 +18,13 @@ Public Class FR_HISTORYPENJUALAN_TAMPIL
     Private Sub FR_HISTORYPENJUALAN_TAMPIL_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ID_TRANS = LBL_IDTRANS.Text
 
+        Try
+            BUKA_KONEKSI()
+        Catch ex As Exception
+            MsgBox("Koneksi database gagal: " & ex.Message, vbCritical)
+            Return
+        End Try
+
         STR = "SELECT" &
             " RTRIM(tbl_karyawan.Nama) AS'Kasir'," &
             " tbl_transaksi_parent.Tgl AS 'Tgl'," &

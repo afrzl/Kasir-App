@@ -258,8 +258,10 @@ Public Class FR_MEMBER
             End With
             DGTAMPIL.Columns.Add(Column_delete)
             DGTAMPIL.Columns(7).Width = 50
+        End If
 
-            ' Tambah kolom Tukar Point
+        ' Tambah kolom Tukar Point untuk Admin, Operator, dan Kasir
+        If ROLE = 1 Or ROLE = 2 Or ROLE = 3 Then
             Dim Column_tukarpoint = New DataGridViewButtonColumn
             With Column_tukarpoint
                 .Text = "Tukar Point"
@@ -272,8 +274,13 @@ Public Class FR_MEMBER
                 .Width = 100
             End With
             DGTAMPIL.Columns.Add(Column_tukarpoint)
-            DGTAMPIL.Columns(8).Width = 50
-
+            
+            ' Set column width based on role
+            If ROLE = 3 Then
+                DGTAMPIL.Columns(6).Width = 50
+            Else
+                DGTAMPIL.Columns(8).Width = 50
+            End If
         End If
         DGTAMPIL.ColumnHeadersHeight = 35
         DGTAMPIL.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing
@@ -298,8 +305,6 @@ Public Class FR_MEMBER
     End Sub
 
     Private Sub DGTAMPIL_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGTAMPIL.CellClick
-        On Error Resume Next
-
         If e.RowIndex >= 0 Then
             If ROLE = 1 Or ROLE = 2 Then
                 If DGTAMPIL.Columns(e.ColumnIndex).HeaderText = "Edit" Then
@@ -315,6 +320,13 @@ Public Class FR_MEMBER
                     End With
                 ElseIf DGTAMPIL.Columns(e.ColumnIndex).HeaderText = "Delete" Then
                     If MsgBox("Apakah anda yakin akan menghapus member?", vbYesNo) = vbYes Then
+                        Try
+                            BUKA_KONEKSI()
+                        Catch ex As Exception
+                            MsgBox("Koneksi database gagal: " & ex.Message, vbCritical)
+                            Return
+                        End Try
+
                         STR = "DELETE tbl_member " &
                             " WHERE Id='" & DGTAMPIL.Item("Id", e.RowIndex).Value & "'"
                         CMD = New MySqlCommand(STR, CONN)
@@ -323,17 +335,20 @@ Public Class FR_MEMBER
                         TAMPIL()
                         LOAD_RIWAYAT()
                     End If
-                ElseIf DGTAMPIL.Columns(e.ColumnIndex).HeaderText = "Tukar Point" Then
-                    Me.Enabled = False
-
-                    With FR_TUKAR_POINT
-                        .Show()
-                        .LBIDMEMBER.Text = DGTAMPIL.Item("ID", e.RowIndex).Value
-                        .LBNAMAMEMBER.Text = DGTAMPIL.Item("Nama Lengkap", e.RowIndex).Value
-                        .LBPOINTTERSEDIA.Text = Convert.ToDecimal(DGTAMPIL.Item("Points", e.RowIndex).Value).ToString("###,##0")
-                        .TXTNAMABARANG.Select()
-                    End With
                 End If
+            End If
+            
+            ' Tukar Point tersedia untuk semua role
+            If DGTAMPIL.Columns(e.ColumnIndex).HeaderText = "Tukar Point" Then
+                Me.Enabled = False
+
+                With FR_TUKAR_POINT
+                    .Show()
+                    .LBIDMEMBER.Text = DGTAMPIL.Item("ID", e.RowIndex).Value
+                    .LBNAMAMEMBER.Text = DGTAMPIL.Item("Nama Lengkap", e.RowIndex).Value
+                    .LBPOINTTERSEDIA.Text = Convert.ToDecimal(DGTAMPIL.Item("Points", e.RowIndex).Value).ToString("###,##0")
+                    .TXTNAMABARANG.Select()
+                End With
             End If
         End If
     End Sub

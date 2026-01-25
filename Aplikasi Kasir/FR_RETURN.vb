@@ -182,6 +182,14 @@ Public Class FR_RETURN
                             & CBKODE.SelectedValue _
                             & "'" _
                             & " AND (SELECT Tgl FROM tbl_transaksi_parent WHERE tbl_transaksi_parent.Id_trans = tbl_transaksi_child.Id_trans) >= DATE_SUB(NOW(), INTERVAL 7 DAY)"
+        
+        Try
+            BUKA_KONEKSI()
+        Catch ex As Exception
+            MsgBox("Koneksi database gagal: " & ex.Message, vbCritical)
+            Return
+        End Try
+
         Dim CMD As New MySqlCommand(STR, CONN)
         Dim RD As MySqlDataReader
         RD = CMD.ExecuteReader
@@ -232,6 +240,13 @@ Public Class FR_RETURN
     End Sub
 
     Private Function CARI_ID(ByVal ID As String) As String
+        Try
+            BUKA_KONEKSI()
+        Catch ex As Exception
+            MsgBox("Koneksi database gagal: " & ex.Message, vbCritical)
+            Return "00"
+        End Try
+
         Dim ID_RETURN As String = "R" + ID
         Dim STR As String = "SELECT TOP 1 (Id_trans) AS Id_trans FROM tbl_transaksi_parent" &
                             " WHERE LEFT(Id_trans, 10)='" & ID_RETURN & "' ORDER BY Id DESC"
@@ -271,6 +286,13 @@ Public Class FR_RETURN
         Else
             Dim ID_TRANS As String = "R" + Mid(TXTID.Text, 2) + CARI_ID(Mid(TXTID.Text, 2))
             Dim PEMBELI As String = ""
+
+            Try
+                BUKA_KONEKSI()
+            Catch ex As Exception
+                MsgBox("Koneksi database gagal: " & ex.Message, vbCritical)
+                Return
+            End Try
 
             Dim STR As String
             Dim CMD As MySqlCommand
@@ -359,6 +381,13 @@ Public Class FR_RETURN
 
     Private Sub HapusToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HapusToolStripMenuItem.Click
         If MsgBox("Apakah anda yakin akan menghapus data transaksi?", vbYesNo) = vbYes Then
+            Try
+                BUKA_KONEKSI()
+            Catch ex As Exception
+                MsgBox("Koneksi database gagal: " & ex.Message, vbCritical)
+                Return
+            End Try
+
             Dim IDX As String = DGTAMPIL.Item(0, DGTAMPIL.CurrentRow.Index).Value
             Dim NAMA_BARANG As String = DGTAMPIL.Item(2, DGTAMPIL.CurrentRow.Index).Value.ToString.Trim
             Dim STOK As Double

@@ -23,6 +23,13 @@ Public Class FR_OPS_DASHBOARD
     End Sub
 
     Private Function CEK_EXPIRED() As Boolean
+        Try
+            BUKA_KONEKSI()
+        Catch ex As Exception
+            MsgBox("Koneksi database gagal: " & ex.Message, vbCritical)
+            Return False
+        End Try
+
         Dim STR As String = "SELECT * FROM tbl_transaksi_child WHERE LEFT(Id_trans, 1) = 'M'" &
             " AND Tgl_exp <= DATE_ADD(NOW(), INTERVAL 14 DAY)" &
             " AND Stok != 0"
@@ -64,6 +71,13 @@ Public Class FR_OPS_DASHBOARD
     End Sub
 
     Sub TAMPIL()
+        Try
+            BUKA_KONEKSI()
+        Catch ex As Exception
+            MsgBox("Koneksi database gagal: " & ex.Message, vbCritical)
+            Return
+        End Try
+
         Dim STR As String = "SELECT RTRIM(tbl_barang.Kode) AS Kode," &
             " RTRIM(Barang) As 'Nama Barang'," &
             " (tbl_stok.Stok) AS Stok," &
@@ -141,6 +155,13 @@ Public Class FR_OPS_DASHBOARD
     End Sub
 
     Sub TAMPIL_DATA()
+        Try
+            BUKA_KONEKSI()
+        Catch ex As Exception
+            MsgBox("Koneksi database gagal: " & ex.Message, vbCritical)
+            Return
+        End Try
+
         Dim TGLAWAL = Format(Date.Now, "yyyy-MM-dd") & " 00:00:00"
         Dim TGLAKHIR = Format(Date.Now, "yyyy-MM-dd") & " 23:59:59"
 

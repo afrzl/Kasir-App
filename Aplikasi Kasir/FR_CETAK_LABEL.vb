@@ -278,6 +278,13 @@ Public Class FR_CETAK_LABEL
             If ADA_DATA = True Then
                 MsgBox("Data sudah ada di dalam tabel")
             Else
+                Try
+                    BUKA_KONEKSI()
+                Catch ex As Exception
+                    MsgBox("Koneksi database gagal: " & ex.Message, vbCritical)
+                    Return
+                End Try
+
                 Dim STR As String
                 STR = "SELECT Kode," &
                     " RTRIM(Barang) as Barang," &

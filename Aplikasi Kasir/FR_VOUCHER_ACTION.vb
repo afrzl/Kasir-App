@@ -43,6 +43,13 @@ Public Class FR_VOUCHER_ACTION
     End Sub
 
     Sub CARI_HARGA()
+        Try
+            BUKA_KONEKSI()
+        Catch ex As Exception
+            MsgBox("Koneksi database gagal: " & ex.Message, vbCritical)
+            Return
+        End Try
+
         STR = "SELECT Id," &
             " Harga AS Harga" &
             " FROM tbl_data_voucher" &
@@ -79,6 +86,13 @@ Public Class FR_VOUCHER_ACTION
     End Sub
 
     Private Sub TXTNAMA_Validated(sender As Object, e As EventArgs) Handles TXTID_MEMBER.Validated
+        Try
+            BUKA_KONEKSI()
+        Catch ex As Exception
+            MsgBox("Koneksi database gagal: " & ex.Message, vbCritical)
+            Return
+        End Try
+
         STR = "SELECT Id," &
             " RTRIM(Nama) AS Nama," &
             " Points AS Points" &
@@ -112,6 +126,13 @@ Public Class FR_VOUCHER_ACTION
                 MsgBox("Point member tidak cukup!")
                 TXTID_MEMBER.Select()
             Else
+                Try
+                    BUKA_KONEKSI()
+                Catch ex As Exception
+                    MsgBox("Koneksi database gagal: " & ex.Message, vbCritical)
+                    Return
+                End Try
+
                 STR = "UPDATE tbl_member SET Points = Points - " & LBL_HARGA.Text.Remove(0, 2) & ", " &
                     " Modified_at = '" & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & "'" &
                     " WHERE Id='" & TXTID_MEMBER.Text & "'"

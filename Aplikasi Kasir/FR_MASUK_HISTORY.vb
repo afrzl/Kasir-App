@@ -554,11 +554,16 @@ Public Class FR_MASUK_HISTORY
     End Sub
 
     Private Sub DGHISTORY_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGHISTORY.CellClick
-        On Error Resume Next
-
         If e.RowIndex >= 0 Then
             If DGHISTORY.Columns(e.ColumnIndex).HeaderText = "Delete" Then
                 If MsgBox("Apakah anda yakin akan menghapus data transaksi?", vbYesNo) = vbYes Then
+                    Try
+                        BUKA_KONEKSI()
+                    Catch ex As Exception
+                        MsgBox("Koneksi database gagal: " & ex.Message, vbCritical)
+                        Return
+                    End Try
+
                     DGHISTORY.Columns(0).Visible = False
                     Dim IDX As String = DGHISTORY.Item(0, DGHISTORY.CurrentRow.Index).Value
                     Dim IDTrans As String = DGHISTORY.Item(1, DGHISTORY.CurrentRow.Index).Value
