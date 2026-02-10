@@ -138,11 +138,15 @@ Public Class FR_REPORT
                         STR = "SELECT tbl_barang.Kode AS 'Kode Barang'," &
                         " tbl_barang.Barang AS 'Nama Barang'," &
                         " tbl_barang.Satuan AS 'Satuan'," &
-                        " COALESCE(SUM(CASE WHEN (tbl_transaksi_child.Id_trans LIKE 'M%' OR tbl_transaksi_child.Id_trans LIKE 'R%') THEN tbl_transaksi_child.Jumlah ELSE 0 END), 0) AS 'Barang Masuk'," &
-                        " COALESCE(SUM(CASE WHEN (tbl_transaksi_child.Id_trans LIKE 'K%' OR tbl_transaksi_child.Id_trans LIKE 'C%') THEN tbl_transaksi_child.Jumlah ELSE 0 END), 0) AS 'Barang Keluar'" &
+                        " COALESCE(masuk.total_masuk, 0) AS 'Barang Masuk'," &
+                        " COALESCE(keluar.total_keluar, 0) AS 'Barang Keluar'" &
                         " FROM tbl_barang" &
-                        " LEFT JOIN tbl_transaksi_child ON tbl_barang.Kode = tbl_transaksi_child.Kode" &
-                        " GROUP BY tbl_barang.Kode, tbl_barang.Barang, tbl_barang.Satuan" &
+                        " LEFT JOIN (SELECT tc.Kode, SUM(tc.Jumlah) AS total_masuk FROM tbl_transaksi_child tc" &
+                        " INNER JOIN tbl_transaksi_parent tp ON tc.Id_trans = tp.Id_trans" &
+                        " WHERE tp.Jenis IN ('M','R') GROUP BY tc.Kode) masuk ON tbl_barang.Kode = masuk.Kode" &
+                        " LEFT JOIN (SELECT tc.Kode, SUM(tc.Jumlah) AS total_keluar FROM tbl_transaksi_child tc" &
+                        " INNER JOIN tbl_transaksi_parent tp ON tc.Id_trans = tp.Id_trans" &
+                        " WHERE tp.Jenis IN ('K','C') GROUP BY tc.Kode) keluar ON tbl_barang.Kode = keluar.Kode" &
                         " ORDER BY tbl_barang.Barang ASC"
                     Case 2
                         STR = "SELECT RTRIM(tbl_transaksi_child.Id_trans) AS 'ID Transaksi'," &
@@ -161,22 +165,22 @@ Public Class FR_REPORT
                     " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans" &
                     " LEFT JOIN tbl_karyawan ON tbl_transaksi_parent.Id_kasir = tbl_karyawan.Id" &
                     " LEFT JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
-                    " Where (tbl_transaksi_child.Id_trans LIKE 'M%' OR tbl_transaksi_child.Id_trans LIKE 'R%')" &
-                    " And tbl_transaksi_parent.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & " 00:00:00'" &
-                    " And tbl_transaksi_parent.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd") & " 23:59:59'" &
+                    " WHERE tbl_transaksi_parent.Jenis IN ('M','R')" &
+                    " AND tbl_transaksi_parent.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & " 00:00:00'" &
+                    " AND tbl_transaksi_parent.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd") & " 23:59:59'" &
                     " ORDER BY tbl_transaksi_parent.Tgl DESC, tbl_transaksi_child.Id DESC"
                     Case 3
-                        STR = "SELECT RTRIM(tbl_transaksi_child.Id_trans) AS 'ID Transaksi'," &
-                    " RTRIM(tbl_transaksi_parent.Jenis) AS 'Jenis'," &
+                        STR = "SELECT tbl_transaksi_child.Id_trans AS 'ID Transaksi'," &
+                    " tbl_transaksi_parent.Jenis AS 'Jenis'," &
                     " tbl_transaksi_parent.Tgl AS 'Tanggal'," &
-                    " RTRIM(tbl_karyawan.Nama) AS 'Kasir'," &
-                    " RTRIM(tbl_transaksi_parent.Person) AS 'Pembeli'," &
+                    " tbl_karyawan.Nama AS 'Kasir'," &
+                    " tbl_transaksi_parent.Person AS 'Pembeli'," &
                     " tbl_transaksi_parent.Jumlah_item AS 'Jumlah_item'," &
-                    " RTRIM(tbl_transaksi_child.Kode) As 'Kode Barang'," &
-                    " RTRIM(tbl_barang.Barang) AS 'Nama Barang'," &
-                    " (tbl_transaksi_child.Harga / tbl_transaksi_child.Jumlah)  AS 'Harga QTY'," &
+                    " tbl_transaksi_child.Kode As 'Kode Barang'," &
+                    " tbl_barang.Barang AS 'Nama Barang'," &
+                    " (tbl_transaksi_child.Harga / tbl_transaksi_child.Jumlah) AS 'Harga QTY'," &
                     " tbl_transaksi_child.Jumlah AS 'QTY'," &
-                    " tbl_transaksi_child.Harga  AS 'Harga Jual'," &
+                    " tbl_transaksi_child.Harga AS 'Harga Jual'," &
                     " tbl_transaksi_child.Diskon AS 'Diskon'," &
                     " tbl_transaksi_child.Harga_akhir AS 'Harga'," &
                     " tbl_transaksi_parent.Harga AS 'Total'," &
@@ -185,12 +189,18 @@ Public Class FR_REPORT
                     " tbl_transaksi_parent.Harga_tunai AS 'Bayar'," &
                     " tbl_transaksi_parent.Harga_kembali AS 'Kembalian'," &
                     " (tbl_transaksi_child.Harga_akhir - tbl_transaksi_child.Harga_beli) AS 'Laba Item'," &
-                    " ((SELECT COALESCE(SUM(Harga_akhir - Harga_beli), 0) FROM tbl_transaksi_child WHERE Id_trans = tbl_transaksi_parent.Id_trans) - tbl_transaksi_parent.Diskon) AS 'Laba'" &
+                    " (COALESCE(laba_trans.total_laba, 0) - tbl_transaksi_parent.Diskon) AS 'Laba'" &
                     " FROM tbl_transaksi_child" &
                     " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans" &
                     " LEFT JOIN tbl_karyawan ON tbl_transaksi_parent.Id_kasir = tbl_karyawan.Id" &
                     " LEFT JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
-                    " WHERE (tbl_transaksi_child.Id_trans LIKE 'K%' OR tbl_transaksi_child.Id_trans LIKE 'C%')" &
+                    " LEFT JOIN (SELECT tc2.Id_trans, SUM(tc2.Harga_akhir - tc2.Harga_beli) AS total_laba FROM tbl_transaksi_child tc2" &
+                    " INNER JOIN tbl_transaksi_parent tp2 ON tc2.Id_trans = tp2.Id_trans" &
+                    " WHERE tp2.Jenis IN ('K','C')" &
+                    " AND tp2.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & " 00:00:00'" &
+                    " AND tp2.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd") & " 23:59:59'" &
+                    " GROUP BY tc2.Id_trans) laba_trans ON laba_trans.Id_trans = tbl_transaksi_parent.Id_trans" &
+                    " WHERE tbl_transaksi_parent.Jenis IN ('K','C')" &
                     " AND tbl_transaksi_parent.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & " 00:00:00'" &
                     " AND tbl_transaksi_parent.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd") & " 23:59:59'" &
                     " ORDER BY tbl_transaksi_parent.Tgl DESC, tbl_transaksi_child.Id DESC"
@@ -207,21 +217,27 @@ Public Class FR_REPORT
                                 " FROM tbl_transaksi_child" &
                                 " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans" &
                                 " LEFT JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
-                                " WHERE (tbl_transaksi_child.Id_trans LIKE 'K%' OR tbl_transaksi_child.Id_trans LIKE 'C%')" &
+                                " WHERE tbl_transaksi_parent.Jenis IN ('K','C')" &
                                 " AND tbl_transaksi_parent.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & " 00:00:00'" &
                                 " AND tbl_transaksi_parent.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd") & " 23:59:59'" &
                                 " ORDER BY tbl_transaksi_parent.Tgl DESC, tbl_transaksi_child.Id DESC"
                     Case 5
-                        STR = "SELECT Id_trans AS 'ID Transaksi'," &
-                                " Tgl AS 'Tanggal', " &
-                                " Jumlah_item AS 'Jumlah Item'," &
-                                " (SELECT COALESCE(SUM(Harga_beli), 0) FROM tbl_transaksi_child WHERE tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans) AS 'Harga Beli'," &
-                                " Harga_total AS 'Harga Jual'" &
+                        STR = "SELECT tbl_transaksi_parent.Id_trans AS 'ID Transaksi'," &
+                                " tbl_transaksi_parent.Tgl AS 'Tanggal', " &
+                                " tbl_transaksi_parent.Jumlah_item AS 'Jumlah Item'," &
+                                " COALESCE(beli_trans.total_beli, 0) AS 'Harga Beli'," &
+                                " tbl_transaksi_parent.Harga_total AS 'Harga Jual'" &
                                 " FROM tbl_transaksi_parent" &
-                                " WHERE (Jenis = 'K' OR Jenis = 'C')" &
-                                " AND Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & " 00:00:00'" &
-                                " AND Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd") & " 23:59:59'" &
-                                " ORDER BY Tgl DESC"
+                                " LEFT JOIN (SELECT tc2.Id_trans, SUM(tc2.Harga_beli) AS total_beli FROM tbl_transaksi_child tc2" &
+                                " INNER JOIN tbl_transaksi_parent tp2 ON tc2.Id_trans = tp2.Id_trans" &
+                                " WHERE tp2.Jenis IN ('K','C')" &
+                                " AND tp2.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & " 00:00:00'" &
+                                " AND tp2.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd") & " 23:59:59'" &
+                                " GROUP BY tc2.Id_trans) beli_trans ON beli_trans.Id_trans = tbl_transaksi_parent.Id_trans" &
+                                " WHERE tbl_transaksi_parent.Jenis IN ('K','C')" &
+                                " AND tbl_transaksi_parent.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & " 00:00:00'" &
+                                " AND tbl_transaksi_parent.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd") & " 23:59:59'" &
+                                " ORDER BY tbl_transaksi_parent.Tgl DESC"
                     Case 6
                         STR = "SELECT tbl_transaksi_child.Id_trans AS 'ID Transaksi'," &
                                 " tbl_transaksi_child.Kode AS 'Kode Barang'," &
@@ -234,7 +250,7 @@ Public Class FR_REPORT
                                 " FROM tbl_transaksi_child" &
                                 " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans" &
                                 " LEFT JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
-                                " WHERE (tbl_transaksi_child.Id_trans LIKE 'K%' OR tbl_transaksi_child.Id_trans LIKE 'C%')" &
+                                " WHERE tbl_transaksi_parent.Jenis IN ('K','C')" &
                                 " AND tbl_transaksi_parent.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & " 00:00:00'" &
                                 " AND tbl_transaksi_parent.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd") & " 23:59:59'" &
                                 " ORDER BY tbl_transaksi_parent.Tgl DESC, tbl_transaksi_child.Id DESC"
@@ -265,27 +281,39 @@ Public Class FR_REPORT
                    " FROM tbl_transaksi_child" &
                    " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans" &
                    " LEFT JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
-                   " WHERE (tbl_transaksi_child.Id_trans LIKE 'K%' OR tbl_transaksi_child.Id_trans LIKE 'C%')" &
+                   " WHERE tbl_transaksi_parent.Jenis IN ('K','C')" &
                    " AND tbl_transaksi_parent.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & " 00:00:00'" &
                    " AND tbl_transaksi_parent.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd") & " 23:59:59'" &
                    " ORDER BY tbl_transaksi_parent.Tgl DESC"
                     Case 10
-                        STR = "SELECT Tgl AS 'Tanggal'," &
-                    " (SELECT COALESCE(SUM(Harga_akhir - Harga_beli), 0) FROM tbl_transaksi_child WHERE tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans) - tbl_transaksi_parent.Diskon AS 'Laba'" &
+                        STR = "SELECT tbl_transaksi_parent.Tgl AS 'Tanggal'," &
+                    " (COALESCE(laba_trans.total_laba, 0) - tbl_transaksi_parent.Diskon) AS 'Laba'" &
                     " FROM tbl_transaksi_parent" &
-                    " WHERE (Jenis = 'K' OR Jenis = 'C')" &
-                    " AND Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & " 00:00:00'" &
-                    " AND Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd") & " 23:59:59'" &
-                    " ORDER BY Tgl DESC"
+                    " LEFT JOIN (SELECT tc2.Id_trans, SUM(tc2.Harga_akhir - tc2.Harga_beli) AS total_laba FROM tbl_transaksi_child tc2" &
+                    " INNER JOIN tbl_transaksi_parent tp2 ON tc2.Id_trans = tp2.Id_trans" &
+                    " WHERE tp2.Jenis IN ('K','C')" &
+                    " AND tp2.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & " 00:00:00'" &
+                    " AND tp2.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd") & " 23:59:59'" &
+                    " GROUP BY tc2.Id_trans) laba_trans ON laba_trans.Id_trans = tbl_transaksi_parent.Id_trans" &
+                    " WHERE tbl_transaksi_parent.Jenis IN ('K','C')" &
+                    " AND tbl_transaksi_parent.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & " 00:00:00'" &
+                    " AND tbl_transaksi_parent.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd") & " 23:59:59'" &
+                    " ORDER BY tbl_transaksi_parent.Tgl DESC"
                     Case 11
                         Dim LASTDAYOFMONTH = DateTime.DaysInMonth(TXTTGLAKHIR.Value.ToString("yyyy"), TXTTGLAKHIR.Value.ToString("MM"))
-                        STR = "SELECT Tgl AS 'Tanggal'," &
-                    " (SELECT COALESCE(SUM(Harga_akhir - Harga_beli), 0) FROM tbl_transaksi_child WHERE tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans) - tbl_transaksi_parent.Diskon AS 'Laba'" &
+                        STR = "SELECT tbl_transaksi_parent.Tgl AS 'Tanggal'," &
+                    " (COALESCE(laba_trans.total_laba, 0) - tbl_transaksi_parent.Diskon) AS 'Laba'" &
                     " FROM tbl_transaksi_parent" &
-                    " WHERE (Jenis = 'K' OR Jenis = 'C')" &
-                    " AND Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-01") & " 00:00:00'" &
-                    " AND Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-" & LASTDAYOFMONTH) & " 23:59:59'" &
-                    " ORDER BY Tgl DESC"
+                    " LEFT JOIN (SELECT tc2.Id_trans, SUM(tc2.Harga_akhir - tc2.Harga_beli) AS total_laba FROM tbl_transaksi_child tc2" &
+                    " INNER JOIN tbl_transaksi_parent tp2 ON tc2.Id_trans = tp2.Id_trans" &
+                    " WHERE tp2.Jenis IN ('K','C')" &
+                    " AND tp2.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-01") & " 00:00:00'" &
+                    " AND tp2.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-" & LASTDAYOFMONTH) & " 23:59:59'" &
+                    " GROUP BY tc2.Id_trans) laba_trans ON laba_trans.Id_trans = tbl_transaksi_parent.Id_trans" &
+                    " WHERE tbl_transaksi_parent.Jenis IN ('K','C')" &
+                    " AND tbl_transaksi_parent.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-01") & " 00:00:00'" &
+                    " AND tbl_transaksi_parent.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-" & LASTDAYOFMONTH) & " 23:59:59'" &
+                    " ORDER BY tbl_transaksi_parent.Tgl DESC"
                 End Select
             Case 2
                 Select Case CBJENIS.SelectedIndex
@@ -312,11 +340,15 @@ Public Class FR_REPORT
                         STR = "SELECT tbl_barang.Kode AS 'Kode Barang'," &
                     " tbl_barang.Barang AS 'Nama Barang'," &
                     " tbl_barang.Satuan AS 'Satuan'," &
-                    " COALESCE(SUM(CASE WHEN tbl_transaksi_child.Id_trans LIKE 'M%' THEN tbl_transaksi_child.Jumlah ELSE 0 END), 0) AS 'Barang Masuk'," &
-                    " COALESCE(SUM(CASE WHEN tbl_transaksi_child.Id_trans LIKE 'K%' THEN tbl_transaksi_child.Jumlah ELSE 0 END), 0) AS 'Barang Keluar'" &
+                    " COALESCE(masuk.total_masuk, 0) AS 'Barang Masuk'," &
+                    " COALESCE(keluar.total_keluar, 0) AS 'Barang Keluar'" &
                     " FROM tbl_barang" &
-                    " LEFT JOIN tbl_transaksi_child ON tbl_barang.Kode = tbl_transaksi_child.Kode" &
-                    " GROUP BY tbl_barang.Kode, tbl_barang.Barang, tbl_barang.Satuan" &
+                    " LEFT JOIN (SELECT tc.Kode, SUM(tc.Jumlah) AS total_masuk FROM tbl_transaksi_child tc" &
+                    " INNER JOIN tbl_transaksi_parent tp ON tc.Id_trans = tp.Id_trans" &
+                    " WHERE tp.Jenis IN ('M','R') GROUP BY tc.Kode) masuk ON tbl_barang.Kode = masuk.Kode" &
+                    " LEFT JOIN (SELECT tc.Kode, SUM(tc.Jumlah) AS total_keluar FROM tbl_transaksi_child tc" &
+                    " INNER JOIN tbl_transaksi_parent tp ON tc.Id_trans = tp.Id_trans" &
+                    " WHERE tp.Jenis IN ('K','C') GROUP BY tc.Kode) keluar ON tbl_barang.Kode = keluar.Kode" &
                     " ORDER BY tbl_barang.Barang ASC"
                     Case 2
                         STR = "SELECT RTRIM(tbl_transaksi_child.Id_trans) AS 'ID Transaksi'," &
@@ -335,7 +367,7 @@ Public Class FR_REPORT
                     " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans" &
                     " LEFT JOIN tbl_karyawan ON tbl_transaksi_parent.Id_kasir = tbl_karyawan.Id" &
                     " LEFT JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
-                    " WHERE (tbl_transaksi_child.Id_trans LIKE 'M%' OR tbl_transaksi_child.Id_trans LIKE 'R%')" &
+                    " WHERE tbl_transaksi_parent.Jenis IN ('M','R')" &
                     " AND tbl_transaksi_parent.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & " 00:00:00'" &
                     " AND tbl_transaksi_parent.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd") & " 23:59:59'" &
                     " AND tbl_transaksi_parent.Id_kasir = '" & My.Settings.ID_ACCOUNT & "'" &
@@ -363,7 +395,7 @@ Public Class FR_REPORT
                     " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans" &
                     " LEFT JOIN tbl_karyawan ON tbl_transaksi_parent.Id_kasir = tbl_karyawan.Id" &
                     " LEFT JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
-                    " WHERE (tbl_transaksi_child.Id_trans LIKE 'K%' OR tbl_transaksi_child.Id_trans LIKE 'C%')" &
+                    " WHERE tbl_transaksi_parent.Jenis IN ('K','C')" &
                     " AND tbl_transaksi_parent.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & " 00:00:00'" &
                     " AND tbl_transaksi_parent.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd") & " 23:59:59'" &
                     " AND tbl_transaksi_parent.Id_kasir = '" & My.Settings.ID_ACCOUNT & "'" &
@@ -375,11 +407,15 @@ Public Class FR_REPORT
                         STR = "SELECT tbl_barang.Kode AS 'Kode Barang'," &
                     " tbl_barang.Barang AS 'Nama Barang'," &
                     " tbl_barang.Satuan AS 'Satuan'," &
-                    " COALESCE(SUM(CASE WHEN tbl_transaksi_child.Id_trans LIKE 'M%' THEN tbl_transaksi_child.Jumlah ELSE 0 END), 0) AS 'Barang Masuk'," &
-                    " COALESCE(SUM(CASE WHEN tbl_transaksi_child.Id_trans LIKE 'K%' THEN tbl_transaksi_child.Jumlah ELSE 0 END), 0) AS 'Barang Keluar'" &
+                    " COALESCE(masuk.total_masuk, 0) AS 'Barang Masuk'," &
+                    " COALESCE(keluar.total_keluar, 0) AS 'Barang Keluar'" &
                     " FROM tbl_barang" &
-                    " LEFT JOIN tbl_transaksi_child ON tbl_barang.Kode = tbl_transaksi_child.Kode" &
-                    " GROUP BY tbl_barang.Kode, tbl_barang.Barang, tbl_barang.Satuan" &
+                    " LEFT JOIN (SELECT tc.Kode, SUM(tc.Jumlah) AS total_masuk FROM tbl_transaksi_child tc" &
+                    " INNER JOIN tbl_transaksi_parent tp ON tc.Id_trans = tp.Id_trans" &
+                    " WHERE tp.Jenis IN ('M','R') GROUP BY tc.Kode) masuk ON tbl_barang.Kode = masuk.Kode" &
+                    " LEFT JOIN (SELECT tc.Kode, SUM(tc.Jumlah) AS total_keluar FROM tbl_transaksi_child tc" &
+                    " INNER JOIN tbl_transaksi_parent tp ON tc.Id_trans = tp.Id_trans" &
+                    " WHERE tp.Jenis IN ('K','C') GROUP BY tc.Kode) keluar ON tbl_barang.Kode = keluar.Kode" &
                     " ORDER BY tbl_barang.Barang ASC"
                     Case 1
                         STR = "SELECT RTRIM(tbl_transaksi_child.Id_trans) AS 'ID Transaksi'," &
@@ -398,7 +434,7 @@ Public Class FR_REPORT
                     " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans" &
                     " LEFT JOIN tbl_karyawan ON tbl_transaksi_parent.Id_kasir = tbl_karyawan.Id" &
                     " LEFT JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
-                    " WHERE (tbl_transaksi_child.Id_trans LIKE 'M%' OR tbl_transaksi_child.Id_trans LIKE 'R%')" &
+                    " WHERE tbl_transaksi_parent.Jenis IN ('M','R')" &
                     " AND tbl_transaksi_parent.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & " 00:00:00'" &
                     " AND tbl_transaksi_parent.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd") & " 23:59:59'" &
                     " AND tbl_transaksi_parent.Id_kasir = '" & My.Settings.ID_ACCOUNT & "'" &
@@ -426,7 +462,7 @@ Public Class FR_REPORT
                     " INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans" &
                     " LEFT JOIN tbl_karyawan ON tbl_transaksi_parent.Id_kasir = tbl_karyawan.Id" &
                     " LEFT JOIN tbl_barang ON tbl_transaksi_child.Kode = tbl_barang.Kode" &
-                    " WHERE (tbl_transaksi_child.Id_trans LIKE 'K%' OR tbl_transaksi_child.Id_trans LIKE 'C%')" &
+                    " WHERE tbl_transaksi_parent.Jenis IN ('K','C')" &
                     " AND tbl_transaksi_parent.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & " 00:00:00'" &
                     " AND tbl_transaksi_parent.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd") & " 23:59:59'" &
                     " AND tbl_transaksi_parent.Id_kasir = '" & My.Settings.ID_ACCOUNT & "'" &
@@ -435,7 +471,7 @@ Public Class FR_REPORT
         End Select
 
         Dim DA As New MySqlDataAdapter(STR, CONN)
-        DA.SelectCommand.CommandTimeout = 300 ' 5 menit timeout
+        DA.SelectCommand.CommandTimeout = 60 ' 1 menit timeout
         TBL.Clear()
         TBL.Columns.Clear()
         DA.Fill(TBL)
@@ -616,105 +652,90 @@ Public Class FR_REPORT
                             Dim cmdPembelian As New MySqlCommand(
                                 "SELECT COALESCE(SUM(tbl_transaksi_child.Harga * tbl_transaksi_child.Jumlah), 0) FROM tbl_transaksi_child " &
                                 "INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans " &
-                                "WHERE (tbl_transaksi_child.Id_trans LIKE 'M%' OR tbl_transaksi_child.Id_trans LIKE 'R%') " &
+                                "WHERE tbl_transaksi_parent.Jenis IN ('M','R') " &
                                 "AND tbl_transaksi_parent.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & " 00:00:00' " &
                                 "AND tbl_transaksi_parent.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd") & " 23:59:59'", CONN)
                             TOTALPEMBELIAN = Convert.ToDouble(cmdPembelian.ExecuteScalar())
 
                             TOTALITEM = Convert.ToDouble(TBL.Compute("SUM(Jumlah_item)", ""))
                         Case 3
-                            ' Query langsung untuk total penjualan dan laba - lebih cepat & akurat
-                            Dim cmdTotal As New MySqlCommand(
-                                "SELECT COALESCE(SUM(Harga_total), 0) FROM tbl_transaksi_parent " &
-                                "WHERE Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & " 00:00:00' " &
-                                "AND Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd") & " 23:59:59' " &
-                                "AND (Jenis = 'K' OR Jenis = 'C')", CONN)
-                            TOTALPENJUALAN = Convert.ToInt64(cmdTotal.ExecuteScalar())
-
-                            Dim cmdLaba As New MySqlCommand(
-                                "SELECT COALESCE(SUM(" &
-                                "  (SELECT SUM(Harga_akhir - Harga_beli) FROM tbl_transaksi_child WHERE Id_trans = tbl_transaksi_parent.Id_trans) " &
-                                "  - tbl_transaksi_parent.Diskon), 0) " &
-                                "FROM tbl_transaksi_parent " &
-                                "WHERE Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & " 00:00:00' " &
-                                "AND Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd") & " 23:59:59' " &
-                                "AND (Jenis = 'K' OR Jenis = 'C')", CONN)
-                            TOTALLABA = Convert.ToDouble(cmdLaba.ExecuteScalar())
-
-                            ' Hitung total item langsung dari database untuk menghindari duplikasi
-                            Dim cmdItem As New MySqlCommand(
-                                "SELECT COALESCE(SUM(Jumlah_item), 0) FROM tbl_transaksi_parent " &
-                                "WHERE Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & " 00:00:00' " &
-                                "AND Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd") & " 23:59:59' " &
-                                "AND (Jenis = 'K' OR Jenis = 'C')", CONN)
-                            TOTALITEM = Convert.ToDouble(cmdItem.ExecuteScalar())
-                            TOTALITEM = Math.Round(TOTALITEM, 2)
+                            ' Satu query untuk semua total: penjualan, laba, item
+                            Dim cmdSummary As New MySqlCommand(
+                                "SELECT COALESCE(SUM(p.Harga_total), 0), " &
+                                "COALESCE(SUM(COALESCE(c.total_laba, 0) - p.Diskon), 0), " &
+                                "COALESCE(SUM(p.Jumlah_item), 0) " &
+                                "FROM tbl_transaksi_parent p " &
+                                "LEFT JOIN (SELECT tc.Id_trans, SUM(tc.Harga_akhir - tc.Harga_beli) AS total_laba FROM tbl_transaksi_child tc " &
+                                "INNER JOIN tbl_transaksi_parent tp ON tc.Id_trans = tp.Id_trans " &
+                                "WHERE tp.Jenis IN ('K','C') AND tp.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & " 00:00:00' " &
+                                "AND tp.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd") & " 23:59:59' " &
+                                "GROUP BY tc.Id_trans) c ON c.Id_trans = p.Id_trans " &
+                                "WHERE p.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & " 00:00:00' " &
+                                "AND p.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd") & " 23:59:59' " &
+                                "AND p.Jenis IN ('K','C')", CONN)
+                            Dim dtSummary As New DataTable()
+                            dtSummary.Load(cmdSummary.ExecuteReader())
+                            If dtSummary.Rows.Count > 0 Then
+                                TOTALPENJUALAN = Convert.ToInt64(dtSummary.Rows(0)(0))
+                                TOTALLABA = Convert.ToDouble(dtSummary.Rows(0)(1))
+                                TOTALITEM = Math.Round(Convert.ToDouble(dtSummary.Rows(0)(2)), 2)
+                            End If
                         Case 4
-                            ' Query langsung untuk total penjualan, laba, dan diskon - konsisten dengan Case 3
-                            Dim cmdPenjualan As New MySqlCommand(
-                                "SELECT COALESCE(SUM(Harga_total), 0) FROM tbl_transaksi_parent " &
-                                "WHERE Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & " 00:00:00' " &
-                                "AND Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd") & " 23:59:59' " &
-                                "AND (Jenis = 'K' OR Jenis = 'C')", CONN)
-                            TOTALPENJUALAN = Convert.ToDouble(cmdPenjualan.ExecuteScalar())
-
-                            Dim cmdLaba As New MySqlCommand(
-                                "SELECT COALESCE(SUM(" &
-                                "  (SELECT SUM(Harga_akhir - Harga_beli) FROM tbl_transaksi_child WHERE Id_trans = tbl_transaksi_parent.Id_trans) " &
-                                "  - tbl_transaksi_parent.Diskon), 0) " &
-                                "FROM tbl_transaksi_parent " &
-                                "WHERE Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & " 00:00:00' " &
-                                "AND Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd") & " 23:59:59' " &
-                                "AND (Jenis = 'K' OR Jenis = 'C')", CONN)
-                            TOTALLABA = Convert.ToDouble(cmdLaba.ExecuteScalar())
-
-                            Dim cmdBeli As New MySqlCommand(
-                                "SELECT COALESCE(SUM(" &
-                                "  (SELECT SUM(Harga_beli) FROM tbl_transaksi_child WHERE Id_trans = tbl_transaksi_parent.Id_trans)), 0) " &
-                                "FROM tbl_transaksi_parent " &
-                                "WHERE Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & " 00:00:00' " &
-                                "AND Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd") & " 23:59:59' " &
-                                "AND (Jenis = 'K' OR Jenis = 'C')", CONN)
-                            Dim TOTALBELI As Double = Convert.ToDouble(cmdBeli.ExecuteScalar())
-
-                            Dim cmdDiskon As New MySqlCommand(
-                                "SELECT COALESCE(SUM(Diskon), 0) FROM tbl_transaksi_parent " &
-                                "WHERE Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & " 00:00:00' " &
-                                "AND Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd") & " 23:59:59' " &
-                                "AND (Jenis = 'K' OR Jenis = 'C')", CONN)
-                            Dim TOTALDISKON As Double = Convert.ToDouble(cmdDiskon.ExecuteScalar())
-
-                            ' Total item dari data yang sudah di-group
-                            TOTALITEM = Convert.ToDouble(TBL.Compute("SUM([Jumlah Item])", ""))
+                            ' Satu query untuk semua total: penjualan, laba, item
+                            Dim cmdSummary As New MySqlCommand(
+                                "SELECT COALESCE(SUM(p.Harga_total), 0), " &
+                                "COALESCE(SUM(COALESCE(c.total_laba, 0) - p.Diskon), 0), " &
+                                "COALESCE(SUM(p.Jumlah_item), 0) " &
+                                "FROM tbl_transaksi_parent p " &
+                                "LEFT JOIN (SELECT tc.Id_trans, SUM(tc.Harga_akhir - tc.Harga_beli) AS total_laba FROM tbl_transaksi_child tc " &
+                                "INNER JOIN tbl_transaksi_parent tp ON tc.Id_trans = tp.Id_trans " &
+                                "WHERE tp.Jenis IN ('K','C') AND tp.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & " 00:00:00' " &
+                                "AND tp.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd") & " 23:59:59' " &
+                                "GROUP BY tc.Id_trans) c ON c.Id_trans = p.Id_trans " &
+                                "WHERE p.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & " 00:00:00' " &
+                                "AND p.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd") & " 23:59:59' " &
+                                "AND p.Jenis IN ('K','C')", CONN)
+                            Dim dtSummary As New DataTable()
+                            dtSummary.Load(cmdSummary.ExecuteReader())
+                            If dtSummary.Rows.Count > 0 Then
+                                TOTALPENJUALAN = Convert.ToDouble(dtSummary.Rows(0)(0))
+                                TOTALLABA = Convert.ToDouble(dtSummary.Rows(0)(1))
+                                TOTALITEM = Convert.ToDouble(dtSummary.Rows(0)(2))
+                            End If
                         Case 5
-                            ' Query langsung untuk total laba penjualan harian - konsisten dengan Case 3
+                            ' Total laba dengan JOIN
                             Dim cmdLaba As New MySqlCommand(
-                                "SELECT COALESCE(SUM(" &
-                                "  (SELECT SUM(Harga_akhir - Harga_beli) FROM tbl_transaksi_child WHERE Id_trans = tbl_transaksi_parent.Id_trans) " &
-                                "  - tbl_transaksi_parent.Diskon), 0) " &
-                                "FROM tbl_transaksi_parent " &
-                                "WHERE Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & " 00:00:00' " &
-                                "AND Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd") & " 23:59:59' " &
-                                "AND (Jenis = 'K' OR Jenis = 'C')", CONN)
+                                "SELECT COALESCE(SUM(COALESCE(c.total_laba, 0) - p.Diskon), 0) " &
+                                "FROM tbl_transaksi_parent p " &
+                                "LEFT JOIN (SELECT tc.Id_trans, SUM(tc.Harga_akhir - tc.Harga_beli) AS total_laba FROM tbl_transaksi_child tc " &
+                                "INNER JOIN tbl_transaksi_parent tp ON tc.Id_trans = tp.Id_trans " &
+                                "WHERE tp.Jenis IN ('K','C') AND tp.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & " 00:00:00' " &
+                                "AND tp.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd") & " 23:59:59' " &
+                                "GROUP BY tc.Id_trans) c ON c.Id_trans = p.Id_trans " &
+                                "WHERE p.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & " 00:00:00' " &
+                                "AND p.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd") & " 23:59:59' " &
+                                "AND p.Jenis IN ('K','C')", CONN)
                             TOTALLABA = Convert.ToDouble(cmdLaba.ExecuteScalar())
                         Case 6
-                            ' Query langsung untuk total penjualan dan laba - konsisten dengan Case 3
-                            Dim cmdPenjualan As New MySqlCommand(
-                                "SELECT COALESCE(SUM(Harga_total), 0) FROM tbl_transaksi_parent " &
-                                "WHERE Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & " 00:00:00' " &
-                                "AND Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd") & " 23:59:59' " &
-                                "AND (Jenis = 'K' OR Jenis = 'C')", CONN)
-                            TOTALPENJUALAN = Convert.ToDouble(cmdPenjualan.ExecuteScalar())
-
-                            Dim cmdLaba As New MySqlCommand(
-                                "SELECT COALESCE(SUM(" &
-                                "  (SELECT SUM(Harga_akhir - Harga_beli) FROM tbl_transaksi_child WHERE Id_trans = tbl_transaksi_parent.Id_trans) " &
-                                "  - tbl_transaksi_parent.Diskon), 0) " &
-                                "FROM tbl_transaksi_parent " &
-                                "WHERE Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & " 00:00:00' " &
-                                "AND Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd") & " 23:59:59' " &
-                                "AND (Jenis = 'K' OR Jenis = 'C')", CONN)
-                            TOTALLABA = Convert.ToDouble(cmdLaba.ExecuteScalar())
+                            ' Satu query untuk total penjualan, laba
+                            Dim cmdSummary As New MySqlCommand(
+                                "SELECT COALESCE(SUM(p.Harga_total), 0), " &
+                                "COALESCE(SUM(COALESCE(c.total_laba, 0) - p.Diskon), 0) " &
+                                "FROM tbl_transaksi_parent p " &
+                                "LEFT JOIN (SELECT tc.Id_trans, SUM(tc.Harga_akhir - tc.Harga_beli) AS total_laba FROM tbl_transaksi_child tc " &
+                                "INNER JOIN tbl_transaksi_parent tp ON tc.Id_trans = tp.Id_trans " &
+                                "WHERE tp.Jenis IN ('K','C') AND tp.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & " 00:00:00' " &
+                                "AND tp.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd") & " 23:59:59' " &
+                                "GROUP BY tc.Id_trans) c ON c.Id_trans = p.Id_trans " &
+                                "WHERE p.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & " 00:00:00' " &
+                                "AND p.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd") & " 23:59:59' " &
+                                "AND p.Jenis IN ('K','C')", CONN)
+                            Dim dtSummary As New DataTable()
+                            dtSummary.Load(cmdSummary.ExecuteReader())
+                            If dtSummary.Rows.Count > 0 Then
+                                TOTALPENJUALAN = Convert.ToDouble(dtSummary.Rows(0)(0))
+                                TOTALLABA = Convert.ToDouble(dtSummary.Rows(0)(1))
+                            End If
 
                             TOTALITEM = Convert.ToDouble(TBL.Compute("SUM([Jumlah Item])", ""))
                         Case 7
@@ -742,27 +763,33 @@ Public Class FR_REPORT
                             Next
                             TOTALITEM = Convert.ToDouble(TBL.Compute("SUM(Jumlah_item)", ""))
                         Case 10
-                            ' Query langsung untuk total laba - lebih akurat
+                            ' Total laba dengan JOIN
                             Dim cmdLaba As New MySqlCommand(
-                                "SELECT COALESCE(SUM(" &
-                                "  (SELECT SUM(Harga_akhir - Harga_beli) FROM tbl_transaksi_child WHERE Id_trans = tbl_transaksi_parent.Id_trans) " &
-                                "  - tbl_transaksi_parent.Diskon), 0) " &
-                                "FROM tbl_transaksi_parent " &
-                                "WHERE Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & " 00:00:00' " &
-                                "AND Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd") & " 23:59:59' " &
-                                "AND (Jenis = 'K' OR Jenis = 'C')", CONN)
+                                "SELECT COALESCE(SUM(COALESCE(c.total_laba, 0) - p.Diskon), 0) " &
+                                "FROM tbl_transaksi_parent p " &
+                                "LEFT JOIN (SELECT tc.Id_trans, SUM(tc.Harga_akhir - tc.Harga_beli) AS total_laba FROM tbl_transaksi_child tc " &
+                                "INNER JOIN tbl_transaksi_parent tp ON tc.Id_trans = tp.Id_trans " &
+                                "WHERE tp.Jenis IN ('K','C') AND tp.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & " 00:00:00' " &
+                                "AND tp.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd") & " 23:59:59' " &
+                                "GROUP BY tc.Id_trans) c ON c.Id_trans = p.Id_trans " &
+                                "WHERE p.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & " 00:00:00' " &
+                                "AND p.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd") & " 23:59:59' " &
+                                "AND p.Jenis IN ('K','C')", CONN)
                             TOTALLABA = Convert.ToDouble(cmdLaba.ExecuteScalar())
                         Case 11
-                            ' Query langsung untuk total laba - lebih akurat
+                            ' Total laba dengan JOIN
                             Dim LASTDAYOFMONTH = DateTime.DaysInMonth(TXTTGLAKHIR.Value.ToString("yyyy"), TXTTGLAKHIR.Value.ToString("MM"))
                             Dim cmdLaba As New MySqlCommand(
-                                "SELECT COALESCE(SUM(" &
-                                "  (SELECT SUM(Harga_akhir - Harga_beli) FROM tbl_transaksi_child WHERE Id_trans = tbl_transaksi_parent.Id_trans) " &
-                                "  - tbl_transaksi_parent.Diskon), 0) " &
-                                "FROM tbl_transaksi_parent " &
-                                "WHERE Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-01") & " 00:00:00' " &
-                                "AND Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-" & LASTDAYOFMONTH) & " 23:59:59' " &
-                                "AND (Jenis = 'K' OR Jenis = 'C')", CONN)
+                                "SELECT COALESCE(SUM(COALESCE(c.total_laba, 0) - p.Diskon), 0) " &
+                                "FROM tbl_transaksi_parent p " &
+                                "LEFT JOIN (SELECT tc.Id_trans, SUM(tc.Harga_akhir - tc.Harga_beli) AS total_laba FROM tbl_transaksi_child tc " &
+                                "INNER JOIN tbl_transaksi_parent tp ON tc.Id_trans = tp.Id_trans " &
+                                "WHERE tp.Jenis IN ('K','C') AND tp.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-01") & " 00:00:00' " &
+                                "AND tp.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-" & LASTDAYOFMONTH) & " 23:59:59' " &
+                                "GROUP BY tc.Id_trans) c ON c.Id_trans = p.Id_trans " &
+                                "WHERE p.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-01") & " 00:00:00' " &
+                                "AND p.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-" & LASTDAYOFMONTH) & " 23:59:59' " &
+                                "AND p.Jenis IN ('K','C')", CONN)
                             TOTALLABA = Convert.ToDouble(cmdLaba.ExecuteScalar())
                     End Select
                 Case 2
@@ -935,7 +962,7 @@ Public Class FR_REPORT
                             Dim cmdPembelian As New MySqlCommand(
                                 "SELECT COALESCE(SUM(tbl_transaksi_child.Harga * tbl_transaksi_child.Jumlah), 0) FROM tbl_transaksi_child " &
                                 "INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans " &
-                                "WHERE (tbl_transaksi_child.Id_trans LIKE 'M%' OR tbl_transaksi_child.Id_trans LIKE 'R%') " &
+                                "WHERE tbl_transaksi_parent.Jenis IN ('M','R') " &
                                 "AND tbl_transaksi_parent.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & " 00:00:00' " &
                                 "AND tbl_transaksi_parent.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd") & " 23:59:59' " &
                                 "AND tbl_transaksi_parent.Id_kasir = '" & My.Settings.ID_ACCOUNT & "'", CONN)
@@ -969,7 +996,7 @@ Public Class FR_REPORT
                             Dim cmdPembelian As New MySqlCommand(
                                 "SELECT COALESCE(SUM(tbl_transaksi_child.Harga * tbl_transaksi_child.Jumlah), 0) FROM tbl_transaksi_child " &
                                 "INNER JOIN tbl_transaksi_parent ON tbl_transaksi_child.Id_trans = tbl_transaksi_parent.Id_trans " &
-                                "WHERE (tbl_transaksi_child.Id_trans LIKE 'M%' OR tbl_transaksi_child.Id_trans LIKE 'R%') " &
+                                "WHERE tbl_transaksi_parent.Jenis IN ('M','R') " &
                                 "AND tbl_transaksi_parent.Tgl >= '" & TXTTGLAWAL.Value.ToString("yyyy-MM-dd") & " 00:00:00' " &
                                 "AND tbl_transaksi_parent.Tgl <= '" & TXTTGLAKHIR.Value.ToString("yyyy-MM-dd") & " 23:59:59' " &
                                 "AND tbl_transaksi_parent.Id_kasir = '" & My.Settings.ID_ACCOUNT & "'", CONN)
@@ -1000,6 +1027,7 @@ Public Class FR_REPORT
 
         End If
 
+        TUTUP_KONEKSI()
     End Sub
 
     Sub KONDISI_AWAL()
@@ -1046,14 +1074,18 @@ Public Class FR_REPORT
 
     Private Sub BTNTAMPIL_Click(sender As Object, e As EventArgs) Handles BTNTAMPIL.Click
         If CBJENIS.Text <> "" Then
+            Me.Cursor = Cursors.WaitCursor
+            BTNTAMPIL.Enabled = False
+            Application.DoEvents()
             TAMPIL()
         End If
         If ADA_TRANSAKSI Then
+            ' Clear report lama sebelum set report baru
+            CRV.ReportSource = Nothing
             Select Case ROLE
                 Case 1
                     Select Case CBJENIS.SelectedIndex
                         Case 0
-                            CRV.Refresh()
                             Dim RPT As New RPT_CETAKHARGA
                             With RPT
                                 .SetDataSource(DT)
@@ -1064,7 +1096,6 @@ Public Class FR_REPORT
                             BTNEXPORT.Visible = True
                             CRV.ReportSource = RPT
                         Case 1
-                            CRV.Refresh()
                             Dim RPT As New RPT_STOK
                             With RPT
                                 .SetDataSource(TBL)
@@ -1075,7 +1106,6 @@ Public Class FR_REPORT
                             BTNEXPORT.Visible = True
                             CRV.ReportSource = RPT
                         Case 2
-                            CRV.Refresh()
                             Dim RPT As New RPT_MASUK
                             With RPT
                                 .SetDataSource(TBL)
@@ -1089,7 +1119,6 @@ Public Class FR_REPORT
                             BTNEXPORT.Visible = True
                             CRV.ReportSource = RPT
                         Case 3
-                            CRV.Refresh()
                             Dim RPT As New RPT_KELUAR
                             With RPT
                                 .SetDataSource(TBL)
@@ -1104,7 +1133,6 @@ Public Class FR_REPORT
                             BTNEXPORT.Visible = True
                             CRV.ReportSource = RPT
                         Case 4
-                            CRV.Refresh()
                             Dim RPT As New RPT_PENJUALAN_BARANG
                             With RPT
                                 .SetDataSource(TBL)
@@ -1121,7 +1149,6 @@ Public Class FR_REPORT
                             BTNEXPORT.Visible = True
                             CRV.ReportSource = RPT
                         Case 5
-                            CRV.Refresh()
                             Dim RPT As New RPT_PENJUALAN_HARIAN
                             With RPT
                                 .SetDataSource(TBL)
@@ -1134,7 +1161,6 @@ Public Class FR_REPORT
                             BTNEXPORT.Visible = True
                             CRV.ReportSource = RPT
                         Case 6
-                            CRV.Refresh()
                             Dim RPT As New RPT_PENJUALAN_BARANG_B
                             With RPT
                                 .SetDataSource(TBL)
@@ -1169,7 +1195,6 @@ Public Class FR_REPORT
                             BTNEXPORT.Visible = True
                             CRV.ReportSource = RPT
                         Case 7
-                            CRV.Refresh()
                             Dim RPT As New RPT_GRAFIK_PENJUALAN_HARIAN
                             With RPT
                                 .SetDataSource(TBL)
@@ -1182,7 +1207,6 @@ Public Class FR_REPORT
                             BTNEXPORT.Visible = True
                             CRV.ReportSource = RPT
                         Case 8
-                            CRV.Refresh()
                             Dim RPT As New RPT_GRAFIK_PENJUALAN_BULANAN
                             With RPT
                                 .SetDataSource(TBL)
@@ -1195,7 +1219,6 @@ Public Class FR_REPORT
                             BTNEXPORT.Visible = True
                             CRV.ReportSource = RPT
                         Case 9
-                            CRV.Refresh()
                             Dim RPT As New RPT_GRAFIK_PENJUALAN_BARANG_HARIAN
                             With RPT
                                 .SetDataSource(TBL)
@@ -1208,7 +1231,6 @@ Public Class FR_REPORT
                             BTNEXPORT.Visible = True
                             CRV.ReportSource = RPT
                         Case 10
-                            CRV.Refresh()
                             Dim RPT As New RPT_GRAFIK_LABA_HARIAN
                             With RPT
                                 .SetDataSource(TBL)
@@ -1221,7 +1243,6 @@ Public Class FR_REPORT
                             BTNEXPORT.Visible = True
                             CRV.ReportSource = RPT
                         Case 11
-                            CRV.Refresh()
                             Dim RPT As New RPT_GRAFIK_LABA_BULANAN
                             With RPT
                                 .SetDataSource(TBL)
@@ -1237,7 +1258,6 @@ Public Class FR_REPORT
                 Case 2
                     Select Case CBJENIS.SelectedIndex
                         Case 0
-                            CRV.Refresh()
                             Dim RPT As New RPT_CETAKHARGA
                             With RPT
                                 .SetDataSource(DT)
@@ -1248,7 +1268,6 @@ Public Class FR_REPORT
                             BTNEXPORT.Visible = True
                             CRV.ReportSource = RPT
                         Case 1
-                            CRV.Refresh()
                             Dim RPT As New RPT_STOK
                             With RPT
                                 .SetDataSource(TBL)
@@ -1259,7 +1278,6 @@ Public Class FR_REPORT
                             BTNEXPORT.Visible = True
                             CRV.ReportSource = RPT
                         Case 2
-                            CRV.Refresh()
                             Dim RPT As New RPT_MASUK_OPS
                             With RPT
                                 .SetDataSource(TBL)
@@ -1273,7 +1291,6 @@ Public Class FR_REPORT
                             BTNEXPORT.Visible = True
                             CRV.ReportSource = RPT
                         Case 3
-                            CRV.Refresh()
                             Dim RPT As New RPT_KELUAR_KASIR
                             With RPT
                                 .SetDataSource(TBL)
@@ -1306,7 +1323,6 @@ Public Class FR_REPORT
                 Case 3
                     Select Case CBJENIS.SelectedIndex
                         Case 0
-                            CRV.Refresh()
                             Dim RPT As New RPT_STOK
                             With RPT
                                 .SetDataSource(TBL)
@@ -1317,7 +1333,6 @@ Public Class FR_REPORT
                             BTNEXPORT.Visible = True
                             CRV.ReportSource = RPT
                         Case 1
-                            CRV.Refresh()
                             Dim RPT As New RPT_MASUK_OPS
                             With RPT
                                 .SetDataSource(TBL)
@@ -1331,7 +1346,6 @@ Public Class FR_REPORT
                             BTNEXPORT.Visible = True
                             CRV.ReportSource = RPT
                         Case 2
-                            CRV.Refresh()
                             Dim RPT As New RPT_KELUAR_KASIR
                             With RPT
                                 .SetDataSource(TBL)
@@ -1363,6 +1377,8 @@ Public Class FR_REPORT
                     End Select
             End Select
         End If
+        Me.Cursor = Cursors.Default
+        BTNTAMPIL.Enabled = True
     End Sub
 
     Private Sub BTNCETAK_Click(sender As Object, e As EventArgs) Handles BTNCETAK.Click

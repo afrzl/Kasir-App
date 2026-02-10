@@ -1,16 +1,25 @@
 ﻿Imports MySql.Data.MySqlClient
 Imports System.IO
+Imports System.ComponentModel
 
 Public Class FR_TENTANG_BACKRESDB
     Dim STR As String
     Dim CMD As MySqlCommand
     Dim RD As MySqlDataReader
 
-    Function BackupDatabase(filePath As String) As Boolean
-        Try
-            BUKA_KONEKSI()
+    Private WithEvents bgWorker As New BackgroundWorker()
+    Private _operationType As String = "" ' "backup" or "restore"
+    Private _filePath As String = ""
+    Private _errorMessage As String = ""
 
-            Using writer As New StreamWriter(filePath, False, System.Text.Encoding.UTF8)
+    Function BackupDatabase(filePath As String) As Boolean
+        Dim localConn As New MySqlConnection()
+        Try
+            ' Pakai koneksi sendiri supaya tidak conflict dengan UI thread
+            localConn.ConnectionString = CONN.ConnectionString
+            localConn.Open()
+
+            Using writer As New StreamWriter(filePath, False, System.Text.Encoding.UTF8, 65536)
                 ' Write header
                 writer.WriteLine("-- MySQL Database Backup")
                 writer.WriteLine("-- Database: TOKO_KASIR")
@@ -18,18 +27,19 @@ Public Class FR_TENTANG_BACKRESDB
                 writer.WriteLine("-- Version: " & VERSI)
                 writer.WriteLine()
                 writer.WriteLine("SET FOREIGN_KEY_CHECKS=0;")
+                writer.WriteLine("SET UNIQUE_CHECKS=0;")
+                writer.WriteLine("SET AUTOCOMMIT=0;")
                 writer.WriteLine()
 
                 ' Get all tables
-                STR = "SHOW TABLES"
-                CMD = New MySqlCommand(STR, CONN)
-                RD = CMD.ExecuteReader()
+                Dim cmdTables As New MySqlCommand("SHOW TABLES", localConn)
+                Dim rdTables As MySqlDataReader = cmdTables.ExecuteReader()
 
                 Dim tables As New List(Of String)
-                While RD.Read()
-                    tables.Add(RD.GetString(0))
+                While rdTables.Read()
+                    tables.Add(rdTables.GetString(0))
                 End While
-                RD.Close()
+                rdTables.Close()
 
                 ' Backup each table
                 For Each tableName As String In tables
@@ -38,77 +48,177 @@ Public Class FR_TENTANG_BACKRESDB
                     writer.WriteLine("DROP TABLE IF EXISTS `" & tableName & "`;")
 
                     ' Get CREATE TABLE statement
-                    STR = "SHOW CREATE TABLE `" & tableName & "`"
-                    CMD = New MySqlCommand(STR, CONN)
-                    RD = CMD.ExecuteReader()
-                    If RD.Read() Then
-                        writer.WriteLine(RD.GetString(1) & ";")
+                    Dim cmdCreate As New MySqlCommand("SHOW CREATE TABLE `" & tableName & "`", localConn)
+                    Dim rdCreate As MySqlDataReader = cmdCreate.ExecuteReader()
+                    If rdCreate.Read() Then
+                        writer.WriteLine(rdCreate.GetString(1) & ";")
                     End If
-                    RD.Close()
+                    rdCreate.Close()
 
                     writer.WriteLine()
 
-                    ' Get table data
-                    STR = "SELECT * FROM `" & tableName & "`"
-                    CMD = New MySqlCommand(STR, CONN)
-                    RD = CMD.ExecuteReader()
+                    ' Get table data - batch INSERT (500 rows per statement)
+                    Dim cmdData As New MySqlCommand("SELECT * FROM `" & tableName & "`", localConn)
+                    cmdData.CommandTimeout = 300
+                    Dim rdData As MySqlDataReader = cmdData.ExecuteReader()
 
-                    If RD.HasRows Then
-                        While RD.Read()
-                            Dim values As New List(Of String)
-                            For i As Integer = 0 To RD.FieldCount - 1
-                                If RD.IsDBNull(i) Then
-                                    values.Add("NULL")
+                    If rdData.HasRows Then
+                        Dim rowCount As Integer = 0
+                        Dim batchSize As Integer = 500
+                        Dim sb As New System.Text.StringBuilder(65536)
+                        Dim isFirstRow As Boolean = True
+
+                        ' Get column count once
+                        Dim fieldCount As Integer = rdData.FieldCount
+
+                        While rdData.Read()
+                            ' Build values string
+                            Dim values As New System.Text.StringBuilder(256)
+                            values.Append("(")
+                            For i As Integer = 0 To fieldCount - 1
+                                If i > 0 Then values.Append(",")
+                                If rdData.IsDBNull(i) Then
+                                    values.Append("NULL")
                                 Else
-                                    Dim value As String = RD.GetValue(i).ToString()
+                                    Dim rawValue As Object = rdData.GetValue(i)
+                                    Dim value As String
+
+                                    ' Format DateTime ke format MySQL (yyyy-MM-dd HH:mm:ss)
+                                    If TypeOf rawValue Is DateTime Then
+                                        Dim dtVal As DateTime = CDate(rawValue)
+                                        If dtVal.TimeOfDay = TimeSpan.Zero Then
+                                            value = dtVal.ToString("yyyy-MM-dd")
+                                        Else
+                                            value = dtVal.ToString("yyyy-MM-dd HH:mm:ss")
+                                        End If
+                                    ElseIf TypeOf rawValue Is Decimal OrElse TypeOf rawValue Is Double OrElse TypeOf rawValue Is Single Then
+                                        ' Angka desimal pakai titik, bukan koma
+                                        value = Convert.ToString(rawValue, System.Globalization.CultureInfo.InvariantCulture)
+                                    Else
+                                        value = rawValue.ToString()
+                                    End If
+
                                     value = value.Replace("\", "\\").Replace("'", "\'").Replace(vbCrLf, "\n").Replace(vbCr, "\r").Replace(vbLf, "\n")
-                                    values.Add("'" & value & "'")
+                                    values.Append("'")
+                                    values.Append(value)
+                                    values.Append("'")
                                 End If
                             Next
-                            writer.WriteLine("INSERT INTO `" & tableName & "` VALUES (" & String.Join(",", values) & ");")
+                            values.Append(")")
+
+                            If isFirstRow OrElse rowCount >= batchSize Then
+                                ' Close previous batch if exists
+                                If Not isFirstRow Then
+                                    sb.AppendLine(";")
+                                    writer.Write(sb.ToString())
+                                    sb.Clear()
+                                End If
+                                ' Start new batch INSERT
+                                sb.Append("INSERT INTO `")
+                                sb.Append(tableName)
+                                sb.Append("` VALUES ")
+                                sb.Append(values.ToString())
+                                rowCount = 1
+                                isFirstRow = False
+                            Else
+                                sb.Append(",")
+                                sb.Append(values.ToString())
+                                rowCount += 1
+                            End If
                         End While
+
+                        ' Write remaining batch
+                        If sb.Length > 0 Then
+                            sb.AppendLine(";")
+                            writer.Write(sb.ToString())
+                        End If
                     End If
-                    RD.Close()
+                    rdData.Close()
                     writer.WriteLine()
                 Next
 
                 writer.WriteLine()
+                writer.WriteLine("COMMIT;")
                 writer.WriteLine("SET FOREIGN_KEY_CHECKS=1;")
+                writer.WriteLine("SET UNIQUE_CHECKS=1;")
+                writer.WriteLine("SET AUTOCOMMIT=1;")
             End Using
 
+            localConn.Close()
             Return True
 
         Catch ex As Exception
-            MsgBox("Error saat backup: " & ex.Message, vbCritical)
+            _errorMessage = ex.Message
+            If localConn.State = ConnectionState.Open Then localConn.Close()
             Return False
         End Try
     End Function
 
     Function RestoreDatabase(filePath As String) As Boolean
+        Dim localConn As New MySqlConnection()
         Try
-            BUKA_KONEKSI()
+            ' Pakai koneksi sendiri supaya tidak conflict dengan UI thread
+            localConn.ConnectionString = CONN.ConnectionString
+            localConn.Open()
 
-            Using reader As New StreamReader(filePath, System.Text.Encoding.UTF8)
-                Dim sqlScript As String = reader.ReadToEnd()
-                Dim sqlCommands() As String = sqlScript.Split(New String() {";" & vbCrLf, ";" & vbLf}, StringSplitOptions.RemoveEmptyEntries)
+            ' Disable checks untuk percepat restore
+            Dim cmdInit As New MySqlCommand("SET FOREIGN_KEY_CHECKS=0; SET UNIQUE_CHECKS=0; SET AUTOCOMMIT=0;", localConn)
+            cmdInit.ExecuteNonQuery()
 
-                For Each sqlCommand As String In sqlCommands
-                    Dim trimmedCommand As String = sqlCommand.Trim()
-                    If trimmedCommand.Length > 0 AndAlso Not trimmedCommand.StartsWith("--") Then
-                        Try
-                            CMD = New MySqlCommand(trimmedCommand, CONN)
-                            CMD.ExecuteNonQuery()
-                        Catch ex As Exception
-                            ' Skip comments and empty commands
-                        End Try
+            Using reader As New StreamReader(filePath, System.Text.Encoding.UTF8, True, 65536)
+                Dim sb As New System.Text.StringBuilder(65536)
+                Dim line As String
+
+                While Not reader.EndOfStream
+                    line = reader.ReadLine()
+
+                    ' Skip comments dan baris kosong
+                    If line Is Nothing OrElse line.TrimStart().StartsWith("--") OrElse line.Trim().Length = 0 Then
+                        Continue While
                     End If
-                Next
+
+                    sb.Append(line)
+
+                    ' Cek apakah statement sudah lengkap (diakhiri ;)
+                    If line.TrimEnd().EndsWith(";") Then
+                        Dim sqlCommand As String = sb.ToString().Trim()
+                        If sqlCommand.Length > 0 Then
+                            Try
+                                Dim cmdExec As New MySqlCommand(sqlCommand, localConn)
+                                cmdExec.CommandTimeout = 300
+                                cmdExec.ExecuteNonQuery()
+                            Catch ex As Exception
+                                ' Skip error per statement (misal table sudah ada)
+                            End Try
+                        End If
+                        sb.Clear()
+                    Else
+                        sb.Append(vbLf)
+                    End If
+                End While
+
+                ' Execute remaining statement jika ada
+                Dim remaining As String = sb.ToString().Trim()
+                If remaining.Length > 0 AndAlso Not remaining.StartsWith("--") Then
+                    Try
+                        Dim cmdRem As New MySqlCommand(remaining, localConn)
+                        cmdRem.CommandTimeout = 300
+                        cmdRem.ExecuteNonQuery()
+                    Catch ex As Exception
+                    End Try
+                End If
             End Using
 
+            ' Commit dan restore checks
+            Dim cmdFinish As New MySqlCommand("COMMIT; SET FOREIGN_KEY_CHECKS=1; SET UNIQUE_CHECKS=1; SET AUTOCOMMIT=1;", localConn)
+            cmdFinish.ExecuteNonQuery()
+
+            localConn.Close()
             Return True
 
         Catch ex As Exception
-            MsgBox("Error saat restore: " & ex.Message, vbCritical)
+            _errorMessage = ex.Message
+            If localConn.State = ConnectionState.Open Then localConn.Close()
             Return False
         End Try
     End Function
@@ -131,14 +241,13 @@ Public Class FR_TENTANG_BACKRESDB
                 If SaveFileDialog1.ShowDialog() = DialogResult.OK Then
                     Me.Cursor = Cursors.WaitCursor
                     BTNSIMPAN.Enabled = False
+                    CB_ACTION.Enabled = False
+                    BTNCLOSE.Enabled = False
 
-                    If BackupDatabase(SaveFileDialog1.FileName) Then
-                        MsgBox("Database berhasil dibackup!" & vbCrLf & "Lokasi: " & SaveFileDialog1.FileName, vbInformation)
-                        TUTUP_FORM()
-                    End If
-
-                    BTNSIMPAN.Enabled = True
-                    Me.Cursor = Cursors.Default
+                    _operationType = "backup"
+                    _filePath = SaveFileDialog1.FileName
+                    _errorMessage = ""
+                    bgWorker.RunWorkerAsync()
                 End If
 
             ElseIf CB_ACTION.SelectedIndex = 2 Then
@@ -151,24 +260,61 @@ Public Class FR_TENTANG_BACKRESDB
                 If MsgBox("Apakah anda yakin akan restore database?" & vbCrLf & "Data yang ada sekarang akan ditimpa!", vbYesNo + vbExclamation) = vbYes Then
                     Me.Cursor = Cursors.WaitCursor
                     BTNSIMPAN.Enabled = False
+                    CB_ACTION.Enabled = False
+                    BTNCLOSE.Enabled = False
 
-                    If RestoreDatabase(TXTFILE.Text) Then
-                        MsgBox("Database berhasil direstore!", vbInformation)
-                        With FR_TENTANG
-                            .Enabled = True
-                        End With
-                        My.Settings.ID_ACCOUNT = 0
-                        FR_LOGIN.Show()
-                        FR_TENTANG.Close()
-                        Me.Close()
-                    End If
-
-                    BTNSIMPAN.Enabled = True
-                    Me.Cursor = Cursors.Default
+                    _operationType = "restore"
+                    _filePath = TXTFILE.Text
+                    _errorMessage = ""
+                    bgWorker.RunWorkerAsync()
                 End If
             End If
         Else
             MsgBox("Silahkan pilih action!")
+        End If
+    End Sub
+
+    Private Sub bgWorker_DoWork(sender As Object, e As DoWorkEventArgs) Handles bgWorker.DoWork
+        If _operationType = "backup" Then
+            e.Result = BackupDatabase(_filePath)
+        ElseIf _operationType = "restore" Then
+            e.Result = RestoreDatabase(_filePath)
+        End If
+    End Sub
+
+    Private Sub bgWorker_RunWorkerCompleted(sender As Object, e As RunWorkerCompletedEventArgs) Handles bgWorker.RunWorkerCompleted
+        Me.Cursor = Cursors.Default
+        BTNSIMPAN.Enabled = True
+        CB_ACTION.Enabled = True
+        BTNCLOSE.Enabled = True
+
+        If e.Error IsNot Nothing Then
+            MsgBox("Error: " & e.Error.Message, vbCritical)
+            Return
+        End If
+
+        Dim success As Boolean = CBool(e.Result)
+
+        If _operationType = "backup" Then
+            If success Then
+                MsgBox("Database berhasil dibackup!" & vbCrLf & "Lokasi: " & _filePath, vbInformation)
+                TUTUP_FORM()
+            Else
+                MsgBox("Error saat backup: " & _errorMessage, vbCritical)
+            End If
+        ElseIf _operationType = "restore" Then
+            If success Then
+                MsgBox("Database berhasil direstore!", vbInformation)
+                With FR_TENTANG
+                    .Enabled = True
+                End With
+                My.Settings.ID_ACCOUNT = 0
+                FR_LOGIN.Show()
+                FR_TENTANG.Close()
+                Me.Close()
+            Else
+                MsgBox("Error saat restore: " & _errorMessage, vbCritical)
+            End If
         End If
     End Sub
 
